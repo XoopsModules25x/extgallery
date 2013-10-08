@@ -1,0 +1,46 @@
+/* GALLERY LIST */
+/* IMPORTANT - Change '#photos' to the ID of your gallery list to prevent a flash of unstyled content */
+#photos { visibility: hidden; }
+
+/* GALLERY CONTAINER */
+.gallery {padding: 5px; margin: 0 auto;}
+
+/* LOADING BOX */
+.loader { background: url(modules/extgallery/images/galleryview/loader.gif) center center no-repeat #ddd; }
+
+/* GALLERY PANELS */
+.panel {}
+
+/* DEFINE HEIGHT OF PANEL OVERLAY */
+/* NOTE - It is best to define padding here as well so overlay and background retain identical dimensions */
+.panel .panel-overlay,
+.panel .overlay-background {padding: 5px; }
+
+
+/* PANEL OVERLAY CONTENT */
+.panel .panel-overlay a { text-decoration: underline; font-weight: bold; }
+
+/* FILMSTRIP */
+/* 'margin' will define top/bottom margin in completed gallery */
+.filmstrip { margin: 5px; }
+
+/* FILMSTRIP FRAMES (contains both images and captions) */
+.frame {}
+
+/* WRAPPER FOR FILMSTRIP IMAGES */
+.frame .img_wrap { border: 1px solid #aaa; }
+
+/* FRAME IMAGES */
+.frame img { border: none; }
+
+/* FRAME CAPTION */
+.frame .caption { font-size: 11px; text-align: center; color: #888; }
+
+/* CURRENT FRAME CAPTION */
+.frame.current .caption { color: #000; }
+
+/* TRANSPARENT BORDER FIX FOR IE6 */
+/* NOTE - DO NOT CHANGE THIS RULE */
+*html .pointer {
+	filter: chroma(color=pink);
+}
