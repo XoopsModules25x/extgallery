@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Galleria Classic Theme</title>
+        <style>
+
+            /* Demo styles */
+            html,body{background:#222;margin:0;}
+            body{border-top:4px solid #000;}
+            .content{color:#777;font:12px/1.4 "helvetica neue",arial,sans-serif;width:620px;margin:20px auto;}
+            h1{font-size:12px;font-weight:normal;color:#ddd;margin:0;}
+            p{margin:0 0 20px}
+            a {color:#22BCB9;text-decoration:none;}
+            .cred{margin-top:20px;font-size:11px;}
+
+            /* This rule is read by Galleria to define the gallery height: */
+            #galleria{height:320px}
+
+        </style>
+
+        <!-- load jQuery -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+
+        <!-- load Galleria -->
+        <script src="../../galleria-1.3.3.min.js"></script>
+        <!--<script type="text/javascript" src="http://www.himalayanacademy.com/assets/js/galleria.twelve.min-cb1328657794.js"></script>-->
+
+    </head>
+<body>
+<!--<script>-->
+    <!--$("body").text("jQuery works");-->
+<!--</script>-->
+
+<!--<script>-->
+    <!--if (Galleria) { $("body").text('Galleria works') }-->
+<!--</script>-->
+
+
+<div class="content">
+    <!--<h1>Galleria Classic Theme</h1>-->
+
+    <!--<p>Demonstrating a basic gallery example.</p>-->
+
+    <!-- Adding gallery images. We use resized thumbnails here for better performance, but it’s not necessary -->
+
+
+    <!--<p class="cred">Made by <a href="http://galleria.aino.se">Galleria</a>.</p>-->
+    <div id="galleria">
+    <script>
+        var data = [
+            {
+                image: 'http://www.himalayanacademy.com/media/slideshows/2013/2013-06-21_hinduism-in-europe/hinduism-in-europe-2013_612.jpg',
+                big: 'http://www.himalayanacademy.com/media/slideshows/2013/2013-06-21_hinduism-in-europe/big/hinduism-in-europe-2013_612.jpg',
+                thumb: 'http://www.himalayanacademy.com/media/slideshows/2013/2013-06-21_hinduism-in-europe/thumb/hinduism-in-europe-2013_612.jpg'
+            },
+            {
+                image: 'http://www.himalayanacademy.com/media/slideshows/2013/2013-06-21_hinduism-in-europe/hinduism-in-europe-2013_613.jpg',
+                big: 'http://www.himalayanacademy.com/media/slideshows/2013/2013-06-21_hinduism-in-europe/big/hinduism-in-europe-2013_613.jpg',
+                thumb: 'http://www.himalayanacademy.com/media/slideshows/2013/2013-06-21_hinduism-in-europe/thumb/hinduism-in-europe-2013_613.jpg',
+                description: 'We pose with the priests and the founder.'
+            },
+            {
+                image: 'http://www.himalayanacademy.com/media/slideshows/2013/2013-06-21_hinduism-in-europe/hinduism-in-europe-2013_614.jpg',
+                big: 'http://www.himalayanacademy.com/media/slideshows/2013/2013-06-21_hinduism-in-europe/big/hinduism-in-europe-2013_614.jpg',
+                thumb: 'http://www.himalayanacademy.com/media/slideshows/2013/2013-06-21_hinduism-in-europe/thumb/hinduism-in-europe-2013_614.jpg'
+            },
+            {
+                image: 'http://www.himalayanacademy.com/media/slideshows/2013/2013-06-21_hinduism-in-europe/hinduism-in-europe-2013_615.jpg',
+                big: 'http://www.himalayanacademy.com/media/slideshows/2013/2013-06-21_hinduism-in-europe/big/hinduism-in-europe-2013_615.jpg',
+                thumb: 'http://www.himalayanacademy.com/media/slideshows/2013/2013-06-21_hinduism-in-europe/thumb/hinduism-in-europe-2013_615.jpg',
+                description: 'Paris to Chicago to Arizona to Hawaii. We return weary, but with good memories, such as this breakfast on our first day in San Francisco on our way to Europe. thank you for joining us. We hope you are able to read the fascinating article that evolved from these excursions. ',
+                description: 'A Visual Exploration of Hinduism in Europe'
+            }
+        ];
+
+        // Load the classic theme
+//        Galleria.loadTheme('galleria.classic.min.js');
+//
+//
+//        Galleria.run('.galleria', {
+//            dataSource: data
+//        });
+    </script>
+    </div>
+
+    <script>
+
+    // Load the classic theme
+    Galleria.loadTheme('http://localhost/xtest256final/modules/extgallery/assets/js/galleria/galleria.classic.min.js');
+
+//    Galleria.loadTheme('http://www.himalayanacademy.com/assets/js/galleria.twelve.min-cb1328657794.js');
+
+
+
+    // Initialize Galleria
+//    Galleria.run('#galleria');
+//    Galleria.run('.galleria', {
+//        dataSource: data
+//    });
+
+    </script>
+
+<!--<script type="text/javascript" src="http://www.himalayanacademy.com/media/slideshows/2013/2013-06-21_hinduism-in-europe/galleriaData.js"></script>-->
+<script type="text/javascript" src="http://localhost/xtest256final/modules/extgallery/assets/js/galleria/themes/classic/quarterly-home-slideshow.js"></script>
+    <!--<script type="text/javascript" src="quarterly-home-slideshow.js"></script>-->
+
+    <!--<script type="text/javascript" src="http://www.hinduismtoday.com/js/quarterly-home-slideshow.js"></script>-->
+
+
+
+</div>
+</body>
+</html>
