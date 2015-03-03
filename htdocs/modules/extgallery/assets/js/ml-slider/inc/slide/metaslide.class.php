@@ -86,7 +86,6 @@ class MetaSlide
         return !strlen($type) || $type == 'image';
     }
 
-
     /**
      * Build image HTML
      *

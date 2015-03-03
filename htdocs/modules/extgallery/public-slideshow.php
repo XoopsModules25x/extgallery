@@ -23,16 +23,16 @@ $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-slideshow.html';
 include XOOPS_ROOT_PATH.'/header.php';
 
 if(!isset($_GET['id'])) {
-	$catId = 0;
+    $catId = 0;
 } else {
-	$catId = intval($_GET['id']);
+    $catId = intval($_GET['id']);
 }
 
 // Check the access permission
 $permHandler = ExtgalleryPublicPermHandler::getHandler();
 if(!$permHandler->isAllowed($xoopsUser, 'public_access', $catId)) {
-	redirect_header("index.php", 3, _NOPERM);
-	exit;
+    redirect_header("index.php", 3, _NOPERM);
+    exit;
 }
 
 $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
@@ -41,8 +41,8 @@ $photoHandler = xoops_getmodulehandler('publicphoto', 'extgallery');
 $catObj = $catHandler->getCat($catId);
 
 if(is_null($catObj)) {
-	include(XOOPS_ROOT_PATH."/footer.php");
-	exit;
+    include(XOOPS_ROOT_PATH."/footer.php");
+    exit;
 }
 $ajaxeffect = $xoopsModuleConfig['use_slideshow_effects'];
 $xoopsTpl->assign('use_slideshow_effects', $ajaxeffect);
@@ -58,7 +58,6 @@ $xoopsTpl->assign('photos', $photos);
 $xoopsTpl->assign('xoops_pagetitle', $catObj->getVar('cat_name'));
 $xoTheme->addMeta('meta','description',$catObj->getVar('cat_desc'));
 
-
 $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));
 
 $rel = "alternate";
@@ -72,31 +71,31 @@ $xoTheme->addStylesheet('modules/extgallery/include/style.css');
 $jquery = $xoopsModuleConfig['enable_jquery'];
 $xoopsTpl->assign('jquery', $jquery);
 if($jquery == 1){
-	$xoTheme->addScript("browse.php?Frameworks/jquery/jquery.js");
-	switch($ajaxeffect) {
-		case 'galleryview':
-			$xoTheme->addScript("browse.php?modules/extgallery/include/galleryview/galleryview.js");
-			$xoTheme->addScript("browse.php?modules/extgallery/include/galleryview/timers.js");
-			$xoTheme->addScript("browse.php?modules/extgallery/include/galleryview/easing.js");
-			$xoTheme->addStylesheet('browse.php?modules/extgallery/include/galleryview/galleryview.css');
-		break;
-		
-		case 'galleria':
-			$xoTheme->addScript("browse.php?modules/extgallery/include/galleria/galleria.js");
-		break;
-		
-		case 'microgallery':
-			$xoTheme->addScript("browse.php?modules/extgallery/include/microgallery/jquery.microgallery.js");
-			$xoTheme->addStylesheet('browse.php?modules/extgallery/include/microgallery/style.css');
-		break;
-		
-		case 'galleriffic':
-			$xoTheme->addScript("browse.php?modules/extgallery/include/galleriffic/jquery.galleriffic.js");
-			$xoTheme->addScript("browse.php?modules/extgallery/include/galleriffic/jquery.history.js");
-			$xoTheme->addScript("browse.php?modules/extgallery/include/galleriffic/jquery.opacityrollover.js");
-			$xoTheme->addStylesheet('browse.php?modules/extgallery/include/galleriffic/galleriffic2.css');
-		break;
-	}
+    $xoTheme->addScript("browse.php?Frameworks/jquery/jquery.js");
+    switch($ajaxeffect) {
+        case 'galleryview':
+            $xoTheme->addScript("browse.php?modules/extgallery/include/galleryview/galleryview.js");
+            $xoTheme->addScript("browse.php?modules/extgallery/include/galleryview/timers.js");
+            $xoTheme->addScript("browse.php?modules/extgallery/include/galleryview/easing.js");
+            $xoTheme->addStylesheet('browse.php?modules/extgallery/include/galleryview/galleryview.css');
+        break;
+        
+        case 'galleria':
+            $xoTheme->addScript("browse.php?modules/extgallery/include/galleria/galleria.js");
+        break;
+        
+        case 'microgallery':
+            $xoTheme->addScript("browse.php?modules/extgallery/include/microgallery/jquery.microgallery.js");
+            $xoTheme->addStylesheet('browse.php?modules/extgallery/include/microgallery/style.css');
+        break;
+        
+        case 'galleriffic':
+            $xoTheme->addScript("browse.php?modules/extgallery/include/galleriffic/jquery.galleriffic.js");
+            $xoTheme->addScript("browse.php?modules/extgallery/include/galleriffic/jquery.history.js");
+            $xoTheme->addScript("browse.php?modules/extgallery/include/galleriffic/jquery.opacityrollover.js");
+            $xoTheme->addStylesheet('browse.php?modules/extgallery/include/galleriffic/galleriffic2.css');
+        break;
+    }
 }
 
 $xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
@@ -135,8 +134,7 @@ if ($xoopsModuleConfig['galleria_autoplay']==1) {
 $xoopsTpl->assign('galleria_transition', $xoopsModuleConfig['galleria_transition']);
 $xoopsTpl->assign('galleria_tspeed', $xoopsModuleConfig['galleria_tspeed']);
 
-
-//for galleriffic 
+//for galleriffic
 $xoopsTpl->assign('galleriffic_nb_thumbs', $xoopsModuleConfig['galleriffic_nb_thumbs']);
 $xoopsTpl->assign('galleriffic_nb_colthumbs', $xoopsModuleConfig['galleriffic_nb_colthumbs']);
 $xoopsTpl->assign('galleriffic_nb_preload', $xoopsModuleConfig['galleriffic_nb_preload']);
@@ -152,20 +150,20 @@ $var_nav_width=0;
 $var_nav_visible='hidden';
 
 switch ($xoopsModuleConfig['galleriffic_nb_colthumbs']){
-	case 1;
-		$var_nav_width=130;
-		$var_nav_visible='visible';
-		break;
-	case 2;
-		$var_nav_width=200;
-		$var_nav_visible='visible';
-		break;		
-	case 3;
-		$var_nav_width=280;
-		$var_nav_visible='visible';
-		break;	
-	case 'default':
-	  break;
+    case 1;
+        $var_nav_width=130;
+        $var_nav_visible='visible';
+        break;
+    case 2;
+        $var_nav_width=200;
+        $var_nav_visible='visible';
+        break;
+    case 3;
+        $var_nav_width=280;
+        $var_nav_visible='visible';
+        break;
+    case 'default':
+      break;
 }
 $xoopsTpl->assign('nav_width', $var_nav_width);
 $xoopsTpl->assign('nav_visibility', $var_nav_visible);
@@ -183,6 +181,4 @@ $xoopsTpl->assign('pic_width', $xoopsModuleConfig['galleriffic_width']);
 $xoopsTpl->assign('galleriffic_show_descr', $xoopsModuleConfig['galleriffic_show_descr']);
 $xoopsTpl->assign('galleriffic_download', $xoopsModuleConfig['galleriffic_download']);
 
-
 include(XOOPS_ROOT_PATH."/footer.php");
-?>

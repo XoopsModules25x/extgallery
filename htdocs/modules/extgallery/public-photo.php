@@ -23,9 +23,9 @@ $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-photo.html';
 include XOOPS_ROOT_PATH.'/header.php';
 
 if(!isset($_GET['photoId'])) {
-	$photoId = 0;
+    $photoId = 0;
 } else {
-	$photoId = intval($_GET['photoId']);
+    $photoId = intval($_GET['photoId']);
 }
 
 $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
@@ -37,8 +37,8 @@ $photoObj = $photoHandler->getPhoto($photoId);
 
 // Check is the photo exist
 if(!$photoObj) {
-	redirect_header("index.php", 3, _NOPERM);
-	exit;
+    redirect_header("index.php", 3, _NOPERM);
+    exit;
 }
 
 $photo = $photoHandler->objectToArray($photoObj,array('cat_id', 'uid'));
@@ -46,13 +46,13 @@ $photo = $photoHandler->objectToArray($photoObj,array('cat_id', 'uid'));
 // Check the category access permission
 $permHandler = ExtgalleryPublicPermHandler::getHandler();
 if(!$permHandler->isAllowed($xoopsUser, 'public_access', $photo['cat']['cat_id'])) {
-	redirect_header("index.php", 3, _NOPERM);
-	exit;
+    redirect_header("index.php", 3, _NOPERM);
+    exit;
 }
 
 // Don't update counter if user come from rating page
 if(isset($_SERVER['HTTP_REFERER']) && basename($_SERVER['HTTP_REFERER']) != "public-rating.php?photoId=".$photoId) {
-	$photoHandler->updateHits($photoId);
+    $photoHandler->updateHits($photoId);
 }
 
 // Plugin traitement
@@ -76,17 +76,17 @@ $nbPhoto = count($photosIds);
 $currentPhotoPlace = array_search($photoId, $photosIds);
 
 if($nbPhoto == 1) {
-	$prev = 0;
-	$next = 0;
+    $prev = 0;
+    $next = 0;
 } else if($currentPhotoPlace == 0) {
-	$prev = 0;
-	$next = $photosIds[$currentPhotoPlace + 1];
+    $prev = 0;
+    $next = $photosIds[$currentPhotoPlace + 1];
 } elseif(($currentPhotoPlace + 1) == $nbPhoto) {
-	$prev = $photosIds[$currentPhotoPlace - 1];
-	$next = 0;
+    $prev = $photosIds[$currentPhotoPlace - 1];
+    $next = 0;
 } else {
-	$prev = $photosIds[$currentPhotoPlace - 1];
-	$next = $photosIds[$currentPhotoPlace + 1];
+    $prev = $photosIds[$currentPhotoPlace - 1];
+    $next = $photosIds[$currentPhotoPlace + 1];
 }
 $xoopsTpl->assign('prevId', $prev);
 $xoopsTpl->assign('nextId', $next);
@@ -108,48 +108,48 @@ $xoTheme->addStylesheet('modules/extgallery/include/style.css');
 $xoopsTpl->assign('rating', $ratingHandler->getRate($photoId));
 
 $lang = array(
-			'preview'=>_MD_EXTGALLERY_PREVIEW,
-			'next'=>_MD_EXTGALLERY_NEXT,
-			'of'=>_MD_EXTGALLERY_OF,
-			'voteFor'=>_MD_EXTGALLERY_VOTE_FOR_THIS_PHOTO,
-			'photoInfo'=>_MD_EXTGALLERY_PHOTO_INFORMATION,
-			'resolution'=>_MD_EXTGALLERY_RESOLUTION,
-			'pixels'=>_MD_EXTGALLERY_PIXELS,
-			'view'=>_MD_EXTGALLERY_VIEW,
-			'hits'=>_MD_EXTGALLERY_HITS,
-			'fileSize'=>_MD_EXTGALLERY_FILE_SIZE,
-			'added'=>_MD_EXTGALLERY_ADDED,
-			'score'=>_MD_EXTGALLERY_SCORE,
-			'votes'=>_MD_EXTGALLERY_VOTES,
-			'downloadOrig'=>_MD_EXTGALLERY_DOWNLOAD_ORIG,
-			'donwloads'=>_MD_EXTGALLERY_DOWNLOADS,
-			'sendEcard'=>_MD_EXTGALLERY_SEND_ECARD,
-			'sends'=>_MD_EXTGALLERY_SENDS,
-			'submitter'=>_MD_EXTGALLERY_SUBMITTER,
-			'allPhotoBy'=>_MD_EXTGALLERY_ALL_PHOTO_BY
-		);
+            'preview'=>_MD_EXTGALLERY_PREVIEW,
+            'next'=>_MD_EXTGALLERY_NEXT,
+            'of'=>_MD_EXTGALLERY_OF,
+            'voteFor'=>_MD_EXTGALLERY_VOTE_FOR_THIS_PHOTO,
+            'photoInfo'=>_MD_EXTGALLERY_PHOTO_INFORMATION,
+            'resolution'=>_MD_EXTGALLERY_RESOLUTION,
+            'pixels'=>_MD_EXTGALLERY_PIXELS,
+            'view'=>_MD_EXTGALLERY_VIEW,
+            'hits'=>_MD_EXTGALLERY_HITS,
+            'fileSize'=>_MD_EXTGALLERY_FILE_SIZE,
+            'added'=>_MD_EXTGALLERY_ADDED,
+            'score'=>_MD_EXTGALLERY_SCORE,
+            'votes'=>_MD_EXTGALLERY_VOTES,
+            'downloadOrig'=>_MD_EXTGALLERY_DOWNLOAD_ORIG,
+            'donwloads'=>_MD_EXTGALLERY_DOWNLOADS,
+            'sendEcard'=>_MD_EXTGALLERY_SEND_ECARD,
+            'sends'=>_MD_EXTGALLERY_SENDS,
+            'submitter'=>_MD_EXTGALLERY_SUBMITTER,
+            'allPhotoBy'=>_MD_EXTGALLERY_ALL_PHOTO_BY
+        );
 $xoopsTpl->assign('lang', $lang);
 
 if($xoopsModuleConfig['enable_rating']) {
-	$xoopsTpl->assign('canRate', $permHandler->isAllowed($xoopsUser, 'public_rate', $cat['cat_id']));
+    $xoopsTpl->assign('canRate', $permHandler->isAllowed($xoopsUser, 'public_rate', $cat['cat_id']));
 } else {
-	$xoopsTpl->assign('canRate', false);
-	//DNPROSSI - added preferences option - enable_rating
-	$xoopsTpl->assign('enable_rating', $xoopsModuleConfig['enable_rating']);
+    $xoopsTpl->assign('canRate', false);
+    //DNPROSSI - added preferences option - enable_rating
+    $xoopsTpl->assign('enable_rating', $xoopsModuleConfig['enable_rating']);
 }
 
 //DNPROSSI - added preferences option
 //	enable_info, enable_resolution, enable_download, enable_date
 //	enable_ecards, enable_submitter_lnk, enable_photo_hits
-if ( $xoopsModuleConfig['info_view'] == "photo" || $xoopsModuleConfig['info_view'] == "both" ) 
+if ( $xoopsModuleConfig['info_view'] == "photo" || $xoopsModuleConfig['info_view'] == "both" )
 {
-	if ( $xoopsModuleConfig['pubusr_info_view'] == "public" || $xoopsModuleConfig['pubusr_info_view'] == "both" ) 
-	{
-		if ( $xoopsModuleConfig['enable_info']  == 0 )
-		{
-			$enable_info = $xoopsModuleConfig['enable_info'];
-		} else { $enable_info = 1; }
-	} else { $enable_info = 1; }		 	
+    if ( $xoopsModuleConfig['pubusr_info_view'] == "public" || $xoopsModuleConfig['pubusr_info_view'] == "both" )
+    {
+        if ( $xoopsModuleConfig['enable_info']  == 0 )
+        {
+            $enable_info = $xoopsModuleConfig['enable_info'];
+        } else { $enable_info = 1; }
+    } else { $enable_info = 1; }
 } else { $enable_info = 1; }
 
 $xoopsTpl->assign('enable_info', $enable_info);
@@ -170,16 +170,14 @@ $xoopsTpl->assign('disp_ph_title', $xoopsModuleConfig['disp_ph_title']);
 $xoopsTpl->assign('display_type', $xoopsModuleConfig['display_type']);
 $xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
 
-	// For xoops tag
-	if (($xoopsModuleConfig['usetag'] == 1) and (is_dir('../tag'))){
-		include_once XOOPS_ROOT_PATH."/modules/tag/include/tagbar.php";
-		$xoopsTpl->assign('tagbar', tagBar($photo['photo_id'], $catid = 0));
-		$xoopsTpl->assign('tags', true);
-	} else {
-		$xoopsTpl->assign('tags', false);
-	}
+    // For xoops tag
+    if (($xoopsModuleConfig['usetag'] == 1) and (is_dir('../tag'))){
+        include_once XOOPS_ROOT_PATH."/modules/tag/include/tagbar.php";
+        $xoopsTpl->assign('tagbar', tagBar($photo['photo_id'], $catid = 0));
+        $xoopsTpl->assign('tags', true);
+    } else {
+        $xoopsTpl->assign('tags', false);
+    }
 
 include XOOPS_ROOT_PATH.'/include/comment_view.php';
 include XOOPS_ROOT_PATH.'/footer.php';
-
-?>

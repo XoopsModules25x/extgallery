@@ -23,5 +23,3 @@ if (!defined('IMAGETYPE_GIF')) {
     define('IMAGETYPE_WBMP',   15);
     define('IMAGETYPE_XBM',    16);
 }
-
-?>

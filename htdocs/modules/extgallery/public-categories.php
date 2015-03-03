@@ -16,16 +16,15 @@
  * @version     $Id: public-categories.php 10874 2013-01-23 17:23:02Z beckmi $
  */
 
-
 require '../../mainfile.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-categories.html';
 include XOOPS_ROOT_PATH.'/header.php';
 
 if(!isset($_GET['id'])) {
-	$catId = 0;
+    $catId = 0;
 } else {
-	$catId = intval($_GET['id']);
+    $catId = intval($_GET['id']);
 }
 
 $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
@@ -33,8 +32,8 @@ $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
 $catObj = $catHandler->getCat($catId);
 
 if(is_null($catObj)) {
-	include(XOOPS_ROOT_PATH."/footer.php");
-	exit;
+    include(XOOPS_ROOT_PATH."/footer.php");
+    exit;
 }
 
 $cat = $catHandler->objectToArrayWithoutExternalKey($catObj);
@@ -46,10 +45,9 @@ $xoopsTpl->assign('catPath', $catPath);
 $catChild = $catHandler->objectToArray($catHandler->getChildren($catId),array('photo_id'));
 $xoopsTpl->assign('catChild', $catChild);
 
-
 if(isset($catObj)) {
-	$xoopsTpl->assign('xoops_pagetitle', $catObj->getVar('cat_name'));
-	$xoTheme->addMeta('meta','description',$catObj->getVar('cat_desc'));
+    $xoopsTpl->assign('xoops_pagetitle', $catObj->getVar('cat_name'));
+    $xoTheme->addMeta('meta','description',$catObj->getVar('cat_desc'));
 }
 
 $rel = "alternate";
@@ -61,10 +59,10 @@ $xoTheme->addMeta('link', $rel, $attributes);
 $xoTheme->addStylesheet('modules/extgallery/include/style.css');
 
 $lang = array(
-			'categoriesAlbums'=>_MD_EXTGALLERY_CATEGORIESALBUMS,
-			'nbAlbums'=>_MD_EXTGALLERY_NBALBUMS,
-			'nbPhotos'=>_MD_EXTGALLERY_NBPHOTOS
-		);
+            'categoriesAlbums'=>_MD_EXTGALLERY_CATEGORIESALBUMS,
+            'nbAlbums'=>_MD_EXTGALLERY_NBALBUMS,
+            'nbPhotos'=>_MD_EXTGALLERY_NBPHOTOS
+        );
 $xoopsTpl->assign('lang', $lang);
 
 $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));
@@ -73,5 +71,3 @@ $xoopsTpl->assign('display_type', $xoopsModuleConfig['display_type']);
 $xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
 
 include(XOOPS_ROOT_PATH."/footer.php");
-
-?>

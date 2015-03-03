@@ -79,10 +79,9 @@ Class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
 
         $this->new_x = $new_x;
         $this->new_y = $new_y;
+
         return true;
     }
-
-
 
     function rotate($angle, $options = null)
     {
@@ -103,7 +102,7 @@ Class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
         $t = deg2rad($angle);
 
         if( !is_array($color_mask) ){
-			// Not already in numberical format, so we convert it.
+            // Not already in numberical format, so we convert it.
             if ($color_mask{0} == '#'){
                 $color_mask = $this->colorhex2colorarray($color_mask);
             } else {
@@ -173,7 +172,6 @@ Class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
 
         $this->img_x = $width2;
         $this->img_y = $height2;
-
 
         imagepalettecopy($img2,$img);
 
@@ -246,7 +244,8 @@ Class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
         }
 
         $this->imageHandle  =  $img2;
+
         return true;
     }
 } // End class ImageGD
-?>
+;

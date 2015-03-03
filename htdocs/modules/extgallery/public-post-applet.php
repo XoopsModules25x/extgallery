@@ -31,5 +31,3 @@ if($result == 2) {
 } elseif($result == 1) {
     echo "SUCCESS\n";
 }
-
-?>

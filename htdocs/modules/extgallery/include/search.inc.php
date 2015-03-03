@@ -17,15 +17,13 @@
  */
 
 if (!defined("XOOPS_ROOT_PATH")) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 function extgallerySearch($queryarray, $andor, $limit, $offset, $userid) {
-	
-	$photoHandler = xoops_getmodulehandler('publicphoto', 'extgallery');
-	
-	return $photoHandler->getSearchedPhoto($queryarray, $andor, $limit, $offset, $userid);
+    
+    $photoHandler = xoops_getmodulehandler('publicphoto', 'extgallery');
+    
+    return $photoHandler->getSearchedPhoto($queryarray, $andor, $limit, $offset, $userid);
 
 }
-
-?>

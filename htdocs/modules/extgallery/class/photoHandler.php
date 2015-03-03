@@ -17,7 +17,7 @@
  */
 
 if (!defined("XOOPS_ROOT_PATH")) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 include_once 'publicPerm.php';
@@ -26,41 +26,41 @@ include_once 'ExtgalleryPersistableObjectHandler.php';
 class ExtgalleryPhoto extends XoopsObject
 {
 
-	var $externalKey = array();
+    var $externalKey = array();
 
-	function ExtgalleryPhoto()
-	{
-		$this->initVar('photo_id', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('cat_id', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_title', XOBJ_DTYPE_TXTBOX, '', false, 255);
-		$this->initVar('photo_desc', XOBJ_DTYPE_TXTAREA, '', false);
-		$this->initVar('photo_serveur', XOBJ_DTYPE_TXTBOX, '', false, 255);
-		$this->initVar('photo_name', XOBJ_DTYPE_TXTBOX, '', false, 255);
-		$this->initVar('photo_orig_name', XOBJ_DTYPE_TXTBOX, '', false, 255);
-		$this->initVar('uid', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_size', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_res_x', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_res_y', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_hits', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_comment', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_rating', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_nbrating', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_download', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_ecard', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_date', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_havelarge', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_approved', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('photo_extra', XOBJ_DTYPE_TXTAREA, '', false);
-		$this->initVar('photo_weight', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('dohtml', XOBJ_DTYPE_INT, 0, false);
+    function ExtgalleryPhoto()
+    {
+        $this->initVar('photo_id', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('cat_id', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_title', XOBJ_DTYPE_TXTBOX, '', false, 255);
+        $this->initVar('photo_desc', XOBJ_DTYPE_TXTAREA, '', false);
+        $this->initVar('photo_serveur', XOBJ_DTYPE_TXTBOX, '', false, 255);
+        $this->initVar('photo_name', XOBJ_DTYPE_TXTBOX, '', false, 255);
+        $this->initVar('photo_orig_name', XOBJ_DTYPE_TXTBOX, '', false, 255);
+        $this->initVar('uid', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_size', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_res_x', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_res_y', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_hits', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_comment', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_rating', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_nbrating', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_download', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_ecard', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_date', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_havelarge', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_approved', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('photo_extra', XOBJ_DTYPE_TXTAREA, '', false);
+        $this->initVar('photo_weight', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('dohtml', XOBJ_DTYPE_INT, 0, false);
 
-		$this->externalKey['cat_id'] = array('className'=>'publiccat', 'getMethodeName'=>'getCat', 'keyName'=>'cat', 'core'=>false);
-		$this->externalKey['uid'] = array('className'=>'user', 'getMethodeName'=>'get', 'keyName'=>'user', 'core'=>true);
-	}
+        $this->externalKey['cat_id'] = array('className'=>'publiccat', 'getMethodeName'=>'getCat', 'keyName'=>'cat', 'core'=>false);
+        $this->externalKey['uid'] = array('className'=>'user', 'getMethodeName'=>'get', 'keyName'=>'user', 'core'=>true);
+    }
 
-	function getExternalKey($key) {
-		return $this->externalKey[$key];
-	}
+    function getExternalKey($key) {
+        return $this->externalKey[$key];
+    }
 
 }
 
@@ -68,99 +68,104 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler {
 
     var $photoUploader = null;
 
-	function ExtgalleryPhotoHandler(&$db, $type)
-	{
-		$this->ExtgalleryPersistableObjectHandler($db, 'extgallery_'.$type.'photo', 'Extgallery'.ucfirst($type).'photo', 'photo_id');
-	}
+    function ExtgalleryPhotoHandler(&$db, $type)
+    {
+        $this->ExtgalleryPersistableObjectHandler($db, 'extgallery_'.$type.'photo', 'Extgallery'.ucfirst($type).'photo', 'photo_id');
+    }
 
-	function createPhoto($data) {
-		$photo = $this->create();
-		$photo->setVars($data);
-		return $this->insert($photo, true);
-	}
+    function createPhoto($data) {
+        $photo = $this->create();
+        $photo->setVars($data);
 
-	function modifyPhoto($photoId,$data) {
-		$photo = $this->get($photoId);
-		$photo->setVars($data);
-		return $this->insert($photo,true);
-	}
+        return $this->insert($photo, true);
+    }
 
-	function deletePhoto(&$photo) {
-		if($photo->getVar('photo_serveur') == "") {
-			$this->deleteFile($photo);
-		}
-		$this->delete($photo->getVar('photo_id'), true);
-	}
+    function modifyPhoto($photoId,$data) {
+        $photo = $this->get($photoId);
+        $photo->setVars($data);
 
-	function deletePhotoByCat($catId) {
-		$criteria = new Criteria('cat_id',$catId);
-		$photos = $this->getObjects($criteria);
-		foreach($photos as $photo) {
-			$this->deletePhoto($photo);
-		}
-	}
+        return $this->insert($photo,true);
+    }
 
-	function deleteFile() {
-		exit("deleteFile() method must be defined on sub classes");
-	}
+    function deletePhoto(&$photo) {
+        if($photo->getVar('photo_serveur') == "") {
+            $this->deleteFile($photo);
+        }
+        $this->delete($photo->getVar('photo_id'), true);
+    }
 
-	function getPhoto($photoId) {
-		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('photo_id',$photoId));
-		$criteria->add(new Criteria('photo_approved',1));
+    function deletePhotoByCat($catId) {
+        $criteria = new Criteria('cat_id',$catId);
+        $photos = $this->getObjects($criteria);
+        foreach($photos as $photo) {
+            $this->deletePhoto($photo);
+        }
+    }
 
-		$photo =  $this->getObjects($criteria);
-		if(count($photo) != 1) {
-			return false;
-		}
-		return $photo[0];
-	}
+    function deleteFile() {
+        exit("deleteFile() method must be defined on sub classes");
+    }
 
-	function nbPhoto(&$cat) {
-		$criteria = new Criteria('cat_id',$cat->getVar('cat_id'));
-		return $this->getCount($criteria);
-	}
-	
-	function getAlbumPhotoPage($catId, $start, $sortby, $orderby) {
+    function getPhoto($photoId) {
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('photo_id',$photoId));
+        $criteria->add(new Criteria('photo_approved',1));
+
+        $photo =  $this->getObjects($criteria);
+        if(count($photo) != 1) {
+            return false;
+        }
+
+        return $photo[0];
+    }
+
+    function nbPhoto(&$cat) {
+        $criteria = new Criteria('cat_id',$cat->getVar('cat_id'));
+
+        return $this->getCount($criteria);
+    }
+    
+    function getAlbumPhotoPage($catId, $start, $sortby, $orderby) {
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('cat_id',$catId));
         $criteria->add(new Criteria('photo_approved',1));
         $criteria->setStart($start);
         $criteria->setLimit($GLOBALS['xoopsModuleConfig']['nb_column']*$GLOBALS['xoopsModuleConfig']['nb_line']);
         if ($criteria->getSort() == '') {
-	        $criteria->setSort($sortby);
-	        $criteria->setOrder($orderby);
+            $criteria->setSort($sortby);
+            $criteria->setOrder($orderby);
         }
+
         return $this->getObjects($criteria);
     }
 
  function getAlbumPhotoAdminPage($catId, $start) {
-		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('cat_id',$catId));
-		$criteria->add(new Criteria('photo_approved',1));
-		$criteria->setStart($start);
-		$criteria->setLimit($GLOBALS['xoopsModuleConfig']['admin_nb_photo']);
-		$criteria->setSort('photo_weight, photo_id');
-		$criteria->setOrder($GLOBALS['xoopsModuleConfig']['display_set_order']);
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('cat_id',$catId));
+        $criteria->add(new Criteria('photo_approved',1));
+        $criteria->setStart($start);
+        $criteria->setLimit($GLOBALS['xoopsModuleConfig']['admin_nb_photo']);
+        $criteria->setSort('photo_weight, photo_id');
+        $criteria->setOrder($GLOBALS['xoopsModuleConfig']['display_set_order']);
 
-		return $this->getObjects($criteria);
-	}
+        return $this->getObjects($criteria);
+    }
 
  function getSlideshowAlbumPhoto($catId) {
-		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('cat_id',$catId));
-		$criteria->add(new Criteria('photo_approved',1));
-		$criteria->setSort('photo_weight, photo_id');
-		$criteria->setOrder($GLOBALS['xoopsModuleConfig']['display_set_order']);
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('cat_id',$catId));
+        $criteria->add(new Criteria('photo_approved',1));
+        $criteria->setSort('photo_weight, photo_id');
+        $criteria->setOrder($GLOBALS['xoopsModuleConfig']['display_set_order']);
 
-		return $this->getObjects($criteria, false, false);
-	}
+        return $this->getObjects($criteria, false, false);
+    }
 
  function getPhotoAlbumId($catId) {
 
   $criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('cat_id',$catId));
-		$criteria->add(new Criteria('photo_approved',1));
+        $criteria->add(new Criteria('cat_id',$catId));
+        $criteria->add(new Criteria('photo_approved',1));
 
   $sql = 'SELECT photo_id FROM '.$this->db->prefix('extgallery_publicphoto').' '.$criteria->renderWhere().' ORDER BY photo_weight, photo_id ASC;';
 
@@ -177,355 +182,366 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler {
  function getAlbumPrevPhoto($catId, $photoId) {
   $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
 
-		$criteria = new CriteriaCompo();
-		$criteria->add($catHandler->getCatRestrictCriteria());
-		$criteria->add(new Criteria('photo_approved',1));
-		$criteria->add(new Criteria('cat_id',$catId));
+        $criteria = new CriteriaCompo();
+        $criteria->add($catHandler->getCatRestrictCriteria());
+        $criteria->add(new Criteria('photo_approved',1));
+        $criteria->add(new Criteria('cat_id',$catId));
   $criteria->add(new Criteria('photo_id',$photoId,'<'));
   $criteria->setSort('photo_weight, photo_id');
-		$criteria->setOrder('DESC');
+        $criteria->setOrder('DESC');
   $criteria->setLimit(1);
-		return $this->getObjects($criteria);
+
+        return $this->getObjects($criteria);
  }
 
  function getAlbumNextPhoto($catId, $photoId) {
   $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
 
-		$criteria = new CriteriaCompo();
-		$criteria->add($catHandler->getCatRestrictCriteria());
-		$criteria->add(new Criteria('photo_approved',1));
-		$criteria->add(new Criteria('cat_id',$catId));
+        $criteria = new CriteriaCompo();
+        $criteria->add($catHandler->getCatRestrictCriteria());
+        $criteria->add(new Criteria('photo_approved',1));
+        $criteria->add(new Criteria('cat_id',$catId));
   $criteria->add(new Criteria('photo_id',$photoId,'>'));
   $criteria->setSort('photo_weight, photo_id');
-		$criteria->setOrder('ASC');
+        $criteria->setOrder('ASC');
   $criteria->setLimit(1);
-		return $this->getObjects($criteria);
+
+        return $this->getObjects($criteria);
  }
 
  function getAlbumCurrentPhotoPlace($catId, $photoId) {
         $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
 
-		$criteria = new CriteriaCompo();
-		$criteria->add($catHandler->getCatRestrictCriteria());
-		$criteria->add(new Criteria('photo_approved',1));
-		$criteria->add(new Criteria('cat_id',$catId));
+        $criteria = new CriteriaCompo();
+        $criteria->add($catHandler->getCatRestrictCriteria());
+        $criteria->add(new Criteria('photo_approved',1));
+        $criteria->add(new Criteria('cat_id',$catId));
         $criteria->add(new Criteria('photo_id',$photoId,'<='));
         $criteria->setSort('photo_weight, photo_id');
-		$criteria->setOrder('DESC');
-		return $this->getCount($criteria);
+        $criteria->setOrder('DESC');
+
+        return $this->getCount($criteria);
  }
 
-	function getAlbumPhoto($catId) {
-		$criteria = new Criteria('cat_id',$catId);
-		$criteria->setSort('photo_weight, photo_id');
-		$criteria->setOrder('ASC');
+    function getAlbumPhoto($catId) {
+        $criteria = new Criteria('cat_id',$catId);
+        $criteria->setSort('photo_weight, photo_id');
+        $criteria->setOrder('ASC');
 
-		return $this->getObjects($criteria);
-	}
+        return $this->getObjects($criteria);
+    }
 
-	function getCatPhoto(&$category) {
+    function getCatPhoto(&$category) {
 
-		$catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
+        $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
 
-		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('nleft', $category->getVar('nleft'), '>='));
-		$criteria->add(new Criteria('nright', $category->getVar('nright'), '<='));
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('nleft', $category->getVar('nleft'), '>='));
+        $criteria->add(new Criteria('nright', $category->getVar('nright'), '<='));
 
-		$cats = $catHandler->getObjects($criteria);
+        $cats = $catHandler->getObjects($criteria);
 
-		$count = count($cats);
-		if($count > 0) {
-			$in = '('.$cats[0]->getVar('cat_id');
-			array_shift($cats);
-			foreach($cats as $cat) {
-				$in .= ','.$cat->getVar('cat_id');
-			}
-			$in .= ')';
-			$criteria = new Criteria('cat_id', $in, 'IN');
-		} else {
-			$criteria = new Criteria('cat_id', '(0)', 'IN');
-		}
+        $count = count($cats);
+        if($count > 0) {
+            $in = '('.$cats[0]->getVar('cat_id');
+            array_shift($cats);
+            foreach($cats as $cat) {
+                $in .= ','.$cat->getVar('cat_id');
+            }
+            $in .= ')';
+            $criteria = new Criteria('cat_id', $in, 'IN');
+        } else {
+            $criteria = new Criteria('cat_id', '(0)', 'IN');
+        }
 
-		return $this->getObjects($criteria);
-	}
+        return $this->getObjects($criteria);
+    }
 
-	function getAlbumCount($catId) {
-		$criteria = new Criteria('cat_id',$catId);
-		return $this->getCount($criteria);
-	}
+    function getAlbumCount($catId) {
+        $criteria = new Criteria('cat_id',$catId);
 
-	function updateHits($photoId) {
-		$criteria = new Criteria('photo_id',$photoId);
-		return $this->updateCounter('photo_hits',$criteria);
-	}
+        return $this->getCount($criteria);
+    }
 
-	function updateNbRating($photoId) {
-		$criteria = new Criteria('photo_id',$photoId);
-		return $this->updateCounter('photo_nbrating',$criteria);
-	}
+    function updateHits($photoId) {
+        $criteria = new Criteria('photo_id',$photoId);
 
-	function updateDownload($photoId) {
-		$criteria = new Criteria('photo_id',$photoId);
-		return $this->updateCounter('photo_download',$criteria);
-	}
+        return $this->updateCounter('photo_hits',$criteria);
+    }
 
-	function updateEcard($photoId) {
-		$criteria = new Criteria('photo_id',$photoId);
-		return $this->updateCounter('photo_ecard',$criteria);
-	}
+    function updateNbRating($photoId) {
+        $criteria = new Criteria('photo_id',$photoId);
 
-	function getAllSize() {
-		exit("getAllSize() method must be defined on sub classes");
-	}
+        return $this->updateCounter('photo_nbrating',$criteria);
+    }
 
-	function _makeWatermark(&$imageTransform) {
+    function updateDownload($photoId) {
+        $criteria = new Criteria('photo_id',$photoId);
 
-		if(!function_exists('imagettfbbox'))
-			return;
+        return $this->updateCounter('photo_download',$criteria);
+    }
 
-		global $xoopsModuleConfig;
+    function updateEcard($photoId) {
+        $criteria = new Criteria('photo_id',$photoId);
 
-		/*	Text position param
-		/
-		/	0 : orig
-		/	-1 : opposit
-		/	1 : center
-		/
-		*/
-		if($xoopsModuleConfig['watermark_position'] == "tl") {
-			$x = 0;
-			$y = 0;
-		} elseif($xoopsModuleConfig['watermark_position'] == "tr") {
-			$x = -1;
-			$y = 0;
-		} elseif($xoopsModuleConfig['watermark_position'] == "bl") {
-			$x = 0;
-			$y = -1;
-		} elseif($xoopsModuleConfig['watermark_position'] == "br") {
-			$x = -1;
-			$y = -1;
-		} elseif($xoopsModuleConfig['watermark_position'] == "tc") {
-			$x = 1;
-			$y = 0;
-		} elseif($xoopsModuleConfig['watermark_position'] == "bc") {
-			$x = 1;
-			$y = -1;
-		} elseif($xoopsModuleConfig['watermark_position'] == "lc") {
-			$x = 0;
-			$y = 1;
-		} elseif($xoopsModuleConfig['watermark_position'] == "rc") {
-			$x = -1;
-			$y = 1;
-		} elseif($xoopsModuleConfig['watermark_position'] == "cc") {
-			$x = 1;
-			$y = 1;
-		}
+        return $this->updateCounter('photo_ecard',$criteria);
+    }
 
-		$text = ($xoopsModuleConfig['watermark_type'] == 0) ? $GLOBALS['xoopsUser']->getVar('uname') : $xoopsModuleConfig['watermark_text'];
+    function getAllSize() {
+        exit("getAllSize() method must be defined on sub classes");
+    }
 
-		$watermarkParams = array(
-			'text'=>$text,
-			'x'=>$x,
-			'y'=>$y,
-			'color'=>$xoopsModuleConfig['watermark_color'],
-			'font'=>XOOPS_ROOT_PATH."/modules/extgallery/fonts/".$xoopsModuleConfig['watermark_font'],
-			'size'=>$xoopsModuleConfig['watermark_fontsize'],
-			'resize_first'=>false,
-			'padding'=>$xoopsModuleConfig['watermark_padding']
-		);
-		$imageTransform->addText($watermarkParams);
-	}
+    function _makeWatermark(&$imageTransform) {
 
-	function _makeBorder(&$imageTransform) {
+        if(!function_exists('imagettfbbox'))
+            return;
 
-		global $xoopsModuleConfig;
+        global $xoopsModuleConfig;
 
-		$borders = array();
-		$borders[] = array('borderWidth'=>$xoopsModuleConfig['inner_border_size'], 'borderColor'=>$xoopsModuleConfig['inner_border_color']);
-		$borders[] = array('borderWidth'=>$xoopsModuleConfig['outer_border_size'], 'borderColor'=>$xoopsModuleConfig['outer_border_color']);
-		$imageTransform->addBorders($borders);
-	}
+        /*	Text position param
+        /
+        /	0 : orig
+        /	-1 : opposit
+        /	1 : center
+        /
+        */
+        if($xoopsModuleConfig['watermark_position'] == "tl") {
+            $x = 0;
+            $y = 0;
+        } elseif($xoopsModuleConfig['watermark_position'] == "tr") {
+            $x = -1;
+            $y = 0;
+        } elseif($xoopsModuleConfig['watermark_position'] == "bl") {
+            $x = 0;
+            $y = -1;
+        } elseif($xoopsModuleConfig['watermark_position'] == "br") {
+            $x = -1;
+            $y = -1;
+        } elseif($xoopsModuleConfig['watermark_position'] == "tc") {
+            $x = 1;
+            $y = 0;
+        } elseif($xoopsModuleConfig['watermark_position'] == "bc") {
+            $x = 1;
+            $y = -1;
+        } elseif($xoopsModuleConfig['watermark_position'] == "lc") {
+            $x = 0;
+            $y = 1;
+        } elseif($xoopsModuleConfig['watermark_position'] == "rc") {
+            $x = -1;
+            $y = 1;
+        } elseif($xoopsModuleConfig['watermark_position'] == "cc") {
+            $x = 1;
+            $y = 1;
+        }
 
-	function _getUploadPhotoPath() {
-		exit("_getUploadPhotoPath() method must be defined on sub classes");
-	}
+        $text = ($xoopsModuleConfig['watermark_type'] == 0) ? $GLOBALS['xoopsUser']->getVar('uname') : $xoopsModuleConfig['watermark_text'];
 
-	function _largePhotoTreatment($photoName) {
+        $watermarkParams = array(
+            'text'=>$text,
+            'x'=>$x,
+            'y'=>$y,
+            'color'=>$xoopsModuleConfig['watermark_color'],
+            'font'=>XOOPS_ROOT_PATH."/modules/extgallery/fonts/".$xoopsModuleConfig['watermark_font'],
+            'size'=>$xoopsModuleConfig['watermark_fontsize'],
+            'resize_first'=>false,
+            'padding'=>$xoopsModuleConfig['watermark_padding']
+        );
+        $imageTransform->addText($watermarkParams);
+    }
 
-		global $xoopsModuleConfig;
+    function _makeBorder(&$imageTransform) {
 
-		// Check if must save large photo
-		if($xoopsModuleConfig['save_large']) {
+        global $xoopsModuleConfig;
 
-			// Define Graphical library path
-			if(!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] == 'IM') {
-				define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
-			}
-			$imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
+        $borders = array();
+        $borders[] = array('borderWidth'=>$xoopsModuleConfig['inner_border_size'], 'borderColor'=>$xoopsModuleConfig['inner_border_color']);
+        $borders[] = array('borderWidth'=>$xoopsModuleConfig['outer_border_size'], 'borderColor'=>$xoopsModuleConfig['outer_border_color']);
+        $imageTransform->addBorders($borders);
+    }
 
-			$filePath = $this->_getUploadPhotoPath();
-			$imageTransform->load($filePath.$photoName);
+    function _getUploadPhotoPath() {
+        exit("_getUploadPhotoPath() method must be defined on sub classes");
+    }
 
-			// Save large photo only if it's bigger than medium size
-			if($imageTransform->getImageWidth() > $xoopsModuleConfig['medium_width'] ||
-				$imageTransform->getImageHeight() > $xoopsModuleConfig['medium_heigth']) {
+    function _largePhotoTreatment($photoName) {
 
-				// Make watermark
-				if($xoopsModuleConfig['enable_large_watermark']) {
-					$this->_makeWatermark($imageTransform);
-				}
+        global $xoopsModuleConfig;
 
-				// Make border
-				if($xoopsModuleConfig['enable_large_border']) {
-					$this->_makeBorder($imageTransform);
-				}
+        // Check if must save large photo
+        if($xoopsModuleConfig['save_large']) {
 
-				$largeFilePath = $filePath."large/large_".$photoName;
-				$imageTransform->save($largeFilePath, '', 100);
-				$imageTransform->free();
-			}
-		}
-	}
+            // Define Graphical library path
+            if(!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] == 'IM') {
+                define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
+            }
+            $imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
 
-	function _mediumPhotoTreatment($photoName, $filePath = null, $mediumFilePath = null) {
+            $filePath = $this->_getUploadPhotoPath();
+            $imageTransform->load($filePath.$photoName);
 
-		global $xoopsModuleConfig;
+            // Save large photo only if it's bigger than medium size
+            if($imageTransform->getImageWidth() > $xoopsModuleConfig['medium_width'] ||
+                $imageTransform->getImageHeight() > $xoopsModuleConfig['medium_heigth']) {
 
-		// Define Graphical library path
-		if(!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] == 'IM') {
-			define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
-		}
-		$imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
+                // Make watermark
+                if($xoopsModuleConfig['enable_large_watermark']) {
+                    $this->_makeWatermark($imageTransform);
+                }
 
-		if(is_null($filePath)) {
-		    $filePath = $this->_getUploadPhotoPath();
-		}
-		if(is_null($mediumFilePath)) {
-		    $mediumFilePath = $filePath."medium/".$photoName;
-		}
-		$imageTransform->load($filePath.$photoName);
+                // Make border
+                if($xoopsModuleConfig['enable_large_border']) {
+                    $this->_makeBorder($imageTransform);
+                }
 
-		// Fitting image to desired size
+                $largeFilePath = $filePath."large/large_".$photoName;
+                $imageTransform->save($largeFilePath, '', 100);
+                $imageTransform->free();
+            }
+        }
+    }
+
+    function _mediumPhotoTreatment($photoName, $filePath = null, $mediumFilePath = null) {
+
+        global $xoopsModuleConfig;
+
+        // Define Graphical library path
+        if(!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] == 'IM') {
+            define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
+        }
+        $imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
+
+        if(is_null($filePath)) {
+            $filePath = $this->_getUploadPhotoPath();
+        }
+        if(is_null($mediumFilePath)) {
+            $mediumFilePath = $filePath."medium/".$photoName;
+        }
+        $imageTransform->load($filePath.$photoName);
+
+        // Fitting image to desired size
   if($xoopsModuleConfig['enable_medium_border']) {
    $borderSize = ($xoopsModuleConfig['inner_border_size'] * 2) + ($xoopsModuleConfig['outer_border_size'] * 2);
   } else {
    $borderSize = 0;
   }
-		$imageTransform->fit($xoopsModuleConfig['medium_width'] - $borderSize , $xoopsModuleConfig['medium_heigth'] - $borderSize);
-		$imageTransform->save($mediumFilePath, '', $xoopsModuleConfig['medium_quality']);
-		$imageTransform->free();
+        $imageTransform->fit($xoopsModuleConfig['medium_width'] - $borderSize , $xoopsModuleConfig['medium_heigth'] - $borderSize);
+        $imageTransform->save($mediumFilePath, '', $xoopsModuleConfig['medium_quality']);
+        $imageTransform->free();
 
-		if($xoopsModuleConfig['enable_medium_watermark'] || $xoopsModuleConfig['enable_medium_border'])	{
-			$imageTransform->load($mediumFilePath);
+        if($xoopsModuleConfig['enable_medium_watermark'] || $xoopsModuleConfig['enable_medium_border'])    {
+            $imageTransform->load($mediumFilePath);
 
-			// Make watermark
-			if($xoopsModuleConfig['enable_medium_watermark']) {
-				$this->_makeWatermark($imageTransform);
-			}
+            // Make watermark
+            if($xoopsModuleConfig['enable_medium_watermark']) {
+                $this->_makeWatermark($imageTransform);
+            }
 
-			// Make border
-			if($xoopsModuleConfig['enable_medium_border']) {
-				$this->_makeBorder($imageTransform);
-			}
+            // Make border
+            if($xoopsModuleConfig['enable_medium_border']) {
+                $this->_makeBorder($imageTransform);
+            }
 
-			$imageTransform->save($mediumFilePath, '', $xoopsModuleConfig['medium_quality']);
-			$imageTransform->free();
-		}
-	}
+            $imageTransform->save($mediumFilePath, '', $xoopsModuleConfig['medium_quality']);
+            $imageTransform->free();
+        }
+    }
 
-	function _makeThumb($photoName) {
+    function _makeThumb($photoName) {
 
-		global $xoopsModuleConfig;
+        global $xoopsModuleConfig;
 
-		// Define Graphical library path
-		if(!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] == 'IM') {
-			define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
-		}
-		$imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
+        // Define Graphical library path
+        if(!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] == 'IM') {
+            define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
+        }
+        $imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
 
-		$filePath = $this->_getUploadPhotoPath()."medium/".$photoName;
-		$thumbPath = $this->_getUploadPhotoPath()."thumb/thumb_".$photoName;
+        $filePath = $this->_getUploadPhotoPath()."medium/".$photoName;
+        $thumbPath = $this->_getUploadPhotoPath()."thumb/thumb_".$photoName;
 
-		$imageTransform->load($filePath);
-		$imageTransform->fit($xoopsModuleConfig['thumb_width'], $xoopsModuleConfig['thumb_heigth']);
-		$imageTransform->save($thumbPath, '', $xoopsModuleConfig['thumb_quality']);
-		$imageTransform->free();
-	}
+        $imageTransform->load($filePath);
+        $imageTransform->fit($xoopsModuleConfig['thumb_width'], $xoopsModuleConfig['thumb_heigth']);
+        $imageTransform->save($thumbPath, '', $xoopsModuleConfig['thumb_quality']);
+        $imageTransform->free();
+    }
 
-	function _haveLargePhoto($photoName) {
-		return file_exists($this->_getUploadPhotoPath()."large/large_".$photoName);
-	}
+    function _haveLargePhoto($photoName) {
+        return file_exists($this->_getUploadPhotoPath()."large/large_".$photoName);
+    }
 
-	function _getImageDimension($photoName) {
+    function _getImageDimension($photoName) {
 
-		global $xoopsModuleConfig;
+        global $xoopsModuleConfig;
 
-		// Define Graphical library path
-		if(!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] == 'IM') {
-			define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
-		}
-		$imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
+        // Define Graphical library path
+        if(!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] == 'IM') {
+            define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
+        }
+        $imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
 
-		$ret = array();
-		if($this->_haveLargePhoto($photoName)) {
-			$imageTransform->load($this->_getUploadPhotoPath()."large/large_".$photoName);
-			$ret['width'] = $imageTransform->getImageWidth();
-			$ret['height'] = $imageTransform->getImageHeight();
-		} else {
-			$imageTransform->load($this->_getUploadPhotoPath()."medium/".$photoName);
-			$ret['width'] = $imageTransform->getImageWidth();
-			$ret['height'] = $imageTransform->getImageHeight();
-		}
-		$imageTransform->free();
-		return $ret;
-	}
+        $ret = array();
+        if($this->_haveLargePhoto($photoName)) {
+            $imageTransform->load($this->_getUploadPhotoPath()."large/large_".$photoName);
+            $ret['width'] = $imageTransform->getImageWidth();
+            $ret['height'] = $imageTransform->getImageHeight();
+        } else {
+            $imageTransform->load($this->_getUploadPhotoPath()."medium/".$photoName);
+            $ret['width'] = $imageTransform->getImageWidth();
+            $ret['height'] = $imageTransform->getImageHeight();
+        }
+        $imageTransform->free();
 
-	function _getAutoDescription($photoName) {
+        return $ret;
+    }
 
-		global $xoopsModuleConfig;
-	
-		//DNPROSSI
-		/*if ($xoopsModuleConfig['enable_longdesc']) {
-			$newphotoname = '';
-			$newnewphotoname = '';
-			$patterns = array();
-			$patterns[0] = "/-/";
-			$patterns[1] = "/_/";
-			$replacements = array();
-			$replacements[0] = " ";
-			$replacements[1] = "'";
-			$newphotoName = substr($photoName, strpos($photoName, "-") + 1);
-			$newphotoName = substr($newphotoName, strpos($newphotoName, "-") + 1);
-			return preg_replace($patterns, $replacements, substr($newphotoName,0,-12));				
-		} else { */
-			$matches = array();	
-			preg_match_all($xoopsModuleConfig['photoname_pattern'], substr($photoName,0,-12), $matches);
-			preg_match_all($xoopsModuleConfig['photoname_pattern'], $photoName, $matches);	
-			return implode(" ",$matches[1]);
-		//}
-	}
+    function _getAutoDescription($photoName) {
 
-	function _makeFileName($fileName) {
-		//DNPROSSI
-		//$fileName = preg_replace("/[^a-zA-Z0-9()_\.-]/", "-", $fileName);
-		$fileName = preg_replace("/[^a-zA-Z0-9_\.-]/", "-", $fileName);
+        global $xoopsModuleConfig;
+    
+        //DNPROSSI
+        /*if ($xoopsModuleConfig['enable_longdesc']) {
+            $newphotoname = '';
+            $newnewphotoname = '';
+            $patterns = array();
+            $patterns[0] = "/-/";
+            $patterns[1] = "/_/";
+            $replacements = array();
+            $replacements[0] = " ";
+            $replacements[1] = "'";
+            $newphotoName = substr($photoName, strpos($photoName, "-") + 1);
+            $newphotoName = substr($newphotoName, strpos($newphotoName, "-") + 1);
+            return preg_replace($patterns, $replacements, substr($newphotoName,0,-12));
+        } else { */
+            $matches = array();
+            preg_match_all($xoopsModuleConfig['photoname_pattern'], substr($photoName,0,-12), $matches);
+            preg_match_all($xoopsModuleConfig['photoname_pattern'], $photoName, $matches);
 
-		$fileName = explode(".",$fileName);
-		$userId = (is_object($GLOBALS['xoopsUser'])) ? $GLOBALS['xoopsUser']->getVar('uid') : 0 ;
-		return $fileName[0].'_'.$userId.'_'.substr(md5(uniqid(rand())),27).'.'.$fileName[1];
-	}
+            return implode(" ",$matches[1]);
+        //}
+    }
 
-	function _getPhotoSize($photoName) {
-		if($this->_haveLargePhoto($photoName)) {
-			return $this->_getFileSize("large/large_".$photoName);
-		} else {
-			return $this->_getFileSize($photoName);
-		}
-	}
+    function _makeFileName($fileName) {
+        //DNPROSSI
+        //$fileName = preg_replace("/[^a-zA-Z0-9()_\.-]/", "-", $fileName);
+        $fileName = preg_replace("/[^a-zA-Z0-9_\.-]/", "-", $fileName);
 
-	function _getFileSize($fileName) {
-		return round(filesize($this->_getUploadPhotoPath().$fileName)/1024,2);
-	}
+        $fileName = explode(".",$fileName);
+        $userId = (is_object($GLOBALS['xoopsUser'])) ? $GLOBALS['xoopsUser']->getVar('uid') : 0 ;
+
+        return $fileName[0].'_'.$userId.'_'.substr(md5(uniqid(rand())),27).'.'.$fileName[1];
+    }
+
+    function _getPhotoSize($photoName) {
+        if($this->_haveLargePhoto($photoName)) {
+            return $this->_getFileSize("large/large_".$photoName);
+        } else {
+            return $this->_getFileSize($photoName);
+        }
+    }
+
+    function _getFileSize($fileName) {
+        return round(filesize($this->_getUploadPhotoPath().$fileName)/1024,2);
+    }
 
  function rebuildThumbnail($catId) {
 
@@ -575,7 +591,6 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler {
         $jupart = (isset($_POST['jupart'])) ? (int)$_POST['jupart'] : 0;
         $jufinal = (isset($_POST['jufinal'])) ? (int)$_POST['jufinal'] : 1;
 
-
         if ($this->photoUploader->fetchMedia($file) && $this->photoUploader->upload()) {
         } else {
             // We got a chunk, so we don't add photo to database
@@ -601,18 +616,17 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler {
         }
 */
 
-
-		//DNPROSSI - add missing title and description on upload
-		$photoTitle = '';
-		$photoDesc = '';
-		$photoExtra = '';
-		$photoTag = '';
-		
-		if ( isset($_POST['photo_title']) ) { $photoTitle = $_POST['photo_title']; }
-		if ( isset($_POST['photo_desc']) ) { $photoDesc = $_POST['photo_desc']; } 
-		if ( isset($_POST['photo_extra']) ) { $photoExtra = $_POST['photo_extra']; } 
-		if ( isset($_POST['tag']) ) { $photoTag = $_POST["tag"]; }
-		
+        //DNPROSSI - add missing title and description on upload
+        $photoTitle = '';
+        $photoDesc = '';
+        $photoExtra = '';
+        $photoTag = '';
+        
+        if ( isset($_POST['photo_title']) ) { $photoTitle = $_POST['photo_title']; }
+        if ( isset($_POST['photo_desc']) ) { $photoDesc = $_POST['photo_desc']; }
+        if ( isset($_POST['photo_extra']) ) { $photoExtra = $_POST['photo_extra']; }
+        if ( isset($_POST['tag']) ) { $photoTag = $_POST["tag"]; }
+        
         $photoStatus = $this->addLocalPhoto($catId,$this->photoUploader->getSavedFilename(), $photoTitle, $photoDesc , $photoExtra , $photoTag);
         $cat = $catHandler->getCat($catId);
         $cat->setVar('cat_isalbum',1);
@@ -653,221 +667,220 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler {
 
     }
 
-	function addLocalPhoto($catId, $dirtyPhotoName, $photoTitle = "", $photoDesc = "", $photoExtra = "" , $photoTag = "") {
+    function addLocalPhoto($catId, $dirtyPhotoName, $photoTitle = "", $photoDesc = "", $photoExtra = "" , $photoTag = "") {
 
-	    include_once XOOPS_ROOT_PATH.'/modules/extgallery/class/pear/Image/Transform.php';
+        include_once XOOPS_ROOT_PATH.'/modules/extgallery/class/pear/Image/Transform.php';
 
-		global $xoopsUser, $xoopsModuleConfig;
-		$permHandler = ExtgalleryPublicPermHandler::getHandler();
+        global $xoopsUser, $xoopsModuleConfig;
+        $permHandler = ExtgalleryPublicPermHandler::getHandler();
 
-		// Replace all bad file name character
-		$photoName = $this->_makeFileName($dirtyPhotoName);
-		rename($this->_getUploadPhotoPath().$dirtyPhotoName, $this->_getUploadPhotoPath().$photoName);
-		
-		//DNPROSSI - changed photo_desc to photo_title
-		// Making auto description
-		if($photoTitle == "") {
-			$photoTitle = $this->_getAutoDescription($photoName);
-		}
+        // Replace all bad file name character
+        $photoName = $this->_makeFileName($dirtyPhotoName);
+        rename($this->_getUploadPhotoPath().$dirtyPhotoName, $this->_getUploadPhotoPath().$photoName);
+        
+        //DNPROSSI - changed photo_desc to photo_title
+        // Making auto description
+        if($photoTitle == "") {
+            $photoTitle = $this->_getAutoDescription($photoName);
+        }
 
-		$originalName = "";
-		// Save original photo
-		if($xoopsModuleConfig['save_large'] && $xoopsModuleConfig['save_original']) {
-			$fileName = explode(".",$photoName);
-			$originalName = md5(uniqid(rand())).".".$fileName[1];
-			copy($this->_getUploadPhotoPath().$photoName, $this->_getUploadPhotoPath()."original/".$originalName);
-		}
+        $originalName = "";
+        // Save original photo
+        if($xoopsModuleConfig['save_large'] && $xoopsModuleConfig['save_original']) {
+            $fileName = explode(".",$photoName);
+            $originalName = md5(uniqid(rand())).".".$fileName[1];
+            copy($this->_getUploadPhotoPath().$photoName, $this->_getUploadPhotoPath()."original/".$originalName);
+        }
 
-		$this->_largePhotoTreatment($photoName);
+        $this->_largePhotoTreatment($photoName);
 
-		$this->_mediumPhotoTreatment($photoName);
+        $this->_mediumPhotoTreatment($photoName);
 
-		$this->_makeThumb($photoName);
+        $this->_makeThumb($photoName);
 
-		$imageDimension = $this->_getImageDimension($photoName);
+        $imageDimension = $this->_getImageDimension($photoName);
 
-		$userId = (is_object($xoopsUser)) ? $xoopsUser->getVar('uid') : 0 ;
-		$data = array(
-				'cat_id'=>$catId,
-				'photo_title'=>$photoTitle,
-				'photo_desc'=>$photoDesc,
-				'photo_name'=>$photoName,
-				'photo_orig_name'=>$originalName,
-				'uid'=>$userId,
-				'photo_size'=>$this->_getPhotoSize($photoName),
-				'photo_res_x'=>$imageDimension['width'],
-				'photo_res_y'=>$imageDimension['height'],
-				'photo_date'=>time(),
-				'photo_havelarge'=>$this->_haveLargePhoto($photoName),
-				'photo_approved'=>$permHandler->isAllowed($xoopsUser, 'public_autoapprove', $catId),
-				'photo_extra'=>$photoExtra,
-				'dohtml'=>$xoopsModuleConfig['allow_html']
-			);
+        $userId = (is_object($xoopsUser)) ? $xoopsUser->getVar('uid') : 0 ;
+        $data = array(
+                'cat_id'=>$catId,
+                'photo_title'=>$photoTitle,
+                'photo_desc'=>$photoDesc,
+                'photo_name'=>$photoName,
+                'photo_orig_name'=>$originalName,
+                'uid'=>$userId,
+                'photo_size'=>$this->_getPhotoSize($photoName),
+                'photo_res_x'=>$imageDimension['width'],
+                'photo_res_y'=>$imageDimension['height'],
+                'photo_date'=>time(),
+                'photo_havelarge'=>$this->_haveLargePhoto($photoName),
+                'photo_approved'=>$permHandler->isAllowed($xoopsUser, 'public_autoapprove', $catId),
+                'photo_extra'=>$photoExtra,
+                'dohtml'=>$xoopsModuleConfig['allow_html']
+            );
 
-		// Deleting working photo
-		unlink($this->_getUploadPhotoPath().$photoName);
+        // Deleting working photo
+        unlink($this->_getUploadPhotoPath().$photoName);
 
-		$this->createPhoto($data);
+        $this->createPhoto($data);
 
-		if ($xoopsModuleConfig['usetag'] == 1|| (is_dir('../tag') or is_dir('../../tag'))){
-			$newid = $this->db->getInsertId(); 
-		   $tag_handler = xoops_getmodulehandler('tag', 'tag');
-		   $tag_handler->updateByItem($photoTag, $newid , 'extgallery', 0);
-		}	 
-		   
-		return $data['photo_approved'];
-	}
+        if ($xoopsModuleConfig['usetag'] == 1|| (is_dir('../tag') or is_dir('../../tag'))){
+            $newid = $this->db->getInsertId();
+           $tag_handler = xoops_getmodulehandler('tag', 'tag');
+           $tag_handler->updateByItem($photoTag, $newid , 'extgallery', 0);
+        }
+           
+        return $data['photo_approved'];
+    }
 
-	function getSearchedPhoto($queryArray, $condition, $limit, $start, $userId)	{
-		$criteria = new CriteriaCompo();
-		if($userId > 0)
-			$criteria->add(new Criteria('uid',$userId));
-		$criteria->add(new Criteria('photo_approved',1));
-		if(is_array($queryArray) && count($queryArray) > 0) {
-			$subCriteria = new CriteriaCompo();
-			foreach($queryArray as $keyWord) {
-				$keyWordCriteria = new CriteriaCompo();
-				$keyWordCriteria->add(new Criteria('photo_title','%'.$keyWord.'%','LIKE'));
-				$keyWordCriteria->add(new Criteria('photo_desc','%'.$keyWord.'%','LIKE'), 'OR');
-				$keyWordCriteria->add(new Criteria('photo_name','%'.$keyWord.'%','LIKE'), 'OR');
-				$subCriteria->add($keyWordCriteria,$condition);
-				unset($keyWordCriteria);
-			}
-			$criteria->add($subCriteria);
-		}
-		$criteria->setStart($start);
-		$criteria->setLimit($limit);
-		$criteria->setSort('photo_date');
+    function getSearchedPhoto($queryArray, $condition, $limit, $start, $userId)    {
+        $criteria = new CriteriaCompo();
+        if($userId > 0)
+            $criteria->add(new Criteria('uid',$userId));
+        $criteria->add(new Criteria('photo_approved',1));
+        if(is_array($queryArray) && count($queryArray) > 0) {
+            $subCriteria = new CriteriaCompo();
+            foreach($queryArray as $keyWord) {
+                $keyWordCriteria = new CriteriaCompo();
+                $keyWordCriteria->add(new Criteria('photo_title','%'.$keyWord.'%','LIKE'));
+                $keyWordCriteria->add(new Criteria('photo_desc','%'.$keyWord.'%','LIKE'), 'OR');
+                $keyWordCriteria->add(new Criteria('photo_name','%'.$keyWord.'%','LIKE'), 'OR');
+                $subCriteria->add($keyWordCriteria,$condition);
+                unset($keyWordCriteria);
+            }
+            $criteria->add($subCriteria);
+        }
+        $criteria->setStart($start);
+        $criteria->setLimit($limit);
+        $criteria->setSort('photo_date');
 
-		$photos = $this->getObjects($criteria);
+        $photos = $this->getObjects($criteria);
 
-		$ret = array();
-		foreach($photos as $photo) {
-			if($photo->getVar('photo_title')){
-				$title = $photo->getVar('photo_title');
-			} else {
-				$title = $photo->getVar('photo_desc');
-			}
-			$data = array(
-						'image'=>'images/extgallery-posticon.gif',
-						'link'=>'public-photo.php?photoId='.$photo->getVar('photo_id'),
-						'title'=>$title,
-						'time'=>$photo->getVar('photo_date'),
-						'uid'=>$photo->getVar('uid')
-					);
-			$ret[] = $data;
-		}
+        $ret = array();
+        foreach($photos as $photo) {
+            if($photo->getVar('photo_title')){
+                $title = $photo->getVar('photo_title');
+            } else {
+                $title = $photo->getVar('photo_desc');
+            }
+            $data = array(
+                        'image'=>'images/extgallery-posticon.gif',
+                        'link'=>'public-photo.php?photoId='.$photo->getVar('photo_id'),
+                        'title'=>$title,
+                        'time'=>$photo->getVar('photo_date'),
+                        'uid'=>$photo->getVar('uid')
+                    );
+            $ret[] = $data;
+        }
 
-		return $ret;
-	}
+        return $ret;
+    }
 
-	function getPendingPhoto() {
-		$criteria = new Criteria('photo_approved',0);
-		return $this->getObjects($criteria);
-	}
+    function getPendingPhoto() {
+        $criteria = new Criteria('photo_approved',0);
 
-	function _addInCriteria(&$criteria, $data) {
-		$count = count($data);
-		if($count > 0) {
-			$in = '('.$data[0];
-			array_shift($data);
-			foreach($data as $elmt) {
-				$in .= ','.$elmt;
-			}
-			$in .= ')';
-			$criteria->add(new Criteria('cat_id', $in, 'IN'));
-		}
-	}
+        return $this->getObjects($criteria);
+    }
 
-	function getRandomPhoto($param) {
+    function _addInCriteria(&$criteria, $data) {
+        $count = count($data);
+        if($count > 0) {
+            $in = '('.$data[0];
+            array_shift($data);
+            foreach($data as $elmt) {
+                $in .= ','.$elmt;
+            }
+            $in .= ')';
+            $criteria->add(new Criteria('cat_id', $in, 'IN'));
+        }
+    }
 
-		$catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
+    function getRandomPhoto($param) {
 
-		$criteria = new CriteriaCompo();
-		$criteria->add($catHandler->getCatRestrictCriteria());
-		$criteria->add(new Criteria('photo_approved',1));
-		$this->_addInCriteria($criteria, $param['cat']);
-		$criteria->setSort('RAND()');
-		$criteria->setLimit($param['limit']);
+        $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
 
-		return $this->getObjects($criteria);
-	}
+        $criteria = new CriteriaCompo();
+        $criteria->add($catHandler->getCatRestrictCriteria());
+        $criteria->add(new Criteria('photo_approved',1));
+        $this->_addInCriteria($criteria, $param['cat']);
+        $criteria->setSort('RAND()');
+        $criteria->setLimit($param['limit']);
 
-	function getLastPhoto($param) {
+        return $this->getObjects($criteria);
+    }
 
-		$catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
+    function getLastPhoto($param) {
 
-		$criteria = new CriteriaCompo();
-		$criteria->add($catHandler->getCatRestrictCriteria());
-		$criteria->add(new Criteria('photo_approved',1));
-		$this->_addInCriteria($criteria, $param['cat']);
-		$criteria->setSort('photo_date');
-		$criteria->setOrder('DESC');
-		$criteria->setLimit($param['limit']);
+        $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
 
-		return $this->getObjects($criteria);
-	}
+        $criteria = new CriteriaCompo();
+        $criteria->add($catHandler->getCatRestrictCriteria());
+        $criteria->add(new Criteria('photo_approved',1));
+        $this->_addInCriteria($criteria, $param['cat']);
+        $criteria->setSort('photo_date');
+        $criteria->setOrder('DESC');
+        $criteria->setLimit($param['limit']);
 
-	function getTopViewPhoto($param) {
+        return $this->getObjects($criteria);
+    }
 
-		$catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
+    function getTopViewPhoto($param) {
 
-		$criteria = new CriteriaCompo();
-		$criteria->add($catHandler->getCatRestrictCriteria());
-		$criteria->add(new Criteria('photo_approved',1));
-		$this->_addInCriteria($criteria, $param['cat']);
-		$criteria->setSort('photo_hits');
-		$criteria->setOrder('DESC');
-		$criteria->setLimit($param['limit']);
+        $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
 
-		return $this->getObjects($criteria);
-	}
+        $criteria = new CriteriaCompo();
+        $criteria->add($catHandler->getCatRestrictCriteria());
+        $criteria->add(new Criteria('photo_approved',1));
+        $this->_addInCriteria($criteria, $param['cat']);
+        $criteria->setSort('photo_hits');
+        $criteria->setOrder('DESC');
+        $criteria->setLimit($param['limit']);
 
-	function getTopRatedPhoto($param) {
+        return $this->getObjects($criteria);
+    }
 
-		$catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
+    function getTopRatedPhoto($param) {
 
-		$criteria = new CriteriaCompo();
-		$criteria->add($catHandler->getCatRestrictCriteria());
-		$criteria->add(new Criteria('photo_approved',1));
-		$this->_addInCriteria($criteria, $param['cat']);
-		$criteria->setSort('photo_rating');
-		$criteria->setOrder('DESC');
-		$criteria->setLimit($param['limit']);
+        $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
 
-		return $this->getObjects($criteria);
-	}
+        $criteria = new CriteriaCompo();
+        $criteria->add($catHandler->getCatRestrictCriteria());
+        $criteria->add(new Criteria('photo_approved',1));
+        $this->_addInCriteria($criteria, $param['cat']);
+        $criteria->setSort('photo_rating');
+        $criteria->setOrder('DESC');
+        $criteria->setLimit($param['limit']);
 
-	function getTopEcardPhoto($param) {
+        return $this->getObjects($criteria);
+    }
 
-		$catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
+    function getTopEcardPhoto($param) {
 
-		$criteria = new CriteriaCompo();
-		$criteria->add($catHandler->getCatRestrictCriteria());
-		$criteria->add(new Criteria('photo_approved',1));
-		$this->_addInCriteria($criteria, $param['cat']);
-		$criteria->setSort('photo_ecard');
-		$criteria->setOrder('DESC');
-		$criteria->setLimit($param['limit']);
+        $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
 
-		return $this->getObjects($criteria);
-	}
+        $criteria = new CriteriaCompo();
+        $criteria->add($catHandler->getCatRestrictCriteria());
+        $criteria->add(new Criteria('photo_approved',1));
+        $this->_addInCriteria($criteria, $param['cat']);
+        $criteria->setSort('photo_ecard');
+        $criteria->setOrder('DESC');
+        $criteria->setLimit($param['limit']);
 
-	function getTopSubmitter($param) {
+        return $this->getObjects($criteria);
+    }
 
-	   $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
+    function getTopSubmitter($param) {
 
-		$criteria = new Criteria();
-		$this->_addInCriteria($criteria, $param['cat']);
+       $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
 
-		echo $criteria->renderWhere();
+        $criteria = new Criteria();
+        $this->_addInCriteria($criteria, $param['cat']);
 
-	}
+        echo $criteria->renderWhere();
 
-	function getInsertId() {
+    }
+
+    function getInsertId() {
         return $this->db->getInsertId();
-	}
+    }
 
 }
-
-?>

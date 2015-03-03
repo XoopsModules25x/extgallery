@@ -28,7 +28,7 @@
 require '../../../mainfile.php';
 
 if (!defined("XOOPS_ROOT_PATH")) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 include_once XOOPS_ROOT_PATH.'/modules/extgallery/class/php-captcha.inc.php';
@@ -36,5 +36,3 @@ include_once XOOPS_ROOT_PATH.'/modules/extgallery/class/php-captcha.inc.php';
 $aFonts = array(XOOPS_ROOT_PATH.'/modules/extgallery/fonts/AllStarResort.ttf');
 $oVisualCaptcha = new PhpCaptcha($aFonts, 200, 60);
 $oVisualCaptcha->Create();
-
-?>

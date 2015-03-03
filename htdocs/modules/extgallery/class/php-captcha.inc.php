@@ -15,8 +15,8 @@
          * Redistributions in binary form must reproduce the above copyright
            notice, this list of conditions and the following disclaimer in the
            documentation and/or other materials provided with the distribution.
-         * Neither the name of Edward Eliot nor the names of its contributors 
-           may be used to endorse or promote products derived from this software 
+         * Neither the name of Edward Eliot nor the names of its contributors
+           may be used to endorse or promote products derived from this software
            without specific prior written permission of Edward Eliot.
 
       THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER AND CONTRIBUTORS "AS IS" AND ANY
@@ -41,7 +41,7 @@
    */
    /************************ Default Options **********************/
    
-   // start a PHP session - this class uses sessions to store the generated 
+   // start a PHP session - this class uses sessions to store the generated
    // code. Comment out if you are calling already from your application
    //session_start();
    
@@ -104,7 +104,7 @@
          $this->SetMinFontSize(CAPTCHA_MIN_FONT_SIZE);
          $this->SetMaxFontSize(CAPTCHA_MAX_FONT_SIZE);
          $this->UseColour(CAPTCHA_USE_COLOUR);
-         $this->SetFileType(CAPTCHA_FILE_TYPE);   
+         $this->SetFileType(CAPTCHA_FILE_TYPE);
          $this->SetWidth($iWidth);
          $this->SetHeight($iHeight);
       }
@@ -153,7 +153,7 @@
                // initialise array
                $this->aCharSet = array();
             
-               // loop through items 
+               // loop through items
                foreach ($aCharSet as $sCurrentItem) {
                   // a range should have 3 characters, otherwise is normal character
                   if (strlen($sCurrentItem) == 3) {
@@ -298,7 +298,7 @@
             // calculate character starting coordinates
             $iX = $this->iSpacing / 4 + $i * $this->iSpacing;
             $iCharHeight = $aCharDetails[2] - $aCharDetails[5];
-            $iY = $this->iHeight / 2 + $iCharHeight / 4; 
+            $iY = $this->iHeight / 2 + $iCharHeight / 4;
             
             // write text to image
             imagefttext($this->oImage, $iFontSize, $iAngle, $iX, $iY, $iTextColour, $sCurrentFont, $this->sCode[$i], array());
@@ -487,4 +487,3 @@
          $this->UseColour(true);
       }
    }
-?>

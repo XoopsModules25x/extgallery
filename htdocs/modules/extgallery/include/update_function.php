@@ -18,46 +18,46 @@
 
 function xoops_module_update_extgallery(&$xoopsModule, $oldVersion = null) {
 
-	$catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
-	$catHandler->rebuild();
+    $catHandler = xoops_getmodulehandler('publiccat', 'extgallery');
+    $catHandler->rebuild();
 
-	if($oldVersion < 101) {
+    if($oldVersion < 101) {
 
-		$db =& XoopsDatabaseFactory::getDatabaseConnection();
-		// Remove the UNIQUE key on the rating table. This constraint is software cheked now
-		$sql = "ALTER TABLE `".$db->prefix('extgallery_publicrating')."` DROP INDEX `photo_rate` ;";
-		$db->query($sql);
+        $db =& XoopsDatabaseFactory::getDatabaseConnection();
+        // Remove the UNIQUE key on the rating table. This constraint is software cheked now
+        $sql = "ALTER TABLE `".$db->prefix('extgallery_publicrating')."` DROP INDEX `photo_rate` ;";
+        $db->query($sql);
 
-	}
+    }
 
-	if($oldVersion < 102) {
+    if($oldVersion < 102) {
 
-		$db =& XoopsDatabaseFactory::getDatabaseConnection();
+        $db =& XoopsDatabaseFactory::getDatabaseConnection();
 
-		$sql = "ALTER TABLE `".$db->prefix('extgallery_publiccat')."` ADD `cat_imgurl` VARCHAR(150) NOT NULL AFTER `cat_nb_photo` ;";
-		$db->query($sql);
+        $sql = "ALTER TABLE `".$db->prefix('extgallery_publiccat')."` ADD `cat_imgurl` VARCHAR(150) NOT NULL AFTER `cat_nb_photo` ;";
+        $db->query($sql);
 
-		$sql = "ALTER TABLE `".$db->prefix('extgallery_publicphoto')."` ADD `photo_title` VARCHAR(150) NOT NULL AFTER `photo_id` ;";
-		$db->query($sql);
+        $sql = "ALTER TABLE `".$db->prefix('extgallery_publicphoto')."` ADD `photo_title` VARCHAR(150) NOT NULL AFTER `photo_id` ;";
+        $db->query($sql);
 
-		$sql = "ALTER TABLE `".$db->prefix('extgallery_publicphoto')."` ADD `photo_weight` int(11) NOT NULL AFTER `photo_extra` ;";
-		$db->query($sql);
+        $sql = "ALTER TABLE `".$db->prefix('extgallery_publicphoto')."` ADD `photo_weight` int(11) NOT NULL AFTER `photo_extra` ;";
+        $db->query($sql);
 
-	}
-	
-	if($oldVersion < 104) {
+    }
+    
+    if($oldVersion < 104) {
 
-		$db =& XoopsDatabaseFactory::getDatabaseConnection();
+        $db =& XoopsDatabaseFactory::getDatabaseConnection();
 
-		$sql = "ALTER TABLE `".$db->prefix('extgallery_publicphoto')."` ADD `dohtml` BOOL NOT NULL DEFAULT '0';";
-		$db->query($sql);
-		
-		$sql = "ALTER TABLE `".$db->prefix('extgallery_publicphoto')."` CHANGE `photo_desc` `photo_desc` TEXT;";
-		$db->query($sql);
+        $sql = "ALTER TABLE `".$db->prefix('extgallery_publicphoto')."` ADD `dohtml` BOOL NOT NULL DEFAULT '0';";
+        $db->query($sql);
+        
+        $sql = "ALTER TABLE `".$db->prefix('extgallery_publicphoto')."` CHANGE `photo_desc` `photo_desc` TEXT;";
+        $db->query($sql);
   
   // Set display parmission for all XOOPS base Groups
   $sql = "SELECT cat_id FROM `".$db->prefix('extgallery_publiccat')."`;";
-		$result = $db->query($sql);
+        $result = $db->query($sql);
   $module_id = $xoopsModule->getVar('mid');
   $gpermHandler = xoops_gethandler('groupperm');
   while($cat = $db->fetchArray($result)) {
@@ -66,7 +66,7 @@ function xoops_module_update_extgallery(&$xoopsModule, $oldVersion = null) {
    $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ANONYMOUS, $module_id);
   }
 
-	}
+    }
  
  if($oldVersion < 106) {
  
@@ -95,15 +95,12 @@ function xoops_module_update_extgallery(&$xoopsModule, $oldVersion = null) {
  
   if($oldVersion < 109) {
  
-	$db =& XoopsDatabaseFactory::getDatabaseConnection();
+    $db =& XoopsDatabaseFactory::getDatabaseConnection();
 
-	$sql = "ALTER TABLE `".$db->prefix('extgallery_publiccat')."` CHANGE `cat_weight` `cat_weight` INT( 11 ) NOT NULL DEFAULT '0' ;";
-	$db->query($sql);
+    $sql = "ALTER TABLE `".$db->prefix('extgallery_publiccat')."` CHANGE `cat_weight` `cat_weight` INT( 11 ) NOT NULL DEFAULT '0' ;";
+    $db->query($sql);
   
   }
 
     return true;
 }
-
-
-?>

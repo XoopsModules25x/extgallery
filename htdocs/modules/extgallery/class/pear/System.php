@@ -61,10 +61,10 @@ class System
     /**
      * returns the commandline arguments of a function
      *
-     * @param    string  $argv           the commandline
-     * @param    string  $short_options  the allowed option short-tags
-     * @param    string  $long_options   the allowed option long-tags
-     * @return   array   the given options and there values
+     * @param  string $argv          the commandline
+     * @param  string $short_options the allowed option short-tags
+     * @param  string $long_options  the allowed option long-tags
+     * @return array  the given options and there values
      * @static
      * @access private
      */
@@ -81,6 +81,7 @@ class System
                 $argv[$k] = trim($a) ;
             }
         }
+
         return Console_Getopt::getopt2($argv, $short_options, $long_options);
     }
 
@@ -88,8 +89,8 @@ class System
      * Output errors with PHP trigger_error(). You can silence the errors
      * with prefixing a "@" sign to the function call: @System::mkdir(..);
      *
-     * @param mixed $error a PEAR error or a string with the error message
-     * @return bool false
+     * @param  mixed $error a PEAR error or a string with the error message
+     * @return bool  false
      * @static
      * @access private
      */
@@ -99,6 +100,7 @@ class System
             $error = $error->getMessage();
         }
         trigger_error($error, E_USER_WARNING);
+
         return false;
     }
 
@@ -119,11 +121,11 @@ class System
      *            [1] => dir1/file3
      *        )
      *    )
-     * @param    string  $sPath      Name of the directory
-     * @param    integer $maxinst    max. deep of the lookup
-     * @param    integer $aktinst    starting deep of the lookup
-     * @param    bool    $silent     if true, do not emit errors.
-     * @return   array   the structure of the dir
+     * @param  string  $sPath   Name of the directory
+     * @param  integer $maxinst max. deep of the lookup
+     * @param  integer $aktinst starting deep of the lookup
+     * @param  bool    $silent  if true, do not emit errors.
+     * @return array   the structure of the dir
      * @static
      * @access   private
      */
@@ -134,6 +136,7 @@ class System
             if (!$silent) {
                 System::raiseError("Could not open dir $sPath");
             }
+
             return $struct; // XXX could not open error
         }
 
@@ -165,8 +168,8 @@ class System
     /**
      * Creates a nested array representing the structure of a directory and files
      *
-     * @param    array $files Array listing files and dirs
-     * @return   array
+     * @param  array $files Array listing files and dirs
+     * @return array
      * @static
      * @see System::_dirToStruct()
      */
@@ -184,6 +187,7 @@ class System
                 }
             }
         }
+
         return $struct;
     }
 
@@ -191,8 +195,8 @@ class System
      * The rm command for removing files.
      * Supports multiple files and dirs and also recursive deletes
      *
-     * @param    string  $args   the arguments for rm
-     * @return   mixed   PEAR_Error or true for success
+     * @param  string $args the arguments for rm
+     * @return mixed  PEAR_Error or true for success
      * @static
      * @access   public
      */
@@ -230,6 +234,7 @@ class System
                 }
             }
         }
+
         return $ret;
     }
 
@@ -237,8 +242,8 @@ class System
      * Make directories.
      *
      * The -p option will create parent directories
-     * @param    string  $args    the name of the director(y|ies) to create
-     * @return   bool    True for success
+     * @param  string $args the name of the director(y|ies) to create
+     * @return bool   True for success
      * @static
      * @access   public
      */
@@ -308,8 +313,8 @@ class System
      *
      * Note: as the class use fopen, urls should work also (test that)
      *
-     * @param    string  $args   the arguments
-     * @return   boolean true on success
+     * @param  string  $args the arguments
+     * @return boolean true on success
      * @static
      * @access   public
      */
@@ -339,6 +344,7 @@ class System
         if (isset($mode)) {
             if (!$outputfd = fopen($outputfile, $mode)) {
                 $err = System::raiseError("Could not open $outputfile");
+
                 return $err;
             }
             $ret = true;
@@ -360,6 +366,7 @@ class System
         if (is_resource($outputfd)) {
             fclose($outputfd);
         }
+
         return $ret;
     }
 
@@ -381,8 +388,8 @@ class System
      *           TMPDIR in Unix will be used. If these vars are also missing
      *           c:\windows\temp or /tmp will be used.
      *
-     * @param   string  $args  The arguments
-     * @return  mixed   the full path of the created (file|dir) or false
+     * @param  string $args The arguments
+     * @return mixed  the full path of the created (file|dir) or false
      * @see System::tmpdir()
      * @static
      * @access  public
@@ -474,18 +481,20 @@ class System
             if ($var = isset($_ENV['windir']) ? $_ENV['windir'] : getenv('windir')) {
                 return $var;
             }
+
             return getenv('SystemRoot') . '\temp';
         }
         if ($var = isset($_ENV['TMPDIR']) ? $_ENV['TMPDIR'] : getenv('TMPDIR')) {
             return $var;
         }
+
         return realpath('/tmp');
     }
 
     /**
      * The "which" command (show the full path of a command)
      *
-     * @param string $program The command to search for
+     * @param string $program  The command to search for
      * @param mixed  $fallback Value to return if $program is not found
      *
      * @return mixed A string with the full path or false if not found
@@ -537,6 +546,7 @@ class System
                 }
             }
         }
+
         return $fallback;
     }
 
@@ -622,8 +632,10 @@ class System
                     $ret[] = $files[$i];
                 }
             }
+
             return $ret;
         }
+
         return $files;
     }
 }

@@ -242,7 +242,7 @@ define('_AM_EXTGALLERY_GFIC_TSPEED',"Transition speed");
 define('_AM_EXTGALLERY_GFIC_SHOW_DESCR',"Show picture description");
 define('_AM_EXTGALLERY_GFIC_DOWNLOAD',"Allow download of original picture (if available)");
 
-// Album 
+// Album
 define('_AM_EXTGALLERY_USE_AJAX_EFFECTS',"Ajax effects ");
 define('_AM_EXTGALLERY_USE_AJAX_EFFECTS_DESC',"Selecting effects will change photo display when thumbs are clicked. Ajax effects or Normal can be selected.<br /><br /> <b>Normal</b> :  No effects<br /><b>Lightbox</b> : Use Lightbox effect<br /><b>Overlay</b> : use Overlay effect<br /><b>Tooltip</b> : use Tooltip effect<br /><b>Fancybox</b> : use Fancybox effect<br /><b>PrettyPhoto</b> : use PrettyPhoto effect<br />");
 define('_AM_EXTGALLERY_ALBUM_CONF',"Album configuration");

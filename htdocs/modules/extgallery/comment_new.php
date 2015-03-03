@@ -20,14 +20,13 @@ include_once '../../mainfile.php';
 
 $com_itemid = isset($_GET['com_itemid']) ? intval($_GET['com_itemid']) : 0;
 if ($com_itemid > 0) {
-	$photoHandler = xoops_getmodulehandler('publicphoto', 'extgallery');
-	$photo = $photoHandler->getPhoto($com_itemid);
-		if($photo->getVar('photo_title')){
-			$title = $photo->getVar('photo_title');
-		} else {
-			$title = $photo->getVar('photo_desc');
-		}
-	$com_replytitle = $title;
-	include_once XOOPS_ROOT_PATH.'/include/comment_new.php';
+    $photoHandler = xoops_getmodulehandler('publicphoto', 'extgallery');
+    $photo = $photoHandler->getPhoto($com_itemid);
+        if($photo->getVar('photo_title')){
+            $title = $photo->getVar('photo_title');
+        } else {
+            $title = $photo->getVar('photo_desc');
+        }
+    $com_replytitle = $title;
+    include_once XOOPS_ROOT_PATH.'/include/comment_new.php';
 }
-?>

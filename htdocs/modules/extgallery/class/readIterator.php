@@ -3,7 +3,7 @@
  * Extended object handlers
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -19,12 +19,12 @@
  */
 
 /**
- * Object render handler class.  
+ * Object render handler class.
  *
  * @author      Taiwen Jiang <phppp@users.sourceforge.net>
  * @copyright   The XOOPS project http://www.xoops.org/
  *
- * {@link XoopsObjectAbstract} 
+ * {@link XoopsObjectAbstract}
  *
  */
 
@@ -32,12 +32,12 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
 {
     /**
      * get all objects matching a condition
-     * 
-     * @param   object      $criteria {@link CriteriaElement} to match
-     * @param   array       $fields     variables to fetch
-     * @param   bool        $asObject     flag indicating as object, otherwise as array
-     * @param   bool        $id_as_key use the ID as key for the array
-     * @return  array of objects/array {@link XoopsObject}
+     *
+     * @param  object $criteria  {@link CriteriaElement} to match
+     * @param  array  $fields    variables to fetch
+     * @param  bool   $asObject  flag indicating as object, otherwise as array
+     * @param  bool   $id_as_key use the ID as key for the array
+     * @return array  of objects/array {@link XoopsObject}
      */
     function &getAll($criteria = null, $fields = null, $asObject = true, $id_as_key = true)
     {
@@ -66,7 +66,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
         }
         $result = $this->handler->db->query($sql, $limit, $start);
         $ret = array();
-        if ($asObject) {        
+        if ($asObject) {
             while ($myrow = $this->handler->db->fetchArray($result)) {
                 $object =& $this->handler->create(false);
                 $object->assignVars($myrow);
@@ -89,6 +89,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
             }
             unset($object);
         }
+
         return $ret;
     }
     
@@ -96,16 +97,17 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
      * retrieve objects from the database
      *
      * For performance consideration, getAll() is recommended
-     * 
-     * @param object $criteria {@link CriteriaElement} conditions to be met
-     * @param bool $id_as_key use the ID as key for the array
-     * @param bool $as_object return an array of objects?
+     *
+     * @param object $criteria  {@link CriteriaElement} conditions to be met
+     * @param bool   $id_as_key use the ID as key for the array
+     * @param bool   $as_object return an array of objects?
      *
      * @return array
      */
     function &getObjects($criteria = null, $id_as_key = false, $as_object = true)
     {
         $objects = $this->getAll($criteria, null, $as_object, $id_as_key);
+
         return $objects;
     }
     
@@ -118,7 +120,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
     *
     * @return array
     */
-    function getList($criteria = null, $limit = 0, $start = 0) 
+    function getList($criteria = null, $limit = 0, $start = 0)
     {
         $ret = array();
         if ($criteria == null) {
@@ -148,14 +150,15 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
             //identifiers should be textboxes, so sanitize them like that
             $ret[$myrow[$this->handler->keyName]] = empty($this->handler->identifierName) ? 1 : $myts->htmlSpecialChars($myrow[$this->handler->identifierName]);
         }
+
         return $ret;
     }
 
     /**
      * get IDs of objects matching a condition
-     * 
-     * @param     object    $criteria {@link CriteriaElement} to match
-     * @return     array of object IDs
+     *
+     * @param  object $criteria {@link CriteriaElement} to match
+     * @return array  of object IDs
      */
     function &getIds($criteria = null)
     {
@@ -173,20 +176,21 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
         while ($myrow = $this->handler->db->fetchArray($result)) {
             $ret[] = $myrow[$this->handler->keyName];
         }
+
         return $ret;
     }
 
     /**
      * get a limited list of objects matching a condition
-     * 
-     * {@link CriteriaCompo} 
      *
-     * @param   int         $limit      Max number of objects to fetch
-     * @param   int         $start      Which record to start at
-     * @param   object      $criteria   {@link CriteriaElement} to match
-     * @param   array       $fields     variables to fetch
-     * @param   bool        $asObject   flag indicating as object, otherwise as array
-     * @return  array of objects    {@link XoopsObject}
+     * {@link CriteriaCompo}
+     *
+     * @param  int    $limit    Max number of objects to fetch
+     * @param  int    $start    Which record to start at
+     * @param  object $criteria {@link CriteriaElement} to match
+     * @param  array  $fields   variables to fetch
+     * @param  bool   $asObject flag indicating as object, otherwise as array
+     * @return array  of objects    {@link XoopsObject}
      */
     function &getByLimit($limit=0, $start = 0, $criteria = null, $fields = null, $asObject=true)
     {
@@ -200,19 +204,20 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
             $criteria->setStart($start);
         }
         $ret = $this->handler->getAll($criteria, $fields, $asObject);
+
         return $ret;
-    }    
+    }
 
     /**
      * Convert a database resultset to a returnable array
      *
-     * @param object $result database resultset
-     * @param bool $id_as_key - should NOT be used with joint keys
-     * @param bool $as_object
+     * @param object $result    database resultset
+     * @param bool   $id_as_key - should NOT be used with joint keys
+     * @param bool   $as_object
      *
      * @return array
      */
-    function convertResultSet($result, $id_as_key = false, $as_object = true) 
+    function convertResultSet($result, $id_as_key = false, $as_object = true)
     {
         trigger_error(__CLASS__ . '::' . __FUNCTION__ . '() is deprecated.', E_USER_WARNING);
         $ret = array();
@@ -249,4 +254,3 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
         return $ret;
     }
 }
-?>

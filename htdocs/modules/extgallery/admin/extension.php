@@ -28,6 +28,7 @@ function extensionInstalled() {
 
 function extensionActivated() {
  $conf = include XOOPS_ROOT_PATH.'/class/textsanitizer/config.custom.php';
+
  return $conf['extensions']['gallery'];
 }
 
@@ -44,13 +45,11 @@ function desactivateExtension() {
 }
 
 if(file_exists(XOOPS_ROOT_PATH.'/class/textsanitizer/gallery/gallery.php')){
-	$xoopsTpl->assign('extensioninstalled', true);
+    $xoopsTpl->assign('extensioninstalled', true);
 } else {
-	$xoopsTpl->assign('extensioninstalled', false);
+    $xoopsTpl->assign('extensioninstalled', false);
 }
 
 // Call template file
 $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/extgallery/templates/admin/extgallery_admin_extension.html');
 xoops_cp_footer();
-
-?>

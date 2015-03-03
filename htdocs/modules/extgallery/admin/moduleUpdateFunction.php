@@ -68,23 +68,25 @@ function moduleLastVersionInfo() {
 
 function getLastModuleVersion() {
  $moduleInfos = moduleLastVersionInfo();
+
  return $moduleInfos['version'];
 }
 
 function getModuleVersion() {
 
  $version = $GLOBALS['xoopsModule']->getVar('version');
+
  return substr($version,0,1).'.'.substr($version,1,1).'.'.substr($version,2);
 
 }
 
 function isModuleUpToDate() {
 
-	if(compareVersion(getModuleVersion(), getLastModuleVersion()) != -1) {
+    if(compareVersion(getModuleVersion(), getLastModuleVersion()) != -1) {
   return true;
-	} else {
-	 return false;
-	}
+    } else {
+     return false;
+    }
 
 }
 
@@ -117,9 +119,9 @@ function isXoopsVersionSupportInstalledModuleVersion() {
 
  if(compareVersion(substr(XOOPS_VERSION,6), _MU_MODULE_XOOPS_VERSION_SUPPORTED) != -1) {
   return true;
-	} else {
-	 return false;
-	}
+    } else {
+     return false;
+    }
 
 }
 
@@ -129,9 +131,9 @@ function isXoopsVersionSupportLastModuleVersion() {
 
  if(compareVersion(substr(XOOPS_VERSION,6), $moduleInfos['xoopsVersionNeeded']) != -1) {
   return true;
-	} else {
-	 return false;
-	}
+    } else {
+     return false;
+    }
 
 }
 
@@ -142,5 +144,3 @@ function getChangelog() {
  return $moduleInfos['versionChangelog'];
 
 }
-
-?>

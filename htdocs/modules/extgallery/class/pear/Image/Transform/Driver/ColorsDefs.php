@@ -146,4 +146,3 @@
         'yellow' => array(255,255,0),
         'yellowgreen' => array(154,205,50)
     );
-?>

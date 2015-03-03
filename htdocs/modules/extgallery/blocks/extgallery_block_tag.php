@@ -17,24 +17,27 @@
  * @version     $Id: extgallery_block_tag.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
-function extgallery_tag_block_cloud_show($options) 
+function extgallery_tag_block_cloud_show($options)
 {
     include_once XOOPS_ROOT_PATH . "/modules/tag/blocks/block.php";
+
     return tag_block_cloud_show($options, $module_dirname);
 }
-function extgallery_tag_block_cloud_edit($options) 
+function extgallery_tag_block_cloud_edit($options)
 {
     include_once XOOPS_ROOT_PATH . "/modules/tag/blocks/block.php";
+
     return tag_block_cloud_edit($options);
 }
-function extgallery_tag_block_top_show($options) 
+function extgallery_tag_block_top_show($options)
 {
     include_once XOOPS_ROOT_PATH . "/modules/tag/blocks/block.php";
+
     return tag_block_top_show($options, $module_dirname);
 }
-function extgallery_tag_block_top_edit($options) 
+function extgallery_tag_block_top_edit($options)
 {
     include_once XOOPS_ROOT_PATH . "/modules/tag/blocks/block.php";
+
     return tag_block_top_edit($options);
 }
-?>

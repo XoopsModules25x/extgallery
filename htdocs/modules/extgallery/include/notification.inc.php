@@ -26,15 +26,15 @@
 //  ------------------------------------------------------------------------ //
 
 if (!defined("XOOPS_ROOT_PATH")) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 function extgalleryNotifyIteminfo($category, $item_id)
 {
-	$photoHandler = xoops_getmodulehandler('publicphoto', 'extgallery');
-	$photo = $photoHandler->getPhoto($item_id);
-	$item['name'] = $photo->getVar('photo_desc');
-	$item['url'] = XOOPS_URL . '/modules/extgallery/public-album.php?id='.$photo->getVar('photo_id');
-	return $item;
+    $photoHandler = xoops_getmodulehandler('publicphoto', 'extgallery');
+    $photo = $photoHandler->getPhoto($item_id);
+    $item['name'] = $photo->getVar('photo_desc');
+    $item['url'] = XOOPS_URL . '/modules/extgallery/public-album.php?id='.$photo->getVar('photo_id');
+
+    return $item;
 }
-?>

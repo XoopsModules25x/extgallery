@@ -77,7 +77,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
     /**
      * Loads an image
      *
-     * @param string $image filename
+     * @param  string          $image filename
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
      */
@@ -85,6 +85,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
     {
         if (!($this->imageHandle = imagick_readimage($image))) {
             $this->free();
+
             return $this->raiseError('Couldn\'t load image.',
                 IMAGE_TRANSFORM_ERROR_IO);
         }
@@ -121,6 +122,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
 
         $this->new_x = $new_x;
         $this->new_y = $new_y;
+
         return true;
 
     } // End resize
@@ -147,6 +149,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
 
         $this->new_x = imagick_getwidth($this->imageHandle);
         $this->new_y = imagick_getheight($this->imageHandle);
+
         return true;
 
     } // End rotate
@@ -182,9 +185,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
                                 );
         $params = array_merge($default_params, $params);
 
-
         $params['color']= is_array($params['color'])?$this->colorarray2colorhex($params['color']):strtolower($params['color']);
-
 
         static $cmds = array(
             'setfillcolor' => 'color',
@@ -236,6 +237,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
                 IMAGE_TRANSFORM_ERROR_IO);
         }
         $this->free();
+
         return true;
 
     } // End save
@@ -272,13 +274,14 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
         header('Content-type: ' . imagick_getmimetype($this->imageHandle));
         echo $image;
         $this->free();
+
         return true;
     }
 
     /**
      * Adjusts the image gamma
      *
-     * @param float $outputgamma
+     * @param  float           $outputgamma
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
      */
@@ -286,9 +289,9 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
         if ($outputgamma != 1.0) {
             imagick_gamma($this->imageHandle, $outputgamma);
         }
+
         return true;
     }
-
 
     /**
      * Crops the image
@@ -328,6 +331,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
             return $this->raiseError('Couldn\'t mirror the image.',
                 IMAGE_TRANSFORM_ERROR_FAILED);
         }
+
         return true;
     }
 
@@ -343,6 +347,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
             return $this->raiseError('Couldn\'t flip the image.',
                 IMAGE_TRANSFORM_ERROR_FAILED);
         }
+
         return true;
     }
 
@@ -362,9 +367,9 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
     /**
      * RaiseError Method - shows imagick Raw errors.
      *
-     * @param string $message message = prefixed message..
-     * @param int    $code error code
-     * @return PEAR error object
+     * @param  string $message message = prefixed message..
+     * @param  int    $code    error code
+     * @return PEAR   error object
      * @access protected
      */
     function raiseError($message, $code = 0)
@@ -375,9 +380,9 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
                         . "\nDescription: "
                         . imagick_faileddescription($this->imageHandle);
         }
+
         return PEAR::raiseError($message, $code);
     }
 
 } // End class Image_Transform_Driver_Imagick2
-
-?>
+;

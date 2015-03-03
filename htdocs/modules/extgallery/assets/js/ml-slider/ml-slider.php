@@ -195,6 +195,7 @@ class MetaSliderPlugin
             }
 
             if (isset($tabs['nextgen'])) unset($tabs['nextgen']);
+
             return array_merge($tabs, $newtabs);
         }
 
@@ -523,7 +524,6 @@ class MetaSliderPlugin
         return false;
     }
 
-
     /**
      * Get sliders. Returns a nicely formatted array of currently
      * published sliders.
@@ -721,7 +721,6 @@ class MetaSliderPlugin
 
         return $return;
     }
-
 
     /**
      * Render the admin page (tabs, slides, settings)

@@ -85,13 +85,13 @@ define("_MD_EXTGALLERY_USERS_SUB_PHOTO_ALBUM","'s submitted photo album");
 
 // Public Slideshow
 define("_MD_EXTGALLERY_MOREINFO","More");
-define("_MD_EXTGALLERY_GFIC_DOWNLOAD","Download original picture"); 
-define("_MD_EXTGALLERY_GFIC_PLAY","Play"); 
-define("_MD_EXTGALLERY_GFIC_PAUSE","Pause"); 
-define("_MD_EXTGALLERY_GFIC_NEXT","Next"); 
-define("_MD_EXTGALLERY_GFIC_PREVIOUS","Previous"); 
-define("_MD_EXTGALLERY_GFIC_NEXTP","Next &rsaquo;"); 
-define("_MD_EXTGALLERY_GFIC_PREVIOUSP","&lsaquo; Prev"); 
+define("_MD_EXTGALLERY_GFIC_DOWNLOAD","Download original picture");
+define("_MD_EXTGALLERY_GFIC_PLAY","Play");
+define("_MD_EXTGALLERY_GFIC_PAUSE","Pause");
+define("_MD_EXTGALLERY_GFIC_NEXT","Next");
+define("_MD_EXTGALLERY_GFIC_PREVIOUS","Previous");
+define("_MD_EXTGALLERY_GFIC_NEXTP","Next &rsaquo;");
+define("_MD_EXTGALLERY_GFIC_PREVIOUSP","&lsaquo; Prev");
 
 // Public bookmarks
 define("_MD_EXTGALLERY_BOOKMARK_ME","Bookmark Me");
@@ -140,4 +140,3 @@ define("_MD_EXTGALLERY_SORTHITSDESC","Most popular pictures listed first");
 define("_MD_EXTGALLERY_SORTNOTE","Note");
 define("_MD_EXTGALLERY_SORTNOTEASC","Worst rated listed first");
 define("_MD_EXTGALLERY_SORTNOTEDESC","Best rated listed first");
-?>
