@@ -17,57 +17,57 @@
  */
 
 if (!defined("XOOPS_ROOT_PATH")) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 include_once 'ExtgalleryPersistableObjectHandler.php';
 
 class ExtgalleryQuota extends XoopsObject {
 
-	var $externalKey = array();
+    var $externalKey = array();
 
-	function ExtgalleryQuota() {
-		$this->initVar('quota_id', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('groupid', XOBJ_DTYPE_INT, 0, false);
-		$this->initVar('quota_name', XOBJ_DTYPE_TXTBOX, 0, false);
-		$this->initVar('quota_value', XOBJ_DTYPE_INT, 0, false);
-	}
-	
-	function getExternalKey() {
-		return $this->externalKey;
-	}
-	
+    function ExtgalleryQuota() {
+        $this->initVar('quota_id', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('groupid', XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('quota_name', XOBJ_DTYPE_TXTBOX, 0, false);
+        $this->initVar('quota_value', XOBJ_DTYPE_INT, 0, false);
+    }
+    
+    function getExternalKey() {
+        return $this->externalKey;
+    }
+    
 }
 
 class ExtgalleryQuotaHandler extends ExtgalleryPersistableObjectHandler {
-	
-	function ExtgalleryQuotaHandler(&$db) {
-		$this->ExtgalleryPersistableObjectHandler($db, 'extgallery_quota', 'ExtgalleryQuota', 'quota_id');
-	}
-	
-	function createQuota($data) {
-		$quota = $this->create();
-		$quota->setVars($data);
-		return $this->insert($quota, true);
-	}
-	
-	function deleteQuota() {
-		$criteria = new Criteria('quota_name','private');
-		return $this->deleteAll($criteria);
-	}
-	
-	function getQuota($groupid, $quotaName) {
-		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('groupid',$groupid));
-		$criteria->add(new Criteria('quota_name',$quotaName));
-		$ret = $this->getObjects($criteria);
-		if(empty($ret)) {
-			return $this->create();
-		} else {
-			return $ret[0];
-		}
-	}
-	
-}
+    
+    function ExtgalleryQuotaHandler(&$db) {
+        $this->ExtgalleryPersistableObjectHandler($db, 'extgallery_quota', 'ExtgalleryQuota', 'quota_id');
+    }
+    
+    function createQuota($data) {
+        $quota = $this->create();
+        $quota->setVars($data);
 
-?>
+        return $this->insert($quota, true);
+    }
+    
+    function deleteQuota() {
+        $criteria = new Criteria('quota_name','private');
+
+        return $this->deleteAll($criteria);
+    }
+    
+    function getQuota($groupid, $quotaName) {
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('groupid',$groupid));
+        $criteria->add(new Criteria('quota_name',$quotaName));
+        $ret = $this->getObjects($criteria);
+        if(empty($ret)) {
+            return $this->create();
+        } else {
+            return $ret[0];
+        }
+    }
+    
+}

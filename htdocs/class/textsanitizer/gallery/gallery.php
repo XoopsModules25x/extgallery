@@ -4,7 +4,7 @@ class MytsGallery extends MyTextSanitizerExtension
 {
     function encode($textarea_id)
     {
-        xoops_loadLanguage('extention', 'extgallery'); 
+        xoops_loadLanguage('extention', 'extgallery');
     
         $code = "<img src='".XOOPS_URL."/modules/extgallery/images/extgallery-posticon.gif' alt='" . _EXT_EXTGALLERY_ALTWMP . "' onclick='xoopsCodeGallery(\"{$textarea_id}\", \""._EXT_EXTGALLERY_TEXTID."\", \""._EXT_EXTGALLERY_TEXTTITLE."\");'  onmouseover='style.cursor=\"hand\"'/>&nbsp;";
         $javascript = <<<EOH
@@ -35,10 +35,11 @@ class MytsGallery extends MyTextSanitizerExtension
                 domobj.focus();
             }
 EOH;
+
         return array($code, $javascript);
     }
     
-    function load(&$ts) 
+    function load(&$ts)
     {
         $ts->patterns[] = "/\[gallery]([0-9]*)\[\/gallery\]/sU";
         $ts->replacements[] = '<a href="'.XOOPS_URL.'/modules/extgallery/hook-photo.php?id=\\1" rel="lightbox"><img src="'.XOOPS_URL.'/modules/extgallery/hook-thumb.php?id=\\1" alt="" /></a>';
@@ -57,5 +58,3 @@ EOH;
     }
     
 }
-
-?>

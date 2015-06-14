@@ -1,0 +1,352 @@
+/*	
+ *	jQuery Touch Optimized Sliders "R"Us
+ *	
+ *	Copyright (c) 2013 Fred Heusschen
+ *	www.frebsite.nl
+ *
+ *	Plugin website:
+ *	tosrus.frebsite.nl
+ *
+ *	Dual licensed under the MIT and GPL licenses.
+ *	http://en.wikipedia.org/wiki/MIT_License
+ *	http://en.wikipedia.org/wiki/GNU_General_Public_License
+ */
+ 
+ 
+ 
+$img: '../img/';
+ 
+@mixin vendor-prefix( $prop, $val )
+{
+	-webkit-#{$prop}: $val;
+	-moz-#{$prop}: $val;
+	-ms-#{$prop}: $val;
+	-o-#{$prop}: $val;
+	#{$prop}: $val;
+
+}
+ 
+//	Wrapper
+.tos-wrapper
+{
+	display: none;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	
+	&.tos-fixed
+	{
+		background-color: rgb( 10, 10, 10 );
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 3000;
+	}
+	&.tos-inline
+	{
+		position: relative;
+	}
+
+	*
+	{
+		@include vendor-prefix( 'text-size-adjust', none );
+	}
+}
+
+.tos-slider
+{
+	white-space: nowrap;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+
+//	Slides
+.tos-slide
+{
+	-webkit-overflow-scrolling: touch;
+
+	line-height: 1px;
+	text-align: center;
+
+	@include vendor-prefix( 'box-sizing', border-box );
+
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	
+	&:before
+	{
+		content: "";
+		display: inline-block;
+		height: 50%;
+		width: 1px;
+		margin-right: -1px;
+	}
+	&.tos-loading
+	{
+		background: url( '#{$img}tos-preloader-black.png' ) center center no-repeat transparent;
+	}
+}
+
+.tos-wrapper.tos-fixed .tos-slide.tos-loading
+{
+	background-image: url( '#{$img}tos-preloader-white.png' );
+}
+
+.tos-slide > *
+{
+	vertical-align: middle;
+	display: inline-block;
+	max-height: 100%;
+	max-width: 100%;
+}
+.tos-wrapper.tos-fill .tos-slide > *
+{
+	max-height: none;
+	max-width: none;
+	min-height: 100%;
+	min-width: 100%;
+}
+
+.tos-content
+{
+	background-color: #fff;
+	color: #333;
+	white-space: normal;
+	text-align: left;
+	line-height: 1.4;
+
+	@include vendor-prefix( 'box-sizing', border-box );
+
+	display: inline-block;
+	padding: 30px;
+	overflow: auto;
+}
+
+
+//	Buttons and caption
+.tos-caption
+{
+	background-image: -webkit-linear-gradient( bottom, rgba( 10, 10, 10, 0.5 ) 0%, rgba( 0, 0, 0, 0 ) 100% );
+	background-image:    -moz-linear-gradient( bottom, rgba( 10, 10, 10, 0.5 ) 0%, rgba( 0, 0, 0, 0 ) 100% );
+	background-image: 		  linear-gradient( bottom, rgba( 10, 10, 10, 0.5 ) 0%, rgba( 0, 0, 0, 0 ) 100% );
+
+	color: #fff;
+	font-size: 15px;
+	line-height: 1.3;
+	text-shadow: 0 1px 2px rgba( 0, 0, 0, 0.8 );
+	text-align: center;
+
+	@include vendor-prefix( 'box-sizing', border-box );
+
+	width: 100%;
+	padding: 50px 30px 20px 30px;
+	bottom: 0;
+	left: 0;
+}
+
+.tos-prev,
+.tos-next,
+.tos-close,
+.tos-play,
+.tos-zoom:after
+{
+	background: center center no-repeat #000;
+	border: 1px solid #666;
+	border-radius: 5px;
+	display: block;
+	width: 40px;
+}
+
+.tos-caption,
+.tos-prev,
+.tos-next,
+.tos-close,
+.tos-play,
+.tos-zoom:after
+{
+	@include vendor-prefix( 'transition', opacity 0.4s ease );
+	opacity: 0;
+	position: absolute;
+}
+.tos-wrapper
+{
+	&.tos-desktop
+	{
+		&:hover 
+		{
+			.tos-prev,
+			.tos-next,
+			.tos-close,
+			.tos-play
+			{
+				opacity: 0.7;
+				&:hover
+				{
+					opacity: 0.9;
+				}
+			}
+			.tos-caption
+			{
+				opacity: 1;
+			}
+			.tos-disabled
+			{
+				&.tos-prev,
+				&.tos-next
+				{
+					opacity: 0.2;
+					&:hover
+					{
+						opacity: 0.2;
+					}
+				}
+			}
+		}
+	}
+	&.tos-touch
+	{
+		.tos-play
+		{
+			opacity: 0.9;
+		}
+		&.tos-hover
+		{
+			.tos-prev,
+			.tos-next,
+			.tos-close
+			{
+				opacity: 0.9;
+			}
+			.tos-caption
+			{
+				opacity: 1;
+			}
+			.tos-disabled
+			{
+				&.tos-prev,
+				&.tos-next
+				{
+					opacity: 0.2;
+				}
+			}
+		}
+	}
+}
+.tos-zoom:hover:after
+{
+	opacity: 0.7;
+}
+
+
+.tos-prev,
+.tos-next
+{
+	height: 70px;
+	margin-top: -35px;
+	top: 50%;
+	
+	&.tos-disabled
+	{
+		cursor: default;
+	}
+}
+
+.tos-prev
+{
+	background-image: url( '#{$img}tos-prev.png' );
+	left: 20px;
+	
+	@include vendor-prefix( 'transform-origin', left center );
+}
+.tos-next
+{
+	background-image: url( '#{$img}tos-next.png' );
+	right: 20px;
+	
+	@include vendor-prefix( 'transform-origin', right center );
+}
+.tos-close
+{
+	background-image: url( '#{$img}tos-close.png' );
+	height: 40px;
+	top: 20px;
+	right: 20px;
+
+	@include vendor-prefix( 'transform-origin', right top );
+}
+.tos-play
+{
+	background-color: rgba( 0, 50, 100, 0.5 );
+	background-image: url( '#{$img}tos-play.png' );
+	background-position: 25px center;
+	border-radius: 80px;
+	border: 5px solid #eee;
+	width: 80px;
+	height: 80px;
+	margin: -45px;
+	position: absolute;
+	top:  50%;
+	left: 50%;
+}
+.tos-zoom
+{
+	position: relative;
+	display: inline-block;
+	
+	&:after
+	{
+		content: "";
+		background-image: url( '#{$img}tos-zoom.png' );
+		height: 40px;
+		margin: -22px;
+		top: 50%;
+		left: 50%;
+	}
+}
+
+
+@media all and (-webkit-min-device-pixel-ratio: 1.5) {
+
+	.tos-prev
+	{
+		background-image: url( '#{$img}tos-prev-retina.png' );
+		background-size: 16px 22px;
+	}
+	.tos-next
+	{
+		background-image: url( '#{$img}tos-next-retina.png' );
+		background-size: 16px 22px;
+	}
+	.tos-close
+	{
+		background-image: url( '#{$img}tos-close-retina.png' );
+		background-size: 20px 20px;
+	}
+	.tos-play
+	{
+		background-image: url( '#{$img}tos-play-retina.png' );
+		background-size: 44px 44px;
+	}
+	
+	.tos-slide.tos-loading
+	{
+		background-image: url( '#{$img}tos-preloader-black-retina.png' );
+		background-size: 22px 22px;
+	}
+	.tos-wrapper.tos-fixed .tos-slide.tos-loading
+	{
+		background-image: url( '#{$img}tos-preloader-white-retina.png' );
+		background-size: 22px 22px;
+	}
+}

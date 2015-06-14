@@ -95,5 +95,4 @@ return $config = array (
   'pluginPerm' =>
   array (
   ),
-)
-?>
+);

@@ -90,6 +90,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         if (PEAR::isError($result)) {
             return $result;
         }
+
         return true;
 
     } // End load
@@ -162,6 +163,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
 
         $this->_set_new_x($new_x);
         $this->_set_new_y($new_y);
+
         return true;
 
     } // End resize
@@ -169,8 +171,8 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
     /**
      * Rotates the image
      *
-     * @param int $angle The angle to rotate the image through
-     * @param array $options
+     * @param  int             $angle   The angle to rotate the image through
+     * @param  array           $options
      * @return bool|PEAR_Error TRUE on success, PEAR_Error object on error
      */
     function rotate($angle, $options = null)
@@ -226,6 +228,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
                     '-background=' . $bgcolor . ' -noantialias -' . (float) $angle);
             }
         }
+
         return true;
     } // End rotate
 
@@ -258,6 +261,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
                     . ' -width ' . ((int) $width)
                     . ' -height ' . ((int) $height));
         }
+
         return true;
     } // End crop
 
@@ -280,6 +284,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
                 'pnmgamma',
                 (float) $outputgamma);
         }
+
         return true;
     }
 
@@ -300,6 +305,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
             IMAGE_TRANSFORM_NETPBM_PATH,
             'pamflip',
             '-topbottom');
+
         return true;
     }
 
@@ -320,6 +326,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
             IMAGE_TRANSFORM_NETPBM_PATH,
             'pamflip',
             '-leftright');
+
         return true;
     }
 
@@ -339,6 +346,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         $this->command[] = $this->_prepare_cmd(
             IMAGE_TRANSFORM_NETPBM_PATH,
             'ppmtopgm');
+
         return true;
     }
 
@@ -394,7 +402,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      * @param $quality
      * @return string A chain of shell command
      * @link http://netpbm.sourceforge.net/doc/directory.html
-	 */
+     */
     function _postProcess($type, $quality)
     {
         array_unshift($this->command, $this->_prepare_cmd(
@@ -406,7 +414,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         $program = '';
         switch ($type) {
             // ppmto* converters
-        	case 'gif':
+            case 'gif':
                 if (!System::which(IMAGE_TRANSFORM_NETPBM_PATH . 'ppmquant'
                                     . ((OS_WINDOWS) ? '.exe' : ''))) {
                     return PEAR::raiseError('Couldn\'t find "ppmquant" binary',
@@ -527,6 +535,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         $this->command[] = $this->_prepare_cmd(
             IMAGE_TRANSFORM_NETPBM_PATH,
             $program);
+
         return implode('|', $this->command);
     }
 
@@ -534,9 +543,9 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      * Save the image file
      *
      * @param $filename string the name of the file to write to
-     * @param string $type (jpeg,png...);
-     * @param int $quality 75
-     * @return TRUE or PEAR Error object on error
+     * @param  string $type    (jpeg,png...);
+     * @param  int    $quality 75
+     * @return TRUE   or PEAR Error object on error
      */
     function save($filename, $type = null, $quality = null)
     {
@@ -562,9 +571,9 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
     /**
      * Display image without saving and lose changes
      *
-     * @param string $type (jpeg,png...);
-     * @param int $quality 75
-     * @return TRUE or PEAR Error object on error
+     * @param  string $type    (jpeg,png...);
+     * @param  int    $quality 75
+     * @return TRUE   or PEAR Error object on error
      */
     function display($type = null, $quality = null)
     {
@@ -579,8 +588,8 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         $cmd = $this->_postProcess($type, $quality);
         passthru($cmd . ' 2>&1');
         if (!$this->keep_settings_on_save) {
-		    $this->free();
-		}
+            $this->free();
+        }
 
         return true;
     }
@@ -595,7 +604,5 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         $this->command = array();
     }
 
-
 } // End class ImageIM
-
-?>
+;

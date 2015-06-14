@@ -28,7 +28,6 @@
  */
 require_once XOOPS_ROOT_PATH."/modules/extgallery/class/pear/Image/Image/Transform.php";
 
-
 /**
  * Image Transformation interface using old ImageMagick extension
  *
@@ -44,7 +43,6 @@ class Image_Transform_Driver_Imagick extends Image_Transform
      * @var array
      */
     var $imageHandle;
-
 
     /**
      * Handler of the image ressource before
@@ -63,6 +61,7 @@ class Image_Transform_Driver_Imagick extends Image_Transform
             return PEAR::raiseError('The imagick extension can not be found.', true);
         }
         include('Image/Transform/Driver/Imagick/ImageTypes.php');
+
         return true;
     } // End Image_IM
 
@@ -215,7 +214,6 @@ class Image_Transform_Driver_Imagick extends Image_Transform
         $this->free();
     }
 
-
     /**
      * Destroy image handle
      *
@@ -229,8 +227,9 @@ class Image_Transform_Driver_Imagick extends Image_Transform
         if(is_resource($this->oldImage)){
             imagick_free($this->oldImage);
         }
+
         return true;
     }
 
 } // End class ImageIM
-?>
+;

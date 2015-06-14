@@ -18,47 +18,47 @@
 
 function gal_getmoduleoption($option)
 {
-	global $xoopsModuleConfig, $xoopsModule;
-	static $tbloptions= Array();
-	if(is_array($tbloptions) && array_key_exists($option, $tbloptions)) {
-		return $tbloptions[$option];
-	}
+    global $xoopsModuleConfig, $xoopsModule;
+    static $tbloptions= Array();
+    if(is_array($tbloptions) && array_key_exists($option, $tbloptions)) {
+        return $tbloptions[$option];
+    }
 
-	$retval = false;
-	if (isset($xoopsModuleConfig) && (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'extgallery' && $xoopsModule->getVar('isactive'))) {
-		if(isset($xoopsModuleConfig[$option])) {
-			$retval= $xoopsModuleConfig[$option];
-		}
-	} else {
-		$module_handler =& xoops_gethandler('module');
-		$module =& $module_handler->getByDirname('extgallery');
-		$config_handler =& xoops_gethandler('config');
-		if ($module) {
-		    $moduleConfig =& $config_handler->getConfigsByCat(0, $module->getVar('mid'));
-	    	if(isset($moduleConfig[$option])) {
-	    		$retval= $moduleConfig[$option];
-	    	}
-		}
-	}
-	$tbloptions[$option]=$retval;
-	return $retval;
+    $retval = false;
+    if (isset($xoopsModuleConfig) && (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'extgallery' && $xoopsModule->getVar('isactive'))) {
+        if(isset($xoopsModuleConfig[$option])) {
+            $retval= $xoopsModuleConfig[$option];
+        }
+    } else {
+        $module_handler =& xoops_gethandler('module');
+        $module =& $module_handler->getByDirname('extgallery');
+        $config_handler =& xoops_gethandler('config');
+        if ($module) {
+            $moduleConfig =& $config_handler->getConfigsByCat(0, $module->getVar('mid'));
+            if(isset($moduleConfig[$option])) {
+                $retval= $moduleConfig[$option];
+            }
+        }
+    }
+    $tbloptions[$option]=$retval;
+
+    return $retval;
 }
 
 function &gal_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $height, $supplemental)
 {
-	$editor_option = strtolower(gal_getmoduleoption('form_options'));
-	$editor = false;
-	$editor_configs=array();
-	$editor_configs['name'] =$name;
-	$editor_configs['value'] = $value;
-	$editor_configs['rows'] = $rows;
-	$editor_configs['cols'] = $cols;
-	$editor_configs['width'] = $width;
-	$editor_configs['height'] = $height;
-	$editor_configs['editor'] = $editor_option;
-	
-	$editor = new XoopsFormEditor($caption, $name, $editor_configs);
+    $editor_option = strtolower(gal_getmoduleoption('form_options'));
+    $editor = false;
+    $editor_configs=array();
+    $editor_configs['name'] =$name;
+    $editor_configs['value'] = $value;
+    $editor_configs['rows'] = $rows;
+    $editor_configs['cols'] = $cols;
+    $editor_configs['width'] = $width;
+    $editor_configs['height'] = $height;
+    $editor_configs['editor'] = $editor_option;
     
-	return $editor;
+    $editor = new XoopsFormEditor($caption, $name, $editor_configs);
+    
+    return $editor;
 }
-?>

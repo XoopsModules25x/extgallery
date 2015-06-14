@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * ExtGallery Class Manager
  *
@@ -17,7 +17,7 @@
  */
 
 if (!defined('XOOPS_ROOT_PATH')) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 require XOOPS_ROOT_PATH.'/class/xoopsform/grouppermform.php';
@@ -45,7 +45,7 @@ class ExtgalleryGroupPermForm extends XoopsGroupPermForm {
    $ele->setOptionTree($this->_itemTree);
    $this->addElement($ele);
    unset($ele);
-  } 
+  }
   $tray = new XoopsFormElementTray('');
   $tray->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
   $tray->addElement(new XoopsFormButton('', 'reset', _CANCEL, 'reset'));
@@ -118,8 +118,6 @@ class ExtgalleryGroupFormCheckBox extends XoopsGroupFormCheckBox {
   echo _ALL." <input id=\"".$checkallbtn_id."\" type=\"checkbox\" value=\"\" onclick=\"var optionids = new Array(".$option_ids_str."); xoopsCheckAllElements(optionids, '".$checkallbtn_id."');\" />";
   echo '</td></tr></table>';
   
- } 
+ }
 
 }
-
-?>

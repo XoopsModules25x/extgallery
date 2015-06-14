@@ -106,6 +106,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -140,6 +141,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -172,6 +174,7 @@ if (!defined("PCL_TAR"))
     {
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -205,6 +208,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -246,6 +250,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
     }
@@ -279,9 +284,11 @@ if (!defined("PCL_TAR"))
     if ($v_result != 1)
     {
       TrFctEnd(__FILE__, __LINE__, 0);
+
       return 0;
     }
     TrFctEnd(__FILE__, __LINE__, $p_list_detail);
+
     return $p_list_detail;
   }
   // --------------------------------------------------------------------------------
@@ -319,6 +326,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return 0;
       }
     }
@@ -329,11 +337,13 @@ if (!defined("PCL_TAR"))
     {
       unset($p_list);
       TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
+
       return(0);
     }
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $p_list);
+
     return $p_list;
   }
   // --------------------------------------------------------------------------------
@@ -373,6 +383,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return 0;
       }
     }
@@ -381,11 +392,13 @@ if (!defined("PCL_TAR"))
     if (($v_result = PclTarHandleExtract($p_tarname, 0, $p_list, "complete", $p_path, $p_mode, $p_remove_path)) != 1)
     {
       TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
+
       return(0);
     }
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $p_list);
+
     return $p_list;
   }
   // --------------------------------------------------------------------------------
@@ -432,6 +445,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return 0;
       }
     }
@@ -443,6 +457,7 @@ if (!defined("PCL_TAR"))
       if (($v_result = PclTarHandleExtract($p_tarname, $p_filelist, $p_list, "partial", $p_path, $v_tar_mode, $p_remove_path)) != 1)
       {
         TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
+
         return(0);
       }
     }
@@ -457,6 +472,7 @@ if (!defined("PCL_TAR"))
       if (($v_result = PclTarHandleExtract($p_tarname, $v_list, $p_list, "partial", $p_path, $v_tar_mode, $p_remove_path)) != 1)
       {
         TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
+
         return(0);
       }
     }
@@ -469,11 +485,13 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return 0;
     }
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $p_list);
+
     return $p_list;
   }
   // --------------------------------------------------------------------------------
@@ -521,6 +539,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return 0;
       }
     }
@@ -532,6 +551,7 @@ if (!defined("PCL_TAR"))
       if (($v_result = PclTarHandleExtractByIndexList($p_tarname, "$p_index", $p_list, $p_path, $p_remove_path, $v_tar_mode)) != 1)
       {
         TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
+
         return(0);
       }
     }
@@ -543,6 +563,7 @@ if (!defined("PCL_TAR"))
       if (($v_result = PclTarHandleExtractByIndexList($p_tarname, $p_index, $p_list, $p_path, $p_remove_path, $v_tar_mode)) != 1)
       {
         TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
+
         return(0);
       }
     }
@@ -555,11 +576,13 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return 0;
     }
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $p_list);
+
     return $p_list;
   }
   // --------------------------------------------------------------------------------
@@ -590,6 +613,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return 0;
       }
     }
@@ -601,6 +625,7 @@ if (!defined("PCL_TAR"))
       if (($v_result = PclTarHandleDelete($p_tarname, $p_filelist, $p_list, $p_mode)) != 1)
       {
         TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
+
         return(0);
       }
     }
@@ -615,6 +640,7 @@ if (!defined("PCL_TAR"))
       if (($v_result = PclTarHandleDelete($p_tarname, $v_list, $p_list, $p_mode)) != 1)
       {
         TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
+
         return(0);
       }
     }
@@ -627,11 +653,13 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return 0;
     }
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $p_list);
+
     return $p_list;
   }
   // --------------------------------------------------------------------------------
@@ -663,6 +691,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return 0;
       }
     }
@@ -674,6 +703,7 @@ if (!defined("PCL_TAR"))
       if (($v_result = PclTarHandleUpdate($p_tarname, $p_filelist, $p_list, $p_mode, $p_add_dir, $p_remove_dir)) != 1)
       {
         TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
+
         return(0);
       }
     }
@@ -688,6 +718,7 @@ if (!defined("PCL_TAR"))
       if (($v_result = PclTarHandleUpdate($p_tarname, $v_list, $p_list, $p_mode, $p_add_dir, $p_remove_dir)) != 1)
       {
         TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
+
         return(0);
       }
     }
@@ -700,11 +731,13 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return 0;
     }
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $p_list);
+
     return $p_list;
   }
   // --------------------------------------------------------------------------------
@@ -738,6 +771,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -748,6 +782,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return 0;
       }
     }
@@ -757,6 +792,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return 0;
       }
     }
@@ -776,6 +812,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
     if ((!is_file($p_tarname_add)) ||
@@ -789,6 +826,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -803,6 +841,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -819,6 +858,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -860,6 +900,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -877,6 +918,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -893,6 +935,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -940,6 +983,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -1001,11 +1045,13 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, $v_result);
+
       return $v_result;
     }
 
@@ -1018,6 +1064,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -1028,7 +1075,6 @@ if (!defined("PCL_TAR"))
 // *****                                                        *****
 // *****       THESES FUNCTIONS MUST NOT BE USED DIRECTLY       *****
 // --------------------------------------------------------------------------------
-
 
 
   // --------------------------------------------------------------------------------
@@ -1057,6 +1103,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -1071,6 +1118,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -1095,6 +1143,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -1111,6 +1160,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -1137,6 +1187,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -1154,6 +1205,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -1168,6 +1220,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -1184,6 +1237,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -1239,11 +1293,13 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, $v_result);
+
       return $v_result;
     }
 
@@ -1258,6 +1314,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -1285,11 +1342,13 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -1326,6 +1385,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -1337,6 +1397,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -1364,6 +1425,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -1375,6 +1437,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -1385,6 +1448,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return status
         TrFctEnd(__FILE__, __LINE__, $v_result);
+
         return $v_result;
       }
 
@@ -1418,6 +1482,7 @@ if (!defined("PCL_TAR"))
             {
               // ----- Return status
               TrFctEnd(__FILE__, __LINE__, $v_result);
+
               return $v_result;
             }
 
@@ -1449,6 +1514,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -1472,6 +1538,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -1483,6 +1550,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -1524,6 +1592,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -1538,6 +1607,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -1546,6 +1616,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return status
         TrFctEnd(__FILE__, __LINE__, $v_result);
+
         return $v_result;
       }
 
@@ -1578,6 +1649,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return status
         TrFctEnd(__FILE__, __LINE__, $v_result);
+
         return $v_result;
       }
 
@@ -1586,6 +1658,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -1622,6 +1695,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -1745,6 +1819,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -1769,6 +1844,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -1803,7 +1879,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Check the path
     //if (($p_path == "") || ((substr($p_path, 0, 1) != "/") && (substr($p_path, 0, 3) != "../")))
-	if ($p_path == "")
+    if ($p_path == "")
       $p_path = "./".$p_path;
 
     // ----- Look for path to remove format (should end by /)
@@ -1836,6 +1912,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
     }
 
@@ -1859,6 +1936,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -1891,6 +1969,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, $v_result);
+
         return $v_result;
       }
 
@@ -2123,6 +2202,7 @@ if (!defined("PCL_TAR"))
 
             // ----- Return
             TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
             return PclErrorCode();
           }
 
@@ -2191,6 +2271,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -2247,6 +2328,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -2287,6 +2369,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -2339,6 +2422,7 @@ if (!defined("PCL_TAR"))
       {
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, $v_result);
+
         return $v_result;
       }
 
@@ -2370,6 +2454,7 @@ if (!defined("PCL_TAR"))
         {
           // ----- Return
           TrFctEnd(__FILE__, __LINE__, $v_result);
+
           return $v_result;
         }
       }
@@ -2419,6 +2504,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -2597,6 +2683,7 @@ if (!defined("PCL_TAR"))
 
             // ----- Return
             TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
             return PclErrorCode();
           }
 
@@ -2617,6 +2704,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -2645,6 +2733,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -2661,6 +2750,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
     }
@@ -2677,6 +2767,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -2693,6 +2784,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
     }
@@ -2732,6 +2824,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, $v_result);
+
         return $v_result;
       }
 
@@ -2856,7 +2949,6 @@ if (!defined("PCL_TAR"))
       PclErrorLog(-11, "Error while deleting archive name $p_tarname");
     }
 
-
     // ----- Rename tar file
     if (!@rename($v_temp_tarname, $p_tarname))
     {
@@ -2865,11 +2957,13 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -2899,6 +2993,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -2915,6 +3010,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
     }
@@ -2931,6 +3027,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
 
@@ -2947,6 +3044,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
         return PclErrorCode();
       }
     }
@@ -2981,7 +3079,6 @@ if (!defined("PCL_TAR"))
     $v_stored_list[$i] = PclTarHandlePathReduction($v_stored_list[$i]);
       TrFctMessage(__FILE__, __LINE__, 3, "After reduction '$v_stored_list[$i]'");
     }
-
 
     // ----- Update file cache
     clearstatcache();
@@ -3024,6 +3121,7 @@ if (!defined("PCL_TAR"))
 
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, $v_result);
+
         return $v_result;
       }
 
@@ -3143,6 +3241,7 @@ if (!defined("PCL_TAR"))
 
           // ----- Return status
           TrFctEnd(__FILE__, __LINE__, $v_result);
+
           return $v_result;
         }
 
@@ -3196,6 +3295,7 @@ if (!defined("PCL_TAR"))
 
           // ----- Return status
           TrFctEnd(__FILE__, __LINE__, $v_result);
+
           return $v_result;
         }
 
@@ -3234,7 +3334,6 @@ if (!defined("PCL_TAR"))
       PclErrorLog(-11, "Error while deleting archive name $p_tarname");
     }
 
-
     // ----- Rename tar file
     if (!@rename($v_temp_tarname, $p_tarname))
     {
@@ -3243,11 +3342,13 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -3279,6 +3380,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, $v_result, "End of archive found");
+
       return $v_result;
     }
 
@@ -3294,6 +3396,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
@@ -3336,6 +3439,7 @@ if (!defined("PCL_TAR"))
         $v_header['status'] = "empty";
         // ----- Return
         TrFctEnd(__FILE__, __LINE__, $v_result, "End of archive found");
+
         return $v_result;
       }
 
@@ -3344,6 +3448,7 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
     TrFctMessage(__FILE__, __LINE__, 2, "File checksum is valid ($v_checksum)");
@@ -3389,6 +3494,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -3414,6 +3520,7 @@ if (!defined("PCL_TAR"))
     if ((is_dir($p_dir)) || ($p_dir == ""))
     {
       TrFctEnd(__FILE__, __LINE__, "'$p_dir' is a directory");
+
       return 1;
     }
 
@@ -3439,6 +3546,7 @@ if (!defined("PCL_TAR"))
         if (($v_result = PclTarHandlerDirCheck($p_parent_dir)) != 1)
         {
           TrFctEnd(__FILE__, __LINE__, $v_result);
+
           return $v_result;
         }
       }
@@ -3453,11 +3561,13 @@ if (!defined("PCL_TAR"))
 
       // ----- Return
       TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
+
       return PclErrorCode();
     }
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result, "Directory '$p_dir' created");
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -3495,6 +3605,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_tar_mode);
+
     return $v_tar_mode;
   }
   // --------------------------------------------------------------------------------
@@ -3545,6 +3656,7 @@ if (!defined("PCL_TAR"))
 
     // ----- Return
     TrFctEnd(__FILE__, __LINE__, $v_result);
+
     return $v_result;
   }
   // --------------------------------------------------------------------------------
@@ -3552,4 +3664,3 @@ if (!defined("PCL_TAR"))
 
 // ----- End of double include look
 }
-?>

@@ -107,4 +107,3 @@ $this->_supported_image_types = array(
     if (OS_WINDOWS) {
         $this->_supported_image_types['emf'] = 'r';
     }
-?>

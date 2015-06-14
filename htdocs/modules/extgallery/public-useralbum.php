@@ -23,16 +23,15 @@ include_once XOOPS_ROOT_PATH.'/modules/extgallery/class/publicPerm.php';
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-useralbum.html';
 include XOOPS_ROOT_PATH.'/header.php';
 
-
 if(!isset($_GET['id'])) {
-	$userId = 0;
+    $userId = 0;
 } else {
-	$userId = intval($_GET['id']);
+    $userId = intval($_GET['id']);
 }
 if(!isset($_GET['start'])) {
-	$start = 0;
+    $start = 0;
 } else {
-	$start = intval($_GET['start']);
+    $start = intval($_GET['start']);
 }
 
 $ajaxeffect = $xoopsModuleConfig['use_ajax_effects'];
@@ -56,7 +55,7 @@ if((isset($_GET['orderby']) && ($_GET['orderby']=="DESC" || $_GET['orderby']=="A
 $SortbyOrderby = $sortby." ".$orderby;
 
 function convertorderbytrans($SortbyOrderby) {
-	         $orderbyTrans = array();
+             $orderbyTrans = array();
             if ($SortbyOrderby == "photo_date DESC")   $orderbyTrans = _MD_EXTGALLERY_ORDERBY_DATEASC;
             if ($SortbyOrderby == "photo_date ASC")    $orderbyTrans = _MD_EXTGALLERY_ORDERBY_DATEDESC;
             if ($SortbyOrderby == "photo_title ASC")    $orderbyTrans = _MD_EXTGALLERY_ORDERBY_TITREASC;
@@ -67,6 +66,7 @@ function convertorderbytrans($SortbyOrderby) {
             if ($SortbyOrderby == "photo_hits ASC")   $orderbyTrans = _MD_EXTGALLERY_ORDERBY_HITSDESC;
             if ($SortbyOrderby == "photo_rating DESC")  $orderbyTrans = _MD_EXTGALLERY_ORDERBY_NOTEASC;
             if ($SortbyOrderby == "photo_rating ASC") $orderbyTrans = _MD_EXTGALLERY_ORDERBY_NOTEDESC;
+
             return $orderbyTrans;
 }
 
@@ -75,16 +75,16 @@ $photoHandler = xoops_getmodulehandler('publicphoto', 'extgallery');
 $photos = $photoHandler->objectToArray($photoHandler->getUserAlbumPhotoPage($userId, $start, $sortby, $orderby), array('uid'));
 $k = $xoopsModuleConfig['nb_column'] - (count($photos)%$xoopsModuleConfig['nb_column']);
 if($k != $xoopsModuleConfig['nb_column']) {
-	for($i=0;$i<$k;$i++) {
-		$photos[] = array();
-	}
+    for($i=0;$i<$k;$i++) {
+        $photos[] = array();
+    }
 }
 
 // HACK DATE BY MAGE : DISPLAY PUBLICATION DATE
 foreach (array_keys($photos) as $i) {
-	if(isset($photos[$i]['photo_date'])){
-		$photos[$i]['photo_date'] = date(_SHORTDATESTRING, $photos[$i]['photo_date']);
-	}
+    if(isset($photos[$i]['photo_date'])){
+        $photos[$i]['photo_date'] = date(_SHORTDATESTRING, $photos[$i]['photo_date']);
+    }
 }
 // END HACK DATE BY MAGE : DISPLAY PUBLICATION DATE
 
@@ -95,42 +95,42 @@ $xoopsTpl->assign('pageNav', $pageNav->renderNav());
 
 $albumName = '';
 if(count($photos) > 0) {
-	$albumName = $photos[0]['user']['uname']._MD_EXTGALLERY_USERS_SUB_PHOTO_ALBUM;
-	$xoopsTpl->assign('xoops_pagetitle', $albumName);
-	$xoTheme->addMeta('meta','description', $albumName);
+    $albumName = $photos[0]['user']['uname']._MD_EXTGALLERY_USERS_SUB_PHOTO_ALBUM;
+    $xoopsTpl->assign('xoops_pagetitle', $albumName);
+    $xoTheme->addMeta('meta','description', $albumName);
 }
 
 $jquery = $xoopsModuleConfig['enable_jquery'];
 $xoopsTpl->assign('jquery', $jquery);
 if($jquery == 1 && $ajaxeffect != 'none'){
-	$xoTheme->addScript("browse.php?Frameworks/jquery/jquery.js");
-	switch($ajaxeffect) {
-		case 'lightbox':
-			$xoTheme->addScript("browse.php?Frameworks/jquery/plugins/jquery.lightbox.js");
-			$xoTheme->addStylesheet('browse.php?modules/system/css/lightbox.css');
-		break;
-		
-		case 'tooltip':
-			$xoTheme->addScript("browse.php?modules/extgallery/include/tooltip/image.tooltip.js");
-			$xoTheme->addStylesheet('browse.php?modules/extgallery/include/tooltip/image.tooltip.css');
-		break;
-		
-		case 'overlay':
-			$xoTheme->addScript("browse.php?modules/extgallery/include/overlay/overlay.jquery.tools.min.js");
-			$xoTheme->addStylesheet('browse.php?modules/extgallery/include/overlay/overlay.css');
-		break;
-		
-		case 'fancybox':
-			$xoTheme->addScript("browse.php?modules/extgallery/include/fancybox/mousewheel.js");
-			$xoTheme->addScript("browse.php?modules/extgallery/include/fancybox/fancybox.pack.js");
-			$xoTheme->addStylesheet('browse.php?modules/extgallery/include/fancybox/fancybox.css');
-		break;
-		
-		case 'prettyphoto':
-			$xoTheme->addScript("browse.php?modules/extgallery/include/prettyphoto/jquery.prettyPhoto.js");
-			$xoTheme->addStylesheet('browse.php?modules/extgallery/include/prettyphoto/prettyPhoto.css');
-		break;
-	}
+    $xoTheme->addScript("browse.php?Frameworks/jquery/jquery.js");
+    switch($ajaxeffect) {
+        case 'lightbox':
+            $xoTheme->addScript("browse.php?Frameworks/jquery/plugins/jquery.lightbox.js");
+            $xoTheme->addStylesheet('browse.php?modules/system/css/lightbox.css');
+        break;
+        
+        case 'tooltip':
+            $xoTheme->addScript("browse.php?modules/extgallery/include/tooltip/image.tooltip.js");
+            $xoTheme->addStylesheet('browse.php?modules/extgallery/include/tooltip/image.tooltip.css');
+        break;
+        
+        case 'overlay':
+            $xoTheme->addScript("browse.php?modules/extgallery/include/overlay/overlay.jquery.tools.min.js");
+            $xoTheme->addStylesheet('browse.php?modules/extgallery/include/overlay/overlay.css');
+        break;
+        
+        case 'fancybox':
+            $xoTheme->addScript("browse.php?modules/extgallery/include/fancybox/mousewheel.js");
+            $xoTheme->addScript("browse.php?modules/extgallery/include/fancybox/fancybox.pack.js");
+            $xoTheme->addStylesheet('browse.php?modules/extgallery/include/fancybox/fancybox.css');
+        break;
+        
+        case 'prettyphoto':
+            $xoTheme->addScript("browse.php?modules/extgallery/include/prettyphoto/jquery.prettyPhoto.js");
+            $xoTheme->addStylesheet('browse.php?modules/extgallery/include/prettyphoto/prettyPhoto.css');
+        break;
+    }
 }
 
 $rel = "alternate";
@@ -156,16 +156,16 @@ $xoopsTpl->assign('extgallerySortbyOrderby', _MD_EXTGALLERY_ORDERBY.convertorder
 
 //DNPROSSI - VOLTAN - added preferences option
 //	enable_info, enable_submitter_lnk, enable_photo_hits
-if ( $xoopsModuleConfig['info_view'] == "album" || $xoopsModuleConfig['info_view'] == "both" ) 
+if ( $xoopsModuleConfig['info_view'] == "album" || $xoopsModuleConfig['info_view'] == "both" )
 {
-	if ( $xoopsModuleConfig['pubusr_info_view'] == "user" || $xoopsModuleConfig['pubusr_info_view'] == "both" ) 
-	{
-		if ( $xoopsModuleConfig['enable_info'] == 0 )
-		{
-			$enable_info = $xoopsModuleConfig['enable_info'];
-		} 
-		else { $enable_info = 1; }
-	} else { $enable_info = 1; }		 	
+    if ( $xoopsModuleConfig['pubusr_info_view'] == "user" || $xoopsModuleConfig['pubusr_info_view'] == "both" )
+    {
+        if ( $xoopsModuleConfig['enable_info'] == 0 )
+        {
+            $enable_info = $xoopsModuleConfig['enable_info'];
+        }
+        else { $enable_info = 1; }
+    } else { $enable_info = 1; }
 } else { $enable_info = 1; }
 $xoopsTpl->assign('enable_info', $enable_info);
 $xoopsTpl->assign('enable_photo_hits', $xoopsModuleConfig['enable_photo_hits']);
@@ -192,12 +192,10 @@ $xoopsTpl->assign('album_fancybox_tout', $xoopsModuleConfig['album_fancybox_tout
 $xoopsTpl->assign('album_fancybox_title', $xoopsModuleConfig['album_fancybox_title']);
 $xoopsTpl->assign('album_fancybox_showtype', $xoopsModuleConfig['album_fancybox_showtype']);
 
-//for prettyphoto 
+//for prettyphoto
 $xoopsTpl->assign('album_prettyphoto_speed', $xoopsModuleConfig['album_prettyphoto_speed']);
 $xoopsTpl->assign('album_prettyphoto_theme', $xoopsModuleConfig['album_prettyphoto_theme']);
 $xoopsTpl->assign('album_prettyphoto_slidspeed', $xoopsModuleConfig['album_prettyphoto_slidspe']);
 $xoopsTpl->assign('album_prettyphoto_autoplay', $xoopsModuleConfig['album_prettyphoto_autopla']);
 
 include(XOOPS_ROOT_PATH."/footer.php");
-
-?>

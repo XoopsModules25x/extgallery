@@ -41,99 +41,97 @@ function xoops_module_pre_install_extgallery(&$xoopsModule) {
 }
 
 function xoops_module_install_extgallery(&$xoopsModule) {
-	
-	$module_id = $xoopsModule->getVar('mid');
-	$gpermHandler =& xoops_gethandler('groupperm');
-	$configHandler =& xoops_gethandler('config');
-	
-	/**
-	 * Default public category permission mask
-	 */
-	
-	// Access right
-	$gpermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_ADMIN, $module_id);
-	$gpermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_USERS, $module_id);
-	$gpermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_ANONYMOUS, $module_id);
-	
-	// Public rate
-	$gpermHandler->addRight('extgallery_public_mask', 2, XOOPS_GROUP_ADMIN, $module_id);
-	$gpermHandler->addRight('extgallery_public_mask', 2, XOOPS_GROUP_USERS, $module_id);
-	
-	// Public eCard
-	$gpermHandler->addRight('extgallery_public_mask', 4, XOOPS_GROUP_ADMIN, $module_id);
-	$gpermHandler->addRight('extgallery_public_mask', 4, XOOPS_GROUP_USERS, $module_id);
-	
-	// Public download
-	$gpermHandler->addRight('extgallery_public_mask', 8, XOOPS_GROUP_ADMIN, $module_id);
-	$gpermHandler->addRight('extgallery_public_mask', 8, XOOPS_GROUP_USERS, $module_id);
-	
-	// Public upload
-	$gpermHandler->addRight('extgallery_public_mask', 16, XOOPS_GROUP_ADMIN, $module_id);
-	
-	// Public autoapprove
-	$gpermHandler->addRight('extgallery_public_mask', 32, XOOPS_GROUP_ADMIN, $module_id);
-	
-	// Public display
-	$gpermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_ADMIN, $module_id);
-	$gpermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_USERS, $module_id);
-	$gpermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_ANONYMOUS, $module_id);
+    
+    $module_id = $xoopsModule->getVar('mid');
+    $gpermHandler =& xoops_gethandler('groupperm');
+    $configHandler =& xoops_gethandler('config');
+    
+    /**
+     * Default public category permission mask
+     */
+    
+    // Access right
+    $gpermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_ADMIN, $module_id);
+    $gpermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_USERS, $module_id);
+    $gpermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_ANONYMOUS, $module_id);
+    
+    // Public rate
+    $gpermHandler->addRight('extgallery_public_mask', 2, XOOPS_GROUP_ADMIN, $module_id);
+    $gpermHandler->addRight('extgallery_public_mask', 2, XOOPS_GROUP_USERS, $module_id);
+    
+    // Public eCard
+    $gpermHandler->addRight('extgallery_public_mask', 4, XOOPS_GROUP_ADMIN, $module_id);
+    $gpermHandler->addRight('extgallery_public_mask', 4, XOOPS_GROUP_USERS, $module_id);
+    
+    // Public download
+    $gpermHandler->addRight('extgallery_public_mask', 8, XOOPS_GROUP_ADMIN, $module_id);
+    $gpermHandler->addRight('extgallery_public_mask', 8, XOOPS_GROUP_USERS, $module_id);
+    
+    // Public upload
+    $gpermHandler->addRight('extgallery_public_mask', 16, XOOPS_GROUP_ADMIN, $module_id);
+    
+    // Public autoapprove
+    $gpermHandler->addRight('extgallery_public_mask', 32, XOOPS_GROUP_ADMIN, $module_id);
+    
+    // Public display
+    $gpermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_ADMIN, $module_id);
+    $gpermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_USERS, $module_id);
+    $gpermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_ANONYMOUS, $module_id);
 
-	/**
-	 * Default User's category permission
-	 */
-	
-	// Private gallery
-	
-	// Private rate
-	$gpermHandler->addRight('extgallery_private', 2, XOOPS_GROUP_ADMIN, $module_id);
-	$gpermHandler->addRight('extgallery_private', 2, XOOPS_GROUP_USERS, $module_id);
-	
-	// Private eCard
-	$gpermHandler->addRight('extgallery_private', 4, XOOPS_GROUP_ADMIN, $module_id);
-	$gpermHandler->addRight('extgallery_private', 4, XOOPS_GROUP_USERS, $module_id);
-	
-	// Private download
-	$gpermHandler->addRight('extgallery_private', 8, XOOPS_GROUP_ADMIN, $module_id);
-	$gpermHandler->addRight('extgallery_private', 8, XOOPS_GROUP_USERS, $module_id);
-	
-	// Private autoapprove
-	$gpermHandler->addRight('extgallery_private', 16, XOOPS_GROUP_ADMIN, $module_id);
-	
-	
-	
-	// Create eXtGallery main upload directory
-	$dir = XOOPS_ROOT_PATH."/uploads/extgallery";
-	if(!is_dir($dir))
-		mkdir($dir, 0777);	   chmod($dir, 0777);
-	// Create directory for photo in public album
-	$dir = XOOPS_ROOT_PATH."/uploads/extgallery/public-photo";
-	if(!is_dir($dir))
-		mkdir($dir, 0777);	   chmod($dir, 0777);
-	$dir = XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/original";
-	if(!is_dir($dir))
-		mkdir($dir, 0777);	   chmod($dir, 0777);
-	$dir = XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/large";
-	if(!is_dir($dir))
-		mkdir($dir, 0777);	   chmod($dir, 0777);
-	$dir = XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/medium";
-	if(!is_dir($dir))
-		mkdir($dir, 0777);	   chmod($dir, 0777);
-	$dir = XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/thumb";
-	if(!is_dir($dir))
-		mkdir($dir, 0777);	   chmod($dir, 0777);
-	// Create directory for photo in user's album
-	//mkdir(XOOPS_ROOT_PATH."/uploads/extgallery/user-photo");
-	
-	// Copy index.html files on uploads folders
-	$indexFile = XOOPS_ROOT_PATH."/modules/extgallery/include/index.html";
+    /**
+     * Default User's category permission
+     */
+    
+    // Private gallery
+    
+    // Private rate
+    $gpermHandler->addRight('extgallery_private', 2, XOOPS_GROUP_ADMIN, $module_id);
+    $gpermHandler->addRight('extgallery_private', 2, XOOPS_GROUP_USERS, $module_id);
+    
+    // Private eCard
+    $gpermHandler->addRight('extgallery_private', 4, XOOPS_GROUP_ADMIN, $module_id);
+    $gpermHandler->addRight('extgallery_private', 4, XOOPS_GROUP_USERS, $module_id);
+    
+    // Private download
+    $gpermHandler->addRight('extgallery_private', 8, XOOPS_GROUP_ADMIN, $module_id);
+    $gpermHandler->addRight('extgallery_private', 8, XOOPS_GROUP_USERS, $module_id);
+    
+    // Private autoapprove
+    $gpermHandler->addRight('extgallery_private', 16, XOOPS_GROUP_ADMIN, $module_id);
+    
+    
+    
+    // Create eXtGallery main upload directory
+    $dir = XOOPS_ROOT_PATH."/uploads/extgallery";
+    if(!is_dir($dir))
+        mkdir($dir, 0777);       chmod($dir, 0777);
+    // Create directory for photo in public album
+    $dir = XOOPS_ROOT_PATH."/uploads/extgallery/public-photo";
+    if(!is_dir($dir))
+        mkdir($dir, 0777);       chmod($dir, 0777);
+    $dir = XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/original";
+    if(!is_dir($dir))
+        mkdir($dir, 0777);       chmod($dir, 0777);
+    $dir = XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/large";
+    if(!is_dir($dir))
+        mkdir($dir, 0777);       chmod($dir, 0777);
+    $dir = XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/medium";
+    if(!is_dir($dir))
+        mkdir($dir, 0777);       chmod($dir, 0777);
+    $dir = XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/thumb";
+    if(!is_dir($dir))
+        mkdir($dir, 0777);       chmod($dir, 0777);
+    // Create directory for photo in user's album
+    //mkdir(XOOPS_ROOT_PATH."/uploads/extgallery/user-photo");
+    
+    // Copy index.html files on uploads folders
+    $indexFile = XOOPS_ROOT_PATH."/modules/extgallery/include/index.html";
    copy($indexFile, XOOPS_ROOT_PATH."/uploads/extgallery/index.html");
    copy($indexFile, XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/index.html");
-	copy($indexFile, XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/original/index.html");
-	copy($indexFile, XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/large/index.html");
-	copy($indexFile, XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/medium/index.html");
-	copy($indexFile, XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/thumb/index.html");
-	
-	return true;
+    copy($indexFile, XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/original/index.html");
+    copy($indexFile, XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/large/index.html");
+    copy($indexFile, XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/medium/index.html");
+    copy($indexFile, XOOPS_ROOT_PATH."/uploads/extgallery/public-photo/thumb/index.html");
+    
+    return true;
 }
-
-?>

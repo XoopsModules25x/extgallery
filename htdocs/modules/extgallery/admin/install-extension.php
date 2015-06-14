@@ -18,9 +18,9 @@
  */
 
 if(isset($_POST['step'])) {
-	$step = $_POST['step'];
+    $step = $_POST['step'];
 } else {
-	$step = 'default';
+    $step = 'default';
 }
 
 include '../../../include/cp_header.php';
@@ -35,51 +35,51 @@ $extensionFileName = 'extgallery-extension-hook.tar.gz';
 
 switch($step) {
 
-	case 'download':
+    case 'download':
 
-		xoops_cp_header();
+        xoops_cp_header();
 
-		if(!$handle = @fopen($downloadServer.$extensionFileName, 'r')) {
-			printf(_AM_EXTGALLERY_EXT_FILE_DONT_EXIST, $downloadServer, $extensionFileName);
-			xoops_cp_footer();
-			break;
-		}
-		$localHandle = @fopen(XOOPS_ROOT_PATH.'/uploads/'.$extensionFileName, 'w+');
+        if(!$handle = @fopen($downloadServer.$extensionFileName, 'r')) {
+            printf(_AM_EXTGALLERY_EXT_FILE_DONT_EXIST, $downloadServer, $extensionFileName);
+            xoops_cp_footer();
+            break;
+        }
+        $localHandle = @fopen(XOOPS_ROOT_PATH.'/uploads/'.$extensionFileName, 'w+');
 
-		// Downlad module archive
-		if ($handle) {
-		    while (!feof($handle)) {
-		        $buffer = fread($handle, 8192);
-		        fwrite($localHandle, $buffer);
-		    }
-		    fclose($localHandle);
-		    fclose($handle);
-		}
+        // Downlad module archive
+        if ($handle) {
+            while (!feof($handle)) {
+                $buffer = fread($handle, 8192);
+                fwrite($localHandle, $buffer);
+            }
+            fclose($localHandle);
+            fclose($handle);
+        }
 
-		xoops_confirm(array('step' => 'install'), 'install-extension.php', _AM_EXTGALLERY_DOWN_DONE, _AM_EXTGALLERY_INSTALL);
+        xoops_confirm(array('step' => 'install'), 'install-extension.php', _AM_EXTGALLERY_DOWN_DONE, _AM_EXTGALLERY_INSTALL);
 
-		xoops_cp_footer();
+        xoops_cp_footer();
 
-		break;
+        break;
 
-	case 'install':
+    case 'install':
 
-		if(!file_exists(XOOPS_ROOT_PATH."/uploads/".$extensionFileName)) {
+        if(!file_exists(XOOPS_ROOT_PATH."/uploads/".$extensionFileName)) {
 
    xoops_cp_header();
-			echo _AM_EXTGALLERY_EXT_FILE_DONT_EXIST_SHORT;
-			xoops_cp_footer();
+            echo _AM_EXTGALLERY_EXT_FILE_DONT_EXIST_SHORT;
+            xoops_cp_footer();
 
-			break;
-		}
+            break;
+        }
 
-		$g_pcltar_lib_dir = XOOPS_ROOT_PATH.'/modules/'.$localModuleDir.'/class';
-		include "../class/pcltar.lib.php";
+        $g_pcltar_lib_dir = XOOPS_ROOT_PATH.'/modules/'.$localModuleDir.'/class';
+        include "../class/pcltar.lib.php";
 
-		// Extract extension files
-		PclTarExtract(XOOPS_ROOT_PATH."/uploads/".$extensionFileName,XOOPS_ROOT_PATH."/class/textsanitizer/","class/textsanitizer/");
-		// Delete downloaded extension's files
-		unlink(XOOPS_ROOT_PATH."/uploads/".$extensionFileName);
+        // Extract extension files
+        PclTarExtract(XOOPS_ROOT_PATH."/uploads/".$extensionFileName,XOOPS_ROOT_PATH."/class/textsanitizer/","class/textsanitizer/");
+        // Delete downloaded extension's files
+        unlink(XOOPS_ROOT_PATH."/uploads/".$extensionFileName);
   
     // Delete folder created by a small issu in PclTar lib
   if(is_dir(XOOPS_ROOT_PATH."/class/textsanitizer/class")) {
@@ -93,14 +93,12 @@ switch($step) {
 
   redirect_header("extension.php", 3, _AM_EXTGALLERY_EXTENSION_INSTALLED);
   
-		break;
+        break;
 
-	default:
-	case 'default':
+    default:
+    case 'default':
 
-		redirect_header("extension.php", 3, "");
+        redirect_header("extension.php", 3, "");
 
-		break;
+        break;
 }
-
-?>

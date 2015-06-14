@@ -33,12 +33,12 @@ $attributes['title'] = _MD_EXTGALLERY_RSS;
 $attributes['href'] = XOOPS_URL."/modules/extgallery/public-rss.php";
 $xoTheme->addMeta('link', $rel, $attributes);
 $xoTheme->addStylesheet('modules/extgallery/include/style.css');
-	
+    
 $lang = array(
-			'categoriesAlbums'=>_MD_EXTGALLERY_CATEGORIESALBUMS,
-			'nbAlbums'=>_MD_EXTGALLERY_NBALBUMS,
-			'nbPhotos'=>_MD_EXTGALLERY_NBPHOTOS
-		);
+            'categoriesAlbums'=>_MD_EXTGALLERY_CATEGORIESALBUMS,
+            'nbAlbums'=>_MD_EXTGALLERY_NBALBUMS,
+            'nbPhotos'=>_MD_EXTGALLERY_NBPHOTOS
+        );
 $xoopsTpl->assign('lang', $lang);
 
 $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));
@@ -47,5 +47,3 @@ $xoopsTpl->assign('display_type', $xoopsModuleConfig['display_type']);
 $xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
 
 include(XOOPS_ROOT_PATH."/footer.php");
-
-?>

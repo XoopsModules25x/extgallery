@@ -1,0 +1,89 @@
+
+/* ------------- single image ------------- */
+
+div.magnific-popup-container {
+	text-align: center;
+}
+
+a.magnific-popup-image {
+	margin-bottom: 15px;
+	display: inline-block;
+}
+
+a.magnific-popup-image:hover {
+	opacity: 0.8;
+}
+
+/* ------------- gallery image ------------- */
+
+div.magnific-popup-gallery a {
+	float: left;
+	margin: 0 15px 15px 0;
+}
+
+div.magnific-popup-gallery a:hover {
+	opacity: 0.8;
+}
+
+div.magnific-popup-gallery .clearer {
+	clear: both;
+}
+
+/* -------------- image border -------------- */
+
+a.magnific-popup-image img,
+div.magnific-popup-gallery img {
+	background: #fff;
+	border: 1px solid #d3d3d3;
+	padding: 4px;
+	box-shadow: 0 0 5px #ccc;
+	-moz-box-shadow: 0 0 5px #ccc;
+	-webkit-box-shadow: 0 0 5px #ccc;
+}
+
+/* ---------- magnific popup title ---------- */
+
+.mfp-title,
+.mfp-counter {
+	font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.mfp-title {
+	font-size: 13px !important;
+}
+
+.mfp-close {
+	font-weight: normal !important;
+	margin: 0 !important;
+}
+
+/* -------- magnific popup animation -------- */
+
+.mfp-with-fade .mfp-content,
+.mfp-with-fade .mfp-arrow,
+.mfp-with-fade.mfp-bg {
+	opacity: 0;
+	-webkit-backface-visibility: hidden;
+	-webkit-transition: opacity 0.2s ease-out;
+	-moz-transition: opacity 0.2s ease-out;
+	-o-transition: opacity 0.2s ease-out;
+	transition: opacity 0.2s ease-out;
+}
+
+.mfp-with-fade.mfp-ready .mfp-content,
+.mfp-with-fade.mfp-ready .mfp-arrow {
+	opacity: 1;
+}
+
+.mfp-with-fade.mfp-ready.mfp-bg {
+	opacity: 0.75;
+}
+
+.mfp-with-fade.mfp-removing .mfp-content,
+.mfp-with-fade.mfp-removing .mfp-arrow, 
+.mfp-with-fade.mfp-removing.mfp-bg {
+	opacity: 0;
+}
+
+/* ------------------------------------------ */
+

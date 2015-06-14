@@ -48,21 +48,21 @@ $modversion['adminmenu'] = "admin/menu.php";
 $modversion['hasMain'] = 1;
 if(isset($GLOBALS['xoopsModule']) && $GLOBALS['xoopsModule']->getVar('dirname') == "extgallery") {
 
-	if($GLOBALS['xoopsUser'] != null) {
-		$modversion['sub'][0]['name'] = _MI_EXTGALLERY_USERALBUM;
-		$modversion['sub'][0]['url'] = "public-useralbum.php?id=".$GLOBALS['xoopsUser']->uid();
-	}
+    if($GLOBALS['xoopsUser'] != null) {
+        $modversion['sub'][0]['name'] = _MI_EXTGALLERY_USERALBUM;
+        $modversion['sub'][0]['url'] = "public-useralbum.php?id=".$GLOBALS['xoopsUser']->uid();
+    }
 
-	include_once XOOPS_ROOT_PATH.'/modules/extgallery/class/publicPerm.php';
-	$permHandler = ExtgalleryPublicPermHandler::getHandler();
-	if(count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
-		$modversion['sub'][1]['name'] = _MI_EXTGALLERY_PUBLIC_UPLOAD;
-		if($GLOBALS['xoopsModuleConfig']['use_extended_upload'] == 'html') {
-		 $modversion['sub'][1]['url'] = "public-upload.php";
-		} else {
-		 $modversion['sub'][1]['url'] = "public-upload-extended.php";
-		}
-	}
+    include_once XOOPS_ROOT_PATH.'/modules/extgallery/class/publicPerm.php';
+    $permHandler = ExtgalleryPublicPermHandler::getHandler();
+    if(count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
+        $modversion['sub'][1]['name'] = _MI_EXTGALLERY_PUBLIC_UPLOAD;
+        if($GLOBALS['xoopsModuleConfig']['use_extended_upload'] == 'html') {
+         $modversion['sub'][1]['url'] = "public-upload.php";
+        } else {
+         $modversion['sub'][1]['url'] = "public-upload-extended.php";
+        }
+    }
 }
 
 // SQL
@@ -132,7 +132,7 @@ $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 0;
 /**
- * DNPROSSI - Editor to use 
+ * DNPROSSI - Editor to use
  */
 $i++;
 $modversion['config'][$i]['name'] = 'form_options';
@@ -402,7 +402,7 @@ $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 1;
 /**
- * Voltan - Enable show comments 
+ * Voltan - Enable show comments
  */
 $i++;
 $modversion['config'][$i]['name'] = 'enable_show_comments';
@@ -448,7 +448,7 @@ $modversion['config'][$i]['title'] = '_MI_EXTGAL_SOCIAL';
 $modversion['config'][$i]['description'] = '_MI_EXTGAL_SOCIAL_DESC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'int';
-$modversion['config'][$i]['options'] = array(_MI_EXTGAL_NONE => 0,	_MI_EXTGAL_SOCIALNETWORM => 1,	_MI_EXTGAL_BOOKMARK => 2, _MI_EXTGAL_INFO_BOTH => 3);
+$modversion['config'][$i]['options'] = array(_MI_EXTGAL_NONE => 0,    _MI_EXTGAL_SOCIALNETWORM => 1,    _MI_EXTGAL_BOOKMARK => 2, _MI_EXTGAL_INFO_BOTH => 3);
 $modversion['config'][$i]['default'] = 0;
 $i++;
 $modversion['config'][$i]['name']        = 'break' . $i;
@@ -1114,5 +1114,3 @@ $modversion['notification']['event'][3]['caption'] = _MI_EXTGAL_NEW_PHOTO_ALBUM_
 $modversion['notification']['event'][3]['description'] = _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYDSC;
 $modversion['notification']['event'][3]['mail_template'] = 'album_new_photo';
 $modversion['notification']['event'][3]['mail_subject'] = _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYSBJ;
-
-?>

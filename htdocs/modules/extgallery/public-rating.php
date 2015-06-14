@@ -16,19 +16,18 @@
  * @version     $Id: public-rating.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
-
 require '../../mainfile.php';
 include_once XOOPS_ROOT_PATH.'/modules/extgallery/class/publicPerm.php';
 
 if(!isset($_GET['id'])) {
-	$photoId = 0;
+    $photoId = 0;
 } else {
-	$photoId = intval($_GET['id']);
+    $photoId = intval($_GET['id']);
 }
 if(!isset($_GET['rate'])) {
-	$rate = 0;
+    $rate = 0;
 } else {
-	$rate = intval($_GET['rate']);
+    $rate = intval($_GET['rate']);
 }
 
 $photoHandler = xoops_getmodulehandler('publicphoto', 'extgallery');
@@ -36,19 +35,17 @@ $photo = $photoHandler->get($photoId);
 
 $permHandler = ExtgalleryPublicPermHandler::getHandler();
 if($xoopsModuleConfig['enable_rating'] && !$permHandler->isAllowed($xoopsUser, 'public_rate', $photo->getVar('cat_id'))) {
-	redirect_header("index.php", 3, _MD_EXTGALLERY_NOPERM);
-	exit;
+    redirect_header("index.php", 3, _MD_EXTGALLERY_NOPERM);
+    exit;
 }
 
 $ratingHandler = xoops_getmodulehandler('publicrating', 'extgallery');
 
 if($ratingHandler->rate($photoId, $rate)) {
-	$rating = $ratingHandler->getRate($photoId);
-	$photoHandler->modifyPhoto($photoId,array('photo_rating'=>$rating));
-	
-	redirect_header("public-photo.php?photoId=".$photoId."#photoNav", 3, _MD_EXTGALLERY_VOTE_THANKS);
+    $rating = $ratingHandler->getRate($photoId);
+    $photoHandler->modifyPhoto($photoId,array('photo_rating'=>$rating));
+    
+    redirect_header("public-photo.php?photoId=".$photoId."#photoNav", 3, _MD_EXTGALLERY_VOTE_THANKS);
 } else {
-	redirect_header("public-photo.php?photoId=".$photoId."#photoNav", 3, _MD_EXTGALLERY_ALREADY_VOTED);
+    redirect_header("public-photo.php?photoId=".$photoId."#photoNav", 3, _MD_EXTGALLERY_ALREADY_VOTED);
 }
-
-?>

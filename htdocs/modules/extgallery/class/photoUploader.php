@@ -53,21 +53,25 @@ class ExtgalleryPhotoUploader {
 
   if($this->uploadDir == '') {
    $this->abort('upload dir not defined');
+
    return false;
   }
 
   if(!is_dir($this->uploadDir)) {
    $this->abort('fail to open upload dir');
+
    return false;
   }
 
   if(!is_writeable($this->uploadDir)) {
    $this->abort('upload dir not writable');
+
    return false;
   }
 
   if($this->checkMd5 && !isset($md5sums)) {
    $this->abort('Expecting an MD5 checksum');
+
    return false;
   }
 
@@ -77,6 +81,7 @@ class ExtgalleryPhotoUploader {
 
   if (!move_uploaded_file($file['tmp_name'], $tmpname)) {
    $this->abort('Unable to move uploaded file');
+
    return false;
   }
 
@@ -95,6 +100,7 @@ class ExtgalleryPhotoUploader {
       fclose($dst);
       unlink($dstname);
       $this->abort('read IO error');
+
       return false;
      }
      if(!fwrite($dst, $buf, $rlen)) {
@@ -102,6 +108,7 @@ class ExtgalleryPhotoUploader {
       fclose($dst);
       unlink($dstname);
       $this->abort('write IO error');
+
       return false;
      }
      $len -= $rlen;
@@ -115,10 +122,12 @@ class ExtgalleryPhotoUploader {
     $dlen = filesize($dstname);
     if($dlen != $_SESSION['juvar.tmpsize']) {
      $this->abort('file size mismatch');
+
      return false;
     }
     if($this->checkMd5 && ($md5sums != md5_file($dstname))) {
      $this->abort('MD5 checksum mismatch');
+
      return false;
     }
     // remove zero sized files
@@ -128,6 +137,7 @@ class ExtgalleryPhotoUploader {
      }
     } else {
      $this->abort('0 file size');
+
      return false;
     }
     // reset session var
@@ -137,6 +147,7 @@ class ExtgalleryPhotoUploader {
    // Got a single file upload. Trivial.
    if($this->checkMd5 && $md5sums != md5_file($tmpname)) {
     $this->abort('MD5 checksum mismatch');
+
     return false;
    }
    if(!$this->_saveFile($tmpname, $file['name'])) {
@@ -159,10 +170,12 @@ class ExtgalleryPhotoUploader {
 
   if (!rename($tmpDestination, $this->savedDestination)) {
    $this->abort('error renaming file');
+
    return false;
   }
 
   @chmod($this->savedDestination, 0644);
+
   return true;
 
  }
@@ -173,7 +186,6 @@ class ExtgalleryPhotoUploader {
 
      $valid_types = array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP);
 
-
      $imageExtensions = array('gif', 'jpg', 'jpeg', 'png');
 
   // Check IE XSS before returning success
@@ -181,26 +193,31 @@ class ExtgalleryPhotoUploader {
   $photoInfo = getimagesize($tmpDestination);
   if( $photoInfo === false || $imageExtensions[ (int)$photoInfo[2] ] != $ext ) {
    $this->abort('Suspicious image upload refused');
+
    return false;
   }
 
   if(!$this->checkMaxFileSize($tmpDestination)) {
    $this->abort('Max file size error');
+
    return false;
   }
 
   if(!$this->checkMaxWidth($photoInfo)) {
    $this->abort('Max width error');
+
    return false;
   }
 
   if(!$this->checkMaxHeight($photoInfo)) {
    $this->abort('Max height error');
+
    return false;
   }
 
   if(!$this->checkImageType($photoInfo)) {
    $this->abort('File type not allowed');
+
    return false;
   }
 
@@ -217,6 +234,7 @@ class ExtgalleryPhotoUploader {
   if(filesize($file) > $this->maxFileSize) {
    return false;
   }
+
   return true;
 
  }
@@ -297,4 +315,3 @@ class ExtgalleryPhotoUploader {
  }
 
 }
-?>

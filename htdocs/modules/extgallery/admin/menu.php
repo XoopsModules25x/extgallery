@@ -61,4 +61,3 @@ $i++;
 $adminmenu[$i]['title'] = _MI_EXTGALLERY_ABOUT;
 $adminmenu[$i]['link']  = "admin/about.php";
 $adminmenu[$i]['icon']  = "images/icons/about.png";
-?>

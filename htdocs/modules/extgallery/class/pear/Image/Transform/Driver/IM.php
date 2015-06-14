@@ -109,22 +109,24 @@ class Image_Transform_Driver_IM extends Image_Transform
         if (PEAR::isError($result)) {
             return $result;
         }
+
         return true;
 
     } // End load
 
-	/**
+    /**
      * Adds a border of constant width around an image
      *
-     * @param int $border_width Width of border to add
+     * @param  int  $border_width Width of border to add
      * @author Peter Bowyer
      * @return bool TRUE
      * @access public
      */
     function addBorder($border_width, $borderNum, $color = '')
     {
-    	$this->command['border'.$borderNum] = ' -bordercolor ' . escapeshellarg($color)
+        $this->command['border'.$borderNum] = ' -bordercolor ' . escapeshellarg($color)
             . ' -border ' . escapeshellarg($border_width);
+
         return true;
     }
 
@@ -134,15 +136,16 @@ class Image_Transform_Driver_IM extends Image_Transform
     function addBorders($borders)
     {
         foreach($borders as $k=>$border) {
-        	$this->addBorder($border['borderWidth'],$k,$border['borderColor']);
+            $this->addBorder($border['borderWidth'],$k,$border['borderColor']);
         }
+
         return true;
     }
 
     /**
      * Image_Transform_Driver_IM::_get_image_details()
      *
-     * @param string $image the path and name of the image file
+     * @param  string $image the path and name of the image file
      * @return none
      */
     function _get_image_details($image)
@@ -213,6 +216,7 @@ class Image_Transform_Driver_IM extends Image_Transform
         if ($angle % 360) {
             $this->command['rotate'] = '-rotate ' . (float) $angle;
         }
+
         return true;
 
     } // End rotate
@@ -276,31 +280,31 @@ class Image_Transform_Driver_IM extends Image_Transform
          }
 
         if($y == 0) {
-			$position = "North";
-		} elseif($y == -1) {
-			$position = "South";
-		}
-		if($x == 0) {
-			$position .= "West";
-		} elseif($x == -1) {
-			$position .= "East";
-		}
-		if($x == 1 && $y == 0) {
-			$position = "North";
-		} elseif($x == 1 && $y == -1) {
-			$position = "South";
-		} elseif($x == 0 && $y == 1) {
-			$position = "West";
-		} elseif($x == -1 && $y == 1) {
-			$position = "East";
-		} elseif($x == 1 && $y == 1) {
-			$position = "Center";
-		}
+            $position = "North";
+        } elseif($y == -1) {
+            $position = "South";
+        }
+        if($x == 0) {
+            $position .= "West";
+        } elseif($x == -1) {
+            $position .= "East";
+        }
+        if($x == 1 && $y == 0) {
+            $position = "North";
+        } elseif($x == 1 && $y == -1) {
+            $position = "South";
+        } elseif($x == 0 && $y == 1) {
+            $position = "West";
+        } elseif($x == -1 && $y == 1) {
+            $position = "East";
+        } elseif($x == 1 && $y == 1) {
+            $position = "Center";
+        }
 
          $this->command[$key] = ' -font ' . escapeshellarg($font)
             . ' -pointsize ' . escapeshellarg($size)
             . ' -gravity ' . escapeshellarg($position)
-			. ' -fill ' . escapeshellarg($color)
+            . ' -fill ' . escapeshellarg($color)
             . ' -annotate ' . escapeshellarg('+'.$padding . '+'.$padding)
             . ' ' . escapeshellarg('"'.$text.'"');
          // Producing error: gs: not found gs: not found convert: Postscript delegate failed [No such file or directory].
@@ -312,13 +316,14 @@ class Image_Transform_Driver_IM extends Image_Transform
      * Adjust the image gamma
      *
      * @access public
-     * @param float $outputgamma
+     * @param  float $outputgamma
      * @return mixed TRUE or a PEAR error object on error
      */
     function gamma($outputgamma = 1.0) {
         if ($outputgamme != 1.0) {
             $this->command['gamma'] = '-gamma ' . (float) $outputgamma;
         }
+
         return true;
     }
 
@@ -330,6 +335,7 @@ class Image_Transform_Driver_IM extends Image_Transform
      */
     function greyscale() {
         $this->command['type'] = '-type Grayscale';
+
         return true;
     }
 
@@ -346,6 +352,7 @@ class Image_Transform_Driver_IM extends Image_Transform
         } else {
             $this->command['flop'] = '-flop';
         }
+
         return true;
     }
 
@@ -362,6 +369,7 @@ class Image_Transform_Driver_IM extends Image_Transform
         } else {
             $this->command['flip'] = '-flip';
         }
+
         return true;
     }
 
@@ -393,14 +401,15 @@ class Image_Transform_Driver_IM extends Image_Transform
         $cmd = $this->_prepare_cmd(
             IMAGE_TRANSFORM_IM_PATH,
             'convert',
-            	escapeshellarg($this->image)
-            	. implode(' ', $this->command)
+                escapeshellarg($this->image)
+                . implode(' ', $this->command)
                 . ' -quality ' . ((int) $quality) . ' '
                 . escapeshellarg($filename));// . ' ' . $type . ':'
                 //. ' 2>&1');
         echo $cmd."<br />";
         exec($cmd, $res, $exit);
-		echo $exit;
+        echo $exit;
+
         return ($exit == 0) ? true : PEAR::raiseError(implode('. ', $res),
             IMAGE_TRANSFORM_ERROR_IO);
     } // End save
@@ -440,9 +449,10 @@ class Image_Transform_Driver_IM extends Image_Transform
                    $this->image . ' ' . $type . ":-");
         passthru($cmd);
 
-		if (!$this->keep_settings_on_save) {
-		    $this->free();
-		}
+        if (!$this->keep_settings_on_save) {
+            $this->free();
+        }
+
         return true;
     }
 
@@ -453,11 +463,10 @@ class Image_Transform_Driver_IM extends Image_Transform
      */
     function free()
     {
-	    $this->command = array();
+        $this->command = array();
         $this->image = '';
         $this->type = '';
     }
 
 } // End class ImageIM
-
-?>
+;

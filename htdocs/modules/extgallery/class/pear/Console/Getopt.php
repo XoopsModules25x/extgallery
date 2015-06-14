@@ -53,12 +53,12 @@ class Console_Getopt {
      *
      * Most of the semantics of this function are based on GNU getopt_long().
      *
-     * @param array  $args           an array of command-line arguments
-     * @param string $short_options  specifies the list of allowed short options
-     * @param array  $long_options   specifies the list of allowed long options
+     * @param array  $args          an array of command-line arguments
+     * @param string $short_options specifies the list of allowed short options
+     * @param array  $long_options  specifies the list of allowed long options
      *
      * @return array two-element array containing the list of parsed options and
-     * the non-option arguments
+     *               the non-option arguments
      *
      * @access public
      *
@@ -72,7 +72,7 @@ class Console_Getopt {
      * This function expects $args to start with the script name (POSIX-style).
      * Preserved for backwards compatibility.
      * @see getopt2()
-     */    
+     */
     function getopt($args, $short_options, $long_options = null)
     {
         return Console_Getopt::doGetopt(1, $args, $short_options, $long_options);
@@ -218,6 +218,7 @@ class Console_Getopt {
             }
 
             $opts[] = array('--' . $opt, $opt_arg);
+
             return;
         }
 
@@ -239,13 +240,14 @@ class Console_Getopt {
                 if (!@is_array($GLOBALS['HTTP_SERVER_VARS']['argv'])) {
                     return PEAR::raiseError("Console_Getopt: Could not read cmd args (register_argc_argv=Off?)");
                 }
+
                 return $GLOBALS['HTTP_SERVER_VARS']['argv'];
             }
+
             return $_SERVER['argv'];
         }
+
         return $argv;
     }
 
 }
-
-?>

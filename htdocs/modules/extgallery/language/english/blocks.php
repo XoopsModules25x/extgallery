@@ -111,8 +111,6 @@ define('_MB_EXTGALLERY_FALSE',"false");
 define('_MB_EXTGALLERY_PHOTO_NUMBER_TABLE',"Number of columns in table show");
 define('_MB_EXTGALLERY_TABLE',"Table");
 
-
 define('_MB_EXTGALLERY_DISPLAY_DATE',"Display photo date");
 define('_MB_EXTGALLERY_DISPLAY_HITS',"Display photo hits");
 define('_MB_EXTGALLERY_DISPLAY_RATE',"Display photo rates");
-?>

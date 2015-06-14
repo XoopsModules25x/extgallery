@@ -43,4 +43,3 @@ return $config = array(
     // Filters XSS scripts on display of text
     // There is considerable trade-off between security and performance
     "filterxss_on_display" => false);
-?>

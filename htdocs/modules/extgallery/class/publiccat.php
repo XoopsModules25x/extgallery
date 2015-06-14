@@ -17,95 +17,93 @@
  */
 
 if (!defined("XOOPS_ROOT_PATH")) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 include_once 'catHandler.php';
 
 class ExtgalleryPubliccat extends ExtgalleryCat {
 
-	function ExtgalleryPubliccat() {
-		parent::ExtgalleryCat();
-	}
+    function ExtgalleryPubliccat() {
+        parent::ExtgalleryCat();
+    }
 
 }
 
 class ExtgalleryPubliccatHandler extends ExtgalleryCatHandler {
 
-	function ExtgalleryPubliccatHandler(&$db)
-	{
-		parent::ExtgalleryCatHandler($db, 'public');
-	}
+    function ExtgalleryPubliccatHandler(&$db)
+    {
+        parent::ExtgalleryCatHandler($db, 'public');
+    }
 
-	function createCat($data) {
-		$cat = $this->create();
-		$cat->setVars($data);
+    function createCat($data) {
+        $cat = $this->create();
+        $cat->setVars($data);
 
-		if(!$this->_haveValidParent($cat)) {
-			return false;
-		}
+        if(!$this->_haveValidParent($cat)) {
+            return false;
+        }
 
-		$this->insert($cat,true);
-		$this->rebuild();
+        $this->insert($cat,true);
+        $this->rebuild();
 
-		$criteria = new CriteriaCompo();
-		$criteria->setSort('cat_id');
-		$criteria->setOrder('DESC');
-		$criteria->setLimit(1);
+        $criteria = new CriteriaCompo();
+        $criteria->setSort('cat_id');
+        $criteria->setOrder('DESC');
+        $criteria->setLimit(1);
 
-		$cat = $this->getObjects($criteria);
-		$cat = $cat[0];
+        $cat = $this->getObjects($criteria);
+        $cat = $cat[0];
 
-		$moduleId = $GLOBALS['xoopsModule']->getVar('mid');
+        $moduleId = $GLOBALS['xoopsModule']->getVar('mid');
 
-		// Retriving permission mask
-		$gpermHandler =& xoops_gethandler('groupperm');
-		$moduleId = $GLOBALS['xoopsModule']->getVar('mid');
-		$groups = $GLOBALS['xoopsUser']->getGroups();
+        // Retriving permission mask
+        $gpermHandler =& xoops_gethandler('groupperm');
+        $moduleId = $GLOBALS['xoopsModule']->getVar('mid');
+        $groups = $GLOBALS['xoopsUser']->getGroups();
 
-		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('gperm_name','extgallery_public_mask'));
-		$criteria->add(new Criteria('gperm_modid',$moduleId));
-		$permMask = $gpermHandler->getObjects($criteria);
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('gperm_name','extgallery_public_mask'));
+        $criteria->add(new Criteria('gperm_modid',$moduleId));
+        $permMask = $gpermHandler->getObjects($criteria);
 
+        // Retriving group list
+        $memberHandler =& xoops_gethandler('member');
+        $glist = $memberHandler->getGroupList();
 
-		// Retriving group list
-		$memberHandler =& xoops_gethandler('member');
-		$glist = $memberHandler->getGroupList();
-
-		// Applying permission mask
-		$permArray = include XOOPS_ROOT_PATH.'/modules/extgallery/include/perm.php';
+        // Applying permission mask
+        $permArray = include XOOPS_ROOT_PATH.'/modules/extgallery/include/perm.php';
         $modulePermArray = $permArray['modulePerm'];
-	    $pluginPermArray = $permArray['pluginPerm'];
+        $pluginPermArray = $permArray['pluginPerm'];
 
-		foreach($permMask as $perm) {
+        foreach($permMask as $perm) {
 
-		    foreach($modulePermArray as $permMask) {
-		        if($perm->getVar('gperm_itemid') == $permMask['maskId']) {
+            foreach($modulePermArray as $permMask) {
+                if($perm->getVar('gperm_itemid') == $permMask['maskId']) {
                     $gpermHandler->addRight($permMask['name'], $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
-		        }
-		    }
+                }
+            }
 
-		    foreach($pluginPermArray as $permMask) {
-		        if($perm->getVar('gperm_itemid') == $permMask['maskId']) {
+            foreach($pluginPermArray as $permMask) {
+                if($perm->getVar('gperm_itemid') == $permMask['maskId']) {
                     $gpermHandler->addRight($permMask['name'], $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
-		        }
-		    }
+                }
+            }
 
-		}
+        }
 
-	}
+    }
 
-	function _haveValidParent(&$cat) {
-		// Check if haven't photo in parent category (parent category isn't an album)
-		$parentCat = $this->get($cat->getVar('cat_pid'));
-		return !$this->_isAlbum($parentCat);
-	}
+    function _haveValidParent(&$cat) {
+        // Check if haven't photo in parent category (parent category isn't an album)
+        $parentCat = $this->get($cat->getVar('cat_pid'));
 
-	function _getPermHandler() {
-		return ExtgalleryPublicPermHandler::getHandler();
-	}
+        return !$this->_isAlbum($parentCat);
+    }
+
+    function _getPermHandler() {
+        return ExtgalleryPublicPermHandler::getHandler();
+    }
 
 }
-
-?>

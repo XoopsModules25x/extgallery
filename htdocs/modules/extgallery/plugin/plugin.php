@@ -19,5 +19,3 @@
 $extgalleryPlugin = array(
  'lolbuilder'=>0,
 );
-
-?>
