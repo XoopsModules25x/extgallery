@@ -22,7 +22,7 @@ if (!defined("XOOPS_ROOT_PATH")) {
 
 class ExtgalleryPublicPermHandler {
 
-    function &getHandler()
+    static function &getHandler()
     {
         static $permHandler;
         if(!isset($permHandler)) {
