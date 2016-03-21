@@ -17,14 +17,14 @@
  */
 
 $modversion['name']        = _MI_EXTGAL_NAME;
-$modversion['version']     = 1.12;
+$modversion['version']     = 1.13;
 $modversion['description'] = _MI_EXTGAL_DESC;
 $modversion['credits']     = 'http://www.zoullou.net/';
 $modversion['author']      = 'Zoullou';
 $modversion['help']        = 'page=help';
 $modversion['license']     = 'GNU GPL 2.0';
 $modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html';
-$modversion['official']    = 0; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
+$modversion['official']    = 1; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
 $modversion['image']       = 'assets/images/extgallery_logo.png';
 $modversion['dirname']     = basename(__DIR__);
 $modversion['onInstall']   = 'include/install_function.php';
