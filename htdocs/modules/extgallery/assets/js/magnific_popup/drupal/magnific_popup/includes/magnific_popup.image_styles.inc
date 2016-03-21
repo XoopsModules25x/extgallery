@@ -27,11 +27,11 @@ function magnific_popup_image_default_styles() {
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 480,
-          'height' => 360,
+          'height' => 360
         ),
-        'weight' => -10,
-      ),
-    ),
+        'weight' => -10
+      )
+    )
   );
 
   return $styles;

@@ -9,56 +9,70 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright   {@link http://xoops.org/ XOOPS Project}
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
  * @version     $Id: functions.php 8088 2011-11-06 09:38:12Z beckmi $
+ * @param $option
+ * @return bool
  */
 
 function gal_getmoduleoption($option)
 {
     global $xoopsModuleConfig, $xoopsModule;
-    static $tbloptions= Array();
-    if(is_array($tbloptions) && array_key_exists($option, $tbloptions)) {
+    static $tbloptions = array();
+    if (is_array($tbloptions) && array_key_exists($option, $tbloptions)) {
         return $tbloptions[$option];
     }
 
     $retval = false;
-    if (isset($xoopsModuleConfig) && (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'extgallery' && $xoopsModule->getVar('isactive'))) {
-        if(isset($xoopsModuleConfig[$option])) {
-            $retval= $xoopsModuleConfig[$option];
+    if (isset($xoopsModuleConfig) && (is_object($xoopsModule) && $xoopsModule->getVar('dirname') === 'extgallery' && $xoopsModule->getVar('isactive'))) {
+        if (isset($xoopsModuleConfig[$option])) {
+            $retval = $xoopsModuleConfig[$option];
         }
     } else {
-        $module_handler =& xoops_gethandler('module');
-        $module =& $module_handler->getByDirname('extgallery');
-        $config_handler =& xoops_gethandler('config');
+        $module_handler = xoops_getHandler('module');
+        $module         = $module_handler->getByDirname('extgallery');
+        $config_handler = xoops_getHandler('config');
         if ($module) {
-            $moduleConfig =& $config_handler->getConfigsByCat(0, $module->getVar('mid'));
-            if(isset($moduleConfig[$option])) {
-                $retval= $moduleConfig[$option];
+            $moduleConfig = $config_handler->getConfigsByCat(0, $module->getVar('mid'));
+            if (isset($moduleConfig[$option])) {
+                $retval = $moduleConfig[$option];
             }
         }
     }
-    $tbloptions[$option]=$retval;
+    $tbloptions[$option] = $retval;
 
     return $retval;
 }
 
+/**
+ * @param $caption
+ * @param $name
+ * @param $value
+ * @param $rows
+ * @param $cols
+ * @param $width
+ * @param $height
+ * @param $supplemental
+ *
+ * @return bool|XoopsFormEditor
+ */
 function &gal_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $height, $supplemental)
 {
-    $editor_option = strtolower(gal_getmoduleoption('form_options'));
-    $editor = false;
-    $editor_configs=array();
-    $editor_configs['name'] =$name;
-    $editor_configs['value'] = $value;
-    $editor_configs['rows'] = $rows;
-    $editor_configs['cols'] = $cols;
-    $editor_configs['width'] = $width;
+    $editor_option            = strtolower(gal_getmoduleoption('form_options'));
+    $editor                   = false;
+    $editor_configs           = array();
+    $editor_configs['name']   = $name;
+    $editor_configs['value']  = $value;
+    $editor_configs['rows']   = $rows;
+    $editor_configs['cols']   = $cols;
+    $editor_configs['width']  = $width;
     $editor_configs['height'] = $height;
     $editor_configs['editor'] = $editor_option;
-    
+
     $editor = new XoopsFormEditor($caption, $name, $editor_configs);
-    
+
     return $editor;
 }

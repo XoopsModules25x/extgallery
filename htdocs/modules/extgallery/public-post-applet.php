@@ -9,25 +9,25 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright   {@link http://xoops.org/ XOOPS Project}
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
  * @version     $Id: public-post-applet.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
-require '../../mainfile.php';
+require dirname(dirname(__DIR__)) . '/mainfile.php';
 
-$photoHandler = xoops_getmodulehandler('publicphoto', 'extgallery');
+$photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 $result = $photoHandler->postPhotoTraitement('File0');
 
-if($result == 2) {
-    echo "ERROR: "._MD_EXTGALLERY_NOT_AN_ALBUM;
-} elseif($result == 4 || $result == 5) {
-    echo "ERROR: ".$photoHandler->photoUploader->getError();
-} elseif($result == 0) {
+if ($result == 2) {
+    echo 'ERROR: ' . _MD_EXTGALLERY_NOT_AN_ALBUM;
+} elseif ($result == 4 || $result == 5) {
+    echo 'ERROR: ' . $photoHandler->photoUploader->getError();
+} elseif ($result == 0) {
     echo "SUCCESS\n";
-} elseif($result == 1) {
+} elseif ($result == 1) {
     echo "SUCCESS\n";
 }

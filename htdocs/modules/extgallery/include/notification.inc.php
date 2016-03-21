@@ -3,7 +3,7 @@
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
+//                       <http://xoops.org/>                             //
 // ------------------------------------------------------------------------- //
 //  This program is free software; you can redistribute it and/or modify     //
 //  it under the terms of the GNU General Public License as published by     //
@@ -25,16 +25,20 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
+// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
+/**
+ * @param $category
+ * @param $item_id
+ *
+ * @return mixed
+ */
 function extgalleryNotifyIteminfo($category, $item_id)
 {
-    $photoHandler = xoops_getmodulehandler('publicphoto', 'extgallery');
-    $photo = $photoHandler->getPhoto($item_id);
+    $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+    $photo        = $photoHandler->getPhoto($item_id);
     $item['name'] = $photo->getVar('photo_desc');
-    $item['url'] = XOOPS_URL . '/modules/extgallery/public-album.php?id='.$photo->getVar('photo_id');
+    $item['url']  = XOOPS_URL . '/modules/extgallery/public-album.php?id=' . $photo->getVar('photo_id');
 
     return $item;
 }

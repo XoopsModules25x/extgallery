@@ -3,7 +3,7 @@
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
+//                       <http://xoops.org/>                             //
 // ------------------------------------------------------------------------- //
 //  This program is free software; you can redistribute it and/or modify     //
 //  it under the terms of the GNU General Public License as published by     //
@@ -27,10 +27,10 @@
 
 require dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 
-// defined("XOOPS_ROOT_PATH") || exit("XOOPS root path not defined");
+// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH.'/modules/extgallery/class/php-captcha.inc.php';
+include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/php-captcha.inc.php';
 
-$aFonts = array(XOOPS_ROOT_PATH.'/modules/extgallery/fonts/AllStarResort.ttf');
+$aFonts         = array(XOOPS_ROOT_PATH . '/modules/extgallery/fonts/AllStarResort.ttf');
 $oVisualCaptcha = new PhpCaptcha($aFonts, 200, 60);
 $oVisualCaptcha->Create();

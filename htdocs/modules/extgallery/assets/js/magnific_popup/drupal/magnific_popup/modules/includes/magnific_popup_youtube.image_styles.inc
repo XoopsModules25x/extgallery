@@ -27,9 +27,9 @@ function magnific_popup_youtube_image_default_styles() {
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 480,
-          'height' => 270,
+          'height' => 270
         ),
-        'weight' => -10,
+        'weight' => -10
       ),
       2 => array(
         'label' => 'Overlay (watermark)',
@@ -44,9 +44,9 @@ function magnific_popup_youtube_image_default_styles() {
           'xpos' => 'center',
           'ypos' => 'bottom',
           'alpha' => 100,
-          'path' => "{$module_path}/assets/images/youtube-chrome_bottom.png",
+          'path' => "{$module_path}/assets/images/youtube-chrome_bottom.png"
         ),
-        'weight' => -9,
+        'weight' => -9
       ),
       3 => array(
         'label' => 'Overlay (watermark)',
@@ -61,11 +61,11 @@ function magnific_popup_youtube_image_default_styles() {
           'xpos' => 'center',
           'ypos' => 'center',
           'alpha' => 100,
-          'path' => "{$module_path}/images/youtube-play_button.png",
+          'path' => "{$module_path}/images/youtube-play_button.png"
         ),
-        'weight' => -8,
-      ),
-    ),
+        'weight' => -8
+      )
+    )
   );
 
   return $styles;

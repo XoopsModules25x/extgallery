@@ -68,7 +68,7 @@
 .entry .metaslider ol,
 .entry-content .metaslider ul,
 .entry-content .metaslider ol,
-.entry-content .metaslider img
+.entry-content .metaslider img,
 .metaslider .flexslider ul,
 .metaslider .flexslider .slides li,
 .metaslider .flexslider .slides ul,
@@ -93,6 +93,6 @@
     line-height: normal;
 }
 .metaslider .slides img {
-	width: 100%;
-	display: block;
+    width: 100%;
+    display: block;
 }

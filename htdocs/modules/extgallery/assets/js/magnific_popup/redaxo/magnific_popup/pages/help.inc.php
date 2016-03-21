@@ -1,9 +1,9 @@
 <?php
 
-$mypage = rex_request('page','string');
+$mypage  = rex_request('page', 'string');
 $subpage = rex_request('subpage', 'string');
 $chapter = rex_request('chapter', 'string');
-$func = rex_request('func', 'string');
+$func    = rex_request('func', 'string');
 
 // include markdwon parser
 if (!class_exists('Parsedown')) {
@@ -11,11 +11,10 @@ if (!class_exists('Parsedown')) {
 }
 
 // chapters
-$chapterpages = array (
-    '' => array($I18N->msg('magnific_popup_help_chapter_readme'), 'pages/help/readme.inc.php'),
+$chapterpages = array(
+    ''          => array($I18N->msg('magnific_popup_help_chapter_readme'), 'pages/help/readme.inc.php'),
     'changelog' => array($I18N->msg('magnific_popup_help_chapter_changelog'), 'pages/help/changelog.inc.php'),
-    'license' => array($I18N->msg('magnific_popup_help_chapter_license'), 'pages/help/license.inc.php'),
-);
+    'license'   => array($I18N->msg('magnific_popup_help_chapter_license'), 'pages/help/license.inc.php'));
 
 // build chapter navigation
 $chapternav = '';
@@ -29,10 +28,10 @@ foreach ($chapterpages as $chapterparam => $chapterprops) {
         }
     }
 }
-$chapternav = ltrim($chapternav, " | ");
+$chapternav = ltrim($chapternav, ' | ');
 
 // build chapter output
-$addonroot = $REX['INCLUDE_PATH']. '/addons/'.$mypage.'/';
+$addonroot = $REX['INCLUDE_PATH'] . '/addons/' . $mypage . '/';
 $source    = $chapterpages[$chapter][1];
 
 // output
@@ -53,17 +52,17 @@ echo '
 ?>
 
 <script type="text/javascript">
-jQuery(document).ready(function($) {
-    // make external links clickable
-    $("#subpage-help").delegate("a", "click", function(event) {
-        var host = new RegExp("/" + window.location.host + "/");
+    jQuery(document).ready(function ($) {
+        // make external links clickable
+        $("#subpage-help").delegate("a", "click", function (event) {
+            var host = new RegExp("/" + window.location.host + "/");
 
-        if (!host.test(this.href)) {
-            event.preventDefault();
-            event.stopPropagation();
+            if (!host.test(this.href)) {
+                event.preventDefault();
+                event.stopPropagation();
 
-            window.open(this.href, "_blank");
-        }
+                window.open(this.href, "_blank");
+            }
+        });
     });
-});
 </script>

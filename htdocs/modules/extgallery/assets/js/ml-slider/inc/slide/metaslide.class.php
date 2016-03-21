@@ -1,16 +1,18 @@
 <?php
+
 /**
  * Slide class represting a single slide. This is extended by type specific
  * slides (eg, MetaImageSlide, MetaYoutubeSlide (pro only), etc)
  */
 class MetaSlide
 {
-    public $slide = 0;
-    public $slider = 0;
+    public $slide    = 0;
+    public $slider   = 0;
     public $settings = array(); // slideshow settings
 
     /**
      * Set the slide
+     * @param $id
      */
     public function set_slide($id)
     {
@@ -19,16 +21,19 @@ class MetaSlide
 
     /**
      * Set the slide (that this slide belongs to)
+     * @param $id
      */
     public function set_slider($id)
     {
-        $this->slider = get_post($id);
+        $this->slider   = get_post($id);
         $this->settings = get_post_meta($id, 'ml-slider_settings', true);
     }
 
     /**
      * Return the HTML for the slide
      *
+     * @param $slide_id
+     * @param $slider_id
      * @return array complete array of slides
      */
     public function get_slide($slide_id, $slider_id)
@@ -41,6 +46,9 @@ class MetaSlide
 
     /**
      * Save the slide
+     * @param $slide_id
+     * @param $slider_id
+     * @param $fields
      */
     public function save_slide($slide_id, $slider_id, $fields)
     {
@@ -57,7 +65,7 @@ class MetaSlide
      */
     public function get_slide_html()
     {
-        if (is_admin() && isset($_GET['page']) && $_GET['page'] == 'metaslider-theme-editor') {
+        if (is_admin() && isset($_GET['page']) && $_GET['page'] === 'metaslider-theme-editor') {
             return $this->get_public_slide();
         }
 
@@ -69,7 +77,9 @@ class MetaSlide
     }
 
     /**
-     *
+     * @param $slider_id
+     * @param $slide_id
+     * @return
      */
     public function slide_exists_in_slideshow($slider_id, $slide_id)
     {
@@ -77,32 +87,34 @@ class MetaSlide
     }
 
     /**
-     *
+     * @param $slider_id
+     * @param $slide_id
+     * @return bool
      */
     public function slide_is_unassigned_or_image_slide($slider_id, $slide_id)
     {
         $type = get_post_meta($slide_id, 'ml-slider_type', true);
 
-        return !strlen($type) || $type == 'image';
+        return !strlen($type) || $type === 'image';
     }
 
     /**
      * Build image HTML
      *
-     * @param  array  $attributes
+     * @param  array $attributes
      * @return string image HTML
      */
     public function build_image_tag($attributes)
     {
-        $html = "<img";
+        $html = '<img';
 
         foreach ($attributes as $att => $val) {
             if (strlen($val)) {
-                $html .= " " . $att . '="' . $val . '"';
+                $html .= ' ' . $att . '="' . $val . '"';
             }
         }
 
-        $html .= " />";
+        $html .= ' />';
 
         return $html;
     }
@@ -110,23 +122,25 @@ class MetaSlide
     /**
      * Build image HTML
      *
-     * @param  array  $attributes
+     * @param  array $attributes
+     * @param $content
      * @return string image HTML
      */
     public function build_anchor_tag($attributes, $content)
     {
-        $html = "<a";
+        $html = '<a';
 
         foreach ($attributes as $att => $val) {
             if (strlen($val)) {
-                $html .= " " . $att . '="' . $val . '"';
+                $html .= ' ' . $att . '="' . $val . '"';
             }
         }
 
-        $html .= ">" . $content . "</a>";
+        $html .= '>' . $content . '</a>';
 
         return $html;
     }
+
     /**
      * Tag the slide attachment to the slider tax category
      */
@@ -158,21 +172,18 @@ class MetaSlide
         // get the slide with the highest menu_order so far
         $args = array(
             'force_no_custom_order' => true,
-            'orderby' => 'menu_order',
-            'order' => 'DESC',
-            'post_type' => 'attachment',
-            'post_status' => 'inherit',
-            'lang' => '', // polylang, ingore language filter
-            'suppress_filters' => 1, // wpml, ignore language filter
-            'posts_per_page' => 1,
-            'tax_query' => array(
+            'orderby'               => 'menu_order',
+            'order'                 => 'DESC',
+            'post_type'             => 'attachment',
+            'post_status'           => 'inherit',
+            'lang'                  => '', // polylang, ingore language filter
+            'suppress_filters'      => 1, // wpml, ignore language filter
+            'posts_per_page'        => 1,
+            'tax_query'             => array(
                 array(
                     'taxonomy' => 'ml-slider',
-                    'field' => 'slug',
-                    'terms' => $this->slider->ID
-                )
-            )
-        );
+                    'field'    => 'slug',
+                    'terms'    => $this->slider->ID)));
 
         $query = new WP_Query($args);
 
@@ -184,25 +195,27 @@ class MetaSlide
         wp_reset_query();
 
         // increment
-        $menu_order = $menu_order + 1;
+        +$menu_order;
 
         // update the slide
         wp_update_post(array(
-            'ID' => $this->slide->ID,
-            'menu_order' => $menu_order
-        ));
+                           'ID'         => $this->slide->ID,
+                           'menu_order' => $menu_order));
     }
 
     /**
      * If the meta doesn't exist, add it
      * If the meta exists, but the value is empty, delete it
      * If the meta exists, update it
+     * @param $post_id
+     * @param $name
+     * @param $value
      */
     public function add_or_update_or_delete_meta($post_id, $name, $value)
     {
-        $key = "ml-slider_" . $name;
+        $key = 'ml-slider_' . $name;
 
-        if ($value == 'false' || $value == "" || !$value) {
+        if ($value === 'false' || $value === '' || !$value) {
             if (get_post_meta($post_id, $key)) {
                 delete_post_meta($post_id, $key);
             }
@@ -220,7 +233,7 @@ class MetaSlide
      */
     public function get_thumb()
     {
-        $imageHelper = new MetaSliderImageHelper($this->slide->ID, 150,150,'false');
+        $imageHelper = new MetaSliderImageHelper($this->slide->ID, 150, 150, 'false');
 
         return $imageHelper->get_image_url();
     }

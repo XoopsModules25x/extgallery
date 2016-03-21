@@ -1,26 +1,26 @@
 <?php defined('C5_EXECUTE') || die('Access denied.');
-$page            = Page::getCurrentPage();
-$v               = View::GetInstance();
+$page = Page::getCurrentPage();
+$v    = View::GetInstance();
 
-$image           = Loader::helper( 'image' );
-$po              = $controller->getPictureObject();
+$image = Loader::helper('image');
+$po    = $controller->getPictureObject();
 
-$json            = Loader::helper('json');
-$imageSource     = $json->encode(t('image source'));
-$fileName        = $po->getRelativePath();
-$thumbnail       = $image->getThumbnail( $po, intval( $controller->thumbnailWidth ), intval( $controller->thumbnailHeight ) );
+$json        = Loader::helper('json');
+$imageSource = $json->encode(t('image source'));
+$fileName    = $po->getRelativePath();
+$thumbnail   = $image->getThumbnail($po, (int)$controller->thumbnailWidth, (int)$controller->thumbnailHeight);
 // get file description (in the file manager attributes) of the picture object
 $fileDescription = $po->getDescription();
 ?>
-<div id="<?php echo $magnific_type .'-'.$bID ?>" class="<?php echo $magnific_type. '-gallery'. ' '. $cssFrameworkClass; ?>">
-    <a href="<?php echo $fileName; ?>" data-source="<?php echo $fileName; ?>" title="<?php echo $title;?>">
-        <img class="<?php echo $cssImageClass;?>"  src="<?php  echo $thumbnail->src;?>" width="<?php echo $thumbnail->width;?>" height="<?php echo $thumbnail->height;?>" alt="<?php echo $fileDescription;?>" />
+<div id="<?php echo $magnific_type . '-' . $bID ?>" class="<?php echo $magnific_type . '-gallery' . ' ' . $cssFrameworkClass; ?>">
+    <a href="<?php echo $fileName; ?>" data-source="<?php echo $fileName; ?>" title="<?php echo $title; ?>">
+        <img class="<?php echo $cssImageClass; ?>" src="<?php echo $thumbnail->src; ?>" width="<?php echo $thumbnail->width; ?>" height="<?php echo $thumbnail->height; ?>" alt="<?php echo $fileDescription; ?>"/>
     </a>
 </div>
 <?php
 // send js to footer
-if ( !$page->isEditMode() ) {
-    $v->addFooterItem( "<script>
+if (!$page->isEditMode()) {
+    $v->addFooterItem("<script>
 $(document).ready(function() {
 $('.zoom-gallery').magnificPopup({
     delegate: 'a',
@@ -47,6 +47,6 @@ $('.zoom-gallery').magnificPopup({
 
 });
 });
-</script>" );
+</script>");
 }
 ?>
