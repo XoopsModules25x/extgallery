@@ -10,22 +10,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright   {@link http://xoops.org/ XOOPS Project}
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
  * @version     $Id: function.php 8088 2011-11-06 09:38:12Z beckmi $
  */
-
-function extgalleryCheckModuleAdmin()
-{
-    if ( file_exists($GLOBALS['xoops']->path('/Frameworks/moduleclasses/moduleadmin/moduleadmin.php'))){
-        include_once $GLOBALS['xoops']->path('/Frameworks/moduleclasses/moduleadmin/moduleadmin.php');
-
-        return true;
-    }else{
-        echo xoops_error("Error: You don't use the Frameworks \"admin module\". Please install this Frameworks");
-
-        return false;
-    }
-}

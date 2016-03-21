@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Helper class for resizing images, returning the correct URL to the image etc
  */
@@ -16,20 +17,21 @@ class MetaSliderImageHelper
      * Constructor
      *
      * @param integer $slide_id
-     * @param integer $width      - required width of image
-     * @param integer $height     - required height of image
-     * @param string  $smart_crop
+     * @param integer $width  - required width of image
+     * @param integer $height - required height of image
+     * @param string $smart_crop
+     * @param bool $use_image_editor
      */
     public function __construct($slide_id, $width, $height, $smart_crop, $use_image_editor = true)
     {
         $upload_dir = wp_upload_dir();
 
-        $this->id = $slide_id;
-        $this->url = $upload_dir['baseurl'] . "/" . get_post_meta($slide_id, '_wp_attached_file', true);
-        $this->path = get_attached_file($slide_id);
-        $this->container_width = $width;
+        $this->id               = $slide_id;
+        $this->url              = $upload_dir['baseurl'] . '/' . get_post_meta($slide_id, '_wp_attached_file', true);
+        $this->path             = get_attached_file($slide_id);
+        $this->container_width  = $width;
         $this->container_height = $height;
-        $this->smart_crop = $smart_crop;
+        $this->smart_crop       = $smart_crop;
         $this->use_image_editor = $use_image_editor;
     }
 
@@ -46,28 +48,28 @@ class MetaSliderImageHelper
      */
     private function get_crop_dimensions($image_width, $image_height)
     {
-        if ($this->smart_crop == 'false') {
-            return array('width' => (int) $this->container_width, 'height' => (int) $this->container_height);
+        if ($this->smart_crop === 'false') {
+            return array('width' => (int)$this->container_width, 'height' => (int)$this->container_height);
         }
 
-        $container_width = $this->container_width;
+        $container_width  = $this->container_width;
         $container_height = $this->container_height;
 
         /**
          * Slideshow Width == Slide Width
          */
         if ($image_width == $container_width && $image_height == $container_height) {
-            $new_slide_width = $container_width;
+            $new_slide_width  = $container_width;
             $new_slide_height = $container_height;
         }
 
         if ($image_width == $container_width && $image_height < $container_height) {
             $new_slide_height = $image_height;
-            $new_slide_width = $container_width / ($container_height / $image_height);
+            $new_slide_width  = $container_width / ($container_height / $image_height);
         }
 
         if ($image_width == $container_width && $image_height > $container_height) {
-            $new_slide_width = $container_width;
+            $new_slide_width  = $container_width;
             $new_slide_height = $container_height;
         }
 
@@ -75,7 +77,7 @@ class MetaSliderImageHelper
          * Slideshow Width < Slide Width
          */
         if ($image_width < $container_width && $image_height == $container_height) {
-            $new_slide_width = $image_width;
+            $new_slide_width  = $image_width;
             $new_slide_height = $image_height / ($container_width / $image_width);
         }
 
@@ -89,20 +91,20 @@ class MetaSliderImageHelper
                 if ($image_width > $image_height) {
                     // wide
                     $new_slide_height = $image_height;
-                    $new_slide_width = $container_width / ($container_height / $image_height);
+                    $new_slide_width  = $container_width / ($container_height / $image_height);
 
                     if ($new_slide_width > $image_width) {
-                        $new_slide_width = $image_width;
+                        $new_slide_width  = $image_width;
                         $new_slide_height = $container_height / ($container_width / $image_width);
                     }
                 } else {
                     // tall
-                    $new_slide_width = $image_width;
+                    $new_slide_width  = $image_width;
                     $new_slide_height = $container_height / ($container_width / $image_width);
 
                     if ($new_slide_height > $image_height) {
                         $new_slide_height = $image_height;
-                        $new_slide_width = $container_width / ($container_height / $image_height);
+                        $new_slide_width  = $container_width / ($container_height / $image_height);
                     }
                 }
             } else {
@@ -110,27 +112,27 @@ class MetaSliderImageHelper
                 if ($image_width > $image_height) {
                     // wide
                     $new_slide_height = $image_height;
-                    $new_slide_width = $container_width / ($container_height / $image_height);
+                    $new_slide_width  = $container_width / ($container_height / $image_height);
 
                     if ($new_slide_width > $image_width) {
-                        $new_slide_width = $image_width;
+                        $new_slide_width  = $image_width;
                         $new_slide_height = $container_height / ($container_width / $image_width);
                     }
                 } else {
                     // tall
-                    $new_slide_width = $image_width;
+                    $new_slide_width  = $image_width;
                     $new_slide_height = $container_height / ($container_width / $image_width);
 
                     if ($new_slide_height > $image_height) {
                         $new_slide_height = $image_height;
-                        $new_slide_width = $container_width / ($container_height / $image_height);
+                        $new_slide_width  = $container_width / ($container_height / $image_height);
                     }
                 }
             }
         }
 
         if ($image_width < $container_width && $image_height > $container_height) {
-            $new_slide_width = $image_width;
+            $new_slide_width  = $image_width;
             $new_slide_height = $container_height / ($container_width / $image_width);
         }
 
@@ -138,17 +140,17 @@ class MetaSliderImageHelper
          * Slideshow Width > Slide Width
          */
         if ($image_width > $container_width && $image_height == $container_height) {
-            $new_slide_width = $container_width;
+            $new_slide_width  = $container_width;
             $new_slide_height = $container_height;
         }
 
         if ($image_width > $container_width && $image_height < $container_height) {
             $new_slide_height = $image_height;
-            $new_slide_width = $container_width / ($container_height / $image_height);
+            $new_slide_width  = $container_width / ($container_height / $image_height);
         }
 
         if ($image_width > $container_width && $image_height > $container_height) {
-            $new_slide_width = $container_width;
+            $new_slide_width  = $container_width;
             $new_slide_height = $container_height;
         }
 
@@ -160,7 +162,7 @@ class MetaSliderImageHelper
      *
      * @return string resized image URL
      */
-    function get_image_url()
+    public function get_image_url()
     {
         // Get the image file path
         if (!strlen($this->path)) {
@@ -169,10 +171,8 @@ class MetaSliderImageHelper
 
         // if the file exists, just return it without going any further
         $dest_file_name = $this->get_destination_file_name(array(
-                'width' => $this->container_width,
-                'height' => $this->container_height
-            )
-        );
+                                                               'width'  => $this->container_width,
+                                                               'height' => $this->container_height));
 
         if (file_exists($dest_file_name)) {
             return str_replace(basename($this->url), basename($dest_file_name), $this->url);
@@ -247,15 +247,15 @@ class MetaSliderImageHelper
     /**
      * Return the file name for the required image size
      *
-     * @param  array  $dest_size image dimensions (width/height) in pixels
+     * @param  array $dest_size image dimensions (width/height) in pixels
      * @return string
      */
     private function get_destination_file_name($dest_size)
     {
-        $info = pathinfo($this->path);
-        $dir = $info['dirname'];
-        $ext = $info['extension'];
-        $name = wp_basename($this->path, ".$ext");
+        $info           = pathinfo($this->path);
+        $dir            = $info['dirname'];
+        $ext            = $info['extension'];
+        $name           = wp_basename($this->path, ".$ext");
         $dest_file_name = "{$dir}/{$name}-{$dest_size['width']}x{$dest_size['height']}.{$ext}";
 
         return $dest_file_name;
@@ -264,8 +264,9 @@ class MetaSliderImageHelper
     /**
      * Use WP_Image_Editor to create a resized image and return the URL for that image
      *
-     * @param  array  $orig_size
-     * @param  array  $dest_size
+     * @param  array $orig_size
+     * @param  array $dest_size
+     * @param $dest_file_name
      * @return string
      */
     private function resize_image($orig_size, $dest_size, $dest_file_name)
@@ -277,12 +278,12 @@ class MetaSliderImageHelper
         if (is_wp_error($image)) {
             if (is_admin()) {
                 echo '<div id="message" class="error">';
-                echo "<p><strong>ERROR</strong> " . $image->get_error_message() . " Check <a href='http://codex.wordpress.org/Changing_File_Permissions' target='_blank'>file permissions</a></p>";
+                echo '<p><strong>ERROR</strong> ' . $image->get_error_message() . " Check <a href='http://codex.wordpress.org/Changing_File_Permissions' target='_blank'>file permissions</a></p>";
                 echo "<button class='toggle'>Show Details</button>";
                 echo "<div class='message' style='display: none;'><br />Slide ID: {$this->id}<pre>";
                 var_dump($image);
-                echo "</pre></div>";
-                echo "</div>";
+                echo '</pre></div>';
+                echo '</div>';
             }
 
             return $this->url;
@@ -302,14 +303,14 @@ class MetaSliderImageHelper
         }
 
         // Record the new size so that the file is correctly removed when the media file is deleted.
-        $backup_sizes = get_post_meta($this->id,'_wp_attachment_backup_sizes',true);
+        $backup_sizes = get_post_meta($this->id, '_wp_attachment_backup_sizes', true);
 
         if (!is_array($backup_sizes)) {
             $backup_sizes = array();
         }
 
         $backup_sizes["resized-{$dest_size['width']}x{$dest_size['height']}"] = $saved;
-        update_post_meta($this->id,'_wp_attachment_backup_sizes', $backup_sizes);
+        update_post_meta($this->id, '_wp_attachment_backup_sizes', $backup_sizes);
 
         $url = str_replace(basename($this->url), basename($saved['path']), $this->url);
 

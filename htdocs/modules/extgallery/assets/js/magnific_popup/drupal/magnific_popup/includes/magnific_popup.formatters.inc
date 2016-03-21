@@ -16,14 +16,20 @@ function magnific_popup_field_formatter_info() {
       'label' => t('Magnific Popup'),
       'field types' => array('file', 'image'),
       'settings'  => array(
-        'gallery_style' => key($gallery_options),
-      ),
-    ),
+        'gallery_style' => key($gallery_options)
+      )
+    )
   );
 }
 
 /**
  * Implements hook_field_formatter_settings_form().
+ * @param $field
+ * @param $instance
+ * @param $view_mode
+ * @param $form
+ * @param $form_state
+ * @return array
  */
 function magnific_popup_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
   $display = $instance['display'][$view_mode];
@@ -37,7 +43,7 @@ function magnific_popup_field_formatter_settings_form($field, $instance, $view_m
   $element['gallery_available'] = array(
     '#type' => 'markup',
     '#prefix' => '<p>',
-    '#suffix' => '</p>',
+    '#suffix' => '</p>'
   );
   $element['gallery_available']['#markup'] = $gallery_available ?
     t('This field configuration <strong>supports multiple items</strong> and can display itself as a gallery of items!') : 
@@ -48,13 +54,17 @@ function magnific_popup_field_formatter_settings_form($field, $instance, $view_m
     '#options' => $gallery_options,
     '#disabled' => !$gallery_available,
     '#default_value' => $settings['gallery_style'],
-    '#description' => t('Choose how this gallery displays its triggering element(s).'),
+    '#description' => t('Choose how this gallery displays its triggering element(s).')
   );
   return $element;
 }
 
 /**
  * Implements hook_field_formatter_settings_summary().
+ * @param $field
+ * @param $instance
+ * @param $view_mode
+ * @return
  */
 function magnific_popup_field_formatter_settings_summary($field, $instance, $view_mode) {
   $display = $instance['display'][$view_mode];
@@ -66,6 +76,13 @@ function magnific_popup_field_formatter_settings_summary($field, $instance, $vie
 
 /**
  * Implements hook_field_formatter_prepare_view().
+ * @param $entity_type
+ * @param $entities
+ * @param $field
+ * @param $instances
+ * @param $langcode
+ * @param $items
+ * @param $displays
  */
 function magnific_popup_field_formatter_prepare_view($entity_type, $entities, $field, $instances, $langcode, &$items, $displays) {
   // Items are some kind of entity reference, be it via image or file type.
@@ -131,7 +148,7 @@ function magnific_popup_field_formatter_prepare_view($entity_type, $entities, $f
             'title' => $title,
             'alt' => $alt,
             'thumbnail_path' => $thumbnail_path,
-            'target_uri' => $wrapper->getExternalUrl(),
+            'target_uri' => $wrapper->getExternalUrl()
           );
           $loaded_items[$item['fid']] = $gallery_item;
         }
@@ -152,6 +169,14 @@ function magnific_popup_field_formatter_prepare_view($entity_type, $entities, $f
 
 /**
  * Implements hook_field_formatter_view().
+ * @param $entity_type
+ * @param $entity
+ * @param $field
+ * @param $instance
+ * @param $langcode
+ * @param $items
+ * @param $display
+ * @return array
  */
 function magnific_popup_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   if (!_magnific_popup_check_status()) {
@@ -169,19 +194,19 @@ function magnific_popup_field_formatter_view($entity_type, $entity, $field, $ins
   $popup_gallery = array(
     '#type' => 'container',
     '#attributes' => array(
-      'class' => array(),
-    ),
+      'class' => array()
+    )
   );
   // Determine if/what the allowed trigger item is (which will get a thumbnail).
   $trigger_item = key($items);
-  if ($settings['gallery_style'] == 'random_item') {
+  if ($settings['gallery_style'] === 'random_item') {
     $trigger_item = array_rand($items);
   }
   // Figure out the base-class for the gallery/nogallery, which is generally
   // something like 'mfp-nogallery-image' or 'mfp-gallery-iframe'.
-  $gallery_base_class = $settings['gallery_style'] == 'no_gallery' ?
+  $gallery_base_class = $settings['gallery_style'] === 'no_gallery' ?
     'mfp-nogallery' : 'mfp-gallery';
-  if ($field['type'] == 'image') {
+  if ($field['type'] === 'image') {
     $gallery_base_class .= '-image';
   }
   else {
@@ -196,8 +221,8 @@ function magnific_popup_field_formatter_view($entity_type, $entity, $field, $ins
       '#path' => $item['target_uri'],
       '#options' => array(
         'attributes' => array('class' => array(), 'style' => array()),
-        'html' => TRUE,
-      ),
+        'html' => TRUE
+      )
     );
     $popup_gallery['item-' . $delta]['#options']['attributes']['class'][] = 'mfp-item';
     // This item has a thumbnail image if:
@@ -205,7 +230,7 @@ function magnific_popup_field_formatter_view($entity_type, $entity, $field, $ins
     //  - the Gallery Type is "no gallery", or
     //  - the Gallery Type is "first item" and this $delta is the first item, or
     //  - the Gallery Type is "random item" and this $delta is the random item.
-    if ($settings['gallery_style'] == 'all_items' || $settings['gallery_style'] == 'no_gallery' || $delta == $trigger_item) {
+    if ($settings['gallery_style'] === 'all_items' || $settings['gallery_style'] === 'no_gallery' || $delta == $trigger_item) {
       $image = array(
         // Try to use a "figure" theme implementation if it exists, or fall back
         // to "image".
@@ -214,8 +239,8 @@ function magnific_popup_field_formatter_view($entity_type, $entity, $field, $ins
         '#alt' => $item['alt'],
         '#title' => $item['title'],
         '#attributes' => array(
-          'class' => array('mfp-thumbnail'),
-        ),
+          'class' => array('mfp-thumbnail')
+        )
       );
       $popup_gallery['item-' . $delta]['#text'] = render($image);
     }
@@ -239,11 +264,14 @@ function magnific_popup_field_formatter_view($entity_type, $entity, $field, $ins
   return $element;
 }
 
+/**
+ * @return array
+ */
 function _magnific_popup_gallery_options() {
   return array(
     'all_items' => t('Gallery: All Items Displayed'),
     'first_item' => t('Gallery: First Item Displayed'),
     'random_item' => t('Gallery: Random Item Displayed'),
-    'no_gallery' => t('No Gallery: Display Each Item Separately'),
+    'no_gallery' => t('No Gallery: Display Each Item Separately')
   );
 }

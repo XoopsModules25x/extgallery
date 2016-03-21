@@ -1,18 +1,20 @@
 <?php
+
 /**
  * Flex Slider specific markup, javascript, css and settings.
  */
 class MetaFlexSlider extends MetaSlider
 {
-    protected $js_function = 'flexslider';
-    protected $js_path = 'sliders/flexslider/jquery.flexslider-min.js';
-    protected $css_path = 'sliders/flexslider/flexslider.css';
+    protected $js_function          = 'flexslider';
+    protected $js_path              = 'sliders/flexslider/jquery.flexslider-min.js';
+    protected $css_path             = 'sliders/flexslider/flexslider.css';
     protected $carousel_item_margin = 5;
 
     /**
      * Constructor
      *
      * @param integer $id slideshow ID
+     * @param $shortcode_settings
      */
     public function __construct($id, $shortcode_settings)
     {
@@ -29,22 +31,22 @@ class MetaFlexSlider extends MetaSlider
     /**
      * Adjust the slider parameters so they're comparible with the carousel mode
      *
-     * @param  array   $options
+     * @param  array $options
      * @param  integer $slider_id
      * @return array   $options
      */
     public function enable_carousel_mode($options, $slider_id)
     {
-        if (isset($options["carouselMode"])) {
-            if ($options["carouselMode"] == "true") {
-                $options["itemWidth"] = $this->get_setting('width');
-                $options["animation"] = "'slide'";
-                $options["direction"] = "'horizontal'";
-                $options["minItems"] = 1;
-                $options["itemMargin"] = $this->carousel_item_margin;
+        if (isset($options['carouselMode'])) {
+            if ($options['carouselMode'] === 'true') {
+                $options['itemWidth']  = $this->get_setting('width');
+                $options['animation']  = "'slide'";
+                $options['direction']  = "'horizontal'";
+                $options['minItems']   = 1;
+                $options['itemMargin'] = $this->carousel_item_margin;
             }
 
-            unset($options["carouselMode"]);
+            unset($options['carouselMode']);
         }
 
         // we don't want this filter hanging around if there's more than one slideshow on the page
@@ -56,13 +58,13 @@ class MetaFlexSlider extends MetaSlider
     /**
      * Ensure CSS transitions are disabled when easing is enabled.
      *
-     * @param  array   $options
+     * @param  array $options
      * @param  integer $slider_id
      * @return array   $options
      */
     public function enable_easing($options, $slider_id)
     {
-        if (isset($options["easing"])) {
+        if (isset($options['easing'])) {
             $options['useCSS'] = 'false';
         }
 
@@ -75,15 +77,17 @@ class MetaFlexSlider extends MetaSlider
     /**
      * Add a 'nav-hidden' class to slideshows where the navigation is hidden.
      *
-     * @param  string  $css
-     * @param  array   $settings
-     * @param  integer $slider_id
-     * @return string  $css
+     * @param $class
+     * @param $id
+     * @param  array $settings
+     * @return string $css
+     * @internal param string $css
+     * @internal param int $slider_id
      */
     public function remove_bottom_margin($class, $id, $settings)
     {
-        if (isset($settings["navigation"]) && $settings['navigation'] == 'false') {
-            return $class .= " nav-hidden";
+        if (isset($settings['navigation']) && $settings['navigation'] === 'false') {
+            return $class .= ' nav-hidden';
         }
 
         // we don't want this filter hanging around if there's more than one slideshow on the page
@@ -95,14 +99,14 @@ class MetaFlexSlider extends MetaSlider
     /**
      * Return css to ensure our slides are rendered correctly in the carousel
      *
-     * @param  string  $css
-     * @param  array   $settings
+     * @param  string $css
+     * @param  array $settings
      * @param  integer $slider_id
      * @return string  $css
      */
     public function get_carousel_css($css, $settings, $slider_id)
     {
-        if (isset($settings["carouselMode"]) && $settings['carouselMode'] == 'true') {
+        if (isset($settings['carouselMode']) && $settings['carouselMode'] === 'true') {
             $css .= "\n        #metaslider_{$slider_id}.flexslider li {margin-right: {$this->carousel_item_margin}px;}";
         }
 
@@ -115,26 +119,25 @@ class MetaFlexSlider extends MetaSlider
     /**
      * Enable the parameters that are accepted by the slider
      *
-     * @param  string        $param
+     * @param  string $param
      * @return array|boolean enabled parameters (false if parameter doesn't exist)
      */
     protected function get_param($param)
     {
         $params = array(
-            'effect' => 'animation',
-            'direction' => 'direction',
-            'prevText' => 'prevText',
-            'nextText' => 'nextText',
-            'delay' => 'slideshowSpeed',
+            'effect'         => 'animation',
+            'direction'      => 'direction',
+            'prevText'       => 'prevText',
+            'nextText'       => 'nextText',
+            'delay'          => 'slideshowSpeed',
             'animationSpeed' => 'animationSpeed',
-            'hoverPause' => 'pauseOnHover',
-            'reverse' => 'reverse',
-            'navigation' => 'controlNav',
-            'links' =>'directionNav',
-            'carouselMode' => 'carouselMode',
-            'easing' => 'easing',
-            'autoPlay' => 'slideshow'
-        );
+            'hoverPause'     => 'pauseOnHover',
+            'reverse'        => 'reverse',
+            'navigation'     => 'controlNav',
+            'links'          => 'directionNav',
+            'carouselMode'   => 'carouselMode',
+            'easing'         => 'easing',
+            'autoPlay'       => 'slideshow');
 
         if (isset($params[$param])) {
             return $params[$param];
@@ -150,7 +153,7 @@ class MetaFlexSlider extends MetaSlider
     {
         parent::enqueue_scripts();
 
-        if ($this->get_setting('printJs') == 'true') {
+        if ($this->get_setting('printJs') === 'true') {
             wp_enqueue_script('metaslider-easing', METASLIDER_ASSETS_URL . 'easing/jQuery.easing.min.js', array('jquery'), METASLIDER_VERSION);
         }
     }
@@ -162,7 +165,7 @@ class MetaFlexSlider extends MetaSlider
      */
     protected function get_html()
     {
-        $class = $this->get_setting('noConflict') == 'true' ? "" : ' class="flexslider"';
+        $class = $this->get_setting('noConflict') === 'true' ? '' : ' class="flexslider"';
 
         $return_value = '<div id="' . $this->get_identifier() . '"' . $class . '>';
         $return_value .= "\n            <ul class=\"slides\">";
@@ -174,7 +177,7 @@ class MetaFlexSlider extends MetaSlider
             if (strpos($slide, '<li') === 0) {
                 $return_value .= "\n                " . $slide;
             } else {
-                $return_value .= "\n                <li style=\"display: none;\">" . $slide . "</li>";
+                $return_value .= "\n                <li style=\"display: none;\">" . $slide . '</li>';
             }
         }
 

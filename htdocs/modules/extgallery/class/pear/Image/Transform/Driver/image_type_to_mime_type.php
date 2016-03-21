@@ -5,9 +5,15 @@
  * @author Philippe.Jausions @at@ 11abacus.com
  **/
 
-include_once(XOOPS_ROOT_PATH.'/modules/extgallery/class/pear/Image/Image/Transform/IMAGETYPE.php');
+include_once(XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Image/Transform/IMAGETYPE.php');
 
-function image_type_to_mime_type($type) {
+/**
+ * @param $type
+ *
+ * @return string
+ */
+function image_type_to_mime_type($type)
+{
     switch ($type) {
         case IMAGETYPE_GIF:
             return 'image/gif';
@@ -52,5 +58,3 @@ function image_type_to_mime_type($type) {
 
     }
 }
-
-?>

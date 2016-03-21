@@ -1,6 +1,14 @@
 <?php
+
+/**
+ * Class rex_magnific_popup_utils
+ */
 class rex_magnific_popup_utils
 {
+    /**
+     * @param $params
+     * @return mixed
+     */
     public static function includeMagnificPopup($params)
     {
         global $REX;
@@ -21,13 +29,19 @@ class rex_magnific_popup_utils
         return str_replace('</head>', $insert . '</head>', $params['subject']);
     }
 
+    /**
+     * @param $mdFile
+     * @param array $search
+     * @param array $replace
+     * @return mixed|string
+     */
     public static function getHtmlFromMDFile($mdFile, $search = array(), $replace = array())
     {
         global $REX;
 
         $curLocale = strtolower($REX['LANG']);
 
-        if ($curLocale == 'de_de') {
+        if ($curLocale === 'de_de') {
             $file = $REX['INCLUDE_PATH'] . '/addons/magnific_popup/' . $mdFile;
         } else {
             $file = $REX['INCLUDE_PATH'] . '/addons/magnific_popup/lang/' . $curLocale . '/' . $mdFile;
@@ -44,6 +58,10 @@ class rex_magnific_popup_utils
         }
     }
 
+    /**
+     * @param $md
+     * @return mixed
+     */
     public static function makeHeadlinePretty($md)
     {
         return str_replace('Magnific Popup AddOn - ', '', $md);

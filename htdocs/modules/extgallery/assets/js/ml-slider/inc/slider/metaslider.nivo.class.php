@@ -1,15 +1,18 @@
 <?php
+
 /**
  * Nivo Slider specific markup, javascript, css and settings.
  */
 class MetaNivoSlider extends MetaSlider
 {
     protected $js_function = 'nivoSlider';
-    protected $js_path = 'sliders/nivoslider/jquery.nivo.slider.pack.js';
-    protected $css_path = 'sliders/nivoslider/nivo-slider.css';
+    protected $js_path     = 'sliders/nivoslider/jquery.nivo.slider.pack.js';
+    protected $css_path    = 'sliders/nivoslider/nivo-slider.css';
 
     /**
      * Constructor
+     * @param $id
+     * @param $shortcode_settings
      */
     public function __construct($id, $shortcode_settings)
     {
@@ -22,15 +25,19 @@ class MetaNivoSlider extends MetaSlider
      * Other slides use "AutoPlay = true" (true autoplays the slideshow)
      * Nivo slider uses "ManualAvance = false" (ie, false autoplays the slideshow)
      * Take care of the manualAdvance parameter here.
+     * @param $options
+     * @param $slider_id
+     * @param $settings
+     * @return
      */
     public function set_autoplay_parameter($options, $slider_id, $settings)
     {
         global $wp_filter;
-        if (isset($options["autoPlay"])) {
-            if ($options["autoPlay"] == 'true') {
-                $options["manualAdvance"] = 'false';
+        if (isset($options['autoPlay'])) {
+            if ($options['autoPlay'] === 'true') {
+                $options['manualAdvance'] = 'false';
             } else {
-                $options["manualAdvance"] = 'true';
+                $options['manualAdvance'] = 'true';
             }
 
             unset($options['autoPlay']);
@@ -45,24 +52,24 @@ class MetaNivoSlider extends MetaSlider
      * Detect whether thie slide supports the requested setting,
      * and if so, the name to use for the setting in the Javascript parameters
      *
-     * @return false (parameter not supported) or parameter name (parameter supported)
+     * @param $param
+     * @return false or parameter name (parameter supported)
      */
     protected function get_param($param)
     {
         $params = array(
-            'effect' => 'effect',
-            'slices' => 'slices',
-            'prevText' => 'prevText',
-            'nextText' => 'nextText',
-            'delay' => 'pauseTime',
+            'effect'         => 'effect',
+            'slices'         => 'slices',
+            'prevText'       => 'prevText',
+            'nextText'       => 'nextText',
+            'delay'          => 'pauseTime',
             'animationSpeed' => 'animSpeed',
-            'hoverPause' => 'pauseOnHover',
-            'spw' => 'boxCols',
-            'sph' => 'boxRows',
-            'navigation' => 'controlNav',
-            'links' =>'directionNav',
-            'autoPlay' => 'autoPlay'
-        );
+            'hoverPause'     => 'pauseOnHover',
+            'spw'            => 'boxCols',
+            'sph'            => 'boxRows',
+            'navigation'     => 'controlNav',
+            'links'          => 'directionNav',
+            'autoPlay'       => 'autoPlay');
 
         if (isset($params[$param])) {
             return $params[$param];
@@ -78,9 +85,9 @@ class MetaNivoSlider extends MetaSlider
     {
         parent::enqueue_scripts();
 
-        if ($this->get_setting('printCss') == 'true') {
+        if ($this->get_setting('printCss') === 'true') {
             $theme = $this->get_theme();
-            wp_enqueue_style('metaslider-' . $this->get_setting('type') . '-slider-'.$theme, METASLIDER_ASSETS_URL . "sliders/nivoslider/themes/{$theme}/{$theme}.css", false, METASLIDER_VERSION);
+            wp_enqueue_style('metaslider-' . $this->get_setting('type') . '-slider-' . $theme, METASLIDER_ASSETS_URL . "sliders/nivoslider/themes/{$theme}/{$theme}.css", false, METASLIDER_VERSION);
         }
     }
 
@@ -105,7 +112,7 @@ class MetaNivoSlider extends MetaSlider
      */
     protected function get_html()
     {
-        $return_value  = "<div class='slider-wrapper theme-{$this->get_theme()}'>";
+        $return_value = "<div class='slider-wrapper theme-{$this->get_theme()}'>";
         $return_value .= "\n            <div class='ribbon'></div>";
         $return_value .= "\n            <div id='" . $this->get_identifier() . "' class='nivoSlider'>";
 
@@ -115,6 +122,6 @@ class MetaNivoSlider extends MetaSlider
 
         $return_value .= "\n            </div>\n        </div>";
 
-        return apply_filters('metaslider_nivo_slider_get_html', $return_value, $this->id, $this->settings);;
+        return apply_filters('metaslider_nivo_slider_get_html', $return_value, $this->id, $this->settings);
     }
 }

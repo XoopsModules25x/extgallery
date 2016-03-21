@@ -3,16 +3,16 @@ $v      = View::GetInstance();
 $page   = Page::getCurrentPage();
 $custom = $customAnim;
 
-if ($dialogType == 'custom-anim') {
-  $dialogType = $custom;
+if ($dialogType === 'custom-anim') {
+    $dialogType = $custom;
 }
 ?>
 <div id="dialogPopup-<?php echo $bID; ?>">
-  <a href="#dialog-window-<?php echo $bID;?>" data-effect="mfp-<?php echo $dialogType; ?>"><?php echo $cssDialogLinkText; ?></a>
+    <a href="#dialog-window-<?php echo $bID; ?>" data-effect="mfp-<?php echo $dialogType; ?>"><?php echo $cssDialogLinkText; ?></a>
 </div>
 <!-- css dialog popup. mfp-hide makes it hidden -->
-<div id="dialog-window-<?php echo $bID;?>" class="white-popup mfp-with-anim mfp-hide">
-    <?php echo $cssDialogText;?>
+<div id="dialog-window-<?php echo $bID; ?>" class="white-popup mfp-with-anim mfp-hide">
+    <?php echo $cssDialogText; ?>
 </div>
 <?php
 if (!$page->isEditMode()) {
