@@ -249,7 +249,7 @@ foreach (array_keys($folder) as $i) {
     $index_admin->addConfigBoxLine($folder[$i], 'folder');
     $index_admin->addConfigBoxLine(array($folder[$i], '777'), 'chmod');
 }
-$xoopsTpl->assign('navigation', $index_admin->addNavigation('index.php'));
+$xoopsTpl->assign('navigation', $index_admin->addNavigation(basename(__FILE__)));
 $xoopsTpl->assign('index', $index_admin->renderIndex());
 
 // Call template file
