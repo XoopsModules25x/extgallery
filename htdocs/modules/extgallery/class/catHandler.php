@@ -13,13 +13,12 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: catHandler.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once 'publicPerm.php';
-include_once 'ExtgalleryPersistableObjectHandler.php';
+include_once __DIR__ . '/publicPerm.php';
+include_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
 
 /**
  * Class ExtgalleryCat
@@ -48,7 +47,12 @@ class ExtgalleryCat extends XoopsObject
         $this->initVar('cat_imgurl', XOBJ_DTYPE_URL, '', false, 150);
         $this->initVar('photo_id', XOBJ_DTYPE_INT, 0, false);
 
-        $this->externalKey['photo_id'] = array('className' => 'publicphoto', 'getMethodeName' => 'getPhoto', 'keyName' => 'photo', 'core' => false);
+        $this->externalKey['photo_id'] = array(
+            'className'      => 'publicphoto',
+            'getMethodeName' => 'getPhoto',
+            'keyName'        => 'photo',
+            'core'           => false
+        );
     }
 
     /**
@@ -137,16 +141,21 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     }
 
     /**
-     * @param int $id
-     * @param bool $includeSelf
-     * @param bool $childrenOnly
-     * @param bool $withRestrict
+     * @param int    $id
+     * @param bool   $includeSelf
+     * @param bool   $childrenOnly
+     * @param bool   $withRestrict
      * @param string $permType
      *
      * @return array
      */
-    public function getDescendants($id = 0, $includeSelf = false, $childrenOnly = false, $withRestrict = true, $permType = 'public_access')
-    {
+    public function getDescendants(
+        $id = 0,
+        $includeSelf = false,
+        $childrenOnly = false,
+        $withRestrict = true,
+        $permType = 'public_access'
+    ) {
         $cat = $this->get($id);
 
         $nleft     = $cat->getVar('nleft');
@@ -197,7 +206,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
         $criteria = new CriteriaCompo();
         $criteria->add($this->getCatRestrictCriteria('public_displayed'));
         $criteria->add(new Criteria('cat_id', $id));
-        $ret = $this->getObjects($criteria);
+        $ret =& $this->getObjects($criteria);
 
         if (count($ret) > 0) {
             return $ret[0];
@@ -234,7 +243,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     }
 
     /**
-     * @param int $id
+     * @param int  $id
      * @param bool $includeSelf
      *
      * @return array
@@ -272,7 +281,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     }
 
     /**
-     * @param int $id
+     * @param int  $id
      * @param bool $includeSelf
      *
      * @return array
@@ -304,16 +313,23 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     /**
      * @param        $name
      * @param        $selectMode
-     * @param bool $addEmpty
-     * @param int $selected
+     * @param bool   $addEmpty
+     * @param int    $selected
      * @param string $extra
-     * @param bool $displayWeight
+     * @param bool   $displayWeight
      * @param string $permType
      *
      * @return string
      */
-    public function getSelect($name, $selectMode, $addEmpty = false, $selected = 0, $extra = '', $displayWeight = false, $permType = 'public_access')
-    {
+    public function getSelect(
+        $name,
+        $selectMode,
+        $addEmpty = false,
+        $selected = 0,
+        $extra = '',
+        $displayWeight = false,
+        $permType = 'public_access'
+    ) {
         $cats = $this->getDescendants(0, false, false, true, $permType);
 
         return $this->makeSelect($cats, $name, $selectMode, $addEmpty, $selected, $extra, $displayWeight);
@@ -321,8 +337,8 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
 
     /**
      * @param        $name
-     * @param bool $addEmpty
-     * @param int $selected
+     * @param bool   $addEmpty
+     * @param int    $selected
      * @param string $extra
      * @param string $permType
      *
@@ -335,8 +351,8 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
 
     /**
      * @param        $name
-     * @param bool $addEmpty
-     * @param int $selected
+     * @param bool   $addEmpty
+     * @param int    $selected
      * @param string $extra
      *
      * @return string
@@ -377,7 +393,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
 
             $selectedOption = '';
             if ($cat->getVar('cat_id') == $selected) {
-                $selectedOption = ' selected="selected"';
+                $selectedOption = ' selected';
             }
 
             $prefix = '';
@@ -407,7 +423,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
         $ret            = '<select name="options[]" multiple="multiple">';
         $selectedOption = '';
         if ($allCat = in_array(0, $selected)) {
-            $selectedOption = ' selected="selected"';
+            $selectedOption = ' selected';
         }
         $ret .= '<option value="0"' . $selectedOption . '>' . _MB_EXTGALLERY_ALL_CATEGORIES . '</option>';
         foreach ($cats as $cat) {
@@ -419,7 +435,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
             $disableOption  = '';
 
             if (!$allCat && in_array($cat->getVar('cat_id'), $selected)) {
-                $selectedOption = ' selected="selected"';
+                $selectedOption = ' selected';
             }
 
             if ($cat->getVar('nright') - $cat->getVar('nleft') != 1) {
@@ -451,7 +467,8 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
         $root['children'] = array();
 
         $arr = array(
-            $root);
+            $root
+        );
 
         // populate the array and create an empty children array
         /*while ($row = $this->db->fetchArray($result)) {
@@ -543,11 +560,11 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
      * in subrequests are held over to when control is returned so the nright
      * can be assigned.
      *
-     * @param   array &$arr     A reference to the data array, since we need to
-     *                          be able to update the data in it
-     * @param   int $id         The ID of the current node to process
-     * @param   int $level      The nlevel to assign to the current node
-     * @param   int &$n         A reference to the running tally for the n-value
+     * @param array &$arr  A reference to the data array, since we need to
+     *                     be able to update the data in it
+     * @param int   $id    The ID of the current node to process
+     * @param int   $level The nlevel to assign to the current node
+     * @param int   &$n    A reference to the running tally for the n-value
      */
     public function _generateTreeData(&$arr, $id, $level, &$n)
     {

@@ -19,7 +19,6 @@
  * @author     Philippe Jausions <Philippe.Jausions@11abacus.com>
  * @copyright  2002-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: NetPBM.php 8088 2011-11-06 09:38:12Z beckmi $
  * @link       http://pear.php.net/package/Image_Transform
  */
 
@@ -86,8 +85,8 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      *
      * @access private
      *
-     * @param int $new_x     New width
-     * @param int $new_y     New height
+     * @param int   $new_x   New width
+     * @param int   $new_y   New height
      * @param mixed $options Optional parameters
      *
      * @return true on success or PEAR Error object on error
@@ -135,7 +134,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
     /**
      * Rotates the image
      *
-     * @param  int $angle The angle to rotate the image through
+     * @param  int   $angle The angle to rotate the image through
      * @param  array $options
      * @return bool|PEAR_Error TRUE on success, PEAR_Error object on error
      */
@@ -303,7 +302,9 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         $color   = $this->_getColor('colorFont', $options, array(0, 0, 0));
         $color   = $this->colorarray2colorhex($color);
 
-        $this->command[] = $this->_prepare_cmd(IMAGE_TRANSFORM_NETPBM_PATH, 'ppmlabel', '-angle ' . ((int)$angle) . ' -colour ' . escapeshellarg($color) . ' -size ' . ((float)$size) . ' -x ' . ((int)$x) . ' -y ' . ((int)($y + $size)) . ' -text ' . escapeshellarg($text));
+        $this->command[] = $this->_prepare_cmd(IMAGE_TRANSFORM_NETPBM_PATH, 'ppmlabel',
+                                               '-angle ' . ((int)$angle) . ' -colour ' . escapeshellarg($color) . ' -size ' . ((float)$size) . ' -x ' . ((int)$x) . ' -y ' . ((int)($y + $size))
+                                               . ' -text ' . escapeshellarg($text));
     } // End addText
 
     /**
@@ -370,7 +371,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
             case 'icon':    // Sun icon
             case 'gem':
             case 'go':
-//            case 'lj':
+                //            case 'lj':
             case 'ln03':
             case 'lps':
             case 'macp':
@@ -441,9 +442,9 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
     /**
      * Save the image file
      *
-     * @param $filename     string the name of the file to write to
-     * @param  string $type (jpeg,png...);
-     * @param  int $quality 75
+     * @param         $filename string the name of the file to write to
+     * @param  string $type     (jpeg,png...);
+     * @param  int    $quality  75
      * @return TRUE   or PEAR Error object on error
      */
     public function save($filename, $type = null, $quality = null)
@@ -469,8 +470,8 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
     /**
      * Display image without saving and lose changes
      *
-     * @param  string $type (jpeg,png...);
-     * @param  int $quality 75
+     * @param  string $type    (jpeg,png...);
+     * @param  int    $quality 75
      * @return TRUE   or PEAR Error object on error
      */
     public function display($type = null, $quality = null)
@@ -502,4 +503,3 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         $this->command = array();
     }
 } // End class ImageIM
-

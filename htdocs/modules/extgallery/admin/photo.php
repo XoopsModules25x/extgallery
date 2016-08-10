@@ -14,14 +14,11 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: photo.php 8480 2011-12-13 11:17:38Z beckmi $
  */
 
-include_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
-include __DIR__ . '/function.php';
+include_once __DIR__ . '/admin_header.php';
+include __DIR__ . '/../../../class/pagenav.php';
+include_once __DIR__ . '/../class/pear/Image/Transform.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -52,7 +49,7 @@ switch ($op) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_NOT_AN_ALBUM);
             exit;
         } elseif ($result == 4 || $result == 5) {
-            redirect_header('photo.php', 3, _AM_EXTGALLERY_UPLOAD_ERROR . ' :<br />' . $photoHandler->photoUploader->getErrors());
+            redirect_header('photo.php', 3, _AM_EXTGALLERY_UPLOAD_ERROR . ' :<br>' . $photoHandler->photoUploader->getErrors());
             exit;
         } elseif ($result == 0) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_PHOTO_UPLOADED);
@@ -96,7 +93,10 @@ switch ($op) {
         $dir      = opendir($batchRep);
         while ($f = readdir($dir)) {
             if (is_file($batchRep . $f)) {
-                if (preg_match('/.*gif/', strtolower($f)) || preg_match('/.*jpg/', strtolower($f)) || preg_match('/.*jpeg/', strtolower($f)) || preg_match('/.*png/', strtolower($f))) {
+                if (preg_match('/.*gif/', strtolower($f)) || preg_match('/.*jpg/', strtolower($f))
+                    || preg_match('/.*jpeg/', strtolower($f))
+                    || preg_match('/.*png/', strtolower($f))
+                ) {
                     $photos[] = $f;
                 }
             }
@@ -124,7 +124,7 @@ switch ($op) {
         }
 
         // Set the category as album only if photo is approve
-        include_once dirname(__DIR__) . '/class/publicPerm.php';
+        include_once __DIR__ . '/../class/publicPerm.php';
         $permHandler = ExtgalleryPublicPermHandler::getHandler();
         if ($permHandler->isAllowed($xoopsUser, 'public_autoapprove', $cat->getVar('cat_id'))) {
             $cat->setVar('cat_isalbum', 1);
@@ -147,28 +147,33 @@ switch ($op) {
             echo '</form>';
             echo '</div>';
 
-            xoops_confirm(array('cat_id' => $_POST['cat_id'], 'photo_desc' => $_POST['photo_desc'], 'nbPhoto' => $nbPhotos), 'photo.php?op=batchAdd', _AM_EXTGALLERY_DELETE_CAT_CONFIRM);
+            xoops_confirm(array(
+                              'cat_id'     => $_POST['cat_id'],
+                              'photo_desc' => $_POST['photo_desc'],
+                              'nbPhoto'    => $nbPhotos
+                          ), 'photo.php?op=batchAdd', _AM_EXTGALLERY_DELETE_CAT_CONFIRM);
 
             xoops_cp_footer();
         } else {
-            $notification_handler =& xoops_getHandler('notification');
-            $extraTags            = array(
+            /** @var XoopsNotificationHandler $notificationHandler*/
+            $notificationHandler = xoops_getHandler('notification');
+            $extraTags           = array(
                 'X_ITEM_CAT'     => $cat->getVar('cat_name'),
-                'X_ITEM_NBPHOTO' => $i + $nbPhotos);
+                'X_ITEM_NBPHOTO' => $i + $nbPhotos
+            );
             if ($photoStatus == 1) {
                 $extraTags['X_ITEM_URL'] = XOOPS_URL . '/modules/extgallery/public-album.php?id=' . $cat->getVar('cat_id');
-                $notification_handler->triggerEvent('global', 0, 'new_photo', $extraTags);
-                $notification_handler->triggerEvent('album', $cat->getVar('cat_id'), 'new_photo_album', $extraTags);
+                $notificationHandler->triggerEvent('global', 0, 'new_photo', $extraTags);
+                $notificationHandler->triggerEvent('album', $cat->getVar('cat_id'), 'new_photo_album', $extraTags);
             } else {
                 $extraTags['X_ITEM_URL'] = XOOPS_URL . '/modules/extgallery/admin/photo.php';
-                $notification_handler->triggerEvent('global', 0, 'new_photo_pending', $extraTags);
+                $notificationHandler->triggerEvent('global', 0, 'new_photo_pending', $extraTags);
             }
 
             // Update photo count if photo needn't approve
-            include_once dirname(__DIR__) . '/class/publicPerm.php';
+            include_once __DIR__ . '/../class/publicPerm.php';
             $permHandler = ExtgalleryPublicPermHandler::getHandler();
             if ($permHandler->isAllowed($xoopsUser, 'public_autoapprove', $cat->getVar('cat_id'))) {
-
                 // Update album count
                 if ($cat->getVar('cat_nb_photo') == 0) {
                     $criteria = new CriteriaCompo();
@@ -190,7 +195,6 @@ switch ($op) {
         break;
 
     case 'batchApprove':
-
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         // Check if they are selected photo
@@ -214,17 +218,18 @@ switch ($op) {
                 }
                 $categories[$photo->getVar('cat_id')]++;
             }
-
-            $notification_handler =& xoops_getHandler('notification');
+            /** @var XoopsNotificationHandler $notificationHandler*/
+            $notificationHandler = xoops_getHandler('notification');
 
             foreach ($categories as $k => $v) {
                 $cat       = $catHandler->getCat($k);
                 $extraTags = array(
                     'X_ITEM_CAT'     => $cat->getVar('cat_name'),
                     'X_ITEM_NBPHOTO' => $v,
-                    'X_ITEM_URL'     => XOOPS_URL . '/modules/extgallery/public-album.php?id=' . $cat->getVar('cat_id'));
-                $notification_handler->triggerEvent('global', 0, 'new_photo', $extraTags);
-                $notification_handler->triggerEvent('album', $cat->getVar('cat_id'), 'new_photo_album', $extraTags);
+                    'X_ITEM_URL'     => XOOPS_URL . '/modules/extgallery/public-album.php?id=' . $cat->getVar('cat_id')
+                );
+                $notificationHandler->triggerEvent('global', 0, 'new_photo', $extraTags);
+                $notificationHandler->triggerEvent('album', $cat->getVar('cat_id'), 'new_photo_album', $extraTags);
 
                 // Update album count
                 if ($cat->getVar('cat_nb_photo') == 0) {
@@ -259,7 +264,6 @@ switch ($op) {
         break;
 
     case 'rebuildthumb':
-
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
         $photoHandler->rebuildThumbnail($_GET['cat_id']);
 
@@ -268,11 +272,8 @@ switch ($op) {
         break;
 
     case 'modify':
-
         switch ($step) {
-
             case 'enreg':
-
                 // Check if they are selected photo
                 if (!isset($_POST['photoId'])) {
                     redirect_header('photo.php', 3, _AM_EXTGALLERY_NO_PHOTO_SELECTED);
@@ -304,7 +305,8 @@ switch ($op) {
                             'cat_id'       => $_POST['catId'][$photoId],
                             'photo_desc'   => $_POST['photoDesc'][$photoId],
                             'photo_title'  => $_POST['photoTitre'][$photoId],
-                            'photo_weight' => $_POST['photoPoids'][$photoId]);
+                            'photo_weight' => $_POST['photoPoids'][$photoId]
+                        );
                         $photoHandler->modifyPhoto($photoId, $data);
 
                         if (!isset($toCategories[$_POST['catId'][$photoId]])) {
@@ -418,9 +420,7 @@ switch ($op) {
 
             case 'default':
             default:
-
                 xoops_cp_header();
-
                 $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
                 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
@@ -435,7 +435,7 @@ switch ($op) {
                 echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTGALLERY_APPROVE . '</legend>' . "\n";
                 echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTGALLERY_INFORMATION . '</legend>' . "\n";
                 echo _AM_EXTGALLERY_EDITDELETE_PHOTOTABLE_INFO . "\n";
-                echo '</fieldset><br />' . "\n";
+                echo '</fieldset><br>' . "\n";
 
                 $pageNav         = new XoopsPageNav($nbPhoto, $xoopsModuleConfig['admin_nb_photo'], $start, 'start', 'op=modify&cat_id=' . $_GET['cat_id']);
                 $globalCatSelect = $catHandler->getLeafSelect('changeAllCat', false, $_GET['cat_id'], ' onChange="return changeAllCategory();"');
@@ -445,7 +445,7 @@ switch ($op) {
                 echo '<table class="outer" style="width:100%; text-align:center;"><tr>' . "\n";
                 echo '<th><input type="checkbox" name="selectAllPhoto" id="selectAllPhoto" onClick="return checkAllPhoto();" /></th>' . "\n";
                 echo '<th>' . _AM_EXTGALLERY_PHOTO . '</th>' . "\n";
-                echo '<th>' . _AM_EXTGALLERY_CATEGORY . '<br />' . $globalCatSelect . '</th>' . "\n";
+                echo '<th>' . _AM_EXTGALLERY_CATEGORY . '<br>' . $globalCatSelect . '</th>' . "\n";
                 echo '<th>' . _AM_EXTGALLERY_WEIGHT . '</th>' . "\n";
                 echo '<th>' . _AM_EXTGALLERY_TITLE . '<br>';
                 echo _AM_EXTGALLERY_DESC . '</th>' . "\n";
@@ -465,9 +465,12 @@ switch ($op) {
                     echo '<td><input type="checkbox" name="photoId[' . $photo->getVar('photo_id') . '][]" id="photoId[' . $photo->getVar('photo_id') . '][]" /></td>' . "\n";
                     echo '<td><img src="' . XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name') . '" /></td>' . "\n";
                     echo '<td>' . $catHandler->getLeafSelect('catId[' . $photo->getVar('photo_id') . ']', false, $_GET['cat_id']) . '</td>' . "\n";
-                    echo '<td><input type="text" name="photoPoids[' . $photo->getVar('photo_id') . ']" id="photoPoids[' . $photo->getVar('photo_id') . ']" value="' . $photo->getVar('photo_weight') . '" size="3" maxlength="14" /></td>' . "\n";
-                    echo '<td><input type="text" name="photoTitre[' . $photo->getVar('photo_id') . ']" id="photoTitre[' . $photo->getVar('photo_id') . ']" value="' . $photo->getVar('photo_title', 'e') . '" size="60" maxlength="150" /><br>' . "\n";
-                    echo '<textarea name="photoDesc[' . $photo->getVar('photo_id') . ']" id="photoDesc[' . $photo->getVar('photo_id') . ']" rows="1" cols="57">' . $photo->getVar('photo_desc', 'e') . '</textarea></td>' . "\n";
+                    echo '<td><input type="text" name="photoPoids[' . $photo->getVar('photo_id') . ']" id="photoPoids[' . $photo->getVar('photo_id') . ']" value="' . $photo->getVar('photo_weight')
+                         . '" size="3" maxlength="14" /></td>' . "\n";
+                    echo '<td><input type="text" name="photoTitre[' . $photo->getVar('photo_id') . ']" id="photoTitre[' . $photo->getVar('photo_id') . ']" value="' . $photo->getVar('photo_title', 'e')
+                         . '" size="60" maxlength="150" /><br>' . "\n";
+                    echo '<textarea name="photoDesc[' . $photo->getVar('photo_id') . ']" id="photoDesc[' . $photo->getVar('photo_id') . ']" rows="1" cols="57">' . $photo->getVar('photo_desc', 'e')
+                         . '</textarea></td>' . "\n";
                     echo '</tr>' . "\n";
                     $scriptCheckbox .= $first ? '\'photoId[' . $photo->getVar('photo_id') . '][]\'' : ', \'photoId[' . $photo->getVar('photo_id') . '][]\'';
                     $scriptSelect .= $first ? '\'catId[' . $photo->getVar('photo_id') . ']\'' : ', \'catId[' . $photo->getVar('photo_id') . ']\'';
@@ -481,7 +484,7 @@ switch ($op) {
 
                 echo '</table>' . "\n";
                 echo '</form>';
-                echo '</fieldset><br />' . "\n";
+                echo '</fieldset><br>' . "\n";
 
                 echo '<script type="text/javascript">' . "\n";
                 echo 'function checkAllPhoto() {' . "\n";
@@ -517,14 +520,14 @@ switch ($op) {
 
         $cat = $catHandler->getCat($photo->getVar('cat_id'));
 
-        $notification_handler =& xoops_getHandler('notification');
+        $notificationHandler = xoops_getHandler('notification');
         $extraTags = array(
                         'X_ITEM_CAT'=>$cat->getVar('cat_name'),
                         'X_ITEM_NBPHOTO'=>1,
                         'X_ITEM_URL'=>XOOPS_URL."/modules/extgallery/public-album.php?id=".$cat->getVar('cat_id')
                     );
-        $notification_handler->triggerEvent('global', 0, 'new_photo',$extraTags);
-        $notification_handler->triggerEvent('album', $cat->getVar('cat_id'), 'new_photo_album',$extraTags);
+        $notificationHandler->triggerEvent('global', 0, 'new_photo',$extraTags);
+        $notificationHandler->triggerEvent('album', $cat->getVar('cat_id'), 'new_photo_album',$extraTags);
 
         //redirect_header("photo.php");
 
@@ -543,13 +546,12 @@ switch ($op) {
 
     case 'default':
     default:
-
         $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         xoops_cp_header();
 
-        include_once dirname(__DIR__) . '/include/functions.php';
+        include_once __DIR__ . '/../include/functions.php';
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTGALLERY_ADD_PHOTO . '</legend>';
 
@@ -566,7 +568,7 @@ switch ($op) {
             $form->addElement(new XoopsFormTextArea(_AM_EXTGALLERY_EXTRA_INFO, 'photo_extra'));
         }
         // For xoops tag
-        if (($xoopsModuleConfig['usetag'] == 1) and is_dir(dirname(dirname(__DIR__)) . '/tag')) {
+        if (($xoopsModuleConfig['usetag'] == 1) && is_dir(__DIR__ . '/../../tag')) {
             require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
             $form->addElement(new XoopsFormTag('tag', 60, 255, '', 0));
         }
@@ -574,7 +576,7 @@ switch ($op) {
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
         $form->display();
 
-        echo '</fieldset><br />';
+        echo '</fieldset><br>';
 
         $nbPhotos = 0;
 
@@ -582,7 +584,10 @@ switch ($op) {
         $dir = opendir($rep);
         while ($f = readdir($dir)) {
             if (is_file($rep . $f)) {
-                if (preg_match('/.*gif/', strtolower($f)) || preg_match('/.*jpg/', strtolower($f)) || preg_match('/.*jpeg/', strtolower($f)) || preg_match('/.*png/', strtolower($f))) {
+                if (preg_match('/.*gif/', strtolower($f)) || preg_match('/.*jpg/', strtolower($f))
+                    || preg_match('/.*jpeg/', strtolower($f))
+                    || preg_match('/.*png/', strtolower($f))
+                ) {
                     ++$nbPhotos;
                 }
             }
@@ -592,8 +597,8 @@ switch ($op) {
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTGALLERY_ADD_BATCH . '</legend>';
 
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTGALLERY_INFORMATION . '</legend>';
-        echo '<b>' . _AM_EXTGALLERY_BATCH_PATH . '</b> : ' . XOOPS_ROOT_PATH . '/modules/extgallery/batch/<br /><br />' . sprintf(_AM_EXTGALLERY_ADD_BATCH_INFO, $nbPhotos);
-        echo '</fieldset><br />';
+        echo '<b>' . _AM_EXTGALLERY_BATCH_PATH . '</b> : ' . XOOPS_ROOT_PATH . '/modules/extgallery/batch/<br><br>' . sprintf(_AM_EXTGALLERY_ADD_BATCH_INFO, $nbPhotos);
+        echo '</fieldset><br>';
 
         $form = new XoopsThemeForm(_AM_EXTGALLERY_ADD_BATCH, 'batch_photo', 'photo.php?op=batchAdd', 'post', true);
         $form->addElement(new XoopsFormLabel(_AM_EXTGALLERY_ALBUM, $catHandler->getLeafSelect('cat_id')));
@@ -602,14 +607,14 @@ switch ($op) {
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
         $form->display();
 
-        echo '</fieldset><br />';
+        echo '</fieldset><br>';
 
         // Rebuild thumbnail
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTGALLERY_REBUILD_THUMB . '</legend>';
 
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTGALLERY_INFORMATION . '</legend>';
         echo _AM_EXTGALLERY_REBUILD_THUMB_INFO;
-        echo '</fieldset><br />';
+        echo '</fieldset><br>';
 
         $form = new XoopsThemeForm(_AM_EXTGALLERY_REBUILD_THUMB, 'rebuild_thumb', 'photo.php', 'get', true);
         $form->addElement(new XoopsFormLabel(_AM_EXTGALLERY_ALBUM, $catHandler->getSelect('cat_id', 'node')));
@@ -617,14 +622,14 @@ switch ($op) {
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
         $form->display();
 
-        echo '</fieldset><br />';
+        echo '</fieldset><br>';
 
         // Edit/delete photo
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTGALLERY_EDITDELETE_PHOTO . '</legend>';
 
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTGALLERY_INFORMATION . '</legend>';
         echo _AM_EXTGALLERY_EDITDELETE_PHOTO_INFO;
-        echo '</fieldset><br />';
+        echo '</fieldset><br>';
 
         $form = new XoopsThemeForm(_AM_EXTGALLERY_EDITDELETE_PHOTO, 'modify_photo', 'photo.php', 'get', true);
         $form->addElement(new XoopsFormLabel(_AM_EXTGALLERY_ALBUM, $catHandler->getSelect('cat_id', 'node')));
@@ -632,15 +637,15 @@ switch ($op) {
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
         $form->display();
 
-        echo '</fieldset><br />';
+        echo '</fieldset><br>';
 
         // Pending photo
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTGALLERY_PENDING_PHOTO . '</legend>';
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTGALLERY_INFORMATION . '</legend>';
-        //echo '<img src="../assets/images/on.png" style="vertical-align:middle;" />&nbsp;&nbsp;'._AM_EXTGALLERY_APPROVE_INFO.'<br />';
-        echo '<img src="../assets/images/edit.png" style="vertical-align:middle;" />&nbsp;&nbsp;' . _AM_EXTGALLERY_EDIT_INFO . '<br />';
+        //echo '<img src="../assets/images/on.png" style="vertical-align:middle;" />&nbsp;&nbsp;'._AM_EXTGALLERY_APPROVE_INFO.'<br>';
+        echo '<img src="../assets/images/edit.png" style="vertical-align:middle;" />&nbsp;&nbsp;' . _AM_EXTGALLERY_EDIT_INFO . '<br>';
         echo '<img src="../assets/images/delete.png" style="vertical-align:middle;" />&nbsp;&nbsp;' . _AM_EXTGALLERY_DELETE_INFO;
-        echo '</fieldset><br />';
+        echo '</fieldset><br>';
 
         $pendingPhoto = $photoHandler->getPendingPhoto();
         $pageNav      = new XoopsPageNav(count($pendingPhoto), $xoopsModuleConfig['admin_nb_photo'], $start);
@@ -688,7 +693,7 @@ switch ($op) {
 
         echo '</table>' . "\n";
         echo '</form>';
-        echo '</fieldset><br />' . "\n";
+        echo '</fieldset><br>' . "\n";
 
         echo '<script type="text/javascript">' . "\n";
         echo 'function checkAllPhoto() {' . "\n";
@@ -700,5 +705,4 @@ switch ($op) {
         xoops_cp_footer();
 
         break;
-
 }

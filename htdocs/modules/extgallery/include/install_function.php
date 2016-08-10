@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: install_function.php 8088 2011-11-06 09:38:12Z beckmi $
  * @param $xoopsModule
  * @return bool
  */
@@ -49,7 +48,9 @@ function xoops_module_pre_install_extgallery(&$xoopsModule)
 function xoops_module_install_extgallery(&$xoopsModule)
 {
     $module_id     = $xoopsModule->getVar('mid');
+    /** @var XoopsGroupPermHandler $gpermHandler*/
     $gpermHandler  = xoops_getHandler('groupperm');
+    /** @var XoopsConfigHandler $configHandler */
     $configHandler = xoops_getHandler('config');
 
     /**

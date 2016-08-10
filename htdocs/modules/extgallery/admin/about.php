@@ -15,7 +15,6 @@
  * @package      extGallery
  * @since        1.12
  * @author       XOOPS Development Team
- * @version      $Id $
  */
 
 include_once __DIR__ . '/admin_header.php';

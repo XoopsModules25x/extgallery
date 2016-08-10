@@ -13,13 +13,12 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: publicphoto.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once 'photoHandler.php';
-include_once 'publicPerm.php';
+include_once __DIR__ . '/photoHandler.php';
+include_once __DIR__ . '/publicPerm.php';
 
 /**
  * Class ExtgalleryPublicphoto
@@ -41,7 +40,8 @@ class ExtgalleryPublicphoto extends ExtgalleryPhoto
 class ExtgalleryPublicphotoHandler extends ExtgalleryPhotoHandler
 {
     /**
-     * @param $db
+     * ExtgalleryPublicphotoHandler constructor.
+     * @param XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
     {
@@ -65,7 +65,9 @@ class ExtgalleryPublicphotoHandler extends ExtgalleryPhotoHandler
             unlink(XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large/large_' . $photo->getVar('photo_name'));
         }
 
-        if ($photo->getVar('photo_orig_name') != '' && file_exists(XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original/' . $photo->getVar('photo_orig_name'))) {
+        if ($photo->getVar('photo_orig_name') != ''
+            && file_exists(XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original/' . $photo->getVar('photo_orig_name'))
+        ) {
             unlink(XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original/' . $photo->getVar('photo_orig_name'));
         }
     }

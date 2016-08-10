@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-slideshow.php 10874 2013-01-23 17:23:02Z beckmi $
  */
 
 require dirname(dirname(__DIR__)) . '/mainfile.php';
@@ -41,7 +40,7 @@ $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 $catObj = $catHandler->getCat($catId);
 
 if (null === $catObj) {
-    include(XOOPS_ROOT_PATH . '/footer.php');
+    include XOOPS_ROOT_PATH . '/footer.php';
     exit;
 }
 $ajaxeffect = $xoopsModuleConfig['use_slideshow_effects'];
@@ -181,4 +180,4 @@ $xoopsTpl->assign('pic_width', $xoopsModuleConfig['galleriffic_width']);
 $xoopsTpl->assign('galleriffic_show_descr', $xoopsModuleConfig['galleriffic_show_descr']);
 $xoopsTpl->assign('galleriffic_download', $xoopsModuleConfig['galleriffic_download']);
 
-include(XOOPS_ROOT_PATH . '/footer.php');
+include XOOPS_ROOT_PATH . '/footer.php';

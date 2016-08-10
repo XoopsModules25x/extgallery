@@ -14,14 +14,11 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: album.php 10467 2012-12-19 02:04:40Z beckmi $
  */
 
-include_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once __DIR__ . '/function.php';
+include_once __DIR__ . '/admin_header.php';
 
-//$GLOBALS['xoopsOption']['template_main'] = 'extgallery_admin_album.html';
+//$GLOBALS['xoopsOption']['template_main'] = 'extgallery_admin_album.tpl';
 
 if (isset($_POST['op'])) {
     $op = $_POST['op'];
@@ -32,6 +29,7 @@ if (isset($_POST['op'])) {
 switch ($op) {
 
     case 'overlay':
+        /** @var XoopsConfigHandler $configHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -48,7 +46,8 @@ switch ($op) {
                     'conf_name'      => 'album_overlay_bg',
                     'conf_value'     => $_POST['album_overlay_bg'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -67,7 +66,8 @@ switch ($op) {
                     'conf_name'      => 'album_overlay_width',
                     'conf_value'     => $_POST['album_overlay_width'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -86,7 +86,8 @@ switch ($op) {
                     'conf_name'      => 'album_overlay_height',
                     'conf_value'     => $_POST['album_overlay_height'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -96,6 +97,7 @@ switch ($op) {
         break;
 
     case 'tooltip':
+        /** @var XoopsConfigHandler $configHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -112,7 +114,8 @@ switch ($op) {
                     'conf_name'      => 'album_tooltip_width',
                     'conf_value'     => $_POST['album_tooltip_width'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 if (isset($_POST['album_tooltip_width'])) {
                     if ($xoopsModuleConfig['album_tooltip_width'] != $_POST['album_tooltip_width']) {
                         $criteria = new CriteriaCompo();
@@ -126,7 +129,8 @@ switch ($op) {
                             'conf_name'      => 'album_tooltip_width',
                             'conf_value'     => $_POST['album_tooltip_width'],
                             'conf_formtype'  => 'hidden',
-                            'conf_valuetype' => 'text');
+                            'conf_valuetype' => 'text'
+                        );
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -149,7 +153,8 @@ switch ($op) {
                     'conf_name'      => 'album_tooltip_borderwidth',
                     'conf_value'     => $_POST['album_tooltip_borderwidth'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -168,7 +173,8 @@ switch ($op) {
                     'conf_name'      => 'album_tooltip_bordercolor',
                     'conf_value'     => $_POST['album_tooltip_bordercolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -178,6 +184,7 @@ switch ($op) {
         break;
 
     case 'fancybox':
+        /** @var XoopsConfigHandler $configHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -194,7 +201,8 @@ switch ($op) {
                     'conf_name'      => 'album_fancybox_color',
                     'conf_value'     => $_POST['album_fancybox_color'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -213,7 +221,8 @@ switch ($op) {
                     'conf_name'      => 'album_fancybox_opacity',
                     'conf_value'     => $_POST['album_fancybox_opacity'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -232,7 +241,8 @@ switch ($op) {
                     'conf_name'      => 'album_fancybox_tin',
                     'conf_value'     => $_POST['album_fancybox_tin'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -251,7 +261,8 @@ switch ($op) {
                     'conf_name'      => 'album_fancybox_tout',
                     'conf_value'     => $_POST['album_fancybox_tout'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -270,7 +281,8 @@ switch ($op) {
                     'conf_name'      => 'album_fancybox_title',
                     'conf_value'     => $_POST['album_fancybox_title'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -289,7 +301,8 @@ switch ($op) {
                     'conf_name'      => 'album_fancybox_showtype',
                     'conf_value'     => $_POST['album_fancybox_showtype'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -299,6 +312,7 @@ switch ($op) {
         break;
 
     case 'prettyphoto':
+        /** @var XoopsConfigHandler $configHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -315,7 +329,8 @@ switch ($op) {
                     'conf_name'      => 'album_prettyphoto_theme',
                     'conf_value'     => $_POST['album_prettyphoto_theme'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -334,7 +349,8 @@ switch ($op) {
                     'conf_name'      => 'album_prettyphoto_speed',
                     'conf_value'     => $_POST['album_prettyphoto_speed'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -353,7 +369,8 @@ switch ($op) {
                     'conf_name'      => 'album_prettyphoto_slidspe',
                     'conf_value'     => $_POST['album_prettyphoto_slidspe'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -372,7 +389,8 @@ switch ($op) {
                     'conf_name'      => 'album_prettyphoto_autopla',
                     'conf_value'     => $_POST['album_prettyphoto_autopla'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }

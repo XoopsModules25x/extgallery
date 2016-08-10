@@ -21,7 +21,6 @@
  * @author     Philippe Jausions <Philippe.Jausions@11abacus.com>
  * @copyright  2002-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: Imagick2.php 8088 2011-11-06 09:38:12Z beckmi $
  * @link       http://pear.php.net/package/Image_Transform
  */
 
@@ -59,7 +58,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
     public function __construct()
     {
         if (PEAR::loadExtension('imagick')) {
-            include 'Image/Transform/Driver/Imagick/ImageTypes.php';
+            include __DIR__ . '/Image/Transform/Driver/Imagick/ImageTypes.php';
         } else {
             $this->isError(PEAR::raiseError('Couldn\'t find the imagick extension.', IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
         }
@@ -95,8 +94,8 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
     /**
      * Resize Action
      *
-     * @param int $new_x     New width
-     * @param int $new_y     New height
+     * @param int   $new_x   New width
+     * @param int   $new_y   New height
      * @param mixed $options Optional parameters
      *
      * @return bool|PEAR_Error TRUE or PEAR_Error object on error
@@ -118,8 +117,8 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
      * Rotates the current image
      * Note: color mask are currently not supported
      *
-     * @param float $angle
-     * @param       int     Rotation angle in degree
+     * @param int Rotation angle in degree
+     * @param array No options are currently supported
      *
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
@@ -175,7 +174,8 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
         static $cmds = array(
             'setfillcolor' => 'color',
             'setfontsize'  => 'size',
-            'setfontface'  => 'font');
+            'setfontface'  => 'font'
+        );
         imagick_begindraw($this->imageHandle);
 
         foreach ($cmds as $cmd => $v) {
@@ -194,8 +194,8 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
      * Saves the image to a file
      *
      * @param                  $filename string the name of the file to write to
-     * @param  string $type
-     * @param  null $quality
+     * @param  string          $type
+     * @param  null            $quality
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
      */
@@ -341,7 +341,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
      * RaiseError Method - shows imagick Raw errors.
      *
      * @param  string $message message = prefixed message..
-     * @param  int $code       error code
+     * @param  int    $code    error code
      * @return PEAR   error object
      * @access protected
      */
@@ -354,4 +354,3 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
         return PEAR::raiseError($message, $code);
     }
 } // End class Image_Transform_Driver_Imagick2
-

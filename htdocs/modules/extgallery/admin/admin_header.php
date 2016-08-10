@@ -15,7 +15,6 @@
  * @package
  * @since
  * @author       XOOPS Development Team
- * @version      $Id $
  */
 
 $moduleDirName = basename(dirname(__DIR__));
@@ -43,7 +42,11 @@ xoops_loadLanguage('main', $moduleDirName);
 $pathIcon16           = $GLOBALS['xoops']->url('www/' . $GLOBALS['xoopsModule']->getInfo('sysicons16'));
 $pathIcon32           = $GLOBALS['xoops']->url('www/' . $GLOBALS['xoopsModule']->getInfo('sysicons32'));
 $xoopsModuleAdminPath = $GLOBALS['xoops']->path('www/' . $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin'));
-require_once "{$xoopsModuleAdminPath}/moduleadmin.php";
+require_once $xoopsModuleAdminPath .'/moduleadmin.php';
 
 //$xoopsModuleAdminPath = $GLOBALS['xoops']->path('www/' . $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin'));
 //require_once "{$xoopsModuleAdminPath}/moduleadmin.php";
+
+
+
+$adminObject = new ModuleAdmin();

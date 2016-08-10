@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-sendecard.php 10874 2013-01-23 17:23:02Z beckmi $
  */
 
 require dirname(dirname(__DIR__)) . '/mainfile.php';
@@ -76,7 +75,8 @@ switch ($step) {
             'ecard_greetings' => $_POST['ecard_greetings'],
             'ecard_desc'      => $_POST['ecard_desc'],
             'ecard_ip'        => $ip,
-            'photo_id'        => $photoId);
+            'photo_id'        => $photoId
+        );
 
         $ecardHandler->createEcard($data);
         $photoHandler->updateEcard($photoId);
@@ -130,7 +130,8 @@ switch ($step) {
 
         $lang = array(
             'to'   => _MD_EXTGALLERY_TO,
-            'from' => _MD_EXTGALLERY_FROM);
+            'from' => _MD_EXTGALLERY_FROM
+        );
         $xoopsTpl->assign('lang', $lang);
 
         include XOOPS_ROOT_PATH . '/footer.php';

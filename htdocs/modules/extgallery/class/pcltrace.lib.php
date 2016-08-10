@@ -63,7 +63,7 @@ if (!defined('PCLTRACE_LIB')) {
     //             'log'    : messages are writed in the file $p_filename
     // --------------------------------------------------------------------------------
     /**
-     * @param int $p_level
+     * @param int    $p_level
      * @param string $p_mode
      * @param string $p_filename
      */
@@ -215,7 +215,7 @@ if (!defined('PCLTRACE_LIB')) {
     /**
      * @param        $p_file
      * @param        $p_line
-     * @param int $p_return
+     * @param int    $p_return
      * @param string $p_message
      */
     function TrFctEnd($p_file, $p_line, $p_return = 1, $p_message = '')
@@ -393,7 +393,7 @@ if (!defined('PCLTRACE_LIB')) {
 
         // ----- Display
         $v_again = 0;
-        for ($i = 0; $i < count($g_pcl_trace_entries); ++$i) {
+        for ($i = 0, $iMax = count($g_pcl_trace_entries); $i < $iMax; ++$i) {
             // ---- Row header
             echo '<tr>';
             echo '<td><table width=100% border=0 cellspacing=0 cellpadding=0><tr>';

@@ -9,7 +9,6 @@
  * @author     Tomas V.V.Cox <cox@idecnet.com>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id: System.php 10024 2012-08-08 07:32:05Z beckmi $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 0.1
  */
@@ -17,8 +16,8 @@
 /**
  * base class
  */
-require_once 'PEAR.php';
-require_once 'Console/Getopt.php';
+require_once __DIR__ . '/PEAR.php';
+require_once __DIR__ . '/Console/Getopt.php';
 
 $GLOBALS['_System_temp_files'] = array();
 
@@ -121,10 +120,10 @@ class System
      *            [1] => dir1/file3
      *        )
      *    )
-     * @param  string $sPath    Name of the directory
+     * @param  string  $sPath   Name of the directory
      * @param  integer $maxinst max. deep of the lookup
      * @param  integer $aktinst starting deep of the lookup
-     * @param  bool $silent     if true, do not emit errors.
+     * @param  bool    $silent  if true, do not emit errors.
      * @return array   the structure of the dir
      * @static
      * @access   private
@@ -493,8 +492,8 @@ class System
     /**
      * The "which" command (show the full path of a command)
      *
-     * @param string $program The command to search for
-     * @param mixed $fallback Value to return if $program is not found
+     * @param string $program  The command to search for
+     * @param mixed  $fallback Value to return if $program is not found
      *
      * @return mixed A string with the full path or false if not found
      * @static
@@ -523,7 +522,12 @@ class System
         }
 
         if (OS_WINDOWS) {
-            $exe_suffixes = getenv('PATHEXT') ? explode(PATH_SEPARATOR, getenv('PATHEXT')) : array('.exe', '.bat', '.cmd', '.com');
+            $exe_suffixes = getenv('PATHEXT') ? explode(PATH_SEPARATOR, getenv('PATHEXT')) : array(
+                '.exe',
+                '.bat',
+                '.cmd',
+                '.com'
+            );
             // allow passing a command.exe param
             if (strpos($program, '.') !== false) {
                 array_unshift($exe_suffixes, '');

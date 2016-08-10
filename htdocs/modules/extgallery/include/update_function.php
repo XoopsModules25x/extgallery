@@ -13,13 +13,14 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: update_function.php 10467 2012-12-19 02:04:40Z beckmi $
- * @param $xoopsModule
- * @param null $oldVersion
- * @return bool
  */
 
-function xoops_module_update_extgallery(&$xoopsModule, $oldVersion = null)
+/**
+ * @param  XoopsModule $xoopsModule
+ * @param  null        $oldVersion
+ * @return bool
+ */
+function xoops_module_update_extgallery(XoopsModule $xoopsModule, $oldVersion = null)
 {
     $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
     $catHandler->rebuild();
@@ -57,6 +58,7 @@ function xoops_module_update_extgallery(&$xoopsModule, $oldVersion = null)
         $sql          = 'SELECT cat_id FROM `' . $db->prefix('extgallery_publiccat') . '`;';
         $result       = $db->query($sql);
         $module_id    = $xoopsModule->getVar('mid');
+        /** @var XoopsGroupPermHandler $gpermHandler*/
         $gpermHandler = xoops_getHandler('groupperm');
         while ($cat = $db->fetchArray($result)) {
             $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ADMIN, $module_id);

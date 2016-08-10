@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-viewecard.php 10874 2013-01-23 17:23:02Z beckmi $
  */
 
 require dirname(dirname(__DIR__)) . '/mainfile.php';
@@ -58,7 +57,8 @@ $xoTheme->addMeta('link', $rel, $attributes);
 $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 
 $lang = array(
-    'clickFormMore' => _MD_EXTGALLERY_CLICK_FOR_MORE);
+    'clickFormMore' => _MD_EXTGALLERY_CLICK_FOR_MORE
+);
 $xoopsTpl->assign('lang', $lang);
 
 include XOOPS_ROOT_PATH . '/footer.php';

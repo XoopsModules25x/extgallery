@@ -13,13 +13,12 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: photoHandler.php 11106 2013-02-26 06:31:04Z cesagonchu $
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once 'publicPerm.php';
-include_once 'ExtgalleryPersistableObjectHandler.php';
+include_once __DIR__ . '/publicPerm.php';
+include_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
 
 /**
  * Class ExtgalleryPhoto
@@ -57,8 +56,18 @@ class ExtgalleryPhoto extends XoopsObject
         $this->initVar('photo_weight', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('dohtml', XOBJ_DTYPE_INT, 0, false);
 
-        $this->externalKey['cat_id'] = array('className' => 'publiccat', 'getMethodeName' => 'getCat', 'keyName' => 'cat', 'core' => false);
-        $this->externalKey['uid']    = array('className' => 'user', 'getMethodeName' => 'get', 'keyName' => 'user', 'core' => true);
+        $this->externalKey['cat_id'] = array(
+            'className'      => 'publiccat',
+            'getMethodeName' => 'getCat',
+            'keyName'        => 'cat',
+            'core'           => false
+        );
+        $this->externalKey['uid']    = array(
+            'className'      => 'user',
+            'getMethodeName' => 'get',
+            'keyName'        => 'user',
+            'core'           => true
+        );
     }
 
     /**
@@ -486,7 +495,8 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             'font'         => XOOPS_ROOT_PATH . '/modules/extgallery/fonts/' . $xoopsModuleConfig['watermark_font'],
             'size'         => $xoopsModuleConfig['watermark_fontsize'],
             'resize_first' => false,
-            'padding'      => $xoopsModuleConfig['watermark_padding']);
+            'padding'      => $xoopsModuleConfig['watermark_padding']
+        );
         $imageTransform->addText($watermarkParams);
     }
 
@@ -498,8 +508,14 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         global $xoopsModuleConfig;
 
         $borders   = array();
-        $borders[] = array('borderWidth' => $xoopsModuleConfig['inner_border_size'], 'borderColor' => $xoopsModuleConfig['inner_border_color']);
-        $borders[] = array('borderWidth' => $xoopsModuleConfig['outer_border_size'], 'borderColor' => $xoopsModuleConfig['outer_border_color']);
+        $borders[] = array(
+            'borderWidth' => $xoopsModuleConfig['inner_border_size'],
+            'borderColor' => $xoopsModuleConfig['inner_border_color']
+        );
+        $borders[] = array(
+            'borderWidth' => $xoopsModuleConfig['outer_border_size'],
+            'borderColor' => $xoopsModuleConfig['outer_border_color']
+        );
         $imageTransform->addBorders($borders);
     }
 
@@ -528,7 +544,9 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             $imageTransform->load($filePath . $photoName);
 
             // Save large photo only if it's bigger than medium size
-            if ($imageTransform->getImageWidth() > $xoopsModuleConfig['medium_width'] || $imageTransform->getImageHeight() > $xoopsModuleConfig['medium_heigth']) {
+            if ($imageTransform->getImageWidth() > $xoopsModuleConfig['medium_width']
+                || $imageTransform->getImageHeight() > $xoopsModuleConfig['medium_heigth']
+            ) {
 
                 // Make watermark
                 if ($xoopsModuleConfig['enable_large_watermark']) {
@@ -782,7 +800,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         //        $this->photoUploader->fetchPhoto($_FILES[$file]);
 
         //------------------------
-        include_once(XOOPS_ROOT_PATH . '/class/uploader.php');
+        include_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $this->photoUploader = new XoopsMediaUploader($uploadDir, $allowedMimeTypes, 50000000, 5000, 5000);
 
         $jupart  = isset($_POST['jupart']) ? (int)$_POST['jupart'] : 0;
@@ -801,10 +819,10 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         //---------------------------
 
         /*
-        
+
                 $jupart = (isset($_POST['jupart'])) ? (int) $_POST['jupart'] : 0;
                 $jufinal = (isset($_POST['jufinal'])) ? (int) $_POST['jufinal'] : 1;
-        
+
                 if ($this->photoUploader->isError()) {
                     return 4;
                 // We got a chunk, so we don't add photo to database
@@ -837,15 +855,17 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         $cat->setVar('cat_isalbum', 1);
         $catHandler->insert($cat);
 
-        $notification_handler = xoops_getHandler('notification');
-        $extraTags            = array(
+        /** @var XoopsNotificationHandler $notificationHandler*/
+        $notificationHandler = xoops_getHandler('notification');
+        $extraTags           = array(
             'X_ITEM_CAT'     => $cat->getVar('cat_name'),
-            'X_ITEM_NBPHOTO' => 1);
+            'X_ITEM_NBPHOTO' => 1
+        );
 
         if ($photoStatus == 1) {
             $extraTags['X_ITEM_URL'] = XOOPS_URL . '/modules/extgallery/public-album.php?id=' . $cat->getVar('cat_id');
-            $notification_handler->triggerEvent('global', 0, 'new_photo', $extraTags);
-            $notification_handler->triggerEvent('album', $cat->getVar('cat_id'), 'new_photo_album', $extraTags);
+            $notificationHandler->triggerEvent('global', 0, 'new_photo', $extraTags);
+            $notificationHandler->triggerEvent('album', $cat->getVar('cat_id'), 'new_photo_album', $extraTags);
 
             // Update album count
             if ($cat->getVar('cat_nb_photo') == 0) {
@@ -864,7 +884,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             return 0;
         } else {
             $extraTags['X_ITEM_URL'] = XOOPS_URL . '/modules/extgallery/admin/photo.php';
-            $notification_handler->triggerEvent('global', 0, 'new_photo_pending', $extraTags);
+            $notificationHandler->triggerEvent('global', 0, 'new_photo_pending', $extraTags);
 
             return 1;
         }
@@ -880,8 +900,14 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
      *
      * @return mixed
      */
-    public function addLocalPhoto($catId, $dirtyPhotoName, $photoTitle = '', $photoDesc = '', $photoExtra = '', $photoTag = '')
-    {
+    public function addLocalPhoto(
+        $catId,
+        $dirtyPhotoName,
+        $photoTitle = '',
+        $photoDesc = '',
+        $photoExtra = '',
+        $photoTag = ''
+    ) {
         include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
 
         global $xoopsUser, $xoopsModuleConfig;
@@ -928,7 +954,8 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             'photo_havelarge' => $this->_haveLargePhoto($photoName),
             'photo_approved'  => $permHandler->isAllowed($xoopsUser, 'public_autoapprove', $catId),
             'photo_extra'     => $photoExtra,
-            'dohtml'          => $xoopsModuleConfig['allow_html']);
+            'dohtml'          => $xoopsModuleConfig['allow_html']
+        );
 
         // Deleting working photo
         unlink($this->_getUploadPhotoPath() . $photoName);
@@ -936,9 +963,9 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         $this->createPhoto($data);
 
         if ($xoopsModuleConfig['usetag'] == 1 || (is_dir('../tag') || is_dir('../../tag'))) {
-            $newid       = $this->db->getInsertId();
-            $tag_handler = xoops_getModuleHandler('tag', 'tag');
-            $tag_handler->updateByItem($photoTag, $newid, 'extgallery', 0);
+            $newid      = $this->db->getInsertId();
+            $tagHandler = xoops_getModuleHandler('tag', 'tag');
+            $tagHandler->updateByItem($photoTag, $newid, 'extgallery', 0);
         }
 
         return $data['photo_approved'];
@@ -990,7 +1017,8 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
                 'link'  => 'public-photo.php?photoId=' . $photo->getVar('photo_id'),
                 'title' => $title,
                 'time'  => $photo->getVar('photo_date'),
-                'uid'   => $photo->getVar('uid'));
+                'uid'   => $photo->getVar('uid')
+            );
             $ret[] = $data;
         }
 

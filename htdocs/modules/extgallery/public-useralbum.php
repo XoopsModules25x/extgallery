@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-useralbum.php 10875 2013-01-23 17:25:30Z beckmi $
  */
 
 require dirname(dirname(__DIR__)) . '/mainfile.php';
@@ -39,7 +38,12 @@ $xoopsTpl->assign('use_ajax_effects', $ajaxeffect);
 
 //HACK BLUETEEN TO SORT PHOTOS BY USERS
 //photo_date - photo_title - photo_hits - photo_rating
-if (isset($_GET['sortby']) && ($_GET['sortby'] === 'photo_date' || $_GET['sortby'] === 'photo_title' || $_GET['sortby'] === 'photo_hits' || $_GET['sortby'] === 'photo_rating')) {
+if (isset($_GET['sortby'])
+    && ($_GET['sortby'] === 'photo_date' 
+        || $_GET['sortby'] === 'photo_title'
+        || $_GET['sortby'] === 'photo_hits'
+        || $_GET['sortby'] === 'photo_rating')
+) {
     $sortby = $_GET['sortby'];
 } else {
     $sortby = 'photo_date';
@@ -116,7 +120,8 @@ foreach (array_keys($photos) as $i) {
 
 $xoopsTpl->assign('photos', $photos);
 
-$pageNav = new XoopsPageNav($photoHandler->getUserAlbumCount($userId), $xoopsModuleConfig['nb_column'] * $xoopsModuleConfig['nb_line'], $start, 'start', 'id=' . $userId . '&orderby=' . $orderby . '&sortby=' . $sortby);//xoops - blueteen - tri de l'affichage
+$pageNav = new XoopsPageNav($photoHandler->getUserAlbumCount($userId), $xoopsModuleConfig['nb_column'] * $xoopsModuleConfig['nb_line'], $start, 'start',
+                            'id=' . $userId . '&orderby=' . $orderby . '&sortby=' . $sortby);//xoops - blueteen - tri de l'affichage
 $xoopsTpl->assign('pageNav', $pageNav->renderNav());
 
 $albumName = '';
@@ -226,4 +231,4 @@ $xoopsTpl->assign('album_prettyphoto_theme', $xoopsModuleConfig['album_prettypho
 $xoopsTpl->assign('album_prettyphoto_slidspeed', $xoopsModuleConfig['album_prettyphoto_slidspe']);
 $xoopsTpl->assign('album_prettyphoto_autoplay', $xoopsModuleConfig['album_prettyphoto_autopla']);
 
-include(XOOPS_ROOT_PATH . '/footer.php');
+include XOOPS_ROOT_PATH . '/footer.php';

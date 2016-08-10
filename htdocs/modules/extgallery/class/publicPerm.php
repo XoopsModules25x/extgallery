@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: publicPerm.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
@@ -26,7 +25,7 @@ class ExtgalleryPublicPermHandler
     /**
      * @return ExtgalleryPublicPermHandler
      */
-    public static function &getHandler()
+    public static function getHandler()
     {
         static $permHandler;
         if (!isset($permHandler)) {
@@ -61,7 +60,9 @@ class ExtgalleryPublicPermHandler
         static $authorizedCat;
         $userId = $user ? $user->getVar('uid') : 0;
         if (!isset($authorizedCat[$perm][$userId])) {
-            $groupPermHandler              = xoops_getHandler('groupperm');
+            /** @var XoopsGroupPermHandler $groupPermHandler */
+            $groupPermHandler = xoops_getHandler('groupperm');
+            /** @var XoopsModuleHandler $moduleHandler */
             $moduleHandler                 = xoops_getHandler('module');
             $module                        = $moduleHandler->getByDirname('extgallery');
             $authorizedCat[$perm][$userId] = $groupPermHandler->getItemIds($perm, $this->_getUserGroup($user), $module->getVar('mid'));

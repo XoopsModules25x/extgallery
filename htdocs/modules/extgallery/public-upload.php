@@ -13,13 +13,12 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-upload.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 require dirname(dirname(__DIR__)) . '/mainfile.php';
 include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once 'include/functions.php';
+include_once __DIR__ . '/include/functions.php';
 
 if (isset($_POST['step'])) {
     $step = $_POST['step'];
@@ -44,7 +43,7 @@ switch ($step) {
         if ($result == 2) {
             redirect_header('public-upload.php', 3, _MD_EXTGALLERY_NOT_AN_ALBUM);
         } elseif ($result == 4 || $result == 5) {
-            redirect_header('public-upload.php', 3, _MD_EXTGALLERY_UPLOAD_ERROR . ' :<br />' . $photoHandler->photoUploader->getError());
+            redirect_header('public-upload.php', 3, _MD_EXTGALLERY_UPLOAD_ERROR . ' :<br>' . $photoHandler->photoUploader->getError());
         } elseif ($result == 0) {
             redirect_header('public-upload.php', 3, _MD_EXTGALLERY_PHOTO_UPLOADED);
         } elseif ($result == 1) {
@@ -88,7 +87,7 @@ switch ($step) {
 
         $form->display();
 
-        include(XOOPS_ROOT_PATH . '/footer.php');
+        include XOOPS_ROOT_PATH . '/footer.php';
 
         break;
 

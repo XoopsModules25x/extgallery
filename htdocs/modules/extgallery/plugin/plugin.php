@@ -13,8 +13,8 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: plugin.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 $extgalleryPlugin = array(
-    'lolbuilder' => 0);
+    'lolbuilder' => 0
+);

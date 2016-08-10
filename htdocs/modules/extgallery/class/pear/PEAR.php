@@ -14,7 +14,6 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2010 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id: PEAR.php 10024 2012-08-08 07:32:05Z beckmi $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 0.1
  */
@@ -203,7 +202,7 @@ if (!class_exists('PEAR')) {
          * @access public
          * @param  string $class The calling classname, to prevent clashes
          * @param  string $var   The variable to retrieve.
-         * @return mixed   A reference to the variable. If not set it will be
+         * @return mixed  A reference to the variable. If not set it will be
          *                       auto initialised to NULL.
          */
         public function &getStaticProperty($class, $var)
@@ -244,7 +243,7 @@ if (!class_exists('PEAR')) {
          * Tell whether a value is a PEAR error.
          *
          * @param mixed $data the value to test
-         * @param int $code   if $data is an error object, return true
+         * @param int   $code if $data is an error object, return true
          *                    only if $code is a string and
          *                    $obj->getMessage() == $code or
          *                    $code is an integer and $obj->getCode() == $code
@@ -273,7 +272,7 @@ if (!class_exists('PEAR')) {
          * PEAR objects.  If called in an object, setErrorHandling sets
          * the default behaviour for that object.
          *
-         * @param int $mode
+         * @param int   $mode
          *                       One of PEAR_ERROR_RETURN, PEAR_ERROR_PRINT,
          *                       PEAR_ERROR_TRIGGER, PEAR_ERROR_DIE,
          *                       PEAR_ERROR_CALLBACK or PEAR_ERROR_EXCEPTION.
@@ -443,16 +442,16 @@ if (!class_exists('PEAR')) {
          * handling applied.  If the $mode and $options parameters are not
          * specified, the object's defaults are used.
          *
-         * @param mixed $message      a text error message or a PEAR error object
+         * @param mixed  $message     a text error message or a PEAR error object
          *
-         * @param int $code           a numeric error code (it is up to your class
+         * @param int    $code        a numeric error code (it is up to your class
          *                            to define these if you want to use codes)
          *
-         * @param int $mode           One of PEAR_ERROR_RETURN, PEAR_ERROR_PRINT,
+         * @param int    $mode        One of PEAR_ERROR_RETURN, PEAR_ERROR_PRINT,
          *                            PEAR_ERROR_TRIGGER, PEAR_ERROR_DIE,
          *                            PEAR_ERROR_CALLBACK, PEAR_ERROR_EXCEPTION.
          *
-         * @param mixed $options      If $mode is PEAR_ERROR_TRIGGER, this parameter
+         * @param mixed  $options     If $mode is PEAR_ERROR_TRIGGER, this parameter
          *                            specifies the PHP-internal error level (one of
          *                            E_USER_NOTICE, E_USER_WARNING or E_USER_ERROR).
          *                            If $mode is PEAR_ERROR_CALLBACK, this
@@ -466,7 +465,7 @@ if (!class_exists('PEAR')) {
          * @param string $error_class The returned error object will be
          *                            instantiated from this class, if specified.
          *
-         * @param bool $skipmsg       If true, raiseError will only pass error codes,
+         * @param bool   $skipmsg     If true, raiseError will only pass error codes,
          *                            the error message parameter will be dropped.
          *
          * @access public
@@ -474,8 +473,15 @@ if (!class_exists('PEAR')) {
          * @see    PEAR::setErrorHandling
          * @since  PHP 4.0.5
          */
-        public function &raiseError($message = null, $code = null, $mode = null, $options = null, $userinfo = null, $error_class = null, $skipmsg = false)
-        {
+        public function &raiseError(
+            $message = null,
+            $code = null,
+            $mode = null,
+            $options = null,
+            $userinfo = null,
+            $error_class = null,
+            $skipmsg = false
+        ) {
             // The error is yet a PEAR error object
             if (is_object($message)) {
                 $code                          = $message->getCode();
@@ -485,8 +491,13 @@ if (!class_exists('PEAR')) {
                 $message                       = $message->getMessage();
             }
 
-            if (isset($this) && isset($this->_expected_errors) && count($this->_expected_errors) > 0 && count($exp = end($this->_expected_errors))) {
-                if ($exp[0] === '*' || (is_int(reset($exp)) && in_array($code, $exp)) || (is_string(reset($exp)) && in_array($message, $exp))) {
+            if (isset($this) && isset($this->_expected_errors) && count($this->_expected_errors) > 0
+                && count($exp = end($this->_expected_errors))
+            ) {
+                if ($exp[0] === '*' || (is_int(reset($exp)) && in_array($code, $exp))
+                    || (is_string(reset($exp))
+                        && in_array($message, $exp))
+                ) {
                     $mode = PEAR_ERROR_RETURN;
                 }
             }
@@ -514,7 +525,7 @@ if (!class_exists('PEAR')) {
 
             if ((int)PHP_VERSION < 5) {
                 // little non-eval hack to fix bug #12147
-                include 'PEAR/FixPHP5PEARWarnings.php';
+                include __DIR__ . '/PEAR/FixPHP5PEARWarnings.php';
 
                 return $a;
             }
@@ -532,9 +543,9 @@ if (!class_exists('PEAR')) {
          * Simpler form of raiseError with fewer options.  In most cases
          * message, code and userinfo are enough.
          *
-         * @param mixed $message   a text error message or a PEAR error object
+         * @param mixed  $message  a text error message or a PEAR error object
          *
-         * @param int $code        a numeric error code (it is up to your class
+         * @param int    $code     a numeric error code (it is up to your class
          *                         to define these if you want to use codes)
          *
          * @param string $userinfo If you need to pass along for example debug
@@ -699,8 +710,8 @@ if (!class_exists('PEAR')) {
          * OS independant PHP extension load. Remember to take care
          * on the correct extension name for case sensitive OSes.
          *
-         * @param string $ext The extension name
-         * @return bool Success or not on the dl() call
+         * @param  string $ext The extension name
+         * @return bool   Success or not on the dl() call
          */
         public function loadExtension($ext)
         {
@@ -730,7 +741,7 @@ if (!class_exists('PEAR')) {
     }
 }
 if (PEAR_ZE2) {
-    include_once 'PEAR5.php';
+    include_once __DIR__ . '/PEAR5.php';
 }
 if (!function_exists('_PEAR_call_destructors()')) {
     function _PEAR_call_destructors()
@@ -766,7 +777,9 @@ if (!function_exists('_PEAR_call_destructors()')) {
         }
 
         // Now call the shutdown functions
-        if (isset($GLOBALS['_PEAR_shutdown_funcs']) && is_array($GLOBALS['_PEAR_shutdown_funcs']) && !empty($GLOBALS['_PEAR_shutdown_funcs'])) {
+        if (isset($GLOBALS['_PEAR_shutdown_funcs']) && is_array($GLOBALS['_PEAR_shutdown_funcs'])
+            && !empty($GLOBALS['_PEAR_shutdown_funcs'])
+        ) {
             foreach ($GLOBALS['_PEAR_shutdown_funcs'] as $value) {
                 call_user_func_array($value[0], $value[1]);
             }
@@ -811,13 +824,13 @@ if (!class_exists('PEAR_Error')) {
          *
          * @param string $message  message
          *
-         * @param int $code        (optional) error code
+         * @param int    $code     (optional) error code
          *
-         * @param int $mode        (optional) error mode, one of: PEAR_ERROR_RETURN,
+         * @param int    $mode     (optional) error mode, one of: PEAR_ERROR_RETURN,
          *                         PEAR_ERROR_PRINT, PEAR_ERROR_DIE, PEAR_ERROR_TRIGGER,
          *                         PEAR_ERROR_CALLBACK or PEAR_ERROR_EXCEPTION
          *
-         * @param mixed $options   (optional) error level, _OR_ in the case of
+         * @param mixed  $options  (optional) error level, _OR_ in the case of
          *                         PEAR_ERROR_CALLBACK, the callback function or object/method
          *                         tuple.
          *
@@ -826,8 +839,13 @@ if (!class_exists('PEAR_Error')) {
          * @access public
          *
          */
-        public function __construct($message = 'unknown error', $code = null, $mode = null, $options = null, $userinfo = null)
-        {
+        public function __construct(
+            $message = 'unknown error',
+            $code = null,
+            $mode = null,
+            $options = null,
+            $userinfo = null
+        ) {
             if ($mode === null) {
                 $mode = PEAR_ERROR_RETURN;
             }
@@ -1027,7 +1045,8 @@ if (!class_exists('PEAR_Error')) {
             $levels = array(
                 E_USER_NOTICE  => 'notice',
                 E_USER_WARNING => 'warning',
-                E_USER_ERROR   => 'error');
+                E_USER_ERROR   => 'error'
+            );
             if ($this->mode & PEAR_ERROR_CALLBACK) {
                 if (is_array($this->callback)) {
                     $callback = (is_object($this->callback[0]) ? strtolower(get_class($this->callback[0])) : $this->callback[0]) . '::' . $this->callback[1];
@@ -1035,7 +1054,8 @@ if (!class_exists('PEAR_Error')) {
                     $callback = $this->callback;
                 }
 
-                return sprintf('[%s: message="%s" code=%d mode=callback ' . 'callback=%s prefix="%s" info="%s"]', strtolower(get_class($this)), $this->message, $this->code, $callback, $this->error_message_prefix, $this->userinfo);
+                return sprintf('[%s: message="%s" code=%d mode=callback ' . 'callback=%s prefix="%s" info="%s"]', strtolower(get_class($this)), $this->message, $this->code, $callback,
+                               $this->error_message_prefix, $this->userinfo);
             }
             if ($this->mode & PEAR_ERROR_PRINT) {
                 $modes[] = 'print';
@@ -1050,7 +1070,8 @@ if (!class_exists('PEAR_Error')) {
                 $modes[] = 'return';
             }
 
-            return sprintf('[%s: message="%s" code=%d mode=%s level=%s ' . 'prefix="%s" info="%s"]', strtolower(get_class($this)), $this->message, $this->code, implode('|', $modes), $levels[$this->level], $this->error_message_prefix, $this->userinfo);
+            return sprintf('[%s: message="%s" code=%d mode=%s level=%s ' . 'prefix="%s" info="%s"]', strtolower(get_class($this)), $this->message, $this->code, implode('|', $modes),
+                           $levels[$this->level], $this->error_message_prefix, $this->userinfo);
         }
     }
 }

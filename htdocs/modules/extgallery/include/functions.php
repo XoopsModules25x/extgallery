@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: functions.php 8088 2011-11-06 09:38:12Z beckmi $
  * @param $option
  * @return bool
  */
@@ -27,16 +26,22 @@ function gal_getmoduleoption($option)
     }
 
     $retval = false;
-    if (isset($xoopsModuleConfig) && (is_object($xoopsModule) && $xoopsModule->getVar('dirname') === 'extgallery' && $xoopsModule->getVar('isactive'))) {
+    if (isset($xoopsModuleConfig)
+        && (is_object($xoopsModule) && $xoopsModule->getVar('dirname') === 'extgallery'
+            && $xoopsModule->getVar('isactive'))
+    ) {
         if (isset($xoopsModuleConfig[$option])) {
             $retval = $xoopsModuleConfig[$option];
         }
     } else {
-        $module_handler = xoops_getHandler('module');
-        $module         = $module_handler->getByDirname('extgallery');
-        $config_handler = xoops_getHandler('config');
+        /** @var XoopsModuleHandler $moduleHandler */
+        $moduleHandler = xoops_getHandler('module');
+        $module        = $moduleHandler->getByDirname('extgallery');
+
+        /** @var XoopsConfigHandler $configHandler */
+        $configHandler = xoops_getHandler('config');
         if ($module) {
-            $moduleConfig = $config_handler->getConfigsByCat(0, $module->getVar('mid'));
+            $moduleConfig = $configHandler->getConfigsByCat(0, $module->getVar('mid'));
             if (isset($moduleConfig[$option])) {
                 $retval = $moduleConfig[$option];
             }

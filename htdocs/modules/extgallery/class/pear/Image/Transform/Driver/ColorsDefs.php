@@ -2,7 +2,7 @@
 /**
  * Mapping from named colors to RGB values.
  *
- * @var  array
+ * @var array
  */
 $colornames = array(
     'aliceblue'            => array(240, 248, 255),
@@ -144,4 +144,5 @@ $colornames = array(
     'white'                => array(255, 255, 255),
     'whitesmoke'           => array(245, 245, 245),
     'yellow'               => array(255, 255, 0),
-    'yellowgreen'          => array(154, 205, 50));
+    'yellowgreen'          => array(154, 205, 50)
+);

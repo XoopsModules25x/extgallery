@@ -13,14 +13,15 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: comment_new.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 include dirname(dirname(__DIR__)) . '/mainfile.php';
 
 $com_itemid = isset($_GET['com_itemid']) ? (int)$_GET['com_itemid'] : 0;
 if ($com_itemid > 0) {
+    /** @var ExtgalleryPhotoHandler $photoHandler */
     $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+    /** @var ExtgalleryPhoto $photo */
     $photo        = $photoHandler->getPhoto($com_itemid);
     if ($photo->getVar('photo_title')) {
         $title = $photo->getVar('photo_title');

@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Voltan (djvoltan@gmail.com)
  * @package     ExtGallery
- * @version     $Id: public-rss.php 10024 2012-08-08 07:32:05Z beckmi $
  */
 
 require dirname(dirname(__DIR__)) . '/mainfile.php';
@@ -91,7 +90,8 @@ if (!$xoopsTpl->is_cached('db:extgallery_public-rss.tpl')) {
 
     $param = array(
         'limit' => $xoopsModuleConfig['perpage_rss'],
-        'cat'   => $categories);
+        'cat'   => $categories
+    );
 
     $photos = $photoHandler->objectToArray($photoHandler->getLastPhoto($param));
     $xoopsTpl->assign('photos', $photos);

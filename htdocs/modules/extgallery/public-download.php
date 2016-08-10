@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-download.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 require dirname(dirname(__DIR__)) . '/mainfile.php';
@@ -65,7 +64,9 @@ header("Content-Disposition: attachment; filename=\"" . $photo->getVar('photo_na
 //    $photoName = "medium/".$photo->getVar('photo_name');
 //}
 
-if ($permHandler->isAllowed($xoopsUser, 'public_download_original', $photo->getVar('cat_id')) && $photo->getVar('photo_orig_name') != '') {
+if ($permHandler->isAllowed($xoopsUser, 'public_download_original', $photo->getVar('cat_id'))
+    && $photo->getVar('photo_orig_name') != ''
+) {
     $photoName = 'original/' . $photo->getVar('photo_orig_name');
 } else {
     if ($photo->getVar('photo_havelarge')) {

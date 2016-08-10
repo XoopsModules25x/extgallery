@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: ExtgalleryPersistableObjectHandler.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 /**
@@ -43,11 +42,11 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
      *
      * @param XoopsDatabase $db        {@link XoopsDatabase}
      *                                 object
-     * @param string $tablename        Name of database table
-     * @param string $classname        Name of Class, this handler is managing
-     * @param string $keyname          Name of the property, holding the key
+     * @param string        $tablename Name of database table
+     * @param string        $classname Name of Class, this handler is managing
+     * @param string        $keyname   Name of the property, holding the key
      *
-     * @param bool $idenfierName
+     * @param bool          $idenfierName
      *
      */
     public function __construct(XoopsDatabase $db, $tablename, $classname, $keyname, $idenfierName = false)
@@ -61,7 +60,6 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
             $this->identifierName = $idenfierName;
         }
     }
-
 
     /**
      * create a new user
@@ -98,15 +96,15 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     /**
      * retrieve an object
      *
-     * @param  mixed $id       ID of the object - or array of ids for joint keys. Joint keys MUST be given in the same order as in the constructor
-     * @param  bool $as_object whether to return an object or an array
+     * @param  mixed $id        ID of the object - or array of ids for joint keys. Joint keys MUST be given in the same order as in the constructor
+     * @param  bool  $as_object whether to return an object or an array
      * @return mixed reference to the object, FALSE if failed
      */
     public function get($id, $as_object = true)
     {
         if (is_array($this->keyName)) {
             $criteria = new CriteriaCompo();
-            for ($i = 0; $i < count($this->keyName); ++$i) {
+            for ($i = 0, $iMax = count($this->keyName); $i < $iMax; ++$i) {
                 $criteria->add(new Criteria($this->keyName[$i], (int)$id[$i]));
             }
         } else {
@@ -124,9 +122,9 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     /**
      * retrieve objects from the database
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement} conditions to be met
-     * @param bool $id_as_key           use the ID as key for the array?
-     * @param bool $as_object           return an array of objects?
+     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param bool            $id_as_key use the ID as key for the array?
+     * @param bool            $as_object return an array of objects?
      *
      * @return array
      */
@@ -156,9 +154,9 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     /**
      * Convert a database resultset to a returnable array
      *
-     * @param XoopsObject $result database resultset
-     * @param bool $id_as_key     - should NOT be used with joint keys
-     * @param bool $as_object
+     * @param XoopsObject $result    database resultset
+     * @param bool        $id_as_key - should NOT be used with joint keys
+     * @param bool        $as_object
      *
      * @return array
      */
@@ -184,7 +182,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
                     $ret[$myrow[$this->keyName]] =& $obj;
                 } else {
                     $row  = array();
-                    $vars = $obj->getVars();
+                    $vars =& $obj->getVars();
                     foreach (array_keys($vars) as $i) {
                         $row[$i] = $obj->getVar($i);
                     }
@@ -201,8 +199,8 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
      * Retrieve a list of objects as arrays - DON'T USE WITH JOINT KEYS
      *
      * @param CriteriaElement $criteria {@link CriteriaElement} conditions to be met
-     * @param int $limit                Max number of objects to fetch
-     * @param int $start                Which record to start at
+     * @param int             $limit    Max number of objects to fetch
+     * @param int             $start    Which record to start at
      *
      * @return array
      */
@@ -248,7 +246,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
      * count objects matching a condition
      *
      * @param  CriteriaElement $criteria {@link CriteriaElement} to match
-     * @return int    count of objects
+     * @return int             count of objects
      */
     public function getCount(CriteriaElement $criteria = null)
     {
@@ -289,14 +287,14 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
      * delete an object from the database
      *
      * @param  XoopsObject $id id of the object to delete
-     * @param  bool $force
-     * @return bool  FALSE if failed.
+     * @param  bool        $force
+     * @return bool        FALSE if failed.
      */
     public function delete(XoopsObject $id, $force = false)
     {
         if (is_array($this->keyName)) {
             $clause = array();
-            for ($i = 0; $i < count($this->keyName); ++$i) {
+            for ($i = 0, $iMax = count($this->keyName); $i < $iMax; ++$i) {
                 $clause[] = $this->keyName[$i] . ' = ' . $id[$i];
             }
             $whereclause = implode(' AND ', $clause);
@@ -319,10 +317,10 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     /**
      * insert a new object in the database
      *
-     * @param  XoopsObject $obj  reference to the object
-     * @param  bool $force       whether to force the query execution despite security settings
-     * @param  bool $checkObject check if the object is dirty and clean the attributes
-     * @return bool   FALSE if failed, TRUE if already present and unchanged or successful
+     * @param  XoopsObject $obj         reference to the object
+     * @param  bool        $force       whether to force the query execution despite security settings
+     * @param  bool        $checkObject check if the object is dirty and clean the attributes
+     * @return bool        FALSE if failed, TRUE if already present and unchanged or successful
      */
 
     public function insert(XoopsObject $obj, $force = false, $checkObject = true)
@@ -365,7 +363,10 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
         } else {
             $sql = 'UPDATE ' . $this->table . ' SET';
             foreach ($cleanvars as $key => $value) {
-                if ((!is_array($this->keyName) && $key == $this->keyName) || (is_array($this->keyName) && in_array($key, $this->keyName))) {
+                if ((!is_array($this->keyName) && $key == $this->keyName)
+                    || (is_array($this->keyName)
+                        && in_array($key, $this->keyName))
+                ) {
                     continue;
                 }
                 if (isset($notfirst)) {
@@ -376,7 +377,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
             }
             if (is_array($this->keyName)) {
                 $whereclause = '';
-                for ($i = 0; $i < count($this->keyName); ++$i) {
+                for ($i = 0, $iMax = count($this->keyName); $i < $iMax; ++$i) {
                     if ($i > 0) {
                         $whereclause .= ' AND ';
                     }
@@ -405,11 +406,11 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     /**
      * Change a value for objects with a certain criteria
      *
-     * @param string $fieldname         Name of the field
-     * @param string $fieldvalue        Value to write
-     * @param CriteriaElement $criteria {@link CriteriaElement}
+     * @param string          $fieldname  Name of the field
+     * @param string          $fieldvalue Value to write
+     * @param CriteriaElement $criteria   {@link CriteriaElement}
      *
-     * @param  bool $force
+     * @param  bool           $force
      * @return bool
      */
     public function updateAll($fieldname, $fieldvalue, $criteria = null, $force = false)
@@ -513,7 +514,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
 
     /**
      * @param        $objects
-     * @param array $externalKeys
+     * @param array  $externalKeys
      * @param string $format
      *
      * @return array
@@ -615,7 +616,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     }
 
     /**
-     * @param null $criteria
+     * @param null   $criteria
      * @param string $sum
      *
      * @return array|int|string
@@ -656,7 +657,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     }
 
     /**
-     * @param null $criteria
+     * @param null   $criteria
      * @param string $max
      *
      * @return array|int|string
@@ -697,7 +698,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     }
 
     /**
-     * @param null $criteria
+     * @param null   $criteria
      * @param string $avg
      *
      * @return int

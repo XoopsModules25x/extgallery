@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: xoops_version.php 10621 2013-01-01 19:56:46Z beckmi $
  */
 
 $modversion['name']        = _MI_EXTGAL_NAME;
@@ -25,7 +24,7 @@ $modversion['help']        = 'page=help';
 $modversion['license']     = 'GNU GPL 2.0';
 $modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html';
 $modversion['official']    = 1; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
-$modversion['image']       = 'assets/images/extgallery_logo.png';
+$modversion['image']       = 'assets/images/logoModule.png';
 $modversion['dirname']     = basename(__DIR__);
 $modversion['onInstall']   = 'include/install_function.php';
 $modversion['onUpdate']    = 'include/update_function.php';
@@ -36,13 +35,13 @@ $modversion['sysicons32']     = 'Frameworks/moduleclasses/icons/32';
 $modversion['modicons16']     = 'assets/images/icons/16';
 $modversion['modicons32']     = 'assets/images/icons/32';
 //about
-$modversion['module_status']       = 'Beta 2';
-$modversion['release_date']        = '2014/04/23';
+$modversion['module_status']       = 'RC 1';
+$modversion['release_date']        = '2016/08/10';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.8';
-$modversion['min_admin']           = '1.1';
+$modversion['min_admin']           = '1.2';
 $modversion['min_db']              = array('mysql' => '5.0.7', 'mysqli' => '5.0.7');
 
 // Admin things
@@ -53,7 +52,9 @@ $modversion['adminmenu']   = 'admin/menu.php';
 
 // Menu
 $modversion['hasMain'] = 1;
-if (isset($GLOBALS['xoopsModule']) && $GLOBALS['xoopsModule']->getVar('dirname') === 'extgallery') {
+if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
+    && $GLOBALS['xoopsModule']->getVar('dirname') === 'extgallery'
+) {
     if ($GLOBALS['xoopsUser'] != null) {
         $modversion['sub'][0]['name'] = _MI_EXTGALLERY_USERALBUM;
         $modversion['sub'][0]['url']  = 'public-useralbum.php?id=' . $GLOBALS['xoopsUser']->uid();
@@ -107,7 +108,8 @@ $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['options']     = array(
     _MI_EXTGALLERY_SLIDESHOW => 'slideshow',
-    _MI_EXTGALLERY_ALBUM     => 'album');
+    _MI_EXTGALLERY_ALBUM     => 'album'
+);
 $modversion['config'][$i]['default']     = 'album';
 ++$i;
 $modversion['config'][$i]['name']        = 'display_set_order';
@@ -117,7 +119,8 @@ $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['options']     = array(
     _MI_EXTGALLERY_DESC => 'DESC',
-    _MI_EXTGALLERY_ASC  => 'ASC');
+    _MI_EXTGALLERY_ASC  => 'ASC'
+);
 $modversion['config'][$i]['default']     = 'DESC';
 ++$i;
 $modversion['config'][$i]['name']        = 'use_extended_upload';
@@ -128,7 +131,8 @@ $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'applet';
 $modversion['config'][$i]['options']     = array(
     _MI_EXTGALLERY_EXTENDED => 'applet',
-    _MI_EXTGALLERY_STANDARD => 'html');
+    _MI_EXTGALLERY_STANDARD => 'html'
+);
 ++$i;
 $modversion['config'][$i]['name']        = 'enable_jquery';
 $modversion['config'][$i]['title']       = '_MI_EXTGAL_JQUERY';
@@ -154,8 +158,8 @@ $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'dhtml';
 xoops_load('xoopseditorhandler');
-$editor_handler                      = XoopsEditorHandler::getInstance();
-$modversion['config'][$i]['options'] = array_flip($editor_handler->getList());
+$editorHandler                       = XoopsEditorHandler::getInstance();
+$modversion['config'][$i]['options'] = array_flip($editorHandler->getList());
 ++$i;
 $modversion['config'][$i]['name']        = 'photoname_pattern';
 $modversion['config'][$i]['title']       = '_MI_EXTGAL_NAME_PATTERN';
@@ -189,7 +193,8 @@ $modversion['config'][$i]['options']     = array(
     _MI_EXTGAL_AJAX_OVERLAY    => 'overlay',
     _MI_EXTGAL_AJAX_TOOLTIP    => 'tooltip',
     _MI_EXTGAL_AJAX_FANCYBOX   => 'fancybox',
-    _MI_EXTGAL_AJAX_PRETTPHOTO => 'prettyphoto');
+    _MI_EXTGAL_AJAX_PRETTPHOTO => 'prettyphoto'
+);
 $modversion['config'][$i]['default']     = 'none';
 ++$i;
 $modversion['config'][$i]['name']        = 'nb_column';
@@ -222,7 +227,8 @@ $modversion['config'][$i]['options']     = array(
     _MI_EXTGAL_SLIDESHOW_GVIEW => 'galleryview',
     _MI_EXTGAL_SLIDESHOW_GRIA  => 'galleria',
     _MI_EXTGAL_SLIDESHOW_MICRO => 'microgallery',
-    _MI_EXTGAL_SLIDESHOW_GFIC  => 'galleriffic');
+    _MI_EXTGAL_SLIDESHOW_GFIC  => 'galleriffic'
+);
 $modversion['config'][$i]['default']     = 'galleryview';
 ++$i;
 $modversion['config'][$i]['name']        = 'break' . $i;
@@ -333,7 +339,11 @@ $modversion['config'][$i]['description'] = '_MI_EXTGAL_INFO_VIEW_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'both';
-$modversion['config'][$i]['options']     = array(_MI_EXTGAL_INFO_BOTH => 'both', _MI_EXTGAL_INFO_ALBUM => 'album', _MI_EXTGAL_INFO_PHOTO => 'photo');
+$modversion['config'][$i]['options']     = array(
+    _MI_EXTGAL_INFO_BOTH  => 'both',
+    _MI_EXTGAL_INFO_ALBUM => 'album',
+    _MI_EXTGAL_INFO_PHOTO => 'photo'
+);
 /**
  * DNPROSSI - Public User Info
  * Shows-hides info from public or user album and photo
@@ -345,7 +355,11 @@ $modversion['config'][$i]['description'] = '_MI_EXTGAL_INFO_PUBUSR_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'both';
-$modversion['config'][$i]['options']     = array(_MI_EXTGAL_INFO_BOTH => 'both', _MI_EXTGAL_INFO_USER => 'user', _MI_EXTGAL_INFO_PUBLIC => 'public');
+$modversion['config'][$i]['options']     = array(
+    _MI_EXTGAL_INFO_BOTH   => 'both',
+    _MI_EXTGAL_INFO_USER   => 'user',
+    _MI_EXTGAL_INFO_PUBLIC => 'public'
+);
 /**
  * DNPROSSI - Enable Info
  */
@@ -474,7 +488,8 @@ $modversion['config'][$i]['options']     = array(
     _MI_EXTGAL_NONE          => 0,
     _MI_EXTGAL_SOCIALNETWORM => 1,
     _MI_EXTGAL_BOOKMARK      => 2,
-    _MI_EXTGAL_INFO_BOTH     => 3);
+    _MI_EXTGAL_INFO_BOTH     => 3
+);
 $modversion['config'][$i]['default']     = 0;
 ++$i;
 $modversion['config'][$i]['name']        = 'break' . $i;

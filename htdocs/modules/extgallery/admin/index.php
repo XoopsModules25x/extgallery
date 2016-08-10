@@ -14,13 +14,9 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: index.php 10870 2013-01-23 06:07:16Z beckmi $
  */
 
 include_once __DIR__ . '/admin_header.php';
-
-include_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include __DIR__ . '/function.php';
 include __DIR__ . '/moduleUpdateFunction.php';
 
 $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
@@ -28,14 +24,8 @@ $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 xoops_cp_header();
 
-// DNPROSSI - In PHP 5.3.0 "JPG Support" was renamed to "JPEG Support".
-// This leads to the following error: "Undefined index: JPG Support in
-// Fixed with version compare
-if (version_compare(PHP_VERSION, '5.3.0', '<')) {
-    $jpegsupport = 'JPG Support';
-} else {
-    $jpegsupport = 'JPEG Support';
-}
+$jpegsupport = 'JPEG Support';
+
 $code = 'function gd_info() {
        $array = Array(
                        "GD Version" => "",
@@ -149,7 +139,8 @@ function imageMagickSupportType()
     $ret = array(
         'GIF Support' => "<span style=\"color:#FF0000;\"><b>KO</b></span>",
         'JPG Support' => "<span style=\"color:#FF0000;\"><b>KO</b></span>",
-        'PNG Support' => "<span style=\"color:#FF0000;\"><b>KO</b></span>");
+        'PNG Support' => "<span style=\"color:#FF0000;\"><b>KO</b></span>"
+    );
 
     foreach ($data as $line) {
         preg_match("`GIF\* GIF.*([rw]{2})`", $line, $matches);
@@ -184,11 +175,9 @@ function is__writable($path)
     if ($path{strlen($path) - 1} === '/') {
         // recursively return a temporary file path
 
-        return is__writable($path . uniqid(mt_rand()) . '.tmp');
-    } else {
-        if (is_dir($path)) {
-            return is__writable($path . '/' . uniqid(mt_rand()) . '.tmp');
-        }
+        return is__writable($path . uniqid(mt_rand(), true) . '.tmp');
+    } elseif (is_dir($path)) {
+        return is__writable($path . '/' . uniqid(mt_rand(), true) . '.tmp');
     }
     // check tmp file for read/write capabilities
     $rm = file_exists($path);
@@ -211,7 +200,8 @@ $folder = array(
     XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original',
     XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large',
     XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium',
-    XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb');
+    XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb'
+);
 
 $index_admin = new ModuleAdmin();
 
@@ -220,7 +210,8 @@ if ($xoopsModuleConfig['graphic_lib'] === 'GD') {
     $gd = gd_info();
     // GD graphic lib
     $test1 = ($gd['GD Version'] == '') ? "<span style=\"color:#FF0000;\"><b>KO</b></span>" : $gd['GD Version'];
-    ($gd['GIF Read Support'] && $gd['GIF Create Support']) ? $test2 = "<span style=\"color:#33CC33;\"><b>OK</b></span>" : $test2 = "<span style=\"color:#FF0000;\"><b>KO</b></span>";
+    ($gd['GIF Read Support']
+     && $gd['GIF Create Support']) ? $test2 = "<span style=\"color:#33CC33;\"><b>OK</b></span>" : $test2 = "<span style=\"color:#FF0000;\"><b>KO</b></span>";
     $gd['' . $jpegsupport . ''] ? $test3 = "<span style=\"color:#33CC33;\"><b>OK</b></span>" : $test3 = "<span style=\"color:#FF0000;\"><b>KO</b></span>";
     $gd['PNG Support'] ? $test4 = "<span style=\"color:#33CC33;\"><b>OK</b></span>" : $test4 = "<span style=\"color:#FF0000;\"><b>KO</b></span>";
 

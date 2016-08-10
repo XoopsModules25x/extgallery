@@ -9,11 +9,10 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright   XOOPS Project (http://xoops.org)
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: perm.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 return $config = array(
@@ -24,54 +23,64 @@ return $config = array(
             'maskTitle' => '_AM_EXTGALLERY_CAN_ACCESS',
             'title'     => '_AM_EXTGALLERY_ACCESS_PERM',
             'desc'      => '_AM_EXTGALLERY_ACCESS_PERM_DESC',
-            'info'      => '_AM_EXTGALLERY_ACCESS_PERM_INFO'),
+            'info'      => '_AM_EXTGALLERY_ACCESS_PERM_INFO'
+        ),
         2 => array(
             'maskId'    => 2,
             'name'      => 'public_rate',
             'maskTitle' => '_AM_EXTGALLERY_CAN_RATE',
             'title'     => '_AM_EXTGALLERY_RATE_PERM',
             'desc'      => '_AM_EXTGALLERY_RATE_PERM_DESC',
-            'info'      => '_AM_EXTGALLERY_RATE_PERM_INFO'),
+            'info'      => '_AM_EXTGALLERY_RATE_PERM_INFO'
+        ),
         3 => array(
             'maskId'    => 4,
             'name'      => 'public_ecard',
             'maskTitle' => '_AM_EXTGALLERY_CAN_SEND_ECARD',
             'title'     => '_AM_EXTGALLERY_PUBLIC_ECARD',
             'desc'      => '_AM_EXTGALLERY_PUBLIC_ECARD_DESC',
-            'info'      => '_AM_EXTGALLERY_PUBLIC_ECARD_INFO'),
+            'info'      => '_AM_EXTGALLERY_PUBLIC_ECARD_INFO'
+        ),
         4 => array(
             'maskId'    => 8,
             'name'      => 'public_download',
             'maskTitle' => '_AM_EXTGALLERY_CAN_DOWNLOAD',
             'title'     => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD',
             'desc'      => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_DESC',
-            'info'      => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_INFO'),
+            'info'      => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_INFO'
+        ),
         5 => array(
             'maskId'    => 16,
             'name'      => 'public_download_original',
             'maskTitle' => '_AM_EXTGALLERY_CAN_DOWNLOAD_ORIG',
             'title'     => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG',
             'desc'      => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_DESC',
-            'info'      => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_INFO'),
+            'info'      => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_INFO'
+        ),
         6 => array(
             'maskId'    => 32,
             'name'      => 'public_upload',
             'maskTitle' => '_AM_EXTGALLERY_CAN_UPLOAD',
             'title'     => '_AM_EXTGALLERY_PUBLIC_UPLOAD',
             'desc'      => '_AM_EXTGALLERY_PUBLIC_UPLOAD_DESC',
-            'info'      => '_AM_EXTGALLERY_PUBLIC_UPLOAD_INFO'),
+            'info'      => '_AM_EXTGALLERY_PUBLIC_UPLOAD_INFO'
+        ),
         7 => array(
             'maskId'    => 64,
             'name'      => 'public_autoapprove',
             'maskTitle' => '_AM_EXTGALLERY_AUTOAPPROVE',
             'title'     => '_AM_EXTGALLERY_PUBLIC_AUTOAPROVE',
             'desc'      => '_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_DESC',
-            'info'      => '_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_INFO'),
+            'info'      => '_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_INFO'
+        ),
         8 => array(
             'maskId'    => 128,
             'name'      => 'public_displayed',
             'maskTitle' => '_AM_EXTGALLERY_DISPLAYED',
             'title'     => '_AM_EXTGALLERY_PUBLIC_DISPLAYED',
             'desc'      => '_AM_EXTGALLERY_PUBLIC_DISPLAYED_DESC',
-            'info'      => '_AM_EXTGALLERY_PUBLIC_DISPLAYED_INFO')),
-    'pluginPerm' => array());
+            'info'      => '_AM_EXTGALLERY_PUBLIC_DISPLAYED_INFO'
+        )
+    ),
+    'pluginPerm' => array()
+);

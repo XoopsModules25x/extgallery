@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-userphoto.php 10874 2013-01-23 17:23:02Z beckmi $
  */
 
 require dirname(dirname(__DIR__)) . '/mainfile.php';
@@ -114,7 +113,8 @@ $lang = array(
     'sends'        => _MD_EXTGALLERY_SENDS,
     'submitter'    => _MD_EXTGALLERY_SUBMITTER,
     'allPhotoBy'   => _MD_EXTGALLERY_ALL_PHOTO_BY,
-    'albumName'    => $albumName);
+    'albumName'    => $albumName
+);
 $xoopsTpl->assign('lang', $lang);
 
 if ($xoopsModuleConfig['enable_rating']) {

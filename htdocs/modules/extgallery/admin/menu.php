@@ -14,14 +14,14 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: menu.php 10467 2012-12-19 02:04:40Z beckmi $
  */
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-$dirname        = basename(dirname(__DIR__));
-$module_handler = xoops_getHandler('module');
-$module         = $module_handler->getByDirname($dirname);
-$pathIcon32     = $module->getInfo('icons32');
+$dirname       = basename(dirname(__DIR__));
+/** @var XoopsModuleHandler $moduleHandler */
+$moduleHandler = xoops_getHandler('module');
+$module        = $moduleHandler->getByDirname($dirname);
+$pathIcon32    = $module->getInfo('icons32');
 
 //xoops_loadLanguage('admin', $dirname);
 

@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Voltan (djvoltan@gmail.com)
  * @package     ExtGallery
- * @version     $Id: view.tag.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 //todo: check this file

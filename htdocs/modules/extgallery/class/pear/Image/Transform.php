@@ -22,7 +22,6 @@
  * @author     Philippe Jausions <Philippe.Jausions@11abacus.com>
  * @copyright  2002-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: Transform.php 8088 2011-11-06 09:38:12Z beckmi $
  * @link       http://pear.php.net/package/Image_Transform
  */
 
@@ -137,7 +136,8 @@ class Image_Transform
         'scaleMethod' => 'smooth',
         'canvasColor' => array(255, 255, 255),
         'pencilColor' => array(0, 0, 0),
-        'textColor'   => array(0, 0, 0));
+        'textColor'   => array(0, 0, 0)
+    );
 
     /**
      * Flag for whether settings should be discarded on saving/display of image
@@ -181,7 +181,8 @@ class Image_Transform
         'font'         => 'Arial.ttf',
         'size'         => '12',
         'angle'        => 0,
-        'resize_first' => false);
+        'resize_first' => false
+    );
 
     /**
      * Creates a new Image_Transform object
@@ -201,7 +202,8 @@ class Image_Transform
             $aExtensions = array(
                 'imagick' => 'Imagick2',
                 'gd'      => 'GD',
-                'imlib'   => 'Imlib');
+                'imlib'   => 'Imlib'
+            );
             foreach ($aExtensions as $sExt => $sDriver) {
                 if (PEAR::loadExtension($sExt)) {
                     $driver = $sDriver;
@@ -285,9 +287,9 @@ class Image_Transform
      * Alias for resize()
      *
      * @see resize()
-     * @param int $new_x
-     * @param int $new_y
-     * @param null $options
+     * @param  int  $new_x
+     * @param  int  $new_y
+     * @param  null $options
      * @return mixed
      */
     public function scaleByXY($new_x = 0, $new_y = 0, $options = null)
@@ -588,7 +590,7 @@ class Image_Transform
      * If either parameter is 0 it will be scaled proportionally
      *
      * @param  mixed $new_size (0, number, percentage 10% or 0.1)
-     * @param  int $old_size
+     * @param  int   $old_size
      * @return mixed Integer or PEAR_error
      * @access protected
      */
@@ -741,7 +743,8 @@ class Image_Transform
             $this->img_y,
             $this->_convert_image_type($this->type),
             'height="' . $this->img_y . '" width="' . $this->img_x . '"',
-            'mime' => $this->getMimeType());
+            'mime' => $this->getMimeType()
+        );
     }
 
     /**
@@ -816,8 +819,8 @@ class Image_Transform
      * Place holder for the real display method
      * used by extended methods to do the resizing
      *
-     * @param  string $type   Format of image to save as
-     * @param  mixed $quality Format-dependent
+     * @param  string $type    Format of image to save as
+     * @param  mixed  $quality Format-dependent
      * @return PEAR_error
      * @access public
      */
@@ -847,7 +850,7 @@ class Image_Transform
      *
      * @param  string $filename Filename to save image to
      * @param  string $type     Format of image to save as
-     * @param  mixed $quality   Format-dependent
+     * @param  mixed  $quality  Format-dependent
      * @return PEAR_error
      * @access public
      */
@@ -933,7 +936,7 @@ class Image_Transform
      */
     public function getTempDir()
     {
-        include_once 'System.php';
+        include_once __DIR__ . '/System.php';
 
         return System::tmpdir();
     }
@@ -1079,8 +1082,8 @@ class Image_Transform
      * Returns a color option
      *
      * @param  string $colorOf one of 'canvasColor', 'pencilColor', 'fontColor'
-     * @param  array $options
-     * @param  array $default  default value to return if color not found
+     * @param  array  $options
+     * @param  array  $default default value to return if color not found
      * @return array  an RGB color array
      * @access protected
      */
@@ -1096,7 +1099,7 @@ class Image_Transform
                 return $this->colorhex2colorarray($color);
             }
             static $colornames = array();
-            include_once(XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform/Driver/ColorsDefs.php');
+            include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform/Driver/ColorsDefs.php';
 
             return isset($colornames[$color]) ? $colornames[$color] : $default;
         }
@@ -1107,9 +1110,9 @@ class Image_Transform
     /**
      * Returns an option
      *
-     * @param  string $name   name of option
-     * @param  array $options local override option array
-     * @param  mixed $default default value to return if option is not found
+     * @param  string $name    name of option
+     * @param  array  $options local override option array
+     * @param  mixed  $default default value to return if option is not found
      * @return mixed  the option
      * @access protected
      */

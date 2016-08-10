@@ -39,7 +39,8 @@ define('_AM_EXTGALLERY_EXTGALLERY_VERSION', 'eXtGallery Version');
 
 // Public category page
 define('_AM_EXTGALLERY_MODDELETE_PUBLICCAT', 'Modify or delete public category');
-define('_AM_EXTGALLERY_MODDELETE_PUBLICCAT_INFO', 'You can find a list of all categories/albums available on your web site. The number between the bracket at the end of the category name is the weight of the category.');
+define('_AM_EXTGALLERY_MODDELETE_PUBLICCAT_INFO',
+       'You can find a list of all categories/albums available on your web site. The number between the bracket at the end of the category name is the weight of the category.');
 define('_AM_EXTGALLERY_ADD_PUBLIC_CAT', 'Add a public category');
 define('_AM_EXTGALLERY_ADD_PUBLIC_CAT_INFO', 'You can add a category only under a category without a photo. Only valid category are diplayed in the selection below.');
 define('_AM_EXTGALLERY_NAME', 'Name');
@@ -55,7 +56,8 @@ define('_AM_EXTGALLERY_NO_CATEGORY_SELECTED', 'No category selected');
 // Photo page
 define('_AM_EXTGALLERY_ADD_BATCH', 'Add batch photos');
 define('_AM_EXTGALLERY_BATCH_PATH', 'Batch folder path');
-define('_AM_EXTGALLERY_ADD_BATCH_INFO', 'There are <b>%d</b> photos in the batch folder. By pressing the SUBMIT button below, all photos in the batch folder will be uploaded to the album/albums selected below.');
+define('_AM_EXTGALLERY_ADD_BATCH_INFO',
+       'There are <b>%d</b> photos in the batch folder. By pressing the SUBMIT button below, all photos in the batch folder will be uploaded to the album/albums selected below.');
 define('_AM_EXTGALLERY_EDITDELETE_PHOTO', 'Edit/Delete photo');
 define('_AM_EXTGALLERY_EDITDELETE_PHOTO_INFO', 'Select the category in which you wish to edit or delete photos.');
 define('_AM_EXTGALLERY_PENDING_PHOTO', 'Pending photo');
@@ -91,7 +93,8 @@ define('_AM_EXTGALLERY_EXTRA_INFO', 'Extra info');
 
 // Permissions
 define('_AM_EXTGALLERY_PUBLIC_PERM_MASK', 'Public permissions mask');
-define('_AM_EXTGALLERY_PUBLIC_PERM_MASK_INFO', "Here you can set the default mask permissions that will be applied to a new category. Don't give over generous permissions here because all new categories will inherit them.");
+define('_AM_EXTGALLERY_PUBLIC_PERM_MASK_INFO',
+       "Here you can set the default mask permissions that will be applied to a new category. Don't give over generous permissions here because all new categories will inherit them.");
 define('_AM_EXTGALLERY_GROUP_NAME', 'Group name');
 define('_AM_EXTGALLERY_CAN_ACCESS', 'Can access');
 define('_AM_EXTGALLERY_CAN_RATE', 'Can rate pictures');
@@ -121,11 +124,14 @@ define('_AM_EXTGALLERY_PUBLIC_ECARD_INFO', "Allows you to restrict the send eCar
 
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD', 'Public download permission');
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_DESC', 'Select categories where photos can be downloaded');
-define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_INFO', "Allows you to restrict the download of large image. If a user is allowed to download, they will also have access to large image downloads if the \"Save large photo\" is enabled in preferences.");
+define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_INFO',
+       "Allows you to restrict the download of large image. If a user is allowed to download, they will also have access to large image downloads if the \"Save large photo\" is enabled in preferences.");
 
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG', 'Download original permissions');
-define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_DESC', "Select categories where users can download original photos.<br />To download originals the 'Save original photo' feature must be enable in 'Preferences' plus group settings must allow the download.");
-define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_INFO', "Allows you to restrict the download of original images. If a user is allowed to download original they can access the original image (without border and watermark, and not resized) if the \"Save original photo\" is enabled in preferences.");
+define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_DESC',
+       "Select categories where users can download original photos.<br>To download originals the 'Save original photo' feature must be enable in 'Preferences' plus group settings must allow the download.");
+define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_INFO',
+       "Allows you to restrict the download of original images. If a user is allowed to download original they can access the original image (without border and watermark, and not resized) if the \"Save original photo\" is enabled in preferences.");
 
 define('_AM_EXTGALLERY_PUBLIC_UPLOAD', 'Public upload permission');
 define('_AM_EXTGALLERY_PUBLIC_UPLOAD_DESC', 'Select categories where public users can upload');
@@ -133,7 +139,8 @@ define('_AM_EXTGALLERY_PUBLIC_UPLOAD_INFO', 'Allows you to restrict the upload/s
 
 define('_AM_EXTGALLERY_PUBLIC_AUTOAPROVE', 'Public auto approve permission');
 define('_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_DESC', "Select categories where public photo uploads don't need admin approval");
-define('_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_INFO', "Allows you to prevent the automatic display of submitted public images until they are approved by an Admin. Select category where public user uploads don't need to be approved. Public users must be allowed to submit photos to enable this permission.");
+define('_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_INFO',
+       "Allows you to prevent the automatic display of submitted public images until they are approved by an Admin. Select category where public user uploads don't need to be approved. Public users must be allowed to submit photos to enable this permission.");
 
 define('_AM_EXTGALLERY_PUBLIC_DISPLAYED', 'Display album permissions');
 define('_AM_EXTGALLERY_PUBLIC_DISPLAYED_DESC', 'Select categories to be displayed');
@@ -145,7 +152,8 @@ define('_AM_EXTGALLERY_ADD_FONT', 'Add font (TTF)');
 define('_AM_EXTGALLERY_FONT_FILE', 'Font file');
 define('_AM_EXTGALLERY_FONT_MANAGMENT', 'Font management');
 define('_AM_EXTGALLERY_ADD_FONT_LINK', "There are %s fonts available. <a href=\"watermark-border.php?op=uploadfont\">Click here</a> to add a new font");
-define('_AM_EXTGALLERY_WATERMARK_FREETYPE_WARN', "<b>PHP must be compiled with FreeType support to enable watermarking. See <a href=\"http://www.freetype.org/\">FreeType.org</a> for more information.</b>");
+define('_AM_EXTGALLERY_WATERMARK_FREETYPE_WARN',
+       "<b>PHP must be compiled with FreeType support to enable watermarking. See <a href=\"http://www.freetype.org/\">FreeType.org</a> for more information.</b>");
 define('_AM_EXTGALLERY_WATERMARK_CONF', 'Watermarks configuration');
 define('_AM_EXTGALLERY_FONT', 'Font');
 define('_AM_EXTGALLERY_WATERMARK_TEXT', 'Watermark text');
@@ -244,7 +252,8 @@ define('_AM_EXTGALLERY_GFIC_DOWNLOAD', 'Allow download of original picture (if a
 
 // Album
 define('_AM_EXTGALLERY_USE_AJAX_EFFECTS', 'Ajax effects ');
-define('_AM_EXTGALLERY_USE_AJAX_EFFECTS_DESC', 'Selecting effects will change photo display when thumbs are clicked. Ajax effects or Normal can be selected.<br /><br /> <b>Normal</b> :  No effects<br /><b>Lightbox</b> : Use Lightbox effect<br /><b>Overlay</b> : use Overlay effect<br /><b>Tooltip</b> : use Tooltip effect<br /><b>Fancybox</b> : use Fancybox effect<br /><b>PrettyPhoto</b> : use PrettyPhoto effect<br />');
+define('_AM_EXTGALLERY_USE_AJAX_EFFECTS_DESC',
+       'Selecting effects will change photo display when thumbs are clicked. Ajax effects or Normal can be selected.<br><br> <b>Normal</b> :  No effects<br><b>Lightbox</b> : Use Lightbox effect<br><b>Overlay</b> : use Overlay effect<br><b>Tooltip</b> : use Tooltip effect<br><b>Fancybox</b> : use Fancybox effect<br><b>PrettyPhoto</b> : use PrettyPhoto effect<br>');
 define('_AM_EXTGALLERY_ALBUM_CONF', 'Album configuration');
 define('_AM_EXTGALLERY_OVERLAY_CONF', 'Overlay configuration');
 define('_AM_EXTGALLERY_TOOLTIP_CONF', 'Tooltip configuration');
@@ -292,8 +301,8 @@ define('_AM_EXTGALLERY_PRETTPHOTO_AUTOPLAY_F', 'false');
 define('_AM_EXTGALLERY_PRETTPHOTO_SLIDESPEED', 'Slideshow speed');
 
 // Update
-define('_AM_EXTGALLERY_MD_FILE_DONT_EXIST', "Module files don't exist on repository :<br /><b>Server : </b>%s<br /><b>File : </b>%s");
-define('_AM_EXTGALLERY_LG_FILE_DONT_EXIST', "Language files don't exist on repository :<br /><b>Server : </b>%s<br /><b>File : </b>%s");
+define('_AM_EXTGALLERY_MD_FILE_DONT_EXIST', "Module files don't exist on repository :<br><b>Server : </b>%s<br><b>File : </b>%s");
+define('_AM_EXTGALLERY_LG_FILE_DONT_EXIST', "Language files don't exist on repository :<br><b>Server : </b>%s<br><b>File : </b>%s");
 define('_AM_EXTGALLERY_DOWN_DONE', 'Downloading done. Click here to install files');
 define('_AM_EXTGALLERY_INSTALL', 'Install files');
 define('_AM_EXTGALLERY_MD_FILE_DONT_EXIST_SHORT', "Module files don't exist");
@@ -304,12 +313,13 @@ define('_AM_EXTGALLERY_EXTENSION_INFO', 'Extension information');
 define('_AM_EXTGALLERY_EXTENSION_NOT_INSTALLED', 'Extension not installed');
 define('_AM_EXTGALLERY_INSTALL_EXTENSION', 'Install extension');
 define('_AM_EXTGALLERY_EXTENSION_OK', 'Extension available');
-define('_AM_EXTGALLERY_EXTENSION_NOTICE', "This extension allow you to display photo on all the site just by adding a <b>gallery</b> tag to your text. A button (<img src=\"../assets/images/extgallery-posticon.gif\" />) is displayed on XOOPS editor.");
-define('_AM_EXTGALLERY_EXT_FILE_DONT_EXIST', "Extension file don't exist on repository :<br /><b>Server : </b>%s<br /><b>File : </b>%s");
+define('_AM_EXTGALLERY_EXTENSION_NOTICE',
+       "This extension allow you to display photo on all the site just by adding a <b>gallery</b> tag to your text. A button (<img src=\"../assets/images/extgallery-posticon.gif\" />) is displayed on XOOPS editor.");
+define('_AM_EXTGALLERY_EXT_FILE_DONT_EXIST', "Extension file don't exist on repository :<br><b>Server : </b>%s<br><b>File : </b>%s");
 define('_AM_EXTGALLERY_EXT_FILE_DONT_EXIST_SHORT', "Extension file don't exist");
 define('_AM_EXTGALLERY_EXTENSION_INSTALLED', 'Extension installed');
 define('_AM_EXTGALLERY_EXTENSION_HOWTO', 'How to use:');
-define('_AM_EXTGALLERY_EXTENSION_HOWTODESC', "To manually install this Extension and use it, you must follow these steps: <br />
+define('_AM_EXTGALLERY_EXTENSION_HOWTODESC', "To manually install this Extension and use it, you must follow these steps: <br>
 <div class=\"marg10\">1- Add <b>gallery.php</b> to <b>XOOPS_ROOT_PATH /class/textsanitizer/gallery/gallery.php</b> ( you can find  gallery.php in module archive)</div>
 <div class=\"marg10\">2- Edit <b>XOOPS_ROOT_PATH /class/textsanitizer/config.php</b> and add (( <b>\"gallery\" => 1</b> )) to config extensions  array ( you can find edited file in module archive)</div>
 <div class=\"marg10\"><img src=\"../assets/images/extensions.png\" /></div>
@@ -332,7 +342,8 @@ define('_AM_EXTGALLERY_ABOUT_AUTHOR_INFO', 'Author Info');
 define('_AM_EXTGALLERY_ABOUT_DESCRIPTION', 'Description: ');
 
 // text in admin footer
-define('_AM_EXTGALLERY_ADMIN_FOOTER', "<div class='right smallsmall italic pad5'>XOOPS Tag is maintained by the <a class='tooltip' rel='external' href='http://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
+define('_AM_EXTGALLERY_ADMIN_FOOTER',
+       "<div class='right smallsmall italic pad5'>XOOPS Tag is maintained by the <a class='tooltip' rel='external' href='http://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
 define('_EXTGALLERY_ADMIN_', ' '); //
 
 // Add File size define (cesagonchu)

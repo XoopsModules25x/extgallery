@@ -5,7 +5,7 @@
  * @author Philippe.Jausions @at@ 11abacus.com
  **/
 
-include_once(XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Image/Transform/IMAGETYPE.php');
+include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Image/Transform/IMAGETYPE.php';
 
 /**
  * @param $type

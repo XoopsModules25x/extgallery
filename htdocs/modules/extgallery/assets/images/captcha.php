@@ -1,8 +1,8 @@
 <?php
-// $Id: captcha.php 8088 2011-11-06 09:38:12Z beckmi $
+//
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
+//                  Copyright (c) 2000-2016 XOOPS.org                        //
 //                       <http://xoops.org/>                             //
 // ------------------------------------------------------------------------- //
 //  This program is free software; you can redistribute it and/or modify     //
@@ -25,11 +25,11 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
-require dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+require dirname(dirname(dirname(dirname(__DIR__)))) . '/mainfile.php';
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/php-captcha.inc.php';
+include_once __DIR__ . '/../../class/php-captcha.inc.php';
 
 $aFonts         = array(XOOPS_ROOT_PATH . '/modules/extgallery/fonts/AllStarResort.ttf');
 $oVisualCaptcha = new PhpCaptcha($aFonts, 200, 60);

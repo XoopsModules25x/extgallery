@@ -14,7 +14,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Rust <jrust@rustyparts.com>                           |
 // +----------------------------------------------------------------------+
-// $Id: Imlib.php 8088 2011-11-06 09:38:12Z beckmi $
+//
 // {{{ requires
 
 require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
@@ -123,7 +123,8 @@ class Image_Transform_Driver_Imlib extends Image_Transform
             'color' => array(255, 0, 0),
             'font'  => 'Arial.ttf',
             'size'  => '12',
-            'angle' => IMLIB_TEXT_TO_RIGHT);
+            'angle' => IMLIB_TEXT_TO_RIGHT
+        );
         $params         = array_merge($default_params, $params);
         extract($params);
 
@@ -131,7 +132,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
             if ($color[0] === '#') {
                 $color = $this->colorhex2colorarray($color);
             } else {
-                include_once 'Image/Transform/Driver/ColorsDefs.php';
+                include_once __DIR__ . '/Image/Transform/Driver/ColorsDefs.php';
                 $color = isset($colornames[$color]) ? $colornames[$color] : false;
             }
         }
@@ -245,8 +246,8 @@ class Image_Transform_Driver_Imlib extends Image_Transform
      *
      * This method adds the Content-type HTTP header
      *
-     * @param string $type (optional) (JPG,PNG...);
-     * @param int $quality (optional) 75
+     * @param string $type    (optional) (JPG,PNG...);
+     * @param int    $quality (optional) 75
      *
      * @return TRUE on success or PEAR Error object on error
      */
@@ -295,8 +296,8 @@ class Image_Transform_Driver_Imlib extends Image_Transform
      *
      * @access private
      *
-     * @param int $new_x     New width
-     * @param int $new_y     New height
+     * @param int   $new_x   New width
+     * @param int   $new_y   New height
      * @param mixed $options Optional parameters
      *
      * @return TRUE on success or PEAR Error object on error
