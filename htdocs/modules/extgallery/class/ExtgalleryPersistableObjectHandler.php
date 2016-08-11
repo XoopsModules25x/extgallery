@@ -56,7 +56,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
         $this->table     = $db->prefix($tablename);
         $this->keyName   = $keyname;
         $this->className = $classname;
-        if ($idenfierName != false) {
+        if (false !== $idenfierName) {
             $this->identifierName = $idenfierName;
         }
     }
@@ -86,7 +86,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     public function create($isNew = true)
     {
         $obj = new $this->className();
-        if ($isNew === true) {
+        if (true === $isNew) {
             $obj->setNew();
         }
 
@@ -133,7 +133,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
         $ret   = array();
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->table;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
             if ($criteria->getSort() != '') {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -207,7 +207,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     public function getList(CriteriaElement $criteria = null, $limit = 0, $start = 0)
     {
         $ret = array();
-        if ($criteria == null) {
+        if (null === $criteria) {
             $criteria = new CriteriaCompo();
         }
 
@@ -220,7 +220,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
             $sql .= ', ' . $this->identifierName;
         }
         $sql .= ' FROM ' . $this->table;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
             if ($criteria->getSort() != '') {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -246,20 +246,20 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
      * count objects matching a condition
      *
      * @param  CriteriaElement $criteria {@link CriteriaElement} to match
-     * @return int             count of objects
+     * @return int|array             count of objects
      */
     public function getCount(CriteriaElement $criteria = null)
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             if ($criteria->groupby != '') {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
         }
         $sql = 'SELECT ' . $field . 'COUNT(*) FROM ' . $this->table;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
             if ($criteria->groupby != '') {
                 $sql .= $criteria->getGroupby();
@@ -269,7 +269,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
         if (!$result) {
             return 0;
         }
-        if ($groupby == false) {
+        if (false === $groupby) {
             list($count) = $this->db->fetchRow($result);
 
             return $count;
@@ -286,11 +286,11 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     /**
      * delete an object from the database
      *
-     * @param  XoopsObject $id id of the object to delete
+     * @param  int $id id of the object to delete
      * @param  bool        $force
      * @return bool        FALSE if failed.
      */
-    public function delete(XoopsObject $id, $force = false)
+    public function delete($id, $force = false)
     {
         if (is_array($this->keyName)) {
             $clause = array();
@@ -302,7 +302,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
             $whereclause = $this->keyName . ' = ' . $id;
         }
         $sql = 'DELETE FROM ' . $this->table . ' WHERE ' . $whereclause;
-        if (false != $force) {
+        if ($force !== false) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -325,9 +325,9 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
 
     public function insert(XoopsObject $obj, $force = false, $checkObject = true)
     {
-        if ($checkObject != false) {
+        if (false !== $checkObject) {
             if (!is_object($obj)) {
-                var_dump($obj);
+//                var_dump($obj);
 
                 return false;
             }
@@ -344,6 +344,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
             return false;
         }
 
+        $cleanvars = array();
         foreach ($obj->cleanVars as $k => $v) {
             if ($obj->vars[$k]['data_type'] == XOBJ_DTYPE_INT) {
                 $cleanvars[$k] = (int)$v;
@@ -388,11 +389,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
             }
             $sql .= ' WHERE ' . $whereclause;
         }
-        if (false != $force) {
-            $result = $this->db->queryF($sql);
-        } else {
-            $result = $this->db->query($sql);
-        }
+        $result = $force !== false ? $this->db->queryF($sql) : $this->db->query($sql);
         if (!$result) {
             return false;
         }
@@ -424,14 +421,10 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
             $set_clause .= $this->db->quoteString($fieldvalue);
         }
         $sql = 'UPDATE ' . $this->table . ' SET ' . $set_clause;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
-        if (false != $force) {
-            $result = $this->db->queryF($sql);
-        } else {
-            $result = $this->db->query($sql);
-        }
+        $result = false !== $force ? $this->db->queryF($sql) : $this->db->query($sql);
         if (!$result) {
             return false;
         }
@@ -450,14 +443,10 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     public function updateFieldValue($fieldname, $fieldvalue, $criteria = null, $force = true)
     {
         $sql = 'UPDATE ' . $this->table . ' SET ' . $fieldname . ' = ' . $fieldvalue;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
-        if (false != $force) {
-            $result = $this->db->queryF($sql);
-        } else {
-            $result = $this->db->query($sql);
-        }
+        $result = false !== $force ? $this->db->queryF($sql) : $this->db->query($sql);
         if (!$result) {
             return false;
         }
@@ -474,7 +463,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
 
     public function deleteAll(CriteriaElement $criteria = null)
     {
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             $sql = 'DELETE FROM ' . $this->table;
             $sql .= ' ' . $criteria->renderWhere();
             if (!$this->db->query($sql)) {
@@ -521,7 +510,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
      */
     public function objectToArray($objects, $externalKeys = array(), $format = 's')
     {
-        static $cache;
+        static $cached;
 
         $ret = array();
         if (is_array($objects)) {
@@ -586,7 +575,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     public function objectToArrayWithoutExternalKey($object, $format = 's')
     {
         $ret = array();
-        if ($object != null) {
+        if (null !== $object) {
             $vars = $object->getVars();
             foreach ($vars as $k => $v) {
                 $ret[$k] = $object->getVar($k, $format);
@@ -616,23 +605,23 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     }
 
     /**
-     * @param null   $criteria
+     * @param null|CriteriaElement $criteria
      * @param string $sum
      *
      * @return array|int|string
      */
-    public function getSum($criteria = null, $sum = '*')
+    public function getSum(CriteriaElement $criteria = null, $sum = '*')
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             if ($criteria->groupby != '') {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
         }
         $sql = 'SELECT ' . $field . "SUM($sum) FROM " . $this->table;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
             if ($criteria->groupby != '') {
                 $sql .= $criteria->getGroupby();
@@ -657,23 +646,23 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     }
 
     /**
-     * @param null   $criteria
+     * @param null|CriteriaElement $criteria
      * @param string $max
      *
      * @return array|int|string
      */
-    public function getMax($criteria = null, $max = '*')
+    public function getMax(CriteriaElement $criteria = null, $max = '*')
     {
         $field   = '';
         $groupby = false;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             if ($criteria->groupby != '') {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
         }
         $sql = 'SELECT ' . $field . "MAX($max) FROM " . $this->table;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
             if ($criteria->groupby != '') {
                 $sql .= $criteria->getGroupby();
@@ -683,7 +672,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
         if (!$result) {
             return 0;
         }
-        if ($groupby == false) {
+        if (false === $groupby) {
             list($max) = $this->db->fetchRow($result);
 
             return $max;
@@ -698,17 +687,17 @@ class ExtgalleryPersistableObjectHandler extends XoopsObjectHandler //XoopsPersi
     }
 
     /**
-     * @param null   $criteria
+     * @param null|CriteriaElement $criteria
      * @param string $avg
      *
      * @return int
      */
-    public function getAvg($criteria = null, $avg = '*')
+    public function getAvg(CriteriaElement $criteria = null, $avg = '*')
     {
         $field = '';
 
         $sql = 'SELECT ' . $field . "AVG($avg) FROM " . $this->table;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);

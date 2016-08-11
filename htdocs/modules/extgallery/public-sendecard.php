@@ -31,7 +31,7 @@ if (isset($_POST['step'])) {
 } else {
     $step = 'default';
 }
-
+/** @var ExtgalleryPublicphotoHandler $photoHandler*/
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 $photo        = $photoHandler->getPhoto($photoId);
 
@@ -55,8 +55,9 @@ switch ($step) {
                 exit;
             }
         }
-
+        /** @var ExtgalleryPublicecardHandler $ecardHandler*/
         $ecardHandler = xoops_getModuleHandler('publicecard', 'extgallery');
+        /** @var ExtgalleryPublicphotoHandler $photoHandler*/
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {

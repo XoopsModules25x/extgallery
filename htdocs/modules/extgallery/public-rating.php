@@ -28,7 +28,7 @@ if (!isset($_GET['rate'])) {
 } else {
     $rate = (int)$_GET['rate'];
 }
-
+/** @var ExtgalleryPublicphotoHandler $photoHandler*/
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 $photo        = $photoHandler->get($photoId);
 

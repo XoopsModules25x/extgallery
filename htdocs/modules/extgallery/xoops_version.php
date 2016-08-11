@@ -55,7 +55,7 @@ $modversion['hasMain'] = 1;
 if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
     && $GLOBALS['xoopsModule']->getVar('dirname') === 'extgallery'
 ) {
-    if ($GLOBALS['xoopsUser'] != null) {
+    if ($GLOBALS['xoopsUser'] !== null) {
         $modversion['sub'][0]['name'] = _MI_EXTGALLERY_USERALBUM;
         $modversion['sub'][0]['url']  = 'public-useralbum.php?id=' . $GLOBALS['xoopsUser']->uid();
     }

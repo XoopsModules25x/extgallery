@@ -96,13 +96,13 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
      *
      * For performance consideration, getAll() is recommended
      *
-     * @param object $criteria  {@link CriteriaElement} conditions to be met
+     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
      * @param bool   $id_as_key use the ID as key for the array
      * @param bool   $as_object return an array of objects?
      *
      * @return array
      */
-    public function &getObjects($criteria = null, $id_as_key = false, $as_object = true)
+    public function &getObjects(CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $objects =& $this->getAll($criteria, null, $as_object, $id_as_key);
 

@@ -26,9 +26,11 @@ if (!isset($_GET['photoId'])) {
 } else {
     $photoId = (int)$_GET['photoId'];
 }
-
+/** @var ExtgalleryCatHandler $catHandler*/
 $catHandler    = xoops_getModuleHandler('publiccat', 'extgallery');
+/** @var ExtgalleryPublicphotoHandler $photoHandler*/
 $photoHandler  = xoops_getModuleHandler('publicphoto', 'extgallery');
+/** @var ExtgalleryPublicratingHandler $ratingHandler*/
 $ratingHandler = xoops_getModuleHandler('publicrating', 'extgallery');
 $permHandler   = ExtgalleryPublicPermHandler::getHandler();
 

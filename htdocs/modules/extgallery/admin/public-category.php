@@ -88,7 +88,8 @@ switch ($op) {
                 }
 
                 $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
-                $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+            /** @var ExtgalleryPublicphotoHandler $photoHandler*/
+            $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
                 $cat       = $catHandler->getCat($_POST['cat_id']);
                 $photosCat = $photoHandler->getCatPhoto($cat);

@@ -109,6 +109,7 @@ class ExtgalleryPublicecardHandler extends ExtgalleryPersistableObjectHandler
      */
     public function send(&$ecard)
     {
+        /** @var ExtgalleryPublicphotoHandler $photoHandler*/
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
         $photo        = $photoHandler->get($ecard->getVar('photo_id'));
 

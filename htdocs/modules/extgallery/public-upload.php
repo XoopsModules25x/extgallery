@@ -35,7 +35,7 @@ if (count($permHandler->getAuthorizedPublicCat($xoopsUser, 'public_upload')) < 1
 switch ($step) {
 
     case 'enreg':
-
+        /** @var ExtgalleryPublicphotoHandler $photoHandler*/
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         $result = $photoHandler->postPhotoTraitement('photo_file', false);

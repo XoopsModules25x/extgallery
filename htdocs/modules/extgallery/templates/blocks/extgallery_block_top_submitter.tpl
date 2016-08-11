@@ -11,7 +11,7 @@
                 <a href="<{$xoops_url}>/modules/extgallery/public-useralbum.php?id=<{$designer.uid}>"
                    title="<{$designer.uname}>"><{$designer.uname}></a>
             </td>
-            <td align="center" style="width: 25px"><{$designer.countphoto}></td>
+            <td align="center" style="width: 25px;"><{$designer.countphoto}></td>
         </tr>
     </table>
 <{/foreach}>

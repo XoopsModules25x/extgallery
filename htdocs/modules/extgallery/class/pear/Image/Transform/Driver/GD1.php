@@ -78,7 +78,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
      */
     public function rotate($angle, $options = null)
     {
-        if ($options == null) {
+        if ($options === null) {
             $autoresize = true;
             $color_mask = array(255, 255, 0);
         } else {

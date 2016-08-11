@@ -23,7 +23,7 @@ if (!isset($_GET['id'])) {
 } else {
     $photoId = (int)$_GET['id'];
 }
-
+/** @var ExtgalleryPublicphotoHandler $photoHandler*/
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 $photo        = $photoHandler->get($photoId);
 

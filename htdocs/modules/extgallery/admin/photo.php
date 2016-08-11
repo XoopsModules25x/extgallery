@@ -18,7 +18,8 @@
 
 include_once __DIR__ . '/admin_header.php';
 include __DIR__ . '/../../../class/pagenav.php';
-include_once __DIR__ . '/../class/pear/Image/Transform.php';
+
+include_once  __DIR__ . '/../class/pear/Image/Transform.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -41,7 +42,7 @@ if (isset($_GET['start'])) {
 switch ($op) {
 
     case 'add_photo':
-
+        /** @var ExtgalleryCatHandler $catHandler*/
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
         $result       = $photoHandler->postPhotoTraitement('photo_file', false);
 
@@ -62,7 +63,7 @@ switch ($op) {
 
     case 'batchAdd':
 
-        if (get_cfg_var('max_execution_time') == null) {
+        if (get_cfg_var('max_execution_time') === null) {
             $maxExecTime = 30;
         } else {
             $maxExecTime = get_cfg_var('max_execution_time');
@@ -70,7 +71,9 @@ switch ($op) {
         $maxTime        = time() + $maxExecTime - 5;
         $maxTimeReached = false;
 
+        /** @var ExtgalleryCatHandler $catHandler*/
         $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+        /** @var ExtgalleryPublicphotoHandler $photoHandler*/
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         // Test if an album is selected
@@ -195,6 +198,7 @@ switch ($op) {
         break;
 
     case 'batchApprove':
+        /** @var ExtgalleryCatHandler $catHandler*/
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         // Check if they are selected photo
@@ -264,6 +268,7 @@ switch ($op) {
         break;
 
     case 'rebuildthumb':
+        /** @var ExtgalleryPublicphotoHandler $photoHandler*/
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
         $photoHandler->rebuildThumbnail($_GET['cat_id']);
 
@@ -279,8 +284,9 @@ switch ($op) {
                     redirect_header('photo.php', 3, _AM_EXTGALLERY_NO_PHOTO_SELECTED);
                     exit;
                 }
-
+                /** @var ExtgalleryCatHandler $catHandler*/
                 $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+                /** @var ExtgalleryPublicphotoHandler $photoHandler*/
                 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
                 // Test if an album is selected
@@ -421,7 +427,9 @@ switch ($op) {
             case 'default':
             default:
                 xoops_cp_header();
-                $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+            /** @var ExtgalleryCatHandler $catHandler*/
+            $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+            /** @var ExtgalleryPublicphotoHandler $photoHandler*/
                 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
                 $photos  = $photoHandler->getAlbumPhotoAdminPage($_GET['cat_id'], $start);
@@ -546,8 +554,10 @@ switch ($op) {
 
     case 'default':
     default:
+    /** @var ExtgalleryCatHandler $catHandler*/
         $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
-        $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+    /** @var ExtgalleryPublicphotoHandler $photoHandler*/
+    $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         xoops_cp_header();
 

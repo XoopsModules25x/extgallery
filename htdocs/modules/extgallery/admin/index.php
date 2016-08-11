@@ -19,7 +19,9 @@
 include_once __DIR__ . '/admin_header.php';
 include __DIR__ . '/moduleUpdateFunction.php';
 
+/** @var ExtgalleryCatHandler $catHandler*/
 $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+/** @var ExtgalleryPublicphotoHandler $photoHandler*/
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 xoops_cp_header();
@@ -111,16 +113,16 @@ $code = 'function gd_info() {
  */
 function dskspace($dir)
 {
-    $s     = stat($dir);
-    $space = $s[7];
+    $sdir     = stat($dir);
+    $space = $sdir[7];
     if (is_dir($dir)) {
-        $dh = opendir($dir);
-        while (($file = readdir($dh)) !== false) {
+        $myDir = opendir($dir);
+        while (($file = readdir($myDir)) !== false) {
             if ($file !== '.' && $file !== '..') {
                 $space += dskspace($dir . '/' . $file);
             }
         }
-        closedir($dh);
+        closedir($myDir);
     }
 
     return $space;

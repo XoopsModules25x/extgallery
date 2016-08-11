@@ -28,6 +28,7 @@
  */
 function extgallerySearch($queryarray, $andor, $limit, $offset, $userid)
 {
+    /** @var ExtgalleryPublicphotoHandler $photoHandler*/
     $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
     return $photoHandler->getSearchedPhoto($queryarray, $andor, $limit, $offset, $userid);

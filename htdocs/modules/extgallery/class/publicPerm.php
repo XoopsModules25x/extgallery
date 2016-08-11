@@ -50,12 +50,12 @@ class ExtgalleryPublicPermHandler
     }
 
     /**
-     * @param $user
+     * @param XoopsUser $user
      * @param $perm
      *
      * @return mixed
      */
-    public function getAuthorizedPublicCat(&$user, $perm)
+    public function getAuthorizedPublicCat(XoopsUser $user, $perm)
     {
         static $authorizedCat;
         $userId = $user ? $user->getVar('uid') : 0;

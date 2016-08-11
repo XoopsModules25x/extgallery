@@ -848,7 +848,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Open a temporary file in write mode
-            $v_temp_tarname = uniqid('pcltar-') . '.tmp';
+            $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
             if (($v_temp_tar = @gzopen($v_temp_tarname, 'wb')) == 0) {
                 // ----- Close tar file
@@ -1211,7 +1211,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Open a temporary file in write mode
-            $v_temp_tarname = uniqid('pcltar-') . '.tmp';
+            $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
             if (($v_temp_tar = @gzopen($v_temp_tarname, 'wb')) == 0) {
                 // ----- Close tar file
@@ -2744,7 +2744,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Open a temporary file in write mode
-            $v_temp_tarname = uniqid('pcltar-') . '.tmp';
+            $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
             if (($v_temp_tar = @fopen($v_temp_tarname, 'wb')) == 0) {
                 // ----- Close tar file
@@ -2773,7 +2773,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Open a temporary file in write mode
-            $v_temp_tarname = uniqid('pcltar-') . '.tmp';
+            $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
             if (($v_temp_tar = @gzopen($v_temp_tarname, 'wb')) == 0) {
                 // ----- Close tar file
@@ -2982,7 +2982,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Open a temporary file in write mode
-            $v_temp_tarname = uniqid('pcltar-') . '.tmp';
+            $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
             if (($v_temp_tar = @fopen($v_temp_tarname, 'wb')) == 0) {
                 // ----- Close tar file
@@ -3011,7 +3011,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Open a temporary file in write mode
-            $v_temp_tarname = uniqid('pcltar-') . '.tmp';
+            $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
             if (($v_temp_tar = @gzopen($v_temp_tarname, 'wb')) == 0) {
                 // ----- Close tar file

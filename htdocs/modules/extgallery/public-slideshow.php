@@ -33,8 +33,9 @@ if (!$permHandler->isAllowed($xoopsUser, 'public_access', $catId)) {
     redirect_header('index.php', 3, _NOPERM);
     exit;
 }
-
+/** @var ExtgalleryCatHandler $catHandler*/
 $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+/** @var ExtgalleryPublicphotoHandler $photoHandler*/
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 $catObj = $catHandler->getCat($catId);

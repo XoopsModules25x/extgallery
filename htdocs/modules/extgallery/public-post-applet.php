@@ -16,7 +16,7 @@
  */
 
 require dirname(dirname(__DIR__)) . '/mainfile.php';
-
+/** @var ExtgalleryPublicphotoHandler $photoHandler*/
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 $result = $photoHandler->postPhotoTraitement('File0');

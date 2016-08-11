@@ -82,6 +82,7 @@ class ExtgalleryPublicratingHandler extends ExtgalleryPersistableObjectHandler
      */
     public function rate($photoId, $rating)
     {
+        /** @var ExtgalleryPublicphotoHandler $photoHandler*/
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         $userId = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid') : 0;

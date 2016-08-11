@@ -22,6 +22,8 @@
 function extgalleryPhotoShow($options)
 {
     global $xoopsConfig;
+    $photos = array();
+
     /** @var ExtgalleryPhotoHandler $photoHandler */
     $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
@@ -215,6 +217,7 @@ function implodeArray2Dextgallery($sep, $array)
 function extgalleryTopSubmitterShow($options)
 {
     global $xoopsDB, $xoopsConfig;
+    $catauth = '';
     $block = '';
     if ($options[1] != 0) {
         $cat     = array_slice($options, 1); //Get information about categories to display

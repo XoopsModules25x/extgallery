@@ -41,11 +41,11 @@ function xoops_module_pre_install_extgallery(&$xoopsModule)
 }
 
 /**
- * @param $xoopsModule
+ * @param XoopsModule $xoopsModule
  *
  * @return bool
  */
-function xoops_module_install_extgallery(&$xoopsModule)
+function xoops_module_install_extgallery(XoopsModule $xoopsModule)
 {
     $module_id     = $xoopsModule->getVar('mid');
     /** @var XoopsGroupPermHandler $gpermHandler*/

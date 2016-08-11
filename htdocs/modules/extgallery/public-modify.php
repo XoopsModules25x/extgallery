@@ -46,7 +46,7 @@ switch ($op) {
         switch ($step) {
 
             case 'enreg':
-
+                /** @var ExtgalleryPublicphotoHandler $photoHandler*/
                 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
                 $myts         = MyTextSanitizer::getInstance();
                 $photo        = $photoHandler->getPhoto($_POST['photo_id']);
@@ -121,7 +121,9 @@ switch ($op) {
 
                 include_once XOOPS_ROOT_PATH . '/header.php';
                 $myts         = MyTextSanitizer::getInstance();
+                /** @var ExtgalleryPubliccatHandler $catHandler*/
                 $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+                /** @var ExtgalleryPublicphotoHandler $photoHandler*/
                 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
                 $photo = $photoHandler->getPhoto((int)$_GET['id']);
@@ -162,8 +164,9 @@ switch ($op) {
         break;
 
     case 'delete':
-
+        /** @var ExtgalleryPubliccatHandler $catHandler*/
         $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+        /** @var ExtgalleryPublicphotoHandler $photoHandler*/
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         $photo = $photoHandler->getPhoto((int)$_GET['id']);

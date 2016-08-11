@@ -28,8 +28,9 @@ if (function_exists('mb_http_output')) {
 }
 
 $catId = isset($_GET['id']) ? $_GET['id'] : 0;
-
+/** @var ExtgalleryPubliccatHandler $catHandler*/
 $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+/** @var ExtgalleryPublicphotoHandler $photoHandler*/
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 $catObj       = $catHandler->getCat($catId);
 

@@ -99,7 +99,7 @@ function convertorderbytrans($SortbyOrderby)
 
     return $orderbyTrans;
 }
-
+/** @var ExtgalleryPublicphotoHandler $photoHandler*/
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 $photos = $photoHandler->objectToArray($photoHandler->getUserAlbumPhotoPage($userId, $start, $sortby, $orderby), array('uid'));

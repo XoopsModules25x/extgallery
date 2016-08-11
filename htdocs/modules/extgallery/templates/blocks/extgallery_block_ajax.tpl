@@ -63,7 +63,7 @@
                 color: #eee;
                 font: 14px/1.4 "helvetica neue", arial, sans-serif;
                 width: <{$galleria_panelwidth}>px;
-                margin: 20px auto
+                margin: 20px auto;
             }
 
             #galleria {
@@ -190,7 +190,7 @@
                 color: #eee;
                 font: 14px/1.4 "helvetica neue", arial, sans-serif;
                 width: <{$block.galleria_panelwidth}>px;
-                margin: 20px auto
+                margin: 20px auto;
             }
 
             #galleria {

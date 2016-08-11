@@ -165,21 +165,21 @@ div.rmmenuicon a:hover span.uno {
 #Slideshow_Index {
     float: left;
     padding: 0 0 0 60px;
-    background: url(../images/admin/index.png) no-repeat left top;
+    background: url(../images/icons/index.png) no-repeat left top;
 }
 
 /* Help page */
 #Slideshow_Help {
     float: left;
     padding: 0 0 0 60px;
-    background: url(../images/admin/help.png) no-repeat left top;
+    background: url(../images/icons/help.png) no-repeat left top;
 }
 
 /* About page */
 #Slideshow_About {
     float: left;
     padding: 0 0 0 60px;
-    background: url(../images/admin/about.png) no-repeat left top;
+    background: url(../images/icnos/about.png) no-repeat left top;
 }
 
 #about fieldset {

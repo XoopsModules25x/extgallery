@@ -23,7 +23,7 @@ if (!isset($_GET['id'])) {
 } else {
     $photoId = (int)$_GET['id'];
 }
-
+/** @var ExtgalleryPublicphotoHandler $photoHandler*/
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 $photo        = $photoHandler->get($photoId);
 
@@ -47,17 +47,17 @@ $permHandler = ExtgalleryPublicPermHandler::getHandler();
 // If require image don't exist
 if ($photo->getVar('cat_id') == 0) {
     header('Content-type: image/jpeg');
-    readfile(__DIR__ . /assets / images / dont - exist . jpg');
+    readfile(__DIR__ . '/assets/images/dont-exist.jpg');
 
     // If user is allowed to view this picture
 } elseif ($permHandler->isAllowed($xoopsUser, 'public_access', $photo->getVar('cat_id'))) {
     $photo = $photoHandler->objectToArray($photo);
 
     header('Content - type: ' . $type . '');
-    readfile(XOOPS_ROOT_PATH . ' / uploads / extgallery /public-photo / thumb / thumb_' . $photo['photo_name']);
+    readfile(XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo['photo_name']);
 
     // If user isn't allowed to view this picture
 } else {
     header('Content-type: image/jpeg');
-    readfile(__DIR__ . /assets / images / not - allowed . jpg');
+    readfile(__DIR__ . '/assets/images/not-allowed.jpg');
 }
