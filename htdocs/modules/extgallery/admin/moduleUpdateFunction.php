@@ -16,9 +16,10 @@
  * @package     ExtGallery
  */
 
+include_once __DIR__ . '/admin_header.php';
 define('_MU_MODULE_VERSION_FILE_URL', 'http://www.zoullou.net/extgalleryVersion.xml');
 define('_MU_MODULE_DOWNLOAD_SERVER', 'http://downloads.sourceforge.net/zoullou/');
-define('_MU_MODULE_XOOPS_VERSION_SUPPORTED', '2.4.0');
+define('_MU_MODULE_XOOPS_VERSION_SUPPORTED', '2.5.8');
 
 /**
  * @return array|bool

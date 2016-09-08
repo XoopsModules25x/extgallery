@@ -48,7 +48,6 @@ class Image_Transform_Driver_IM extends Image_Transform
      */
     public $command;
 
-
     /**
      * Class constructor
      */
@@ -193,7 +192,7 @@ class Image_Transform_Driver_IM extends Image_Transform
      * rotate
      *
      * @param float $angle
-     * @param int angle rotation angle
+     * @param       int angle rotation angle
      * @return mixed TRUE or a PEAR error object on error
      */
     public function rotate($angle, $options = null)
@@ -284,8 +283,9 @@ class Image_Transform_Driver_IM extends Image_Transform
             $position = 'Center';
         }
 
-        $this->command[$key] = ' -font ' . escapeshellarg($font) . ' -pointsize ' . escapeshellarg($size) . ' -gravity ' . escapeshellarg($position) . ' -fill ' . escapeshellarg($color)
-                               . ' -annotate ' . escapeshellarg('+' . $padding . '+' . $padding) . ' ' . escapeshellarg('"' . $text . '"');
+        $this->command[$key] = ' -font ' . escapeshellarg($font) . ' -pointsize ' . escapeshellarg($size) . ' -gravity ' . escapeshellarg($position) . ' -fill ' . escapeshellarg($color) . ' -annotate ' . escapeshellarg('+' . $padding . '+'
+                                                                                                                                                                                                                           . $padding) . ' '
+                               . escapeshellarg('"' . $text . '"');
 
         // Producing error: gs: not found gs: not found convert: Postscript delegate failed [No such file or directory].
         return true;
@@ -381,8 +381,7 @@ class Image_Transform_Driver_IM extends Image_Transform
         }
         $quality = $this->_getOption('quality', $options, 75);
 
-        $cmd = $this->_prepare_cmd(IMAGE_TRANSFORM_IM_PATH, 'convert',
-                                   escapeshellarg($this->image) . implode(' ', $this->command) . ' -quality ' . ((int)$quality) . ' ' . escapeshellarg($filename));// . ' ' . $type . ':'
+        $cmd = $this->_prepare_cmd(IMAGE_TRANSFORM_IM_PATH, 'convert', escapeshellarg($this->image) . implode(' ', $this->command) . ' -quality ' . ((int)$quality) . ' ' . escapeshellarg($filename));// . ' ' . $type . ':'
         //. ' 2>&1');
         echo $cmd . '<br>';
         exec($cmd, $res, $exit);

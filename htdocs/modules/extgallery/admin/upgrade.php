@@ -16,6 +16,7 @@
  * @package     ExtGallery
  */
 
+include_once __DIR__ . '/admin_header.php';
 if (isset($_POST['step'])) {
     $step = $_POST['step'];
 } else {

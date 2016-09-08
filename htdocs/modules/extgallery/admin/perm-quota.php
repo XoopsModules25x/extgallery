@@ -67,7 +67,7 @@ switch ($step) {
         /** @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         /** @var XoopsGroupPermHandler $gpermHandler */
-        $gpermHandler  = xoops_getHandler('groupperm');
+        $gpermHandler = xoops_getHandler('groupperm');
         /** @var ExtgalleryPluginHandler $pluginHandler */
         $pluginHandler = xoops_getModuleHandler('plugin', 'extgallery');
 
@@ -136,9 +136,8 @@ switch ($step) {
                 $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'), $cat->getVar('cat_pid'));
             }
 
-            echo '<fieldset id="' . $perm['name'] . 'Bookmark"><legend><a href="#' . $perm['name'] . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $perm['name']
-                 . '\'); toggleIcon(\'' . $perm['name'] . 'Icon\');"><img id="' . $perm['name'] . 'Icon" src="../assets/images/minus.gif" />&nbsp;' . constant($perm['title'])
-                 . '</a></legend><div id="' . $perm['name'] . '">';
+            echo '<fieldset id="' . $perm['name'] . 'Bookmark"><legend><a href="#' . $perm['name'] . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $perm['name'] . '\'); toggleIcon(\'' . $perm['name']
+                 . 'Icon\');"><img id="' . $perm['name'] . 'Icon" src="../assets/images/minus.gif" />&nbsp;' . constant($perm['title']) . '</a></legend><div id="' . $perm['name'] . '">';
             echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTGALLERY_INFORMATION . '</legend>';
             echo constant($perm['info']);
             echo '</fieldset>';
@@ -158,9 +157,8 @@ switch ($step) {
                 $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'), $cat->getVar('cat_pid'));
             }
 
-            echo '<fieldset id="' . $perm['name'] . 'Bookmark"><legend><a href="#' . $perm['name'] . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $perm['name']
-                 . '\'); toggleIcon(\'' . $perm['name'] . 'Icon\');"><img id="' . $perm['name'] . 'Icon" src="../assets/images/minus.gif" />&nbsp;' . constant($perm['title'])
-                 . '</a></legend><div id="' . $perm['name'] . '">';
+            echo '<fieldset id="' . $perm['name'] . 'Bookmark"><legend><a href="#' . $perm['name'] . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $perm['name'] . '\'); toggleIcon(\'' . $perm['name']
+                 . 'Icon\');"><img id="' . $perm['name'] . 'Icon" src="../assets/images/minus.gif" />&nbsp;' . constant($perm['title']) . '</a></legend><div id="' . $perm['name'] . '">';
             echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTGALLERY_INFORMATION . '</legend>';
             echo constant($perm['info']);
             echo '</fieldset>';
@@ -203,14 +201,12 @@ switch ($step) {
 
             foreach ($modulePermArray as $perm) {
                 $permAccessGroup = $gpermHandler->getGroupIds('extgallery_public_mask', $perm['maskId'], $module_id);
-                echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extgallery_public_mask][group][' . $k . '][' . $perm['maskId'] . ']" type="checkbox"'
-                     . getChecked($permAccessGroup, $k) . ' /></td>';
+                echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extgallery_public_mask][group][' . $k . '][' . $perm['maskId'] . ']" type="checkbox"' . getChecked($permAccessGroup, $k) . ' /></td>';
             }
 
             foreach ($pluginPermArray as $perm) {
                 $permAccessGroup = $gpermHandler->getGroupIds('extgallery_public_mask', $perm['maskId'], $module_id);
-                echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extgallery_public_mask][group][' . $k . '][' . $perm['maskId'] . ']" type="checkbox"'
-                     . getChecked($permAccessGroup, $k) . ' /></td>';
+                echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extgallery_public_mask][group][' . $k . '][' . $perm['maskId'] . ']" type="checkbox"' . getChecked($permAccessGroup, $k) . ' /></td>';
             }
 
             echo '</tr>';

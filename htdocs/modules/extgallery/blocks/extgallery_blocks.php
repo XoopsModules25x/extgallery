@@ -218,7 +218,7 @@ function extgalleryTopSubmitterShow($options)
 {
     global $xoopsDB, $xoopsConfig;
     $catauth = '';
-    $block = '';
+    $block   = '';
     if ($options[1] != 0) {
         $cat     = array_slice($options, 1); //Get information about categories to display
         $catauth = implodeArray2Dextgallery(',', $cat); //Creation of categories list to use - separated by a coma
@@ -435,8 +435,7 @@ function extgalleryBlockEdit($options)
         $nChecked = ' checked';
     }
 
-    $form .= _MB_EXTGALLERY_DISPLAY_TITLE . ' : <input type="radio" name="options[]" value="1"' . $yChecked . ' />&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[]" value="0"'
-             . $nChecked . ' />' . _NO . '<br>';
+    $form .= _MB_EXTGALLERY_DISPLAY_TITLE . ' : <input type="radio" name="options[]" value="1"' . $yChecked . ' />&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[]" value="0"' . $nChecked . ' />' . _NO . '<br>';
 
     $effectTypeSelect = new XoopsFormSelect(_MB_EXTGALLERY_SHOW_TYPE, 'options[]', $options[3]);
     $effectTypeSelect->addOption('RandomPhoto', _MB_EXTGALLERY_TYPE_OP1);
@@ -734,7 +733,7 @@ function extgalleryList($options)
     global $xoopsConfig;
 
     /** @var ExtgalleryPhotoHandler $photoHandler */
-    $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+    $photoHandler     = xoops_getModuleHandler('publicphoto', 'extgallery');
     $param            = array('limit' => $options[0]);
     $date             = $options[1];
     $hits             = $options[2];
@@ -813,8 +812,7 @@ function extgalleryListEdit($options)
     } else {
         $n2Checked = ' checked';
     }
-    $form .= _MB_EXTGALLERY_DISPLAY_DATE . ' : <input type="radio" name="options[1]" value="1"' . $y2Checked . ' />&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[1]" value="0"'
-             . $n2Checked . ' />' . _NO . '<br>';
+    $form .= _MB_EXTGALLERY_DISPLAY_DATE . ' : <input type="radio" name="options[1]" value="1"' . $y2Checked . ' />&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[1]" value="0"' . $n2Checked . ' />' . _NO . '<br>';
     //==================================
     $y3Checked = '';
     $n3Checked = '';
@@ -823,8 +821,7 @@ function extgalleryListEdit($options)
     } else {
         $n3Checked = ' checked';
     }
-    $form .= _MB_EXTGALLERY_DISPLAY_HITS . ' : <input type="radio" name="options[2]" value="1"' . $y3Checked . ' />&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[2]" value="0"'
-             . $n3Checked . ' />' . _NO . '<br>';
+    $form .= _MB_EXTGALLERY_DISPLAY_HITS . ' : <input type="radio" name="options[2]" value="1"' . $y3Checked . ' />&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[2]" value="0"' . $n3Checked . ' />' . _NO . '<br>';
     //==================================
     $y4Checked = '';
     $n4Checked = '';
@@ -833,8 +830,7 @@ function extgalleryListEdit($options)
     } else {
         $n4Checked = ' checked';
     }
-    $form .= _MB_EXTGALLERY_DISPLAY_RATE . ' : <input type="radio" name="options[3]" value="1"' . $y4Checked . ' />&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[3]" value="0"'
-             . $n4Checked . ' />' . _NO . '<br>';
+    $form .= _MB_EXTGALLERY_DISPLAY_RATE . ' : <input type="radio" name="options[3]" value="1"' . $y4Checked . ' />&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[3]" value="0"' . $n4Checked . ' />' . _NO . '<br>';
     //==================================
     $effectTypeSelect = new XoopsFormSelect(_MB_EXTGALLERY_SHOW_TYPE, 'options[]', $options[4]);
     $effectTypeSelect->addOption('RandomPhoto', _MB_EXTGALLERY_TYPE_OP1);

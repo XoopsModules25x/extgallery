@@ -39,7 +39,7 @@ $xoopsTpl->assign('use_ajax_effects', $ajaxeffect);
 //HACK BLUETEEN TO SORT PHOTOS BY USERS
 //photo_date - photo_title - photo_hits - photo_rating
 if (isset($_GET['sortby'])
-    && ($_GET['sortby'] === 'photo_date' 
+    && ($_GET['sortby'] === 'photo_date'
         || $_GET['sortby'] === 'photo_title'
         || $_GET['sortby'] === 'photo_hits'
         || $_GET['sortby'] === 'photo_rating')
@@ -99,7 +99,8 @@ function convertorderbytrans($SortbyOrderby)
 
     return $orderbyTrans;
 }
-/** @var ExtgalleryPublicphotoHandler $photoHandler*/
+
+/** @var ExtgalleryPublicphotoHandler $photoHandler */
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 $photos = $photoHandler->objectToArray($photoHandler->getUserAlbumPhotoPage($userId, $start, $sortby, $orderby), array('uid'));

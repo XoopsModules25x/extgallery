@@ -2173,8 +2173,7 @@ if (!defined('PCL_TAR')) {
                         }
 
                         // ----- Error log
-                        PclErrorLog(-7, 'Extracted file ' . $v_header['filename'] . " does not have the correct file size '" . filesize($v_filename) . "' ('" . $v_header['size']
-                                        . "' expected). Archive may be corrupted.");
+                        PclErrorLog(-7, 'Extracted file ' . $v_header['filename'] . " does not have the correct file size '" . filesize($v_filename) . "' ('" . $v_header['size'] . "' expected). Archive may be corrupted.");
 
                         // ----- Return
                         TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
@@ -2283,8 +2282,7 @@ if (!defined('PCL_TAR')) {
         $p_remove_path,
         $p_tar_mode
     ) {
-        TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtractByIndexList',
-                   "archive='$p_tarname', index_string='$p_index_string', list, path=$p_path, remove_path='$p_remove_path', tar_mode=$p_tar_mode");
+        TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtractByIndexList', "archive='$p_tarname', index_string='$p_index_string', list, path=$p_path, remove_path='$p_remove_path', tar_mode=$p_tar_mode");
         $v_result = 1;
         $v_nb     = 0;
 
@@ -2594,8 +2592,7 @@ if (!defined('PCL_TAR')) {
             } // ----- Look if the extracted file is older
             elseif (filemtime($v_header['filename']) > $v_header['mtime']) {
                 TrFctMessage(__FILE__, __LINE__, 2,
-                             'Existing file ' . $v_header['filename'] . ' is newer (' . date('l dS of F Y h:i:s A', filemtime($v_header['filename'])) . ') than the extracted file ('
-                             . date('l dS of F Y h:i:s A', $v_header['mtime']) . ')');
+                             'Existing file ' . $v_header['filename'] . ' is newer (' . date('l dS of F Y h:i:s A', filemtime($v_header['filename'])) . ') than the extracted file (' . date('l dS of F Y h:i:s A', $v_header['mtime']) . ')');
 
                 // ----- Change the file status
                 $v_header['status'] = 'newer_exist';
@@ -2678,8 +2675,7 @@ if (!defined('PCL_TAR')) {
             clearstatcache();
             if (filesize($v_header['filename']) != $v_header['size']) {
                 // ----- Error log
-                PclErrorLog(-7, 'Extracted file ' . $v_header['filename'] . " does not have the correct file size '" . filesize($v_filename) . "' ('" . $v_header['size']
-                                . "' expected). Archive may be corrupted.");
+                PclErrorLog(-7, 'Extracted file ' . $v_header['filename'] . " does not have the correct file size '" . filesize($v_filename) . "' ('" . $v_header['size'] . "' expected). Archive may be corrupted.");
 
                 // ----- Return
                 TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());

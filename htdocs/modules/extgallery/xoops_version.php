@@ -15,40 +15,73 @@
  * @package     ExtGallery
  */
 
-$modversion['name']        = _MI_EXTGAL_NAME;
-$modversion['version']     = 1.13;
-$modversion['description'] = _MI_EXTGAL_DESC;
-$modversion['credits']     = 'http://www.zoullou.net/';
-$modversion['author']      = 'Zoullou';
-$modversion['help']        = 'page=help';
-$modversion['license']     = 'GNU GPL 2.0';
-$modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html';
-$modversion['official']    = 1; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
-$modversion['image']       = 'assets/images/logoModule.png';
-$modversion['dirname']     = basename(__DIR__);
-$modversion['onInstall']   = 'include/install_function.php';
-$modversion['onUpdate']    = 'include/update_function.php';
+$moduleDirName = basename(__DIR__);
 
-$modversion['dirmoduleadmin'] = 'Frameworks/moduleclasses/moduleadmin';
-$modversion['sysicons16']     = 'Frameworks/moduleclasses/icons/16';
-$modversion['sysicons32']     = 'Frameworks/moduleclasses/icons/32';
-$modversion['modicons16']     = 'assets/images/icons/16';
-$modversion['modicons32']     = 'assets/images/icons/32';
-//about
-$modversion['module_status']       = 'RC 1';
-$modversion['release_date']        = '2016/08/10';
-$modversion['module_website_url']  = 'www.xoops.org';
-$modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = '2.5.8';
-$modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array('mysql' => '5.0.7', 'mysqli' => '5.0.7');
+// ------------------- Informations ------------------- //
+$modversion = array(
+    'name'                => _MI_EXTGALLERY_NAME,
+    'description'         => _MI_EXTGAL_DESC,
+    'author'              => 'Zoullou, contributors: Voltan, Mamba, Goffy',
+    //    'author_mail'         => " ",
+    'author_website_url'  => 'http://xoops.com',
+    'author_website_name' => 'XOOPS',
+    'credits'             => 'XOOPS Development Team',
+    'license'             => 'GPL 2.0 or later',
+    'license_url'         => 'www.gnu.org/licenses/gpl-2.0.html/',
+    'help'                => 'page=help',
+    //
+    'release_info'        => 'release_info',
+    'release'             => '2016-08-28',
+    'release_file'        => XOOPS_URL . "/modules/{$moduleDirName}/docs/release_info file",
 
-// Admin things
-$modversion['hasAdmin']    = 1;
-$modversion['system_menu'] = 1;
-$modversion['adminindex']  = 'admin/index.php';
-$modversion['adminmenu']   = 'admin/menu.php';
+    //
+    'manual'              => 'link to manual file',
+    'manual_file'         => XOOPS_URL . "/modules/{$moduleDirName}/docs/install.txt",
+    'min_php'             => '5.5',
+    'min_xoops'           => '2.5.8',
+    'min_admin'           => '1.2',
+    'min_db'              => array('mysql' => '5.0.7', 'mysqli' => '5.0.7'),
+    'image'               => 'assets/images/logoModule.png', // Path and name of the module’s logo
+    'official'            => 1, //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
+    'dirname'             => "{$moduleDirName}",
+    //Frameworks paths
+    'dirmoduleadmin'      => 'Frameworks/moduleclasses/moduleadmin',
+    'systemIcons16'       => 'Frameworks/moduleclasses/icons/16',
+    'systemIcons32'       => 'Frameworks/moduleclasses/icons/32',
+    // Local icons paths
+    'moduleIcons16'       => 'assets/images/icons/16',
+    'moduleIcons32'       => 'assets/images/icons',
+    //About
+    'version'             => 1.13,
+    'module_status'       => 'RC1',
+    'release_date'        => '2016/09/07', // YYYY/mm/dd
+
+    'demo_site_url'       => 'http://www.xoops.org',
+    'demo_site_name'      => 'XOOPS Demo Site',
+    'support_url'         => 'http://xoops.org/modules/newbb',
+    'support_name'        => 'Support Forum',
+    'module_website_url'  => 'www.xoops.org',
+    'module_website_name' => 'XOOPS Project',
+    // Admin things
+    'hasAdmin'            => 1,
+    'system_menu'         => 1,
+    'adminindex'          => 'admin/index.php',
+    'adminmenu'           => 'admin/menu.php',
+    // Main Menu
+    'hasMain'             => 1,
+    // Install/Update
+    'onInstall'           => 'include/oninstall.php',
+    //'onUninstall'         => "include/onuninstall.php",
+    'onUpdate'            => 'include/update_function.php',
+    // Search
+    'hasSearch'           => 1,
+    // Comments
+    'hasComments'         => 1,
+    // Notification
+    'hasNotification'     => 1
+);
+
+
 
 // Menu
 $modversion['hasMain'] = 1;
@@ -60,7 +93,7 @@ if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
         $modversion['sub'][0]['url']  = 'public-useralbum.php?id=' . $GLOBALS['xoopsUser']->uid();
     }
 
-    include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+    include_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/publicPerm.php";
     $permHandler = ExtgalleryPublicPermHandler::getHandler();
     if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
         $modversion['sub'][1]['name'] = _MI_EXTGALLERY_PUBLIC_UPLOAD;
@@ -72,25 +105,42 @@ if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
     }
 }
 
-// SQL
+// ------------------- Mysql ------------------- //
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
-$modversion['tables'][1]        = 'extgallery_publiccat';
-$modversion['tables'][2]        = 'extgallery_publicphoto';
-$modversion['tables'][3]        = 'extgallery_quota';
-$modversion['tables'][4]        = 'extgallery_publicrating';
-$modversion['tables'][5]        = 'extgallery_publicecard';
+
+// Tables created by sql file (without prefix!)
+$modversion['tables'] = array(
+    $moduleDirName . '_' . 'publiccat',
+    $moduleDirName . '_' . 'publicphoto',
+    $moduleDirName . '_' . 'quota',
+    $moduleDirName . '_' . 'publicrating',
+    $moduleDirName . '_' . 'publicecard');
+
+
+// ------------------- Help files ------------------- //
+$modversion['helpsection'] = array(
+    array('name' => _MI_EXTGALLERY_OVERVIEW, 'link' => 'page=help'),
+    array('name' => _MI_EXTGALLERY_HELP1, 'link' => 'page=help1'),
+    array('name' => _MI_EXTGALLERY_HELP2, 'link' => 'page=help2'),
+    array('name' => _MI_EXTGALLERY_HELP3, 'link' => 'page=help3'),
+    array('name' => _MI_EXTGALLERY_HELP4, 'link' => 'page=help4'),
+    array('name' => _MI_EXTGALLERY_HELP5, 'link' => 'page=help5'),
+    array('name' => _MI_EXTGALLERY_HELP6, 'link' => 'page=help6'),
+    array('name' => _MI_EXTGALLERY_HELP7, 'link' => 'page=help7')
+);
+
 
 // Comments
 $modversion['hasComments']                    = 1;
 $modversion['comments']['itemName']           = 'photoId';
 $modversion['comments']['pageName']           = 'public-photo.php';
 $modversion['comments']['callbackFile']       = 'include/comment_function.php';
-$modversion['comments']['callback']['update'] = 'extgalleryComUpdate';
+$modversion['comments']['callback']['update'] = $moduleDirName . 'ComUpdate';
 
 // Search
 $modversion['hasSearch']      = 1;
 $modversion['search']['file'] = 'include/search.inc.php';
-$modversion['search']['func'] = 'extgallerySearch';
+$modversion['search']['func'] = $moduleDirName . 'Search';
 
 // Config items
 $i                                       = 0;
@@ -158,7 +208,7 @@ $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'dhtml';
 xoops_load('xoopseditorhandler');
-$editorHandler                       = XoopsEditorHandler::getInstance();
+$editorHandler                      = XoopsEditorHandler::getInstance();
 $modversion['config'][$i]['options'] = array_flip($editorHandler->getList());
 ++$i;
 $modversion['config'][$i]['name']        = 'photoname_pattern';
@@ -1044,18 +1094,20 @@ $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'true';
 
 // Templates
-$modversion['templates'][] = array('file' => 'extgallery_public-categories.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'extgallery_public-album.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'extgallery_public-photo.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'extgallery_index.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'extgallery_public-sendecard.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'extgallery_public-viewecard.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'extgallery_public-useralbum.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'extgallery_public-userphoto.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'extgallery_public-slideshow.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'extgallery_public-upload-applet.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'extgallery_public-bookmarkme.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'extgallery_public-rss.tpl', 'description' => '');
+$modversion['templates'] = array(
+    array('file' => 'extgallery_public-categories.tpl', 'description' => ''),
+    array('file' => 'extgallery_public-album.tpl', 'description' => ''),
+    array('file' => 'extgallery_public-photo.tpl', 'description' => ''),
+    array('file' => 'extgallery_index.tpl', 'description' => ''),
+    array('file' => 'extgallery_public-sendecard.tpl', 'description' => ''),
+    array('file' => 'extgallery_public-viewecard.tpl', 'description' => ''),
+    array('file' => 'extgallery_public-useralbum.tpl', 'description' => ''),
+    array('file' => 'extgallery_public-userphoto.tpl', 'description' => ''),
+    array('file' => 'extgallery_public-slideshow.tpl', 'description' => ''),
+    array('file' => 'extgallery_public-upload-applet.tpl', 'description' => ''),
+    array('file' => 'extgallery_public-bookmarkme.tpl', 'description' => ''),
+    array('file' => 'extgallery_public-rss.tpl', 'description' => '')
+);
 
 // Blocs
 $modversion['blocks'][1]['file']        = 'extgallery_blocks.php';
@@ -1130,27 +1182,33 @@ $modversion['notification']['category'][3]['subscribe_from'] = 'public-photo.php
 $modversion['notification']['category'][3]['item_name']      = 'photoId';
 $modversion['notification']['category'][3]['allow_bookmark'] = 1;
 
-$modversion['notification']['event'][1]['name']          = 'new_photo';
-$modversion['notification']['event'][1]['category']      = 'global';
-$modversion['notification']['event'][1]['title']         = _MI_EXTGAL_NEW_PHOTO_NOTIFY;
-$modversion['notification']['event'][1]['caption']       = _MI_EXTGAL_NEW_PHOTO_NOTIFYCAP;
-$modversion['notification']['event'][1]['description']   = _MI_EXTGAL_NEW_PHOTO_NOTIFYDSC;
-$modversion['notification']['event'][1]['mail_template'] = 'global_new_photo';
-$modversion['notification']['event'][1]['mail_subject']  = _MI_EXTGAL_NEW_PHOTO_NOTIFYSBJ;
+$modversion['notification']['event'][1] = array(
+    'name'          => 'new_photo',
+    'category'      => 'global',
+    'title'         => _MI_EXTGAL_NEW_PHOTO_NOTIFY,
+    'caption'       => _MI_EXTGAL_NEW_PHOTO_NOTIFYCAP,
+    'description'   => _MI_EXTGAL_NEW_PHOTO_NOTIFYDSC,
+    'mail_template' => 'global_new_photo',
+    'mail_subject'  => _MI_EXTGAL_NEW_PHOTO_NOTIFYSBJ
+);
 
-$modversion['notification']['event'][2]['name']          = 'new_photo_pending';
-$modversion['notification']['event'][2]['category']      = 'global';
-$modversion['notification']['event'][2]['title']         = _MI_EXTGAL_NEW_PHOTO_PENDING_NOTIFY;
-$modversion['notification']['event'][2]['caption']       = _MI_EXTGAL_NEW_PHOTO_PENDING_NOTIFYCAP;
-$modversion['notification']['event'][2]['description']   = _MI_EXTGAL_NEW_PHOTO_PENDING_NOTIFYDSC;
-$modversion['notification']['event'][2]['mail_template'] = 'global_new_photo_pending';
-$modversion['notification']['event'][2]['mail_subject']  = _MI_EXTGAL_NEW_PHOTO_PENDING_NOTIFYSBJ;
-$modversion['notification']['event'][2]['admin_only']    = 1;
+$modversion['notification']['event'][2] = array(
+    'name'          => 'new_photo_pending',
+    'category'      => 'global',
+    'title'         => _MI_EXTGAL_NEW_PHOTO_PENDING_NOTIFY,
+    'caption'       => _MI_EXTGAL_NEW_PHOTO_PENDING_NOTIFYCAP,
+    'description'   => _MI_EXTGAL_NEW_PHOTO_PENDING_NOTIFYDSC,
+    'mail_template' => 'global_new_photo_pending',
+    'mail_subject'  => _MI_EXTGAL_NEW_PHOTO_PENDING_NOTIFYSBJ,
+    'admin_only'    => 1
+);
 
-$modversion['notification']['event'][3]['name']          = 'new_photo_album';
-$modversion['notification']['event'][3]['category']      = 'album';
-$modversion['notification']['event'][3]['title']         = _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFY;
-$modversion['notification']['event'][3]['caption']       = _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYCAP;
-$modversion['notification']['event'][3]['description']   = _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYDSC;
-$modversion['notification']['event'][3]['mail_template'] = 'album_new_photo';
-$modversion['notification']['event'][3]['mail_subject']  = _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYSBJ;
+$modversion['notification']['event'][3] = array(
+    'name'          => 'new_photo_album',
+    'category'      => 'album',
+    'title'         => _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFY,
+    'caption'       => _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYCAP,
+    'description'   => _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYDSC,
+    'mail_template' => 'album_new_photo',
+    'mail_subject'  => _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYSBJ
+);

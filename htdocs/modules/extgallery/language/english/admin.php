@@ -39,8 +39,7 @@ define('_AM_EXTGALLERY_EXTGALLERY_VERSION', 'eXtGallery Version');
 
 // Public category page
 define('_AM_EXTGALLERY_MODDELETE_PUBLICCAT', 'Modify or delete public category');
-define('_AM_EXTGALLERY_MODDELETE_PUBLICCAT_INFO',
-       'You can find a list of all categories/albums available on your web site. The number between the bracket at the end of the category name is the weight of the category.');
+define('_AM_EXTGALLERY_MODDELETE_PUBLICCAT_INFO', 'You can find a list of all categories/albums available on your web site. The number between the bracket at the end of the category name is the weight of the category.');
 define('_AM_EXTGALLERY_ADD_PUBLIC_CAT', 'Add a public category');
 define('_AM_EXTGALLERY_ADD_PUBLIC_CAT_INFO', 'You can add a category only under a category without a photo. Only valid category are diplayed in the selection below.');
 define('_AM_EXTGALLERY_NAME', 'Name');
@@ -56,8 +55,7 @@ define('_AM_EXTGALLERY_NO_CATEGORY_SELECTED', 'No category selected');
 // Photo page
 define('_AM_EXTGALLERY_ADD_BATCH', 'Add batch photos');
 define('_AM_EXTGALLERY_BATCH_PATH', 'Batch folder path');
-define('_AM_EXTGALLERY_ADD_BATCH_INFO',
-       'There are <b>%d</b> photos in the batch folder. By pressing the SUBMIT button below, all photos in the batch folder will be uploaded to the album/albums selected below.');
+define('_AM_EXTGALLERY_ADD_BATCH_INFO', 'There are <b>%d</b> photos in the batch folder. By pressing the SUBMIT button below, all photos in the batch folder will be uploaded to the album/albums selected below.');
 define('_AM_EXTGALLERY_EDITDELETE_PHOTO', 'Edit/Delete photo');
 define('_AM_EXTGALLERY_EDITDELETE_PHOTO_INFO', 'Select the category in which you wish to edit or delete photos.');
 define('_AM_EXTGALLERY_PENDING_PHOTO', 'Pending photo');
@@ -93,8 +91,7 @@ define('_AM_EXTGALLERY_EXTRA_INFO', 'Extra info');
 
 // Permissions
 define('_AM_EXTGALLERY_PUBLIC_PERM_MASK', 'Public permissions mask');
-define('_AM_EXTGALLERY_PUBLIC_PERM_MASK_INFO',
-       "Here you can set the default mask permissions that will be applied to a new category. Don't give over generous permissions here because all new categories will inherit them.");
+define('_AM_EXTGALLERY_PUBLIC_PERM_MASK_INFO', "Here you can set the default mask permissions that will be applied to a new category. Don't give over generous permissions here because all new categories will inherit them.");
 define('_AM_EXTGALLERY_GROUP_NAME', 'Group name');
 define('_AM_EXTGALLERY_CAN_ACCESS', 'Can access');
 define('_AM_EXTGALLERY_CAN_RATE', 'Can rate pictures');
@@ -124,12 +121,10 @@ define('_AM_EXTGALLERY_PUBLIC_ECARD_INFO', "Allows you to restrict the send eCar
 
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD', 'Public download permission');
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_DESC', 'Select categories where photos can be downloaded');
-define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_INFO',
-       "Allows you to restrict the download of large image. If a user is allowed to download, they will also have access to large image downloads if the \"Save large photo\" is enabled in preferences.");
+define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_INFO', "Allows you to restrict the download of large image. If a user is allowed to download, they will also have access to large image downloads if the \"Save large photo\" is enabled in preferences.");
 
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG', 'Download original permissions');
-define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_DESC',
-       "Select categories where users can download original photos.<br>To download originals the 'Save original photo' feature must be enable in 'Preferences' plus group settings must allow the download.");
+define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_DESC', "Select categories where users can download original photos.<br>To download originals the 'Save original photo' feature must be enable in 'Preferences' plus group settings must allow the download.");
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_INFO',
        "Allows you to restrict the download of original images. If a user is allowed to download original they can access the original image (without border and watermark, and not resized) if the \"Save original photo\" is enabled in preferences.");
 
@@ -152,8 +147,7 @@ define('_AM_EXTGALLERY_ADD_FONT', 'Add font (TTF)');
 define('_AM_EXTGALLERY_FONT_FILE', 'Font file');
 define('_AM_EXTGALLERY_FONT_MANAGMENT', 'Font management');
 define('_AM_EXTGALLERY_ADD_FONT_LINK', "There are %s fonts available. <a href=\"watermark-border.php?op=uploadfont\">Click here</a> to add a new font");
-define('_AM_EXTGALLERY_WATERMARK_FREETYPE_WARN',
-       "<b>PHP must be compiled with FreeType support to enable watermarking. See <a href=\"http://www.freetype.org/\">FreeType.org</a> for more information.</b>");
+define('_AM_EXTGALLERY_WATERMARK_FREETYPE_WARN', "<b>PHP must be compiled with FreeType support to enable watermarking. See <a href=\"http://www.freetype.org/\">FreeType.org</a> for more information.</b>");
 define('_AM_EXTGALLERY_WATERMARK_CONF', 'Watermarks configuration');
 define('_AM_EXTGALLERY_FONT', 'Font');
 define('_AM_EXTGALLERY_WATERMARK_TEXT', 'Watermark text');
@@ -342,8 +336,7 @@ define('_AM_EXTGALLERY_ABOUT_AUTHOR_INFO', 'Author Info');
 define('_AM_EXTGALLERY_ABOUT_DESCRIPTION', 'Description: ');
 
 // text in admin footer
-define('_AM_EXTGALLERY_ADMIN_FOOTER',
-       "<div class='right smallsmall italic pad5'>XOOPS Tag is maintained by the <a class='tooltip' rel='external' href='http://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
+define('_AM_EXTGALLERY_ADMIN_FOOTER', "<div class='right smallsmall italic pad5'>XOOPS Tag is maintained by the <a class='tooltip' rel='external' href='http://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
 define('_EXTGALLERY_ADMIN_', ' '); //
 
 // Add File size define (cesagonchu)

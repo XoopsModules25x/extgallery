@@ -132,7 +132,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         if ($photo->getVar('photo_serveur') == '') {
             $this->deleteFile($photo);
         }
-        $this->delete($photo->getVar('photo_id'), true);
+        $this->deleteById($photo->getVar('photo_id'), true);
     }
 
     /**
@@ -855,7 +855,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         $cat->setVar('cat_isalbum', 1);
         $catHandler->insert($cat);
 
-        /** @var XoopsNotificationHandler $notificationHandler*/
+        /** @var XoopsNotificationHandler $notificationHandler */
         $notificationHandler = xoops_getHandler('notification');
         $extraTags           = array(
             'X_ITEM_CAT'     => $cat->getVar('cat_name'),

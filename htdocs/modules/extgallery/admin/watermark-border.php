@@ -15,9 +15,10 @@
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
  */
-
+include_once __DIR__ . '/admin_header.php';
 include_once __DIR__ . '/../../../include/cp_header.php';
 xoops_load('XoopsFormLoader');
+
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];

@@ -1054,8 +1054,7 @@ if (!class_exists('PEAR_Error')) {
                     $callback = $this->callback;
                 }
 
-                return sprintf('[%s: message="%s" code=%d mode=callback ' . 'callback=%s prefix="%s" info="%s"]', strtolower(get_class($this)), $this->message, $this->code, $callback,
-                               $this->error_message_prefix, $this->userinfo);
+                return sprintf('[%s: message="%s" code=%d mode=callback ' . 'callback=%s prefix="%s" info="%s"]', strtolower(get_class($this)), $this->message, $this->code, $callback, $this->error_message_prefix, $this->userinfo);
             }
             if ($this->mode & PEAR_ERROR_PRINT) {
                 $modes[] = 'print';
@@ -1070,8 +1069,8 @@ if (!class_exists('PEAR_Error')) {
                 $modes[] = 'return';
             }
 
-            return sprintf('[%s: message="%s" code=%d mode=%s level=%s ' . 'prefix="%s" info="%s"]', strtolower(get_class($this)), $this->message, $this->code, implode('|', $modes),
-                           $levels[$this->level], $this->error_message_prefix, $this->userinfo);
+            return sprintf('[%s: message="%s" code=%d mode=%s level=%s ' . 'prefix="%s" info="%s"]', strtolower(get_class($this)), $this->message, $this->code, implode('|', $modes), $levels[$this->level], $this->error_message_prefix,
+                           $this->userinfo);
         }
     }
 }

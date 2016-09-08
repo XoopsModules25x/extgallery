@@ -77,8 +77,7 @@
             }
 
             .galleria-thumb-nav-left, .galleria-thumb-nav-right, .galleria-info-link, .galleria-info-close, .galleria-image-nav-left, .galleria-image-nav-right {
-                background: url(<{xoAppUrl modules/extgallery/}>assets/images/galleria/<{$galleria_bgimg}>.png
-            };
+                background: url(<{xoAppUrl modules/extgallery/}> assets/images/galleria/ <{$galleria_bgimg}> .png };
         </style>
     <{/if}>
     <{if $use_slideshow_effects == microgallery}>
@@ -181,8 +180,7 @@
             }
 
             .galleria-thumb-nav-left, .galleria-thumb-nav-right, .galleria-info-link, .galleria-info-close, .galleria-image-nav-left, .galleria-image-nav-right {
-                background: url(<{xoAppUrl modules/extgallery/}>assets/images/galleria/<{$galleria_bgimg}>.png
-            };
+                background: url(<{xoAppUrl modules/extgallery/}> assets/images/galleria/ <{$galleria_bgimg}> .png };
         </style>
     <{/if}>
     <{if $use_slideshow_effects == microgallery}>

@@ -137,7 +137,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
             $this->deleteCat($child->getVar('cat_id'));
         }
         $this->_photoHandler->deletePhotoByCat($catId);
-        $this->delete($catId);
+        $this->deleteById($catId);
     }
 
     /**

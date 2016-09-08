@@ -303,8 +303,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         $color   = $this->colorarray2colorhex($color);
 
         $this->command[] = $this->_prepare_cmd(IMAGE_TRANSFORM_NETPBM_PATH, 'ppmlabel',
-                                               '-angle ' . ((int)$angle) . ' -colour ' . escapeshellarg($color) . ' -size ' . ((float)$size) . ' -x ' . ((int)$x) . ' -y ' . ((int)($y + $size))
-                                               . ' -text ' . escapeshellarg($text));
+                                               '-angle ' . ((int)$angle) . ' -colour ' . escapeshellarg($color) . ' -size ' . ((float)$size) . ' -x ' . ((int)$x) . ' -y ' . ((int)($y + $size)) . ' -text ' . escapeshellarg($text));
     } // End addText
 
     /**
