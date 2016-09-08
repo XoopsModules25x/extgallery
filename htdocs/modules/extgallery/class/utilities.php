@@ -24,8 +24,7 @@ class ExtgalleryUtilities extends XoopsObject
                     file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
                 }
             }
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n", '<br/>';
         }
     }
@@ -137,6 +136,10 @@ class ExtgalleryUtilities extends XoopsObject
         return $success;
     }
 
+    /**
+     * @param $option
+     * @return bool|mixed
+     */
     public static function getModuleOption($option)
     {
         global $xoopsModuleConfig, $xoopsModule;
@@ -161,7 +164,7 @@ class ExtgalleryUtilities extends XoopsObject
             /** @var XoopsConfigHandler $configHandler */
             $configHandler = xoops_getHandler('config');
             if ($module) {
-                $moduleConfig = $configHandler->getConfigsByCat(0, $module->getVar('mid'));
+                $moduleConfig =& $configHandler->getConfigsByCat(0, $module->getVar('mid'));
                 if (isset($moduleConfig[$option])) {
                     $retval = $moduleConfig[$option];
                 }

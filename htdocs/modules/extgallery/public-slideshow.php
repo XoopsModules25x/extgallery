@@ -33,9 +33,9 @@ if (!$permHandler->isAllowed($xoopsUser, 'public_access', $catId)) {
     redirect_header('index.php', 3, _NOPERM);
     exit;
 }
-/** @var ExtgalleryCatHandler $catHandler*/
-$catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
-/** @var ExtgalleryPublicphotoHandler $photoHandler*/
+/** @var ExtgalleryCatHandler $catHandler */
+$catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+/** @var ExtgalleryPublicphotoHandler $photoHandler */
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 $catObj = $catHandler->getCat($catId);
@@ -150,15 +150,15 @@ $var_nav_width   = 0;
 $var_nav_visible = 'hidden';
 
 switch ($xoopsModuleConfig['galleriffic_nb_colthumbs']) {
-    case 1;
+    case 1:
         $var_nav_width   = 130;
         $var_nav_visible = 'visible';
         break;
-    case 2;
+    case 2:
         $var_nav_width   = 200;
         $var_nav_visible = 'visible';
         break;
-    case 3;
+    case 3:
         $var_nav_width   = 280;
         $var_nav_visible = 'visible';
         break;

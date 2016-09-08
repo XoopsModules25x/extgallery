@@ -97,7 +97,7 @@ class PhpCaptcha
         $aFonts, // array of TrueType fonts to use - specify full path
         $iWidth = CAPTCHA_WIDTH, // width of image
         $iHeight = CAPTCHA_HEIGHT // height of image
-    )
+)
     {
         // get parameters
         $this->aFonts = $aFonts;
@@ -473,7 +473,7 @@ class PhpCaptcha
      *
      * @return bool
      */
-    public function Validate($sUserCode, $bCaseInsensitive = true)
+    public static function Validate($sUserCode, $bCaseInsensitive = true)
     {
         if ($bCaseInsensitive) {
             $sUserCode = strtoupper($sUserCode);
@@ -508,7 +508,7 @@ class AudioPhpCaptcha
     public function __construct(
         $sFlitePath = CAPTCHA_FLITE_PATH, // path to flite binary
         $sAudioPath = CAPTCHA_AUDIO_PATH // the location to temporarily store the generated audio CAPTCHA
-    )
+)
     {
         $this->SetFlitePath($sFlitePath);
         $this->SetAudioPath($sAudioPath);

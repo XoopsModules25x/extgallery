@@ -66,7 +66,7 @@ switch ($step) {
         }
 
         // English file are included on module package
-        if ($xoopsConfig['language'] != 'english') {
+        if ($xoopsConfig['language'] !== 'english') {
             if (!$handle = @fopen($downloadServer . $langFileName, 'r')) {
                 printf(_AM_EXTGALLERY_LG_FILE_DONT_EXIST, $downloadServer, $langFileName);
             } else {

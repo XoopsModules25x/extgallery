@@ -19,7 +19,7 @@ function extgallery_tag_iteminfo(&$items)
 
     /** @var ExtgalleryPublicphotoHandler $itemHandler */
     $itemHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
-    $items_obj   = $itemHandler->getObjects(new Criteria('photo_id', '(' . implode(', ', $items_id) . ')', 'IN'), true);
+    $items_obj   =& $itemHandler->getObjects(new Criteria('photo_id', '(' . implode(', ', $items_id) . ')', 'IN'), true);
 
     foreach (array_keys($items) as $cat_id) {
         foreach (array_keys($items[$cat_id]) as $item_id) {
@@ -54,8 +54,7 @@ function extgallery_tag_synchronization($mid)
     if (version_compare(mysqli_get_server_info($XoopsDB->conn), '4.1.0', 'ge')):
 
         $sql = "    DELETE FROM {$linkHandler->table}" . '    WHERE ' . "        tag_modid = {$mid}" . '        AND ' . '        ( tag_itemid NOT IN ' . "            ( SELECT DISTINCT {$itemHandler->keyName} "
-               . "                FROM {$itemHandler->table} " . "                WHERE {$itemHandler->table}.photo_approved > 0" . '            ) ' . '        )';
-    else:
+               . "                FROM {$itemHandler->table} " . "                WHERE {$itemHandler->table}.photo_approved > 0" . '            ) ' . '        )'; else:
         $sql = "    DELETE {$linkHandler->table} FROM {$linkHandler->table}" . "    LEFT JOIN {$itemHandler->table} AS aa ON {$linkHandler->table}.tag_itemid = aa.{$itemHandler->keyName} " . '    WHERE ' . "        tag_modid = {$mid}"
                . '        AND ' . "        ( aa.{$itemHandler->keyName} IS NULL" . '            OR aa.photo_approved < 1' . '        )';
     endif;

@@ -31,10 +31,10 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
      *
      * @var string
      */
-    public $table;
-    public $keyName;
-    public $className;
-    public $identifierName;
+//    public $table;
+//    public $keyName;
+//    public $className;
+//    public $identifierName;
     /**#@-*/
 
     /**

@@ -51,9 +51,10 @@ function xoops_module_pre_install_extgallery(XoopsModule $module)
 /**
  *
  * Performs tasks required during installation of the module
- * @param XoopsModule $module {@link XoopsModule}
- *
+ * @param XoopsModule $xoopsModule
  * @return bool true if installation successful, false if not
+ * @internal param XoopsModule $module <a href='psi_element://XoopsModule'>XoopsModule</a>
+ *
  */
 function xoops_module_install_extgallery(XoopsModule $xoopsModule)
 {

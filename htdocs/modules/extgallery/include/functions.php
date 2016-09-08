@@ -41,7 +41,7 @@ function gal_getmoduleoption($option)
         /** @var XoopsConfigHandler $configHandler */
         $configHandler = xoops_getHandler('config');
         if ($module) {
-            $moduleConfig = $configHandler->getConfigsByCat(0, $module->getVar('mid'));
+            $moduleConfig =& $configHandler->getConfigsByCat(0, $module->getVar('mid'));
             if (isset($moduleConfig[$option])) {
                 $retval = $moduleConfig[$option];
             }

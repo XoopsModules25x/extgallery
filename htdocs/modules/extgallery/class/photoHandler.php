@@ -252,7 +252,8 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         $criteria->add(new Criteria('cat_id', $catId));
         $criteria->add(new Criteria('photo_approved', 1));
 
-        $sql = 'SELECT photo_id FROM ' . $this->db->prefix('extgallery_publicphoto') . ' ' . $criteria->renderWhere() . ' ORDER BY photo_weight, photo_id ASC;';
+        $sql = 'SELECT photo_id FROM ' . $this->db->prefix('extgallery_publicphoto') . ' ' . $criteria->renderWhere()
+               . ' ORDER BY photo_weight, photo_id ASC;';
 
         $result = $this->db->query($sql);
         $ret    = array();
@@ -485,7 +486,8 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             $y = 1;
         }
 
-        $text = ($xoopsModuleConfig['watermark_type'] == 0) ? $GLOBALS['xoopsUser']->getVar('uname') : $xoopsModuleConfig['watermark_text'];
+        $text = ($xoopsModuleConfig['watermark_type']
+                 == 0) ? $GLOBALS['xoopsUser']->getVar('uname') : $xoopsModuleConfig['watermark_text'];
 
         $watermarkParams = array(
             'text'         => $text,
@@ -566,9 +568,9 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
     }
 
     /**
-     * @param      $photoName
-     * @param null $filePath
-     * @param null $mediumFilePath
+     * @param             $photoName
+     * @param null|string $filePath
+     * @param null        $mediumFilePath
      */
     public function _mediumPhotoTreatment($photoName, $filePath = null, $mediumFilePath = null)
     {
@@ -594,7 +596,8 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         } else {
             $borderSize = 0;
         }
-        $imageTransform->fit($xoopsModuleConfig['medium_width'] - $borderSize, $xoopsModuleConfig['medium_heigth'] - $borderSize);
+        $imageTransform->fit($xoopsModuleConfig['medium_width'] - $borderSize,
+                             $xoopsModuleConfig['medium_heigth'] - $borderSize);
         $imageTransform->save($mediumFilePath, '', $xoopsModuleConfig['medium_quality']);
         $imageTransform->free();
 
@@ -850,7 +853,8 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             $photoTag = $_POST['tag'];
         }
 
-        $photoStatus = $this->addLocalPhoto($catId, $this->photoUploader->getSavedFilename(), $photoTitle, $photoDesc, $photoExtra, $photoTag);
+        $photoStatus = $this->addLocalPhoto($catId, $this->photoUploader->getSavedFileName(), $photoTitle, $photoDesc,
+                                            $photoExtra, $photoTag);
         $cat         = $catHandler->getCat($catId);
         $cat->setVar('cat_isalbum', 1);
         $catHandler->insert($cat);
