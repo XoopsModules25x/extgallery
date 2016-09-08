@@ -72,7 +72,7 @@ $modversion = array(
     // Install/Update
     'onInstall'           => 'include/oninstall.php',
     //'onUninstall'         => "include/onuninstall.php",
-    'onUpdate'            => 'include/update_function.php',
+    'onUpdate'            => 'include/onupdate.php',
     // Search
     'hasSearch'           => 1,
     // Comments

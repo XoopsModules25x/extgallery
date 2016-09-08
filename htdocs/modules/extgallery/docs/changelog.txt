@@ -15,9 +15,9 @@
 - changed RGB to HEX (mamba)
 - updated and optimized CSS (background and margins) (mamba)
 - added "type hints" via PhpDocs (mamba)
-
 - added oninstall.php, onupdate.php (mamba)
 - added checks for PHP & XOOPS Versions (mamba)
+- added moduleConfig array (mamba)
 
 
 ============================

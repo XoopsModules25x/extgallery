@@ -18,45 +18,43 @@
  */
 
 require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+$moduleDirName = basename(dirname(__DIR__));
 
 if (!defined('EXTGALLERY_DIRNAME')) {
-    define('EXTGALLERY_DIRNAME', $GLOBALS['xoopsModule']->dirname());
+    define('EXTGALLERY_DIRNAME', $moduleDirName);
     define('EXTGALLERY_PATH', XOOPS_ROOT_PATH . '/modules/' . EXTGALLERY_DIRNAME);
     define('EXTGALLERY_URL', XOOPS_URL . '/modules/' . EXTGALLERY_DIRNAME);
     define('EXTGALLERY_ADMIN', EXTGALLERY_URL . '/admin/index.php');
     define('EXTGALLERY_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/' . EXTGALLERY_DIRNAME);
     define('EXTGALLERY_AUTHOR_LOGOIMG', EXTGALLERY_URL . '/assets/images/logoModule.png');
+    define('EXTGALLERY_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . EXTGALLERY_DIRNAME); // WITHOUT Trailing slash
+    define('EXTGALLERY_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . EXTGALLERY_DIRNAME); // WITHOUT Trailing slash
+
 }
 
-// Define here the place where main upload path
-
-//$img_dir = $GLOBALS['xoopsModuleConfig']['uploaddir'];
-
-define('EXTGALLERY_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . EXTGALLERY_DIRNAME); // WITHOUT Trailing slash
-//define("EXTGALLERY_UPLOAD_PATH", $img_dir); // WITHOUT Trailing slash
-define('EXTGALLERY_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . EXTGALLERY_DIRNAME); // WITHOUT Trailing slash
-
-$uploadFolders = array(
-    EXTGALLERY_UPLOAD_PATH,
-    EXTGALLERY_UPLOAD_PATH . '/public-photo',
-    EXTGALLERY_UPLOAD_PATH . '/public-photo/original',
-    EXTGALLERY_UPLOAD_PATH . '/public-photo/large',
-    EXTGALLERY_UPLOAD_PATH . '/public-photo/medium',
-    EXTGALLERY_UPLOAD_PATH . '/public-photo/thumb',
-);
-
-$copyFiles = array(
-    EXTGALLERY_UPLOAD_PATH,
-    EXTGALLERY_UPLOAD_PATH . '/public-photo',
-    EXTGALLERY_UPLOAD_PATH . '/public-photo/original',
-    EXTGALLERY_UPLOAD_PATH . '/public-photo/large',
-    EXTGALLERY_UPLOAD_PATH . '/public-photo/medium',
-    EXTGALLERY_UPLOAD_PATH . '/public-photo/thumb',
-);
-
-$oldFiles = array(
-    '/include/update_functions.php',
-    '/include/install_functions.php'
+//Configurator
+return array(
+    'name'          => 'Module Configurator',
+    'uploadFolders' => array(
+        EXTGALLERY_UPLOAD_PATH,
+        EXTGALLERY_UPLOAD_PATH . '/public-photo',
+        EXTGALLERY_UPLOAD_PATH . '/public-photo/original',
+        EXTGALLERY_UPLOAD_PATH . '/public-photo/large',
+        EXTGALLERY_UPLOAD_PATH . '/public-photo/medium',
+        EXTGALLERY_UPLOAD_PATH . '/public-photo/thumb',
+    ),
+    'copyFiles'     => array(
+        EXTGALLERY_UPLOAD_PATH,
+        EXTGALLERY_UPLOAD_PATH . '/public-photo',
+        EXTGALLERY_UPLOAD_PATH . '/public-photo/original',
+        EXTGALLERY_UPLOAD_PATH . '/public-photo/large',
+        EXTGALLERY_UPLOAD_PATH . '/public-photo/medium',
+        EXTGALLERY_UPLOAD_PATH . '/public-photo/thumb',
+    ),
+    'oldFiles'      => array(
+        '/include/update_functions.php',
+        '/include/install_functions.php'
+    ),
 );
 
 // module information

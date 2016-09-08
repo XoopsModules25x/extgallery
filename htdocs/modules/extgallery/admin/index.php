@@ -26,10 +26,12 @@ if (!class_exists($classUtilities)) {
     xoops_load('utilities', $moduleDirName);
 }
 
-foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-    $classUtilities::createFolder($uploadFolders[$i]);
-    $adminObject->addConfigBoxLine($uploadFolders[$i], 'folder');
-    //    $indexAdmin->addConfigBoxLine(array($folder[$i], '777'), 'chmod');
+$configurator = include __DIR__ .  '/../include/config.php';
+
+foreach (array_keys($configurator['uploadFolders']) as $i) {
+    $classUtilities::createFolder($configurator['uploadFolders'][$i]);
+    $adminObject->addConfigBoxLine($configurator['uploadFolders'][$i], 'folder');
+//    $adminObject->addConfigBoxLine(array($configurator['uploadFolders'][$i], '777'), 'chmod');
 }
 
 

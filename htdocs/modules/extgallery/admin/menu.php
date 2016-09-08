@@ -28,7 +28,13 @@ xoops_loadLanguage('modinfo', $moduleDirName);
 
 //xoops_loadLanguage('admin', $dirname);
 
+$xoopsModuleAdminPath = XOOPS_ROOT_PATH . '/' . $module->getInfo('dirmoduleadmin');
 
+
+if (!file_exists($fileinc = $xoopsModuleAdminPath . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/' . 'main.php')) {
+    $fileinc = $xoopsModuleAdminPath . '/language/english/main.php';
+}
+include_once $fileinc;
 
 $adminmenu[] = array(
     'title' => _AM_MODULEADMIN_HOME,

@@ -168,23 +168,33 @@ function xoops_module_install_extgallery(XoopsModule $xoopsModule)
 
 */
 
-    $moduleDirName = $xoopsModule->getVar('dirname');
-    include_once $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
+    $moduleDirName = basename(dirname(__DIR__));
+    include_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+
+//    $moduleDirName = $xoopsModule->getVar('dirname');
+    $configurator = include $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
+
+
 
     $classUtilities = ucfirst($moduleDirName) . 'Utilities';
     if (!class_exists($classUtilities)) {
         xoops_load('utilities', $moduleDirName);
     }
 
+//    include_once __DIR__ . '/config.php';
 
-    foreach (array_keys($uploadFolders) as $i) {
-        $classUtilities::createFolder($uploadFolders[$i]);
+    if (count($configurator['uploadFolders']) > 0) {
+        //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
+        foreach (array_keys($configurator['uploadFolders']) as $i) {
+            $classUtilities::createFolder($configurator['uploadFolders'][$i]);
+        }
     }
-
-    $file = PUBLISHER_ROOT_PATH . '/assets/images/blank.png';
-    foreach (array_keys($copyFiles) as $i) {
-        $dest = $copyFiles[$i] . '/blank.png';
-        $classUtilities::copyFile($file, $dest);
+    if (count($configurator['copyFiles'])>0) {
+        $file = __DIR__ . '/../assets/images/blank.png';
+        foreach (array_keys($configurator['copyFiles']) as $i) {
+            $dest = $configurator['copyFiles'][$i] . '/blank.png';
+            $classUtilities::copyFile($file, $dest);
+        }
     }
 
     return true;
