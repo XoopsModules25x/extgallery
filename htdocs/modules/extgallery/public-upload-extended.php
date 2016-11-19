@@ -15,13 +15,13 @@
  * @package     ExtGallery
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-upload-applet.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
 
-$permHandler = ExtgalleryPublicPermHandler::getHandler();
+$permHandler = ExtgalleryPublicPermHandler::getInstance();
 if (count($permHandler->getAuthorizedPublicCat($xoopsUser, 'public_upload')) < 1) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
     exit;

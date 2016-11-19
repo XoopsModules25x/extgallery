@@ -140,3 +140,9 @@ define('_MD_EXTGALLERY_SORTHITSDESC', 'Most popular pictures listed first');
 define('_MD_EXTGALLERY_SORTNOTE', 'Note');
 define('_MD_EXTGALLERY_SORTNOTEASC', 'Worst rated listed first');
 define('_MD_EXTGALLERY_SORTNOTEDESC', 'Best rated listed first');
+
+define('_MD_EXTGALLERY_ORDERBY_DESIGNERASC', 'User ID,  newest first');
+define('_MD_EXTGALLERY_ORDERBY_DESIGNERDESC', 'User ID, oldest first');
+//1.13
+// pk add my user def for new album link
+define("_MD_EXTGALLERY_USERALBUM","View my album");

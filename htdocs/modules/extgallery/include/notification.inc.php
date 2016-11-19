@@ -35,7 +35,7 @@
  */
 function extgalleryNotifyIteminfo($category, $item_id)
 {
-    /** @var ExtgalleryPublicphotoHandler $photoHandler*/
+    /** @var ExtgalleryPublicPhotoHandler $photoHandler */
     $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
     $photo        = $photoHandler->getPhoto($item_id);
     $item['name'] = $photo->getVar('photo_desc');

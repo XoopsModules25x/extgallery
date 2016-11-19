@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-viewecard.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
@@ -35,7 +35,6 @@ $ecardObj = $ecardHandler->getEcard($ecardId);
 // Check is the photo exist
 if (!$ecardObj) {
     redirect_header('index.php', 3, _NOPERM);
-    exit;
 }
 
 $ecard = $ecardHandler->objectToArray($ecardObj, array('photo_id'));

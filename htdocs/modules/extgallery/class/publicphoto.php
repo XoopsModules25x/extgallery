@@ -21,12 +21,12 @@ include_once __DIR__ . '/photoHandler.php';
 include_once __DIR__ . '/publicPerm.php';
 
 /**
- * Class ExtgalleryPublicphoto
+ * Class ExtgalleryPublicPhoto
  */
-class ExtgalleryPublicphoto extends ExtgalleryPhoto
+class ExtgalleryPublicPhoto extends ExtgalleryPhoto
 {
     /**
-     * ExtgalleryPublicphoto constructor.
+     * ExtgalleryPublicPhoto constructor.
      */
     public function __construct()
     {
@@ -35,12 +35,12 @@ class ExtgalleryPublicphoto extends ExtgalleryPhoto
 }
 
 /**
- * Class ExtgalleryPublicphotoHandler
+ * Class ExtgalleryPublicPhotoHandler
  */
-class ExtgalleryPublicphotoHandler extends ExtgalleryPhotoHandler
+class ExtgalleryPublicPhotoHandler extends ExtgalleryPhotoHandler
 {
     /**
-     * ExtgalleryPublicphotoHandler constructor.
+     * ExtgalleryPublicPhotoHandler constructor.
      * @param XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
@@ -209,7 +209,7 @@ class ExtgalleryPublicphotoHandler extends ExtgalleryPhotoHandler
 
         $result = $this->db->query($sql);
         $ret    = array();
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[] = $myrow['photo_id'];
         }
 

@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-categories.tpl';
 include XOOPS_ROOT_PATH . '/header.php';

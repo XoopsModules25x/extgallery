@@ -93,6 +93,15 @@
         </tr>-->
     </table>
 
+     <{*pk ------------------- add upload and view-my-album links to main page*}>
+    <div>
+        <a title="<{$albumlinkname}>" href="<{xoAppUrl modules/extgallery/}><{$albumurl}>"><{$albumlinkname}></a> <br />
+        <a title="<{$uploadlinkname}>" href="<{xoAppUrl modules/extgallery/}><{$uploadurl}>"><{$uploadlinkname}></a>
+
+    </div>
+     <{*end pk mod ------------------------------*}>
+
+
     <{if $show_rss}>
         <div id="rss">
             <a href="<{xoAppUrl modules/extgallery/public-rss.php}>" title="<{$smarty.const._MD_EXTGALLERY_RSS}>">

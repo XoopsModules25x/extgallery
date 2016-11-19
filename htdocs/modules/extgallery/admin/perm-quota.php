@@ -17,7 +17,7 @@
  */
 
 include_once __DIR__ . '/admin_header.php';
-include dirname(__DIR__) . '/class/grouppermform.php';
+include __DIR__ . '/../class/grouppermform.php';
 
 if (isset($_POST['step'])) {
     $step = $_POST['step'];

@@ -18,12 +18,12 @@
  */
 
 $moduleDirName = basename(dirname(__DIR__));
-include_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+include_once __DIR__ . '/../../../mainfile.php';
 include_once $GLOBALS['xoops']->path('www/include/cp_functions.php');
 include_once $GLOBALS['xoops']->path('www/include/cp_header.php');
 include_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
 
-include_once dirname(__DIR__) . '/include/config.php';
+include_once __DIR__ . '/../include/config.php';
 
 xoops_load('XoopsRequest');
 

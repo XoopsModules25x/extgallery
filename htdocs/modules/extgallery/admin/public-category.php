@@ -84,12 +84,11 @@ switch ($op) {
                 // Check if they are selected category
                 if (!isset($_POST['cat_id'])) {
                     redirect_header('photo.php', 3, _AM_EXTGALLERY_NO_CATEGORY_SELECTED);
-                    exit;
                 }
 
-                $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
-            /** @var ExtgalleryPublicphotoHandler $photoHandler*/
-            $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+                $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+                /** @var ExtgalleryPublicPhotoHandler $photoHandler */
+                $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
                 $cat       = $catHandler->getCat($_POST['cat_id']);
                 $photosCat = $photoHandler->getCatPhoto($cat);

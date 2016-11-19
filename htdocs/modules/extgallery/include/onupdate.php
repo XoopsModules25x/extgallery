@@ -114,7 +114,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         $module_id = $xoopsModule->getVar('mid');
         /** @var XoopsGroupPermHandler $gpermHandler */
         $gpermHandler = xoops_getHandler('groupperm');
-        while ($cat = $db->fetchArray($result)) {
+        while (false !== ($cat = $db->fetchArray($result))) {
             $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ADMIN, $module_id);
             $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_USERS, $module_id);
             $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ANONYMOUS, $module_id);

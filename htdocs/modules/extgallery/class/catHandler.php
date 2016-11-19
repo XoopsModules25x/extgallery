@@ -32,6 +32,7 @@ class ExtgalleryCat extends XoopsObject
      */
     public function __construct()
     {
+        parent::__construct();
         $this->initVar('cat_id', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('cat_pid', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('nleft', XOBJ_DTYPE_INT, 0, false);
@@ -80,7 +81,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
      */
     public function __construct(XoopsDatabase $db, $type)
     {
-        parent::__construct($db, 'extgallery_' . $type . 'cat', 'Extgallery' . ucfirst($type) . 'cat', 'cat_id');
+        parent::__construct($db, 'extgallery_' . $type . 'cat', 'Extgallery' . ucfirst($type) . 'Cat', 'cat_id');
         //$this->_nestedTree = new NestedTree($db, 'extgallery_'.$type.'cat', 'cat_id', 'cat_pid', 'cat_id');
         $this->_photoHandler = xoops_getModuleHandler($type . 'photo', 'extgallery');
     }
@@ -127,7 +128,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     }
 
     /**
-     * @param $catId
+     * @param int $catId
      */
     public function deleteCat($catId)
     {
@@ -225,7 +226,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
      *
      * @return bool
      */
-    public function _isAlbum(&$cat)
+    public function _isAlbum($cat)
     {
         $nbPhoto = $this->nbPhoto($cat);
 
@@ -233,12 +234,13 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     }
 
     /**
-     * @param $cat
+     * @param ExtgalleryCat $cat
      *
      * @return mixed
      */
     public function nbPhoto(&$cat)
     {
+        /** @var ExtgalleryPublicPhotoHandler $this->_photoHandler */
         return $this->_photoHandler->nbPhoto($cat);
     }
 
@@ -363,9 +365,9 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     }
 
     /**
-     * @param $cats
-     * @param $name
-     * @param $selectMode
+     * @param array $cats
+     * @param string $name
+     * @param string $selectMode
      * @param $addEmpty
      * @param $selected
      * @param $extra
@@ -373,17 +375,19 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
      *
      * @return string
      */
-    public function makeSelect(&$cats, $name, $selectMode, $addEmpty, $selected, $extra, $displayWeight)
+    public function makeSelect($cats, $name, $selectMode, $addEmpty, $selected, $extra, $displayWeight)
     {
         $ret = '<select name="' . $name . '" id="' . $name . '"' . $extra . '>';
         if ($addEmpty) {
             $ret .= '<option value="0">-----</option>';
         }
+        /** @var ExtgalleryCat $cat */
         foreach ($cats as $cat) {
             $disableOption = '';
             if ($selectMode === 'node' && ($cat->getVar('nright') - $cat->getVar('nleft') != 1)) {
                 // If the brownser is IE the parent cat isn't displayed
-                if (preg_match('`MSIE`', $_SERVER['HTTP_USER_AGENT'])) {
+//                if (preg_match('`MSIE`', $_SERVER['HTTP_USER_AGENT'])) {
+                if (false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
                     continue;
                 }
                 $disableOption = ' disabled="disabled"';
@@ -526,6 +530,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
                 $criteria = new CriteriaCompo();
                 $criteria->add(new Criteria('cat_id', $id));
                 $criteria->add(new Criteria('photo_approved', 1));
+                /** @var ExtgalleryPublicPhotoHandler $this->_photoHandler */
                 $nbPhoto = $this->_photoHandler->getCount($criteria);
 
                 // Update all parent of this album

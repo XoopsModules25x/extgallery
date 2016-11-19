@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 if (!isset($_GET['id'])) {
@@ -23,7 +23,7 @@ if (!isset($_GET['id'])) {
 } else {
     $photoId = (int)$_GET['id'];
 }
-/** @var ExtgalleryPublicphotoHandler $photoHandler*/
+/** @var ExtgalleryPublicPhotoHandler $photoHandler */
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 $photo        = $photoHandler->get($photoId);
 
@@ -42,7 +42,7 @@ switch (strtolower(strrchr($photo->getVar('photo_name'), '.'))) {
         break;
 }
 
-$permHandler = ExtgalleryPublicPermHandler::getHandler();
+$permHandler = ExtgalleryPublicPermHandler::getInstance();
 
 // If require image don't exist
 if ($photo->getVar('cat_id') == 0) {

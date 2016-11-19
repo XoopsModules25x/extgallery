@@ -20,12 +20,12 @@
 include_once __DIR__ . '/catHandler.php';
 
 /**
- * Class ExtgalleryPubliccat
+ * Class ExtgalleryPublicCat
  */
-class ExtgalleryPubliccat extends ExtgalleryCat
+class ExtgalleryPublicCat extends ExtgalleryCat
 {
     /**
-     * ExtgalleryPubliccat constructor.
+     * ExtgalleryPublicCat constructor.
      */
     public function __construct()
     {
@@ -34,12 +34,12 @@ class ExtgalleryPubliccat extends ExtgalleryCat
 }
 
 /**
- * Class ExtgalleryPubliccatHandler
+ * Class ExtgalleryPublicCatHandler
  */
-class ExtgalleryPubliccatHandler extends ExtgalleryCatHandler
+class ExtgalleryPublicCatHandler extends ExtgalleryCatHandler
 {
     /**
-     * ExtgalleryPubliccatHandler constructor.
+     * ExtgalleryPublicCatHandler constructor.
      * @param XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
@@ -75,7 +75,7 @@ class ExtgalleryPubliccatHandler extends ExtgalleryCatHandler
         $moduleId = $GLOBALS['xoopsModule']->getVar('mid');
 
         // Retriving permission mask
-        /** @var XoopsGroupPermHandler $gpermHandler*/
+        /** @var XoopsGroupPermHandler $gpermHandler */
         $gpermHandler = xoops_getHandler('groupperm');
         $moduleId     = $GLOBALS['xoopsModule']->getVar('mid');
         $groups       = $GLOBALS['xoopsUser']->getGroups();
@@ -127,6 +127,6 @@ class ExtgalleryPubliccatHandler extends ExtgalleryCatHandler
      */
     public function _getPermHandler()
     {
-        return ExtgalleryPublicPermHandler::getHandler();
+        return ExtgalleryPublicPermHandler::getInstance();
     }
 }

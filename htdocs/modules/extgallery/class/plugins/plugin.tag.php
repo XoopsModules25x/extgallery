@@ -17,7 +17,7 @@ function extgallery_tag_iteminfo(&$items)
         }
     }
 
-    /** @var ExtgalleryPublicphotoHandler $itemHandler */
+    /** @var ExtgalleryPublicPhotoHandler $itemHandler */
     $itemHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
     $items_obj   =& $itemHandler->getObjects(new Criteria('photo_id', '(' . implode(', ', $items_id) . ')', 'IN'), true);
 
@@ -45,7 +45,7 @@ function extgallery_tag_iteminfo(&$items)
 function extgallery_tag_synchronization($mid)
 {
     global $XoopsDB;
-    /** @var ExtgalleryPublicphotoHandler $itemHandler */
+    /** @var ExtgalleryPublicPhotoHandler $itemHandler */
     $itemHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
     /** @var TagLinkHandler $linkHandler */
     $linkHandler = xoops_getModuleHandler('link', 'tag');

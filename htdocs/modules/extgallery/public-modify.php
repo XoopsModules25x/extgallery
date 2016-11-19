@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include_once __DIR__ . '/class/utilities.php';
 
@@ -33,10 +33,8 @@ if (isset($_POST['step'])) {
 
 if (!isset($xoopsUser)) {
     redirect_header('index.php');
-    exit;
 } elseif (!$xoopsUser->isAdmin()) {
     redirect_header('index.php');
-    exit;
 }
 $moduleDirName = basename(__DIR__);
 $classUtilities = ucfirst($moduleDirName) . 'Utilities';
@@ -47,7 +45,7 @@ switch ($op) {
         switch ($step) {
 
             case 'enreg':
-                /** @var ExtgalleryPublicphotoHandler $photoHandler */
+                /** @var ExtgalleryPublicPhotoHandler $photoHandler */
                 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
                 $myts         = MyTextSanitizer::getInstance();
                 $photo        = $photoHandler->getPhoto($_POST['photo_id']);
@@ -122,9 +120,9 @@ switch ($op) {
 
                 include_once XOOPS_ROOT_PATH . '/header.php';
                 $myts = MyTextSanitizer::getInstance();
-                /** @var ExtgalleryPubliccatHandler $catHandler */
+                /** @var ExtgalleryPublicCatHandler $catHandler */
                 $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
-                /** @var ExtgalleryPublicphotoHandler $photoHandler */
+                /** @var ExtgalleryPublicPhotoHandler $photoHandler */
                 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
                 $photo = $photoHandler->getPhoto((int)$_GET['id']);
@@ -165,9 +163,9 @@ switch ($op) {
         break;
 
     case 'delete':
-        /** @var ExtgalleryPubliccatHandler $catHandler */
+        /** @var ExtgalleryPublicCatHandler $catHandler */
         $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
-        /** @var ExtgalleryPublicphotoHandler $photoHandler */
+        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         $photo = $photoHandler->getPhoto((int)$_GET['id']);

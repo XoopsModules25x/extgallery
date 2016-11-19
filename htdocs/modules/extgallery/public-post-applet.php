@@ -15,8 +15,8 @@
  * @package     ExtGallery
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
-/** @var ExtgalleryPublicphotoHandler $photoHandler*/
+include __DIR__ . '/header.php';
+/** @var ExtgalleryPublicPhotoHandler $photoHandler */
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 $result = $photoHandler->postPhotoTraitement('File0');

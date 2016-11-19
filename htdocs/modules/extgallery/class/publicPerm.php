@@ -25,14 +25,14 @@ class ExtgalleryPublicPermHandler
     /**
      * @return ExtgalleryPublicPermHandler
      */
-    public static function getHandler()
+    public static function getInstance()
     {
-        static $permHandler;
-        if (!isset($permHandler)) {
-            $permHandler = new ExtgalleryPublicPermHandler();
+        static $instance;
+        if (null === $instance) {
+            $instance = new static();
         }
 
-        return $permHandler;
+        return $instance;
     }
 
     /**
@@ -40,7 +40,7 @@ class ExtgalleryPublicPermHandler
      *
      * @return string
      */
-    public function _getUserGroup(&$user)
+    public function _getUserGroup($user)
     {
         if (is_a($user, 'XoopsUser')) {
             return $user->getGroups();
@@ -51,7 +51,7 @@ class ExtgalleryPublicPermHandler
 
     /**
      * @param XoopsUser $user
-     * @param $perm
+     * @param           $perm
      *
      * @return mixed
      */
@@ -78,7 +78,7 @@ class ExtgalleryPublicPermHandler
      *
      * @return bool
      */
-    public function isAllowed(&$user, $perm, $catId)
+    public function isAllowed($user, $perm, $catId)
     {
         $autorizedCat = $this->getAuthorizedPublicCat($user, $perm);
 

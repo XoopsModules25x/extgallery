@@ -32,6 +32,7 @@ class ExtgalleryPhoto extends XoopsObject
      */
     public function __construct()
     {
+        parent::__construct();
         $this->initVar('photo_id', XOBJ_DTYPE_INT, null, false);
         $this->initVar('cat_id', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('photo_title', XOBJ_DTYPE_TXTBOX, '', false, 255);
@@ -94,7 +95,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
      */
     public function __construct(XoopsDatabase $db, $type)
     {
-        parent::__construct($db, 'extgallery_' . $type . 'photo', 'Extgallery' . ucfirst($type) . 'photo', 'photo_id');
+        parent::__construct($db, 'extgallery_' . $type . 'photo', 'Extgallery' . ucfirst($type) . 'Photo', 'photo_id');
     }
 
     /**
@@ -257,7 +258,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
 
         $result = $this->db->query($sql);
         $ret    = array();
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[] = $myrow['photo_id'];
         }
 
@@ -915,7 +916,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
 
         global $xoopsUser, $xoopsModuleConfig;
-        $permHandler = ExtgalleryPublicPermHandler::getHandler();
+        $permHandler = ExtgalleryPublicPermHandler::getInstance();
 
         // Replace all bad file name character
         $photoName = $this->_makeFileName($dirtyPhotoName);

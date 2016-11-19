@@ -31,6 +31,7 @@ class ExtgalleryQuota extends XoopsObject
      */
     public function __construct()
     {
+        parent::__construct();
         $this->initVar('quota_id', XOBJ_DTYPE_INT, null, false);
         $this->initVar('groupid', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('quota_name', XOBJ_DTYPE_TXTBOX, 0, false);
@@ -87,7 +88,7 @@ class ExtgalleryQuotaHandler extends ExtgalleryPersistableObjectHandler
      * @param $groupid
      * @param $quotaName
      *
-     * @return object
+     * @return XoopsObject
      */
     public function getQuota($groupid, $quotaName)
     {

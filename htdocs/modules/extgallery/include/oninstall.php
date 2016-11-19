@@ -169,7 +169,7 @@ function xoops_module_install_extgallery(XoopsModule $xoopsModule)
 */
 
     $moduleDirName = basename(dirname(__DIR__));
-    include_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+    include_once __DIR__ . '/../../../mainfile.php';
 
 //    $moduleDirName = $xoopsModule->getVar('dirname');
     $configurator = include $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');

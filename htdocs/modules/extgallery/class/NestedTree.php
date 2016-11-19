@@ -45,7 +45,7 @@ class NestedTree
      * Fetch the node data for the node identified by $id
      *
      * @param  int $id   The ID of the node to fetch
-     * @return object An object containing the node's
+     * @return null|XoopsObject An object containing the node's
      *                   data, or null if node not found
      */
     public function getNode($id)
@@ -109,7 +109,7 @@ class NestedTree
         $result = $this->db->query($query);
 
         $arr = array();
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $arr[$row[$idField]] = $row;
         }
 
@@ -157,7 +157,7 @@ class NestedTree
 
         $idField = $this->fields['id'];
         $arr     = array();
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $arr[$row[$idField]] = $row;
         }
 
@@ -300,7 +300,7 @@ class NestedTree
         );
 
         // populate the array and create an empty children array
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $arr[$row[$this->fields['id']]]             = $row;
             $arr[$row[$this->fields['id']]]['children'] = array();
         }

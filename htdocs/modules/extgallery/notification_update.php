@@ -25,5 +25,5 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
-include dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include XOOPS_ROOT_PATH . '/include/notification_update.php';

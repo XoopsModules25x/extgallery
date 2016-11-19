@@ -21,17 +21,18 @@ include_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
 include_once __DIR__ . '/extgalleryMailer.php';
 
 /**
- * Class ExtgalleryPublicecard
+ * Class ExtgalleryPublicEcard
  */
-class ExtgalleryPublicecard extends XoopsObject
+class ExtgalleryPublicEcard extends XoopsObject
 {
     public $externalKey = array();
 
     /**
-     * ExtgalleryPublicecard constructor.
+     * ExtgalleryPublicEcard constructor.
      */
     public function __construct()
     {
+        parent::__construct();
         $this->initVar('ecard_id', XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('ecard_cardid', XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('ecard_fromname', XOBJ_DTYPE_TXTBOX, 0, false);
@@ -71,17 +72,17 @@ class ExtgalleryPublicecard extends XoopsObject
 }
 
 /**
- * Class ExtgalleryPublicecardHandler
+ * Class ExtgalleryPublicEcardHandler
  */
-class ExtgalleryPublicecardHandler extends ExtgalleryPersistableObjectHandler
+class ExtgalleryPublicEcardHandler extends ExtgalleryPersistableObjectHandler
 {
     /**
-     * ExtgalleryPublicecardHandler constructor.
+     * ExtgalleryPublicEcardHandler constructor.
      * @param XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
     {
-        parent::__construct($db, 'extgallery_publicecard', 'ExtgalleryPublicecard', 'ecard_id');
+        parent::__construct($db, 'extgallery_publicecard', 'ExtgalleryPublicEcard', 'ecard_id');
     }
 
     /**
@@ -109,7 +110,7 @@ class ExtgalleryPublicecardHandler extends ExtgalleryPersistableObjectHandler
      */
     public function send(&$ecard)
     {
-        /** @var ExtgalleryPublicphotoHandler $photoHandler*/
+        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
         $photo        = $photoHandler->get($ecard->getVar('photo_id'));
 

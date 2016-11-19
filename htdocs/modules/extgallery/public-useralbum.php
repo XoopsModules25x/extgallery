@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
@@ -100,7 +100,7 @@ function convertorderbytrans($SortbyOrderby)
     return $orderbyTrans;
 }
 
-/** @var ExtgalleryPublicphotoHandler $photoHandler */
+/** @var ExtgalleryPublicPhotoHandler $photoHandler */
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 $photos = $photoHandler->objectToArray($photoHandler->getUserAlbumPhotoPage($userId, $start, $sortby, $orderby), array('uid'));

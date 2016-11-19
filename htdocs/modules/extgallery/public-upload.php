@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include_once __DIR__ . '/class/utilities.php';
@@ -26,10 +26,9 @@ if (isset($_POST['step'])) {
     $step = 'default';
 }
 
-$permHandler = ExtgalleryPublicPermHandler::getHandler();
+$permHandler = ExtgalleryPublicPermHandler::getInstance();
 if (count($permHandler->getAuthorizedPublicCat($xoopsUser, 'public_upload')) < 1) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
-    exit;
 }
 
 $moduleDirName = basename(__DIR__);
@@ -37,7 +36,7 @@ $classUtilities = ucfirst($moduleDirName) . 'Utilities';
 switch ($step) {
 
     case 'enreg':
-        /** @var ExtgalleryPublicphotoHandler $photoHandler */
+        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         $result = $photoHandler->postPhotoTraitement('photo_file', false);

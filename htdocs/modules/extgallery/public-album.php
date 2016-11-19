@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
@@ -36,7 +36,7 @@ if (!isset($_GET['start'])) {
 // HACK BLUETEEN TO SORT PHOTO BY USERS
 //photo_date - photo_title - photo_hits - photo_rating
 if (isset($_GET['sortby'])
-    && ($_GET['sortby'] === 'photo_date' 
+    && ($_GET['sortby'] === 'photo_date'
         || $_GET['sortby'] === 'photo_title'
         || $_GET['sortby'] === 'photo_hits'
         || $_GET['sortby'] === 'photo_rating')
@@ -98,14 +98,13 @@ function convertorderbytrans($SortbyOrderby)
 }
 
 // Check the access permission
-$permHandler = ExtgalleryPublicPermHandler::getHandler();
+$permHandler = ExtgalleryPublicPermHandler::getInstance();
 if (!$permHandler->isAllowed($xoopsUser, 'public_access', $catId)) {
     redirect_header('index.php', 3, _NOPERM);
-    exit;
 }
-/** @var ExtgalleryPubliccatHandler $catHandler*/
-$catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
-/** @var ExtgalleryPublicphotoHandler $photoHandler */
+/** @var ExtgalleryPublicCatHandler $catHandler */
+$catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+/** @var ExtgalleryPublicPhotoHandler $photoHandler */
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 $catObj = $catHandler->getCat($catId);

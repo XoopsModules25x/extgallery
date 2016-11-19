@@ -38,6 +38,7 @@ switch ($op) {
                 $criteria = new CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
                 $criteria->add(new Criteria('conf_name', 'album_overlay_bg'));
+                /** @var XoopsObject $config */
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
                 $configValue = array(
@@ -58,6 +59,7 @@ switch ($op) {
                 $criteria = new CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
                 $criteria->add(new Criteria('conf_name', 'album_overlay_width'));
+                /** @var XoopsObject $config */
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
                 $configValue = array(
@@ -78,6 +80,7 @@ switch ($op) {
                 $criteria = new CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
                 $criteria->add(new Criteria('conf_name', 'album_overlay_height'));
+                /** @var XoopsObject $config */
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
                 $configValue = array(
@@ -106,6 +109,7 @@ switch ($op) {
                 $criteria = new CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
                 $criteria->add(new Criteria('conf_name', 'album_tooltip_width'));
+                /** @var XoopsObject $config */
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
                 $configValue = array(
@@ -121,6 +125,7 @@ switch ($op) {
                         $criteria = new CriteriaCompo();
                         $criteria->add($moduleIdCriteria);
                         $criteria->add(new Criteria('conf_name', 'album_tooltip_width'));
+                        /** @var XoopsObject $config */
                         $config      = $configHandler->getConfigs($criteria);
                         $config      = $config[0];
                         $configValue = array(
@@ -145,6 +150,7 @@ switch ($op) {
                 $criteria = new CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
                 $criteria->add(new Criteria('conf_name', 'album_tooltip_borderwidth'));
+                /** @var XoopsObject $config */
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
                 $configValue = array(
@@ -165,6 +171,7 @@ switch ($op) {
                 $criteria = new CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
                 $criteria->add(new Criteria('conf_name', 'album_tooltip_bordercolor'));
+                /** @var XoopsObject $config */
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
                 $configValue = array(
@@ -193,6 +200,7 @@ switch ($op) {
                 $criteria = new CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
                 $criteria->add(new Criteria('conf_name', 'album_fancybox_color'));
+                /** @var XoopsObject $config */
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
                 $configValue = array(
@@ -213,6 +221,7 @@ switch ($op) {
                 $criteria = new CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
                 $criteria->add(new Criteria('conf_name', 'album_fancybox_opacity'));
+                /** @var XoopsObject $config */
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
                 $configValue = array(
@@ -233,6 +242,7 @@ switch ($op) {
                 $criteria = new CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
                 $criteria->add(new Criteria('conf_name', 'album_fancybox_tin'));
+                /** @var XoopsObject $config */
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
                 $configValue = array(
@@ -253,6 +263,7 @@ switch ($op) {
                 $criteria = new CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
                 $criteria->add(new Criteria('conf_name', 'album_fancybox_tout'));
+                /** @var XoopsObject $config */
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
                 $configValue = array(
@@ -273,6 +284,7 @@ switch ($op) {
                 $criteria = new CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
                 $criteria->add(new Criteria('conf_name', 'album_fancybox_title'));
+                /** @var XoopsObject $config */
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
                 $configValue = array(
@@ -293,6 +305,7 @@ switch ($op) {
                 $criteria = new CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
                 $criteria->add(new Criteria('conf_name', 'album_fancybox_showtype'));
+                /** @var XoopsObject $config */
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
                 $configValue = array(

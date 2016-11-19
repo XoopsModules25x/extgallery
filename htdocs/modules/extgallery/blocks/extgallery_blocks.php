@@ -236,7 +236,7 @@ function extgalleryTopSubmitterShow($options)
     if (!$result) {
         return '';
     }
-    while ($myrow = $xoopsDB->fetchArray($result)) {
+    while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $uid                  = $myrow['uid'];
         $countphoto           = $myrow['countphoto'];
         $uname                = XoopsUser::getUnameFromId($myrow['uid']);
@@ -417,6 +417,7 @@ function extgalleryBlockEdit($options)
 {
     global $xoopsUser;
 
+    /** @var ExtgalleryCat $catHandler */
     $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
 
     $form = _MB_EXTGALLERY_PHOTO_NUMBER . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[0] . "\" type=\"text\" /><br>";

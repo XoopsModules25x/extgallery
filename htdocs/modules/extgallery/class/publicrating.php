@@ -20,17 +20,18 @@
 include_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
 
 /**
- * Class ExtgalleryPublicrating
+ * Class ExtgalleryPublicRating
  */
-class ExtgalleryPublicrating extends XoopsObject
+class ExtgalleryPublicRating extends XoopsObject
 {
     public $externalKey = array();
 
     /**
-     * ExtgalleryPublicrating constructor.
+     * ExtgalleryPublicRating constructor.
      */
     public function __construct()
     {
+        parent::__construct();
         $this->initVar('rating_id', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('photo_id', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('uid', XOBJ_DTYPE_INT, 0, false);
@@ -62,16 +63,16 @@ class ExtgalleryPublicrating extends XoopsObject
 }
 
 /**
- * Class ExtgalleryPublicratingHandler
+ * Class ExtgalleryPublicRatingHandler
  */
-class ExtgalleryPublicratingHandler extends ExtgalleryPersistableObjectHandler
+class ExtgalleryPublicRatingHandler extends ExtgalleryPersistableObjectHandler
 {
     /**
      * @param XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
     {
-        parent::__construct($db, 'extgallery_publicrating', 'ExtgalleryPublicrating', 'rating_id');
+        parent::__construct($db, 'extgallery_publicrating', 'ExtgalleryPublicRating', 'rating_id');
     }
 
     /**
@@ -82,7 +83,7 @@ class ExtgalleryPublicratingHandler extends ExtgalleryPersistableObjectHandler
      */
     public function rate($photoId, $rating)
     {
-        /** @var ExtgalleryPublicphotoHandler $photoHandler*/
+        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         $userId = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid') : 0;

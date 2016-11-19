@@ -15,13 +15,14 @@
  * @package     ExtGallery
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
+$moduleDirName = basename(__DIR__);
 
-$GLOBALS['xoopsOption']['template_main'] = 'extgallery_index.tpl';
+$GLOBALS['xoopsOption']['template_main'] = $moduleDirName . '_index.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
 
-/** @var ExtgalleryPubliccatHandler $catHandler*/
-$catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+/** @var ExtgalleryPublicCatHandler $catHandler */
+$catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
 
 $cats = $catHandler->objectToArray($catHandler->getChildren(0), array('photo_id'));
 $xoopsTpl->assign('cats', $cats);
@@ -45,5 +46,34 @@ $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));
 $xoopsTpl->assign('disp_cat_img', $xoopsModuleConfig['disp_cat_img']);
 $xoopsTpl->assign('display_type', $xoopsModuleConfig['display_type']);
 $xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
+
+// pk ------------------- add upload and view-my-album links to main page
+
+if(isset($GLOBALS['xoopsModule']) && $GLOBALS['xoopsModule']->getVar('dirname') == $moduleDirName) {
+
+    if($GLOBALS['xoopsUser'] != null) {
+        $albumlinkname = _MD_EXTGALLERY_USERALBUM;
+        $albumurl = "public-useralbum.php?id=".$GLOBALS['xoopsUser']->uid();
+    }
+
+    include_once XOOPS_ROOT_PATH."/modules/{$moduleDirName}/class/publicPerm.php";
+
+    $permHandler = ExtgalleryPublicPermHandler::getInstance();
+    if(count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
+        $uploadlinkname = _MD_EXTGALLERY_PUBLIC_UPLOAD;
+        if($GLOBALS['xoopsModuleConfig']['use_extended_upload'] === 'html') {
+            $uploadurl = "public-upload.php";
+        } else {
+            $uploadurl = "public-upload-extended.php";
+        }
+    }
+}
+
+$xoopsTpl->assign('albumlinkname', $albumlinkname);
+$xoopsTpl->assign('albumurl', $albumurl);
+$xoopsTpl->assign('uploadlinkname', $uploadlinkname);
+$xoopsTpl->assign('uploadurl', $uploadurl);
+
+// end pk mod ------------------------------
 
 include XOOPS_ROOT_PATH . '/footer.php';

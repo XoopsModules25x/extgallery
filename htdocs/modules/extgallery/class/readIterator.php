@@ -65,7 +65,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
         $result = $this->handler->db->query($sql, $limit, $start);
         $ret    = array();
         if ($asObject) {
-            while ($myrow = $this->handler->db->fetchArray($result)) {
+            while (false !== ($myrow = $this->handler->db->fetchArray($result))) {
                 $object = $this->handler->create(false);
                 $object->assignVars($myrow);
                 if ($id_as_key) {
@@ -77,7 +77,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
             }
         } else {
             $object = $this->handler->create(false);
-            while ($myrow = $this->handler->db->fetchArray($result)) {
+            while (false !== ($myrow = $this->handler->db->fetchArray($result))) {
                 $object->assignVars($myrow);
                 if ($id_as_key) {
                     $ret[$myrow[$this->handler->keyName]] = $object->getValues(array_keys($myrow));
@@ -144,7 +144,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
         }
 
         $myts = MyTextSanitizer::getInstance();
-        while ($myrow = $this->handler->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->handler->db->fetchArray($result))) {
             //identifiers should be textboxes, so sanitize them like that
             $ret[$myrow[$this->handler->keyName]] = empty($this->handler->identifierName) ? 1 : $myts->htmlSpecialChars($myrow[$this->handler->identifierName]);
         }
@@ -171,7 +171,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
         if (!$result = $this->handler->db->query($sql, $limit, $start)) {
             return $ret;
         }
-        while ($myrow = $this->handler->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->handler->db->fetchArray($result))) {
             $ret[] = $myrow[$this->handler->keyName];
         }
 
@@ -214,7 +214,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
     /**
      * Convert a database resultset to a returnable array
      *
-     * @param object $result    database resultset
+     * @param $result    database resultset
      * @param bool   $id_as_key - should NOT be used with joint keys
      * @param bool   $as_object
      *
@@ -224,7 +224,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
     {
         trigger_error(__CLASS__ . '::' . __FUNCTION__ . '() is deprecated.', E_USER_WARNING);
         $ret = array();
-        while ($myrow = $this->handler->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->handler->db->fetchArray($result))) {
             $obj = $this->handler->create(false);
             $obj->assignVars($myrow);
             if (!$id_as_key) {
