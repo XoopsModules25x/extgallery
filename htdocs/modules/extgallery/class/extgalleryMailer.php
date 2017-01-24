@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: extgalleryMailer.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
@@ -50,7 +49,7 @@ class extgalleryMailer
 
     public function imageIncluded()
     {
-        if ($this->photo->getVar('photo_serveur') == '') {
+        if ($this->photo->getVar('photo_serveur') === '') {
             $photoPath = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium/' . $this->photo->getVar('photo_name');
         } else {
             $photoPath = $this->photo->getVar('photo_serveur') . $this->photo->getVar('photo_name');
@@ -195,7 +194,7 @@ class extgalleryMailer
     /**
      * @param $photo
      */
-    public function setPhoto(&$photo)
+    public function setPhoto($photo)
     {
         $this->photo = $photo;
     }

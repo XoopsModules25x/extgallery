@@ -13,10 +13,9 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Voltan (djvoltan@gmail.com)
  * @package     ExtGallery
- * @version     $Id: public-rss.php 10024 2012-08-08 07:32:05Z beckmi $
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include XOOPS_ROOT_PATH . '/header.php';
 include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
@@ -29,13 +28,14 @@ if (function_exists('mb_http_output')) {
 }
 
 $catId = isset($_GET['id']) ? $_GET['id'] : 0;
-
-$catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+/** @var ExtgalleryPublicCatHandler $catHandler */
+$catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+/** @var ExtgalleryPublicPhotoHandler $photoHandler */
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 $catObj       = $catHandler->getCat($catId);
 
 if ($catId != 0) {
-    $permHandler = ExtgalleryPublicPermHandler::getHandler();
+    $permHandler = ExtgalleryPublicPermHandler::getInstance();
     if ($permHandler->isAllowed($xoopsUser, 'public_access', $catId)) {
         $catObj = $catHandler->getCat($catId);
         $cat    = $catHandler->objectToArray($catObj);
@@ -91,7 +91,8 @@ if (!$xoopsTpl->is_cached('db:extgallery_public-rss.tpl')) {
 
     $param = array(
         'limit' => $xoopsModuleConfig['perpage_rss'],
-        'cat'   => $categories);
+        'cat'   => $categories
+    );
 
     $photos = $photoHandler->objectToArray($photoHandler->getLastPhoto($param));
     $xoopsTpl->assign('photos', $photos);

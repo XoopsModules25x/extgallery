@@ -1,6 +1,6 @@
 <?php
 
-define('_MI_EXTGAL_NAME', 'eXtGallery');
+define('_MI_EXTGALLERY_NAME', 'eXtGallery');
 define('_MI_EXTGAL_DESC', 'eXtGallery is a powerful web gallery module for XOOPS');
 
 // Main menu
@@ -48,14 +48,16 @@ define('_MI_EXTGAL_L_WATERMARK_DESC', "Choose whether on not to enable the water
 define('_MI_EXTGAL_L_BORDER', 'Enable borders for large photos');
 define('_MI_EXTGAL_L_BORDER_DESC', "Choose whether on not to enable the border feature for new large photos. You must also configure border settings under the 'watermarks & borders' tab.");
 define('_MI_EXTGAL_NAME_PATTERN', 'Auto photo description pattern');
-define('_MI_EXTGAL_NAME_PATTERN_DESC', "If you don't provide a description for your photo on upload the file name of the photo will be used to make an auto description.<br /> For example, with a \"Tournament-06-may-2006_1.jpg\" photo name, you will end up with \"Tournament 06 may 2006\" as the description");
+define('_MI_EXTGAL_NAME_PATTERN_DESC',
+       "If you don't provide a description for your photo on upload the file name of the photo will be used to make an auto description.<br> For example, with a \"Tournament-06-may-2006_1.jpg\" photo name, you will end up with \"Tournament 06 may 2006\" as the description");
 define('_MI_EXTGAL_DISPLAY_EXTRA', 'Display an extra field');
 define('_MI_EXTGAL_DISPLAY_EXTRA_DESC', 'Choose whether on not to add more information on submit form. For example, you could use this feature to add a PayPal button to each photo.');
 define('_MI_EXTGAL_ALLOW_HTML', 'Allow HTML in extra field');
 define('_MI_EXTGAL_ALLOW_HTML_DESC', 'Allow or Disallow HTML code in description and extra field.');
 define('_MI_EXTGAL_HIDDEN_FIELD', "This constant is used only to remove PHP notices. This text isn't use in the module");
 define('_MI_EXTGAL_SAVE_ORIG', 'Save original photo');
-define('_MI_EXTGAL_SAVE_ORIG_DESC', "The original version can be downloaded but is dependant on group permission for \"Download original permissions\"</b>.<br />If a user doesn't have permission to download the original, then the \"large\" photo will be downloaded instead.");
+define('_MI_EXTGAL_SAVE_ORIG_DESC',
+       "The original version can be downloaded but is dependant on group permission for \"Download original permissions\"</b>.<br>If a user doesn't have permission to download the original, then the \"large\" photo will be downloaded instead.");
 define('_MI_EXTGAL_ADM_NBPHOTO', 'Number of photos to be displayed on admin page');
 define('_MI_EXTGAL_ADM_NBPHOTO_DESC', 'Set the number of photos to be displayed on the admin approve and edit table.');
 define('_MI_EXTGAL_GRAPHLIB', 'Graphic library');
@@ -109,7 +111,8 @@ define('_MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYSBJ', 'New photo submitted');
 
 // DNPROSSI ADDED in ver 1.09
 define('_MI_EXTGAL_FORM_OPTIONS', 'Form Option');
-define('_MI_EXTGAL_FORM_OPTIONS_DESC', "Select the editor to use. If you have a 'simple' install (e.g you use only xoops core editor class, provided in the standard xoops core package), then you can just select DHTML and Compact");
+define('_MI_EXTGAL_FORM_OPTIONS_DESC',
+       "Select the editor to use. If you have a 'simple' install (e.g you use only xoops core editor class, provided in the standard XOOPS core package), then you can just select DHTML and Compact");
 define('_MI_EXTGAL_ENABLE_INFO', 'Photo Info View');
 define('_MI_EXTGAL_ENABLE_INFO_DESC', 'If disabled all photo info (submitter, resolution, date etc.) will not be viewed');
 define('_MI_EXTGAL_ENABLE_ECARDS', 'E-cards View');
@@ -137,7 +140,8 @@ define('_MI_EXTGAL_INFO_PUBUSR_DESC', 'Shows-hides info from public or user albu
 define('_MI_EXTGAL_INFO_PUBLIC', 'Public');
 define('_MI_EXTGAL_INFO_USER', 'User');
 define('_MI_EXTGAL_JQUERY', 'Use jQuery');
-define('_MI_EXTGAL_JQUERY_DESC', 'You can enable/disable jQuery in module templates. if jQuery loaded in your theme and you have problem with theme Ajax effects (Interference jQuery library), you must disable jQuery in extGallery and use theme jQuery.');
+define('_MI_EXTGAL_JQUERY_DESC',
+       'You can enable/disable jQuery in module templates. if jQuery loaded in your theme and you have problem with theme Ajax effects (Interference jQuery library), you must disable jQuery in extGallery and use theme jQuery.');
 define('_MI_EXTGAL_SOCIAL', 'Use Social network');
 define('_MI_EXTGAL_SOCIAL_DESC', 'You can use Social network and bookmark icons for each photo');
 define('_MI_EXTGAL_NONE', 'None');
@@ -176,3 +180,18 @@ define('_MI_EXTGAL_PREFERENCE_BREAK_GRAPHLIB', 'Graphic library');
 define('_MI_EXTGAL_PREFERENCE_BREAK_COMNOTI', 'Comments and notifications');
 define('_MI_EXTGAL_PREFERENCE_BREAK_ALBUM', 'Album');
 define('_MI_EXTGAL_PREFERENCE_BREAK_SLIDESHOW', 'Slideshow');
+
+//Help
+define('_MI_EXTGALLERY_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_EXTGALLERY_HELP_HEADER', __DIR__.'/help/helpheader.html');
+define('_MI_EXTGALLERY_BACK_2_ADMIN', 'Back to Administration of ');
+define('_MI_EXTGALLERY_OVERVIEW', 'Overview');
+
+//help multi-page
+define('_MI_EXTGALLERY_HELP1', 'Category/Albums');
+define('_MI_EXTGALLERY_HELP2', 'Photos');
+define('_MI_EXTGALLERY_HELP3', 'Permissions');
+define('_MI_EXTGALLERY_HELP4', 'Watermark & Border');
+define('_MI_EXTGALLERY_HELP5', 'Slideshow');
+define('_MI_EXTGALLERY_HELP6', 'Extension');
+define('_MI_EXTGALLERY_HELP7', 'Configuration');

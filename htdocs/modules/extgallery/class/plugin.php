@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: plugin.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
@@ -24,6 +23,7 @@
 class ExtgalleryPluginHandler
 {
     /**
+     * ExtgalleryPluginHandler constructor.
      * @param $db
      */
     public function __construct(XoopsDatabase $db)

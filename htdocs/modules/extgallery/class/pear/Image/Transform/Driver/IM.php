@@ -19,7 +19,6 @@
  * @author     Philippe Jausions <Philippe.Jausions@11abacus.com>
  * @copyright  2002-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: IM.php 8088 2011-11-06 09:38:12Z beckmi $
  * @link       http://pear.php.net/package/Image_Transform
  */
 
@@ -48,14 +47,6 @@ class Image_Transform_Driver_IM extends Image_Transform
      * @access private
      */
     public $command;
-
-    /**
-     * Class constructor
-     */
-    public function Image_Transform_Driver_IM()
-    {
-        $this->__construct();
-    } // End Image_IM
 
     /**
      * Class constructor
@@ -111,7 +102,7 @@ class Image_Transform_Driver_IM extends Image_Transform
     /**
      * Adds a border of constant width around an image
      *
-     * @param int $border_width Width of border to add
+     * @param int    $border_width Width of border to add
      * @param        $borderNum
      * @param string $color
      *
@@ -177,8 +168,8 @@ class Image_Transform_Driver_IM extends Image_Transform
      *
      * @access private
      *
-     * @param int $new_x     New width
-     * @param int $new_y     New height
+     * @param int   $new_x   New width
+     * @param int   $new_y   New height
      * @param mixed $options Optional parameters
      *
      * @return true on success or PEAR Error object on error
@@ -201,7 +192,7 @@ class Image_Transform_Driver_IM extends Image_Transform
      * rotate
      *
      * @param float $angle
-     * @param       int     angle   rotation angle
+     * @param       int angle rotation angle
      * @return mixed TRUE or a PEAR error object on error
      */
     public function rotate($angle, $options = null)
@@ -292,7 +283,10 @@ class Image_Transform_Driver_IM extends Image_Transform
             $position = 'Center';
         }
 
-        $this->command[$key] = ' -font ' . escapeshellarg($font) . ' -pointsize ' . escapeshellarg($size) . ' -gravity ' . escapeshellarg($position) . ' -fill ' . escapeshellarg($color) . ' -annotate ' . escapeshellarg('+' . $padding . '+' . $padding) . ' ' . escapeshellarg('"' . $text . '"');
+        $this->command[$key] = ' -font ' . escapeshellarg($font) . ' -pointsize ' . escapeshellarg($size) . ' -gravity ' . escapeshellarg($position) . ' -fill ' . escapeshellarg($color) . ' -annotate ' . escapeshellarg('+' . $padding . '+'
+                                                                                                                                                                                                                           . $padding) . ' '
+                               . escapeshellarg('"' . $text . '"');
+
         // Producing error: gs: not found gs: not found convert: Postscript delegate failed [No such file or directory].
         return true;
     } // End addText
@@ -389,7 +383,7 @@ class Image_Transform_Driver_IM extends Image_Transform
 
         $cmd = $this->_prepare_cmd(IMAGE_TRANSFORM_IM_PATH, 'convert', escapeshellarg($this->image) . implode(' ', $this->command) . ' -quality ' . ((int)$quality) . ' ' . escapeshellarg($filename));// . ' ' . $type . ':'
         //. ' 2>&1');
-        echo $cmd . '<br />';
+        echo $cmd . '<br>';
         exec($cmd, $res, $exit);
         echo $exit;
 
@@ -446,4 +440,3 @@ class Image_Transform_Driver_IM extends Image_Transform
         $this->type    = '';
     }
 } // End class ImageIM
-

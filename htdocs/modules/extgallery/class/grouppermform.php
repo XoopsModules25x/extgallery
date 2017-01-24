@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: grouppermform.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
@@ -26,12 +25,13 @@ require XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 class ExtgalleryGroupPermForm extends XoopsGroupPermForm
 {
     /**
-     * @param        $title
-     * @param        $modid
-     * @param        $permname
-     * @param        $permdesc
+     * ExtgalleryGroupPermForm constructor.
+     * @param string $title
+     * @param string $modid
+     * @param string $permname
+     * @param string $permdesc
      * @param string $url
-     * @param bool $anonymous
+     * @param bool   $anonymous
      */
     public function __construct($title, $modid, $permname, $permdesc, $url = '', $anonymous = true)
     {
@@ -48,15 +48,17 @@ class ExtgalleryGroupPermForm extends XoopsGroupPermForm
             $this->_itemTree[$item_id]['allchild'] = array();
             $this->_loadAllChildItemIds($item_id, $this->_itemTree[$item_id]['allchild']);
         }
-        $gperm_handler  = xoops_getHandler('groupperm');
-        $member_handler = xoops_getHandler('member');
-        $glist          = $member_handler->getGroupList();
+        /** @var XoopsGroupPermHandler $gpermHandler */
+        $gpermHandler = xoops_getHandler('groupperm');
+        /** @var XoopsMemberHandler $memberHandler */
+        $memberHandler = xoops_getHandler('member');
+        $glist         = $memberHandler->getGroupList();
         foreach (array_keys($glist) as $i) {
             if ($i == XOOPS_GROUP_ANONYMOUS && !$this->_showAnonymous) {
                 continue;
             }
             // get selected item id(s) for each group
-            $selected = $gperm_handler->getItemIds($this->_permName, $i, $this->_modid);
+            $selected = $gpermHandler->getItemIds($this->_permName, $i, $this->_modid);
             $ele      = new ExtgalleryGroupFormCheckBox($glist[$i], 'perms[' . $this->_permName . ']', $i, $selected);
             $ele->setOptionTree($this->_itemTree);
             $this->addElement($ele);
@@ -68,7 +70,7 @@ class ExtgalleryGroupPermForm extends XoopsGroupPermForm
         $this->addElement($tray);
         echo '<h4>' . $this->getTitle() . '</h4>';
         if ($this->_permDesc) {
-            echo $this->_permDesc . '<br /><br />';
+            echo $this->_permDesc . '<br><br>';
         }
         echo "<form name='" . $this->getName() . "' id='" . $this->getName() . "' action='" . $this->getAction() . "' method='" . $this->getMethod() . "'" . $this->getExtra() . ">\n<table width='100%' class='outer' cellspacing='1' valign='top'>\n";
         $elements =& $this->getElements();
@@ -79,7 +81,7 @@ class ExtgalleryGroupPermForm extends XoopsGroupPermForm
             } elseif (!$elements[$i]->isHidden()) {
                 echo "<tr valign='top' align='left'><td class='head'>" . $elements[$i]->getCaption();
                 if ($elements[$i]->getDescription() != '') {
-                    echo '<br /><br /><span style="font-weight: normal;">' . $elements[$i]->getDescription() . '</span>';
+                    echo '<br><br><span style="font-weight: normal;">' . $elements[$i]->getDescription() . '</span>';
                 }
                 echo "</td>\n<td class='even'>\n";
                 if (is_a($elements[$i], 'ExtgalleryGroupFormCheckBox')) {
@@ -103,6 +105,7 @@ class ExtgalleryGroupPermForm extends XoopsGroupPermForm
 class ExtgalleryGroupFormCheckBox extends XoopsGroupFormCheckBox
 {
     /**
+     * ExtgalleryGroupFormCheckBox constructor.
      * @param      $caption
      * @param      $name
      * @param      $groupId

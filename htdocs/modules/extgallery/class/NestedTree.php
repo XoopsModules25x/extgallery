@@ -14,7 +14,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: NestedTree.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 class NestedTree
 {
@@ -38,15 +37,16 @@ class NestedTree
         $this->fields = array(
             'id'     => $idField,
             'parent' => $parentField,
-            'sort'   => $sortField);
+            'sort'   => $sortField
+        );
     }
 
     /**
      * Fetch the node data for the node identified by $id
      *
-     * @param   int $id         The ID of the node to fetch
-     * @return  object          An object containing the node's
-     *                          data, or null if node not found
+     * @param  int $id   The ID of the node to fetch
+     * @return null|XoopsObject An object containing the node's
+     *                   data, or null if node not found
      */
     public function getNode($id)
     {
@@ -65,13 +65,13 @@ class NestedTree
      * entire tree. Optionally, only return child data instead of all descendant
      * data.
      *
-     * @param   int $id                 The ID of the node to fetch descendant data for.
-     *                                  Specify an invalid ID (e.g. 0) to retrieve all data.
-     * @param   bool $includeSelf       Whether or not to include the passed node in the
-     *                                  the results. This has no meaning if fetching entire tree.
-     * @param   bool $childrenOnly      True if only returning children data. False if
-     *                                  returning all descendant data
-     * @return  array                   The descendants of the passed now
+     * @param  int  $id            The ID of the node to fetch descendant data for.
+     *                             Specify an invalid ID (e.g. 0) to retrieve all data.
+     * @param  bool $includeSelf   Whether or not to include the passed node in the
+     *                             the results. This has no meaning if fetching entire tree.
+     * @param  bool $childrenOnly  True if only returning children data. False if
+     *                             returning all descendant data
+     * @return array The descendants of the passed now
      */
     public function getDescendants($id = 0, $includeSelf = false, $childrenOnly = false)
     {
@@ -109,7 +109,7 @@ class NestedTree
         $result = $this->db->query($query);
 
         $arr = array();
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $arr[$row[$idField]] = $row;
         }
 
@@ -120,10 +120,10 @@ class NestedTree
      * Fetch the children of a node, or if no node is specified, fetch the
      * top level items.
      *
-     * @param   int $id                 The ID of the node to fetch child data for.
-     * @param   bool $includeSelf       Whether or not to include the passed node in the
-     *                                  the results.
-     * @return  array                   The children of the passed node
+     * @param  int  $id           The ID of the node to fetch child data for.
+     * @param  bool $includeSelf  Whether or not to include the passed node in the
+     *                            the results.
+     * @return array The children of the passed node
      */
     public function getChildren($id = 0, $includeSelf = false)
     {
@@ -135,10 +135,10 @@ class NestedTree
      * If a top level node is passed, an array containing on that node is included (if
      * 'includeSelf' is set to true, otherwise an empty array)
      *
-     * @param   int $id                 The ID of the node to fetch child data for.
-     * @param   bool $includeSelf       Whether or not to include the passed node in the
-     *                                  the results.
-     * @return  array                   An array of each node to passed node
+     * @param  int  $id           The ID of the node to fetch child data for.
+     * @param  bool $includeSelf  Whether or not to include the passed node in the
+     *                            the results.
+     * @return array An array of each node to passed node
      */
     public function getPath($id = 0, $includeSelf = false)
     {
@@ -157,7 +157,7 @@ class NestedTree
 
         $idField = $this->fields['id'];
         $arr     = array();
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $arr[$row[$idField]] = $row;
         }
 
@@ -168,9 +168,9 @@ class NestedTree
      * Check if one node descends from another node. If either node is not
      * found, then false is returned.
      *
-     * @param   int $descendant_id The node that potentially descends
-     * @param   int $ancestor_id   The node that is potentially descended from
-     * @return  bool                    True if $descendant_id descends from $ancestor_id, false otherwise
+     * @param  int $descendant_id The node that potentially descends
+     * @param  int $ancestor_id   The node that is potentially descended from
+     * @return bool True if $descendant_id descends from $ancestor_id, false otherwise
      */
     public function isDescendantOf($descendant_id, $ancestor_id)
     {
@@ -198,9 +198,9 @@ class NestedTree
      * Check if one node is a child of another node. If either node is not
      * found, then false is returned.
      *
-     * @param   int $child_id  The node that is possibly a child
-     * @param   int $parent_id The node that is possibly a parent
-     * @return  bool                    True if $child_id is a child of $parent_id, false otherwise
+     * @param  int $child_id  The node that is possibly a child
+     * @param  int $parent_id The node that is possibly a parent
+     * @return bool True if $child_id is a child of $parent_id, false otherwise
      */
     public function isChildOf($child_id, $parent_id)
     {
@@ -218,8 +218,8 @@ class NestedTree
     /**
      * Find the number of descendants a node has
      *
-     * @param   int $id The ID of the node to search for. Pass 0 to count all nodes in the tree.
-     * @return  int             The number of descendants the node has, or -1 if the node isn't found.
+     * @param  int $id The ID of the node to search for. Pass 0 to count all nodes in the tree.
+     * @return int The number of descendants the node has, or -1 if the node isn't found.
      */
     public function numDescendants($id)
     {
@@ -242,8 +242,8 @@ class NestedTree
     /**
      * Find the number of children a node has
      *
-     * @param   int $id The ID of the node to search for. Pass 0 to count the first level items
-     * @return  int             The number of descendants the node has, or -1 if the node isn't found.
+     * @param  int $id The ID of the node to search for. Pass 0 to count the first level items
+     * @return int The number of descendants the node has, or -1 if the node isn't found.
      */
     public function numChildren($id)
     {
@@ -279,7 +279,7 @@ class NestedTree
     /**
      * Fetch the tree data, nesting within each node references to the node's children
      *
-     * @return  array       The tree with the node's child data
+     * @return array The tree with the node's child data
      */
     public function getTreeWithChildren()
     {
@@ -296,10 +296,11 @@ class NestedTree
         $root['children']          = array();
 
         $arr = array(
-            $root);
+            $root
+        );
 
         // populate the array and create an empty children array
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $arr[$row[$this->fields['id']]]             = $row;
             $arr[$row[$this->fields['id']]]['children'] = array();
         }
@@ -355,11 +356,11 @@ class NestedTree
      * in subrequests are held over to when control is returned so the nright
      * can be assigned.
      *
-     * @param   array &$arr     A reference to the data array, since we need to
-     *                          be able to update the data in it
-     * @param   int $id         The ID of the current node to process
-     * @param   int $level      The nlevel to assign to the current node
-     * @param   int &$n         A reference to the running tally for the n-value
+     * @param array &$arr  A reference to the data array, since we need to
+     *                     be able to update the data in it
+     * @param int   $id    The ID of the current node to process
+     * @param int   $level The nlevel to assign to the current node
+     * @param int   &$n    A reference to the running tally for the n-value
      */
     public function _generateTreeData(& $arr, $id, $level, & $n)
     {

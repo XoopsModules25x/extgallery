@@ -15,7 +15,6 @@
  * @subpackage      model
  * @since           2.3.0
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
- * @version         $Id: readIterator.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 /**
@@ -32,11 +31,11 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
     /**
      * get all objects matching a condition
      *
-     * @param  CriteriaElement $criteria {@link CriteriaElement} to match
-     * @param  array $fields             variables to fetch
-     * @param  bool $asObject            flag indicating as object, otherwise as array
-     * @param  bool $id_as_key           use the ID as key for the array
-     * @return array  of objects/array {@link XoopsObject}
+     * @param  CriteriaElement $criteria  {@link CriteriaElement} to match
+     * @param  array           $fields    variables to fetch
+     * @param  bool            $asObject  flag indicating as object, otherwise as array
+     * @param  bool            $id_as_key use the ID as key for the array
+     * @return array           of objects/array {@link XoopsObject}
      */
     public function &getAll(CriteriaElement $criteria = null, $fields = null, $asObject = true, $id_as_key = true)
     {
@@ -66,7 +65,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
         $result = $this->handler->db->query($sql, $limit, $start);
         $ret    = array();
         if ($asObject) {
-            while ($myrow = $this->handler->db->fetchArray($result)) {
+            while (false !== ($myrow = $this->handler->db->fetchArray($result))) {
                 $object = $this->handler->create(false);
                 $object->assignVars($myrow);
                 if ($id_as_key) {
@@ -78,7 +77,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
             }
         } else {
             $object = $this->handler->create(false);
-            while ($myrow = $this->handler->db->fetchArray($result)) {
+            while (false !== ($myrow = $this->handler->db->fetchArray($result))) {
                 $object->assignVars($myrow);
                 if ($id_as_key) {
                     $ret[$myrow[$this->handler->keyName]] = $object->getValues(array_keys($myrow));
@@ -97,13 +96,13 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
      *
      * For performance consideration, getAll() is recommended
      *
-     * @param object $criteria {@link CriteriaElement} conditions to be met
-     * @param bool $id_as_key  use the ID as key for the array
-     * @param bool $as_object  return an array of objects?
+     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param bool            $id_as_key use the ID as key for the array
+     * @param bool            $as_object return an array of objects?
      *
      * @return array
      */
-    public function &getObjects($criteria = null, $id_as_key = false, $as_object = true)
+    public function &getObjects(CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $objects =& $this->getAll($criteria, null, $as_object, $id_as_key);
 
@@ -114,15 +113,15 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
      * Retrieve a list of objects data
      *
      * @param CriteriaElement $criteria {@link CriteriaElement} conditions to be met
-     * @param int $limit                Max number of objects to fetch
-     * @param int $start                Which record to start at
+     * @param int             $limit    Max number of objects to fetch
+     * @param int             $start    Which record to start at
      *
      * @return array
      */
     public function getList(CriteriaElement $criteria = null, $limit = 0, $start = 0)
     {
         $ret = array();
-        if ($criteria == null) {
+        if ($criteria === null) {
             $criteria = new CriteriaCompo();
         }
 
@@ -145,7 +144,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
         }
 
         $myts = MyTextSanitizer::getInstance();
-        while ($myrow = $this->handler->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->handler->db->fetchArray($result))) {
             //identifiers should be textboxes, so sanitize them like that
             $ret[$myrow[$this->handler->keyName]] = empty($this->handler->identifierName) ? 1 : $myts->htmlSpecialChars($myrow[$this->handler->identifierName]);
         }
@@ -157,7 +156,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
      * get IDs of objects matching a condition
      *
      * @param  CriteriaElement $criteria {@link CriteriaElement} to match
-     * @return array  of object IDs
+     * @return array           of object IDs
      */
     public function &getIds(CriteriaElement $criteria = null)
     {
@@ -172,7 +171,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
         if (!$result = $this->handler->db->query($sql, $limit, $start)) {
             return $ret;
         }
-        while ($myrow = $this->handler->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->handler->db->fetchArray($result))) {
             $ret[] = $myrow[$this->handler->keyName];
         }
 
@@ -184,15 +183,20 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
      *
      * {@link CriteriaCompo}
      *
-     * @param  int $limit                Max number of objects to fetch
-     * @param  int $start                Which record to start at
+     * @param  int             $limit    Max number of objects to fetch
+     * @param  int             $start    Which record to start at
      * @param  CriteriaElement $criteria {@link CriteriaElement} to match
-     * @param  array $fields             variables to fetch
-     * @param  bool $asObject            flag indicating as object, otherwise as array
-     * @return array  of objects    {@link XoopsObject}
+     * @param  array           $fields   variables to fetch
+     * @param  bool            $asObject flag indicating as object, otherwise as array
+     * @return array           of objects    {@link XoopsObject}
      */
-    public function &getByLimit($limit = 0, $start = 0, CriteriaElement $criteria = null, $fields = null, $asObject = true)
-    {
+    public function &getByLimit(
+        $limit = 0,
+        $start = 0,
+        CriteriaElement $criteria = null,
+        $fields = null,
+        $asObject = true
+    ) {
         trigger_error(__CLASS__ . '::' . __FUNCTION__ . '() is deprecated, please use getAll instead.', E_USER_WARNING);
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $criteria->setLimit($limit);
@@ -210,9 +214,9 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
     /**
      * Convert a database resultset to a returnable array
      *
-     * @param object $result  database resultset
-     * @param bool $id_as_key - should NOT be used with joint keys
-     * @param bool $as_object
+     * @param $result    database resultset
+     * @param bool   $id_as_key - should NOT be used with joint keys
+     * @param bool   $as_object
      *
      * @return array
      */
@@ -220,7 +224,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
     {
         trigger_error(__CLASS__ . '::' . __FUNCTION__ . '() is deprecated.', E_USER_WARNING);
         $ret = array();
-        while ($myrow = $this->handler->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->handler->db->fetchArray($result))) {
             $obj = $this->handler->create(false);
             $obj->assignVars($myrow);
             if (!$id_as_key) {

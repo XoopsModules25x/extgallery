@@ -1,55 +1,67 @@
 <?php
-/**
- * ExtGallery functions
- *
+/*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @copyright   {@link http://xoops.org/ XOOPS Project}
- * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
- * @author      Zoullou (http://www.zoullou.net)
- * @package     ExtGallery
- * @version     $Id: install_function.php 8088 2011-11-06 09:38:12Z beckmi $
- * @param $xoopsModule
- * @return bool
  */
 
-function xoops_module_pre_install_extgallery(&$xoopsModule)
-{
-    // Check if this XOOPS version is supported
-    $minSupportedVersion = explode('.', '2.5.0');
-    $currentVersion      = explode('.', substr(XOOPS_VERSION, 6));
+/**
+ * @copyright    XOOPS Project http://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author     XOOPS Development Team
+ */
 
-    if ($currentVersion[0] > $minSupportedVersion[0]) {
-        return true;
-    } elseif ($currentVersion[0] == $minSupportedVersion[0]) {
-        if ($currentVersion[1] > $minSupportedVersion[1]) {
-            return true;
-        } elseif ($currentVersion[1] == $minSupportedVersion[1]) {
-            if ($currentVersion[2] > $minSupportedVersion[2]) {
-                return true;
-            } elseif ($currentVersion[2] == $minSupportedVersion[2]) {
-                return true;
-            }
-        }
+
+/**
+ *
+ * Prepares system prior to attempting to install module
+ * @param XoopsModule $module {@link XoopsModule}
+ *
+ * @return bool true if ready to install, false if not
+ */
+function xoops_module_pre_install_extgallery(XoopsModule $module)
+{
+    $moduleDirName = basename(dirname(__DIR__));
+    $className = ucfirst($moduleDirName) . 'Utilities';
+    if (!class_exists($className)) {
+        xoops_load('utilities', $moduleDirName);
+    }
+    //check for minimum XOOPS version
+    if (!$className::checkXoopsVer($module)) {
+        return false;
     }
 
-    return false;
+    // check for minimum PHP version
+    if (!$className::checkPhpVer($module)) {
+        return false;
+    }
+
+    $mod_tables =& $module->getInfo('tables');
+    foreach ($mod_tables as $table) {
+        $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
+    }
+
+    return true;
 }
 
 /**
- * @param $xoopsModule
  *
- * @return bool
+ * Performs tasks required during installation of the module
+ * @param XoopsModule $xoopsModule
+ * @return bool true if installation successful, false if not
+ * @internal param XoopsModule $module <a href='psi_element://XoopsModule'>XoopsModule</a>
+ *
  */
-function xoops_module_install_extgallery(&$xoopsModule)
+function xoops_module_install_extgallery(XoopsModule $xoopsModule)
 {
-    $module_id     = $xoopsModule->getVar('mid');
-    $gpermHandler  = xoops_getHandler('groupperm');
+    $module_id = $xoopsModule->getVar('mid');
+    /** @var XoopsGroupPermHandler $gpermHandler */
+    $gpermHandler = xoops_getHandler('groupperm');
+    /** @var XoopsConfigHandler $configHandler */
     $configHandler = xoops_getHandler('config');
 
     /**
@@ -105,6 +117,8 @@ function xoops_module_install_extgallery(&$xoopsModule)
     // Private autoapprove
     $gpermHandler->addRight('extgallery_private', 16, XOOPS_GROUP_ADMIN, $module_id);
 
+  /*
+
     // Create eXtGallery main upload directory
     $dir = XOOPS_ROOT_PATH . '/uploads/extgallery';
     if (!is_dir($dir)) {
@@ -137,6 +151,9 @@ function xoops_module_install_extgallery(&$xoopsModule)
         mkdir($dir, 0777);
     }
     chmod($dir, 0777);
+
+
+
     // Create directory for photo in user's album
     //mkdir(XOOPS_ROOT_PATH."/uploads/extgallery/user-photo");
 
@@ -148,6 +165,37 @@ function xoops_module_install_extgallery(&$xoopsModule)
     copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large/index.html');
     copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium/index.html');
     copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb/index.html');
+
+*/
+
+    $moduleDirName = basename(dirname(__DIR__));
+    include_once __DIR__ . '/../../../mainfile.php';
+
+//    $moduleDirName = $xoopsModule->getVar('dirname');
+    $configurator = include $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
+
+
+
+    $classUtilities = ucfirst($moduleDirName) . 'Utilities';
+    if (!class_exists($classUtilities)) {
+        xoops_load('utilities', $moduleDirName);
+    }
+
+//    include_once __DIR__ . '/config.php';
+
+    if (count($configurator['uploadFolders']) > 0) {
+        //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
+        foreach (array_keys($configurator['uploadFolders']) as $i) {
+            $classUtilities::createFolder($configurator['uploadFolders'][$i]);
+        }
+    }
+    if (count($configurator['copyFiles'])>0) {
+        $file = __DIR__ . '/../assets/images/blank.png';
+        foreach (array_keys($configurator['copyFiles']) as $i) {
+            $dest = $configurator['copyFiles'][$i] . '/blank.png';
+            $classUtilities::copyFile($file, $dest);
+        }
+    }
 
     return true;
 }

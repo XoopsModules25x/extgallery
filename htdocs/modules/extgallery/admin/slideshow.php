@@ -14,12 +14,9 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: slideshow.php 10467 2012-12-19 02:04:40Z beckmi $
  */
 
-include_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include __DIR__ . '/function.php';
+include_once __DIR__ . '/admin_header.php';
 
 if (isset($_POST['op'])) {
     $op = $_POST['op'];
@@ -30,7 +27,8 @@ if (isset($_POST['op'])) {
 switch ($op) {
 
     case 'galleryview':
-        $configHandler    =& xoops_getHandler('config');
+        /** @var XoopsConfigHandler $configHandler */
+        $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
         if (isset($_POST['galleryview_panelwidth'])) {
@@ -46,7 +44,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_panelwidth',
                     'conf_value'     => $_POST['galleryview_panelwidth'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -65,7 +64,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_panelheight',
                     'conf_value'     => $_POST['galleryview_panelheight'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -84,7 +84,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_framewidth',
                     'conf_value'     => $_POST['galleryview_framewidth'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -103,7 +104,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_frameheight',
                     'conf_value'     => $_POST['galleryview_frameheight'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -122,7 +124,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_tspeed',
                     'conf_value'     => $_POST['galleryview_tspeed'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -141,7 +144,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_tterval',
                     'conf_value'     => $_POST['galleryview_tterval'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -160,7 +164,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_overlayheight',
                     'conf_value'     => $_POST['galleryview_overlayheight'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -179,7 +184,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_opacity',
                     'conf_value'     => $_POST['galleryview_opacity'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -198,7 +204,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_overlayfs',
                     'conf_value'     => $_POST['galleryview_overlayfs'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -217,7 +224,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_borderwidth',
                     'conf_value'     => $_POST['galleryview_borderwidth'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -236,7 +244,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_bordercolor',
                     'conf_value'     => $_POST['galleryview_bordercolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -255,7 +264,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_bgcolor',
                     'conf_value'     => $_POST['galleryview_bgcolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -274,7 +284,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_overlaycolor',
                     'conf_value'     => $_POST['galleryview_overlaycolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -293,7 +304,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_overlaytc',
                     'conf_value'     => $_POST['galleryview_overlaytc'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -312,7 +324,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_captiontc',
                     'conf_value'     => $_POST['galleryview_captiontc'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -331,7 +344,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_navtheme',
                     'conf_value'     => $_POST['galleryview_navtheme'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -350,7 +364,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_position',
                     'conf_value'     => $_POST['galleryview_position'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -369,7 +384,8 @@ switch ($op) {
                     'conf_name'      => 'galleryview_easing',
                     'conf_value'     => $_POST['galleryview_easing'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -379,7 +395,8 @@ switch ($op) {
         break;
 
     case 'galleria':
-        $configHandler    =& xoops_getHandler('config');
+        /** @var XoopsConfigHandler $configHandler */
+        $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
         if (isset($_POST['galleria_height'])) {
             if ($xoopsModuleConfig['galleria_height'] != $_POST['galleria_height']) {
@@ -394,7 +411,8 @@ switch ($op) {
                     'conf_name'      => 'galleria_height',
                     'conf_value'     => $_POST['galleria_height'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -413,7 +431,8 @@ switch ($op) {
                     'conf_name'      => 'galleria_panelwidth',
                     'conf_value'     => $_POST['galleria_panelwidth'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -432,7 +451,8 @@ switch ($op) {
                     'conf_name'      => 'galleria_bgcolor',
                     'conf_value'     => $_POST['galleria_bgcolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -451,7 +471,8 @@ switch ($op) {
                     'conf_name'      => 'galleria_bcolor',
                     'conf_value'     => $_POST['galleria_bcolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -470,7 +491,8 @@ switch ($op) {
                     'conf_name'      => 'galleria_bgimg',
                     'conf_value'     => $_POST['galleria_bgimg'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -489,7 +511,8 @@ switch ($op) {
                     'conf_name'      => 'galleria_autoplay',
                     'conf_value'     => $_POST['galleria_autoplay'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -508,7 +531,8 @@ switch ($op) {
                     'conf_name'      => 'galleria_transition',
                     'conf_value'     => $_POST['galleria_transition'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -527,7 +551,8 @@ switch ($op) {
                     'conf_name'      => 'galleria_tspeed',
                     'conf_value'     => $_POST['galleria_tspeed'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -536,7 +561,8 @@ switch ($op) {
         break;
 
     case 'galleriffic':
-        $configHandler    =& xoops_getHandler('config');
+        /** @var XoopsConfigHandler $configHandler */
+        $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
         if (isset($_POST['galleriffic_height'])) {
@@ -552,7 +578,8 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_height',
                     'conf_value'     => $_POST['galleriffic_height'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -571,7 +598,8 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_width',
                     'conf_value'     => $_POST['galleriffic_width'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -590,7 +618,8 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_bgcolor',
                     'conf_value'     => $_POST['galleriffic_bgcolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -609,7 +638,8 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_bordercolor',
                     'conf_value'     => $_POST['galleriffic_bordercolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -628,7 +658,8 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_fontcolor',
                     'conf_value'     => $_POST['galleriffic_fontcolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -647,7 +678,8 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_autoplay',
                     'conf_value'     => $_POST['galleriffic_autoplay'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -666,7 +698,8 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_nb_thumbs',
                     'conf_value'     => $_POST['galleriffic_nb_thumbs'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -685,7 +718,8 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_nb_colthumbs',
                     'conf_value'     => $_POST['galleriffic_nb_colthumbs'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -704,7 +738,8 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_nb_preload',
                     'conf_value'     => $_POST['galleriffic_nb_preload'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -723,7 +758,8 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_tdelay',
                     'conf_value'     => $_POST['galleriffic_tdelay'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -742,7 +778,8 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_tspeed',
                     'conf_value'     => $_POST['galleriffic_tspeed'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -761,7 +798,8 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_show_descr',
                     'conf_value'     => $_POST['galleriffic_show_descr'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -780,7 +818,8 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_download',
                     'conf_value'     => $_POST['galleriffic_download'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text');
+                    'conf_valuetype' => 'text'
+                );
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }

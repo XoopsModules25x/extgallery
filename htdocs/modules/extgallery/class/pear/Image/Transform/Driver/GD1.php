@@ -24,23 +24,10 @@ require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform/D
  * @package
  * @author    NAWAL ASWAN
  * @copyright Copyright (c) 2003
- * @version   $Id: GD1.php 8088 2011-11-06 09:38:12Z beckmi $
  * @access    public
  **/
 class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
 {
-    /**
-     * Check settings
-     *
-     * @return mixed true or  or a PEAR error object on error
-     *
-     * @see PEAR::isError()
-     */
-    public function Image_Transform_Driver_GD1()
-    {
-        $this->__construct();
-    } // End function Image
-
     /**
      * Check settings
      *
@@ -53,7 +40,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
         parent::__construct();
     } // End function Image
 
-    /**
+   /**
      * Resize Action
      *
      * For GD 2.01+ the new copyresampled function is used
@@ -84,14 +71,14 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
     }
 
     /**
-     * @param int $angle
+     * @param int  $angle
      * @param null $options
      *
      * @return bool|object
      */
     public function rotate($angle, $options = null)
     {
-        if ($options == null) {
+        if ($options === null) {
             $autoresize = true;
             $color_mask = array(255, 255, 0);
         } else {
@@ -112,7 +99,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
             if ($color_mask{0} === '#') {
                 $color_mask = $this->colorhex2colorarray($color_mask);
             } else {
-                include_once 'Image/Transform/Driver/ColorsDefs.php';
+                include_once __DIR__ . '/Image/Transform/Driver/ColorsDefs.php';
                 $color_mask = isset($colornames[$color_mask]) ? $colornames[$color_mask] : false;
             }
         }
@@ -253,4 +240,3 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
         return true;
     }
 } // End class ImageGD
-

@@ -13,10 +13,9 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-rating.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 if (!isset($_GET['id'])) {
@@ -29,14 +28,15 @@ if (!isset($_GET['rate'])) {
 } else {
     $rate = (int)$_GET['rate'];
 }
-
+/** @var ExtgalleryPublicPhotoHandler $photoHandler */
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 $photo        = $photoHandler->get($photoId);
 
-$permHandler = ExtgalleryPublicPermHandler::getHandler();
-if ($xoopsModuleConfig['enable_rating'] && !$permHandler->isAllowed($xoopsUser, 'public_rate', $photo->getVar('cat_id'))) {
+$permHandler = ExtgalleryPublicPermHandler::getInstance();
+if ($xoopsModuleConfig['enable_rating']
+    && !$permHandler->isAllowed($xoopsUser, 'public_rate', $photo->getVar('cat_id'))
+) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
-    exit;
 }
 
 $ratingHandler = xoops_getModuleHandler('publicrating', 'extgallery');

@@ -13,12 +13,11 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: quota.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once 'ExtgalleryPersistableObjectHandler.php';
+include_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
 
 /**
  * Class ExtgalleryQuota
@@ -32,6 +31,7 @@ class ExtgalleryQuota extends XoopsObject
      */
     public function __construct()
     {
+        parent::__construct();
         $this->initVar('quota_id', XOBJ_DTYPE_INT, null, false);
         $this->initVar('groupid', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('quota_name', XOBJ_DTYPE_TXTBOX, 0, false);
@@ -53,7 +53,8 @@ class ExtgalleryQuota extends XoopsObject
 class ExtgalleryQuotaHandler extends ExtgalleryPersistableObjectHandler
 {
     /**
-     * @param $db
+     * ExtgalleryQuotaHandler constructor.
+     * @param XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
     {
@@ -87,7 +88,7 @@ class ExtgalleryQuotaHandler extends ExtgalleryPersistableObjectHandler
      * @param $groupid
      * @param $quotaName
      *
-     * @return object
+     * @return XoopsObject
      */
     public function getQuota($groupid, $quotaName)
     {

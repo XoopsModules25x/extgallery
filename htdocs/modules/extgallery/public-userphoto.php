@@ -13,10 +13,9 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-userphoto.php 10874 2013-01-23 17:23:02Z beckmi $
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-userphoto.tpl';
@@ -27,24 +26,25 @@ if (!isset($_GET['photoId'])) {
 } else {
     $photoId = (int)$_GET['photoId'];
 }
-
-$catHandler    = xoops_getModuleHandler('publiccat', 'extgallery');
-$photoHandler  = xoops_getModuleHandler('publicphoto', 'extgallery');
+/** @var ExtgalleryCatHandler $catHandler */
+$catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+/** @var ExtgalleryPublicPhotoHandler $photoHandler */
+$photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+/** @var ExtgalleryPublicRatingHandler $ratingHandler */
 $ratingHandler = xoops_getModuleHandler('publicrating', 'extgallery');
-$permHandler   = ExtgalleryPublicPermHandler::getHandler();
+$permHandler   = ExtgalleryPublicPermHandler::getInstance();
 
 $photoObj = $photoHandler->getPhoto($photoId);
 
 // Check is the photo exist
 if (!$photoObj) {
     redirect_header('index.php', 3, _NOPERM);
-    exit;
 }
 
 $photo = $photoHandler->objectToArray($photoObj, array('cat_id', 'uid'));
 
 // Check the category access permission
-$permHandler = ExtgalleryPublicPermHandler::getHandler();
+$permHandler = ExtgalleryPublicPermHandler::getInstance();
 if (!$permHandler->isAllowed($xoopsUser, 'public_access', $photo['cat']['cat_id'])) {
     redirect_header('index.php', 3, _NOPERM);
 }
@@ -114,7 +114,8 @@ $lang = array(
     'sends'        => _MD_EXTGALLERY_SENDS,
     'submitter'    => _MD_EXTGALLERY_SUBMITTER,
     'allPhotoBy'   => _MD_EXTGALLERY_ALL_PHOTO_BY,
-    'albumName'    => $albumName);
+    'albumName'    => $albumName
+);
 $xoopsTpl->assign('lang', $lang);
 
 if ($xoopsModuleConfig['enable_rating']) {

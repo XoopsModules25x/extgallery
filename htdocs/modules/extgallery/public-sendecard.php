@@ -13,10 +13,9 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-sendecard.php 10874 2013-01-23 17:23:02Z beckmi $
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -32,15 +31,14 @@ if (isset($_POST['step'])) {
 } else {
     $step = 'default';
 }
-
+/** @var ExtgalleryPublicPhotoHandler $photoHandler */
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 $photo        = $photoHandler->getPhoto($photoId);
 
-$permHandler = ExtgalleryPublicPermHandler::getHandler();
+$permHandler = ExtgalleryPublicPermHandler::getInstance();
 
 if (!$permHandler->isAllowed($xoopsUser, 'public_ecard', $photo->getVar('cat_id'))) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
-    exit;
 }
 
 switch ($step) {
@@ -53,11 +51,11 @@ switch ($step) {
         if ($xoopsModuleConfig['graphic_lib'] === 'GD') {
             if (!PhpCaptcha::Validate($_POST['captcha'])) {
                 redirect_header('public-photo.php?photoId=' . $photoId . '#photoNav', 3, _MD_EXTGALLERY_CAPTCHA_ERROR);
-                exit;
             }
         }
-
+        /** @var ExtgalleryPublicEcardHandler $ecardHandler */
         $ecardHandler = xoops_getModuleHandler('publicecard', 'extgallery');
+        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -76,7 +74,8 @@ switch ($step) {
             'ecard_greetings' => $_POST['ecard_greetings'],
             'ecard_desc'      => $_POST['ecard_desc'],
             'ecard_ip'        => $ip,
-            'photo_id'        => $photoId);
+            'photo_id'        => $photoId
+        );
 
         $ecardHandler->createEcard($data);
         $photoHandler->updateEcard($photoId);
@@ -130,7 +129,8 @@ switch ($step) {
 
         $lang = array(
             'to'   => _MD_EXTGALLERY_TO,
-            'from' => _MD_EXTGALLERY_FROM);
+            'from' => _MD_EXTGALLERY_FROM
+        );
         $xoopsTpl->assign('lang', $lang);
 
         include XOOPS_ROOT_PATH . '/footer.php';

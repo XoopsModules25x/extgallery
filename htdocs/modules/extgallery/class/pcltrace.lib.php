@@ -63,7 +63,7 @@ if (!defined('PCLTRACE_LIB')) {
     //             'log'    : messages are writed in the file $p_filename
     // --------------------------------------------------------------------------------
     /**
-     * @param int $p_level
+     * @param int    $p_level
      * @param string $p_mode
      * @param string $p_filename
      */
@@ -81,12 +81,12 @@ if (!defined('PCLTRACE_LIB')) {
 
         // ----- Memorize mode and filename
         switch ($p_mode) {
-            case 'normal' :
-            case 'memory' :
-            case 'log' :
+            case 'normal':
+            case 'memory':
+            case 'log':
                 $g_pcl_trace_mode = $p_mode;
                 break;
-            default :
+            default:
                 $g_pcl_trace_mode = 'logged';
         }
 
@@ -215,7 +215,7 @@ if (!defined('PCLTRACE_LIB')) {
     /**
      * @param        $p_file
      * @param        $p_line
-     * @param int $p_return
+     * @param int    $p_return
      * @param string $p_message
      */
     function TrFctEnd($p_file, $p_line, $p_return = 1, $p_message = '')
@@ -381,7 +381,7 @@ if (!defined('PCLTRACE_LIB')) {
         echo '<tr bgcolor=#0000CC>';
         echo '<td bgcolor=#0000CC width=1>';
         echo '</td>';
-        echo "<td><div align=center><font size=3 color=#FFFFFF face=$v_font>Trace</font></div></td>";
+        echo "<td><div align=center><span style='font-size: small; color: #FFFFFF; font-family: $v_font; '>Trace</span></div></td>";
         echo '</tr>';
         echo '<tr>';
         echo '<td bgcolor=#0000CC width=1>';
@@ -393,7 +393,7 @@ if (!defined('PCLTRACE_LIB')) {
 
         // ----- Display
         $v_again = 0;
-        for ($i = 0; $i < count($g_pcl_trace_entries); ++$i) {
+        for ($i = 0, $iMax = count($g_pcl_trace_entries); $i < $iMax; ++$i) {
             // ---- Row header
             echo '<tr>';
             echo '<td><table width=100% border=0 cellspacing=0 cellpadding=0><tr>';
@@ -403,10 +403,10 @@ if (!defined('PCLTRACE_LIB')) {
             for ($j = 0; $j <= $g_pcl_trace_entries[$i]['index']; ++$j) {
                 if ($j == $g_pcl_trace_entries[$i]['index']) {
                     if (($g_pcl_trace_entries[$i]['type'] == 1) || ($g_pcl_trace_entries[$i]['type'] == 2)) {
-                        echo "<td width=10><div align=center><font size=2 face=$v_font>+</font></div></td>";
+                        echo "<td width=10><div align=center><span style='font-size: x-small; font-family: $v_font; '>+</span></div></td>";
                     }
                 } else {
-                    echo "<td width=10><div align=center><font size=2 face=$v_font>|</font></div></td>";
+                    echo "<td width=10><div align=center><span style='font-size: x-small; font-family: $v_font; '>|</span></div></td>";
                 }
             }
             //echo "<td>&nbsp</td>";
@@ -415,25 +415,25 @@ if (!defined('PCLTRACE_LIB')) {
             echo '<td width=2></td>';
             switch ($g_pcl_trace_entries[$i]['type']) {
                 case 1:
-                    echo "<td><font size=2 face=$v_font>" . $g_pcl_trace_entries[$i]['name'] . '(' . $g_pcl_trace_entries[$i]['param'] . ')</font></td>';
+                    echo "<td><span style='font-size: x-small; font-family: $v_font; '>" . $g_pcl_trace_entries[$i]['name'] . '(' . $g_pcl_trace_entries[$i]['param'] . ')</span></td>';
                     break;
                 case 2:
-                    echo "<td><font size=2 face=$v_font>" . $g_pcl_trace_entries[$i]['name'] . '()=' . $g_pcl_trace_entries[$i]['param'] . '</font></td>';
+                    echo "<td><span style='font-size: x-small; font-family: $v_font; '>" . $g_pcl_trace_entries[$i]['name'] . '()=' . $g_pcl_trace_entries[$i]['param'] . '</span></td>';
                     break;
                 case 3:
                 case 4:
                     echo '<td><table width=100% border=0 cellspacing=0 cellpadding=0><td width=20></td><td>';
-                    echo "<font size=2 face=$v_font>" . $g_pcl_trace_entries[$i]['message'] . '</font>';
+                    echo "<span style='font-size: x-small; font-family: $v_font; '>" . $g_pcl_trace_entries[$i]['message'] . '</span>';
                     echo '</td></table></td>';
                     break;
                 default:
-                    echo "<td><font size=2 face=$v_font>" . $g_pcl_trace_entries[$i]['name'] . '(' . $g_pcl_trace_entries[$i]['param'] . ')</font></td>';
+                    echo "<td><span style='font-size: x-small; font-family: $v_font; '>" . $g_pcl_trace_entries[$i]['name'] . '(' . $g_pcl_trace_entries[$i]['param'] . ')</span></td>';
             }
             echo '</tr></table></td>';
             echo '<td width=5></td>';
-            echo "<td><font size=1 face=$v_font>" . basename($g_pcl_trace_entries[$i]['file']) . '</font></td>';
+            echo "<td><span style='font-size: xx-small; font-family: $v_font; '>" . basename($g_pcl_trace_entries[$i]['file']) . '</span></td>';
             echo '<td width=5></td>';
-            echo "<td><font size=1 face=$v_font>" . $g_pcl_trace_entries[$i]['line'] . '</font></td>';
+            echo "<td><span style='font-size: xx-small; font-family: $v_font; '>" . $g_pcl_trace_entries[$i]['line'] . '</span></td>';
             echo '</tr>';
         }
 
@@ -448,7 +448,7 @@ if (!defined('PCLTRACE_LIB')) {
         echo '<tr bgcolor=#0000CC>';
         echo '<td bgcolor=#0000CC width=1>';
         echo '</td>';
-        echo "<td><div align=center><font color=#FFFFFF face=$v_font>&nbsp</font></div></td>";
+        echo "<td><span align=center><span style='color: #FFFFFF; font-family: $v_font; '>&nbsp</font></span></td>";
         echo '</tr>';
         echo '</table>';
     }
@@ -478,7 +478,7 @@ if (!defined('PCLTRACE_LIB')) {
             }
             if ($p_entry['type'] == 1) {
                 echo '<b>' . $p_entry['name'] . '</b>(' . $p_entry['param'] . ') : ' . $p_entry['message'] . ' [' . $p_entry['file'] . ', ' . $p_entry['line'] . ']<br>';
-            } elseif ($p_entry[type] == 2) {
+            } elseif ($p_entry['type'] == 2) {
                 echo '<b>' . $p_entry['name'] . '</b>()=' . $p_entry['param'] . ' : ' . $p_entry['message'] . ' [' . $p_entry['file'] . ', ' . $p_entry['line'] . ']<br>';
             } else {
                 echo $p_entry['message'] . ' [' . $p_entry['file'] . ', ' . $p_entry['line'] . ']<br>';

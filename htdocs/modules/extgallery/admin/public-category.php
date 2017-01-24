@@ -14,13 +14,9 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-category.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 include_once __DIR__ . '/admin_header.php';
-//include_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include __DIR__ . '/function.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -49,7 +45,8 @@ switch ($op) {
                     'cat_desc'   => $_POST['cat_desc'],
                     'cat_weight' => $_POST['cat_weight'],
                     'cat_date'   => time(),
-                    'cat_imgurl' => $_POST['cat_imgurl']);
+                    'cat_imgurl' => $_POST['cat_imgurl']
+                );
                 $catHandler->createCat($data);
 
                 redirect_header('public-category.php', 3, _AM_EXTGALLERY_CAT_CREATED);
@@ -87,10 +84,10 @@ switch ($op) {
                 // Check if they are selected category
                 if (!isset($_POST['cat_id'])) {
                     redirect_header('photo.php', 3, _AM_EXTGALLERY_NO_CATEGORY_SELECTED);
-                    exit;
                 }
 
-                $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+                $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+                /** @var ExtgalleryPublicPhotoHandler $photoHandler */
                 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
                 $cat       = $catHandler->getCat($_POST['cat_id']);
@@ -133,7 +130,7 @@ switch ($op) {
                 $photoSelect .= '<option value="0">&nbsp;</option>' . "\n";
                 foreach ($photosCat as $photo) {
                     if ($photo->getVar('photo_id') == $cat->getVar('photo_id')) {
-                        $photoSelect .= '<option value="' . $photo->getVar('photo_id') . '" selected="selected">' . $photo->getVar('photo_title') . ' (' . $photo->getVar('photo_name') . ')</option>' . "\n";
+                        $photoSelect .= '<option value="' . $photo->getVar('photo_id') . '" selected>' . $photo->getVar('photo_title') . ' (' . $photo->getVar('photo_name') . ')</option>' . "\n";
                     } else {
                         $photoSelect .= '<option value="' . $photo->getVar('photo_id') . '">' . $photo->getVar('photo_title') . ' (' . $photo->getVar('photo_name') . ')</option>' . "\n";
                     }

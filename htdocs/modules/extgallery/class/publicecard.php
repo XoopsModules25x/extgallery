@@ -13,26 +13,26 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: publicecard.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once 'ExtgalleryPersistableObjectHandler.php';
-include_once 'extgalleryMailer.php';
+include_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
+include_once __DIR__ . '/extgalleryMailer.php';
 
 /**
- * Class ExtgalleryPublicecard
+ * Class ExtgalleryPublicEcard
  */
-class ExtgalleryPublicecard extends XoopsObject
+class ExtgalleryPublicEcard extends XoopsObject
 {
     public $externalKey = array();
 
     /**
-     * ExtgalleryPublicecard constructor.
+     * ExtgalleryPublicEcard constructor.
      */
     public function __construct()
     {
+        parent::__construct();
         $this->initVar('ecard_id', XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('ecard_cardid', XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('ecard_fromname', XOBJ_DTYPE_TXTBOX, 0, false);
@@ -46,8 +46,18 @@ class ExtgalleryPublicecard extends XoopsObject
         $this->initVar('uid', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('photo_id', XOBJ_DTYPE_INT, 0, false);
 
-        $this->externalKey['photo_id'] = array('className' => 'publicphoto', 'getMethodeName' => 'getPhoto', 'keyName' => 'photo', 'core' => false);
-        $this->externalKey['uid']      = array('className' => 'user', 'getMethodeName' => 'get', 'keyName' => 'user', 'core' => true);
+        $this->externalKey['photo_id'] = array(
+            'className'      => 'publicphoto',
+            'getMethodeName' => 'getPhoto',
+            'keyName'        => 'photo',
+            'core'           => false
+        );
+        $this->externalKey['uid']      = array(
+            'className'      => 'user',
+            'getMethodeName' => 'get',
+            'keyName'        => 'user',
+            'core'           => true
+        );
     }
 
     /**
@@ -62,16 +72,17 @@ class ExtgalleryPublicecard extends XoopsObject
 }
 
 /**
- * Class ExtgalleryPublicecardHandler
+ * Class ExtgalleryPublicEcardHandler
  */
-class ExtgalleryPublicecardHandler extends ExtgalleryPersistableObjectHandler
+class ExtgalleryPublicEcardHandler extends ExtgalleryPersistableObjectHandler
 {
     /**
-     * @param $db
+     * ExtgalleryPublicEcardHandler constructor.
+     * @param XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
     {
-        parent::__construct($db, 'extgallery_publicecard', 'ExtgalleryPublicecard', 'ecard_id');
+        parent::__construct($db, 'extgallery_publicecard', 'ExtgalleryPublicEcard', 'ecard_id');
     }
 
     /**
@@ -99,6 +110,7 @@ class ExtgalleryPublicecardHandler extends ExtgalleryPersistableObjectHandler
      */
     public function send(&$ecard)
     {
+        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
         $photo        = $photoHandler->get($ecard->getVar('photo_id'));
 

@@ -1,8 +1,8 @@
 <?php
-// $Id: notification.inc.php 8088 2011-11-06 09:38:12Z beckmi $
+//
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
+//                  Copyright (c) 2000-2016 XOOPS.org                        //
 //                       <http://xoops.org/>                             //
 // ------------------------------------------------------------------------- //
 //  This program is free software; you can redistribute it and/or modify     //
@@ -35,6 +35,7 @@
  */
 function extgalleryNotifyIteminfo($category, $item_id)
 {
+    /** @var ExtgalleryPublicPhotoHandler $photoHandler */
     $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
     $photo        = $photoHandler->getPhoto($item_id);
     $item['name'] = $photo->getVar('photo_desc');

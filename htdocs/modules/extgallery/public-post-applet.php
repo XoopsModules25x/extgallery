@@ -13,11 +13,10 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-post-applet.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
-
+include __DIR__ . '/header.php';
+/** @var ExtgalleryPublicPhotoHandler $photoHandler */
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 $result = $photoHandler->postPhotoTraitement('File0');

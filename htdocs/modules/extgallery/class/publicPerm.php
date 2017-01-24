@@ -13,7 +13,6 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: publicPerm.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
@@ -26,14 +25,14 @@ class ExtgalleryPublicPermHandler
     /**
      * @return ExtgalleryPublicPermHandler
      */
-    public static function &getHandler()
+    public static function getInstance()
     {
-        static $permHandler;
-        if (!isset($permHandler)) {
-            $permHandler = new ExtgalleryPublicPermHandler();
+        static $instance;
+        if (null === $instance) {
+            $instance = new static();
         }
 
-        return $permHandler;
+        return $instance;
     }
 
     /**
@@ -41,7 +40,7 @@ class ExtgalleryPublicPermHandler
      *
      * @return string
      */
-    public function _getUserGroup(&$user)
+    public function _getUserGroup($user)
     {
         if (is_a($user, 'XoopsUser')) {
             return $user->getGroups();
@@ -51,17 +50,19 @@ class ExtgalleryPublicPermHandler
     }
 
     /**
-     * @param $user
-     * @param $perm
+     * @param XoopsUser $user
+     * @param           $perm
      *
      * @return mixed
      */
-    public function getAuthorizedPublicCat(&$user, $perm)
+    public function getAuthorizedPublicCat(XoopsUser $user, $perm)
     {
         static $authorizedCat;
         $userId = $user ? $user->getVar('uid') : 0;
         if (!isset($authorizedCat[$perm][$userId])) {
-            $groupPermHandler              = xoops_getHandler('groupperm');
+            /** @var XoopsGroupPermHandler $groupPermHandler */
+            $groupPermHandler = xoops_getHandler('groupperm');
+            /** @var XoopsModuleHandler $moduleHandler */
             $moduleHandler                 = xoops_getHandler('module');
             $module                        = $moduleHandler->getByDirname('extgallery');
             $authorizedCat[$perm][$userId] = $groupPermHandler->getItemIds($perm, $this->_getUserGroup($user), $module->getVar('mid'));
@@ -77,7 +78,7 @@ class ExtgalleryPublicPermHandler
      *
      * @return bool
      */
-    public function isAllowed(&$user, $perm, $catId)
+    public function isAllowed($user, $perm, $catId)
     {
         $autorizedCat = $this->getAuthorizedPublicCat($user, $perm);
 

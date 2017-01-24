@@ -14,17 +14,15 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: install-extension.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
+include_once __DIR__ . '/admin_header.php';
 if (isset($_POST['step'])) {
     $step = $_POST['step'];
 } else {
     $step = 'default';
 }
 
-include_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include __DIR__ . '/function.php';
 
 // Change this variable if you use a cloned version of eXtGallery
 $localModuleDir = 'extgallery';
@@ -73,7 +71,7 @@ switch ($step) {
         }
 
         $g_pcltar_lib_dir = XOOPS_ROOT_PATH . '/modules/' . $localModuleDir . '/class';
-        include dirname(__DIR__) . '/class/pcltar.lib.php';
+        include __DIR__ . '/../class/pcltar.lib.php';
 
         // Extract extension files
         PclTarExtract(XOOPS_ROOT_PATH . '/uploads/' . $extensionFileName, XOOPS_ROOT_PATH . '/class/textsanitizer/', 'class/textsanitizer/');

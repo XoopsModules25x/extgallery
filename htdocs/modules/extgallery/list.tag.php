@@ -13,9 +13,8 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Voltan (djvoltan@gmail.com)
  * @package     ExtGallery
- * @version     $Id: list.tag.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 // todo: Check this file
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include XOOPS_ROOT_PATH . '/modules/tag/list.tag.php';

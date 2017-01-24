@@ -39,7 +39,7 @@ EOH;
         return array($code, $javascript);
     }
     
-    function load(&$ts)
+    function load($ts)
     {
         $ts->patterns[] = "/\[gallery]([0-9]*)\[\/gallery\]/sU";
         $ts->replacements[] = '<a href="'.XOOPS_URL.'/modules/extgallery/hook-photo.php?id=\\1" rel="lightbox"><img src="'.XOOPS_URL.'/modules/extgallery/hook-thumb.php?id=\\1" alt="" /></a>';

@@ -60,10 +60,10 @@ if (!defined('PCL_TAR')) {
     // This library should be called by each script before the include of PhpZip
     // Library in order to limit the potential 'lib' directory path problem.
     if (!defined('PCLERROR_LIB')) {
-        include($g_pcltar_lib_dir . '/pclerror.lib.php');
+        include $g_pcltar_lib_dir . '/pclerror.lib.php';
     }
     if (!defined('PCLTRACE_LIB')) {
-        include($g_pcltar_lib_dir . '/pcltrace.lib.php');
+        include $g_pcltar_lib_dir . '/pcltrace.lib.php';
     }
 
     // --------------------------------------------------------------------------------
@@ -817,7 +817,10 @@ if (!defined('PCL_TAR')) {
 
             return PclErrorCode();
         }
-        if ((!is_file($p_tarname_add)) || (((($v_size_add = filesize($p_tarname_add)) % 512) != 0) && ($p_mode_add === 'tar'))) {
+        if ((!is_file($p_tarname_add))
+            || (((($v_size_add = filesize($p_tarname_add)) % 512) != 0)
+                && ($p_mode_add === 'tar'))
+        ) {
             // ----- Error log
             if (!is_file($p_tarname_add)) {
                 PclErrorLog(-4, "Archive '$p_tarname_add' does not exist");
@@ -845,7 +848,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Open a temporary file in write mode
-            $v_temp_tarname = uniqid('pcltar-') . '.tmp';
+            $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
             if (($v_temp_tar = @gzopen($v_temp_tarname, 'wb')) == 0) {
                 // ----- Close tar file
@@ -1208,7 +1211,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Open a temporary file in write mode
-            $v_temp_tarname = uniqid('pcltar-') . '.tmp';
+            $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
             if (($v_temp_tar = @gzopen($v_temp_tarname, 'wb')) == 0) {
                 // ----- Close tar file
@@ -1860,8 +1863,15 @@ if (!defined('PCL_TAR')) {
      *
      * @return int
      */
-    function PclTarHandleExtract($p_tarname, $p_file_list, &$p_list_detail, $p_mode, $p_path, $p_tar_mode, $p_remove_path)
-    {
+    function PclTarHandleExtract(
+        $p_tarname,
+        $p_file_list,
+        &$p_list_detail,
+        $p_mode,
+        $p_path,
+        $p_tar_mode,
+        $p_remove_path
+    ) {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtract', "archive='$p_tarname', list, mode=$p_mode, path=$p_path, tar_mode=$p_tar_mode, remove_path='$p_remove_path'");
         $v_result      = 1;
         $v_nb          = 0;
@@ -1976,7 +1986,7 @@ if (!defined('PCL_TAR')) {
                 $v_extract_file = false;
 
                 // ----- Look into the file list
-                for ($i = 0; $i < count($p_file_list); ++$i) {
+                for ($i = 0, $iMax = count($p_file_list); $i < $iMax; ++$i) {
                     TrFctMessage(__FILE__, __LINE__, 2, 'Compare archived file ' . $v_header['filename'] . " from asked list file '" . $p_file_list[$i] . "'");
 
                     // ----- Look if it is a directory
@@ -1984,7 +1994,9 @@ if (!defined('PCL_TAR')) {
                         TrFctMessage(__FILE__, __LINE__, 3, 'Compare file ' . $v_header['filename'] . " with directory '$p_file_list[$i]'");
 
                         // ----- Look if the directory is in the filename path
-                        if ((strlen($v_header['filename']) > strlen($p_file_list[$i])) && (substr($v_header['filename'], 0, strlen($p_file_list[$i])) == $p_file_list[$i])) {
+                        if ((strlen($v_header['filename']) > strlen($p_file_list[$i]))
+                            && (substr($v_header['filename'], 0, strlen($p_file_list[$i])) == $p_file_list[$i])
+                        ) {
                             // ----- The file is in the directory, so extract it
                             TrFctMessage(__FILE__, __LINE__, 2, 'File ' . $v_header['filename'] . " is in directory '$p_file_list[$i]' : extract it");
                             $v_extract_file = true;
@@ -2015,7 +2027,9 @@ if (!defined('PCL_TAR')) {
             // ----- Look if this file need to be extracted
             if ($v_extract_file && (!$v_listing)) {
                 // ----- Look for path to remove
-                if (($p_remove_path != '') && (substr($v_header['filename'], 0, $p_remove_path_size) == $p_remove_path)) {
+                if (($p_remove_path != '')
+                    && (substr($v_header['filename'], 0, $p_remove_path_size) == $p_remove_path)
+                ) {
                     TrFctMessage(__FILE__, __LINE__, 3, "Found path '$p_remove_path' to remove in file " . $v_header['filename'] . '');
                     // ----- Remove the path
                     $v_header['filename'] = substr($v_header['filename'], $p_remove_path_size);
@@ -2260,8 +2274,14 @@ if (!defined('PCL_TAR')) {
      *
      * @return int
      */
-    function PclTarHandleExtractByIndexList($p_tarname, $p_index_string, &$p_list_detail, $p_path, $p_remove_path, $p_tar_mode)
-    {
+    function PclTarHandleExtractByIndexList(
+        $p_tarname,
+        $p_index_string,
+        &$p_list_detail,
+        $p_path,
+        $p_remove_path,
+        $p_tar_mode
+    ) {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtractByIndexList', "archive='$p_tarname', index_string='$p_index_string', list, path=$p_path, remove_path='$p_remove_path', tar_mode=$p_tar_mode");
         $v_result = 1;
         $v_nb     = 0;
@@ -2269,7 +2289,10 @@ if (!defined('PCL_TAR')) {
         // ----- TBC : I should check the string by a regexp
 
         // ----- Check the path
-        if (($p_path == '') || ((substr($p_path, 0, 1) !== '/') && (substr($p_path, 0, 3) !== '../') && (substr($p_path, 0, 2) !== './'))) {
+        if (($p_path == '')
+            || ((substr($p_path, 0, 1) !== '/') && (substr($p_path, 0, 3) !== '../')
+                && (substr($p_path, 0, 2) !== './'))
+        ) {
             $p_path = './' . $p_path;
         }
 
@@ -2357,9 +2380,18 @@ if (!defined('PCL_TAR')) {
      *
      * @return int
      */
-    function PclTarHandleExtractByIndex($p_tar, &$p_index_current, $p_index_start, $p_index_stop, &$p_list_detail, $p_path, $p_remove_path, $p_tar_mode)
-    {
-        TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtractByIndex', "archive_descr='$p_tar', index_current=$p_index_current, index_start='$p_index_start', index_stop='$p_index_stop', list, path=$p_path, remove_path='$p_remove_path', tar_mode=$p_tar_mode");
+    function PclTarHandleExtractByIndex(
+        $p_tar,
+        &$p_index_current,
+        $p_index_start,
+        $p_index_stop,
+        &$p_list_detail,
+        $p_path,
+        $p_remove_path,
+        $p_tar_mode
+    ) {
+        TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtractByIndex',
+                   "archive_descr='$p_tar', index_current=$p_index_current, index_start='$p_index_start', index_stop='$p_index_stop', list, path=$p_path, remove_path='$p_remove_path', tar_mode=$p_tar_mode");
         $v_result = 1;
         $v_nb     = 0;
 
@@ -2559,7 +2591,8 @@ if (!defined('PCL_TAR')) {
                 $v_extract_file       = 0;
             } // ----- Look if the extracted file is older
             elseif (filemtime($v_header['filename']) > $v_header['mtime']) {
-                TrFctMessage(__FILE__, __LINE__, 2, 'Existing file ' . $v_header['filename'] . ' is newer (' . date('l dS of F Y h:i:s A', filemtime($v_header['filename'])) . ') than the extracted file (' . date('l dS of F Y h:i:s A', $v_header['mtime']) . ')');
+                TrFctMessage(__FILE__, __LINE__, 2,
+                             'Existing file ' . $v_header['filename'] . ' is newer (' . date('l dS of F Y h:i:s A', filemtime($v_header['filename'])) . ') than the extracted file (' . date('l dS of F Y h:i:s A', $v_header['mtime']) . ')');
 
                 // ----- Change the file status
                 $v_header['status'] = 'newer_exist';
@@ -2707,7 +2740,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Open a temporary file in write mode
-            $v_temp_tarname = uniqid('pcltar-') . '.tmp';
+            $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
             if (($v_temp_tar = @fopen($v_temp_tarname, 'wb')) == 0) {
                 // ----- Close tar file
@@ -2736,7 +2769,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Open a temporary file in write mode
-            $v_temp_tarname = uniqid('pcltar-') . '.tmp';
+            $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
             if (($v_temp_tar = @gzopen($v_temp_tarname, 'wb')) == 0) {
                 // ----- Close tar file
@@ -2945,7 +2978,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Open a temporary file in write mode
-            $v_temp_tarname = uniqid('pcltar-') . '.tmp';
+            $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
             if (($v_temp_tar = @fopen($v_temp_tarname, 'wb')) == 0) {
                 // ----- Close tar file
@@ -2974,7 +3007,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Open a temporary file in write mode
-            $v_temp_tarname = uniqid('pcltar-') . '.tmp';
+            $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
             if (($v_temp_tar = @gzopen($v_temp_tarname, 'wb')) == 0) {
                 // ----- Close tar file
@@ -2991,7 +3024,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Prepare the list of files
-        for ($i = 0; $i < count($p_file_list); ++$i) {
+        for ($i = 0, $iMax = count($p_file_list); $i < $iMax; ++$i) {
             // ----- Reset the found list
             $v_found_list[$i] = 0;
 
@@ -3184,7 +3217,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Look for files that does not exists in the archive and need to be added
-        for ($i = 0; $i < count($p_file_list); ++$i) {
+        for ($i = 0, $iMax = count($p_file_list); $i < $iMax; ++$i) {
             // ----- Look if file not found in the archive
             if (!$v_found_list[$i]) {
                 TrFctMessage(__FILE__, __LINE__, 3, "File '$p_file_list[$i]' need to be added");

@@ -13,13 +13,12 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-upload.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once 'include/functions.php';
+include_once __DIR__ . '/class/utilities.php';
 
 if (isset($_POST['step'])) {
     $step = $_POST['step'];
@@ -27,16 +26,17 @@ if (isset($_POST['step'])) {
     $step = 'default';
 }
 
-$permHandler = ExtgalleryPublicPermHandler::getHandler();
+$permHandler = ExtgalleryPublicPermHandler::getInstance();
 if (count($permHandler->getAuthorizedPublicCat($xoopsUser, 'public_upload')) < 1) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
-    exit;
 }
 
+$moduleDirName = basename(__DIR__);
+$classUtilities = ucfirst($moduleDirName) . 'Utilities';
 switch ($step) {
 
     case 'enreg':
-
+        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         $result = $photoHandler->postPhotoTraitement('photo_file', false);
@@ -44,7 +44,7 @@ switch ($step) {
         if ($result == 2) {
             redirect_header('public-upload.php', 3, _MD_EXTGALLERY_NOT_AN_ALBUM);
         } elseif ($result == 4 || $result == 5) {
-            redirect_header('public-upload.php', 3, _MD_EXTGALLERY_UPLOAD_ERROR . ' :<br />' . $photoHandler->photoUploader->getError());
+            redirect_header('public-upload.php', 3, _MD_EXTGALLERY_UPLOAD_ERROR . ' :<br>' . $photoHandler->photoUploader->getError());
         } elseif ($result == 0) {
             redirect_header('public-upload.php', 3, _MD_EXTGALLERY_PHOTO_UPLOADED);
         } elseif ($result == 1) {
@@ -66,7 +66,7 @@ switch ($step) {
 
         //DNPROSSI - editors
         $form->addElement(new XoopsFormText(_MD_EXTGALLERY_PHOTO_TITLE, 'photo_title', '50', '150'), false);
-        $editor = gal_getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
+        $editor = $classUtilities ::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
         $form->addElement($editor, false);
 
         $form->addElement(new XoopsFormFile(_MD_EXTGALLERY_PHOTO, 'photo_file', $xoopsModuleConfig['max_photosize']), false);
@@ -88,7 +88,7 @@ switch ($step) {
 
         $form->display();
 
-        include(XOOPS_ROOT_PATH . '/footer.php');
+        include XOOPS_ROOT_PATH . '/footer.php';
 
         break;
 

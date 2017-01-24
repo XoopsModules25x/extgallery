@@ -13,32 +13,42 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: publicrating.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once 'ExtgalleryPersistableObjectHandler.php';
+include_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
 
 /**
- * Class ExtgalleryPublicrating
+ * Class ExtgalleryPublicRating
  */
-class ExtgalleryPublicrating extends XoopsObject
+class ExtgalleryPublicRating extends XoopsObject
 {
     public $externalKey = array();
 
     /**
-     * ExtgalleryPublicrating constructor.
+     * ExtgalleryPublicRating constructor.
      */
     public function __construct()
     {
+        parent::__construct();
         $this->initVar('rating_id', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('photo_id', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('uid', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('rating_rate', XOBJ_DTYPE_INT, 0, false);
 
-        $this->externalKey['photo_id'] = array('className' => 'publicphoto', 'getMethodeName' => 'getPhoto', 'keyName' => 'photo', 'core' => false);
-        $this->externalKey['uid']      = array('className' => 'user', 'getMethodeName' => 'get', 'keyName' => 'user', 'core' => true);
+        $this->externalKey['photo_id'] = array(
+            'className'      => 'publicphoto',
+            'getMethodeName' => 'getPhoto',
+            'keyName'        => 'photo',
+            'core'           => false
+        );
+        $this->externalKey['uid']      = array(
+            'className'      => 'user',
+            'getMethodeName' => 'get',
+            'keyName'        => 'user',
+            'core'           => true
+        );
     }
 
     /**
@@ -53,16 +63,16 @@ class ExtgalleryPublicrating extends XoopsObject
 }
 
 /**
- * Class ExtgalleryPublicratingHandler
+ * Class ExtgalleryPublicRatingHandler
  */
-class ExtgalleryPublicratingHandler extends ExtgalleryPersistableObjectHandler
+class ExtgalleryPublicRatingHandler extends ExtgalleryPersistableObjectHandler
 {
     /**
-     * @param $db
+     * @param XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
     {
-        parent::__construct($db, 'extgallery_publicrating', 'ExtgalleryPublicrating', 'rating_id');
+        parent::__construct($db, 'extgallery_publicrating', 'ExtgalleryPublicRating', 'rating_id');
     }
 
     /**
@@ -73,6 +83,7 @@ class ExtgalleryPublicratingHandler extends ExtgalleryPersistableObjectHandler
      */
     public function rate($photoId, $rating)
     {
+        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         $userId = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid') : 0;

@@ -14,12 +14,11 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: watermark-border.php 8088 2011-11-06 09:38:12Z beckmi $
  */
+include_once __DIR__ . '/admin_header.php';
+include_once __DIR__ . '/../../../include/cp_header.php';
+xoops_load('XoopsFormLoader');
 
-include_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include __DIR__ . '/function.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -94,11 +93,9 @@ switch ($op) {
         break;
 
     case 'conf':
-
         switch ($step) {
-
             case 'enreg':
-
+                /** @var XoopsConfigHandler $configHandler */
                 $configHandler    = xoops_getHandler('config');
                 $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -130,7 +127,8 @@ switch ($op) {
                             'conf_name'      => 'watermark_font',
                             'conf_value'     => $_POST['watermark_font'],
                             'conf_formtype'  => 'hidden',
-                            'conf_valuetype' => 'text');
+                            'conf_valuetype' => 'text'
+                        );
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -148,7 +146,8 @@ switch ($op) {
                             'conf_name'      => 'watermark_type',
                             'conf_value'     => $_POST['watermark_type'],
                             'conf_formtype'  => 'hidden',
-                            'conf_valuetype' => 'int');
+                            'conf_valuetype' => 'int'
+                        );
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -167,7 +166,8 @@ switch ($op) {
                                 'conf_name'      => 'watermark_text',
                                 'conf_value'     => $_POST['watermark_text'],
                                 'conf_formtype'  => 'hidden',
-                                'conf_valuetype' => 'text');
+                                'conf_valuetype' => 'text'
+                            );
                             $config->setVars($configValue);
                             $configHandler->insertConfig($config);
                         }
@@ -186,7 +186,8 @@ switch ($op) {
                             'conf_name'      => 'watermark_position',
                             'conf_value'     => $_POST['watermark_position'],
                             'conf_formtype'  => 'hidden',
-                            'conf_valuetype' => 'text');
+                            'conf_valuetype' => 'text'
+                        );
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -204,7 +205,8 @@ switch ($op) {
                             'conf_name'      => 'watermark_color',
                             'conf_value'     => $_POST['watermark_color'],
                             'conf_formtype'  => 'hidden',
-                            'conf_valuetype' => 'text');
+                            'conf_valuetype' => 'text'
+                        );
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -222,7 +224,8 @@ switch ($op) {
                             'conf_name'      => 'watermark_fontsize',
                             'conf_value'     => $_POST['watermark_fontsize'],
                             'conf_formtype'  => 'hidden',
-                            'conf_valuetype' => 'int');
+                            'conf_valuetype' => 'int'
+                        );
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -240,7 +243,8 @@ switch ($op) {
                             'conf_name'      => 'watermark_padding',
                             'conf_value'     => $_POST['watermark_padding'],
                             'conf_formtype'  => 'hidden',
-                            'conf_valuetype' => 'int');
+                            'conf_valuetype' => 'int'
+                        );
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -260,7 +264,8 @@ switch ($op) {
                             'conf_name'      => 'inner_border_color',
                             'conf_value'     => $_POST['inner_border_color'],
                             'conf_formtype'  => 'hidden',
-                            'conf_valuetype' => 'text');
+                            'conf_valuetype' => 'text'
+                        );
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -278,7 +283,8 @@ switch ($op) {
                             'conf_name'      => 'inner_border_size',
                             'conf_value'     => $_POST['inner_border_size'],
                             'conf_formtype'  => 'hidden',
-                            'conf_valuetype' => 'int');
+                            'conf_valuetype' => 'int'
+                        );
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -296,7 +302,8 @@ switch ($op) {
                             'conf_name'      => 'outer_border_color',
                             'conf_value'     => $_POST['outer_border_color'],
                             'conf_formtype'  => 'hidden',
-                            'conf_valuetype' => 'text');
+                            'conf_valuetype' => 'text'
+                        );
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -314,7 +321,8 @@ switch ($op) {
                             'conf_name'      => 'outer_border_size',
                             'conf_value'     => $_POST['outer_border_size'],
                             'conf_formtype'  => 'hidden',
-                            'conf_valuetype' => 'int');
+                            'conf_valuetype' => 'int'
+                        );
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -372,13 +380,20 @@ switch ($op) {
                     'font'         => '../fonts/' . $testParam['watermark_font'],
                     'size'         => $testParam['watermark_fontsize'],
                     'resize_first' => false,
-                    'padding'      => $testParam['watermark_padding']);
+                    'padding'      => $testParam['watermark_padding']
+                );
                 $imageTransform->addText($watermarkParams);
 
                 // Making border
                 $borders   = array();
-                $borders[] = array('borderWidth' => $testParam['inner_border_size'], 'borderColor' => $testParam['inner_border_color']);
-                $borders[] = array('borderWidth' => $testParam['outer_border_size'], 'borderColor' => $testParam['outer_border_color']);
+                $borders[] = array(
+                    'borderWidth' => $testParam['inner_border_size'],
+                    'borderColor' => $testParam['inner_border_color']
+                );
+                $borders[] = array(
+                    'borderWidth' => $testParam['outer_border_size'],
+                    'borderColor' => $testParam['outer_border_color']
+                );
                 $imageTransform->addBorders($borders);
 
                 // Remove old test image
@@ -435,7 +450,8 @@ switch ($op) {
             $disable   = $xoopsModuleConfig['watermark_type'] == 0 ? " disabled=\"disabled\"" : '';
             $style     = $xoopsModuleConfig['watermark_type'] == 0 ? " style=\"background-color:#DDDDDD;\"" : '';
             $onClick   = ' onClick="document.getElementById(\'watermark_text\').disabled = false; document.getElementById(\'watermark_text\').style.backgroundColor = \'#FFFFFF\';"';
-            $WTextForm = '<input type="radio" name="watermark_type" value="1"' . $selected1 . $onClick . ' /> <input name="watermark_text" id="watermark_text" size="50" maxlength="255" value="' . $xoopsModuleConfig['watermark_text'] . '" type="text"' . $disable . $style . ' /><br />';
+            $WTextForm = '<input type="radio" name="watermark_type" value="1"' . $selected1 . $onClick . ' /> <input name="watermark_text" id="watermark_text" size="50" maxlength="255" value="'
+                         . $xoopsModuleConfig['watermark_text'] . '" type="text"' . $disable . $style . ' /><br>';
 
             $selected2 = $xoopsModuleConfig['watermark_type'] == 0 ? " checked=\"checked\"" : '';
             $onClick   = ' onClick="document.getElementById(\'watermark_text\').disabled = true; document.getElementById(\'watermark_text\').style.backgroundColor = \'#DDDDDD\';"';
@@ -482,7 +498,7 @@ switch ($op) {
         $xoopsTpl->assign('imagetest', $imageTest[0]);
 
         // Call template file
-        $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/extgallery/templates/admin/extgallery_admin_watermark_border.tpl');
+        $xoopsTpl->display(__DIR__ . '/../templates/admin/extgallery_admin_watermark_border.tpl');
         xoops_cp_footer();
 
         break;
@@ -495,7 +511,7 @@ switch ($op) {
 function getImageTest()
 {
     $ret = array();
-    $rep = XOOPS_ROOT_PATH . '/modules/extgallery/assets/images/';
+    $rep = __DIR__ . '/../assets/images/';
     $dir = opendir($rep);
     while ($f = readdir($dir)) {
         if (is_file($rep . $f)) {
@@ -512,6 +528,6 @@ function deleteImageTest()
 {
     $files = getImageTest();
     foreach ($files as $file) {
-        unlink(XOOPS_ROOT_PATH . '/modules/extgallery/assets/images/' . $file);
+        unlink(__DIR__ . '/../assets/images/' . $file);
     }
 }

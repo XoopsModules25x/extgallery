@@ -18,7 +18,6 @@
  * @author     Peter Bowyer <peter@mapledesign.co.uk>
  * @copyright  2002-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: Imagick.php 8088 2011-11-06 09:38:12Z beckmi $
  * @deprecated
  * @link       http://pear.php.net/package/Image_Transform
  */
@@ -172,16 +171,17 @@ class Image_Transform_Driver_Imagick extends Image_Transform
             'pointsize' => $size,
             'antialias' => 0,
             'fill'      => $color,
-            'font'      => $font));
+            'font'      => $font
+        ));
     } // End addText
 
     /**
      * Save the image file
      *
-     * @param   $filename string the name of the file to write to
+     * @param         $filename string the name of the file to write to
      *
      * @param  string $type
-     * @param  int $quality
+     * @param  int    $quality
      * @return none
      */
     public function save($filename, $type = '', $quality = 75)
@@ -234,4 +234,3 @@ class Image_Transform_Driver_Imagick extends Image_Transform
         return true;
     }
 } // End class ImageIM
-

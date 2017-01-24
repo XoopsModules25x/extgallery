@@ -13,12 +13,11 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-modify.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once 'include/functions.php';
+include_once __DIR__ . '/class/utilities.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -34,12 +33,11 @@ if (isset($_POST['step'])) {
 
 if (!isset($xoopsUser)) {
     redirect_header('index.php');
-    exit;
 } elseif (!$xoopsUser->isAdmin()) {
     redirect_header('index.php');
-    exit;
 }
-
+$moduleDirName = basename(__DIR__);
+$classUtilities = ucfirst($moduleDirName) . 'Utilities';
 switch ($op) {
 
     case 'edit':
@@ -47,7 +45,7 @@ switch ($op) {
         switch ($step) {
 
             case 'enreg':
-
+                /** @var ExtgalleryPublicPhotoHandler $photoHandler */
                 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
                 $myts         = MyTextSanitizer::getInstance();
                 $photo        = $photoHandler->getPhoto($_POST['photo_id']);
@@ -65,8 +63,8 @@ switch ($op) {
 
                 // For xoops tag
                 if (($xoopsModuleConfig['usetag'] == 1) and is_dir('../tag')) {
-                    $tag_handler = xoops_getModuleHandler('tag', 'tag');
-                    $tag_handler->updateByItem($_POST['tag'], $_POST['photo_id'], $xoopsModule->getVar('dirname'), 0);
+                    $tagHandler = xoops_getModuleHandler('tag', 'tag');
+                    $tagHandler->updateByItem($_POST['tag'], $_POST['photo_id'], $xoopsModule->getVar('dirname'), 0);
                 }
 
                 // If the photo category change
@@ -121,8 +119,10 @@ switch ($op) {
             default:
 
                 include_once XOOPS_ROOT_PATH . '/header.php';
-                $myts         = MyTextSanitizer::getInstance();
-                $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+                $myts = MyTextSanitizer::getInstance();
+                /** @var ExtgalleryPublicCatHandler $catHandler */
+                $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+                /** @var ExtgalleryPublicPhotoHandler $photoHandler */
                 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
                 $photo = $photoHandler->getPhoto((int)$_GET['id']);
@@ -136,7 +136,7 @@ switch ($op) {
                 //DNPROSSI - wysiwyg editors from xoopseditors
                 //TODO dohtml - dobr
                 $photo_desc = $myts->displayTarea($photo->getVar('photo_desc'), 0, 1, 1, 1, 0);
-                $editor     = gal_getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', $photo_desc, 15, 60, '100%', '350px', 'hometext_hidden');
+                $editor     = $classUtilities ::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', $photo_desc, 15, 60, '100%', '350px', 'hometext_hidden');
                 $form->addElement($editor, false);
                 if ($xoopsModuleConfig['display_extra_field']) {
                     $form->addElement(new XoopsFormTextArea(_MD_EXTGALLERY_EXTRA_INFO, 'photo_extra', $photo->getVar('photo_extra')));
@@ -154,7 +154,7 @@ switch ($op) {
                 $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
                 $form->display();
 
-                include(XOOPS_ROOT_PATH . '/footer.php');
+                include XOOPS_ROOT_PATH . '/footer.php';
 
                 break;
 
@@ -163,8 +163,9 @@ switch ($op) {
         break;
 
     case 'delete':
-
-        $catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+        /** @var ExtgalleryPublicCatHandler $catHandler */
+        $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
         $photo = $photoHandler->getPhoto((int)$_GET['id']);

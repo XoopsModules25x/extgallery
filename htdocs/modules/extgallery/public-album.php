@@ -13,10 +13,9 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-album.php 10874 2013-01-23 17:23:02Z beckmi $
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
@@ -36,7 +35,12 @@ if (!isset($_GET['start'])) {
 
 // HACK BLUETEEN TO SORT PHOTO BY USERS
 //photo_date - photo_title - photo_hits - photo_rating
-if (isset($_GET['sortby']) && ($_GET['sortby'] === 'photo_date' || $_GET['sortby'] === 'photo_title' || $_GET['sortby'] === 'photo_hits' || $_GET['sortby'] === 'photo_rating')) {
+if (isset($_GET['sortby'])
+    && ($_GET['sortby'] === 'photo_date'
+        || $_GET['sortby'] === 'photo_title'
+        || $_GET['sortby'] === 'photo_hits'
+        || $_GET['sortby'] === 'photo_rating')
+) {
     $sortby = $_GET['sortby'];
 } else {
     $sortby = 'photo_date';
@@ -94,19 +98,19 @@ function convertorderbytrans($SortbyOrderby)
 }
 
 // Check the access permission
-$permHandler = ExtgalleryPublicPermHandler::getHandler();
+$permHandler = ExtgalleryPublicPermHandler::getInstance();
 if (!$permHandler->isAllowed($xoopsUser, 'public_access', $catId)) {
     redirect_header('index.php', 3, _NOPERM);
-    exit;
 }
-
-$catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
+/** @var ExtgalleryPublicCatHandler $catHandler */
+$catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+/** @var ExtgalleryPublicPhotoHandler $photoHandler */
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 $catObj = $catHandler->getCat($catId);
 
 if (null === $catObj) {
-    include(XOOPS_ROOT_PATH . '/footer.php');
+    include XOOPS_ROOT_PATH . '/footer.php';
     exit;
 }
 
@@ -147,7 +151,8 @@ foreach (array_keys($photos) as $i) {
 
 $xoopsTpl->assign('photos', $photos);
 
-$pageNav = new XoopsPageNav($photoHandler->getAlbumCount($catId), $xoopsModuleConfig['nb_column'] * $xoopsModuleConfig['nb_line'], $start, 'start', 'id=' . $catId . '&orderby=' . $orderby . '&sortby=' . $sortby); //xoops - blueteen - tri de l'affichage
+$pageNav = new XoopsPageNav($photoHandler->getAlbumCount($catId), $xoopsModuleConfig['nb_column'] * $xoopsModuleConfig['nb_line'], $start, 'start',
+                            'id=' . $catId . '&orderby=' . $orderby . '&sortby=' . $sortby); //xoops - blueteen - tri de l'affichage
 $xoopsTpl->assign('pageNav', $pageNav->renderNav());
 
 if (isset($catObj)) {
@@ -196,7 +201,11 @@ $attributes['href']  = XOOPS_URL . '/modules/extgallery/public-rss.php';
 $xoTheme->addMeta('link', $rel, $attributes);
 $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 
-$lang = array('hits' => _MD_EXTGALLERY_HITS, 'comments' => _MD_EXTGALLERY_COMMENTS, 'rate_score' => _MD_EXTGALLERY_RATING_SCORE);
+$lang = array(
+    'hits'       => _MD_EXTGALLERY_HITS,
+    'comments'   => _MD_EXTGALLERY_COMMENTS,
+    'rate_score' => _MD_EXTGALLERY_RATING_SCORE
+);
 $xoopsTpl->assign('lang', $lang);
 
 $xoopsTpl->assign('enableExtra', $xoopsModuleConfig['display_extra_field']);
@@ -255,4 +264,4 @@ $xoopsTpl->assign('album_prettyphoto_theme', $xoopsModuleConfig['album_prettypho
 $xoopsTpl->assign('album_prettyphoto_slidspeed', $xoopsModuleConfig['album_prettyphoto_slidspe']);
 $xoopsTpl->assign('album_prettyphoto_autoplay', $xoopsModuleConfig['album_prettyphoto_autopla']);
 
-include(XOOPS_ROOT_PATH . '/footer.php');
+include XOOPS_ROOT_PATH . '/footer.php';

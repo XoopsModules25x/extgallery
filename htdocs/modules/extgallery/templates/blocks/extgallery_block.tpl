@@ -56,7 +56,7 @@
                     return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
                     }
                 });
-            });
+            })
         </script>
     <{/if}>
     <{if $block.ajaxeffect == jcarousel}>
@@ -142,7 +142,7 @@
                     return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
                     }
                 });
-            });
+            })
         </script>
     <{/if}>
     <{if $block.ajaxeffect == prettyphoto}>

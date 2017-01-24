@@ -21,7 +21,6 @@
  * @author     Philippe Jausions <Philippe.Jausions@11abacus.com>
  * @copyright  2002-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: GD.php 8088 2011-11-06 09:38:12Z beckmi $
  * @link       http://pear.php.net/package/Image_Transform
  */
 
@@ -78,14 +77,6 @@ class Image_Transform_Driver_GD extends Image_Transform
      * @access protected
      */
     public $old_image = null;
-
-    /**
-     * Check settings
-     */
-    public function Image_Transform_Driver_GD()
-    {
-        $this->__construct();
-    } // End function Image
 
     /**
      * Check settings
@@ -152,7 +143,7 @@ class Image_Transform_Driver_GD extends Image_Transform
     /**
      * Adds a border of constant width around an image
      *
-     * @param int $border_width Width of border to add
+     * @param int    $border_width Width of border to add
      * @param string $color
      *
      * @author Peter Bowyer
@@ -275,7 +266,7 @@ class Image_Transform_Driver_GD extends Image_Transform
      * Uses a fast rotation algorythm for custom angles
      * or lines copy for multiple of 90 degrees
      *
-     * @param int $angle     Rotation angle
+     * @param int   $angle   Rotation angle
      * @param array $options array(
      *                       'canvasColor' => array(r ,g, b), named color or #rrggbb
      *                       )
@@ -407,8 +398,8 @@ class Image_Transform_Driver_GD extends Image_Transform
      * Options:
      *  - scaleMethod: "pixel" or "smooth"
      *
-     * @param int $new_x     New width
-     * @param int $new_y     New height
+     * @param int   $new_x   New width
+     * @param int   $new_y   New height
      * @param mixed $options Optional parameters
      *
      * @return bool|PEAR_Error TRUE on success or PEAR_Error object on error
@@ -470,7 +461,7 @@ class Image_Transform_Driver_GD extends Image_Transform
      *
      * @param string $filename the name of the file to write to (blank to output)
      * @param string $type
-     * @param int $quality     output DPI, default is 75
+     * @param int    $quality  output DPI, default is 75
      *
      * @internal param string $types define the output format, default
      *                          is the current used format
@@ -527,8 +518,8 @@ class Image_Transform_Driver_GD extends Image_Transform
      *
      * This method adds the Content-type HTTP header
      *
-     * @param string $type (JPEG, PNG...);
-     * @param int $quality 75
+     * @param string $type    (JPEG, PNG...);
+     * @param int    $quality 75
      *
      * @return bool|PEAR_Error TRUE or PEAR_Error object on error
      * @access public
@@ -544,7 +535,7 @@ class Image_Transform_Driver_GD extends Image_Transform
      * @param string $filename the name of the file to write to
      * @param string $type     the output format, default
      *                         is the current used format
-     * @param int $quality     default is 75
+     * @param int    $quality  default is 75
      *
      * @return bool|PEAR_Error TRUE on success or PEAR_Error object on error
      * @access public
@@ -579,8 +570,8 @@ class Image_Transform_Driver_GD extends Image_Transform
     /**
      * Returns a new image for temporary processing
      *
-     * @param  int $width      width of the new image
-     * @param  int $height     height of the new image
+     * @param  int  $width     width of the new image
+     * @param  int  $height    height of the new image
      * @param  bool $trueColor force which type of image to create
      * @return resource a GD image resource
      * @access protected

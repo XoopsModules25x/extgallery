@@ -13,10 +13,9 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: public-categories.php 10874 2013-01-23 17:23:02Z beckmi $
  */
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+include __DIR__ . '/header.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-categories.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
@@ -32,7 +31,7 @@ $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
 $catObj = $catHandler->getCat($catId);
 
 if (null === $catObj) {
-    include(XOOPS_ROOT_PATH . '/footer.php');
+    include XOOPS_ROOT_PATH . '/footer.php';
     exit;
 }
 
@@ -61,7 +60,8 @@ $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 $lang = array(
     'categoriesAlbums' => _MD_EXTGALLERY_CATEGORIESALBUMS,
     'nbAlbums'         => _MD_EXTGALLERY_NBALBUMS,
-    'nbPhotos'         => _MD_EXTGALLERY_NBPHOTOS);
+    'nbPhotos'         => _MD_EXTGALLERY_NBPHOTOS
+);
 $xoopsTpl->assign('lang', $lang);
 
 $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));
@@ -69,4 +69,4 @@ $xoopsTpl->assign('disp_cat_img', $xoopsModuleConfig['disp_cat_img']);
 $xoopsTpl->assign('display_type', $xoopsModuleConfig['display_type']);
 $xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
 
-include(XOOPS_ROOT_PATH . '/footer.php');
+include XOOPS_ROOT_PATH . '/footer.php';

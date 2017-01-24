@@ -88,14 +88,16 @@ class PhpCaptcha
     public $sCode = '';
 
     /**
+     * PhpCaptcha constructor.
      * @param     $aFonts
      * @param int $iWidth
      * @param int $iHeight
      */
-    public function __construct($aFonts, // array of TrueType fonts to use - specify full path
-                                $iWidth = CAPTCHA_WIDTH, // width of image
-                                $iHeight = CAPTCHA_HEIGHT // height of image
-    )
+    public function __construct(
+        $aFonts, // array of TrueType fonts to use - specify full path
+        $iWidth = CAPTCHA_WIDTH, // width of image
+        $iHeight = CAPTCHA_HEIGHT // height of image
+)
     {
         // get parameters
         $this->aFonts = $aFonts;
@@ -329,7 +331,7 @@ class PhpCaptcha
     public function DrawCharacters()
     {
         // loop through and write out selected number of characters
-        for ($i = 0; $i < strlen($this->sCode); ++$i) {
+        for ($i = 0, $iMax = strlen($this->sCode); $i < $iMax; ++$i) {
             // select random font
             $sCurrentFont = $this->aFonts[array_rand($this->aFonts)];
 
@@ -410,7 +412,9 @@ class PhpCaptcha
     public function Create($sFilename = '')
     {
         // check for required gd functions
-        if (!function_exists('imagecreate') || !function_exists("image$this->sFileType") || ($this->vBackgroundImages != '' && !function_exists('imagecreatetruecolor'))) {
+        if (!function_exists('imagecreate') || !function_exists("image$this->sFileType")
+            || ($this->vBackgroundImages != '' && !function_exists('imagecreatetruecolor'))
+        ) {
             return false;
         }
 
@@ -469,7 +473,7 @@ class PhpCaptcha
      *
      * @return bool
      */
-    public function Validate($sUserCode, $bCaseInsensitive = true)
+    public static function Validate($sUserCode, $bCaseInsensitive = true)
     {
         if ($bCaseInsensitive) {
             $sUserCode = strtoupper($sUserCode);
@@ -497,12 +501,14 @@ class AudioPhpCaptcha
     public $sCode;
 
     /**
+     * AudioPhpCaptcha constructor.
      * @param string $sFlitePath
      * @param string $sAudioPath
      */
-    public function __construct($sFlitePath = CAPTCHA_FLITE_PATH, // path to flite binary
-                                $sAudioPath = CAPTCHA_AUDIO_PATH // the location to temporarily store the generated audio CAPTCHA
-    )
+    public function __construct(
+        $sFlitePath = CAPTCHA_FLITE_PATH, // path to flite binary
+        $sAudioPath = CAPTCHA_AUDIO_PATH // the location to temporarily store the generated audio CAPTCHA
+)
     {
         $this->SetFlitePath($sFlitePath);
         $this->SetAudioPath($sAudioPath);
@@ -555,7 +561,8 @@ class AudioPhpCaptcha
             "%2\$s, are the %1\$s letters",
             "Here are the %1\$s characters: %2\$s",
             "%1\$s characters are: %2\$s",
-            "%1\$s letters: %2\$s");
+            "%1\$s letters: %2\$s"
+        );
 
         $iPhrase = array_rand($aPhrases);
 
@@ -589,6 +596,7 @@ class AudioPhpCaptcha
 class PhpCaptchaColour extends PhpCaptcha
 {
     /**
+     * PhpCaptchaColour constructor.
      * @param     $aFonts
      * @param int $iWidth
      * @param int $iHeight

@@ -13,20 +13,19 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @version     $Id: publiccat.php 8088 2011-11-06 09:38:12Z beckmi $
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once 'catHandler.php';
+include_once __DIR__ . '/catHandler.php';
 
 /**
- * Class ExtgalleryPubliccat
+ * Class ExtgalleryPublicCat
  */
-class ExtgalleryPubliccat extends ExtgalleryCat
+class ExtgalleryPublicCat extends ExtgalleryCat
 {
     /**
-     * ExtgalleryPubliccat constructor.
+     * ExtgalleryPublicCat constructor.
      */
     public function __construct()
     {
@@ -35,12 +34,13 @@ class ExtgalleryPubliccat extends ExtgalleryCat
 }
 
 /**
- * Class ExtgalleryPubliccatHandler
+ * Class ExtgalleryPublicCatHandler
  */
-class ExtgalleryPubliccatHandler extends ExtgalleryCatHandler
+class ExtgalleryPublicCatHandler extends ExtgalleryCatHandler
 {
     /**
-     * @param $db
+     * ExtgalleryPublicCatHandler constructor.
+     * @param XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
     {
@@ -75,6 +75,7 @@ class ExtgalleryPubliccatHandler extends ExtgalleryCatHandler
         $moduleId = $GLOBALS['xoopsModule']->getVar('mid');
 
         // Retriving permission mask
+        /** @var XoopsGroupPermHandler $gpermHandler */
         $gpermHandler = xoops_getHandler('groupperm');
         $moduleId     = $GLOBALS['xoopsModule']->getVar('mid');
         $groups       = $GLOBALS['xoopsUser']->getGroups();
@@ -109,7 +110,7 @@ class ExtgalleryPubliccatHandler extends ExtgalleryCatHandler
     }
 
     /**
-     * @param $cat
+     * @param XoopsObject $cat
      *
      * @return bool
      */
@@ -126,6 +127,6 @@ class ExtgalleryPubliccatHandler extends ExtgalleryCatHandler
      */
     public function _getPermHandler()
     {
-        return ExtgalleryPublicPermHandler::getHandler();
+        return ExtgalleryPublicPermHandler::getInstance();
     }
 }
