@@ -19,7 +19,6 @@ include_once __DIR__ . '/admin_header.php';
 include_once __DIR__ . '/../../../include/cp_header.php';
 xoops_load('XoopsFormLoader');
 
-
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
 } else {
@@ -446,14 +445,21 @@ switch ($op) {
 
             $elementTray = new XoopsFormElementTray(_AM_EXTGALLERY_WATERMARK_TEXT, '&nbsp;');
 
-            $selected1 = $xoopsModuleConfig['watermark_type'] == 1 ? " checked=\"checked\"" : '';
-            $disable   = $xoopsModuleConfig['watermark_type'] == 0 ? " disabled=\"disabled\"" : '';
-            $style     = $xoopsModuleConfig['watermark_type'] == 0 ? " style=\"background-color:#DDDDDD;\"" : '';
+            $selected1 = $xoopsModuleConfig['watermark_type'] == 1 ? ' checked="checked"' : '';
+            $disable   = $xoopsModuleConfig['watermark_type'] == 0 ? ' disabled="disabled"' : '';
+            $style     = $xoopsModuleConfig['watermark_type'] == 0 ? ' style="background-color:#DDDDDD;"' : '';
             $onClick   = ' onClick="document.getElementById(\'watermark_text\').disabled = false; document.getElementById(\'watermark_text\').style.backgroundColor = \'#FFFFFF\';"';
-            $WTextForm = '<input type="radio" name="watermark_type" value="1"' . $selected1 . $onClick . ' /> <input name="watermark_text" id="watermark_text" size="50" maxlength="255" value="'
-                         . $xoopsModuleConfig['watermark_text'] . '" type="text"' . $disable . $style . ' /><br>';
+            $WTextForm = '<input type="radio" name="watermark_type" value="1"'
+                         . $selected1
+                         . $onClick
+                         . ' /> <input name="watermark_text" id="watermark_text" size="50" maxlength="255" value="'
+                         . $xoopsModuleConfig['watermark_text']
+                         . '" type="text"'
+                         . $disable
+                         . $style
+                         . ' /><br>';
 
-            $selected2 = $xoopsModuleConfig['watermark_type'] == 0 ? " checked=\"checked\"" : '';
+            $selected2 = $xoopsModuleConfig['watermark_type'] == 0 ? ' checked="checked"' : '';
             $onClick   = ' onClick="document.getElementById(\'watermark_text\').disabled = true; document.getElementById(\'watermark_text\').style.backgroundColor = \'#DDDDDD\';"';
             $WTextForm .= '<input type="radio" name="watermark_type" value="0"' . $selected2 . $onClick . ' /> ' . _AM_EXTGALLERY_PRINT_SUBMITTER_UNAME;
 

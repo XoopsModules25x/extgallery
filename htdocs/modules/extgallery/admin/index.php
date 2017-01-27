@@ -14,26 +14,25 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 include_once __DIR__ . '/admin_header.php';
 // Display Admin header
 xoops_cp_header();
 
-$classUtilities = ucfirst($moduleDirName) . 'Utilities';
-if (!class_exists($classUtilities)) {
-    xoops_load('utilities', $moduleDirName);
+$classUtility = ucfirst($moduleDirName) . 'Utility';
+if (!class_exists($classUtility)) {
+    xoops_load('utility', $moduleDirName);
 }
 
-$configurator = include __DIR__ .  '/../include/config.php';
+$configurator = include __DIR__ . '/../include/config.php';
 
 foreach (array_keys($configurator['uploadFolders']) as $i) {
-    $classUtilities::createFolder($configurator['uploadFolders'][$i]);
+    $classUtility::createFolder($configurator['uploadFolders'][$i]);
     $adminObject->addConfigBoxLine($configurator['uploadFolders'][$i], 'folder');
-//    $adminObject->addConfigBoxLine(array($configurator['uploadFolders'][$i], '777'), 'chmod');
+    //    $adminObject->addConfigBoxLine(array($configurator['uploadFolders'][$i], '777'), 'chmod');
 }
-
 
 // DNPROSSI - In PHP 5.3.0 "JPG Support" was renamed to "JPEG Support".
 // This leads to the following error: "Undefined index: JPG Support in
@@ -48,11 +47,11 @@ $adminObject->addInfoBox(_AM_EXTGALLERY_SERVER_CONF);
 if ($xoopsModuleConfig['graphic_lib'] === 'GD') {
     $gd = gd_info();
     // GD graphic lib
-    $test1 = ($gd['GD Version'] == '') ? "<span style=\"color:#FF0000;\"><b>KO</b></span>" : $gd['GD Version'];
+    $test1 = ($gd['GD Version'] == '') ? '<span style="color:#FF0000;"><b>KO</b></span>' : $gd['GD Version'];
     ($gd['GIF Read Support']
-     && $gd['GIF Create Support']) ? $test2 = "<span style=\"color:#33CC33;\"><b>OK</b></span>" : $test2 = "<span style=\"color:#FF0000;\"><b>KO</b></span>";
-    $gd['' . $jpegsupport . ''] ? $test3 = "<span style=\"color:#33CC33;\"><b>OK</b></span>" : $test3 = "<span style=\"color:#FF0000;\"><b>KO</b></span>";
-    $gd['PNG Support'] ? $test4 = "<span style=\"color:#33CC33;\"><b>OK</b></span>" : $test4 = "<span style=\"color:#FF0000;\"><b>KO</b></span>";
+     && $gd['GIF Create Support']) ? $test2 = '<span style="color:#33CC33;"><b>OK</b></span>' : $test2 = '<span style="color:#FF0000;"><b>KO</b></span>';
+    $gd['' . $jpegsupport . ''] ? $test3 = '<span style="color:#33CC33;"><b>OK</b></span>' : $test3 = '<span style="color:#FF0000;"><b>KO</b></span>';
+    $gd['PNG Support'] ? $test4 = '<span style="color:#33CC33;"><b>OK</b></span>' : $test4 = '<span style="color:#FF0000;"><b>KO</b></span>';
 
     $adminObject->addInfoBoxLine(_AM_EXTGALLERY_SERVER_CONF, _AM_EXTGALLERY_GRAPH_GD_LIB_VERSION . ' ' . $test1);
     $adminObject->addInfoBoxLine(_AM_EXTGALLERY_SERVER_CONF, _AM_EXTGALLERY_GIF_SUPPORT . ' ' . $test2);
@@ -64,7 +63,7 @@ if ($xoopsModuleConfig['graphic_lib'] === 'IM') {
     // ImageMagick graphic lib
     $cmd = $xoopsModuleConfig['graphic_lib_path'] . 'convert -version';
     exec($cmd, $data, $error);
-    $test      = !isset($data[0]) ? "<span style=\"color:#FF0000;\"><b>KO</b></span>" : $data[0];
+    $test      = !isset($data[0]) ? '<span style="color:#FF0000;"><b>KO</b></span>' : $data[0];
     $imSupport = imageMagickSupportType();
     $adminObject->addInfoBoxLine(_AM_EXTGALLERY_SERVER_CONF, _AM_EXTGALLERY_GRAPH_IM_LIB_VERSION . ' ' . $test);
     $adminObject->addInfoBoxLine(_AM_EXTGALLERY_SERVER_CONF, _AM_EXTGALLERY_GIF_SUPPORT . ' ' . $imSupport['GIF Support']);
@@ -74,7 +73,6 @@ if ($xoopsModuleConfig['graphic_lib'] === 'IM') {
 
 $adminObject->addInfoBoxLine(_AM_EXTGALLERY_SERVER_CONF, _AM_EXTGALLERY_UPLOAD_MAX_FILESIZE . get_cfg_var('upload_max_filesize'));
 $adminObject->addInfoBoxLine(_AM_EXTGALLERY_SERVER_CONF, _AM_EXTGALLERY_POST_MAX_SIZE . get_cfg_var('post_max_size'));
-
 
 echo $adminObject->addNavigation(basename(__FILE__));
 echo $adminObject->renderIndex();

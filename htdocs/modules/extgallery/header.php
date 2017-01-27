@@ -8,7 +8,7 @@ include_once __DIR__ . '/include/common.php';
 
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-include_once __DIR__ . '/class/utilities.php';
+include_once __DIR__ . '/class/utility.php';
 
 $myts = MyTextSanitizer::getInstance();
 
@@ -22,5 +22,3 @@ Language::load('main', $moduleDirName);
 //$permHandler       = ExtcalPerm::getHandler();
 //$xoopsUser         = $xoopsUser ?: null;
 //------------------------------------------------------
-
-

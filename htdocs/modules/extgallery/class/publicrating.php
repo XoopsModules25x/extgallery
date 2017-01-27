@@ -132,10 +132,6 @@ class ExtgalleryPublicRatingHandler extends ExtgalleryPersistableObjectHandler
         $criteria->add(new Criteria('photo_id', $rate->getVar('photo_id')));
         $criteria->add(new Criteria('uid', $rate->getVar('uid')));
 
-        if ($this->getCount($criteria) > 0) {
-            return true;
-        }
-
-        return false;
+        return $this->getCount($criteria) > 0;
     }
 }

@@ -12,9 +12,8 @@
 /**
  * @copyright    XOOPS Project http://xoops.org/
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
-
 
 /**
  *
@@ -26,17 +25,17 @@
 function xoops_module_pre_install_extgallery(XoopsModule $module)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    $className = ucfirst($moduleDirName) . 'Utilities';
+    $className     = ucfirst($moduleDirName) . 'Utility';
     if (!class_exists($className)) {
-        xoops_load('utilities', $moduleDirName);
+        xoops_load('utility', $moduleDirName);
     }
     //check for minimum XOOPS version
-    if (!$className::checkXoopsVer($module)) {
+    if (!$className::checkVerXoops($module)) {
         return false;
     }
 
     // check for minimum PHP version
-    if (!$className::checkPhpVer($module)) {
+    if (!$className::checkVerPhp($module)) {
         return false;
     }
 
@@ -117,83 +116,84 @@ function xoops_module_install_extgallery(XoopsModule $xoopsModule)
     // Private autoapprove
     $gpermHandler->addRight('extgallery_private', 16, XOOPS_GROUP_ADMIN, $module_id);
 
-  /*
+    /*
 
-    // Create eXtGallery main upload directory
-    $dir = XOOPS_ROOT_PATH . '/uploads/extgallery';
-    if (!is_dir($dir)) {
-        mkdir($dir, 0777);
+      // Create eXtGallery main upload directory
+      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery';
+      if (!is_dir($dir)) {
+          mkdir($dir, 0777);
+      }
+      chmod($dir, 0777);
+      // Create directory for photo in public album
+      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo';
+      if (!is_dir($dir)) {
+          mkdir($dir, 0777);
+      }
+      chmod($dir, 0777);
+      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original';
+      if (!is_dir($dir)) {
+          mkdir($dir, 0777);
+      }
+      chmod($dir, 0777);
+      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large';
+      if (!is_dir($dir)) {
+          mkdir($dir, 0777);
+      }
+      chmod($dir, 0777);
+      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium';
+      if (!is_dir($dir)) {
+          mkdir($dir, 0777);
+      }
+      chmod($dir, 0777);
+      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb';
+      if (!is_dir($dir)) {
+          mkdir($dir, 0777);
+      }
+      chmod($dir, 0777);
+
+
+
+      // Create directory for photo in user's album
+      //mkdir(XOOPS_ROOT_PATH."/uploads/extgallery/user-photo");
+
+      // Copy index.html files on uploads folders
+      $indexFile = XOOPS_ROOT_PATH . '/modules/extgallery/include/index.html';
+      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/index.html');
+      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/index.html');
+      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original/index.html');
+      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large/index.html');
+      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium/index.html');
+      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb/index.html');
+
+  */
+
+    include_once __DIR__ . '/../../../include/cp_header.php';
+
+    if (!isset($moduleDirName)) {
+        $moduleDirName = basename(dirname(__DIR__));
     }
-    chmod($dir, 0777);
-    // Create directory for photo in public album
-    $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo';
-    if (!is_dir($dir)) {
-        mkdir($dir, 0777);
-    }
-    chmod($dir, 0777);
-    $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original';
-    if (!is_dir($dir)) {
-        mkdir($dir, 0777);
-    }
-    chmod($dir, 0777);
-    $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large';
-    if (!is_dir($dir)) {
-        mkdir($dir, 0777);
-    }
-    chmod($dir, 0777);
-    $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium';
-    if (!is_dir($dir)) {
-        mkdir($dir, 0777);
-    }
-    chmod($dir, 0777);
-    $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb';
-    if (!is_dir($dir)) {
-        mkdir($dir, 0777);
-    }
-    chmod($dir, 0777);
 
-
-
-    // Create directory for photo in user's album
-    //mkdir(XOOPS_ROOT_PATH."/uploads/extgallery/user-photo");
-
-    // Copy index.html files on uploads folders
-    $indexFile = XOOPS_ROOT_PATH . '/modules/extgallery/include/index.html';
-    copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/index.html');
-    copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/index.html');
-    copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original/index.html');
-    copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large/index.html');
-    copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium/index.html');
-    copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb/index.html');
-
-*/
-
-    $moduleDirName = basename(dirname(__DIR__));
-    include_once __DIR__ . '/../../../mainfile.php';
-
-//    $moduleDirName = $xoopsModule->getVar('dirname');
+    //    $moduleDirName = $xoopsModule->getVar('dirname');
     $configurator = include $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
 
-
-
-    $classUtilities = ucfirst($moduleDirName) . 'Utilities';
-    if (!class_exists($classUtilities)) {
-        xoops_load('utilities', $moduleDirName);
+    $classUtility = ucfirst($moduleDirName) . 'Utility';
+    if (!class_exists($classUtility)) {
+        xoops_load('utility', $moduleDirName);
     }
 
-//    include_once __DIR__ . '/config.php';
+    //    include_once __DIR__ . '/config.php';
 
     if (count($configurator['uploadFolders']) > 0) {
         //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
         foreach (array_keys($configurator['uploadFolders']) as $i) {
-            $classUtilities::createFolder($configurator['uploadFolders'][$i]);
+            $classUtility::createFolder($configurator['uploadFolders'][$i]);
         }
     }
-    if (count($configurator['copyFiles'])>0) {
+    if (count($configurator['copyFiles']) > 0) {
         $file = __DIR__ . '/../assets/images/blank.png';
         foreach (array_keys($configurator['copyFiles']) as $i) {
             $dest = $configurator['copyFiles'][$i] . '/blank.png';
-            $classUtilities::copyFile($file, $dest);
+            $classUtility::copyFile($file, $dest);
         }
     }
 

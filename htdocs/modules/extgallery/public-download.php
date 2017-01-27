@@ -51,7 +51,7 @@ switch (strtolower(strrchr($photo->getVar('photo_name'), '.'))) {
 }
 
 header('Content-Type: ' . $type . '');
-header("Content-Disposition: attachment; filename=\"" . $photo->getVar('photo_name') . "\"");
+header('Content-Disposition: attachment; filename="' . $photo->getVar('photo_name') . '"');
 
 //if ($photo->getVar('photo_havelarge')) {
 //    if ($permHandler->isAllowed($xoopsUser, 'public_download_original', $photo->getVar('cat_id')) && $photo->getVar('photo_orig_name') != "") {

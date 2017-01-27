@@ -31,10 +31,10 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
      *
      * @var string
      */
-//    public $table;
-//    public $keyName;
-//    public $className;
-//    public $identifierName;
+    //    public $table;
+    //    public $keyName;
+    //    public $className;
+    //    public $identifierName;
     /**#@-*/
 
     /**
@@ -187,8 +187,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
                             } else {
                                 $handler = xoops_getModuleHandler($externalKey['className'], 'extgallery');
                             }
-                            $cached[$externalKey['keyName']][$ret[$i][$key]] = $this->objectToArrayWithoutExternalKey($handler->{$externalKey['getMethodeName']}($ret[$i][$key]),
-                                                                                                                      $format);
+                            $cached[$externalKey['keyName']][$ret[$i][$key]] = $this->objectToArrayWithoutExternalKey($handler->{$externalKey['getMethodeName']}($ret[$i][$key]), $format);
                         }
                         $ret[$i][$externalKey['keyName']] = $cached[$externalKey['keyName']][$ret[$i][$key]];
                     }
@@ -212,8 +211,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
                         } else {
                             $handler = xoops_getModuleHandler($externalKey['className'], 'extgallery');
                         }
-                        $cached[$externalKey['keyName']][$ret[$key]] = $this->objectToArrayWithoutExternalKey($handler->{$externalKey['getMethodeName']}($ret[$key]),
-                                                                                                              $format);
+                        $cached[$externalKey['keyName']][$ret[$key]] = $this->objectToArrayWithoutExternalKey($handler->{$externalKey['getMethodeName']}($ret[$key]), $format);
                     }
                     $ret[$externalKey['keyName']] = $cached[$externalKey['keyName']][$ret[$key]];
                 }
@@ -252,8 +250,8 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
      */
     public function updateCounter($fieldname, $criteria, $op = '+')
     {
-        $sql = 'UPDATE ' . $this->table . ' SET ' . $fieldname . ' = ' . $fieldname . $op . '1';
-        $sql .= ' ' . $criteria->renderWhere();
+        $sql    = 'UPDATE ' . $this->table . ' SET ' . $fieldname . ' = ' . $fieldname . $op . '1';
+        $sql    .= ' ' . $criteria->renderWhere();
         $result = $this->db->queryF($sql);
         if (!$result) {
             return false;
@@ -275,8 +273,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
         if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             if ($criteria->groupby != '') {
                 $groupby = true;
-                $field   = $criteria->groupby
-                           . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
+                $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
         }
         $sql = 'SELECT ' . $field . "SUM($sum) FROM " . $this->table;
@@ -317,8 +314,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
         if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             if ($criteria->groupby != '') {
                 $groupby = true;
-                $field   = $criteria->groupby
-                           . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
+                $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
         }
         $sql = 'SELECT ' . $field . "MAX($max) FROM " . $this->table;

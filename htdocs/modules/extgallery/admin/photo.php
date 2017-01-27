@@ -40,7 +40,7 @@ if (isset($_GET['start'])) {
 }
 
 $moduleDirName = basename(dirname(__DIR__));
-$classUtilities = ucfirst($moduleDirName) . 'Utilities';
+$classUtility  = ucfirst($moduleDirName) . 'Utility';
 switch ($op) {
 
     case 'add_photo':
@@ -468,8 +468,8 @@ switch ($op) {
                     echo '<textarea name="photoDesc[' . $photo->getVar('photo_id') . ']" id="photoDesc[' . $photo->getVar('photo_id') . ']" rows="1" cols="57">' . $photo->getVar('photo_desc', 'e') . '</textarea></td>' . "\n";
                     echo '</tr>' . "\n";
                     $scriptCheckbox .= $first ? '\'photoId[' . $photo->getVar('photo_id') . '][]\'' : ', \'photoId[' . $photo->getVar('photo_id') . '][]\'';
-                    $scriptSelect .= $first ? '\'catId[' . $photo->getVar('photo_id') . ']\'' : ', \'catId[' . $photo->getVar('photo_id') . ']\'';
-                    $first = false;
+                    $scriptSelect   .= $first ? '\'catId[' . $photo->getVar('photo_id') . ']\'' : ', \'catId[' . $photo->getVar('photo_id') . ']\'';
+                    $first          = false;
                 }
                 echo '<tr><td colspan="4">';
                 echo '<input type="hidden" name="cat_id" value="' . $_GET['cat_id'] . '" />';
@@ -548,7 +548,7 @@ switch ($op) {
 
         xoops_cp_header();
 
-        include_once __DIR__ . '/../class/utilities.php';
+        include_once __DIR__ . '/../class/utility.php';
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTGALLERY_ADD_PHOTO . '</legend>';
 
@@ -558,7 +558,7 @@ switch ($op) {
         $form->addElement(new XoopsFormLabel(_AM_EXTGALLERY_ALBUMS, $catHandler->getLeafSelect('cat_id', false, 0, '', 'public_upload')));
         //DNPROSSI - editors
         $form->addElement(new XoopsFormText(_AM_EXTGALLERY_PHOTO_TITLE, 'photo_title', '50', '150'), false);
-        $editor = $classUtilities ::getWysiwygForm(_AM_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
+        $editor = $classUtility::getWysiwygForm(_AM_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
         $form->addElement($editor, false);
         $form->addElement(new XoopsFormFile(_AM_EXTGALLERY_PHOTO, 'photo_file', $xoopsModuleConfig['max_photosize']), false);
         if ($xoopsModuleConfig['display_extra_field']) {
@@ -682,7 +682,7 @@ switch ($op) {
             echo '</td>' . "\n";
             echo '</tr>' . "\n";
             $script .= $first ? '\'photoId[' . $photo->getVar('photo_id') . ']\'' : ', \'photoId[' . $photo->getVar('photo_id') . ']\'';
-            $first = false;
+            $first  = false;
         }
         echo '<tr><td colspan="5">';
         echo '<input type="submit" name="approve" value="' . _AM_EXTGALLERY_APPROVE . '" />&nbsp;&nbsp;<input type="submit" name="delete" value="' . _DELETE . '" />';

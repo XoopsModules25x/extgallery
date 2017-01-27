@@ -43,18 +43,18 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_extgallery(XoopsModule $module)
 {
-    $moduleDirName  = basename(dirname(__DIR__));
-    $classUtilities = ucfirst($moduleDirName) . 'Utilities';
-    if (!class_exists($classUtilities)) {
-        xoops_load('utilities', $moduleDirName);
+    $moduleDirName = basename(dirname(__DIR__));
+    $classUtility  = ucfirst($moduleDirName) . 'Utility';
+    if (!class_exists($classUtility)) {
+        xoops_load('utility', $moduleDirName);
     }
     //check for minimum XOOPS version
-    if (!$classUtilities::checkXoopsVer($module)) {
+    if (!$classUtility::checkVerXoops($module)) {
         return false;
     }
 
     // check for minimum PHP version
-    if (!$classUtilities::checkPHPVer($module)) {
+    if (!$classUtility::checkVerPhp($module)) {
         return false;
     }
 
@@ -179,8 +179,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         }
 
         // delete old admin html template files ============================
-        $templateDirectory = $GLOBALS['xoops']->path('modules/' . $module->getVar('dirname', 'n')
-                                                     . '/templates/admin/');
+        $templateDirectory = $GLOBALS['xoops']->path('modules/' . $module->getVar('dirname', 'n') . '/templates/admin/');
         if (is_dir($templateDirectory)) {
             $templateList = array_diff(scandir($templateDirectory), array('..', '.'));
             foreach ($templateList as $k => $v) {
@@ -194,9 +193,9 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         }
 
         $configurator = include __DIR__ . '/config.php';
-        $classUtilities = ucfirst($moduleDirName) . 'Utilities';
-        if (!class_exists($classUtilities)) {
-            xoops_load('utilities', $moduleDirName);
+        $classUtility = ucfirst($moduleDirName) . 'Utility';
+        if (!class_exists($classUtility)) {
+            xoops_load('utility', $moduleDirName);
         }
 
         //  ---  COPY blank.png FILES ---------------
@@ -204,7 +203,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
             $file = __DIR__ . '/../assets/images/blank.png';
             foreach (array_keys($configurator['copyFiles']) as $i) {
                 $dest = $configurator['copyFiles'][$i] . '/blank.png';
-                $classUtilities::copyFile($file, $dest);
+                $classUtility::copyFile($file, $dest);
             }
         }
 
@@ -222,9 +221,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         //---------------------
 
         //delete .html entries from the tpl table
-        $sql = 'DELETE FROM ' . $xoopsDB->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname',
-                                                                                                          'n')
-               . "' AND `tpl_file` LIKE '%.html%'";
+        $sql = 'DELETE FROM ' . $xoopsDB->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . '\' AND `tpl_file` LIKE \'%.html%\'';
         $xoopsDB->queryF($sql);
 
         // Load class XoopsFile ====================

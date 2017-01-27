@@ -48,12 +48,15 @@ $modversion = array(
     'official'            => 1, //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
     'dirname'             => "{$moduleDirName}",
     //Frameworks paths
-    'dirmoduleadmin'      => 'Frameworks/moduleclasses/moduleadmin',
-    'systemIcons16'       => 'Frameworks/moduleclasses/icons/16',
-    'systemIcons32'       => 'Frameworks/moduleclasses/icons/32',
+    //    'dirmoduleadmin'      => 'Frameworks/moduleclasses/moduleadmin',
+    //    'systemIcons16'       => 'Frameworks/moduleclasses/icons/16',
+    //    'systemIcons32'       => 'Frameworks/moduleclasses/icons/32',
     // Local icons paths
-    'moduleIcons16'       => 'assets/images/icons/16',
-    'moduleIcons32'       => 'assets/images/icons',
+    //    'moduleIcons16'       => 'assets/images/icons/16',
+    //    'moduleIcons32'       => 'assets/images/icons',
+    'modicons16'          => 'assets/images/icons/16',
+    'modicons32'          => 'assets/images/icons',
+
     //About
     'demo_site_url'       => 'http://www.xoops.org',
     'demo_site_name'      => 'XOOPS Demo Site',
@@ -79,8 +82,6 @@ $modversion = array(
     // Notification
     'hasNotification'     => 1
 );
-
-
 
 // Menu
 $modversion['hasMain'] = 1;
@@ -108,13 +109,13 @@ if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 
 // Tables created by sql file (without prefix!)
-    $modversion['tables'] = array(
+$modversion['tables'] = array(
     $moduleDirName . '_' . 'publiccat',
     $moduleDirName . '_' . 'publicphoto',
     $moduleDirName . '_' . 'quota',
     $moduleDirName . '_' . 'publicrating',
-    $moduleDirName . '_' . 'publicecard');
-
+    $moduleDirName . '_' . 'publicecard'
+);
 
 // ------------------- Help files ------------------- //
 $modversion['helpsection'] = array(
@@ -127,7 +128,6 @@ $modversion['helpsection'] = array(
     array('name' => _MI_EXTGALLERY_HELP6, 'link' => 'page=help6'),
     array('name' => _MI_EXTGALLERY_HELP7, 'link' => 'page=help7')
 );
-
 
 // Comments
 $modversion['hasComments']                    = 1;
@@ -207,7 +207,7 @@ $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'dhtml';
 xoops_load('xoopseditorhandler');
-$editorHandler                      = XoopsEditorHandler::getInstance();
+$editorHandler                       = XoopsEditorHandler::getInstance();
 $modversion['config'][$i]['options'] = array_flip($editorHandler->getList());
 ++$i;
 $modversion['config'][$i]['name']        = 'photoname_pattern';

@@ -111,8 +111,7 @@ define('_MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYSBJ', 'New photo submitted');
 
 // DNPROSSI ADDED in ver 1.09
 define('_MI_EXTGAL_FORM_OPTIONS', 'Form Option');
-define('_MI_EXTGAL_FORM_OPTIONS_DESC',
-       "Select the editor to use. If you have a 'simple' install (e.g you use only xoops core editor class, provided in the standard XOOPS core package), then you can just select DHTML and Compact");
+define('_MI_EXTGAL_FORM_OPTIONS_DESC', "Select the editor to use. If you have a 'simple' install (e.g you use only xoops core editor class, provided in the standard XOOPS core package), then you can just select DHTML and Compact");
 define('_MI_EXTGAL_ENABLE_INFO', 'Photo Info View');
 define('_MI_EXTGAL_ENABLE_INFO_DESC', 'If disabled all photo info (submitter, resolution, date etc.) will not be viewed');
 define('_MI_EXTGAL_ENABLE_ECARDS', 'E-cards View');
@@ -183,7 +182,7 @@ define('_MI_EXTGAL_PREFERENCE_BREAK_SLIDESHOW', 'Slideshow');
 
 //Help
 define('_MI_EXTGALLERY_DIRNAME', basename(dirname(dirname(__DIR__))));
-define('_MI_EXTGALLERY_HELP_HEADER', __DIR__.'/help/helpheader.html');
+define('_MI_EXTGALLERY_HELP_HEADER', __DIR__ . '/help/helpheader.html');
 define('_MI_EXTGALLERY_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_EXTGALLERY_OVERVIEW', 'Overview');
 

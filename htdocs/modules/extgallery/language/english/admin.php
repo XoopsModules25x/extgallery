@@ -121,12 +121,12 @@ define('_AM_EXTGALLERY_PUBLIC_ECARD_INFO', "Allows you to restrict the send eCar
 
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD', 'Public download permission');
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_DESC', 'Select categories where photos can be downloaded');
-define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_INFO', "Allows you to restrict the download of large image. If a user is allowed to download, they will also have access to large image downloads if the \"Save large photo\" is enabled in preferences.");
+define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_INFO', 'Allows you to restrict the download of large image. If a user is allowed to download, they will also have access to large image downloads if the "Save large photo" is enabled in preferences.');
 
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG', 'Download original permissions');
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_DESC', "Select categories where users can download original photos.<br>To download originals the 'Save original photo' feature must be enable in 'Preferences' plus group settings must allow the download.");
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_INFO',
-       "Allows you to restrict the download of original images. If a user is allowed to download original they can access the original image (without border and watermark, and not resized) if the \"Save original photo\" is enabled in preferences.");
+       'Allows you to restrict the download of original images. If a user is allowed to download original they can access the original image (without border and watermark, and not resized) if the "Save original photo" is enabled in preferences.');
 
 define('_AM_EXTGALLERY_PUBLIC_UPLOAD', 'Public upload permission');
 define('_AM_EXTGALLERY_PUBLIC_UPLOAD_DESC', 'Select categories where public users can upload');
@@ -146,8 +146,8 @@ define('_AM_EXTGALLERY_AVAILABLE_FONT', 'Available fonts');
 define('_AM_EXTGALLERY_ADD_FONT', 'Add font (TTF)');
 define('_AM_EXTGALLERY_FONT_FILE', 'Font file');
 define('_AM_EXTGALLERY_FONT_MANAGMENT', 'Font management');
-define('_AM_EXTGALLERY_ADD_FONT_LINK', "There are %s fonts available. <a href=\"watermark-border.php?op=uploadfont\">Click here</a> to add a new font");
-define('_AM_EXTGALLERY_WATERMARK_FREETYPE_WARN', "<b>PHP must be compiled with FreeType support to enable watermarking. See <a href=\"http://www.freetype.org/\">FreeType.org</a> for more information.</b>");
+define('_AM_EXTGALLERY_ADD_FONT_LINK', 'There are %s fonts available. <a href="watermark-border.php?op=uploadfont">Click here</a> to add a new font');
+define('_AM_EXTGALLERY_WATERMARK_FREETYPE_WARN', '<b>PHP must be compiled with FreeType support to enable watermarking. See <a href="http://www.freetype.org/">FreeType.org</a> for more information.</b>');
 define('_AM_EXTGALLERY_WATERMARK_CONF', 'Watermarks configuration');
 define('_AM_EXTGALLERY_FONT', 'Font');
 define('_AM_EXTGALLERY_WATERMARK_TEXT', 'Watermark text');
@@ -307,19 +307,18 @@ define('_AM_EXTGALLERY_EXTENSION_INFO', 'Extension information');
 define('_AM_EXTGALLERY_EXTENSION_NOT_INSTALLED', 'Extension not installed');
 define('_AM_EXTGALLERY_INSTALL_EXTENSION', 'Install extension');
 define('_AM_EXTGALLERY_EXTENSION_OK', 'Extension available');
-define('_AM_EXTGALLERY_EXTENSION_NOTICE',
-       "This extension allow you to display photo on all the site just by adding a <b>gallery</b> tag to your text. A button (<img src=\"../assets/images/extgallery-posticon.gif\" />) is displayed on XOOPS editor.");
+define('_AM_EXTGALLERY_EXTENSION_NOTICE', 'This extension allow you to display photo on all the site just by adding a <b>gallery</b> tag to your text. A button (<img src="../assets/images/extgallery-posticon.gif" />) is displayed on XOOPS editor.');
 define('_AM_EXTGALLERY_EXT_FILE_DONT_EXIST', "Extension file don't exist on repository :<br><b>Server : </b>%s<br><b>File : </b>%s");
 define('_AM_EXTGALLERY_EXT_FILE_DONT_EXIST_SHORT', "Extension file don't exist");
 define('_AM_EXTGALLERY_EXTENSION_INSTALLED', 'Extension installed');
 define('_AM_EXTGALLERY_EXTENSION_HOWTO', 'How to use:');
-define('_AM_EXTGALLERY_EXTENSION_HOWTODESC', "To manually install this Extension and use it, you must follow these steps: <br>
-<div class=\"marg10\">1- Add <b>gallery.php</b> to <b>XOOPS_ROOT_PATH /class/textsanitizer/gallery/gallery.php</b> ( you can find  gallery.php in module archive)</div>
-<div class=\"marg10\">2- Edit <b>XOOPS_ROOT_PATH /class/textsanitizer/config.php</b> and add (( <b>\"gallery\" => 1</b> )) to config extensions  array ( you can find edited file in module archive)</div>
-<div class=\"marg10\"><img src=\"../assets/images/extensions.png\" /></div>
-<div class=\"marg10\">3- You can download <b>gallery.php</b> and <b>config.php</b> at XOOPS SVN</div>
-<div class=\"marg10\">4- If you want to use module install function, you must <b>XOOPS_ROOT_PATH /class/textsanitizer</b> chmod to 777 . after installation you must change chmod to 644.</div>
-");
+define('_AM_EXTGALLERY_EXTENSION_HOWTODESC', 'To manually install this Extension and use it, you must follow these steps: <br>
+<div class="marg10">1- Add <b>gallery.php</b> to <b>XOOPS_ROOT_PATH /class/textsanitizer/gallery/gallery.php</b> ( you can find  gallery.php in module archive)</div>
+<div class="marg10">2- Edit <b>XOOPS_ROOT_PATH /class/textsanitizer/config.php</b> and add (( <b>"gallery" => 1</b> )) to config extensions  array ( you can find edited file in module archive)</div>
+<div class="marg10"><img src="../assets/images/extensions.png" /></div>
+<div class="marg10">3- You can download <b>gallery.php</b> and <b>config.php</b> at XOOPS SVN</div>
+<div class="marg10">4- If you want to use module install function, you must <b>XOOPS_ROOT_PATH /class/textsanitizer</b> chmod to 777 . after installation you must change chmod to 644.</div>
+');
 define('_AM_EXTGALLERY_EXTENSION_DOWNLOAD', 'Download files from XOOPS SVN');
 
 // About.php

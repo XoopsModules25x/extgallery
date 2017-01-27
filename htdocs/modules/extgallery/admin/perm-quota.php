@@ -104,17 +104,17 @@ switch ($step) {
 
         foreach ($modulePermArray as $perm) {
             if ($op == $perm['name']) {
-                echo "<option value='" . $perm['name'] . "' selected>" . constant($perm['title']) . "</option>\n";
+                echo "<option value='" . $perm['name'] . '\' selected>' . constant($perm['title']) . "</option>\n";
             } else {
-                echo "<option value='" . $perm['name'] . "'>" . constant($perm['title']) . "</option>\n";
+                echo "<option value='" . $perm['name'] . '\'>' . constant($perm['title']) . "</option>\n";
             }
         }
 
         foreach ($pluginPermArray as $perm) {
             if ($op == $perm['name']) {
-                echo "<option value='" . $perm['name'] . "' selected>" . constant($perm['title']) . "</option>\n";
+                echo "<option value='" . $perm['name'] . '\' selected>' . constant($perm['title']) . "</option>\n";
             } else {
-                echo "<option value='" . $perm['name'] . "'>" . constant($perm['title']) . "</option>\n";
+                echo "<option value='" . $perm['name'] . '\'>' . constant($perm['title']) . "</option>\n";
             }
         }
 
@@ -136,8 +136,21 @@ switch ($step) {
                 $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'), $cat->getVar('cat_pid'));
             }
 
-            echo '<fieldset id="' . $perm['name'] . 'Bookmark"><legend><a href="#' . $perm['name'] . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $perm['name'] . '\'); toggleIcon(\'' . $perm['name']
-                 . 'Icon\');"><img id="' . $perm['name'] . 'Icon" src="../assets/images/minus.gif" />&nbsp;' . constant($perm['title']) . '</a></legend><div id="' . $perm['name'] . '">';
+            echo '<fieldset id="'
+                 . $perm['name']
+                 . 'Bookmark"><legend><a href="#'
+                 . $perm['name']
+                 . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\''
+                 . $perm['name']
+                 . '\'); toggleIcon(\''
+                 . $perm['name']
+                 . 'Icon\');"><img id="'
+                 . $perm['name']
+                 . 'Icon" src="../assets/images/minus.gif" />&nbsp;'
+                 . constant($perm['title'])
+                 . '</a></legend><div id="'
+                 . $perm['name']
+                 . '">';
             echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTGALLERY_INFORMATION . '</legend>';
             echo constant($perm['info']);
             echo '</fieldset>';
@@ -157,8 +170,21 @@ switch ($step) {
                 $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'), $cat->getVar('cat_pid'));
             }
 
-            echo '<fieldset id="' . $perm['name'] . 'Bookmark"><legend><a href="#' . $perm['name'] . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'' . $perm['name'] . '\'); toggleIcon(\'' . $perm['name']
-                 . 'Icon\');"><img id="' . $perm['name'] . 'Icon" src="../assets/images/minus.gif" />&nbsp;' . constant($perm['title']) . '</a></legend><div id="' . $perm['name'] . '">';
+            echo '<fieldset id="'
+                 . $perm['name']
+                 . 'Bookmark"><legend><a href="#'
+                 . $perm['name']
+                 . 'Bookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\''
+                 . $perm['name']
+                 . '\'); toggleIcon(\''
+                 . $perm['name']
+                 . 'Icon\');"><img id="'
+                 . $perm['name']
+                 . 'Icon" src="../assets/images/minus.gif" />&nbsp;'
+                 . constant($perm['title'])
+                 . '</a></legend><div id="'
+                 . $perm['name']
+                 . '">';
             echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTGALLERY_INFORMATION . '</legend>';
             echo constant($perm['info']);
             echo '</fieldset>';
@@ -172,7 +198,8 @@ switch ($step) {
          * Public category permission mask
          */
         echo '<fieldset id="defaultBookmark"><legend><a href="#defaultBookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'default\'); toggleIcon(\'defaultIcon\');"><img id="defaultIcon" src="../assets/images/minus.gif" />&nbsp;'
-             . _AM_EXTGALLERY_PUBLIC_PERM_MASK . '</a></legend><div id="default">';
+             . _AM_EXTGALLERY_PUBLIC_PERM_MASK
+             . '</a></legend><div id="default">';
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTGALLERY_INFORMATION . '</legend>';
         echo _AM_EXTGALLERY_PUBLIC_PERM_MASK_INFO;
         echo '</fieldset><br>';

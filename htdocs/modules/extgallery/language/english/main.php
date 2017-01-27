@@ -81,7 +81,7 @@ define('_MD_EXTGALLERY_PHOTO_UPLOADED', 'Photo uploaded. Thanks for your submiss
 define('_MD_EXTGALLERY_PHOTO_PENDING', 'Your photo must be approved by an admin. Thanks for your submission.');
 
 // Public user's album
-define('_MD_EXTGALLERY_USERS_SUB_PHOTO_ALBUM', "'s submitted photo album");
+define('_MD_EXTGALLERY_USERS_SUB_PHOTO_ALBUM', '\'s submitted photo album');
 
 // Public Slideshow
 define('_MD_EXTGALLERY_MOREINFO', 'More');
@@ -145,4 +145,4 @@ define('_MD_EXTGALLERY_ORDERBY_DESIGNERASC', 'User ID,  newest first');
 define('_MD_EXTGALLERY_ORDERBY_DESIGNERDESC', 'User ID, oldest first');
 //1.13
 // pk add my user def for new album link
-define("_MD_EXTGALLERY_USERALBUM","View my album");
+define('_MD_EXTGALLERY_USERALBUM', 'View my album');

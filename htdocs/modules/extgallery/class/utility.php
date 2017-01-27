@@ -3,9 +3,9 @@
 include_once __DIR__ . '/../include/config.php';
 
 /**
- * Class MyalbumUtilities
+ * Class ExtgalleryUtility
  */
-class ExtgalleryUtilities extends XoopsObject
+class ExtgalleryUtility extends XoopsObject
 {
     /**
      * Function responsible for checking if a directory exists, we can also write in and create an index.html file
@@ -77,7 +77,7 @@ class ExtgalleryUtilities extends XoopsObject
      *
      * @return bool true if meets requirements, false if not
      */
-    public static function checkXoopsVer(XoopsModule $module)
+    public static function checkVerXoops(XoopsModule $module)
     {
         xoops_loadLanguage('admin', $module->dirname());
         //check for minimum XOOPS version
@@ -119,7 +119,7 @@ class ExtgalleryUtilities extends XoopsObject
      *
      * @return bool true if meets requirements, false if not
      */
-    public static function checkPhpVer(XoopsModule $module)
+    public static function checkVerPhp(XoopsModule $module)
     {
         xoops_loadLanguage('admin', $module->dirname());
         // check for minimum PHP version

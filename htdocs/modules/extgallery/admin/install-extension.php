@@ -23,7 +23,6 @@ if (isset($_POST['step'])) {
     $step = 'default';
 }
 
-
 // Change this variable if you use a cloned version of eXtGallery
 $localModuleDir = 'extgallery';
 

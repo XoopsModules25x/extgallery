@@ -72,7 +72,17 @@ class ExtgalleryGroupPermForm extends XoopsGroupPermForm
         if ($this->_permDesc) {
             echo $this->_permDesc . '<br><br>';
         }
-        echo "<form name='" . $this->getName() . "' id='" . $this->getName() . "' action='" . $this->getAction() . "' method='" . $this->getMethod() . "'" . $this->getExtra() . ">\n<table width='100%' class='outer' cellspacing='1' valign='top'>\n";
+        echo "<form name='"
+             . $this->getName()
+             . '\' id=\''
+             . $this->getName()
+             . '\' action=\''
+             . $this->getAction()
+             . '\' method=\''
+             . $this->getMethod()
+             . '\''
+             . $this->getExtra()
+             . ">\n<table width='100%' class='outer' cellspacing='1' valign='top'>\n";
         $elements =& $this->getElements();
         $hidden   = '';
         foreach (array_keys($elements) as $i) {
@@ -140,12 +150,12 @@ class ExtgalleryGroupFormCheckBox extends XoopsGroupFormCheckBox
         $option_ids = array();
         foreach (array_keys($this->_optionTree) as $id) {
             if (!empty($id)) {
-                $option_ids[] = "'" . $ele_name . '[groups][' . $this->_groupId . '][' . $id . ']' . "'";
+                $option_ids[] = '\'' . $ele_name . '[groups][' . $this->_groupId . '][' . $id . ']' . '\'';
             }
         }
         $checkallbtn_id = $ele_name . '[checkallbtn][' . $this->_groupId . ']';
         $option_ids_str = implode(', ', $option_ids);
-        echo _ALL . " <input id=\"" . $checkallbtn_id . "\" type=\"checkbox\" value=\"\" onclick=\"var optionids = new Array(" . $option_ids_str . "); xoopsCheckAllElements(optionids, '" . $checkallbtn_id . "');\" />";
+        echo _ALL . ' <input id="' . $checkallbtn_id . '" type="checkbox" value="" onclick="var optionids = new Array(' . $option_ids_str . "); xoopsCheckAllElements(optionids, '" . $checkallbtn_id . '\');" />';
         echo '</td></tr></table>';
     }
 }

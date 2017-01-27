@@ -374,7 +374,7 @@ if (!defined('PCLTRACE_LIB')) {
             return;
         }
 
-        $v_font = "\"Verdana, Arial, Helvetica, sans-serif\"";
+        $v_font = '"Verdana, Arial, Helvetica, sans-serif"';
 
         // ----- Trace Header
         echo '<table width=100% border=0 cellspacing=0 cellpadding=0>';

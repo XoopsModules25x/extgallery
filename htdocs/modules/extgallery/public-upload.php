@@ -18,7 +18,7 @@
 include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once __DIR__ . '/class/utilities.php';
+include_once __DIR__ . '/class/utility.php';
 
 if (isset($_POST['step'])) {
     $step = $_POST['step'];
@@ -32,7 +32,7 @@ if (count($permHandler->getAuthorizedPublicCat($xoopsUser, 'public_upload')) < 1
 }
 
 $moduleDirName = basename(__DIR__);
-$classUtilities = ucfirst($moduleDirName) . 'Utilities';
+$classUtility  = ucfirst($moduleDirName) . 'Utility';
 switch ($step) {
 
     case 'enreg':
@@ -66,7 +66,7 @@ switch ($step) {
 
         //DNPROSSI - editors
         $form->addElement(new XoopsFormText(_MD_EXTGALLERY_PHOTO_TITLE, 'photo_title', '50', '150'), false);
-        $editor = $classUtilities ::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
+        $editor = $classUtility::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
         $form->addElement($editor, false);
 
         $form->addElement(new XoopsFormFile(_MD_EXTGALLERY_PHOTO, 'photo_file', $xoopsModuleConfig['max_photosize']), false);

@@ -50,7 +50,7 @@ class NestedTree
      */
     public function getNode($id)
     {
-        $query = sprintf('select * from %s where %s = %d', $this->table, $this->fields['id'], $id);
+        $query = sprintf('SELECT * FROM %s WHERE %s = %d', $this->table, $this->fields['id'], $id);
 
         $result = $this->db->query($query);
         if ($row = $this->db->fetchArray($result)) {
@@ -90,18 +90,18 @@ class NestedTree
 
         if ($childrenOnly) {
             if ($includeSelf) {
-                $query = sprintf('select * from %s where %s = %d or %s = %d order by nleft', $this->table, $this->fields['id'], $parent_id, $this->fields['parent'], $parent_id);
+                $query = sprintf('SELECT * FROM %s WHERE %s = %d OR %s = %d ORDER BY nleft', $this->table, $this->fields['id'], $parent_id, $this->fields['parent'], $parent_id);
             } else {
-                $query = sprintf('select * from %s where %s = %d order by nleft', $this->table, $this->fields['parent'], $parent_id);
+                $query = sprintf('SELECT * FROM %s WHERE %s = %d ORDER BY nleft', $this->table, $this->fields['parent'], $parent_id);
             }
         } else {
             if ($nleft > 0 && $includeSelf) {
-                $query = sprintf('select * from %s where nleft >= %d and nright <= %d order by nleft', $this->table, $nleft, $nright);
+                $query = sprintf('SELECT * FROM %s WHERE nleft >= %d AND nright <= %d ORDER BY nleft', $this->table, $nleft, $nright);
             } else {
                 if ($nleft > 0) {
-                    $query = sprintf('select * from %s where nleft > %d and nright < %d order by nleft', $this->table, $nleft, $nright);
+                    $query = sprintf('SELECT * FROM %s WHERE nleft > %d AND nright < %d ORDER BY nleft', $this->table, $nleft, $nright);
                 } else {
-                    $query = sprintf('select * from %s order by nleft', $this->table);
+                    $query = sprintf('SELECT * FROM %s ORDER BY nleft', $this->table);
                 }
             }
         }
@@ -148,9 +148,9 @@ class NestedTree
         }
 
         if ($includeSelf) {
-            $query = sprintf('select * from %s where nleft <= %d and nright >= %d order by nlevel', $this->table, $node['nleft'], $node['nright']);
+            $query = sprintf('SELECT * FROM %s WHERE nleft <= %d AND nright >= %d ORDER BY nlevel', $this->table, $node['nleft'], $node['nright']);
         } else {
-            $query = sprintf('select * from %s where nleft < %d and nright > %d order by nlevel', $this->table, $node['nleft'], $node['nright']);
+            $query = sprintf('SELECT * FROM %s WHERE nleft < %d AND nright > %d ORDER BY nlevel', $this->table, $node['nleft'], $node['nright']);
         }
 
         $result = $this->db->query($query);
@@ -179,11 +179,11 @@ class NestedTree
             return false;
         }
 
-        $query = sprintf('select count(*) as is_descendant
-                                      from %s
-                                      where %s = %d
-                                      and nleft > %d
-                                      and nright < %d', $this->table, $this->fields['id'], $descendant_id, $node->nleft, $node->nright);
+        $query = sprintf('SELECT count(*) AS is_descendant
+                                      FROM %s
+                                      WHERE %s = %d
+                                      AND nleft > %d
+                                      AND nright < %d', $this->table, $this->fields['id'], $descendant_id, $node->nleft, $node->nright);
 
         $result = $this->db->query($query);
 
@@ -204,7 +204,7 @@ class NestedTree
      */
     public function isChildOf($child_id, $parent_id)
     {
-        $query = sprintf('select count(*) as is_child from %s where %s = %d and %s = %d', $this->table, $this->fields['id'], $child_id, $this->fields['parent'], $parent_id);
+        $query = sprintf('SELECT count(*) AS is_child FROM %s WHERE %s = %d AND %s = %d', $this->table, $this->fields['id'], $child_id, $this->fields['parent'], $parent_id);
 
         $result = $this->db->query($query);
 
@@ -224,7 +224,7 @@ class NestedTree
     public function numDescendants($id)
     {
         if ($id == 0) {
-            $query  = sprintf('select count(*) as num_descendants from %s', $this->table);
+            $query  = sprintf('SELECT count(*) AS num_descendants FROM %s', $this->table);
             $result = $this->db->query($query);
             if ($row = $this->db->fetchArray($result)) {
                 return $row['num_descendants'];
@@ -247,7 +247,7 @@ class NestedTree
      */
     public function numChildren($id)
     {
-        $query  = sprintf('select count(*) as num_children from %s where %s = %d', $this->table, $this->fields['parent'], $id);
+        $query  = sprintf('SELECT count(*) AS num_children FROM %s WHERE %s = %d', $this->table, $this->fields['parent'], $id);
         $result = $this->db->query($query);
         if ($row = $this->db->fetchArray($result)) {
             return $row['num_children'];
@@ -263,9 +263,9 @@ class NestedTree
      */
     public function numLeef($id)
     {
-        $query = sprintf('select count(*) as num_leef from %s where nright - nleft = 1', $this->table);
+        $query = sprintf('SELECT count(*) AS num_leef FROM %s WHERE nright - nleft = 1', $this->table);
         if ($id != 0) {
-            $node = $this->getNode($id);
+            $node  = $this->getNode($id);
             $query .= sprintf(' AND nleft > %d AND nright < %d', $node['nleft'], $node['nright']);
         }
         $result = $this->db->query($query);
@@ -286,7 +286,7 @@ class NestedTree
         $idField     = $this->fields['id'];
         $parentField = $this->fields['parent'];
 
-        $query = sprintf('select * from %s order by %s', $this->table, $this->fields['sort']);
+        $query = sprintf('SELECT * FROM %s ORDER BY %s', $this->table, $this->fields['sort']);
 
         $result = $this->db->query($query);
 
@@ -341,7 +341,7 @@ class NestedTree
                 continue;
             }
 
-            $query = sprintf('update %s set nlevel = %d, nleft = %d, nright = %d where %s = %d', $this->table, $row['nlevel'], $row['nleft'], $row['nright'], $this->fields['id'], $id);
+            $query = sprintf('UPDATE %s SET nlevel = %d, nleft = %d, nright = %d WHERE %s = %d', $this->table, $row['nlevel'], $row['nleft'], $row['nright'], $this->fields['id'], $id);
             $this->db->queryF($query);
         }
     }

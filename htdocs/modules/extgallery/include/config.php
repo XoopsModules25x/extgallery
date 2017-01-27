@@ -29,7 +29,6 @@ if (!defined('EXTGALLERY_DIRNAME')) {
     define('EXTGALLERY_AUTHOR_LOGOIMG', EXTGALLERY_URL . '/assets/images/logoModule.png');
     define('EXTGALLERY_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . EXTGALLERY_DIRNAME); // WITHOUT Trailing slash
     define('EXTGALLERY_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . EXTGALLERY_DIRNAME); // WITHOUT Trailing slash
-
 }
 
 //Configurator

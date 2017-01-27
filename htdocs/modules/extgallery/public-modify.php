@@ -17,7 +17,7 @@
 
 include __DIR__ . '/header.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once __DIR__ . '/class/utilities.php';
+include_once __DIR__ . '/class/utility.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -37,7 +37,7 @@ if (!isset($xoopsUser)) {
     redirect_header('index.php');
 }
 $moduleDirName = basename(__DIR__);
-$classUtilities = ucfirst($moduleDirName) . 'Utilities';
+$classUtility  = ucfirst($moduleDirName) . 'Utility';
 switch ($op) {
 
     case 'edit':
@@ -136,7 +136,7 @@ switch ($op) {
                 //DNPROSSI - wysiwyg editors from xoopseditors
                 //TODO dohtml - dobr
                 $photo_desc = $myts->displayTarea($photo->getVar('photo_desc'), 0, 1, 1, 1, 0);
-                $editor     = $classUtilities ::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', $photo_desc, 15, 60, '100%', '350px', 'hometext_hidden');
+                $editor     = $classUtility::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', $photo_desc, 15, 60, '100%', '350px', 'hometext_hidden');
                 $form->addElement($editor, false);
                 if ($xoopsModuleConfig['display_extra_field']) {
                     $form->addElement(new XoopsFormTextArea(_MD_EXTGALLERY_EXTRA_INFO, 'photo_extra', $photo->getVar('photo_extra')));
