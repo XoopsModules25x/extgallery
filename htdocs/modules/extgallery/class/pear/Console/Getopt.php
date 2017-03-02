@@ -1,272 +1,591 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4: */
-// +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2003 The PHP Group                                |
-// +----------------------------------------------------------------------+
-// | This source file is subject to version 3.0 of the PHP license,       |
-// | that is bundled with this package in the file LICENSE, and is        |
-// | available through the world-wide-web at the following url:           |
-// | http://www.php.net/license/3_0.txt.                                  |
-// | If you did not receive a copy of the PHP license and are unable to   |
-// | obtain it through the world-wide-web, please send a note to          |
-// | license@php.net so we can mail you a copy immediately.               |
-// +----------------------------------------------------------------------+
-// | Author: Andrei Zmievski <andrei@php.net>                             |
-// +----------------------------------------------------------------------+
-//
-//
 
+/**
+ * Console Getopt
+ *
+ * All rights reserved.
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ * + Redistributions of source code must retain the above copyright notice,
+ * this list of conditions and the following disclaimer.
+ * + Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution.
+ * + The names of its contributors may not be used to endorse or promote
+ * products derived from this software without specific prior written permission.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @category  Console
+ * @package   Console_GetoptPlus
+ * @author    Michel Corne <mcorne@yahoo.com>
+ * @copyright 2008 Michel Corne
+ * @license   http://www.opensource.org/licenses/bsd-license.php The BSD License
+ * @version   SVN: $Id: Getopt.php 48 2008-01-10 15:32:56Z mcorne $
+ * @link      http://pear.php.net/package/Console_GetoptPlus
+ */
+
+require_once 'Console/GetoptPlus/Exception.php';
 require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/PEAR.php';
 
 /**
- * Command-line options parsing class.
+ * Parsing of a command line.
  *
- * @author Andrei Zmievski <andrei@php.net>
+ * See more examples in docs/examples.
  *
+ * Code Example 1:
+ * <code>
+ * require_once 'Console/GetoptPlus.php';
+ *
+ * try {
+ *    $shortOptions = "b:c::";
+ *    $longOptions = array("foo", "bar=");
+ *    $options = Console_Getoptplus::getopt($config, $shortOptions, $longOptions);
+ *    // some processing here...
+ *    print_r($options);
+ * }
+ * catch(Console_GetoptPlus_Exception $e) {
+ *    $error = array($e->getCode(), $e->getMessage());
+ *    print_r($error);
+ * }
+ * </code>
+ *
+ * Code Example 2:
+ * <code>
+ * require_once 'Console/GetoptPlus/Getopt.php';
+ *
+ * try {
+ *    $shortOptions = "b:c::";
+ *    $longOptions = array("foo", "bar=");
+ *    $options = Console_GetoptPlus_Getopt::getopt($config, $shortOptions, $longOptions);
+ *    // some processing here...
+ *    print_r($options);
+ * }
+ * catch(Console_GetoptPlus_Exception $e) {
+ *    $error = array($e->getCode(), $e->getMessage());
+ *    print_r($error);
+ * }
+ * </code>
+ *
+ * Run:
+ * <pre>
+ * #xyz --foo -b car -c
+ * #xyz --foo -b car -c param1
+ * #xyz --foo -b car -cbus param1
+ * #xyz --foo -b car -c=bus param1
+ * #xyz --bar car param1 param2
+ * #xyz --bar car -- param1 param2
+ * #xyz --bar=car param1 param2
+ * </pre>
+ *
+ * @category  Console
+ * @package   Console_GetoptPlus
+ * @author    Michel Corne <mcorne@yahoo.com>
+ * @copyright 2008 Michel Corne
+ * @license   http://www.opensource.org/licenses/bsd-license.php The BSD License
+ * @version   Release:
+ * @package   _version@
+ * @link      http://pear.php.net/package/Console_GetoptPlus
+ * @see       Console_Getopt
  */
-class Console_Getopt
+class Console_GetoptPlus_Getopt
 {
     /**
-     * Parses the command-line options.
+     * The list of ambigous option names
      *
-     * The first parameter to this function should be the list of command-line
-     * arguments without the leading reference to the running program.
-     *
-     * The second parameter is a string of allowed short options. Each of the
-     * option letters can be followed by a colon ':' to specify that the option
-     * requires an argument, or a double colon '::' to specify that the option
-     * takes an optional argument.
-     *
-     * The third argument is an optional array of allowed long options. The
-     * leading '--' should not be included in the option name. Options that
-     * require an argument should be followed by '=', and options that take an
-     * option argument should be followed by '=='.
-     *
-     * The return value is an array of two elements: the list of parsed
-     * options and the list of non-option command-line arguments. Each entry in
-     * the list of parsed options is a pair of elements - the first one
-     * specifies the option, and the second one specifies the option argument,
-     * if there was one.
-     *
-     * Long and short options can be mixed.
-     *
-     * Most of the semantics of this function are based on GNU getopt_long().
-     *
-     * @param array  $args          an array of command-line arguments
-     * @param string $short_options specifies the list of allowed short options
-     * @param array  $long_options  specifies the list of allowed long options
-     *
-     * @return array two-element array containing the list of parsed options and
-     *               the non-option arguments
-     *
-     * @access public
-     *
-     */
-    public function getopt2($args, $short_options, $long_options = null)
-    {
-        return Console_Getopt::doGetopt(2, $args, $short_options, $long_options);
-    }
-
-    /**
-     * This function expects $args to start with the script name (POSIX-style).
-     * Preserved for backwards compatibility.
-     * @see getopt2()
-     * @param                    $args
-     * @param                    $short_options
-     * @param  null              $long_options
-     * @return array|object|void
-     */
-    public function getopt($args, $short_options, $long_options = null)
-    {
-        return Console_Getopt::doGetopt(1, $args, $short_options, $long_options);
-    }
-
-    /**
-     * The actual implementation of the argument parsing code.
-     * @param                    $version
-     * @param                    $args
-     * @param                    $short_options
-     * @param  null              $long_options
-     * @return array|object|void
-     */
-    public function doGetopt($version, $args, $short_options, $long_options = null)
-    {
-        // in case you pass directly readPHPArgv() as the first arg
-        if (PEAR::isError($args)) {
-            return $args;
-        }
-        if (empty($args)) {
-            return array(array(), array());
-        }
-        $opts     = array();
-        $non_opts = array();
-
-        settype($args, 'array');
-
-        if ($long_options) {
-            sort($long_options);
-        }
-
-        /*
-         * Preserve backwards compatibility with callers that relied on
-         * erroneous POSIX fix.
-         */
-        if ($version < 2) {
-            if (isset($args[0]{0}) && $args[0]{0} != '-') {
-                array_shift($args);
-            }
-        }
-
-        reset($args);
-        while (list($i, $arg) = each($args)) {
-
-            /* The special element '--' means explicit end of
-               options. Treat the rest of the arguments as non-options
-               and end the loop. */
-            if ($arg == '--') {
-                $non_opts = array_merge($non_opts, array_slice($args, $i + 1));
-                break;
-            }
-
-            if ($arg{0} != '-' || (strlen($arg) > 1 && $arg{1} == '-' && !$long_options)) {
-                $non_opts = array_merge($non_opts, array_slice($args, $i));
-                break;
-            } elseif (strlen($arg) > 1 && $arg{1} == '-') {
-                $error = Console_Getopt::_parseLongOption(substr($arg, 2), $long_options, $opts, $args);
-                if (PEAR::isError($error)) {
-                    return $error;
-                }
-            } else {
-                $error = Console_Getopt::_parseShortOption(substr($arg, 1), $short_options, $opts, $args);
-                if (PEAR::isError($error)) {
-                    return $error;
-                }
-            }
-        }
-
-        return array($opts, $non_opts);
-    }
-
-    /**
+     * @var    array
      * @access private
-     * @param $arg
-     * @param $short_options
-     * @param $opts
-     * @param $args
-     * @return object
      */
-    public function _parseShortOption($arg, $short_options, &$opts, &$args)
+    private $ambigous;
+
+    /**
+     * The command arguments
+     *
+     * @var    array
+     * @access private
+     */
+    private $args;
+
+    /**
+     * The long option names
+     *
+     * @var    array
+     * @access private
+     */
+    private $longOptionsDef;
+
+    /**
+     * The parsed options
+     *
+     * @var    array
+     * @access private
+     */
+    private $options;
+
+    /**
+     * The option shortcut names
+     *
+     * @var    array
+     * @access private
+     */
+    private $shortcuts;
+
+    /**
+     * The short option names and their definition
+     *
+     * @var    array
+     * @access private
+     */
+    private $shortOptionsDef;
+
+    /**
+     * The option types
+     *
+     * @var    array
+     * @access private
+     */
+    private $type = array(// /
+        false => 'noarg',
+        '=' => 'mandatory', ':' => 'mandatory',
+        '==' => 'optional', '::' => 'optional',
+        );
+
+    /**
+     * Creates the option shorcut names
+     *
+     * @param  array  $longOptionsDef the long option names
+     * @param  string $ambiguity      directive to handle option names ambiguity
+     * @return array  the option shorcuts and the ambigous options
+     * @access public
+     */
+    public function createShorcuts($longOptionsDef, $ambiguity)
     {
-        for ($i = 0, $iMax = strlen($arg); $i < $iMax; ++$i) {
-            $opt     = $arg{$i};
-            $opt_arg = null;
+        $shortcuts = array();
+        $ambigous = array();
 
-            /* Try to find the short option in the specifier string. */
-            if (($spec = strstr($short_options, $opt)) === false || $arg{$i} === ':') {
-                return PEAR::raiseError("Console_Getopt: unrecognized option -- $opt");
-            }
+        if ($ambiguity == 'shortcuts') {
+            foreach(array_keys($longOptionsDef) as $name) {
+                // splits the option name in characters to build the name
+                // substring combinations, e.g. foo => f, fo, foo
+                $subName = '';
+                foreach(str_split($name) as $char) {
+                    $subName .= $char;
 
-            if (strlen($spec) > 1 && $spec{1} === ':') {
-                if (strlen($spec) > 2 && $spec{2} === ':') {
-                    if ($i + 1 < strlen($arg)) {
-                        /* Option takes an optional argument. Use the remainder of
-                           the arg string if there is anything left. */
-                        $opts[] = array($opt, substr($arg, $i + 1));
-                        break;
-                    }
-                } else {
-                    /* Option requires an argument. Use the remainder of the arg
-                       string if there is anything left. */
-                    if ($i + 1 < strlen($arg)) {
-                        $opts[] = array($opt, substr($arg, $i + 1));
-                        break;
-                    } elseif (list(, $opt_arg) = each($args)) {/* Else use the next argument. */
+                    if (isset($ambigous[$subName])) {
+                        // adds the shortcut to the list of ambigous shortcuts
+                        $ambigous[$subName][] = $name;
+                    } else if (isset($shortcuts[$subName])) {
+                        // there is already a shortcut, adds the previous one
+                        // and the current one in the list of ambigous shortcuts
+                        $ambigous[$subName] = array($shortcuts[$subName], $name);
+                        unset($shortcuts[$subName]);
                     } else {
-                        return PEAR::raiseError("Console_Getopt: option requires an argument -- $opt");
+                        // creates the shorcut entry
+                        $shortcuts[$subName] = $name;
                     }
                 }
             }
-
-            $opts[] = array($opt, $opt_arg);
+            // checks if some options are ambigous, e.g. --foo --foobar
+            $names = array_intersect_key($longOptionsDef, $ambigous) and
+            self::exception('ambigous', key($names));
         }
+
+        return array($shortcuts, $ambigous);
     }
 
     /**
-     * @access private
-     * @param $arg
-     * @param $long_options
-     * @param $opts
-     * @param $args
-     * @return object|void
-     */
-    public function _parseLongOption($arg, $long_options, &$opts, &$args)
-    {
-        @list($opt, $opt_arg) = explode('=', $arg);
-        $opt_len = strlen($opt);
-
-        for ($i = 0, $iMax = count($long_options); $i < $iMax; ++$i) {
-            $long_opt  = $long_options[$i];
-            $opt_start = substr($long_opt, 0, $opt_len);
-
-            /* Option doesn't match. Go on to the next one. */
-            if ($opt_start != $opt) {
-                continue;
-            }
-
-            $opt_rest = substr($long_opt, $opt_len);
-
-            /* Check that the options uniquely matches one of the allowed
-               options. */
-            if ($opt_rest != '' && $opt{0} !== '=' && $i + 1 < count($long_options)
-                && $opt == substr($long_options[$i + 1], 0, $opt_len)
-            ) {
-                return PEAR::raiseError("Console_Getopt: option --$opt is ambiguous");
-            }
-
-            if (substr($long_opt, -1) === '=') {
-                if (substr($long_opt, -2) !== '==') {
-                    /* Long option requires an argument.
-                       Take the next argument if one wasn't specified. */
-                    if (!strlen($opt_arg) && !(list(, $opt_arg) = each($args))) {
-                        return PEAR::raiseError("Console_Getopt: option --$opt requires an argument");
-                    }
-                }
-            } elseif ($opt_arg) {
-                return PEAR::raiseError("Console_Getopt: option --$opt doesn't allow an argument");
-            }
-
-            $opts[] = array('--' . $opt, $opt_arg);
-
-            return;
-        }
-
-        return PEAR::raiseError("Console_Getopt: unrecognized option --$opt");
-    }
-
-    /**
-     * Safely read the $argv PHP array across different PHP configurations.
-     * Will take care on register_globals and register_argc_argv ini directives
+     * Parses the command line
      *
+     * See getopt() for a complete description.
+     *
+     * @param  numeric $version      the getopt version: 1 or 2
+     * @param  array   $args         the arguments
+     * @param  string  $shortOptions the short options definition, e.g. "ab:c::"
+     * @param  array   $longOptions  the long options definition
+     * @param  string  $ambiguity    directive to handle option names ambiguity
+     * @return array   the parsed options, their arguments and parameters
      * @access public
-     * @return mixed the $argv PHP array or PEAR error if not registered
+     * @static
      */
-    public function readPHPArgv()
+    public static function doGetopt($version = null, $args = array(),
+        $shortOptions = '', $longOptions = array(), $ambiguity = '')
+    {
+        $getopt = new self;
+
+        return $getopt->process($args, $shortOptions, $longOptions,
+            $ambiguity, $version);
+    }
+
+    /**
+     * Wraps the exception call
+     *
+     * @return void
+     * @access private
+     * @throws Console_GetoptPlus_Exception Exception
+     * @static
+     */
+    private static function exception()
+    {
+        $error = func_get_args();
+        throw new Console_GetoptPlus_Exception($error);
+    }
+
+    /**
+     * Parses the command line
+     *
+     * See the definition/example in the class Doc Block.
+     *
+     * Example: returning an index array
+     * <code>
+     * array(
+     *      [0] => array("foo" => null, "bar" => "car", "c" => null),
+     *      [1] => array([0] => "param1", [1] => "param2")
+     * );
+     * </code>
+     *
+     * @param  array  $args         the arguments
+     * @param  string $shortOptions the short options definition, e.g. "ab:c::"
+     *                              <ul>
+     *                              <li>":" : the option requires an argument</li>
+     *                              <li>"::" : the option accepts an optional argument</li>
+     *                              <li>otherwise the option accepts no argument</li>
+     *                              </ul>
+     * @param  array  $longOptions  the long options definition,
+     *                              e.g. array("art", "bar=", "car==)
+     *                              <ul>
+     *                              <li>"=" : the option requires an argument</li>
+     *                              <li>"==" : the option accepts an optional argument</li>
+     *                              <li>otherwise the option accepts no argument</li>
+     *                              </ul>
+     * @param  string $ambiguity    directive to handle option names ambiguity,
+     *                              e.g. "--foo" and "--foobar":
+     *                              <ul>
+     *                              <li>"loose": allowed if "--foo" does not
+     *                              accept an argument, this is the default
+     *                              behaviour</li>
+     *                              <li>"strict": no ambiguity allowed</li>
+     *                              <li>"shortcuts": implies "strict", the use of
+     *                              partial option names is allowed,
+     *                              e.g. "--f" or "--fo" instead of "--foo"</li>
+     *                              </ul>
+     * @return array  the parsed options, their arguments and parameters
+     * @access public
+     * @static
+     */
+    public static function getopt($args = array(), $shortOptions = '',
+        $longOptions = array(), $ambiguity = '')
+    {
+        return self::doGetopt(1, $args, $shortOptions, $longOptions, $ambiguity);
+    }
+
+    /**
+     * Parses the command line
+     *
+     * See getopt() for a complete description.
+     *
+     * @param  array  $args         the arguments
+     * @param  string $shortOptions the short options definition, e.g. "ab:c::"
+     * @param  array  $longOptions  the long options definition
+     * @param  string $ambiguity    directive to handle option names ambiguity
+     * @return array  the parsed options, their arguments and parameters
+     * @access public
+     * @static
+     */
+    public static function getopt2($args = array(), $shortOptions = '',
+        $longOptions = array(), $ambiguity = '')
+    {
+        return self::doGetopt(2, $args, $shortOptions, $longOptions, $ambiguity);
+    }
+
+    /**
+     * Checks if the argument is an option
+     *
+     * @param  string  $argument the argument, e.g. "-f" or "--foo"
+     * @return boolean true if an option, false otherwise
+     * @access public
+     */
+    public function isOption($argument)
+    {
+        return (bool)preg_match('~^(-\w|--\w+)$~', $argument);
+    }
+
+    /**
+     * Parses a long option
+     *
+     * @param  string $argument the option and argument (excluding the "--" prefix),
+     *                          e.g. "file=foo.php", "file foo.php", "bar"
+     * @return void
+     * @access public
+     */
+    public function parseLongOption($argument)
+    {
+        $option = explode('=', $argument, 2);
+        $name = current($option);
+        $arg = next($option) or $arg = null;
+        // verifies the option is valid
+        isset($this->ambigous[$name]) and self::exception('ambigous', $name);
+        isset($this->shortcuts[$name]) and $name = $this->shortcuts[$name] or
+        isset($this->longOptionsDef[$name]) or self::exception('unrecognized', $name);
+
+        if ($this->longOptionsDef[$name] == 'mandatory') {
+            // the option requires an argument, e.g. --file=foo.php
+            // tries the next argument if necessary, e.g. --file foo.php
+            is_null($arg) and list(, $arg) = each($this->args);
+            is_null($arg) and self::exception('mandatory', $name);
+            // verifies the argument is not an option itself
+            $this->isOption($arg) and self::exception('mandatory', $name);
+        } else if ($this->longOptionsDef[$name] == 'noarg' and !is_null($arg)) {
+            // the option may not take an optional argument
+            self::exception('noargument', $name);
+        }
+        // capture the option and its argument
+        $this->options[] = array('--' . $name, $arg);
+    }
+
+    /**
+     * Parses the long option names and types
+     *
+     * @param  array  $options the long options, e.g. array("foo", "bar=")
+     * @return array  the options name and type,
+     *                e.g. array("foo"=>"noarg", "bar"=>"mandatory")
+     * @access public
+     */
+    public function parseLongOptionsDef($options)
+    {
+        // converts to an array if there is only one option
+        settype($options, 'array');
+
+        $longOptionsDef = array();
+        foreach($options as $option) {
+            if ($option = trim($option)) {
+                // extracts the option name and type:
+                // optional argument (==), mandatory (=), or none (null)
+                // verifies the option syntax is correct
+                preg_match("~^(\w+)(==|=)?$~", $option, $match) or
+                self::exception('invalid', $option);
+                $name = next($match);
+                $type = next($match);
+                // verifies the option is not a duplicate
+                isset($longOptionsDef[$name]) and self::exception('duplicate', $name);
+                // captures the option name and type
+                $longOptionsDef[$name] = $this->type[$type];
+            }
+        }
+
+        return $longOptionsDef;
+    }
+
+    /**
+     * Parses a short option
+     *
+     * @param  string $argument the option and argument (excluding the "-" prefix),
+     *                          e.g. "zfoo.php", "z foo.php", "z".
+     * @return void
+     * @access public
+     */
+    public function parseShortOption($argument)
+    {
+        for ($i = 0; $i < strlen($argument); $i++) {
+            $name = $argument{$i};
+            $arg = null;
+            // verifies the option is valid
+            isset($this->shortOptionsDef[$name]) or self::exception('unrecognized', $name);
+
+            if ($this->shortOptionsDef[$name] == 'optional') {
+                // the option may take an optional argument, e.g. -zfoo.php or -z
+                if (($arg = substr($argument, $i + 1)) !== false) {
+                    // the remainder of the string is the option argument
+                    $this->options[] = array($name, $arg);
+                    return;
+                }
+            } else if ($this->shortOptionsDef[$name] == 'mandatory') {
+                // the option requires an argument, -zfoo.php or -z foo.php
+                if (($arg = substr($argument, $i + 1)) === false) {
+                    // nothing left to use as the option argument
+                    // the next argument is expected to be the option argument
+                    // verifies there is one and it is not an option itself
+                    list(, $arg) = each($this->args);
+                    (is_null($arg) or $this->isOption($arg)) and
+                    self::exception('mandatory', $name);
+                }
+                $this->options[] = array($name, $arg);
+                return;
+            }
+            // else: the option is not expecting an argument, e.g. -h
+            // TODO: verify that if followed by a non option which is interpreted
+            // as the end of options, there is indeed no option after until
+            // possibly -- or -
+            // capture the option and its argument
+            $this->options[] = array($name, $arg);
+        }
+    }
+
+    /**
+     * Parses the short option names and types
+     *
+     * @param  string $options the short options, e.g. array("ab:c::)
+     * @return array  the options name and type,
+     *                e.g. array("a"=>"noarg", "b"=>"mandatory", "c"=>"optional")
+     * @access public
+     */
+    public function parseShortOptionsDef($options)
+    {
+        // expecting a string for a the short options definition
+        is_array($options) and self::exception('string');
+        // trims and extracts the options name and type
+        // optional argument (::), mandatory (:), or none (null)
+        $options = trim($options);
+        preg_match_all("~(\w)(::|:)?~", $options, $matches, PREG_SET_ORDER);
+
+        $check = '';
+        $shortOptionsDef = array();
+        foreach($matches as $match) {
+            $check .= current($match);
+            $name = next($match);
+            $type = next($match);
+            // verifies the option is not a duplicate
+            isset($shortOptionsDef[$name]) and self::exception('duplicate', $name);
+            // captures the option name and type
+            $shortOptionsDef[$name] = $this->type[$type];
+        }
+        // checks there is no syntax error the short options definition
+        $check == $options or self::exception('syntax', $name);
+
+        return $shortOptionsDef;
+    }
+
+    /**
+     * Parses the command line
+     *
+     * See getopt() for a complete description.
+     *
+     * @param  array   $args         the arguments
+     * @param  string  $shortOptions the short options definition, e.g. "ab:c::"
+     * @param  array   $longOptions  the long options definition, e.g. array("foo", "bar=")
+     * @param  string  $ambiguity    directive to handle option names ambiguity
+     * @param  numeric $version      the getopt version: 1 or 2
+     * @return array   the parsed options, their arguments and parameters
+     * @access public
+     */
+    public function process($args = array(), $shortOptions, $longOptions,
+        $ambiguity = '', $version = 2)
+    {
+        settype($args, 'array');
+        in_array($ambiguity, array('loose', 'strict', 'shortcuts')) or
+        $ambiguity = 'loose';
+
+        if ($version < 2) {
+            // preserve backwards compatibility with callers
+            // that relied on erroneous POSIX fix
+            // note: ported from Console/Getopt
+            isset($args[0]) and substr($args[0], 0, 1) != '-' and array_shift($args);
+            settype($args, 'array');
+        }
+        $this->args = $args;
+        // parses the options definitions, create shorcuts or check ambiguities
+        $this->shortOptionsDef = $this->parseShortOptionsDef($shortOptions);
+        $this->longOptionsDef = $this->parseLongOptionsDef($longOptions);
+        list($this->shortcuts, $this->ambigous) = $this->createShorcuts($this->longOptionsDef, $ambiguity);
+        $this->verifyNoAmbiguity($this->longOptionsDef, $ambiguity);
+
+        $this->options = array();
+        $parameters = array();
+        while (list($i, $arg) = each($this->args)) {
+            if ($arg == '--') {
+                // end of options
+                // the remaining arguments are parameters excluding this one
+                $parameters = array_slice($this->args, $i + 1);
+                break;
+            } else if ($arg == '-') {
+                // the stdin flag
+                // the remaining arguments are parameters including this one
+                $parameters = array_slice($this->args, $i);
+                break;
+            } else if (substr($arg, 0, 2) == '--') {
+                // a long option, e.g. --foo
+                if ($this->longOptionsDef) {
+                    $this->parseLongOption(substr($arg, 2));
+                } else {
+                    // not expecting long options, the remaining arguments are
+                    // parameters including this one stripped off of --
+                    $parameters = array_slice($this->args, $i);
+                    $parameters[0] = substr($parameters[0], 2);
+                    break;
+                }
+            } else if ($arg{0} == '-') {
+                // a short option, e.g. -h
+                $this->parseShortOption(substr($arg, 1));
+            } else {
+                // the first non option
+                // the remaining arguments are parameters including this one
+                $parameters = array_slice($this->args, $i);
+                break;
+            }
+        }
+
+        return array($this->options, $parameters);
+    }
+
+    /**
+     * Reads the command arguments
+     *
+     * @return array  the arguments
+     * @access public
+     * @static
+     */
+    public static function readPHPArgv()
     {
         global $argv;
-        if (!is_array($argv)) {
-            if (!@is_array($_SERVER['argv'])) {
-                if (!@is_array($GLOBALS['HTTP_SERVER_VARS']['argv'])) {
-                    return PEAR::raiseError('Console_Getopt: Could not read cmd args (register_argc_argv=Off?)');
+
+        is_array($args = $argv) or
+        is_array($args = $_SERVER['argv']) or
+        is_array($args = $GLOBALS['HTTP_SERVER_VARS']['argv']) or
+        self::exception('noargs');
+
+        return $args;
+    }
+
+    /**
+     * Verifies there is no ambiguity with option names
+     *
+     * @param  array   $longOptionsDef the long options names and their types
+     * @param  string  $ambiguity      directive to handle option names ambiguity,
+     *                                 See getopt() for a complete description
+     * @return boolean no ambiguity if true, false otherwise
+     * @access public
+     */
+    public function verifyNoAmbiguity($longOptionsDef, $ambiguity)
+    {
+        settype($longOptionsDef, 'array');
+
+        foreach($longOptionsDef as $name => $type) {
+            foreach($longOptionsDef as $name2 => $type2) {
+                if ($name != $name2) {
+                    if ($ambiguity == 'loose' and $type == 'noarg') {
+                        // according to Getopt.php, CVS v 1.4 2007/06/12,
+                        // _parseLongOption(), line #236, the possible
+                        // ambiguity of a long option name with another one is
+                        // ignored if this option does not expect an argument!
+                        continue;
+                    }
+                    // checks options are not ambigous, e.g. --foo --foobar
+                    strpos($name2, $name) === false or self::exception('ambigous', $name);
                 }
-
-                return $GLOBALS['HTTP_SERVER_VARS']['argv'];
+                // else: there is no ambiguity between an option and itself!
             }
-
-            return $_SERVER['argv'];
         }
 
-        return $argv;
+        return true;
     }
 }
+
+?>
