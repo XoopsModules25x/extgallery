@@ -142,7 +142,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
     public function deletePhotoByCat($catId)
     {
         $criteria = new Criteria('cat_id', $catId);
-        $photos   =& $this->getObjects($criteria);
+        $photos   = $this->getObjects($criteria);
         foreach ($photos as $photo) {
             $this->deletePhoto($photo);
         }
@@ -164,7 +164,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         $criteria->add(new Criteria('photo_id', $photoId));
         $criteria->add(new Criteria('photo_approved', 1));
 
-        $photo =& $this->getObjects($criteria);
+        $photo = $this->getObjects($criteria);
         if (count($photo) != 1) {
             return false;
         }
@@ -1008,7 +1008,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         $criteria->setLimit($limit);
         $criteria->setSort('photo_date');
 
-        $photos =& $this->getObjects($criteria);
+        $photos = $this->getObjects($criteria);
 
         $ret = array();
         foreach ($photos as $photo) {

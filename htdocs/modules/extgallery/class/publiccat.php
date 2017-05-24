@@ -69,7 +69,7 @@ class ExtgalleryPublicCatHandler extends ExtgalleryCatHandler
         $criteria->setOrder('DESC');
         $criteria->setLimit(1);
 
-        $cat =& $this->getObjects($criteria);
+        $cat = $this->getObjects($criteria);
         $cat = $cat[0];
 
         $moduleId = $GLOBALS['xoopsModule']->getVar('mid');
