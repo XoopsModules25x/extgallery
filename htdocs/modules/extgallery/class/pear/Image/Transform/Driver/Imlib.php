@@ -151,7 +151,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform {
             if ($color[0] == '#'){
                 $color = $this->colorhex2colorarray($color);
             } else {
-                include_once 'Image/Transform/Driver/ColorsDefs.php';
+                require_once 'Image/Transform/Driver/ColorsDefs.php';
                 $color = isset($colornames[$color]) ? $colornames[$color] : false;
             }
         }

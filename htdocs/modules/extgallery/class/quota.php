@@ -17,7 +17,7 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
+require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
 
 /**
  * Class ExtgalleryQuota

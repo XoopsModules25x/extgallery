@@ -15,8 +15,8 @@
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
  */
-include_once __DIR__ . '/admin_header.php';
-include_once __DIR__ . '/../../../include/cp_header.php';
+require_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/../../../include/cp_header.php';
 xoops_load('XoopsFormLoader');
 
 if (isset($_GET['op'])) {
@@ -329,7 +329,7 @@ switch ($op) {
 
                 // Refresh the photo exemple
 
-                include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
+                require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
 
                 // Loading original image
                 // Define Graphical library path

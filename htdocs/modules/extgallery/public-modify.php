@@ -16,8 +16,8 @@
  */
 
 include __DIR__ . '/header.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once __DIR__ . '/class/utility.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once __DIR__ . '/class/utility.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -118,7 +118,7 @@ switch ($op) {
             case 'default':
             default:
 
-                include_once XOOPS_ROOT_PATH . '/header.php';
+                require_once XOOPS_ROOT_PATH . '/header.php';
                 $myts = MyTextSanitizer::getInstance();
                 /** @var ExtgalleryPublicCatHandler $catHandler */
                 $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');

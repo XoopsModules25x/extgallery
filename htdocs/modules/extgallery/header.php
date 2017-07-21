@@ -4,11 +4,11 @@ use Xmf\Language;
 
 include __DIR__ . '/../../mainfile.php';
 $moduleDirName = basename(__DIR__);
-include_once __DIR__ . '/include/common.php';
+require_once __DIR__ . '/include/common.php';
 
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-include_once __DIR__ . '/class/utility.php';
+require_once __DIR__ . '/class/utility.php';
 
 $myts = MyTextSanitizer::getInstance();
 

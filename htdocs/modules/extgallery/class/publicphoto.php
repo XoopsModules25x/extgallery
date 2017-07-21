@@ -17,8 +17,8 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once __DIR__ . '/photoHandler.php';
-include_once __DIR__ . '/publicPerm.php';
+require_once __DIR__ . '/photoHandler.php';
+require_once __DIR__ . '/publicPerm.php';
 
 /**
  * Class ExtgalleryPublicPhoto

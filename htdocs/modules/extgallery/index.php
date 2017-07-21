@@ -55,7 +55,7 @@ if (isset($GLOBALS['xoopsModule']) && $GLOBALS['xoopsModule']->getVar('dirname')
         $albumurl      = 'public-useralbum.php?id=' . $GLOBALS['xoopsUser']->uid();
     }
 
-    include_once XOOPS_ROOT_PATH . "/modules/{$moduleDirName}/class/publicPerm.php";
+    require_once XOOPS_ROOT_PATH . "/modules/{$moduleDirName}/class/publicPerm.php";
 
     $permHandler = ExtgalleryPublicPermHandler::getInstance();
     if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {

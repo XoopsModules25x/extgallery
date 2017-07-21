@@ -16,10 +16,10 @@
  * @package     ExtGallery
  */
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 include __DIR__ . '/../../../class/pagenav.php';
 
-include_once __DIR__ . '/../class/pear/Image/Transform.php';
+require_once __DIR__ . '/../class/pear/Image/Transform.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -122,7 +122,7 @@ switch ($op) {
         }
 
         // Set the category as album only if photo is approve
-        include_once __DIR__ . '/../class/publicPerm.php';
+        require_once __DIR__ . '/../class/publicPerm.php';
         $permHandler = ExtgalleryPublicPermHandler::getInstance();
         if ($permHandler->isAllowed($xoopsUser, 'public_autoapprove', $cat->getVar('cat_id'))) {
             $cat->setVar('cat_isalbum', 1);
@@ -169,7 +169,7 @@ switch ($op) {
             }
 
             // Update photo count if photo needn't approve
-            include_once __DIR__ . '/../class/publicPerm.php';
+            require_once __DIR__ . '/../class/publicPerm.php';
             $permHandler = ExtgalleryPublicPermHandler::getInstance();
             if ($permHandler->isAllowed($xoopsUser, 'public_autoapprove', $cat->getVar('cat_id'))) {
                 // Update album count
@@ -548,7 +548,7 @@ switch ($op) {
 
         xoops_cp_header();
 
-        include_once __DIR__ . '/../class/utility.php';
+        require_once __DIR__ . '/../class/utility.php';
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTGALLERY_ADD_PHOTO . '</legend>';
 

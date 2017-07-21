@@ -16,7 +16,7 @@
  */
 
 include __DIR__ . '/header.php';
-include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-photo.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
@@ -174,7 +174,7 @@ $xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
 
 // For xoops tag
 if (($xoopsModuleConfig['usetag'] == 1) and is_dir('../tag')) {
-    include_once XOOPS_ROOT_PATH . '/modules/tag/include/tagbar.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tag/include/tagbar.php';
     $xoopsTpl->assign('tagbar', tagBar($photo['photo_id'], $catid = 0));
     $xoopsTpl->assign('tags', true);
 } else {

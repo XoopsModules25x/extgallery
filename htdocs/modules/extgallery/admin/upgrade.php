@@ -16,14 +16,14 @@
  * @package     ExtGallery
  */
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 if (isset($_POST['step'])) {
     $step = $_POST['step'];
 } else {
     $step = 'default';
 }
 
-include_once __DIR__ . '/../../../include/cp_header.php';
+require_once __DIR__ . '/../../../include/cp_header.php';
 include __DIR__ . '/moduleUpdateFunction.php';
 
 // Change this variable if you use a cloned version of eXtGallery

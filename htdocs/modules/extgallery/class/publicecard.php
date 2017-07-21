@@ -17,8 +17,8 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
-include_once __DIR__ . '/extgalleryMailer.php';
+require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
+require_once __DIR__ . '/extgalleryMailer.php';
 
 /**
  * Class ExtgalleryPublicEcard

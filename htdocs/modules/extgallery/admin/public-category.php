@@ -16,7 +16,7 @@
  * @package     ExtGallery
  */
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -73,7 +73,7 @@ switch ($op) {
 
                     xoops_confirm(array('cat_id' => $_POST['cat_id'], 'step' => 'enreg'), 'public-category.php?op=delete', _AM_EXTGALLERY_DELETE_CAT_CONFIRM);
                     //                    xoops_cp_footer();
-                    include_once __DIR__ . '/admin_footer.php';
+                    require_once __DIR__ . '/admin_footer.php';
                 }
 
                 break;
@@ -157,7 +157,7 @@ switch ($op) {
                 $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/extgallery/templates/admin/extgallery_admin_public_category.tpl');
 
                 //                xoops_cp_footer();
-                include_once __DIR__ . '/admin_footer.php';
+                require_once __DIR__ . '/admin_footer.php';
 
                 break;
 
@@ -208,7 +208,7 @@ switch ($op) {
         // Call template file
         $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/extgallery/templates/admin/extgallery_admin_public_category.tpl');
         //        xoops_cp_footer();
-        include_once __DIR__ . '/admin_footer.php';
+        require_once __DIR__ . '/admin_footer.php';
         break;
 
 }

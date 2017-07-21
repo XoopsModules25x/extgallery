@@ -16,7 +16,7 @@
  * @package     ExtGallery
  */
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 include __DIR__ . '/../class/grouppermform.php';
 
 if (isset($_POST['step'])) {

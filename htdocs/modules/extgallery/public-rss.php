@@ -17,12 +17,12 @@
 
 include __DIR__ . '/header.php';
 include XOOPS_ROOT_PATH . '/header.php';
-include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 error_reporting(0);
 $GLOBALS['xoopsLogger']->activated = false;
 
-include_once XOOPS_ROOT_PATH . '/class/template.php';
+require_once XOOPS_ROOT_PATH . '/class/template.php';
 if (function_exists('mb_http_output')) {
     mb_http_output('pass');
 }

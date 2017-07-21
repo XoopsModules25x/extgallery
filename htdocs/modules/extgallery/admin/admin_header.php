@@ -17,14 +17,14 @@
  * @author       XOOPS Development Team
  */
 
-include_once __DIR__ . '/../../../include/cp_header.php';
-include_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
+require_once __DIR__ . '/../../../include/cp_header.php';
+require_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
 
 if (!isset($moduleDirName)) {
     $moduleDirName = basename(dirname(__DIR__));
 }
 
-include_once __DIR__ . '/../include/config.php';
+require_once __DIR__ . '/../include/config.php';
 
 xoops_load('XoopsRequest');
 
@@ -38,13 +38,13 @@ require_once $xoopsModuleAdminPath . '/moduleadmin.php';
 $myts = MyTextSanitizer::getInstance();
 
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
-    include_once $GLOBALS['xoops']->path('class/template.php');
+    require_once $GLOBALS['xoops']->path('class/template.php');
     $xoopsTpl = new XoopsTpl();
 }
 
 //Module specific elements
-//include_once $GLOBALS['xoops']->path("modules/{$moduleDirName}/include/functions.php");
-//include_once $GLOBALS['xoops']->path("modules/{$moduleDirName}/include/config.php");
+//require_once $GLOBALS['xoops']->path("modules/{$moduleDirName}/include/functions.php");
+//require_once $GLOBALS['xoops']->path("modules/{$moduleDirName}/include/config.php");
 
 //Handlers
 //$XXXHandler = xoops_getModuleHandler('XXX', $moduleDirName);

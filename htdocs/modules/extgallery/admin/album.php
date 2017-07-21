@@ -16,7 +16,7 @@
  * @package     ExtGallery
  */
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 
 //$GLOBALS['xoopsOption']['template_main'] = 'extgallery_admin_album.tpl';
 

@@ -251,7 +251,7 @@ class Image_Transform
         $classname = 'Image_Transform_Driver_' . $driver;
 
         if (!class_exists($classname)) {
-            include_once $file;
+            require_once $file;
 
             if (!class_exists($classname)) {
                 return PEAR::raiseError(
@@ -1132,7 +1132,7 @@ class Image_Transform
      */
     function getTempDir()
     {
-        include_once 'System.php';
+        require_once 'System.php';
         return System::tmpdir();
     }
 
@@ -1147,7 +1147,7 @@ class Image_Transform
     function getTempFile($dirname = null)
     {
         if (is_null($dirname)) {
-            include_once 'System.php';
+            require_once 'System.php';
             $dirname = System::tmpdir();
         }
 
@@ -1305,7 +1305,7 @@ class Image_Transform
                 return $this->colorhex2colorarray($color);
             }
             static $colornames = array();
-            include_once 'Image/Transform/Driver/ColorsDefs.php';
+            require_once 'Image/Transform/Driver/ColorsDefs.php';
             return (isset($colornames[$color])) ? $colornames[$color] : $default;
         }
         return $default;

@@ -21,7 +21,7 @@ require dirname(dirname(dirname(dirname(__DIR__)))) . '/mainfile.php';
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once __DIR__ . '/../../class/php-captcha.inc.php';
+require_once __DIR__ . '/../../class/php-captcha.inc.php';
 
 $aFonts         = array(XOOPS_ROOT_PATH . '/modules/extgallery/fonts/AllStarResort.ttf');
 $oVisualCaptcha = new PhpCaptcha($aFonts, 200, 60);

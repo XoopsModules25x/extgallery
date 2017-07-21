@@ -29,13 +29,13 @@ if (!defined('EXTGALLERY_MODULE_PATH')) {
 }
 xoops_loadLanguage('common', EXTGALLERY_DIRNAME);
 
-include_once EXTGALLERY_ROOT_PATH . '/class/utility.php';
-//include_once EXTGALLERY_ROOT_PATH . '/include/constants.php';
-//include_once EXTGALLERY_ROOT_PATH . '/include/seo_functions.php';
-//include_once EXTGALLERY_ROOT_PATH . '/class/metagen.php';
-//include_once EXTGALLERY_ROOT_PATH . '/class/session.php';
-//include_once EXTGALLERY_ROOT_PATH . '/class/xoalbum.php';
-//include_once EXTGALLERY_ROOT_PATH . '/class/request.php';
+require_once EXTGALLERY_ROOT_PATH . '/class/utility.php';
+//require_once EXTGALLERY_ROOT_PATH . '/include/constants.php';
+//require_once EXTGALLERY_ROOT_PATH . '/include/seo_functions.php';
+//require_once EXTGALLERY_ROOT_PATH . '/class/metagen.php';
+//require_once EXTGALLERY_ROOT_PATH . '/class/session.php';
+//require_once EXTGALLERY_ROOT_PATH . '/class/xoalbum.php';
+//require_once EXTGALLERY_ROOT_PATH . '/class/request.php';
 
 $debug = false;
 //$xoalbum = XoalbumXoalbum::getInstance($debug);

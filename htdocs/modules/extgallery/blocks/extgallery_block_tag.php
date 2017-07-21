@@ -26,7 +26,7 @@ function extgallery_tag_block_cloud_show($options)
     $module_dirname = basename(dirname(__DIR__));
     // tags support
     if (xoops_isActiveModule('tag')) {
-        include_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';
+        require_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';
 
         return tag_block_cloud_show($options, $module_dirname);
     }
@@ -39,7 +39,7 @@ function extgallery_tag_block_cloud_show($options)
  */
 function extgallery_tag_block_cloud_edit($options)
 {
-    include_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';
 
     return tag_block_cloud_edit($options);
 }
@@ -55,7 +55,7 @@ function extgallery_tag_block_top_show($options)
 
     // tags support
     if (xoops_isActiveModule('tag')) {
-        include_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';
+        require_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';
 
         return tag_block_top_show($options, $module_dirname);
     }
@@ -68,7 +68,7 @@ function extgallery_tag_block_top_show($options)
  */
 function extgallery_tag_block_top_edit($options)
 {
-    include_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';
 
     return tag_block_top_edit($options);
 }

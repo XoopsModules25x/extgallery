@@ -108,7 +108,7 @@ Class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
             if ($color_mask{0} == '#'){
                 $color_mask = $this->colorhex2colorarray($color_mask);
             } else {
-                include_once 'Image/Transform/Driver/ColorsDefs.php';
+                require_once 'Image/Transform/Driver/ColorsDefs.php';
                 $color_mask = isset($colornames[$color_mask])?$colornames[$color_mask]:false;
             }
         }

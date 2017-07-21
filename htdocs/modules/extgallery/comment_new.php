@@ -29,5 +29,5 @@ if ($com_itemid > 0) {
         $title = $photo->getVar('photo_desc');
     }
     $com_replytitle = $title;
-    include_once XOOPS_ROOT_PATH . '/include/comment_new.php';
+    require_once XOOPS_ROOT_PATH . '/include/comment_new.php';
 }

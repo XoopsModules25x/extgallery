@@ -16,9 +16,9 @@
  */
 
 include __DIR__ . '/header.php';
-include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once __DIR__ . '/class/utility.php';
+require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once __DIR__ . '/class/utility.php';
 
 if (isset($_POST['step'])) {
     $step = $_POST['step'];
@@ -56,7 +56,7 @@ switch ($step) {
     case 'default':
     default:
 
-        include_once XOOPS_ROOT_PATH . '/header.php';
+        require_once XOOPS_ROOT_PATH . '/header.php';
 
         $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
 

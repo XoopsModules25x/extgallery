@@ -43,7 +43,7 @@ class ExtgalleryPluginHandler
                 continue;
             }
 
-            include_once XOOPS_ROOT_PATH . "/modules/extgallery/plugin/$plugin/$plugin.php";
+            require_once XOOPS_ROOT_PATH . "/modules/extgallery/plugin/$plugin/$plugin.php";
 
             $class = 'Extgallery' . ucfirst($plugin);
 
@@ -61,7 +61,7 @@ class ExtgalleryPluginHandler
                 continue;
             }
 
-            include_once XOOPS_ROOT_PATH . "/modules/extgallery/plugin/$plugin/language/english/main.php";
+            require_once XOOPS_ROOT_PATH . "/modules/extgallery/plugin/$plugin/language/english/main.php";
         }
     }
 }

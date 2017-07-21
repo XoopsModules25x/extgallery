@@ -167,7 +167,7 @@ function xoops_module_install_extgallery(XoopsModule $xoopsModule)
 
   */
 
-    include_once __DIR__ . '/../../../include/cp_header.php';
+    require_once __DIR__ . '/../../../include/cp_header.php';
 
     if (!isset($moduleDirName)) {
         $moduleDirName = basename(dirname(__DIR__));
@@ -181,7 +181,7 @@ function xoops_module_install_extgallery(XoopsModule $xoopsModule)
         xoops_load('utility', $moduleDirName);
     }
 
-    //    include_once __DIR__ . '/config.php';
+    //    require_once __DIR__ . '/config.php';
 
     if (count($configurator['uploadFolders']) > 0) {
         //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {

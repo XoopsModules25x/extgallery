@@ -16,7 +16,7 @@
  */
 
 include __DIR__ . '/header.php';
-include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 if (!isset($_GET['id'])) {
     $photoId = 0;

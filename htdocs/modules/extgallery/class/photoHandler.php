@@ -17,8 +17,8 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once __DIR__ . '/publicPerm.php';
-include_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
+require_once __DIR__ . '/publicPerm.php';
+require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
 
 /**
  * Class ExtgalleryPhoto
@@ -782,7 +782,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
      */
     public function postPhotoTraitement($file, $checkMd5 = false)
     {
-        //        include_once XOOPS_ROOT_PATH.'/modules/extgallery/class/photoUploader.php';
+        //        require_once XOOPS_ROOT_PATH.'/modules/extgallery/class/photoUploader.php';
 
         $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
 
@@ -804,7 +804,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         //        $this->photoUploader->fetchPhoto($_FILES[$file]);
 
         //------------------------
-        include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+        require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $this->photoUploader = new XoopsMediaUploader($uploadDir, $allowedMimeTypes, 50000000, 5000, 5000);
 
         $jupart  = isset($_POST['jupart']) ? (int)$_POST['jupart'] : 0;
@@ -913,7 +913,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         $photoExtra = '',
         $photoTag = ''
     ) {
-        include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
+        require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
 
         global $xoopsUser, $xoopsModuleConfig;
         $permHandler = ExtgalleryPublicPermHandler::getInstance();

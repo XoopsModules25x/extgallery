@@ -16,8 +16,8 @@
  */
 
 include __DIR__ . '/header.php';
-include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 if (isset($_GET['id'])) {
     $photoId = (int)$_GET['id'];
@@ -45,7 +45,7 @@ switch ($step) {
 
     case 'send':
 
-        include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/php-captcha.inc.php';
+        require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/php-captcha.inc.php';
 
         // Enable captcha only if GD is Used
         if ($xoopsModuleConfig['graphic_lib'] === 'GD') {
