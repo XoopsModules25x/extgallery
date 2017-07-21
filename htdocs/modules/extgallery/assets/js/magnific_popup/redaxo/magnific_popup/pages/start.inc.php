@@ -5,7 +5,7 @@
             <canvas id="broken-glass"></canvas>
             <h1 id="logo-title"><?php echo $I18N->msg('magnific_popup_start_magnific_popup'); ?></h1>
         </div>
-        <br/>
+        <br>
         <ul>
             <li><a class="extern" target="_blank" href="http://dimsemenov.com/plugins/magnific-popup/documentation.html"><?php echo $I18N->msg('magnific_popup_start_docs'); ?></a></li>
             <li><a class="extern" target="_blank" href="http://dimsemenov.com/plugins/magnific-popup/"><?php echo $I18N->msg('magnific_popup_start_homepage'); ?></a></li>
