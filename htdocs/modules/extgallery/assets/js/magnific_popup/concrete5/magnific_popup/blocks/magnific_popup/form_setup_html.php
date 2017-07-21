@@ -202,7 +202,7 @@ $thumbnailHeight = 200;
       <div id="mapsPreviewImage" class="control-group">
         <label for="mapAddress" class="control-label"><?php echo t('Map Address') ?></label>
         <div class="controls">
-         <input id="mapAddress" type="text" name="mapAddress" value="<?php echo $mapAddress; ?>" class="span3" />
+         <input id="mapAddress" type="text" name="mapAddress" value="<?php echo $mapAddress; ?>" class="span3" >
         </div>
       </div>
 -->

@@ -602,7 +602,7 @@ class MetaSliderPlugin
         foreach ($aFields as $id => $row) {
             // checkbox input type
             if ($row['type'] === 'checkbox') {
-                $return .= "<tr><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><input class='option {$row['class']} {$id}' type='checkbox' name='settings[{$id}]' {$row['checked']} />";
+                $return .= "<tr><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><input class='option {$row['class']} {$id}' type='checkbox' name='settings[{$id}]' {$row['checked']} >";
 
                 if (isset($row['after'])) {
                     $return .= "<span class='after'>{$row['after']}</span>";
@@ -652,7 +652,7 @@ class MetaSliderPlugin
 
                 foreach ($row['options'] as $k => $v) {
                     $checked = checked($k, $row['value'], false);
-                    $return .= "<input class='select-slider' id='{$k}' rel='{$k}' type='radio' name='settings[type]' value='{$k}' {$checked} />
+                    $return .= "<input class='select-slider' id='{$k}' rel='{$k}' type='radio' name='settings[type]' value='{$k}' {$checked} >
                     <label for='{$k}'>{$v['label']}</label>";
                 }
 
@@ -661,7 +661,7 @@ class MetaSliderPlugin
 
             // number input type
             if ($row['type'] === 'number') {
-                $return .= "<tr class='{$row['type']}'><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><input class='option {$row['class']} {$id}' type='number' min='{$row['min']}' max='{$row['max']}' step='{$row['step']}' name='settings[{$id}]' value='{$row['value']}' /><span class='after'>{$row['after']}</span></td></tr>";
+                $return .= "<tr class='{$row['type']}'><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><input class='option {$row['class']} {$id}' type='number' min='{$row['min']}' max='{$row['max']}' step='{$row['step']}' name='settings[{$id}]' value='{$row['value']}' ><span class='after'>{$row['after']}</span></td></tr>";
             }
 
             // select drop down
@@ -691,12 +691,12 @@ class MetaSliderPlugin
 
             // text input type
             if ($row['type'] === 'text') {
-                $return .= "<tr class='{$row['type']}'><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><input class='option {$row['class']} {$id}' type='text' name='settings[{$id}]' value='{$row['value']}' /></td></tr>";
+                $return .= "<tr class='{$row['type']}'><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><input class='option {$row['class']} {$id}' type='text' name='settings[{$id}]' value='{$row['value']}' ></td></tr>";
             }
 
             // text input type
             if ($row['type'] === 'title') {
-                $return .= "<tr class='{$row['type']}'><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><input class='option {$row['class']} {$id}' type='text' name='{$id}' value='{$row['value']}' /></td></tr>";
+                $return .= "<tr class='{$row['type']}'><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><input class='option {$row['class']} {$id}' type='text' name='{$id}' value='{$row['value']}' ></td></tr>";
             }
         }
 
@@ -806,7 +806,7 @@ class MetaSliderPlugin
                         echo "<h3 class='nav-tab-wrapper'>";
                         foreach ($tabs as $tab) {
                             if ($tab['active']) {
-                                echo "<div class='nav-tab nav-tab-active'><input type='text' name='title'  value='" . $tab['title'] . "' onfocus='this.style.width = ((this.value.length + 1) * 9) + \"px\"' /></div>";
+                                echo "<div class='nav-tab nav-tab-active'><input type='text' name='title'  value='" . $tab['title'] . "' onfocus='this.style.width = ((this.value.length + 1) * 9) + \"px\"' ></div>";
                             } else {
                                 echo "<a href='?page=metaslider&amp;id={$tab['id']}' class='nav-tab'>" . $tab['title'] . '</a>';
                             }

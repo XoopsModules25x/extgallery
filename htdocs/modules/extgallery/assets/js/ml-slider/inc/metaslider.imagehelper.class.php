@@ -280,7 +280,7 @@ class MetaSliderImageHelper
                 echo '<div id="message" class="error">';
                 echo '<p><strong>ERROR</strong> ' . $image->get_error_message() . " Check <a href='http://codex.wordpress.org/Changing_File_Permissions' target='_blank'>file permissions</a></p>";
                 echo "<button class='toggle'>Show Details</button>";
-                echo "<div class='message' style='display: none;'><br />Slide ID: {$this->id}<pre>";
+                echo "<div class='message' style='display: none;'><br >Slide ID: {$this->id}<pre>";
                 var_dump($image);
                 echo '</pre></div>';
                 echo '</div>';

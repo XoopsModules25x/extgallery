@@ -95,7 +95,7 @@
 
      <{*pk ------------------- add upload and view-my-album links to main page*}>
     <div>
-        <a title="<{$albumlinkname}>" href="<{xoAppUrl modules/extgallery/}><{$albumurl}>"><{$albumlinkname}></a> <br />
+        <a title="<{$albumlinkname}>" href="<{xoAppUrl modules/extgallery/}><{$albumurl}>"><{$albumlinkname}></a> <br >
         <a title="<{$uploadlinkname}>" href="<{xoAppUrl modules/extgallery/}><{$uploadurl}>"><{$uploadlinkname}></a>
 
     </div>

@@ -74,7 +74,7 @@
 <{else}>
     <{if $block.ajaxeffect == lightbox}>
         <script type="text/javascript" src="<{xoAppUrl browse.php?Frameworks/jquery/plugins/jquery.lightbox.js}>"></script>
-        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/system/css/lightbox.css}>" />
+        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/system/css/lightbox.css}>" >
         <script type="text/javascript">
             $(function() {
             $('#gallery a').lightBox({
@@ -89,7 +89,7 @@
     <{/if}>
     <{if $block.ajaxeffect == TosRUs}>
         <script type="text/javascript" src="<{xoAppUrl browse.php?modules/extgallery/assets/js/TosRUs/src/js/jquery.tosrus.js}>"></script>
-        <link rel="stylesheet" type="text/css" href="<{xoAppUrl modules/extgallery/assets/js/TosRUs/src/css/jquery.tosrus.css}>" />
+        <link rel="stylesheet" type="text/css" href="<{xoAppUrl modules/extgallery/assets/js/TosRUs/src/css/jquery.tosrus.css}>" >
         <script type="text/javascript" src="<{xoAppUrl browse.php?modules/extgallery/assets/js/TosRUs/lib/jquery.hammer.min.js}>"></script>
         <script type="text/javascript" src="<{xoAppUrl browse.php?modules/extgallery/assets/js/TosRUs/lib/FlameViewportScale.js}>"></script>
         <script type="text/javascript">
@@ -102,14 +102,14 @@
     <{/if}>
     <{if $block.ajaxeffect == tooltip}>
         <script type="text/javascript" src="<{xoAppUrl browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.js}>"></script>
-        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.css}>" />
+        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.css}>" >
         <style>
             #screenshot img {max-width: <{$block.tooltipw}>px; border: <{$block.tooltipbw}>px solid <{$block.tooltipbbg}> !important;}
         </style>
     <{/if}>
     <{if $block.ajaxeffect == overlay}>
         <script type="text/javascript" src="<{xoAppUrl browse.php?modules/extgallery/assets/js/overlay/overlay.jquery.tools.min.js}>"></script>
-        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/extgallery/assets/js/overlay/overlay.css}>" media="screen" />
+        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/extgallery/assets/js/overlay/overlay.css}>" media="screen" >
         <style>
             .apple_overlay {
                 background-color: <{$block.overlyabg}>;
@@ -125,7 +125,7 @@
     <{if $block.ajaxeffect == fancybox}>
         <script type="text/javascript" src="<{xoAppUrl browse.php?modules/extgallery/assets/js/fancybox/mousewheel.js}>"></script>
         <script type="text/javascript" src="<{xoAppUrl browse.php?modules/extgallery/assets/js/fancybox/fancybox.pack.js}>"></script>
-        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/extgallery/assets/js/fancybox/fancybox.css}>" />
+        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/extgallery/assets/js/fancybox/fancybox.css}>" >
         <script type="text/javascript">
             $(document).ready(function() {
             <{if $block.fancyboxshow == group}>
@@ -147,11 +147,11 @@
     <{/if}>
     <{if $block.ajaxeffect == prettyphoto}>
         <script type="text/javascript" src="<{xoAppUrl browse.php?modules/extgallery/assets/js/prettyphoto/jquery.prettyPhoto.js}>"></script>
-        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/extgallery/assets/js/prettyphoto/prettyPhoto.css}>" />
+        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/extgallery/assets/js/prettyphoto/prettyPhoto.css}>" >
     <{/if}>
     <{if $block.ajaxeffect == jcarousel}>
         <script type="text/javascript" src="<{xoAppUrl browse.php?modules/extgallery/assets/js/jcarousel/jquery.jcarousel.min.js}>"></script>
-        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/extgallery/assets/js/jcarousel/skin.css}>" />
+        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/extgallery/assets/js/jcarousel/skin.css}>" >
         <script type="text/javascript">
             jQuery(document).ready(function() {
                 jQuery('#mycarousel').jcarousel(<{if $block.direction == 1}>{vertical: true, scroll: 2}<{/if}>);
@@ -188,14 +188,14 @@
                 <{if $block.ajaxeffect == none}>
                 <!-- Start Normal show -->
                     <a title="<{$photo.photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$photo.photo_id}>">
-                        <img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" />
+                        <img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" >
                     </a>
                 <!-- End Normal show -->
                 <{/if}>
                 <{if $block.ajaxeffect == tooltip}>
                 <!-- Start Tooltip show -->
                     <a class="screenshot" title="<{$photo.photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$photo.photo_id}>" rel="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>">
-                        <img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" />
+                        <img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" >
                     </a>
                 <!-- End Tooltip show -->
                 <{/if}>
@@ -203,7 +203,7 @@
                 <!-- Start Lightbox -->
                 <div id="gallery">
                     <a title="<{$photo.photo_title}>" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>">
-                        <img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" />
+                        <img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" >
                     </a>
                 </div>
                 <!-- End Lightbox -->
@@ -211,16 +211,16 @@
                 <{if $block.ajaxeffect == TosRUs}>
                 <!-- Start TosRUs -->
                     <a class="TosRUs-gallery" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>" title="<{$photo.photo_title}>">
-                        <img src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" /></a>
+                        <img src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" ></a>
                 <!-- End TosRUs -->
                 <{/if}>
                 <{if $block.ajaxeffect == overlay}>
                 <!-- Start Overlay -->
                     <div align="center" id="apple">
-                        <img rel="#photo<{$photo.photo_id}>" class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" />
+                        <img rel="#photo<{$photo.photo_id}>" class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" >
                     </div>
                     <div class="apple_overlay" id="photo<{$photo.photo_id}>"><a class="close"></a>
-                        <img src="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>" alt="<{$photo.photo_title}>" />
+                        <img src="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>" alt="<{$photo.photo_title}>" >
                         <div class="details">
                             <div align="center"><a href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$photo.photo_id}>"><{$photo.photo_title}></a></div>
                             <p><{$photo.photo_desc}></p>
@@ -230,19 +230,19 @@
                 <{/if}>
                 <{if $block.ajaxeffect == fancybox}>
                 <!-- Start Fansybox -->
-                    <a <{if $block.fancyboxshow == group }>rel="example_group"<{else}>class="example"<{/if}> href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>" title="<{$photo.photo_title}>"><img class="last" alt="<{$photo.photo_title}>" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" /></a>
+                    <a <{if $block.fancyboxshow == group }>rel="example_group"<{else}>class="example"<{/if}> href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>" title="<{$photo.photo_title}>"><img class="last" alt="<{$photo.photo_title}>" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" ></a>
                 <!-- End Fansybox -->
                 <{/if}>
                 <{if $block.ajaxeffect == prettyphoto}>
                 <!-- Start prettyPhoto show -->
                     <ul class="gallery clearfix">
-                        <li><a title="<{$photo.photo_title}>" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>" rel="prettyPhoto[gallery2]"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" /></a></li>
+                        <li><a title="<{$photo.photo_title}>" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>" rel="prettyPhoto[gallery2]"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" ></a></li>
                     </ul>
                 <!-- End prettyPhoto show -->
                 <{/if}>
                 <{if $block.ajaxeffect == jcarousel}>
                 <!-- Start jcarousel show -->
-                    <li><a title="<{$photo.photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$photo.photo_id}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" /></a></li>
+                    <li><a title="<{$photo.photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$photo.photo_id}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" ></a></li>
                 <!-- End jcarousel show -->
                 <{/if}>
                 <{if $block.title}>
@@ -275,31 +275,31 @@
         <{/if}>
                 <{if $block.ajaxeffect == none}>
                 <!-- Start Normal show -->
-                    <a title="<{$photo.photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$photo.photo_id}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" /></a>
+                    <a title="<{$photo.photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$photo.photo_id}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" ></a>
                 <!-- End Normal show -->
                 <{/if}>
                 <{if $block.ajaxeffect == tooltip}>
                 <!-- Start Tooltip show -->
-                    <a class="screenshot" title="<{$photo.photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$photo.photo_id}>" rel="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" /></a>
+                    <a class="screenshot" title="<{$photo.photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$photo.photo_id}>" rel="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" ></a>
                 <!-- End Tooltip show -->
                 <{/if}>
                 <{if $block.ajaxeffect == lightbox}>
                 <!-- Start Lightbox -->
                     <div id="gallery">
-                        <a title="<{$photo.photo_title}>" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" /></a>
+                        <a title="<{$photo.photo_title}>" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" ></a>
                     </div>
                  <!-- End Lightbox -->
                  <{/if}>
                 <{if $block.ajaxeffect == TosRUs}>
                 <!-- Start TosRUs -->
                     <a class="TosRUs-gallery" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>" title="<{$photo.photo_title}>">
-                        <img src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" /></a>
+                        <img src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" ></a>
                 <!-- End TosRUs -->
                 <{/if}>
                 <{if $block.ajaxeffect == overlay}>
                 <!-- Start Overlay -->
                     <div align="center" id="apple">
-                        <img rel="#photo<{$photo.photo_id}>" class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" />
+                        <img rel="#photo<{$photo.photo_id}>" class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" >
                     </div>
                     <div class="apple_overlay" id="photo<{$photo.photo_id}>"><a class="close"></a>
                         <img alt="<{$photo.photo_title}>" src="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>">
@@ -312,19 +312,19 @@
                 <{/if}>
                 <{if $block.ajaxeffect == fancybox}>
                 <!-- Start Fansybox -->
-                    <a <{if $block.fancyboxshow == group }>rel="example_group"<{else}>class="example"<{/if}> href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>" title="<{$photo.photo_title}>"><img class="last" alt="<{$photo.photo_title}>" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" /></a>
+                    <a <{if $block.fancyboxshow == group }>rel="example_group"<{else}>class="example"<{/if}> href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>" title="<{$photo.photo_title}>"><img class="last" alt="<{$photo.photo_title}>" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" ></a>
                 <!-- End Fansybox -->
                 <{/if}>
                 <{if $block.ajaxeffect == prettyphoto}>
                 <!-- Start prettyPhoto show -->
                     <ul class="gallery clearfix">
-                        <li><a title="<{$photo.photo_title}>" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>" rel="prettyPhoto[gallery2]"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" /></a></li>
+                        <li><a title="<{$photo.photo_title}>" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>" rel="prettyPhoto[gallery2]"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" ></a></li>
                     </ul>
                 <!-- End prettyPhoto show -->
                 <{/if}>
                 <{if $block.ajaxeffect == jcarousel}>
                 <!-- Start jcarousel show -->
-                    <li><a title="<{$photo.photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$photo.photo_id}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" /></a></li>
+                    <li><a title="<{$photo.photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$photo.photo_id}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>" alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>" ></a></li>
                 <!-- End jcarousel show -->
                 <{/if}>
             <{if $block.title}>
@@ -362,31 +362,31 @@
             <{/if}>
                 <!-- Start Normal show -->
                 <{if $block.ajaxeffect == none}>
-                    <a title="<{$block.photos[photo].photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$block.photos[photo].photo_id}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" alt="<{$block.photos[photo].photo_title}>" title="<{$block.photos[photo].photo_title}>" /></a>
+                    <a title="<{$block.photos[photo].photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$block.photos[photo].photo_id}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" alt="<{$block.photos[photo].photo_title}>" title="<{$block.photos[photo].photo_title}>" ></a>
                 <{/if}>
                 <!-- End Normal show -->
                <!-- Start Tooltip show -->
                 <{if $block.ajaxeffect == tooltip}>
-                    <a title="<{$block.photos[photo].photo_title}>" class="screenshot" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$block.photos[photo].photo_id}>" rel="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$block.photos[photo].photo_name}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" alt="<{$block.photos[photo].photo_title}>" title="<{$block.photos[photo].photo_title}>" /></a>
+                    <a title="<{$block.photos[photo].photo_title}>" class="screenshot" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$block.photos[photo].photo_id}>" rel="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$block.photos[photo].photo_name}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" alt="<{$block.photos[photo].photo_title}>" title="<{$block.photos[photo].photo_title}>" ></a>
                 <{/if}>
                 <!-- End Tooltip show -->
                 <!-- Start Lightbox -->
                 <{if $block.ajaxeffect == lightbox}>
                 <div id="gallery">
-                    <a title="<{$block.photos[photo].photo_title}>" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$block.photos[photo].photo_name}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" alt="<{$block.photos[photo].photo_title}>" title="<{$block.photos[photo].photo_title}>" /></a>
+                    <a title="<{$block.photos[photo].photo_title}>" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$block.photos[photo].photo_name}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" alt="<{$block.photos[photo].photo_title}>" title="<{$block.photos[photo].photo_title}>" ></a>
                 </div>
                 <{/if}>
                 <!-- End Lightbox -->
                 <{if $block.ajaxeffect == TosRUs}>
                 <!-- Start TosRUs -->
                     <a class="TosRUs-gallery" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$block.photos[photo].photo_name}>" title="<{$block.photos[photo].photo_title}>">
-                        <img src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" /></a>
+                        <img src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" ></a>
                 <!-- End TosRUs -->
                 <{/if}>
                 <!-- Start Overlay -->
                 <{if $block.ajaxeffect == overlay}>
                     <div align="center" id="apple">
-                        <img alt="<{$block.photos[photo].photo_title}>" rel="#photo<{$block.photos[photo].photo_id}>" class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" alt="<{$block.photos[photo].photo_title}>" title="<{$block.photos[photo].photo_title}>" />
+                        <img alt="<{$block.photos[photo].photo_title}>" rel="#photo<{$block.photos[photo].photo_id}>" class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" alt="<{$block.photos[photo].photo_title}>" title="<{$block.photos[photo].photo_title}>" >
                     </div>
                     <div class="apple_overlay" id="photo<{$block.photos[photo].photo_id}>"><a class="close"></a>
                         <img alt="<{$block.photos[photo].photo_title}>" src="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$block.photos[photo].photo_name}>">
@@ -399,19 +399,19 @@
                 <!-- End Overlay -->
                 <!-- Start Fansybox -->
                 <{if $block.ajaxeffect == fancybox}>
-                    <a <{if $block.fancyboxshow == group }>rel="example_group"<{else}>class="example"<{/if}> href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$block.photos[photo].photo_name}>" title="<{$block.photos[photo].photo_title}>"><img class="last" alt="<{$block.photos[photo].photo_title}>" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" /></a>
+                    <a <{if $block.fancyboxshow == group }>rel="example_group"<{else}>class="example"<{/if}> href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$block.photos[photo].photo_name}>" title="<{$block.photos[photo].photo_title}>"><img class="last" alt="<{$block.photos[photo].photo_title}>" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" ></a>
                 <{/if}>
                 <!-- End Fansybox -->
                 <!-- Start prettyPhoto show -->
                 <{if $block.ajaxeffect == prettyphoto}>
                     <ul class="gallery clearfix">
-                        <li><a title="<{$block.photos[photo].photo_title}>" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$block.photos[photo].photo_name}>" rel="prettyPhoto[gallery2]"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" alt="<{$block.photos[photo].photo_title}>" /></a></li>
+                        <li><a title="<{$block.photos[photo].photo_title}>" href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$block.photos[photo].photo_name}>" rel="prettyPhoto[gallery2]"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" alt="<{$block.photos[photo].photo_title}>" ></a></li>
                     </ul>
                 <{/if}>
                 <!-- End prettyPhoto show -->
                 <!-- Start jcarousel show -->
                 <{if $block.ajaxeffect == jcarousel}>
-                    <li><a title="<{$block.photos[photo].photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$block.photos[photo].photo_id}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" alt="<{$block.photos[photo].photo_title}>" title="<{$block.photos[photo].photo_title}>" /></a></li>
+                    <li><a title="<{$block.photos[photo].photo_title}>" href="<{$xoops_url}>/modules/extgallery/public-photo.php?photoId=<{$block.photos[photo].photo_id}>"><img class="thumb" src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$block.photos[photo].photo_name}>" alt="<{$block.photos[photo].photo_title}>" title="<{$block.photos[photo].photo_title}>" ></a></li>
                 <{/if}>
                 <!-- End jcarousel show -->
             <{if $block.title}>

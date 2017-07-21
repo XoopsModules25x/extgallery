@@ -56,7 +56,7 @@ if ($mediaList != '') {
 
         // html code
         echo '<a href="' . $imageUrl . '" title="' . $description . '">';
-        echo '<img src="' . $imageManagerUrl . '"' . $imageDimensions . ' alt="' . $title . '" />';
+        echo '<img src="' . $imageManagerUrl . '"' . $imageDimensions . ' alt="' . $title . '" >';
         echo '</a>';
     }
 

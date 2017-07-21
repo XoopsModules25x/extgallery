@@ -58,4 +58,4 @@ return array(
 
 // module information
 $mod_copyright = "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
-                     <img src='" . EXTGALLERY_AUTHOR_LOGOIMG . "' alt='XOOPS Project' /></a>";
+                     <img src='" . EXTGALLERY_AUTHOR_LOGOIMG . "' alt='XOOPS Project' ></a>";

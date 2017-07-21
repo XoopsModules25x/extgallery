@@ -402,7 +402,7 @@
 
                     <!-- Start Displaying Hook code -->
                     <!--<{if $xoops_isadmin}>
-                    <div class=""> <input type="text" value='[gallery title="<{$photos[photo].photo_title}>"]<{$photos[photo].photo_id}>[/gallery]' /></div>
+                    <div class=""> <input type="text" value='[gallery title="<{$photos[photo].photo_title}>"]<{$photos[photo].photo_id}>[/gallery]' ></div>
                 <{/if}>-->
                     <!-- End Displaying Hook code -->
                 <{/if}>

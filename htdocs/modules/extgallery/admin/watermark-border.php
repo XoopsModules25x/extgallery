@@ -452,16 +452,16 @@ switch ($op) {
             $WTextForm = '<input type="radio" name="watermark_type" value="1"'
                          . $selected1
                          . $onClick
-                         . ' /> <input name="watermark_text" id="watermark_text" size="50" maxlength="255" value="'
+                         . ' > <input name="watermark_text" id="watermark_text" size="50" maxlength="255" value="'
                          . $xoopsModuleConfig['watermark_text']
                          . '" type="text"'
                          . $disable
                          . $style
-                         . ' /><br>';
+                         . ' ><br>';
 
             $selected2 = $xoopsModuleConfig['watermark_type'] == 0 ? ' checked="checked"' : '';
             $onClick   = ' onClick="document.getElementById(\'watermark_text\').disabled = true; document.getElementById(\'watermark_text\').style.backgroundColor = \'#DDDDDD\';"';
-            $WTextForm .= '<input type="radio" name="watermark_type" value="0"' . $selected2 . $onClick . ' /> ' . _AM_EXTGALLERY_PRINT_SUBMITTER_UNAME;
+            $WTextForm .= '<input type="radio" name="watermark_type" value="0"' . $selected2 . $onClick . ' > ' . _AM_EXTGALLERY_PRINT_SUBMITTER_UNAME;
 
             $elementTray->addElement(new XoopsFormLabel('', $WTextForm), false);
             $form->addElement($elementTray);

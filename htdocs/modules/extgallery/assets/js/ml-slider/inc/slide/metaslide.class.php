@@ -114,7 +114,7 @@ class MetaSlide
             }
         }
 
-        $html .= ' />';
+        $html .= ' >';
 
         return $html;
     }

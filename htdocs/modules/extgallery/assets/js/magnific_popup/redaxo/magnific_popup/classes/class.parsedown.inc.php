@@ -579,7 +579,7 @@ class Parsedown
 
                 case 'hr':
 
-                    $markup .= '<hr />' . "\n";
+                    $markup .= '<hr >' . "\n";
 
                     break;
 
@@ -725,7 +725,7 @@ class Parsedown
                         $element['»'] = str_replace('<', '&lt;', $element['»']);
 
                         if ($element['!']) {
-                            $markup .= '<img alt="' . $element['a'] . '" src="' . $element['»'] . '" />';
+                            $markup .= '<img alt="' . $element['a'] . '" src="' . $element['»'] . '" >';
                         } else {
                             $element['a'] = $this->parse_span_elements($element['a'], $markers);
 
@@ -883,7 +883,7 @@ class Parsedown
             $markers[$closest_marker_index] = $closest_marker;
         }
 
-        $markup = str_replace($this->break_marker, '<br />' . "\n", $markup);
+        $markup = str_replace($this->break_marker, '<br >' . "\n", $markup);
 
         return $markup;
     }

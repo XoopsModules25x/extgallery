@@ -307,7 +307,7 @@ define('_AM_EXTGALLERY_EXTENSION_INFO', 'Extension information');
 define('_AM_EXTGALLERY_EXTENSION_NOT_INSTALLED', 'Extension not installed');
 define('_AM_EXTGALLERY_INSTALL_EXTENSION', 'Install extension');
 define('_AM_EXTGALLERY_EXTENSION_OK', 'Extension available');
-define('_AM_EXTGALLERY_EXTENSION_NOTICE', 'This extension allow you to display photo on all the site just by adding a <b>gallery</b> tag to your text. A button (<img src="../assets/images/extgallery-posticon.gif" />) is displayed on XOOPS editor.');
+define('_AM_EXTGALLERY_EXTENSION_NOTICE', 'This extension allow you to display photo on all the site just by adding a <b>gallery</b> tag to your text. A button (<img src="../assets/images/extgallery-posticon.gif" >) is displayed on XOOPS editor.');
 define('_AM_EXTGALLERY_EXT_FILE_DONT_EXIST', "Extension file don't exist on repository :<br><b>Server : </b>%s<br><b>File : </b>%s");
 define('_AM_EXTGALLERY_EXT_FILE_DONT_EXIST_SHORT', "Extension file don't exist");
 define('_AM_EXTGALLERY_EXTENSION_INSTALLED', 'Extension installed');
@@ -315,7 +315,7 @@ define('_AM_EXTGALLERY_EXTENSION_HOWTO', 'How to use:');
 define('_AM_EXTGALLERY_EXTENSION_HOWTODESC', 'To manually install this Extension and use it, you must follow these steps: <br>
 <div class="marg10">1- Add <b>gallery.php</b> to <b>XOOPS_ROOT_PATH /class/textsanitizer/gallery/gallery.php</b> ( you can find  gallery.php in module archive)</div>
 <div class="marg10">2- Edit <b>XOOPS_ROOT_PATH /class/textsanitizer/config.php</b> and add (( <b>"gallery" => 1</b> )) to config extensions  array ( you can find edited file in module archive)</div>
-<div class="marg10"><img src="../assets/images/extensions.png" /></div>
+<div class="marg10"><img src="../assets/images/extensions.png" ></div>
 <div class="marg10">3- You can download <b>gallery.php</b> and <b>config.php</b> at XOOPS SVN</div>
 <div class="marg10">4- If you want to use module install function, you must <b>XOOPS_ROOT_PATH /class/textsanitizer</b> chmod to 777 . after installation you must change chmod to 644.</div>
 ');

@@ -41,7 +41,7 @@
 				<legend style="font-weight:bold; color:#0A3760;"><{$smarty.const._AM_EXTGALLERY_INFORMATION}></legend>
 				<{$smarty.const._AM_EXTGALLERY_WATERMARK_BORDER_EXEMPLE_INFO}>
 			</fieldset>
-		<div style="text-align:center; padding:10px;"><img src="../assets/images/<{$imagetest}>" /></div>
+		<div style="text-align:center; padding:10px;"><img src="../assets/images/<{$imagetest}>" ></div>
 	</fieldset>
 </div>
 <{/if}>

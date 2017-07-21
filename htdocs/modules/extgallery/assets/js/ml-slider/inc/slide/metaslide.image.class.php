@@ -123,21 +123,21 @@ class MetaImageSlide extends MetaSlide
             $row .= "<div class='warning'>" . __('Warning: Image data does not exist. Please re-upload the image.') . '</div>';
         }
         $row .= "                <textarea name='attachment[{$this->slide->ID}][post_excerpt]' placeholder='{$str_caption}'>{$caption}</textarea>";
-        $row .= "                <input class='url' type='text' name='attachment[{$this->slide->ID}][url]' placeholder='{$str_url}' value='{$url}' />";
+        $row .= "                <input class='url' type='text' name='attachment[{$this->slide->ID}][url]' placeholder='{$str_url}' value='{$url}' >";
         $row .= "                <div class='new_window'>";
-        $row .= "                    <label>{$str_new_window}<input type='checkbox' name='attachment[{$this->slide->ID}][new_window]' {$target} /></label>";
+        $row .= "                    <label>{$str_new_window}<input type='checkbox' name='attachment[{$this->slide->ID}][new_window]' {$target} ></label>";
         $row .= '                </div>';
         $row .= '            </div>';
         $row .= "            <div class='tab tab-2' style='display: none;'>";
         $row .= "                <div class='row'><label>" . __('Image Title Text', 'metaslider') . '</label></div>';
-        $row .= "                <div class='row'><input type='text' size='50' name='attachment[{$this->slide->ID}][title]' value='{$title}' /></div>";
+        $row .= "                <div class='row'><input type='text' size='50' name='attachment[{$this->slide->ID}][title]' value='{$title}' ></div>";
         $row .= "                <div class='row'><label>" . __('Image Alt Text', 'metaslider') . '</label></div>';
-        $row .= "                <div class='row'><input type='text' size='50' name='attachment[{$this->slide->ID}][alt]' value='{$alt}' /></div>";
+        $row .= "                <div class='row'><input type='text' size='50' name='attachment[{$this->slide->ID}][alt]' value='{$alt}' ></div>";
         $row .= '            </div>';
         $row .= '        </div>';
-        $row .= "        <input type='hidden' name='attachment[{$this->slide->ID}][type]' value='image' />";
-        $row .= "        <input type='hidden' class='menu_order' name='attachment[{$this->slide->ID}][menu_order]' value='{$this->slide->menu_order}' />";
-        $row .= "        <input type='hidden' name='resize_slide_id' data-slide_id='{$this->slide->ID}' data-width='{$this->settings['width']}' data-height='{$this->settings['height']}' />";
+        $row .= "        <input type='hidden' name='attachment[{$this->slide->ID}][type]' value='image' >";
+        $row .= "        <input type='hidden' class='menu_order' name='attachment[{$this->slide->ID}][menu_order]' value='{$this->slide->menu_order}' >";
+        $row .= "        <input type='hidden' name='resize_slide_id' data-slide_id='{$this->slide->ID}' data-width='{$this->settings['width']}' data-height='{$this->settings['height']}' >";
         $row .= '    </td>';
         $row .= '</tr>';
 

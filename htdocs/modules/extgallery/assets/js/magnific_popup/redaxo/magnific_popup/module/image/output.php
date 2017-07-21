@@ -50,7 +50,7 @@ if ($imageFile != '') {
     // html code
     echo '<div class="magnific-popup-container">';
     echo '<a class="magnific-popup-image" href="' . $imageUrl . '" title="' . $description . '">';
-    echo '<img src="' . $imageManagerUrl . '"' . $imageDimensions . ' alt="' . $title . '" />';
+    echo '<img src="' . $imageManagerUrl . '"' . $imageDimensions . ' alt="' . $title . '" >';
     echo '</a>';
     echo '</div>';
 }

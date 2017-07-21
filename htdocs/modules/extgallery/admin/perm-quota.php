@@ -146,7 +146,7 @@ switch ($step) {
                  . $perm['name']
                  . 'Icon\');"><img id="'
                  . $perm['name']
-                 . 'Icon" src="../assets/images/minus.gif" />&nbsp;'
+                 . 'Icon" src="../assets/images/minus.gif" >&nbsp;'
                  . constant($perm['title'])
                  . '</a></legend><div id="'
                  . $perm['name']
@@ -180,7 +180,7 @@ switch ($step) {
                  . $perm['name']
                  . 'Icon\');"><img id="'
                  . $perm['name']
-                 . 'Icon" src="../assets/images/minus.gif" />&nbsp;'
+                 . 'Icon" src="../assets/images/minus.gif" >&nbsp;'
                  . constant($perm['title'])
                  . '</a></legend><div id="'
                  . $perm['name']
@@ -197,7 +197,7 @@ switch ($step) {
         /**
          * Public category permission mask
          */
-        echo '<fieldset id="defaultBookmark"><legend><a href="#defaultBookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'default\'); toggleIcon(\'defaultIcon\');"><img id="defaultIcon" src="../assets/images/minus.gif" />&nbsp;'
+        echo '<fieldset id="defaultBookmark"><legend><a href="#defaultBookmark" style="font-weight:bold; color:#990000;" onClick="toggle(\'default\'); toggleIcon(\'defaultIcon\');"><img id="defaultIcon" src="../assets/images/minus.gif" >&nbsp;'
              . _AM_EXTGALLERY_PUBLIC_PERM_MASK
              . '</a></legend><div id="default">';
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTGALLERY_INFORMATION . '</legend>';
@@ -228,19 +228,19 @@ switch ($step) {
 
             foreach ($modulePermArray as $perm) {
                 $permAccessGroup = $gpermHandler->getGroupIds('extgallery_public_mask', $perm['maskId'], $module_id);
-                echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extgallery_public_mask][group][' . $k . '][' . $perm['maskId'] . ']" type="checkbox"' . getChecked($permAccessGroup, $k) . ' /></td>';
+                echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extgallery_public_mask][group][' . $k . '][' . $perm['maskId'] . ']" type="checkbox"' . getChecked($permAccessGroup, $k) . ' ></td>';
             }
 
             foreach ($pluginPermArray as $perm) {
                 $permAccessGroup = $gpermHandler->getGroupIds('extgallery_public_mask', $perm['maskId'], $module_id);
-                echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extgallery_public_mask][group][' . $k . '][' . $perm['maskId'] . ']" type="checkbox"' . getChecked($permAccessGroup, $k) . ' /></td>';
+                echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extgallery_public_mask][group][' . $k . '][' . $perm['maskId'] . ']" type="checkbox"' . getChecked($permAccessGroup, $k) . ' ></td>';
             }
 
             echo '</tr>';
         }
-        echo '<input type="hidden" name="type" value="public" />';
-        echo '<input type="hidden" name="step" value="enreg" />';
-        echo '<tr><td colspan="' . $nbPerm . '" style="text-align:center;" class="head"><input type="submit" value="' . _SUBMIT . '" /></td></tr></form>';
+        echo '<input type="hidden" name="type" value="public" >';
+        echo '<input type="hidden" name="step" value="enreg" >';
+        echo '<tr><td colspan="' . $nbPerm . '" style="text-align:center;" class="head"><input type="submit" value="' . _SUBMIT . '" ></td></tr></form>';
         echo '</table><br>';
 
         echo '</div></fieldset><br>';

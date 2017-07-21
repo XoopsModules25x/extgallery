@@ -15,8 +15,8 @@ class rex_magnific_popup_utils
 
         $insert = PHP_EOL;
         $insert .= "\t" . '<!-- BEGIN AddOn Magnific Popup -->' . PHP_EOL;
-        $insert .= "\t" . '<link rel="stylesheet" type="text/css" href="' . $REX['HTDOCS_PATH'] . 'files/addons/magnific_popup/magnific-popup.css" media="screen" />' . PHP_EOL;
-        $insert .= "\t" . '<link rel="stylesheet" type="text/css" href="' . $REX['HTDOCS_PATH'] . 'files/addons/magnific_popup/custom.css" media="screen" />' . PHP_EOL;
+        $insert .= "\t" . '<link rel="stylesheet" type="text/css" href="' . $REX['HTDOCS_PATH'] . 'files/addons/magnific_popup/magnific-popup.css" media="screen" >' . PHP_EOL;
+        $insert .= "\t" . '<link rel="stylesheet" type="text/css" href="' . $REX['HTDOCS_PATH'] . 'files/addons/magnific_popup/custom.css" media="screen" >' . PHP_EOL;
 
         if ($REX['ADDON']['magnific_popup']['settings']['include_jquery'] == 1) {
             $insert .= "\t" . '<script type="text/javascript" src="' . $REX['HTDOCS_PATH'] . 'files/addons/magnific_popup/jquery.min.js"></script>' . PHP_EOL;

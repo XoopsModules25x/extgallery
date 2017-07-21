@@ -145,7 +145,7 @@ class MetaSliderSystemCheck
             $file_path = $child_footer;
         }
 
-        $error = "Required call to wp_footer() not found in file <b>{$file_path}</b>. <br /><br />Please check the <a href='http://codex.wordpress.org/Function_Reference/wp_footer'>wp_footer()</a> documentation and make sure your theme has a call to wp_footer() just above the closing </body> tag.";
+        $error = "Required call to wp_footer() not found in file <b>{$file_path}</b>. <br ><br >Please check the <a href='http://codex.wordpress.org/Function_Reference/wp_footer'>wp_footer()</a> documentation and make sure your theme has a call to wp_footer() just above the closing </body> tag.";
         $this->printMessage($error, $key);
     }
 
@@ -157,6 +157,6 @@ class MetaSliderSystemCheck
     private function printMessage($message, $key)
     {
         $nonce = wp_create_nonce("metaslider-dismiss-{$key}");
-        echo "<div id='message' class='updated'><p><b>Warning:</b> {$message}<br /><br /><a class='button' href='?page=metaslider&dismissMessage={$key}&_wpnonce={$nonce}'>Hide</a></p></div>";
+        echo "<div id='message' class='updated'><p><b>Warning:</b> {$message}<br ><br ><a class='button' href='?page=metaslider&dismissMessage={$key}&_wpnonce={$nonce}'>Hide</a></p></div>";
     }
 }

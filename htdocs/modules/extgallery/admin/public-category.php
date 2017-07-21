@@ -143,7 +143,7 @@ switch ($op) {
                 $form->addElement(new XoopsFormText(_AM_EXTGALLERY_WEIGHT, 'cat_weight', '4', '4', $cat->getVar('cat_weight')), false);
                 $form->addElement(new XoopsFormDhtmlTextArea(_AM_EXTGALLERY_DESC, 'cat_desc', $cat->getVar('cat_desc', 'e')), false);
                 $elementTrayThumb = new XoopsFormElementTray(_AM_EXTGALLERY_THUMB);
-                $elementTrayThumb->addElement(new XoopsFormLabel('', $photoSelect . "<img style=\"float:left; margin-top:5px;\" id=\"thumb\" src=\"$selectedPhoto\" />"));
+                $elementTrayThumb->addElement(new XoopsFormLabel('', $photoSelect . "<img style=\"float:left; margin-top:5px;\" id=\"thumb\" src=\"$selectedPhoto\" >"));
                 $form->addElement(new XoopsFormText(_AM_EXTGALLERY_CAT_IMG, 'cat_imgurl', '70', '150', $cat->getVar('cat_imgurl', 'e')), false);
                 $form->addElement($elementTrayThumb);
                 $elementTrayButton = new XoopsFormElementTray('');

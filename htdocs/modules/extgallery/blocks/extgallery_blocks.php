@@ -420,7 +420,7 @@ function extgalleryBlockEdit($options)
     /** @var ExtgalleryCat $catHandler */
     $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
 
-    $form = _MB_EXTGALLERY_PHOTO_NUMBER . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[0] . "\" type=\"text\" /><br>";
+    $form = _MB_EXTGALLERY_PHOTO_NUMBER . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[0] . "\" type=\"text\" ><br>";
 
     $Selected = new XoopsFormSelect(_MB_EXTGALLERY_DIRECTION, 'options[]', $options[1]);
     $Selected->addOption('0', _MB_EXTGALLERY_HORIZONTALLY);
@@ -436,7 +436,7 @@ function extgalleryBlockEdit($options)
         $nChecked = ' checked';
     }
 
-    $form .= _MB_EXTGALLERY_DISPLAY_TITLE . ' : <input type="radio" name="options[]" value="1"' . $yChecked . ' />&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[]" value="0"' . $nChecked . ' />' . _NO . '<br>';
+    $form .= _MB_EXTGALLERY_DISPLAY_TITLE . ' : <input type="radio" name="options[]" value="1"' . $yChecked . ' >&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[]" value="0"' . $nChecked . ' >' . _NO . '<br>';
 
     $effectTypeSelect = new XoopsFormSelect(_MB_EXTGALLERY_SHOW_TYPE, 'options[]', $options[3]);
     $effectTypeSelect->addOption('RandomPhoto', _MB_EXTGALLERY_TYPE_OP1);
@@ -467,22 +467,22 @@ function extgalleryBlockEdit($options)
 
     //for overlay
     $form .= "<fieldset><legend style='font-weight:bold; color:#990000;'>" . _MB_EXTGALLERY_AJAX_OVERLAY . '</legend>';
-    $form .= _MB_EXTGALLERY_OVERLAY_BG . " : <input name=\"options[]\" size=\"7\" maxlength=\"7\" value=\"" . $options[6] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_OVERLAY_WIDTH . " : <input name=\"options[]\" size=\"5\" maxlength=\"5\" value=\"" . $options[7] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_OVERLAY_HEIGHT . " : <input name=\"options[]\" size=\"5\" maxlength=\"5\" value=\"" . $options[8] . "\" type=\"text\" /><br>";
+    $form .= _MB_EXTGALLERY_OVERLAY_BG . " : <input name=\"options[]\" size=\"7\" maxlength=\"7\" value=\"" . $options[6] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_OVERLAY_WIDTH . " : <input name=\"options[]\" size=\"5\" maxlength=\"5\" value=\"" . $options[7] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_OVERLAY_HEIGHT . " : <input name=\"options[]\" size=\"5\" maxlength=\"5\" value=\"" . $options[8] . "\" type=\"text\" ><br>";
     $form .= '</fieldset><br>';
 
     //for tooltip
     $form .= "<fieldset><legend style='font-weight:bold; color:#990000;'>" . _MB_EXTGALLERY_AJAX_TOOLTIP . '</legend>';
-    $form .= _MB_EXTGALLERY_TOOLTIP_WIDTH . " : <input name=\"options[]\" size=\"5\" maxlength=\"5\" value=\"" . $options[9] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_TOOLTIP_BORDER_WIDTH . " : <input name=\"options[]\" size=\"5\" maxlength=\"5\" value=\"" . $options[10] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_TOOLTIP_BORDERCOLOR . " : <input name=\"options[]\" size=\"7\" maxlength=\"7\" value=\"" . $options[11] . "\" type=\"text\" /><br>";
+    $form .= _MB_EXTGALLERY_TOOLTIP_WIDTH . " : <input name=\"options[]\" size=\"5\" maxlength=\"5\" value=\"" . $options[9] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_TOOLTIP_BORDER_WIDTH . " : <input name=\"options[]\" size=\"5\" maxlength=\"5\" value=\"" . $options[10] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_TOOLTIP_BORDERCOLOR . " : <input name=\"options[]\" size=\"7\" maxlength=\"7\" value=\"" . $options[11] . "\" type=\"text\" ><br>";
     $form .= '</fieldset><br>';
 
     //for fancybox
     $form .= "<fieldset><legend style='font-weight:bold; color:#990000;'>" . _MB_EXTGALLERY_AJAX_FANCYBOX . '</legend>';
-    $form .= _MB_EXTGALLERY_FANCYBOX_BGCOLOR . " : <input name=\"options[]\" size=\"7\" maxlength=\"7\" value=\"" . $options[12] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_FANCYBOX_OPACITY . " : <input name=\"options[]\" size=\"5\" maxlength=\"5\" value=\"" . $options[13] . "\" type=\"text\" /><br>";
+    $form .= _MB_EXTGALLERY_FANCYBOX_BGCOLOR . " : <input name=\"options[]\" size=\"7\" maxlength=\"7\" value=\"" . $options[12] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_FANCYBOX_OPACITY . " : <input name=\"options[]\" size=\"5\" maxlength=\"5\" value=\"" . $options[13] . "\" type=\"text\" ><br>";
     $fancyboxtinSelect = new XoopsFormSelect(_MB_EXTGALLERY_FANCYBOX_TIN, 'options[]', $options[14]);
     $fancyboxtinSelect->addOption('none', _MB_EXTGALLERY_FANCYBOX_NONE);
     $fancyboxtinSelect->addOption('elastic', _MB_EXTGALLERY_FANCYBOX_ELASTIC);
@@ -515,7 +515,7 @@ function extgalleryBlockEdit($options)
     $prettythemeSelect->addOption('light_rounded', _MB_EXTGALLERY_PRETTPHOTO_THEME4);
     $prettythemeSelect->addOption('light_square', _MB_EXTGALLERY_PRETTPHOTO_THEME5);
     $form .= _MB_EXTGALLERY_PRETTPHOTO_THEME . ' : ' . $prettythemeSelect->render() . '<br>';
-    $form .= _MB_EXTGALLERY_PRETTPHOTO_SLIDESPEED . " : <input name=\"options[]\" size=\"5\" maxlength=\"5\" value=\"" . $options[20] . "\" type=\"text\" /><br>";
+    $form .= _MB_EXTGALLERY_PRETTPHOTO_SLIDESPEED . " : <input name=\"options[]\" size=\"5\" maxlength=\"5\" value=\"" . $options[20] . "\" type=\"text\" ><br>";
     $prettyautoplaySelect = new XoopsFormSelect(_MB_EXTGALLERY_PRETTPHOTO_AUTOPLAY, 'options[]', $options[21]);
     $prettyautoplaySelect->addOption('true', _MB_EXTGALLERY_TRUE);
     $prettyautoplaySelect->addOption('false', _MB_EXTGALLERY_FALSE);
@@ -524,13 +524,13 @@ function extgalleryBlockEdit($options)
 
     //for jcarousel
     $form .= "<fieldset><legend style='font-weight:bold; color:#990000;'>" . _MB_EXTGALLERY_AJAX_JCAROUSEL . '</legend>';
-    $form .= _MB_EXTGALLERY_JCAROUSEL_HWIDTH . " : <input name=\"options[]\" size=\"7\" maxlength=\"7\" value=\"" . $options[22] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_JCAROUSEL_VWIDTH . " : <input name=\"options[]\" size=\"7\" maxlength=\"7\" value=\"" . $options[23] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_JCAROUSEL_VHIGHT . " : <input name=\"options[]\" size=\"7\" maxlength=\"7\" value=\"" . $options[24] . "\" type=\"text\" /><br>";
+    $form .= _MB_EXTGALLERY_JCAROUSEL_HWIDTH . " : <input name=\"options[]\" size=\"7\" maxlength=\"7\" value=\"" . $options[22] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_JCAROUSEL_VWIDTH . " : <input name=\"options[]\" size=\"7\" maxlength=\"7\" value=\"" . $options[23] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_JCAROUSEL_VHIGHT . " : <input name=\"options[]\" size=\"7\" maxlength=\"7\" value=\"" . $options[24] . "\" type=\"text\" ><br>";
     $form .= '</fieldset><br>';
 
     $form .= "<fieldset><legend style='font-weight:bold; color:#990000;'>" . _MB_EXTGALLERY_TABLE . '</legend>';
-    $form .= _MB_EXTGALLERY_PHOTO_NUMBER_TABLE . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[25] . "\" type=\"text\" /><br>";
+    $form .= _MB_EXTGALLERY_PHOTO_NUMBER_TABLE . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[25] . "\" type=\"text\" ><br>";
     $form .= '</fieldset><br>';
 
     array_shift($options);
@@ -577,7 +577,7 @@ function extgalleryAjaxEdit($options)
 
     $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
 
-    $form = _MB_EXTGALLERY_PHOTO_NUMBER . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[0] . "\" type=\"text\" /><br>";
+    $form = _MB_EXTGALLERY_PHOTO_NUMBER . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[0] . "\" type=\"text\" ><br>";
 
     $showTypeSelect = new XoopsFormSelect(_MB_EXTGALLERY_SHOW_TYPE, 'options[]', $options[1]);
     $showTypeSelect->addOption('RandomPhoto', _MB_EXTGALLERY_TYPE_OP1);
@@ -602,20 +602,20 @@ function extgalleryAjaxEdit($options)
     $form .= '</fieldset><br>';
 
     $form .= "<fieldset><legend style='font-weight:bold; color:#990000;'>" . _MB_EXTGALLERY_GVIEW . '</legend>';
-    $form .= _MB_EXTGALLERY_PANEL_WIDTH . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[4] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_PANEL_HEIGHT . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[5] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_FRAME_WIDTH . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[6] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_FRAME_HEIGHT . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[7] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_BACKGROUND . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[8] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_TRANSITION_SPEED . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[9] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_TRANSITION_INTERVAL . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[10] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_OVERLAY_HEIGHT . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[11] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_OVERLAY_COLOR . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[12] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_OVERLAY_TEXT_COLOR . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[13] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_CAPTION_TEXT_COLOR . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[14] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_BORDER . " : <input name=\"options[]\" size=\"20\" maxlength=\"255\" value=\"" . $options[15] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_OVERLAY_OPACITY . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[16] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_OVERLAY_FONT_SIZE . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[17] . "\" type=\"text\" /><br>";
+    $form .= _MB_EXTGALLERY_PANEL_WIDTH . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[4] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_PANEL_HEIGHT . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[5] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_FRAME_WIDTH . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[6] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_FRAME_HEIGHT . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[7] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_BACKGROUND . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[8] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_TRANSITION_SPEED . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[9] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_TRANSITION_INTERVAL . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[10] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_OVERLAY_HEIGHT . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[11] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_OVERLAY_COLOR . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[12] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_OVERLAY_TEXT_COLOR . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[13] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_CAPTION_TEXT_COLOR . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[14] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_BORDER . " : <input name=\"options[]\" size=\"20\" maxlength=\"255\" value=\"" . $options[15] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_OVERLAY_OPACITY . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[16] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_OVERLAY_FONT_SIZE . " : <input name=\"options[]\" size=\"6\" maxlength=\"255\" value=\"" . $options[17] . "\" type=\"text\" ><br>";
     $themeSelect = new XoopsFormSelect(_MB_EXTGALLERY_SELECT_THEME, 'options[]', $options[18]);
     $themeSelect->addOption('light', _MB_EXTGALLERY_LIGHT);
     $themeSelect->addOption('dark', _MB_EXTGALLERY_DARK);
@@ -635,10 +635,10 @@ function extgalleryAjaxEdit($options)
     $form .= '</fieldset><br>';
 
     $form .= "<fieldset><legend style='font-weight:bold; color:#990000;'>" . _MB_EXTGALLERY_GRIA . '</legend>';
-    $form .= _MB_EXTGALLERY_GRIA_WIDTH . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[21] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_GRIA_HEIGHT . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[22] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_GRIA_BGCOLOR . " : <input name=\"options[]\" size=\"7\" maxlength=\"255\" value=\"" . $options[23] . "\" type=\"text\" /><br>";
-    $form .= _MB_EXTGALLERY_GRIA_BCOLOR . " : <input name=\"options[]\" size=\"7\" maxlength=\"255\" value=\"" . $options[24] . "\" type=\"text\" /><br>";
+    $form .= _MB_EXTGALLERY_GRIA_WIDTH . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[21] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_GRIA_HEIGHT . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[22] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_GRIA_BGCOLOR . " : <input name=\"options[]\" size=\"7\" maxlength=\"255\" value=\"" . $options[23] . "\" type=\"text\" ><br>";
+    $form .= _MB_EXTGALLERY_GRIA_BCOLOR . " : <input name=\"options[]\" size=\"7\" maxlength=\"255\" value=\"" . $options[24] . "\" type=\"text\" ><br>";
     $bgimgSelect = new XoopsFormSelect(_MB_EXTGALLERY_GRIA_BGIMG, 'options[]', $options[25]);
     $bgimgSelect->addOption('classic-map', _MB_EXTGALLERY_GRIA_BGIMG_OP1);
     $bgimgSelect->addOption('classic-map-b', _MB_EXTGALLERY_GRIA_BGIMG_OP2);
@@ -655,7 +655,7 @@ function extgalleryAjaxEdit($options)
     $select_trans->addOption('slide', _MB_EXTGALLERY_GRIA_TRANS_TYP4);
     $select_trans->addOption('fadeslide', _MB_EXTGALLERY_GRIA_TRANS_TYP5);
     $form .= _MB_EXTGALLERY_GRIA_TRANS . ' : ' . $select_trans->render() . '<br>';
-    $form .= _MB_EXTGALLERY_GRIA_TSPEED . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[28] . "\" type=\"text\" /><br>";
+    $form .= _MB_EXTGALLERY_GRIA_TSPEED . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[28] . "\" type=\"text\" ><br>";
 
     $form .= '</fieldset><br>';
 
@@ -715,7 +715,7 @@ function extgalleryTopSubmitterEdit($options)
 
     $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
 
-    $form = _MB_EXTGALLERY_USER_NUMBER . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[0] . "\" type=\"text\" /><br>";
+    $form = _MB_EXTGALLERY_USER_NUMBER . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[0] . "\" type=\"text\" ><br>";
 
     array_shift($options);
 
@@ -804,7 +804,7 @@ function extgalleryListEdit($options)
 {
     global $xoopsUser;
     $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
-    $form       = _MB_EXTGALLERY_PHOTO_NUMBER . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[0] . "\" type=\"text\" /><br>";
+    $form       = _MB_EXTGALLERY_PHOTO_NUMBER . " : <input name=\"options[]\" size=\"5\" maxlength=\"255\" value=\"" . $options[0] . "\" type=\"text\" ><br>";
     //==================================
     $y2Checked = '';
     $n2Checked = '';
@@ -813,7 +813,7 @@ function extgalleryListEdit($options)
     } else {
         $n2Checked = ' checked';
     }
-    $form .= _MB_EXTGALLERY_DISPLAY_DATE . ' : <input type="radio" name="options[1]" value="1"' . $y2Checked . ' />&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[1]" value="0"' . $n2Checked . ' />' . _NO . '<br>';
+    $form .= _MB_EXTGALLERY_DISPLAY_DATE . ' : <input type="radio" name="options[1]" value="1"' . $y2Checked . ' >&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[1]" value="0"' . $n2Checked . ' >' . _NO . '<br>';
     //==================================
     $y3Checked = '';
     $n3Checked = '';
@@ -822,7 +822,7 @@ function extgalleryListEdit($options)
     } else {
         $n3Checked = ' checked';
     }
-    $form .= _MB_EXTGALLERY_DISPLAY_HITS . ' : <input type="radio" name="options[2]" value="1"' . $y3Checked . ' />&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[2]" value="0"' . $n3Checked . ' />' . _NO . '<br>';
+    $form .= _MB_EXTGALLERY_DISPLAY_HITS . ' : <input type="radio" name="options[2]" value="1"' . $y3Checked . ' >&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[2]" value="0"' . $n3Checked . ' >' . _NO . '<br>';
     //==================================
     $y4Checked = '';
     $n4Checked = '';
@@ -831,7 +831,7 @@ function extgalleryListEdit($options)
     } else {
         $n4Checked = ' checked';
     }
-    $form .= _MB_EXTGALLERY_DISPLAY_RATE . ' : <input type="radio" name="options[3]" value="1"' . $y4Checked . ' />&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[3]" value="0"' . $n4Checked . ' />' . _NO . '<br>';
+    $form .= _MB_EXTGALLERY_DISPLAY_RATE . ' : <input type="radio" name="options[3]" value="1"' . $y4Checked . ' >&nbsp;' . _YES . '&nbsp;&nbsp;<input type="radio" name="options[3]" value="0"' . $n4Checked . ' >' . _NO . '<br>';
     //==================================
     $effectTypeSelect = new XoopsFormSelect(_MB_EXTGALLERY_SHOW_TYPE, 'options[]', $options[4]);
     $effectTypeSelect->addOption('RandomPhoto', _MB_EXTGALLERY_TYPE_OP1);
