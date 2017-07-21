@@ -335,7 +335,7 @@ define('_AM_EXTGALLERY_ABOUT_AUTHOR_INFO', 'Author Info');
 define('_AM_EXTGALLERY_ABOUT_DESCRIPTION', 'Description: ');
 
 // text in admin footer
-define('_AM_EXTGALLERY_ADMIN_FOOTER', "<div class='right smallsmall italic pad5'>XOOPS Tag is maintained by the <a class='tooltip' rel='external' href='http://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
+define('_AM_EXTGALLERY_ADMIN_FOOTER', "<div class='right smallsmall italic pad5'>XOOPS Tag is maintained by the <a class='tooltip' rel='external' href='https://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
 define('_EXTGALLERY_ADMIN_', ' '); //
 
 // Add File size define (cesagonchu)
