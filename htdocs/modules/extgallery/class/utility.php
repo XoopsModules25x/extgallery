@@ -125,7 +125,7 @@ class ExtgalleryUtility extends XoopsObject
         // check for minimum PHP version
         $success = true;
         $verNum  = phpversion();
-        $reqVer  =& $module->getInfo('min_php');
+        $reqVer  = $module->getInfo('min_php');
         if (false !== $reqVer && '' !== $reqVer) {
             if (version_compare($verNum, $reqVer, '<')) {
                 $module->setErrors(sprintf(_AM_TAG_ERROR_BAD_PHP, $reqVer, $verNum));
@@ -164,7 +164,7 @@ class ExtgalleryUtility extends XoopsObject
             /** @var XoopsModuleHandler $moduleHandler */
             $configHandler = xoops_getHandler('config');
             if ($module) {
-                $configurator =& $configHandler->getConfigsByCat(0, $module->getVar('mid'));
+                $configurator = $configHandler->getConfigsByCat(0, $module->getVar('mid'));
                 if (isset($configurator[$option])) {
                     $retval = $configurator[$option];
                 }
