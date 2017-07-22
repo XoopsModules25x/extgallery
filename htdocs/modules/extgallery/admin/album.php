@@ -29,7 +29,7 @@ if (isset($_POST['op'])) {
 switch ($op) {
 
     case 'overlay':
-        /** @var XoopsConfigHandler $configHandler */
+        /** @var XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -100,7 +100,7 @@ switch ($op) {
         break;
 
     case 'tooltip':
-        /** @var XoopsConfigHandler $configHandler */
+        /** @var XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -191,7 +191,7 @@ switch ($op) {
         break;
 
     case 'fancybox':
-        /** @var XoopsConfigHandler $configHandler */
+        /** @var XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -325,7 +325,7 @@ switch ($op) {
         break;
 
     case 'prettyphoto':
-        /** @var XoopsConfigHandler $configHandler */
+        /** @var XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 

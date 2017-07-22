@@ -38,7 +38,7 @@ function gal_getmoduleoption($option)
         $moduleHandler = xoops_getHandler('module');
         $module        = $moduleHandler->getByDirname('extgallery');
 
-        /** @var XoopsConfigHandler $configHandler */
+        /** @var XoopsModuleHandler $moduleHandler */
         $configHandler = xoops_getHandler('config');
         if ($module) {
             $moduleConfig =& $configHandler->getConfigsByCat(0, $module->getVar('mid'));

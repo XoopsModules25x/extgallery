@@ -161,7 +161,7 @@ class ExtgalleryUtility extends XoopsObject
             $moduleHandler = xoops_getHandler('module');
             $module        = $moduleHandler->getByDirname('extgallery');
 
-            /** @var XoopsConfigHandler $configHandler */
+            /** @var XoopsModuleHandler $moduleHandler */
             $configHandler = xoops_getHandler('config');
             if ($module) {
                 $configurator =& $configHandler->getConfigsByCat(0, $module->getVar('mid'));

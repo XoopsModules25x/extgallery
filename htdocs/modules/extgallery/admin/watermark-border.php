@@ -94,7 +94,7 @@ switch ($op) {
     case 'conf':
         switch ($step) {
             case 'enreg':
-                /** @var XoopsConfigHandler $configHandler */
+                /** @var XoopsModuleHandler $moduleHandler */
                 $configHandler    = xoops_getHandler('config');
                 $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 

@@ -363,6 +363,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         if ($count > 0) {
             $in = '(' . $cats[0]->getVar('cat_id');
             array_shift($cats);
+            /** @var ExtgalleryCat $cat */
             foreach ($cats as $cat) {
                 $in .= ',' . $cat->getVar('cat_id');
             }
@@ -856,6 +857,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
 
         $photoStatus = $this->addLocalPhoto($catId, $this->photoUploader->getSavedFileName(), $photoTitle, $photoDesc,
                                             $photoExtra, $photoTag);
+        /** @var ExtgalleryCat $cat */
         $cat         = $catHandler->getCat($catId);
         $cat->setVar('cat_isalbum', 1);
         $catHandler->insert($cat);

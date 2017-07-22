@@ -32,6 +32,7 @@ $attributes['rel']   = $rel;
 $attributes['type']  = 'application/rss+xml';
 $attributes['title'] = _MD_EXTGALLERY_RSS;
 $attributes['href']  = XOOPS_URL . '/modules/extgallery/public-rss.php';
+/** @var xos_opal_Theme $xoTheme */
 $xoTheme->addMeta('link', $rel, $attributes);
 $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 

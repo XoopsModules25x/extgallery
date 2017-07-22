@@ -150,11 +150,11 @@ foreach (array_keys($photos) as $i) {
 // END HACK DATE BY MAGE : DISPLAY PUBLICATION DATE
 
 $xoopsTpl->assign('photos', $photos);
+/** @var xos_opal_Theme $xoTheme */
 
 $pageNav = new XoopsPageNav($photoHandler->getAlbumCount($catId), $xoopsModuleConfig['nb_column'] * $xoopsModuleConfig['nb_line'], $start, 'start',
                             'id=' . $catId . '&orderby=' . $orderby . '&sortby=' . $sortby); //xoops - blueteen - tri de l'affichage
 $xoopsTpl->assign('pageNav', $pageNav->renderNav());
-
 if (isset($catObj)) {
     $xoopsTpl->assign('xoops_pagetitle', $catObj->getVar('cat_name'));
     $xoTheme->addMeta('meta', 'description', $catObj->getVar('cat_desc'));

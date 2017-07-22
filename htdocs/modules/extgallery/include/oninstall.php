@@ -60,7 +60,7 @@ function xoops_module_install_extgallery(XoopsModule $xoopsModule)
     $module_id = $xoopsModule->getVar('mid');
     /** @var XoopsGroupPermHandler $gpermHandler */
     $gpermHandler = xoops_getHandler('groupperm');
-    /** @var XoopsConfigHandler $configHandler */
+    /** @var XoopsModuleHandler $moduleHandler */
     $configHandler = xoops_getHandler('config');
 
     /**

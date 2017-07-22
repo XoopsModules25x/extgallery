@@ -27,7 +27,7 @@ if (!isset($_GET['id'])) {
 }
 
 $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
-
+/** @var ExtgalleryCat $catObj */
 $catObj = $catHandler->getCat($catId);
 
 if (null === $catObj) {
@@ -43,7 +43,7 @@ $xoopsTpl->assign('catPath', $catPath);
 
 $catChild = $catHandler->objectToArray($catHandler->getChildren($catId), array('photo_id'));
 $xoopsTpl->assign('catChild', $catChild);
-
+/** @var xos_opal_Theme $xoTheme */
 if (isset($catObj)) {
     $xoopsTpl->assign('xoops_pagetitle', $catObj->getVar('cat_name'));
     $xoTheme->addMeta('meta', 'description', $catObj->getVar('cat_desc'));

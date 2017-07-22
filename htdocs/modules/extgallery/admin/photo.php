@@ -80,6 +80,7 @@ switch ($op) {
         }
 
         // If isn't an album when stop the traitment
+        /** @var ExtgalleryCat $cat */
         $cat = $catHandler->getCat($_POST['cat_id']);
         if ($cat->getVar('nright') - $cat->getVar('nleft') != 1) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_NOT_AN_ALBUM);
@@ -120,7 +121,7 @@ switch ($op) {
                 break;
             }
         }
-
+        global $xoopsUser;
         // Set the category as album only if photo is approve
         require_once __DIR__ . '/../class/publicPerm.php';
         $permHandler = ExtgalleryPublicPermHandler::getInstance();
@@ -138,10 +139,10 @@ switch ($op) {
             $photoMore = count($photos) - $i;
             echo '<h4>' . sprintf(_AM_EXTGALLERY_BATCH_CONTINUE_MESSAGE, $i + $nbPhotos, $photoMore) . '</h4>';
             echo '<form method="post" action="photo.php?op=batchAdd">';
-            echo '<input type="hidden" name="cat_id" value="' . $_POST['cat_id'] . '" >';
-            echo '<input type="hidden" name="photo_desc" value="' . $_POST['photo_desc'] . '" >';
-            echo '<input type="hidden" name="nbPhoto" value="' . ($i + $nbPhotos) . '" >';
-            echo '<input type="submit" name="confirm_submit" value="Continue" >';
+            echo '<input type="hidden" name="cat_id" value="' . $_POST['cat_id'] . '">';
+            echo '<input type="hidden" name="photo_desc" value="' . $_POST['photo_desc'] . '">';
+            echo '<input type="hidden" name="nbPhoto" value="' . ($i + $nbPhotos) . '">';
+            echo '<input type="submit" name="confirm_submit" value="Continue">';
             echo '</form>';
             echo '</div>';
 
@@ -391,6 +392,7 @@ switch ($op) {
                     }
 
                     $nbPhotoDeleted = count($_POST['photoId']);
+                    /** @var ExtgalleryCat $cat */
                     $cat            = $catHandler->getCat($_POST['cat_id']);
 
                     if ($cat->getVar('cat_nb_photo') == $nbPhotoDeleted) {
@@ -441,7 +443,7 @@ switch ($op) {
                 echo '<div style="text-align:right;">' . $pageNav->renderNav() . '</div>' . "\n";
                 echo '<form action="photo.php?op=modify" method="post">' . "\n";
                 echo '<table class="outer" style="width:100%; text-align:center;"><tr>' . "\n";
-                echo '<th><input type="checkbox" name="selectAllPhoto" id="selectAllPhoto" onClick="return checkAllPhoto();" ></th>' . "\n";
+                echo '<th><input type="checkbox" name="selectAllPhoto" id="selectAllPhoto" onClick="return checkAllPhoto();"></th>' . "\n";
                 echo '<th>' . _AM_EXTGALLERY_PHOTO . '</th>' . "\n";
                 echo '<th>' . _AM_EXTGALLERY_CATEGORY . '<br>' . $globalCatSelect . '</th>' . "\n";
                 echo '<th>' . _AM_EXTGALLERY_WEIGHT . '</th>' . "\n";
@@ -460,11 +462,11 @@ switch ($op) {
                         $cat[$photo->getVar('cat_id')] = $catHandler->get($photo->getVar('cat_id'));
                     }*/
                     echo '<tr class="' . $class . '">' . "\n";
-                    echo '<td><input type="checkbox" name="photoId[' . $photo->getVar('photo_id') . '][]" id="photoId[' . $photo->getVar('photo_id') . '][]" ></td>' . "\n";
-                    echo '<td><img src="' . XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name') . '" ></td>' . "\n";
+                    echo '<td><input type="checkbox" name="photoId[' . $photo->getVar('photo_id') . '][]" id="photoId[' . $photo->getVar('photo_id') . '][]"></td>' . "\n";
+                    echo '<td><img src="' . XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name') . '"></td>' . "\n";
                     echo '<td>' . $catHandler->getLeafSelect('catId[' . $photo->getVar('photo_id') . ']', false, $_GET['cat_id']) . '</td>' . "\n";
-                    echo '<td><input type="text" name="photoPoids[' . $photo->getVar('photo_id') . ']" id="photoPoids[' . $photo->getVar('photo_id') . ']" value="' . $photo->getVar('photo_weight') . '" size="3" maxlength="14" ></td>' . "\n";
-                    echo '<td><input type="text" name="photoTitre[' . $photo->getVar('photo_id') . ']" id="photoTitre[' . $photo->getVar('photo_id') . ']" value="' . $photo->getVar('photo_title', 'e') . '" size="60" maxlength="150" ><br>' . "\n";
+                    echo '<td><input type="text" name="photoPoids[' . $photo->getVar('photo_id') . ']" id="photoPoids[' . $photo->getVar('photo_id') . ']" value="' . $photo->getVar('photo_weight') . '" size="3" maxlength="14"></td>' . "\n";
+                    echo '<td><input type="text" name="photoTitre[' . $photo->getVar('photo_id') . ']" id="photoTitre[' . $photo->getVar('photo_id') . ']" value="' . $photo->getVar('photo_title', 'e') . '" size="60" maxlength="150"><br>' . "\n";
                     echo '<textarea name="photoDesc[' . $photo->getVar('photo_id') . ']" id="photoDesc[' . $photo->getVar('photo_id') . ']" rows="1" cols="57">' . $photo->getVar('photo_desc', 'e') . '</textarea></td>' . "\n";
                     echo '</tr>' . "\n";
                     $scriptCheckbox .= $first ? '\'photoId[' . $photo->getVar('photo_id') . '][]\'' : ', \'photoId[' . $photo->getVar('photo_id') . '][]\'';
@@ -472,9 +474,9 @@ switch ($op) {
                     $first          = false;
                 }
                 echo '<tr><td colspan="4">';
-                echo '<input type="hidden" name="cat_id" value="' . $_GET['cat_id'] . '" >';
-                echo '<input type="hidden" name="step" value="enreg" >';
-                echo '<input type="submit" name="modify" value="' . _AM_EXTGALLERY_APPLY_CHANGE . '" >&nbsp;&nbsp;<input type="submit" name="delete" value="' . _DELETE . '" >';
+                echo '<input type="hidden" name="cat_id" value="' . $_GET['cat_id'] . '">';
+                echo '<input type="hidden" name="step" value="enreg">';
+                echo '<input type="submit" name="modify" value="' . _AM_EXTGALLERY_APPLY_CHANGE . '">&nbsp;&nbsp;<input type="submit" name="delete" value="' . _DELETE . '">';
                 echo '</td></tr>';
 
                 echo '</table>' . "\n";
@@ -639,9 +641,9 @@ switch ($op) {
         // Pending photo
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTGALLERY_PENDING_PHOTO . '</legend>';
         echo '<fieldset><legend style="font-weight:bold; color:#0A3760;">' . _AM_EXTGALLERY_INFORMATION . '</legend>';
-        //echo '<img src="../assets/images/on.png" style="vertical-align:middle;" >&nbsp;&nbsp;'._AM_EXTGALLERY_APPROVE_INFO.'<br>';
-        echo '<img src="../assets/images/edit.png" style="vertical-align:middle;" >&nbsp;&nbsp;' . _AM_EXTGALLERY_EDIT_INFO . '<br>';
-        echo '<img src="../assets/images/delete.png" style="vertical-align:middle;" >&nbsp;&nbsp;' . _AM_EXTGALLERY_DELETE_INFO;
+        //echo '<img src="../assets/images/on.png" style="vertical-align:middle;">&nbsp;&nbsp;'._AM_EXTGALLERY_APPROVE_INFO.'<br>';
+        echo '<img src="../assets/images/edit.png" style="vertical-align:middle;">&nbsp;&nbsp;' . _AM_EXTGALLERY_EDIT_INFO . '<br>';
+        echo '<img src="../assets/images/delete.png" style="vertical-align:middle;">&nbsp;&nbsp;' . _AM_EXTGALLERY_DELETE_INFO;
         echo '</fieldset><br>';
 
         $pendingPhoto = $photoHandler->getPendingPhoto();
@@ -650,7 +652,7 @@ switch ($op) {
         echo '<div id="pending-photo" style="text-align:right;">' . $pageNav->renderNav() . '</div>';
         echo '<form action="photo.php?op=batchApprove" method="post">';
         echo '<table class="outer" style="width:100%; text-align:center;"><tr>' . "\n";
-        echo '<th><input type="checkbox" name="selectAllPhoto" id="selectAllPhoto" onClick="return checkAllPhoto();" ></th>' . "\n";
+        echo '<th><input type="checkbox" name="selectAllPhoto" id="selectAllPhoto" onClick="return checkAllPhoto();"></th>' . "\n";
         echo '<th>' . _AM_EXTGALLERY_PHOTO . '</th>' . "\n";
         echo '<th>' . _AM_EXTGALLERY_CATEGORY . '</th>' . "\n";
         echo '<th>' . _AM_EXTGALLERY_TITLE . '</th>' . "\n";
@@ -670,22 +672,22 @@ switch ($op) {
                 $cat[$photo->getVar('cat_id')] = $catHandler->get($photo->getVar('cat_id'));
             }
             echo '<tr class="' . $class . '">' . "\n";
-            echo '<td><input type="checkbox" name="photoId[' . $photo->getVar('photo_id') . ']" id="photoId[' . $photo->getVar('photo_id') . ']" ></td>' . "\n";
-            echo '<td><img src="' . XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name') . '" ></td>' . "\n";
+            echo '<td><input type="checkbox" name="photoId[' . $photo->getVar('photo_id') . ']" id="photoId[' . $photo->getVar('photo_id') . ']"></td>' . "\n";
+            echo '<td><img src="' . XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name') . '"></td>' . "\n";
             echo '<td>' . $cat[$photo->getVar('cat_id')]->getVar('cat_name') . '</td>' . "\n";
             echo '<td>' . $photo->getVar('photo_title') . '</td>' . "\n";
             echo '<td>' . $photo->getVar('photo_desc') . '</td>' . "\n";
             echo '<td>' . "\n";
-            //echo '<a href="photo.php?op=approve&id='.$photo->getVar('photo_id').'"><img src="../assets/images/on.png" style="vertical-align:middle;" ></a>&nbsp;&nbsp;'."\n";
-            echo '<a href="photo.php?op=modify&id=' . $photo->getVar('photo_id') . '"><img src="../assets/images/edit.png" style="vertical-align:middle;" ></a>&nbsp;' . "\n";
-            echo '<a href="photo.php?op=delete&id=' . $photo->getVar('photo_id') . '"><img src="../assets/images/delete.png" style="vertical-align:middle;" ></a>' . "\n";
+            //echo '<a href="photo.php?op=approve&id='.$photo->getVar('photo_id').'"><img src="../assets/images/on.png" style="vertical-align:middle;"></a>&nbsp;&nbsp;'."\n";
+            echo '<a href="photo.php?op=modify&id=' . $photo->getVar('photo_id') . '"><img src="../assets/images/edit.png" style="vertical-align:middle;"></a>&nbsp;' . "\n";
+            echo '<a href="photo.php?op=delete&id=' . $photo->getVar('photo_id') . '"><img src="../assets/images/delete.png" style="vertical-align:middle;"></a>' . "\n";
             echo '</td>' . "\n";
             echo '</tr>' . "\n";
             $script .= $first ? '\'photoId[' . $photo->getVar('photo_id') . ']\'' : ', \'photoId[' . $photo->getVar('photo_id') . ']\'';
             $first  = false;
         }
         echo '<tr><td colspan="5">';
-        echo '<input type="submit" name="approve" value="' . _AM_EXTGALLERY_APPROVE . '" >&nbsp;&nbsp;<input type="submit" name="delete" value="' . _DELETE . '" >';
+        echo '<input type="submit" name="approve" value="' . _AM_EXTGALLERY_APPROVE . '">&nbsp;&nbsp;<input type="submit" name="delete" value="' . _DELETE . '">';
         echo '</td></tr>';
 
         echo '</table>' . "\n";

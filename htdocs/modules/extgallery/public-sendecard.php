@@ -40,7 +40,7 @@ $permHandler = ExtgalleryPublicPermHandler::getInstance();
 if (!$permHandler->isAllowed($xoopsUser, 'public_ecard', $photo->getVar('cat_id'))) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
 }
-
+/** @var xos_opal_Theme $xoTheme */
 switch ($step) {
 
     case 'send':

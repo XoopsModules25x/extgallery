@@ -27,7 +27,7 @@ if (isset($_POST['op'])) {
 switch ($op) {
 
     case 'galleryview':
-        /** @var XoopsConfigHandler $configHandler */
+        /** @var XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -395,7 +395,7 @@ switch ($op) {
         break;
 
     case 'galleria':
-        /** @var XoopsConfigHandler $configHandler */
+        /** @var XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
         if (isset($_POST['galleria_height'])) {
@@ -561,7 +561,7 @@ switch ($op) {
         break;
 
     case 'galleriffic':
-        /** @var XoopsConfigHandler $configHandler */
+        /** @var XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
