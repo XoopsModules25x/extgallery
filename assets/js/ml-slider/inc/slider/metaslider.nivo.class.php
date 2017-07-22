@@ -69,7 +69,8 @@ class MetaNivoSlider extends MetaSlider
             'sph'            => 'boxRows',
             'navigation'     => 'controlNav',
             'links'          => 'directionNav',
-            'autoPlay'       => 'autoPlay');
+            'autoPlay'       => 'autoPlay'
+        );
 
         if (isset($params[$param])) {
             return $params[$param];

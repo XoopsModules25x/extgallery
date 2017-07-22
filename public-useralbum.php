@@ -42,8 +42,7 @@ if (isset($_GET['sortby'])
     && ($_GET['sortby'] === 'photo_date'
         || $_GET['sortby'] === 'photo_title'
         || $_GET['sortby'] === 'photo_hits'
-        || $_GET['sortby'] === 'photo_rating')
-) {
+        || $_GET['sortby'] === 'photo_rating')) {
     $sortby = $_GET['sortby'];
 } else {
     $sortby = 'photo_date';
@@ -121,8 +120,7 @@ foreach (array_keys($photos) as $i) {
 
 $xoopsTpl->assign('photos', $photos);
 
-$pageNav = new XoopsPageNav($photoHandler->getUserAlbumCount($userId), $xoopsModuleConfig['nb_column'] * $xoopsModuleConfig['nb_line'], $start, 'start',
-                            'id=' . $userId . '&orderby=' . $orderby . '&sortby=' . $sortby);//xoops - blueteen - tri de l'affichage
+$pageNav = new XoopsPageNav($photoHandler->getUserAlbumCount($userId), $xoopsModuleConfig['nb_column'] * $xoopsModuleConfig['nb_line'], $start, 'start', 'id=' . $userId . '&orderby=' . $orderby . '&sortby=' . $sortby);//xoops - blueteen - tri de l'affichage
 $xoopsTpl->assign('pageNav', $pageNav->renderNav());
 
 $albumName = '';

@@ -56,8 +56,7 @@ define('_MI_EXTGAL_ALLOW_HTML', 'Allow HTML in extra field');
 define('_MI_EXTGAL_ALLOW_HTML_DESC', 'Allow or Disallow HTML code in description and extra field.');
 define('_MI_EXTGAL_HIDDEN_FIELD', "This constant is used only to remove PHP notices. This text isn't use in the module");
 define('_MI_EXTGAL_SAVE_ORIG', 'Save original photo');
-define('_MI_EXTGAL_SAVE_ORIG_DESC',
-       "The original version can be downloaded but is dependant on group permission for \"Download original permissions\"</b>.<br>If a user doesn't have permission to download the original, then the \"large\" photo will be downloaded instead.");
+define('_MI_EXTGAL_SAVE_ORIG_DESC', "The original version can be downloaded but is dependant on group permission for \"Download original permissions\"</b>.<br>If a user doesn't have permission to download the original, then the \"large\" photo will be downloaded instead.");
 define('_MI_EXTGAL_ADM_NBPHOTO', 'Number of photos to be displayed on admin page');
 define('_MI_EXTGAL_ADM_NBPHOTO_DESC', 'Set the number of photos to be displayed on the admin approve and edit table.');
 define('_MI_EXTGAL_GRAPHLIB', 'Graphic library');
@@ -139,8 +138,7 @@ define('_MI_EXTGAL_INFO_PUBUSR_DESC', 'Shows-hides info from public or user albu
 define('_MI_EXTGAL_INFO_PUBLIC', 'Public');
 define('_MI_EXTGAL_INFO_USER', 'User');
 define('_MI_EXTGAL_JQUERY', 'Use jQuery');
-define('_MI_EXTGAL_JQUERY_DESC',
-       'You can enable/disable jQuery in module templates. if jQuery loaded in your theme and you have problem with theme Ajax effects (Interference jQuery library), you must disable jQuery in extGallery and use theme jQuery.');
+define('_MI_EXTGAL_JQUERY_DESC', 'You can enable/disable jQuery in module templates. if jQuery loaded in your theme and you have problem with theme Ajax effects (Interference jQuery library), you must disable jQuery in extGallery and use theme jQuery.');
 define('_MI_EXTGAL_SOCIAL', 'Use Social network');
 define('_MI_EXTGAL_SOCIAL_DESC', 'You can use Social network and bookmark icons for each photo');
 define('_MI_EXTGAL_NONE', 'None');

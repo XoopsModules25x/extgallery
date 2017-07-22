@@ -34,8 +34,7 @@ $photo        = $photoHandler->get($photoId);
 
 $permHandler = ExtgalleryPublicPermHandler::getInstance();
 if ($xoopsModuleConfig['enable_rating']
-    && !$permHandler->isAllowed($xoopsUser, 'public_rate', $photo->getVar('cat_id'))
-) {
+    && !$permHandler->isAllowed($xoopsUser, 'public_rate', $photo->getVar('cat_id'))) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
 }
 

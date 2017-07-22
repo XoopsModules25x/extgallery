@@ -74,7 +74,7 @@ class ExtgalleryUtility extends XoopsObject
      * Verifies XOOPS version meets minimum requirements for this module
      * @static
      * @param XoopsModule $module
-     * @param null|string        $requiredVer
+     * @param null|string $requiredVer
      *
      * @return bool true if meets requirements, false if not
      */
@@ -82,7 +82,7 @@ class ExtgalleryUtility extends XoopsObject
     {
         $moduleDirName = basename(dirname(__DIR__));
         if (null === $module) {
-            $module        = XoopsModule::getByDirname($moduleDirName);
+            $module = XoopsModule::getByDirname($moduleDirName);
         }
         xoops_loadLanguage('admin', $moduleDirName);
         //check for minimum XOOPS version
@@ -158,8 +158,7 @@ class ExtgalleryUtility extends XoopsObject
         $retval = false;
         if (isset($xoopsModuleConfig)
             && (is_object($xoopsModule) && $xoopsModule->getVar('dirname') === 'extgallery'
-                && $xoopsModule->getVar('isactive'))
-        ) {
+                && $xoopsModule->getVar('isactive'))) {
             if (isset($xoopsModuleConfig[$option])) {
                 $retval = $xoopsModuleConfig[$option];
             }
@@ -211,5 +210,4 @@ class ExtgalleryUtility extends XoopsObject
 
         return $editor;
     }
-
 }

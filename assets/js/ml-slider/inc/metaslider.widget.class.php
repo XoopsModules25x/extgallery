@@ -96,7 +96,8 @@ class MetaSlider_Widget extends WP_Widget
                                'post_status'    => 'publish',
                                'orderby'        => 'date',
                                'order'          => 'ASC',
-                               'posts_per_page' => -1));
+                               'posts_per_page' => -1
+                           ));
 
         foreach ($posts as $post) {
             $active = $selected_slider == $post->ID ? true : false;
@@ -104,43 +105,30 @@ class MetaSlider_Widget extends WP_Widget
             $sliders[] = array(
                 'active' => $active,
                 'title'  => $post->post_title,
-                'id'     => $post->ID);
-        }
-
-        ?>
+                'id'     => $post->ID
+            );
+        } ?>
         <p>
         <?php if ($sliders) {
-        ?>
+            ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title');
-            ?>"><?php _e('Title:');
-                ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id('title');
-            ?>" name="<?php echo $this->get_field_name('title');
-            ?>" type="text" value="<?php echo esc_attr($title);
-            ?>"/>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>"/>
         </p>
-        <label for="<?php echo $this->get_field_id('slider_id');
-        ?>"><?php _e('Select Slider:', 'metaslider');
-            ?></label>
-        <select id="<?php echo $this->get_field_id('slider_id');
-        ?>" name="<?php echo $this->get_field_name('slider_id');
-        ?>">
+        <label for="<?php echo $this->get_field_id('slider_id'); ?>"><?php _e('Select Slider:', 'metaslider'); ?></label>
+        <select id="<?php echo $this->get_field_id('slider_id'); ?>" name="<?php echo $this->get_field_name('slider_id'); ?>">
             <?php
             foreach ($sliders as $slider) {
                 $selected = $slider['active'] ? 'selected=selected' : '';
                 echo "<option value='{$slider['id']}' {$selected}>{$slider['title']}</option>";
-            }
-            ?>
+            } ?>
         </select>
         <?php
-    } else {
-        _e('No slideshows found', 'metaslider');
-    }
-        ?>
+        } else {
+            _e('No slideshows found', 'metaslider');
+        } ?>
         </p>
         <?php
-
     }
 }
 

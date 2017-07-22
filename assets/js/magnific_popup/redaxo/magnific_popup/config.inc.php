@@ -24,7 +24,8 @@ if ($REX['REDAXO']) {
         array('image_module', $I18N->msg('magnific_popup_image_module')),
         array('gallery_module', $I18N->msg('magnific_popup_gallery_module')),
         array('settings', $I18N->msg('magnific_popup_settings')),
-        array('help', $I18N->msg('magnific_popup_help')));
+        array('help', $I18N->msg('magnific_popup_help'))
+    );
 } else {
     rex_register_extension('OUTPUT_FILTER', 'rex_magnific_popup_utils::includeMagnificPopup');
 }

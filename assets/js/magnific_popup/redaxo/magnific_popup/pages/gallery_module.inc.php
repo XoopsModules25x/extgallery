@@ -6,7 +6,7 @@ $moduleOutput = rex_get_file_contents($REX['INCLUDE_PATH'] . '/addons/magnific_p
 $searchtext = 'module: magnific_popup_gallery_out';
 
 $gm = rex_sql::factory();
-$gm->setQuery('select * from ' . $REX['TABLE_PREFIX'] . 'module where ausgabe LIKE "%' . $searchtext . '%"');
+$gm->setQuery('SELECT * FROM ' . $REX['TABLE_PREFIX'] . 'module WHERE ausgabe LIKE "%' . $searchtext . '%"');
 
 $module_id   = 0;
 $module_name = '';

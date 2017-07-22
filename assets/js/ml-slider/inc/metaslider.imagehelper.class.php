@@ -19,8 +19,8 @@ class MetaSliderImageHelper
      * @param integer $slide_id
      * @param integer $width  - required width of image
      * @param integer $height - required height of image
-     * @param string $smart_crop
-     * @param bool $use_image_editor
+     * @param string  $smart_crop
+     * @param bool    $use_image_editor
      */
     public function __construct($slide_id, $width, $height, $smart_crop, $use_image_editor = true)
     {
@@ -172,7 +172,8 @@ class MetaSliderImageHelper
         // if the file exists, just return it without going any further
         $dest_file_name = $this->get_destination_file_name(array(
                                                                'width'  => $this->container_width,
-                                                               'height' => $this->container_height));
+                                                               'height' => $this->container_height
+                                                           ));
 
         if (file_exists($dest_file_name)) {
             return str_replace(basename($this->url), basename($dest_file_name), $this->url);
@@ -266,7 +267,7 @@ class MetaSliderImageHelper
      *
      * @param  array $orig_size
      * @param  array $dest_size
-     * @param $dest_file_name
+     * @param        $dest_file_name
      * @return string
      */
     private function resize_image($orig_size, $dest_size, $dest_file_name)

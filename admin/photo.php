@@ -95,8 +95,7 @@ switch ($op) {
             if (is_file($batchRep . $f)) {
                 if (preg_match('/.*gif/', strtolower($f)) || preg_match('/.*jpg/', strtolower($f))
                     || preg_match('/.*jpeg/', strtolower($f))
-                    || preg_match('/.*png/', strtolower($f))
-                ) {
+                    || preg_match('/.*png/', strtolower($f))) {
                     $photos[] = $f;
                 }
             }
@@ -393,7 +392,7 @@ switch ($op) {
 
                     $nbPhotoDeleted = count($_POST['photoId']);
                     /** @var ExtgalleryCat $cat */
-                    $cat            = $catHandler->getCat($_POST['cat_id']);
+                    $cat = $catHandler->getCat($_POST['cat_id']);
 
                     if ($cat->getVar('cat_nb_photo') == $nbPhotoDeleted) {
                         $cat->setVar('cat_isalbum', 0);
@@ -585,8 +584,7 @@ switch ($op) {
             if (is_file($rep . $f)) {
                 if (preg_match('/.*gif/', strtolower($f)) || preg_match('/.*jpg/', strtolower($f))
                     || preg_match('/.*jpeg/', strtolower($f))
-                    || preg_match('/.*png/', strtolower($f))
-                ) {
+                    || preg_match('/.*png/', strtolower($f))) {
                     ++$nbPhotos;
                 }
             }

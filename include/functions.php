@@ -28,8 +28,7 @@ function gal_getmoduleoption($option)
     $retval = false;
     if (isset($xoopsModuleConfig)
         && (is_object($xoopsModule) && $xoopsModule->getVar('dirname') === 'extgallery'
-            && $xoopsModule->getVar('isactive'))
-    ) {
+            && $xoopsModule->getVar('isactive'))) {
         if (isset($xoopsModuleConfig[$option])) {
             $retval = $xoopsModuleConfig[$option];
         }

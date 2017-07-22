@@ -196,7 +196,8 @@ class MetaImageSlide extends MetaSlide
             'caption_raw' => __($this->slide->post_excerpt),
             'class'       => "slider-{$this->slider->ID} slide-{$this->slide->ID}",
             'rel'         => '',
-            'data-thumb'  => '');
+            'data-thumb'  => ''
+        );
 
         // fix slide URLs
         if (strpos($slide['url'], 'www.') === 0) {
@@ -237,13 +238,15 @@ class MetaImageSlide extends MetaSlide
             'title'      => $slide['title'],
             'alt'        => $slide['alt'],
             'rel'        => $slide['rel'],
-            'class'      => $slide['class']), $slide, $this->slider->ID);
+            'class'      => $slide['class']
+        ), $slide, $this->slider->ID);
 
         $html = $this->build_image_tag($attributes);
 
         $anchor_attributes = apply_filters('metaslider_nivo_slider_anchor_attributes', array(
             'href'   => $slide['url'],
-            'target' => $slide['target']), $slide, $this->slider->ID);
+            'target' => $slide['target']
+        ), $slide, $this->slider->ID);
 
         if (strlen($anchor_attributes['href'])) {
             $html = $this->build_anchor_tag($anchor_attributes, $html);
@@ -267,13 +270,15 @@ class MetaImageSlide extends MetaSlide
             'alt'    => $slide['alt'],
             'rel'    => $slide['rel'],
             'class'  => $slide['class'],
-            'title'  => $slide['title']), $slide, $this->slider->ID);
+            'title'  => $slide['title']
+        ), $slide, $this->slider->ID);
 
         $html = $this->build_image_tag($attributes);
 
         $anchor_attributes = apply_filters('metaslider_flex_slider_anchor_attributes', array(
             'href'   => $slide['url'],
-            'target' => $slide['target']), $slide, $this->slider->ID);
+            'target' => $slide['target']
+        ), $slide, $this->slider->ID);
 
         if (strlen($anchor_attributes['href'])) {
             $html = $this->build_anchor_tag($anchor_attributes, $html);
@@ -307,7 +312,8 @@ class MetaImageSlide extends MetaSlide
             'rel'    => $slide['rel'],
             'class'  => $slide['class'],
             'title'  => $slide['title'],
-            'style'  => 'display: none;'), $slide, $this->slider->ID);
+            'style'  => 'display: none;'
+        ), $slide, $this->slider->ID);
 
         $html = $this->build_image_tag($attributes);
 
@@ -316,7 +322,8 @@ class MetaImageSlide extends MetaSlide
         }
 
         $attributes = apply_filters('metaslider_coin_slider_anchor_attributes', array(
-            'href' => strlen($slide['url']) ? $slide['url'] : 'javascript:void(0)'), $slide, $this->slider->ID);
+            'href' => strlen($slide['url']) ? $slide['url'] : 'javascript:void(0)'
+        ), $slide, $this->slider->ID);
 
         $html = $this->build_anchor_tag($attributes, $html);
 
@@ -338,7 +345,8 @@ class MetaImageSlide extends MetaSlide
             'alt'    => $slide['alt'],
             'rel'    => $slide['rel'],
             'class'  => $slide['class'],
-            'title'  => $slide['title']), $slide, $this->slider->ID);
+            'title'  => $slide['title']
+        ), $slide, $this->slider->ID);
 
         $html = $this->build_image_tag($attributes);
 
@@ -348,7 +356,8 @@ class MetaImageSlide extends MetaSlide
 
         $anchor_attributes = apply_filters('metaslider_responsive_slider_anchor_attributes', array(
             'href'   => $slide['url'],
-            'target' => $slide['target']), $slide, $this->slider->ID);
+            'target' => $slide['target']
+        ), $slide, $this->slider->ID);
 
         if (strlen($anchor_attributes['href'])) {
             $html = $this->build_anchor_tag($anchor_attributes, $html);
@@ -367,7 +376,8 @@ class MetaImageSlide extends MetaSlide
         wp_update_post(array(
                            'ID'           => $this->slide->ID,
                            'post_excerpt' => $fields['post_excerpt'],
-                           'menu_order'   => $fields['menu_order']));
+                           'menu_order'   => $fields['menu_order']
+                       ));
 
         // store the URL as a meta field against the attachment
         $this->add_or_update_or_delete_meta($this->slide->ID, 'url', $fields['url']);

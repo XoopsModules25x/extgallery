@@ -26,7 +26,8 @@ class MetaResponsiveSlider extends MetaSlider
             'hoverPause'     => 'pause',
             'navigation'     => 'pager',
             'links'          => 'nav',
-            'autoPlay'       => 'auto');
+            'autoPlay'       => 'auto'
+        );
 
         if (isset($params[$param])) {
             return $params[$param];
@@ -52,7 +53,7 @@ class MetaResponsiveSlider extends MetaSlider
                 $style = " style='display: none;'";
             }
             $return_value .= "\n            <li{$style}>" . $slide . '</li>';
-            $first = false;
+            $first        = false;
         }
 
         $return_value .= "\n        </ul>";

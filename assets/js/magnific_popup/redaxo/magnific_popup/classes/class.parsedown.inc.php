@@ -124,7 +124,7 @@ class Parsedown
     #
 
     /**
-     * @param array $lines
+     * @param array  $lines
      * @param string $context
      * @return string
      */
@@ -133,7 +133,8 @@ class Parsedown
         $elements = array();
 
         $element = array(
-            'type' => '');
+            'type' => ''
+        );
 
         foreach ($lines as $line) {
             # fenced elements
@@ -214,7 +215,9 @@ class Parsedown
                                 'indentation' => $matches[1],
                                 'last'        => true,
                                 'lines'       => array(
-                                    preg_replace('/^[ ]{0,4}/', '', $matches[3])));
+                                    preg_replace('/^[ ]{0,4}/', '', $matches[3])
+                                )
+                            );
                         }
 
                         continue 2;
@@ -266,7 +269,8 @@ class Parsedown
 
                             $element = array(
                                 'type' => 'code block',
-                                'text' => $code_line);
+                                'text' => $code_line
+                            );
                         }
 
                         continue 2;
@@ -290,7 +294,8 @@ class Parsedown
                         $element = array(
                             'type'  => 'heading',
                             'text'  => trim($line, '# '),
-                            'level' => $level);
+                            'level' => $level
+                        );
 
                         continue 2;
                     }
@@ -360,7 +365,8 @@ class Parsedown
                         if (isset($self_closing)) {
                             $element = array(
                                 'type' => 'self-closing tag',
-                                'text' => $deindented_line);
+                                'text' => $deindented_line
+                            );
 
                             unset($self_closing);
 
@@ -372,7 +378,8 @@ class Parsedown
                             'text'  => $deindented_line,
                             'start' => '<' . $name . '>',
                             'end'   => '</' . $name . '>',
-                            'depth' => 0);
+                            'depth' => 0
+                        );
 
                         if (strpos($deindented_line, $element['end'])) {
                             $element['closed'] = true;
@@ -393,7 +400,9 @@ class Parsedown
                         $element = array(
                             'type'  => 'blockquote',
                             'lines' => array(
-                                $matches[1]));
+                                $matches[1]
+                            )
+                        );
 
                         continue 2;
                     }
@@ -408,7 +417,8 @@ class Parsedown
                         $label = strtolower($matches[1]);
 
                         $this->reference_map[$label] = array(
-                            '»' => trim($matches[2], '<>'));
+                            '»' => trim($matches[2], '<>')
+                        );
 
                         if (isset($matches[3])) {
                             $this->reference_map[$label]['#'] = $matches[3];
@@ -430,7 +440,8 @@ class Parsedown
                         $element = array(
                             'type'  => 'fenced block',
                             'text'  => '',
-                            'fence' => $matches[1]);
+                            'fence' => $matches[1]
+                        );
 
                         isset($matches[2]) and $element['language'] = $matches[2];
 
@@ -450,7 +461,8 @@ class Parsedown
                         $elements [] = $element;
 
                         $element = array(
-                            'type' => 'hr');
+                            'type' => 'hr'
+                        );
 
                         continue 2;
                     }
@@ -466,7 +478,9 @@ class Parsedown
                             'indentation' => $matches[1],
                             'last'        => true,
                             'lines'       => array(
-                                preg_replace('/^[ ]{0,4}/', '', $matches[2])));
+                                preg_replace('/^[ ]{0,4}/', '', $matches[2])
+                            )
+                        );
 
                         continue 2;
                     }
@@ -483,7 +497,9 @@ class Parsedown
                     'indentation' => $matches[1],
                     'last'        => true,
                     'lines'       => array(
-                        preg_replace('/^[ ]{0,4}/', '', $matches[2])));
+                        preg_replace('/^[ ]{0,4}/', '', $matches[2])
+                    )
+                );
 
                 continue;
             }
@@ -505,7 +521,8 @@ class Parsedown
 
                 $element = array(
                     'type' => 'paragraph',
-                    'text' => $line);
+                    'text' => $line
+                );
             }
         }
 
@@ -619,7 +636,7 @@ class Parsedown
     }
 
     /**
-     * @param $text
+     * @param       $text
      * @param array $markers
      * @return string
      */
@@ -679,7 +696,8 @@ class Parsedown
                     if (strpos($text, ']') and preg_match('/\[((?:[^][]|(?R))*)\]/', $text, $matches)) {
                         $element = array(
                             '!' => $text[0] === '!',
-                            'a' => $matches[1]);
+                            'a' => $matches[1]
+                        );
 
                         $offset = strlen($matches[0]);
 
@@ -923,23 +941,28 @@ class Parsedown
         'sup',
         'textarea',
         'tt',
-        'var');
+        'var'
+    );
 
     # ~
 
     private $strong_regex = array(
         '*' => '/^[*]{2}([^*]+?)[*]{2}(?![*])/s',
-        '_' => '/^__([^_]+?)__(?!_)/s');
+        '_' => '/^__([^_]+?)__(?!_)/s'
+    );
 
     private $em_regex = array(
         '*' => '/^[*]([^*]+?)[*](?![*])/s',
-        '_' => '/^_([^_]+?)[_](?![_])\b/s');
+        '_' => '/^_([^_]+?)[_](?![_])\b/s'
+    );
 
     private $strong_em_regex = array(
         '*' => '/^[*]{2}(.*?)[*](.+?)[*](.*?)[*]{2}/s',
-        '_' => '/^__(.*?)_(.+?)_(.*?)__/s');
+        '_' => '/^__(.*?)_(.+?)_(.*?)__/s'
+    );
 
     private $em_strong_regex = array(
         '*' => '/^[*](.*?)[*]{2}(.+?)[*]{2}(.*?)[*]/s',
-        '_' => '/^_(.*?)__(.+?)__(.*?)_/s');
+        '_' => '/^_(.*?)__(.+?)__(.*?)_/s'
+    );
 }

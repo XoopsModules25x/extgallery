@@ -63,10 +63,12 @@ class MagnificPopupBlockController extends BlockController
             'video-map-selection-required' => t('Please Make a Video or Map Selection'),
             'dialog-type-required'         => t('Please Choose a Dialog Type'),
             'dialog-text-required'         => t('Please Enter the Dialog Text'),
-            'dialog-link-text-required'    => t('Pleaes Enter the Dialog Link Text'));
+            'dialog-link-text-required'    => t('Pleaes Enter the Dialog Link Text')
+        );
     }
 
     // getting a picture for the file picker
+
     /**
      * @return mixed
      */

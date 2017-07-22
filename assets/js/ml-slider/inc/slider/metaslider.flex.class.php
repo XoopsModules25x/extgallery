@@ -14,7 +14,7 @@ class MetaFlexSlider extends MetaSlider
      * Constructor
      *
      * @param integer $id slideshow ID
-     * @param $shortcode_settings
+     * @param         $shortcode_settings
      */
     public function __construct($id, $shortcode_settings)
     {
@@ -31,7 +31,7 @@ class MetaFlexSlider extends MetaSlider
     /**
      * Adjust the slider parameters so they're comparible with the carousel mode
      *
-     * @param  array $options
+     * @param  array   $options
      * @param  integer $slider_id
      * @return array   $options
      */
@@ -58,7 +58,7 @@ class MetaFlexSlider extends MetaSlider
     /**
      * Ensure CSS transitions are disabled when easing is enabled.
      *
-     * @param  array $options
+     * @param  array   $options
      * @param  integer $slider_id
      * @return array   $options
      */
@@ -77,8 +77,8 @@ class MetaFlexSlider extends MetaSlider
     /**
      * Add a 'nav-hidden' class to slideshows where the navigation is hidden.
      *
-     * @param $class
-     * @param $id
+     * @param        $class
+     * @param        $id
      * @param  array $settings
      * @return string $css
      * @internal param string $css
@@ -99,8 +99,8 @@ class MetaFlexSlider extends MetaSlider
     /**
      * Return css to ensure our slides are rendered correctly in the carousel
      *
-     * @param  string $css
-     * @param  array $settings
+     * @param  string  $css
+     * @param  array   $settings
      * @param  integer $slider_id
      * @return string  $css
      */
@@ -137,7 +137,8 @@ class MetaFlexSlider extends MetaSlider
             'links'          => 'directionNav',
             'carouselMode'   => 'carouselMode',
             'easing'         => 'easing',
-            'autoPlay'       => 'slideshow');
+            'autoPlay'       => 'slideshow'
+        );
 
         if (isset($params[$param])) {
             return $params[$param];

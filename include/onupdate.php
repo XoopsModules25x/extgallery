@@ -17,8 +17,7 @@
  */
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
-    || !$GLOBALS['xoopsUser']->IsAdmin()
-) {
+    || !$GLOBALS['xoopsUser']->IsAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
 
@@ -95,7 +94,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         $sql = 'ALTER TABLE `' . $db->prefix($moduleDirName . '_publicphoto') . '` ADD `photo_title` VARCHAR(150) NOT NULL AFTER `photo_id` ;';
         $db->query($sql);
 
-        $sql = 'ALTER TABLE `' . $db->prefix($moduleDirName . '_publicphoto') . '` ADD `photo_weight` int(11) NOT NULL AFTER `photo_extra` ;';
+        $sql = 'ALTER TABLE `' . $db->prefix($moduleDirName . '_publicphoto') . '` ADD `photo_weight` INT(11) NOT NULL AFTER `photo_extra` ;';
         $db->query($sql);
     }
 

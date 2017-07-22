@@ -86,24 +86,24 @@ class Console_GetoptPlus_Help
         settype($lines, 'array');
         settype($addon, 'string');
         // defaults the left alignment to the length of the additional data + 1
-        is_null($paddingLength) and $paddingLength = $addon? (strlen($addon) + 1) : 0;
+        is_null($paddingLength) and $paddingLength = $addon ? (strlen($addon) + 1) : 0;
         // extracts the first line
-        $firstLine = (string)current($lines);
+        $firstLine      = (string)current($lines);
         $firstLineEmpty = $firstLine == '';
 
         if (!$addon or $firstLineEmpty or $paddingLength > strlen($addon)) {
             // no addon or padding larger than addon
             // pads the additional data and adds it to the left of the first line
-            $addon = str_pad($addon, $paddingLength);
+            $addon     = str_pad($addon, $paddingLength);
             $firstLine = $addon . array_shift($lines);
         } else {
             // the information on the left is longer than the padding size
             $firstLine = $addon;
         }
         // left-pads the other lines
-        $padding = str_repeat(' ', $paddingLength);
+        $padding  = str_repeat(' ', $paddingLength);
         $callback = create_function('$string', "return '$padding' . \$string;");
-        $lines = array_map($callback, $lines);
+        $lines    = array_map($callback, $lines);
         // prepends the first line
         $firstLine = rtrim($firstLine);
         array_unshift($lines, $firstLine);
@@ -114,6 +114,7 @@ class Console_GetoptPlus_Help
     public static function get($config, $command)
     {
         $help = new self;
+
         return $help->set($config, $command);
     }
 
@@ -129,17 +130,14 @@ class Console_GetoptPlus_Help
     {
         // sets all the help/usage section texts
         $help = array();
-        isset($config['header']) and
-        $help[] = $this->tidyArray($config['header']);
+        isset($config['header']) and $help[] = $this->tidyArray($config['header']);
         $help[] = $this->setUsage($config, $command);
         isset($config['options']) and $help[] = $this->setOptions($config['options']);
-        isset($config['parameters']) and
-        $help[] = $this->alignLines($config['parameters'], self::parameters) ;
+        isset($config['parameters']) and $help[] = $this->alignLines($config['parameters'], self::parameters);
         isset($config['footer']) and $help[] = $this->tidyArray($config['footer']);
         // merges the section texts together
-        $callback = create_function('$array, $array1',
-            '$array or $array = array(); return array_merge($array, $array1);');
-        $help = array_reduce($help, $callback, array());
+        $callback = create_function('$array, $array1', '$array or $array = array(); return array_merge($array, $array1);');
+        $help     = array_reduce($help, $callback, array());
 
         return implode("\n", $help);
     }
@@ -147,7 +145,7 @@ class Console_GetoptPlus_Help
     /**
      * Creates the options help text section
      *
-     * @param  array  $optionsConfig the options descriptions
+     * @param  array $optionsConfig the options descriptions
      * @return array  the options help text section
      * @access public
      */
@@ -155,19 +153,17 @@ class Console_GetoptPlus_Help
     {
         settype($optionsConfig, 'array');
 
-        $padding = str_repeat(' ', self::optionPadding);
+        $padding  = str_repeat(' ', self::optionPadding);
         $callback = create_function('$string', "return '$padding' . \$string;");
 
         $lines = array();
-        foreach($optionsConfig as $option) {
-            $desc = isset($option['desc'])? $option['desc']: '';
+        foreach ($optionsConfig as $option) {
+            $desc = isset($option['desc']) ? $option['desc'] : '';
             settype($desc, 'array');
             // extracts the option example value from the description
             // encloses with angle/square brackets if mandatory/optional
             $value = '';
-            empty($option['type']) or
-            $option['type'] == 'mandatory' and $value = '<' . array_shift($desc) . '>' or
-            $option['type'] == 'optional' and $value = '[' . array_shift($desc) . ']';
+            empty($option['type']) or $option['type'] == 'mandatory' and $value = '<' . array_shift($desc) . '>' or $option['type'] == 'optional' and $value = '[' . array_shift($desc) . ']';
             // sets the option names
             $optionNames = array();
             isset($option['short']) and $optionNames[] = "-{$option['short']}";
@@ -175,7 +171,7 @@ class Console_GetoptPlus_Help
             $value and $optionNames[] = $value;
             $optionNames = implode(' ', $optionNames);
             // adds the option names to the description
-            $desc = $this->alignLines($desc, $optionNames, self::optionPadding);
+            $desc  = $this->alignLines($desc, $optionNames, self::optionPadding);
             $lines = array_merge($lines, $desc);
         }
         // prefix the options with e.g. "Options:"
@@ -207,17 +203,17 @@ class Console_GetoptPlus_Help
         // expecting an array of arrays of usage lines,
         // or possibly a single usage line
         settype($config['usage'], 'array');
-        $lines = array();
+        $lines   = array();
         $padding = str_repeat(' ', strlen(self::usage));
 
-        foreach($config['usage'] as $idx => $usage) {
+        foreach ($config['usage'] as $idx => $usage) {
             $usage = $this->tidyArray($usage);
             // adds the usage keywork to the first usage, e.g. "Usage:"
-            $prefix = $idx? $padding : self::usage;
+            $prefix = $idx ? $padding : self::usage;
             // adds the command to each usage, e.g. command [options] [parameters]
             $prefix .= basename($command);
-            $usage = $this->alignLines($usage, $prefix);
-            $lines = array_merge($lines, $usage);
+            $usage  = $this->alignLines($usage, $prefix);
+            $lines  = array_merge($lines, $usage);
         }
 
         return $lines;
@@ -262,5 +258,3 @@ class Console_GetoptPlus_Help
         return trim($string);
     }
 }
-
-?>

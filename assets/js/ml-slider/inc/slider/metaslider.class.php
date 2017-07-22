@@ -118,7 +118,8 @@ class MetaSlider
             'thumb_width'    => 150,
             'thumb_height'   => 100,
             'fullWidth'      => false,
-            'noConflict'     => false);
+            'noConflict'     => false
+        );
 
         $params = apply_filters('metaslider_default_parameters', $params);
 
@@ -172,7 +173,10 @@ class MetaSlider
                 array(
                     'taxonomy' => 'ml-slider',
                     'field'    => 'slug',
-                    'terms'    => $this->id)));
+                    'terms'    => $this->id
+                )
+            )
+        );
 
         $args = apply_filters('metaslider_populate_slides_args', $args, $this->id, $this->settings);
 
@@ -508,7 +512,8 @@ class MetaSlider
     {
         $slide = array(
             'ID'         => $this->id,
-            'post_title' => $title);
+            'post_title' => $title
+        );
 
         wp_update_post($slide);
     }

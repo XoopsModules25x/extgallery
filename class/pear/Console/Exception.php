@@ -57,28 +57,28 @@ class Console_GetoptPlus_Exception extends PEAR_Exception
      * @access private
      */
     private $messages = array(// /
-        'unknow' => array(1, 'Console_Getopt: unknown error ID (%s)'),
-        // original Console_Getopt error messages
-        'ambigous' => array(10, 'Console_Getopt: option --%s is ambiguous'),
-        'mandatory' => array(11, 'Console_Getopt: option requires an argument --%s'),
-        'noargument' => array(12, 'Console_Getopt: option --%s doesn\'t allow an argument'),
-        'noargs' => array(13, 'Console_Getopt: Could not read cmd args (register_argc_argv=Off?)'),
-        'unrecognized' => array(14, 'Console_Getopt: unrecognized option --%s'),
-        // additional Console_GetoptPlus_Getopt error messages
-        'duplicate' => array(20, 'Console_Getopt: duplicate option name definition --%s'),
-        'invalid' => array(21, 'Console_Getopt: invalid long option definition %s'),
-        'string' => array(22, 'Console_Getopt: short options definition must be a string'),
-        'syntax' => array(23, 'Console_Getopt: short options definition syntax error %s'),
-        // additional Console_GetoptPlus error messages
-        'missing' => array(30, 'Console_GetoptPlus: unknown option name #%s'),
-        'type' => array(31, 'Console_GetoptPlus: unknown option type %s'),
-        'convert' => array(32, 'Console_GetoptPlus: wrong option name conversion %s'),
-        );
+                              'unknow'       => array(1, 'Console_Getopt: unknown error ID (%s)'),
+                              // original Console_Getopt error messages
+                              'ambigous'     => array(10, 'Console_Getopt: option --%s is ambiguous'),
+                              'mandatory'    => array(11, 'Console_Getopt: option requires an argument --%s'),
+                              'noargument'   => array(12, 'Console_Getopt: option --%s doesn\'t allow an argument'),
+                              'noargs'       => array(13, 'Console_Getopt: Could not read cmd args (register_argc_argv=Off?)'),
+                              'unrecognized' => array(14, 'Console_Getopt: unrecognized option --%s'),
+                              // additional Console_GetoptPlus_Getopt error messages
+                              'duplicate'    => array(20, 'Console_Getopt: duplicate option name definition --%s'),
+                              'invalid'      => array(21, 'Console_Getopt: invalid long option definition %s'),
+                              'string'       => array(22, 'Console_Getopt: short options definition must be a string'),
+                              'syntax'       => array(23, 'Console_Getopt: short options definition syntax error %s'),
+                              // additional Console_GetoptPlus error messages
+                              'missing'      => array(30, 'Console_GetoptPlus: unknown option name #%s'),
+                              'type'         => array(31, 'Console_GetoptPlus: unknown option type %s'),
+                              'convert'      => array(32, 'Console_GetoptPlus: wrong option name conversion %s'),
+    );
 
     /**
      * Triggers the exception.
      *
-     * @param  mixed  $exception the exception ID and optional message part,
+     * @param  mixed $exception  the exception ID and optional message part,
      *                           e.g. "string" or array("invalid", '--foo')
      * @return void
      * @access public
@@ -98,5 +98,3 @@ class Console_GetoptPlus_Exception extends PEAR_Exception
         parent::__construct($message, $code);
     }
 }
-
-?>

@@ -125,8 +125,7 @@ define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_INFO', 'Allows you to restrict the downlo
 
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG', 'Download original permissions');
 define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_DESC', "Select categories where users can download original photos.<br>To download originals the 'Save original photo' feature must be enable in 'Preferences' plus group settings must allow the download.");
-define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_INFO',
-       'Allows you to restrict the download of original images. If a user is allowed to download original they can access the original image (without border and watermark, and not resized) if the "Save original photo" is enabled in preferences.');
+define('_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_INFO', 'Allows you to restrict the download of original images. If a user is allowed to download original they can access the original image (without border and watermark, and not resized) if the "Save original photo" is enabled in preferences.');
 
 define('_AM_EXTGALLERY_PUBLIC_UPLOAD', 'Public upload permission');
 define('_AM_EXTGALLERY_PUBLIC_UPLOAD_DESC', 'Select categories where public users can upload');
@@ -341,7 +340,6 @@ define('_EXTGALLERY_ADMIN_', ' '); //
 // Add File size define (cesagonchu)
 define('_AM_EXTGALLERY_UPLOAD_MAX_FILESIZE', 'Maximum file size to upload: ');
 define('_AM_EXTGALLERY_POST_MAX_SIZE', 'Maximum size to send: ');
-
 
 //1.13
 define('_AM_EXTGALLERY_UPGRADEFAILED0', "Update failed - couldn't rename field '%s'");

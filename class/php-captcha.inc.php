@@ -97,7 +97,7 @@ class PhpCaptcha
         $aFonts, // array of TrueType fonts to use - specify full path
         $iWidth = CAPTCHA_WIDTH, // width of image
         $iHeight = CAPTCHA_HEIGHT // height of image
-) {
+    ) {
         // get parameters
         $this->aFonts = $aFonts;
         $this->SetNumChars(CAPTCHA_NUM_CHARS);
@@ -412,8 +412,7 @@ class PhpCaptcha
     {
         // check for required gd functions
         if (!function_exists('imagecreate') || !function_exists("image$this->sFileType")
-            || ($this->vBackgroundImages != '' && !function_exists('imagecreatetruecolor'))
-        ) {
+            || ($this->vBackgroundImages != '' && !function_exists('imagecreatetruecolor'))) {
             return false;
         }
 
@@ -466,6 +465,7 @@ class PhpCaptcha
     }
 
     // call this method statically
+
     /**
      * @param      $sUserCode
      * @param bool $bCaseInsensitive
@@ -490,6 +490,7 @@ class PhpCaptcha
 }
 
 // this class will only work correctly if a visual CAPTCHA has been created first using PhpCaptcha
+
 /**
  * Class AudioPhpCaptcha
  */
@@ -507,7 +508,7 @@ class AudioPhpCaptcha
     public function __construct(
         $sFlitePath = CAPTCHA_FLITE_PATH, // path to flite binary
         $sAudioPath = CAPTCHA_AUDIO_PATH // the location to temporarily store the generated audio CAPTCHA
-) {
+    ) {
         $this->SetFlitePath($sFlitePath);
         $this->SetAudioPath($sAudioPath);
 
@@ -588,6 +589,7 @@ class AudioPhpCaptcha
 }
 
 // example sub class
+
 /**
  * Class PhpCaptchaColour
  */

@@ -32,7 +32,8 @@ class MetaCoinSlider extends MetaSlider
             'navigation' => 'showNavigationButtons',
             'links'      => 'showNavigationPrevNext',
             'prevText'   => 'prevText',
-            'nextText'   => 'nextText');
+            'nextText'   => 'nextText'
+        );
 
         if (isset($params[$param])) {
             return $params[$param];

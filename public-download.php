@@ -64,8 +64,7 @@ header('Content-Disposition: attachment; filename="' . $photo->getVar('photo_nam
 //}
 
 if ($permHandler->isAllowed($xoopsUser, 'public_download_original', $photo->getVar('cat_id'))
-    && $photo->getVar('photo_orig_name') != ''
-) {
+    && $photo->getVar('photo_orig_name') != '') {
     $photoName = 'original/' . $photo->getVar('photo_orig_name');
 } else {
     if ($photo->getVar('photo_havelarge')) {

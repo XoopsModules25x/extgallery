@@ -123,7 +123,7 @@ class MetaSlide
      * Build image HTML
      *
      * @param  array $attributes
-     * @param $content
+     * @param        $content
      * @return string image HTML
      */
     public function build_anchor_tag($attributes, $content)
@@ -183,7 +183,10 @@ class MetaSlide
                 array(
                     'taxonomy' => 'ml-slider',
                     'field'    => 'slug',
-                    'terms'    => $this->slider->ID)));
+                    'terms'    => $this->slider->ID
+                )
+            )
+        );
 
         $query = new WP_Query($args);
 
@@ -200,7 +203,8 @@ class MetaSlide
         // update the slide
         wp_update_post(array(
                            'ID'         => $this->slide->ID,
-                           'menu_order' => $menu_order));
+                           'menu_order' => $menu_order
+                       ));
     }
 
     /**

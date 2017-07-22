@@ -449,15 +449,7 @@ switch ($op) {
             $disable   = $xoopsModuleConfig['watermark_type'] == 0 ? ' disabled="disabled"' : '';
             $style     = $xoopsModuleConfig['watermark_type'] == 0 ? ' style="background-color:#DDDDDD;"' : '';
             $onClick   = ' onClick="document.getElementById(\'watermark_text\').disabled = false; document.getElementById(\'watermark_text\').style.backgroundColor = \'#FFFFFF\';"';
-            $WTextForm = '<input type="radio" name="watermark_type" value="1"'
-                         . $selected1
-                         . $onClick
-                         . '> <input name="watermark_text" id="watermark_text" size="50" maxlength="255" value="'
-                         . $xoopsModuleConfig['watermark_text']
-                         . '" type="text"'
-                         . $disable
-                         . $style
-                         . '><br>';
+            $WTextForm = '<input type="radio" name="watermark_type" value="1"' . $selected1 . $onClick . '> <input name="watermark_text" id="watermark_text" size="50" maxlength="255" value="' . $xoopsModuleConfig['watermark_text'] . '" type="text"' . $disable . $style . '><br>';
 
             $selected2 = $xoopsModuleConfig['watermark_type'] == 0 ? ' checked' : '';
             $onClick   = ' onClick="document.getElementById(\'watermark_text\').disabled = true; document.getElementById(\'watermark_text\').style.backgroundColor = \'#DDDDDD\';"';

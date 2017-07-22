@@ -819,8 +819,7 @@ if (!defined('PCL_TAR')) {
         }
         if ((!is_file($p_tarname_add))
             || (((($v_size_add = filesize($p_tarname_add)) % 512) != 0)
-                && ($p_mode_add === 'tar'))
-        ) {
+                && ($p_mode_add === 'tar'))) {
             // ----- Error log
             if (!is_file($p_tarname_add)) {
                 PclErrorLog(-4, "Archive '$p_tarname_add' does not exist");
@@ -1892,22 +1891,22 @@ if (!defined('PCL_TAR')) {
 
         // ----- Study the mode
         switch ($p_mode) {
-            case 'complete' :
+            case 'complete':
                 // ----- Flag extract of all files
                 $v_extract_all = true;
                 $v_listing     = false;
                 break;
-            case 'partial' :
+            case 'partial':
                 // ----- Flag extract of specific files
                 $v_extract_all = false;
                 $v_listing     = false;
                 break;
-            case 'list' :
+            case 'list':
                 // ----- Flag list of all files
                 $v_extract_all = false;
                 $v_listing     = true;
                 break;
-            default :
+            default:
                 // ----- Error log
                 PclErrorLog(-3, "Invalid extract mode ($p_mode)");
 
@@ -1995,8 +1994,7 @@ if (!defined('PCL_TAR')) {
 
                         // ----- Look if the directory is in the filename path
                         if ((strlen($v_header['filename']) > strlen($p_file_list[$i]))
-                            && (substr($v_header['filename'], 0, strlen($p_file_list[$i])) == $p_file_list[$i])
-                        ) {
+                            && (substr($v_header['filename'], 0, strlen($p_file_list[$i])) == $p_file_list[$i])) {
                             // ----- The file is in the directory, so extract it
                             TrFctMessage(__FILE__, __LINE__, 2, 'File ' . $v_header['filename'] . " is in directory '$p_file_list[$i]' : extract it");
                             $v_extract_file = true;
@@ -2028,8 +2026,7 @@ if (!defined('PCL_TAR')) {
             if ($v_extract_file && (!$v_listing)) {
                 // ----- Look for path to remove
                 if (($p_remove_path != '')
-                    && (substr($v_header['filename'], 0, $p_remove_path_size) == $p_remove_path)
-                ) {
+                    && (substr($v_header['filename'], 0, $p_remove_path_size) == $p_remove_path)) {
                     TrFctMessage(__FILE__, __LINE__, 3, "Found path '$p_remove_path' to remove in file " . $v_header['filename'] . '');
                     // ----- Remove the path
                     $v_header['filename'] = substr($v_header['filename'], $p_remove_path_size);
@@ -2291,8 +2288,7 @@ if (!defined('PCL_TAR')) {
         // ----- Check the path
         if (($p_path == '')
             || ((substr($p_path, 0, 1) !== '/') && (substr($p_path, 0, 3) !== '../')
-                && (substr($p_path, 0, 2) !== './'))
-        ) {
+                && (substr($p_path, 0, 2) !== './'))) {
             $p_path = './' . $p_path;
         }
 
@@ -2390,8 +2386,7 @@ if (!defined('PCL_TAR')) {
         $p_remove_path,
         $p_tar_mode
     ) {
-        TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtractByIndex',
-                   "archive_descr='$p_tar', index_current=$p_index_current, index_start='$p_index_start', index_stop='$p_index_stop', list, path=$p_path, remove_path='$p_remove_path', tar_mode=$p_tar_mode");
+        TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtractByIndex', "archive_descr='$p_tar', index_current=$p_index_current, index_start='$p_index_start', index_stop='$p_index_stop', list, path=$p_path, remove_path='$p_remove_path', tar_mode=$p_tar_mode");
         $v_result = 1;
         $v_nb     = 0;
 
@@ -2591,8 +2586,7 @@ if (!defined('PCL_TAR')) {
                 $v_extract_file       = 0;
             } // ----- Look if the extracted file is older
             elseif (filemtime($v_header['filename']) > $v_header['mtime']) {
-                TrFctMessage(__FILE__, __LINE__, 2,
-                             'Existing file ' . $v_header['filename'] . ' is newer (' . date('l dS of F Y h:i:s A', filemtime($v_header['filename'])) . ') than the extracted file (' . date('l dS of F Y h:i:s A', $v_header['mtime']) . ')');
+                TrFctMessage(__FILE__, __LINE__, 2, 'Existing file ' . $v_header['filename'] . ' is newer (' . date('l dS of F Y h:i:s A', filemtime($v_header['filename'])) . ') than the extracted file (' . date('l dS of F Y h:i:s A', $v_header['mtime']) . ')');
 
                 // ----- Change the file status
                 $v_header['status'] = 'newer_exist';

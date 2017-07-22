@@ -34,7 +34,7 @@ require_once 'Image/Transform.php';
  */
 class Image_Transform_Driver_Cairowrapper extends Image_Transform
 {
-    var $surface = null;
+    public $surface = null;
 
     /**
      * Supported image types
@@ -42,36 +42,27 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
      * @var    array
      * @access protected
      */
-    var $_supported_image_types = array(
+    public $_supported_image_types = array(
         'png' => 'rw'
     );
 
     /**
      * Check settings
      */
-    function Image_Transform_Driver_Cairowrapper()
+    public function Image_Transform_Driver_Cairowrapper()
     {
         $this->__construct();
     }
 
-
-
     /**
      * Create object and check if cairo_wrapper is loaded
      */
-    function __construct()
+    public function __construct()
     {
         if (!PEAR::loadExtension('cairo_wrapper')) {
-            $this->isError(
-                PEAR::raiseError(
-                    'cairo_wrapper extension is not available.',
-                    IMAGE_TRANSFORM_ERROR_UNSUPPORTED
-                )
-            );
+            $this->isError(PEAR::raiseError('cairo_wrapper extension is not available.', IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
         }
     }
-
-
 
     /**
      * Loads an image from file
@@ -82,31 +73,28 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
      *
      * @access public
      */
-    function load($image)
+    public function load($image)
     {
         $this->free();
 
         $this->image = $image;
-        $result = $this->_get_image_details($image);
+        $result      = $this->_get_image_details($image);
         if (PEAR::isError($result)) {
             return $result;
         }
         if (!$this->supportsType($this->type, 'r')) {
-            return PEAR::raiseError('Image type not supported for input',
-                IMAGE_TRANSFORM_ERROR_UNSUPPORTED);
+            return PEAR::raiseError('Image type not supported for input', IMAGE_TRANSFORM_ERROR_UNSUPPORTED);
         }
 
         $this->surface = cairo_image_surface_create_from_png($this->image);
         if (cairo_surface_status($this->surface) != CAIRO_STATUS_SUCCESS) {
             $this->surface = null;
-            return PEAR::raiseError('Error while loading image file.',
-                IMAGE_TRANSFORM_ERROR_IO);
+
+            return PEAR::raiseError('Error while loading image file.', IMAGE_TRANSFORM_ERROR_IO);
         }
 
         return true;
     }//function load(..)
-
-
 
     /**
      * Resize the image
@@ -119,14 +107,10 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
      *
      * @access protected
      */
-    function _resize($new_x, $new_y, $options = null)
+    public function _resize($new_x, $new_y, $options = null)
     {
         if ($this->resized === true) {
-            return PEAR::raiseError(
-                'You have already resized the image without saving it.'
-                . ' Your previous resizing will be overwritten',
-                null, PEAR_ERROR_TRIGGER, E_USER_NOTICE
-            );
+            return PEAR::raiseError('You have already resized the image without saving it.' . ' Your previous resizing will be overwritten', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE);
         }
 
         if ($this->new_x == $new_x && $this->new_y == $new_y) {
@@ -136,9 +120,7 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
         $xFactor = $new_x / $this->img_x;
         $yFactor = $new_y / $this->img_y;
 
-        $outputSurface = cairo_image_surface_create(
-            CAIRO_FORMAT_ARGB32, $new_x, $new_y
-        );
+        $outputSurface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, $new_x, $new_y);
         $outputContext = cairo_create($outputSurface);
 
         cairo_scale($outputContext, $xFactor, $yFactor);
@@ -154,10 +136,9 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
 
         $this->new_x = $new_x;
         $this->new_y = $new_y;
+
         return true;
     }//function _resize(..)
-
-
 
     /**
      * Saves the scaled image into a file.
@@ -170,14 +151,13 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
      *
      * @access public
      */
-    function save($filename, $type = null, $quality = null)
+    public function save($filename, $type = null, $quality = null)
     {
         cairo_surface_write_to_png($this->surface, $filename);
         $this->free();
+
         return true;
     }//function save(..)
-
-
 
     /**
      * Returns the surface of the image so it can be modified further
@@ -186,12 +166,10 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
      *
      * @access public
      */
-    function getHandle()
+    public function getHandle()
     {
         return $this->surface;
     }//function getHandle()
-
-
 
     /**
      * Frees cairo handles
@@ -200,7 +178,7 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
      *
      * @access public
      */
-    function free()
+    public function free()
     {
         $this->resized = false;
         if (is_resource($this->surface)) {
@@ -209,22 +187,18 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
         $this->surface = null;
     }//function free()
 
-
-
     /**
      * Mirrors the image vertically
      * Uses an affine transformation matrix to flip the image.
      *
      * @return void
      */
-    function flip()
+    public function flip()
     {
-        $outputSurface = cairo_image_surface_create(
-            CAIRO_FORMAT_ARGB32, $this->img_x, $this->img_y
-        );
+        $outputSurface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, $this->img_x, $this->img_y);
         $outputContext = cairo_create($outputSurface);
         //                            xx, yx, xy, yy, x0, y0
-        $matrix = cairo_matrix_create(1,  0,  0,  -1,  0, $this->img_y);
+        $matrix = cairo_matrix_create(1, 0, 0, -1, 0, $this->img_y);
 
         cairo_set_matrix($outputContext, $matrix);
         cairo_set_source_surface($outputContext, $this->surface, 0, 0);
@@ -236,8 +210,6 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
         $this->surface = $outputSurface;
     }//function flip()
 
-
-
     /**
      * Mirrors the image horizontally.
      * Uses an affine transformation matrix to mirror the image.
@@ -246,14 +218,12 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
      *
      * @return void
      */
-    function mirror()
+    public function mirror()
     {
-        $outputSurface = cairo_image_surface_create(
-            CAIRO_FORMAT_ARGB32, $this->img_x, $this->img_y
-        );
+        $outputSurface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, $this->img_x, $this->img_y);
         $outputContext = cairo_create($outputSurface);
         //                            xx, yx, xy, yy, x0, y0
-        $matrix = cairo_matrix_create(-1, 0,  0,  1, $this->img_x, 0);
+        $matrix = cairo_matrix_create(-1, 0, 0, 1, $this->img_x, 0);
 
         cairo_set_matrix($outputContext, $matrix);
         cairo_set_source_surface($outputContext, $this->surface, 0, 0);
@@ -264,6 +234,4 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
 
         $this->surface = $outputSurface;
     }//function mirror()
-
 }//class Image_Transform_Driver_Cairowrapper extends Image_Transform
-?>

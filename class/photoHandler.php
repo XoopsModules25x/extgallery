@@ -253,8 +253,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         $criteria->add(new Criteria('cat_id', $catId));
         $criteria->add(new Criteria('photo_approved', 1));
 
-        $sql = 'SELECT photo_id FROM ' . $this->db->prefix('extgallery_publicphoto') . ' ' . $criteria->renderWhere()
-               . ' ORDER BY photo_weight, photo_id ASC;';
+        $sql = 'SELECT photo_id FROM ' . $this->db->prefix('extgallery_publicphoto') . ' ' . $criteria->renderWhere() . ' ORDER BY photo_weight, photo_id ASC;';
 
         $result = $this->db->query($sql);
         $ret    = array();
@@ -367,7 +366,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             foreach ($cats as $cat) {
                 $in .= ',' . $cat->getVar('cat_id');
             }
-            $in .= ')';
+            $in       .= ')';
             $criteria = new Criteria('cat_id', $in, 'IN');
         } else {
             $criteria = new Criteria('cat_id', '(0)', 'IN');
@@ -488,8 +487,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             $y = 1;
         }
 
-        $text = ($xoopsModuleConfig['watermark_type']
-                 == 0) ? $GLOBALS['xoopsUser']->getVar('uname') : $xoopsModuleConfig['watermark_text'];
+        $text = ($xoopsModuleConfig['watermark_type'] == 0) ? $GLOBALS['xoopsUser']->getVar('uname') : $xoopsModuleConfig['watermark_text'];
 
         $watermarkParams = array(
             'text'         => $text,
@@ -542,7 +540,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'imagick') {
                 define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
             }
-            $imageFactory = new Image_Transform;
+            $imageFactory   = new Image_Transform;
             $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
             $filePath = $this->_getUploadPhotoPath();
@@ -550,8 +548,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
 
             // Save large photo only if it's bigger than medium size
             if ($imageTransform->getImageWidth() > $xoopsModuleConfig['medium_width']
-                || $imageTransform->getImageHeight() > $xoopsModuleConfig['medium_heigth']
-            ) {
+                || $imageTransform->getImageHeight() > $xoopsModuleConfig['medium_heigth']) {
 
                 // Make watermark
                 if ($xoopsModuleConfig['enable_large_watermark']) {
@@ -583,7 +580,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'imagick') {
             define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
         }
-        $imageFactory = new Image_Transform;
+        $imageFactory   = new Image_Transform;
         $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
         if (null === $filePath) {
@@ -600,8 +597,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         } else {
             $borderSize = 0;
         }
-        $imageTransform->fit($xoopsModuleConfig['medium_width'] - $borderSize,
-                             $xoopsModuleConfig['medium_heigth'] - $borderSize);
+        $imageTransform->fit($xoopsModuleConfig['medium_width'] - $borderSize, $xoopsModuleConfig['medium_heigth'] - $borderSize);
         $imageTransform->save($mediumFilePath, '', $xoopsModuleConfig['medium_quality']);
         $imageTransform->free();
 
@@ -634,7 +630,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'imagick') {
             define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
         }
-        $imageFactory = new Image_Transform;
+        $imageFactory   = new Image_Transform;
         $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
         $filePath  = $this->_getUploadPhotoPath() . 'medium/' . $photoName;
@@ -669,7 +665,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'imagick') {
             define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
         }
-        $imageFactory = new Image_Transform;
+        $imageFactory   = new Image_Transform;
         $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
         $ret = array();
@@ -859,10 +855,9 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             $photoTag = $_POST['tag'];
         }
 
-        $photoStatus = $this->addLocalPhoto($catId, $this->photoUploader->getSavedFileName(), $photoTitle, $photoDesc,
-                                            $photoExtra, $photoTag);
+        $photoStatus = $this->addLocalPhoto($catId, $this->photoUploader->getSavedFileName(), $photoTitle, $photoDesc, $photoExtra, $photoTag);
         /** @var ExtgalleryCat $cat */
-        $cat         = $catHandler->getCat($catId);
+        $cat = $catHandler->getCat($catId);
         $cat->setVar('cat_isalbum', 1);
         $catHandler->insert($cat);
 

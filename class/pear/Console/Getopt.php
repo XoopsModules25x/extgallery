@@ -154,10 +154,12 @@ class Console_GetoptPlus_Getopt
      * @access private
      */
     private $type = array(// /
-        false => 'noarg',
-        '=' => 'mandatory', ':' => 'mandatory',
-        '==' => 'optional', '::' => 'optional',
-        );
+                          false => 'noarg',
+                          '='   => 'mandatory',
+                          ':'   => 'mandatory',
+                          '=='  => 'optional',
+                          '::'  => 'optional',
+    );
 
     /**
      * Creates the option shorcut names
@@ -170,20 +172,20 @@ class Console_GetoptPlus_Getopt
     public function createShorcuts($longOptionsDef, $ambiguity)
     {
         $shortcuts = array();
-        $ambigous = array();
+        $ambigous  = array();
 
         if ($ambiguity == 'shortcuts') {
-            foreach(array_keys($longOptionsDef) as $name) {
+            foreach (array_keys($longOptionsDef) as $name) {
                 // splits the option name in characters to build the name
                 // substring combinations, e.g. foo => f, fo, foo
                 $subName = '';
-                foreach(str_split($name) as $char) {
+                foreach (str_split($name) as $char) {
                     $subName .= $char;
 
                     if (isset($ambigous[$subName])) {
                         // adds the shortcut to the list of ambigous shortcuts
                         $ambigous[$subName][] = $name;
-                    } else if (isset($shortcuts[$subName])) {
+                    } elseif (isset($shortcuts[$subName])) {
                         // there is already a shortcut, adds the previous one
                         // and the current one in the list of ambigous shortcuts
                         $ambigous[$subName] = array($shortcuts[$subName], $name);
@@ -195,8 +197,7 @@ class Console_GetoptPlus_Getopt
                 }
             }
             // checks if some options are ambigous, e.g. --foo --foobar
-            $names = array_intersect_key($longOptionsDef, $ambigous) and
-            self::exception('ambigous', key($names));
+            $names = array_intersect_key($longOptionsDef, $ambigous) and self::exception('ambigous', key($names));
         }
 
         return array($shortcuts, $ambigous);
@@ -216,13 +217,16 @@ class Console_GetoptPlus_Getopt
      * @access public
      * @static
      */
-    public static function doGetopt($version = null, $args = array(),
-        $shortOptions = '', $longOptions = array(), $ambiguity = '')
-    {
+    public static function doGetopt(
+        $version = null,
+        $args = array(),
+        $shortOptions = '',
+        $longOptions = array(),
+        $ambiguity = ''
+    ) {
         $getopt = new self;
 
-        return $getopt->process($args, $shortOptions, $longOptions,
-            $ambiguity, $version);
+        return $getopt->process($args, $shortOptions, $longOptions, $ambiguity, $version);
     }
 
     /**
@@ -281,9 +285,12 @@ class Console_GetoptPlus_Getopt
      * @access public
      * @static
      */
-    public static function getopt($args = array(), $shortOptions = '',
-        $longOptions = array(), $ambiguity = '')
-    {
+    public static function getopt(
+        $args = array(),
+        $shortOptions = '',
+        $longOptions = array(),
+        $ambiguity = ''
+    ) {
         return self::doGetopt(1, $args, $shortOptions, $longOptions, $ambiguity);
     }
 
@@ -300,16 +307,19 @@ class Console_GetoptPlus_Getopt
      * @access public
      * @static
      */
-    public static function getopt2($args = array(), $shortOptions = '',
-        $longOptions = array(), $ambiguity = '')
-    {
+    public static function getopt2(
+        $args = array(),
+        $shortOptions = '',
+        $longOptions = array(),
+        $ambiguity = ''
+    ) {
         return self::doGetopt(2, $args, $shortOptions, $longOptions, $ambiguity);
     }
 
     /**
      * Checks if the argument is an option
      *
-     * @param  string  $argument the argument, e.g. "-f" or "--foo"
+     * @param  string $argument the argument, e.g. "-f" or "--foo"
      * @return boolean true if an option, false otherwise
      * @access public
      */
@@ -329,12 +339,11 @@ class Console_GetoptPlus_Getopt
     public function parseLongOption($argument)
     {
         $option = explode('=', $argument, 2);
-        $name = current($option);
+        $name   = current($option);
         $arg = next($option) or $arg = null;
         // verifies the option is valid
         isset($this->ambigous[$name]) and self::exception('ambigous', $name);
-        isset($this->shortcuts[$name]) and $name = $this->shortcuts[$name] or
-        isset($this->longOptionsDef[$name]) or self::exception('unrecognized', $name);
+        isset($this->shortcuts[$name]) and $name = $this->shortcuts[$name] or isset($this->longOptionsDef[$name]) or self::exception('unrecognized', $name);
 
         if ($this->longOptionsDef[$name] == 'mandatory') {
             // the option requires an argument, e.g. --file=foo.php
@@ -343,7 +352,7 @@ class Console_GetoptPlus_Getopt
             is_null($arg) and self::exception('mandatory', $name);
             // verifies the argument is not an option itself
             $this->isOption($arg) and self::exception('mandatory', $name);
-        } else if ($this->longOptionsDef[$name] == 'noarg' and !is_null($arg)) {
+        } elseif ($this->longOptionsDef[$name] == 'noarg' and !is_null($arg)) {
             // the option may not take an optional argument
             self::exception('noargument', $name);
         }
@@ -354,9 +363,9 @@ class Console_GetoptPlus_Getopt
     /**
      * Parses the long option names and types
      *
-     * @param  array  $options the long options, e.g. array("foo", "bar=")
+     * @param  array $options the long options, e.g. array("foo", "bar=")
      * @return array  the options name and type,
-     *                e.g. array("foo"=>"noarg", "bar"=>"mandatory")
+     *                        e.g. array("foo"=>"noarg", "bar"=>"mandatory")
      * @access public
      */
     public function parseLongOptionsDef($options)
@@ -365,13 +374,12 @@ class Console_GetoptPlus_Getopt
         settype($options, 'array');
 
         $longOptionsDef = array();
-        foreach($options as $option) {
+        foreach ($options as $option) {
             if ($option = trim($option)) {
                 // extracts the option name and type:
                 // optional argument (==), mandatory (=), or none (null)
                 // verifies the option syntax is correct
-                preg_match("~^(\w+)(==|=)?$~", $option, $match) or
-                self::exception('invalid', $option);
+                preg_match("~^(\w+)(==|=)?$~", $option, $match) or self::exception('invalid', $option);
                 $name = next($match);
                 $type = next($match);
                 // verifies the option is not a duplicate
@@ -396,7 +404,7 @@ class Console_GetoptPlus_Getopt
     {
         for ($i = 0; $i < strlen($argument); $i++) {
             $name = $argument{$i};
-            $arg = null;
+            $arg  = null;
             // verifies the option is valid
             isset($this->shortOptionsDef[$name]) or self::exception('unrecognized', $name);
 
@@ -405,19 +413,20 @@ class Console_GetoptPlus_Getopt
                 if (($arg = substr($argument, $i + 1)) !== false) {
                     // the remainder of the string is the option argument
                     $this->options[] = array($name, $arg);
+
                     return;
                 }
-            } else if ($this->shortOptionsDef[$name] == 'mandatory') {
+            } elseif ($this->shortOptionsDef[$name] == 'mandatory') {
                 // the option requires an argument, -zfoo.php or -z foo.php
                 if (($arg = substr($argument, $i + 1)) === false) {
                     // nothing left to use as the option argument
                     // the next argument is expected to be the option argument
                     // verifies there is one and it is not an option itself
                     list(, $arg) = each($this->args);
-                    (is_null($arg) or $this->isOption($arg)) and
-                    self::exception('mandatory', $name);
+                    (is_null($arg) or $this->isOption($arg)) and self::exception('mandatory', $name);
                 }
                 $this->options[] = array($name, $arg);
+
                 return;
             }
             // else: the option is not expecting an argument, e.g. -h
@@ -434,7 +443,7 @@ class Console_GetoptPlus_Getopt
      *
      * @param  string $options the short options, e.g. array("ab:c::)
      * @return array  the options name and type,
-     *                e.g. array("a"=>"noarg", "b"=>"mandatory", "c"=>"optional")
+     *                         e.g. array("a"=>"noarg", "b"=>"mandatory", "c"=>"optional")
      * @access public
      */
     public function parseShortOptionsDef($options)
@@ -446,12 +455,12 @@ class Console_GetoptPlus_Getopt
         $options = trim($options);
         preg_match_all("~(\w)(::|:)?~", $options, $matches, PREG_SET_ORDER);
 
-        $check = '';
+        $check           = '';
         $shortOptionsDef = array();
-        foreach($matches as $match) {
+        foreach ($matches as $match) {
             $check .= current($match);
-            $name = next($match);
-            $type = next($match);
+            $name  = next($match);
+            $type  = next($match);
             // verifies the option is not a duplicate
             isset($shortOptionsDef[$name]) and self::exception('duplicate', $name);
             // captures the option name and type
@@ -476,12 +485,15 @@ class Console_GetoptPlus_Getopt
      * @return array   the parsed options, their arguments and parameters
      * @access public
      */
-    public function process($args = array(), $shortOptions, $longOptions,
-        $ambiguity = '', $version = 2)
-    {
+    public function process(
+        $args = array(),
+        $shortOptions,
+        $longOptions,
+        $ambiguity = '',
+        $version = 2
+    ) {
         settype($args, 'array');
-        in_array($ambiguity, array('loose', 'strict', 'shortcuts')) or
-        $ambiguity = 'loose';
+        in_array($ambiguity, array('loose', 'strict', 'shortcuts')) or $ambiguity = 'loose';
 
         if ($version < 2) {
             // preserve backwards compatibility with callers
@@ -493,35 +505,35 @@ class Console_GetoptPlus_Getopt
         $this->args = $args;
         // parses the options definitions, create shorcuts or check ambiguities
         $this->shortOptionsDef = $this->parseShortOptionsDef($shortOptions);
-        $this->longOptionsDef = $this->parseLongOptionsDef($longOptions);
+        $this->longOptionsDef  = $this->parseLongOptionsDef($longOptions);
         list($this->shortcuts, $this->ambigous) = $this->createShorcuts($this->longOptionsDef, $ambiguity);
         $this->verifyNoAmbiguity($this->longOptionsDef, $ambiguity);
 
         $this->options = array();
-        $parameters = array();
+        $parameters    = array();
         while (list($i, $arg) = each($this->args)) {
             if ($arg == '--') {
                 // end of options
                 // the remaining arguments are parameters excluding this one
                 $parameters = array_slice($this->args, $i + 1);
                 break;
-            } else if ($arg == '-') {
+            } elseif ($arg == '-') {
                 // the stdin flag
                 // the remaining arguments are parameters including this one
                 $parameters = array_slice($this->args, $i);
                 break;
-            } else if (substr($arg, 0, 2) == '--') {
+            } elseif (substr($arg, 0, 2) == '--') {
                 // a long option, e.g. --foo
                 if ($this->longOptionsDef) {
                     $this->parseLongOption(substr($arg, 2));
                 } else {
                     // not expecting long options, the remaining arguments are
                     // parameters including this one stripped off of --
-                    $parameters = array_slice($this->args, $i);
+                    $parameters    = array_slice($this->args, $i);
                     $parameters[0] = substr($parameters[0], 2);
                     break;
                 }
-            } else if ($arg{0} == '-') {
+            } elseif ($arg{0} == '-') {
                 // a short option, e.g. -h
                 $this->parseShortOption(substr($arg, 1));
             } else {
@@ -546,10 +558,7 @@ class Console_GetoptPlus_Getopt
     {
         global $argv;
 
-        is_array($args = $argv) or
-        is_array($args = $_SERVER['argv']) or
-        is_array($args = $GLOBALS['HTTP_SERVER_VARS']['argv']) or
-        self::exception('noargs');
+        is_array($args = $argv) or is_array($args = $_SERVER['argv']) or is_array($args = $GLOBALS['HTTP_SERVER_VARS']['argv']) or self::exception('noargs');
 
         return $args;
     }
@@ -557,8 +566,8 @@ class Console_GetoptPlus_Getopt
     /**
      * Verifies there is no ambiguity with option names
      *
-     * @param  array   $longOptionsDef the long options names and their types
-     * @param  string  $ambiguity      directive to handle option names ambiguity,
+     * @param  array  $longOptionsDef  the long options names and their types
+     * @param  string $ambiguity       directive to handle option names ambiguity,
      *                                 See getopt() for a complete description
      * @return boolean no ambiguity if true, false otherwise
      * @access public
@@ -567,8 +576,8 @@ class Console_GetoptPlus_Getopt
     {
         settype($longOptionsDef, 'array');
 
-        foreach($longOptionsDef as $name => $type) {
-            foreach($longOptionsDef as $name2 => $type2) {
+        foreach ($longOptionsDef as $name => $type) {
+            foreach ($longOptionsDef as $name2 => $type2) {
                 if ($name != $name2) {
                     if ($ambiguity == 'loose' and $type == 'noarg') {
                         // according to Getopt.php, CVS v 1.4 2007/06/12,
@@ -587,5 +596,3 @@ class Console_GetoptPlus_Getopt
         return true;
     }
 }
-
-?>
