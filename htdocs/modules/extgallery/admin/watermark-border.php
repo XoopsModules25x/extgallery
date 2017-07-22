@@ -333,7 +333,7 @@ switch ($op) {
 
                 // Loading original image
                 // Define Graphical library path
-                if ($xoopsModuleConfig['graphic_lib'] === 'IM') {
+                if ($xoopsModuleConfig['graphic_lib'] === 'imagick') {
                     define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
                 }
                 $imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
@@ -398,7 +398,7 @@ switch ($op) {
                 // Remove old test image
                 deleteImageTest();
                 // Saving transformation on test image
-                $imageTransform->save('../assets/images/watermark-border-test-' . substr(md5(uniqid(mt_rand())), 27) . '.jpg');
+                $imageTransform->save('../assets/images/watermark-border-test-' . substr(md5(uniqid(mt_rand(), true)), 27) . '.jpg');
                 $imageTransform->free();
 
                 redirect_header('watermark-border.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
@@ -445,23 +445,23 @@ switch ($op) {
 
             $elementTray = new XoopsFormElementTray(_AM_EXTGALLERY_WATERMARK_TEXT, '&nbsp;');
 
-            $selected1 = $xoopsModuleConfig['watermark_type'] == 1 ? ' checked="checked"' : '';
+            $selected1 = $xoopsModuleConfig['watermark_type'] == 1 ? ' checked' : '';
             $disable   = $xoopsModuleConfig['watermark_type'] == 0 ? ' disabled="disabled"' : '';
             $style     = $xoopsModuleConfig['watermark_type'] == 0 ? ' style="background-color:#DDDDDD;"' : '';
             $onClick   = ' onClick="document.getElementById(\'watermark_text\').disabled = false; document.getElementById(\'watermark_text\').style.backgroundColor = \'#FFFFFF\';"';
             $WTextForm = '<input type="radio" name="watermark_type" value="1"'
                          . $selected1
                          . $onClick
-                         . ' > <input name="watermark_text" id="watermark_text" size="50" maxlength="255" value="'
+                         . '> <input name="watermark_text" id="watermark_text" size="50" maxlength="255" value="'
                          . $xoopsModuleConfig['watermark_text']
                          . '" type="text"'
                          . $disable
                          . $style
-                         . ' ><br>';
+                         . '><br>';
 
-            $selected2 = $xoopsModuleConfig['watermark_type'] == 0 ? ' checked="checked"' : '';
+            $selected2 = $xoopsModuleConfig['watermark_type'] == 0 ? ' checked' : '';
             $onClick   = ' onClick="document.getElementById(\'watermark_text\').disabled = true; document.getElementById(\'watermark_text\').style.backgroundColor = \'#DDDDDD\';"';
-            $WTextForm .= '<input type="radio" name="watermark_type" value="0"' . $selected2 . $onClick . ' > ' . _AM_EXTGALLERY_PRINT_SUBMITTER_UNAME;
+            $WTextForm .= '<input type="radio" name="watermark_type" value="0"' . $selected2 . $onClick . '> ' . _AM_EXTGALLERY_PRINT_SUBMITTER_UNAME;
 
             $elementTray->addElement(new XoopsFormLabel('', $WTextForm), false);
             $form->addElement($elementTray);

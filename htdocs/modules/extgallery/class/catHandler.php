@@ -240,7 +240,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
      */
     public function nbPhoto(&$cat)
     {
-        /** @var ExtgalleryPublicPhotoHandler $this->_photoHandler */
+        /** @var ExtgalleryPublicPhotoHandler $this ->_photoHandler */
         return $this->_photoHandler->nbPhoto($cat);
     }
 
@@ -365,13 +365,13 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     }
 
     /**
-     * @param array $cats
+     * @param array  $cats
      * @param string $name
      * @param string $selectMode
-     * @param $addEmpty
-     * @param $selected
-     * @param $extra
-     * @param $displayWeight
+     * @param        $addEmpty
+     * @param        $selected
+     * @param        $extra
+     * @param        $displayWeight
      *
      * @return string
      */
@@ -386,7 +386,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
             $disableOption = '';
             if ($selectMode === 'node' && ($cat->getVar('nright') - $cat->getVar('nleft') != 1)) {
                 // If the brownser is IE the parent cat isn't displayed
-//                if (preg_match('`MSIE`', $_SERVER['HTTP_USER_AGENT'])) {
+                //                if (preg_match('`MSIE`', $_SERVER['HTTP_USER_AGENT'])) {
                 if (false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
                     continue;
                 }
@@ -514,7 +514,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
         // and nright of (tree size * 2 + 1)
 
         // Errase category and photo counter
-        $query = sprintf('UPDATE %s SET cat_nb_album = 0, cat_nb_photo = 0;', $this->table);
+        $query = sprintf('UPDATE "%s" SET cat_nb_album = 0, cat_nb_photo = 0;', $this->table);
         $this->db->queryF($query);
 
         foreach ($data as $id => $row) {
@@ -530,7 +530,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
                 $criteria = new CriteriaCompo();
                 $criteria->add(new Criteria('cat_id', $id));
                 $criteria->add(new Criteria('photo_approved', 1));
-                /** @var ExtgalleryPublicPhotoHandler $this->_photoHandler */
+                /** @var ExtgalleryPublicPhotoHandler $this ->_photoHandler */
                 $nbPhoto = $this->_photoHandler->getCount($criteria);
 
                 // Update all parent of this album
@@ -538,7 +538,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
                 if ($nbPhoto != 0) {
                     $upNbAlbum = 'cat_nb_album = cat_nb_album + 1, ';
                 }
-                $sql   = 'UPDATE %s SET ' . $upNbAlbum . 'cat_nb_photo = cat_nb_photo + %d WHERE nleft < %d AND nright > %d;';
+                $sql   = 'UPDATE "%s" SET ' . $upNbAlbum . 'cat_nb_photo = cat_nb_photo + "%d" WHERE nleft < "%d" AND nright > "%d";';
                 $query = sprintf($sql, $this->table, $nbPhoto, $row['nleft'], $row['nright']);
                 $this->db->queryF($query);
 
@@ -550,7 +550,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
                 }
             }
 
-            $query = sprintf('UPDATE %s SET nlevel = %d, nleft = %d, nright = %d WHERE %s = %d;', $this->table, $row['nlevel'], $row['nleft'], $row['nright'], $this->keyName, $id);
+            $query = sprintf('UPDATE "%s" SET nlevel = "%d", nleft = "%d", nright = "%d" WHERE "%s" = "%d";', $this->table, $row['nlevel'], $row['nleft'], $row['nright'], $this->keyName, $id);
             $this->db->queryF($query);
         }
     }
@@ -589,24 +589,33 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
      *
      * @return Criteria
      */
-    public function &getCatRestrictCriteria($permType = 'public_access')
+    public function getCatRestrictCriteria($permType = 'public_access')
     {
-        $permHandler       = $this->_getPermHandler();
-        $allowedCategories = $permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], $permType);
+        if (null !== $GLOBALS['xoopsUser'] && is_object($GLOBALS['xoopsUser'])) {
+            $permHandler       = $this->_getPermHandler();
+            $allowedCategories = $permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], $permType);
 
-        $count = count($allowedCategories);
-        if ($count > 0) {
-            $in = '(' . $allowedCategories[0];
-            array_shift($allowedCategories);
-            foreach ($allowedCategories as $allowedCategory) {
-                $in .= ',' . $allowedCategory;
+            $count = count($allowedCategories);
+            if ($count > 0) {
+                $in = '(' . $allowedCategories[0];
+                array_shift($allowedCategories);
+                foreach ($allowedCategories as $allowedCategory) {
+                    $in .= ',' . $allowedCategory;
+                }
+                $in       .= ')';
+                $criteria = new Criteria('cat_id', $in, 'IN');
+            } else {
+                $criteria = new Criteria('cat_id', '(0)', 'IN');
             }
-            $in .= ')';
-            $criteria = new Criteria('cat_id', $in, 'IN');
-        } else {
-            $criteria = new Criteria('cat_id', '(0)', 'IN');
-        }
 
-        return $criteria;
+            return $criteria;
+        }
+    }
+    /**
+     * @return ExtgalleryPublicPermHandler
+     */
+    public function _getPermHandler()
+    {
+        return ExtgalleryPublicPermHandler::getInstance();
     }
 }

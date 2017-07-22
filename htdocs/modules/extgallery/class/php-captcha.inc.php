@@ -97,8 +97,7 @@ class PhpCaptcha
         $aFonts, // array of TrueType fonts to use - specify full path
         $iWidth = CAPTCHA_WIDTH, // width of image
         $iHeight = CAPTCHA_HEIGHT // height of image
-)
-    {
+) {
         // get parameters
         $this->aFonts = $aFonts;
         $this->SetNumChars(CAPTCHA_NUM_CHARS);
@@ -508,8 +507,7 @@ class AudioPhpCaptcha
     public function __construct(
         $sFlitePath = CAPTCHA_FLITE_PATH, // path to flite binary
         $sAudioPath = CAPTCHA_AUDIO_PATH // the location to temporarily store the generated audio CAPTCHA
-)
-    {
+) {
         $this->SetFlitePath($sFlitePath);
         $this->SetAudioPath($sAudioPath);
 
@@ -557,11 +555,11 @@ class AudioPhpCaptcha
         }
 
         $aPhrases = array(
-            "The %1\$s characters are as follows: %2\$s",
-            "%2\$s, are the %1\$s letters",
-            "Here are the %1\$s characters: %2\$s",
-            "%1\$s characters are: %2\$s",
-            "%1\$s letters: %2\$s"
+            'The %1$s characters are as follows: %2$s',
+            '%2$s, are the %1$s letters',
+            'Here are the %1$s characters: %2$s',
+            '%1$s characters are: %2$s',
+            '%1$s letters: %2$s'
         );
 
         $iPhrase = array_rand($aPhrases);

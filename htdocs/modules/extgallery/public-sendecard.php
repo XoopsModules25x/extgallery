@@ -48,7 +48,7 @@ switch ($step) {
         require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/php-captcha.inc.php';
 
         // Enable captcha only if GD is Used
-        if ($xoopsModuleConfig['graphic_lib'] === 'GD') {
+        if ($xoopsModuleConfig['graphic_lib'] === 'gd') {
             if (!PhpCaptcha::Validate($_POST['captcha'])) {
                 redirect_header('public-photo.php?photoId=' . $photoId . '#photoNav', 3, _MD_EXTGALLERY_CAPTCHA_ERROR);
             }
@@ -107,7 +107,7 @@ switch ($step) {
         $form->addElement(new XoopsFormText(_MD_EXTGALLERY_GREETINGS, 'ecard_greetings', '110', '255', ''), false);
         $form->addElement(new XoopsFormTextArea(_MD_EXTGALLERY_DESC, 'ecard_desc', ''), false);
         // Enable captcha only if GD is Used
-        if ($xoopsModuleConfig['graphic_lib'] === 'GD') {
+        if ($xoopsModuleConfig['graphic_lib'] === 'gd') {
             $form->addElement(new XoopsFormText(_MD_EXTGALLERY_SECURITY, 'captcha', '10', '5', ''), false);
         }
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));

@@ -539,10 +539,11 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         if ($xoopsModuleConfig['save_large']) {
 
             // Define Graphical library path
-            if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'IM') {
+            if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'imagick') {
                 define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
             }
-            $imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
+            $imageFactory = new Image_Transform;
+            $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
             $filePath = $this->_getUploadPhotoPath();
             $imageTransform->load($filePath . $photoName);
@@ -579,10 +580,11 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         global $xoopsModuleConfig;
 
         // Define Graphical library path
-        if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'IM') {
+        if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'imagick') {
             define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
         }
-        $imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
+        $imageFactory = new Image_Transform;
+        $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
         if (null === $filePath) {
             $filePath = $this->_getUploadPhotoPath();
@@ -629,10 +631,11 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         global $xoopsModuleConfig;
 
         // Define Graphical library path
-        if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'IM') {
+        if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'imagick') {
             define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
         }
-        $imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
+        $imageFactory = new Image_Transform;
+        $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
         $filePath  = $this->_getUploadPhotoPath() . 'medium/' . $photoName;
         $thumbPath = $this->_getUploadPhotoPath() . 'thumb/thumb_' . $photoName;
@@ -663,10 +666,11 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         global $xoopsModuleConfig;
 
         // Define Graphical library path
-        if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'IM') {
+        if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'imagick') {
             define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
         }
-        $imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
+        $imageFactory = new Image_Transform;
+        $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
         $ret = array();
         if ($this->_haveLargePhoto($photoName)) {
@@ -729,7 +733,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         $fileName = explode('.', $fileName);
         $userId   = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid') : 0;
 
-        return $fileName[0] . '_' . $userId . '_' . substr(md5(uniqid(mt_rand())), 27) . '.' . $fileName[1];
+        return $fileName[0] . '_' . $userId . '_' . substr(md5(uniqid(mt_rand(), true)), 27) . '.' . $fileName[1];
     }
 
     /**
@@ -791,7 +795,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
 
         // If isn't an album when stop the traitment
         $cat = $catHandler->getCat($catId);
-        if ($cat->getVar('nright') - $cat->getVar('nleft') != 1) {
+        if (null !== $cat && ($cat->getVar('nright') - $cat->getVar('nleft') != 1)) {
             return 2;
         }
 
@@ -926,7 +930,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
 
         //DNPROSSI - changed photo_desc to photo_title
         // Making auto description
-        if ($photoTitle == '') {
+        if ($photoTitle === '') {
             $photoTitle = $this->_getAutoDescription($photoName);
         }
 
@@ -934,7 +938,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         // Save original photo
         if ($xoopsModuleConfig['save_large'] && $xoopsModuleConfig['save_original']) {
             $fileName     = explode('.', $photoName);
-            $originalName = md5(uniqid(mt_rand())) . '.' . $fileName[1];
+            $originalName = md5(uniqid(mt_rand(), true)) . '.' . $fileName[1];
             copy($this->_getUploadPhotoPath() . $photoName, $this->_getUploadPhotoPath() . 'original/' . $originalName);
         }
 
@@ -1068,13 +1072,14 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
     public function getRandomPhoto($param)
     {
         $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
-
-        $criteria = new CriteriaCompo();
-        $criteria->add($catHandler->getCatRestrictCriteria());
-        $criteria->add(new Criteria('photo_approved', 1));
-        $this->_addInCriteria($criteria, $param['cat']);
-        $criteria->setSort('RAND()');
-        $criteria->setLimit($param['limit']);
+        if (null !== $catHandler->getCatRestrictCriteria()) {
+            $criteria = new CriteriaCompo();
+            $criteria->add($catHandler->getCatRestrictCriteria());
+            $criteria->add(new Criteria('photo_approved', 1));
+            $this->_addInCriteria($criteria, $param['cat']);
+            $criteria->setSort('RAND()');
+            $criteria->setLimit($param['limit']);
+        }
 
         return $this->getObjects($criteria);
     }

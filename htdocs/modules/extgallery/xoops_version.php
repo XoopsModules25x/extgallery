@@ -36,7 +36,6 @@ $modversion = array(
     'release_info'        => 'release_info',
     'release'             => '2016-08-28',
     'release_file'        => XOOPS_URL . "/modules/{$moduleDirName}/docs/release_info file",
-
     //
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . "/modules/{$moduleDirName}/docs/install.txt",
@@ -85,24 +84,24 @@ $modversion = array(
 
 // Menu
 $modversion['hasMain'] = 1;
-if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
-    && $GLOBALS['xoopsModule']->getVar('dirname') === 'extgallery'
-) {
-    if ($GLOBALS['xoopsUser'] !== null) {
+if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule']) && $GLOBALS['xoopsModule']->getVar('dirname') === 'extgallery') {
+    if (null !== $GLOBALS['xoopsUser'] && is_object($GLOBALS['xoopsUser'])) {
         $modversion['sub'][0]['name'] = _MI_EXTGALLERY_USERALBUM;
         $modversion['sub'][0]['url']  = 'public-useralbum.php?id=' . $GLOBALS['xoopsUser']->uid();
-    }
 
-    require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/publicPerm.php";
-    $permHandler = ExtgalleryPublicPermHandler::getInstance();
-    if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
-        $modversion['sub'][1]['name'] = _MI_EXTGALLERY_PUBLIC_UPLOAD;
-        if ($GLOBALS['xoopsModuleConfig']['use_extended_upload'] === 'html') {
-            $modversion['sub'][1]['url'] = 'public-upload.php';
-        } else {
-            $modversion['sub'][1]['url'] = 'public-upload-extended.php';
+//        if (isset($GLOBALS['xoopsUser']) && '' !== $GLOBALS['xoopsUser']) {
+            require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/publicPerm.php";
+            $permHandler = ExtgalleryPublicPermHandler::getInstance();
+            if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
+                $modversion['sub'][1]['name'] = _MI_EXTGALLERY_PUBLIC_UPLOAD;
+                if ($GLOBALS['xoopsModuleConfig']['use_extended_upload'] === 'html') {
+                    $modversion['sub'][1]['url'] = 'public-upload.php';
+                } else {
+                    $modversion['sub'][1]['url'] = 'public-upload-extended.php';
+                }
+            }
         }
-    }
+//    }
 }
 
 // ------------------- Mysql ------------------- //
@@ -602,8 +601,8 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_GRAPHLIB';
 $modversion['config'][$i]['description'] = '_MI_EXTGAL_GRAPHLIB_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'GD';
-$modversion['config'][$i]['options']     = array('GD 2' => 'GD', 'ImageMagick 6 Binary' => 'IM');
+$modversion['config'][$i]['default']     = 'gd';
+$modversion['config'][$i]['options']     = array('GD 2' => 'gd', 'Imagick' => 'imagick');
 ++$i;
 $modversion['config'][$i]['name']        = 'graphic_lib_path';
 $modversion['config'][$i]['title']       = '_MI_EXTGAL_GRAPHLIB_PATH';
