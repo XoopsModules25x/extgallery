@@ -53,7 +53,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
             if ($sort = $criteria->getSort()) {
-                $sql .= " ORDER BY {$sort} " . $criteria->getOrder();
+                $sql      .= " ORDER BY {$sort} " . $criteria->getOrder();
                 $orderSet = true;
             }
             $limit = $criteria->getLimit();
@@ -164,7 +164,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
         $sql   = "SELECT `{$this->handler->keyName}` FROM `{$this->handler->table}`";
         $limit = $start = null;
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' ' . $criteria->renderWhere();
+            $sql   .= ' ' . $criteria->renderWhere();
             $limit = $criteria->getLimit();
             $start = $criteria->getStart();
         }
@@ -197,7 +197,8 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
         $fields = null,
         $asObject = true
     ) {
-        trigger_error(__CLASS__ . '::' . __FUNCTION__ . '() is deprecated, please use getAll instead.', E_USER_WARNING);
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
+        trigger_error(__CLASS__ . '::' . __FUNCTION__ . '() is deprecated, please use getAll instead.' . ". Called from {$trace[0]['file']}line {$trace[0]['line']}", E_USER_WARNING);
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $criteria->setLimit($limit);
             $criteria->setStart($start);
@@ -214,15 +215,16 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
     /**
      * Convert a database resultset to a returnable array
      *
-     * @param $result    database resultset
-     * @param bool   $id_as_key - should NOT be used with joint keys
-     * @param bool   $as_object
+     * @param      $result    database resultset
+     * @param bool $id_as_key - should NOT be used with joint keys
+     * @param bool $as_object
      *
      * @return array
      */
     public function convertResultSet($result, $id_as_key = false, $as_object = true)
     {
-        trigger_error(__CLASS__ . '::' . __FUNCTION__ . '() is deprecated.', E_USER_WARNING);
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
+        trigger_error(__CLASS__ . '::' . __FUNCTION__ . '() is deprecated.' . ". Called from {$trace[0]['file']}line {$trace[0]['line']}", E_USER_WARNING);
         $ret = array();
         while (false !== ($myrow = $this->handler->db->fetchArray($result))) {
             $obj = $this->handler->create(false);
