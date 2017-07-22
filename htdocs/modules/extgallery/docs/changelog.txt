@@ -22,7 +22,7 @@
 - added defaults for mysql.sql (mamba)
 
 - updated PEAR 1.10.3 (mamba)
-- updated PEAR Getopt 1.4.1 (mamba)
+- updated PEAR GetoptPlus 1.0.0 RC1 (mamba)
 - update PEAR Image-Transform 0.9.5 (mamba)
 
 
