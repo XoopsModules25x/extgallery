@@ -1,7 +1,5 @@
 <?php
 
-use Xmf\Language;
-
 include __DIR__ . '/../../mainfile.php';
 $moduleDirName = basename(__DIR__);
 require_once __DIR__ . '/include/common.php';
@@ -12,7 +10,7 @@ require_once __DIR__ . '/class/utility.php';
 
 $myts = MyTextSanitizer::getInstance();
 
-Language::load('main', $moduleDirName);
+xoops_loadLanguage('main', $moduleDirName);
 
 //------------------------------------------------------
 // Getting eXtCal object's handler
