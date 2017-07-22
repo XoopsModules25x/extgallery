@@ -25,17 +25,17 @@
 function xoops_module_pre_install_extgallery(XoopsModule $module)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    $className     = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($className)) {
+    $classUtility     = ucfirst($moduleDirName) . 'Utility';
+    if (!class_exists($classUtility)) {
         xoops_load('utility', $moduleDirName);
     }
     //check for minimum XOOPS version
-    if (!$className::checkVerXoops($module)) {
+    if (!$classUtility::checkVerXoops($module)) {
         return false;
     }
 
     // check for minimum PHP version
-    if (!$className::checkVerPhp($module)) {
+    if (!$classUtility::checkVerPhp($module)) {
         return false;
     }
 
@@ -169,9 +169,9 @@ function xoops_module_install_extgallery(XoopsModule $xoopsModule)
 
     require_once __DIR__ . '/../../../include/cp_header.php';
 
-    if (!isset($moduleDirName)) {
+
         $moduleDirName = basename(dirname(__DIR__));
-    }
+
 
     //    $moduleDirName = $xoopsModule->getVar('dirname');
     $configurator = include $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
