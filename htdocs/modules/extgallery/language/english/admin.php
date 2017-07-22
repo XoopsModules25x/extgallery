@@ -307,7 +307,7 @@ define('_AM_EXTGALLERY_EXTENSION_INFO', 'Extension information');
 define('_AM_EXTGALLERY_EXTENSION_NOT_INSTALLED', 'Extension not installed');
 define('_AM_EXTGALLERY_INSTALL_EXTENSION', 'Install extension');
 define('_AM_EXTGALLERY_EXTENSION_OK', 'Extension available');
-define('_AM_EXTGALLERY_EXTENSION_NOTICE', 'This extension allow you to display photo on all the site just by adding a <b>gallery</b> tag to your text. A button (<img src="../assets/images/extgallery-posticon.gif" >) is displayed on XOOPS editor.');
+define('_AM_EXTGALLERY_EXTENSION_NOTICE', 'This extension allow you to display photo on all the site just by adding a <b>gallery</b> tag to your text. A button (<img src="../assets/images/extgallery-posticon.gif">) is displayed on XOOPS editor.');
 define('_AM_EXTGALLERY_EXT_FILE_DONT_EXIST', "Extension file don't exist on repository :<br><b>Server : </b>%s<br><b>File : </b>%s");
 define('_AM_EXTGALLERY_EXT_FILE_DONT_EXIST_SHORT', "Extension file don't exist");
 define('_AM_EXTGALLERY_EXTENSION_INSTALLED', 'Extension installed');
@@ -315,7 +315,7 @@ define('_AM_EXTGALLERY_EXTENSION_HOWTO', 'How to use:');
 define('_AM_EXTGALLERY_EXTENSION_HOWTODESC', 'To manually install this Extension and use it, you must follow these steps: <br>
 <div class="marg10">1- Add <b>gallery.php</b> to <b>XOOPS_ROOT_PATH /class/textsanitizer/gallery/gallery.php</b> ( you can find  gallery.php in module archive)</div>
 <div class="marg10">2- Edit <b>XOOPS_ROOT_PATH /class/textsanitizer/config.php</b> and add (( <b>"gallery" => 1</b> )) to config extensions  array ( you can find edited file in module archive)</div>
-<div class="marg10"><img src="../assets/images/extensions.png" ></div>
+<div class="marg10"><img src="../assets/images/extensions.png"></div>
 <div class="marg10">3- You can download <b>gallery.php</b> and <b>config.php</b> at XOOPS SVN</div>
 <div class="marg10">4- If you want to use module install function, you must <b>XOOPS_ROOT_PATH /class/textsanitizer</b> chmod to 777 . after installation you must change chmod to 644.</div>
 ');
@@ -341,3 +341,74 @@ define('_EXTGALLERY_ADMIN_', ' '); //
 // Add File size define (cesagonchu)
 define('_AM_EXTGALLERY_UPLOAD_MAX_FILESIZE', 'Maximum file size to upload: ');
 define('_AM_EXTGALLERY_POST_MAX_SIZE', 'Maximum size to send: ');
+
+
+//1.13
+define('_AM_EXTGALLERY_UPGRADEFAILED0', "Update failed - couldn't rename field '%s'");
+define('_AM_EXTGALLERY_UPGRADEFAILED1', "Update failed - couldn't add new fields");
+define('_AM_EXTGALLERY_UPGRADEFAILED2', "Update failed - couldn't rename table '%s'");
+define('_AM_EXTGALLERY_ERROR_COLUMN', 'Could not create column in database : %s');
+define('_AM_EXTGALLERY_ERROR_BAD_XOOPS', 'This module requires XOOPS %s+ (%s installed)');
+define('_AM_EXTGALLERY_ERROR_BAD_PHP', 'This module requires PHP version %s+ (%s installed)');
+define('_AM_EXTGALLERY_ERROR_TAG_REMOVAL', 'Could not remove tags from Tag Module');
+
+// Upload defines
+define('_AM_EXTGALLERY_DOWN_IMAGEUPLOAD', 'Image successfully uploaded to the server');
+define('_AM_EXTGALLERY_DOWN_NOIMAGEEXIST', 'Error: No file was selected for uploading. Please try again!');
+define('_AM_EXTGALLERY_DOWN_IMAGEEXIST', 'Image already exists in upload area!');
+define('_AM_EXTGALLERY_DOWN_FILEDELETED', 'File has been deleted.');
+define('_AM_EXTGALLERY_DOWN_FILEERRORDELETE', 'Error deleting file: file not found on the server.');
+define('_AM_EXTGALLERY_DOWN_NOFILEERROR', 'Error deleting file: No file selected for deleting.');
+define('_AM_EXTGALLERY_DOWN_DELETEFILE', 'WARNING: Are you sure you want to delete this image file?');
+define('_AM_EXTGALLERY_DOWN_IMAGEINFO', 'Server status');
+define('_AM_EXTGALLERY_DOWN_NOTSET', 'Upload path not set');
+define('_AM_EXTGALLERY_DOWN_SERVERPATH', 'Server path to XOOPS root: ');
+define('_AM_EXTGALLERY_DOWN_UPLOADPATH', 'Current upload path: ');
+//1.08
+//Server Information
+define('_AM_EXTGALLERY_SERVERSTATS', 'Server Information');
+define('_AM_EXTGALLERY_UPLOADMAX', 'Maximum upload size: ');
+define('_AM_EXTGALLERY_POSTMAX', 'Maximum post size: ');
+define('_AM_EXTGALLERY_UPLOADS', 'Uploads allowed: ');
+define('_AM_EXTGALLERY_UPLOAD_ON', 'On');
+define('_AM_EXTGALLERY_UPLOAD_OFF', 'Off');
+define('_AM_EXTGALLERY_GDIMGSPPRT', 'GD image lib supported: ');
+define('_AM_EXTGALLERY_GDIMGON', 'Yes');
+define('_AM_EXTGALLERY_GDIMGOFF', 'No');
+define('_AM_EXTGALLERY_GDIMGVRSN', 'GD image lib version: ');
+
+//Server Status
+define('_AM_EXTGALLERY_DOWN_METAVERSION', "<span style='font-weight: bold;'>Downloads meta version:</span> ");
+define('_AM_EXTGALLERY_DOWN_SPHPINI', "<span style='font-weight: bold;'>Information taken from PHP ini file:</span>");
+define('_AM_EXTGALLERY_DOWN_SAFEMODESTATUS', 'Safe mode status: ');
+define('_AM_EXTGALLERY_DOWN_REGISTERGLOBALS', 'Register globals: ');
+define('_AM_EXTGALLERY_DOWN_SERVERUPLOADSTATUS', 'Server uploads status: ');
+define('_AM_EXTGALLERY_DOWN_MAXUPLOADSIZE', 'Max upload size permitted (upload_max_filesize directive in php.ini): ');
+define('_AM_EXTGALLERY_DOWN_MAXPOSTSIZE', 'Max post size permitted (post_max_size directive in php.ini): ');
+define('_AM_EXTGALLERY_DOWN_SAFEMODEPROBLEMS', ' (This may cause problems)');
+define('_AM_EXTGALLERY_DOWN_GDLIBSTATUS', 'GD library support: ');
+define('_AM_EXTGALLERY_DOWN_GDLIBVERSION', 'GD Library version: ');
+define('_AM_EXTGALLERY_DOWN_GDON', "<span style='font-weight: bold;'>Enabled</span> (Thumbsnails available)");
+define('_AM_EXTGALLERY_DOWN_GDOFF', "<span style='font-weight: bold;'>Disabled</span> (No thumbnails available)");
+define('_AM_EXTGALLERY_DOWN_OFF', "<span style='font-weight: bold;'>OFF</span>");
+define('_AM_EXTGALLERY_DOWN_ON', "<span style='font-weight: bold;'>ON</span>");
+define('_AM_EXTGALLERY_DOWN_CATIMAGE', 'Category images');
+define('_AM_EXTGALLERY_DOWN_SCREENSHOTS', 'Screenshot images');
+define('_AM_EXTGALLERY_DOWN_MAINIMAGEDIR', 'Main images');
+define('_AM_EXTGALLERY_DOWN_FCATIMAGE', 'Category image path');
+define('_AM_EXTGALLERY_DOWN_FSCREENSHOTS', 'Screenshot image path');
+define('_AM_EXTGALLERY_DOWN_FMAINIMAGEDIR', 'Main image path');
+define('_AM_EXTGALLERY_DOWN_FUPLOADIMAGETO', 'Upload image: ');
+define('_AM_EXTGALLERY_DOWN_FUPLOADPATH', 'Upload path:');
+define('_AM_EXTGALLERY_DOWN_FUPLOADURL', 'Upload URL:');
+define('_AM_EXTGALLERY_DOWN_FOLDERSELECTION', 'Select upload destination');
+define('_AM_EXTGALLERY_DOWN_FSHOWSELECTEDIMAGE', 'Display selected image');
+define('_AM_EXTGALLERY_DOWN_FUPLOADIMAGE', 'Upload new image to selected destination');
+define('_AM_EXTGALLERY_DOWN_UPLOADPATHDSC', 'Note. Upload path *MUST* contain the full server path of your upload folder.');
+
+define('_AM_EXTGALLERY_TEXTOPTIONS_DESC', 'Description and Summary text options');
+define('_AM_EXTGALLERY_FCATEGORY_DESCRIPTION_DESC', '');
+define('_AM_EXTGALLERY_FCATEGORY_SUMMARY_DESC', '');
+define('_AM_EXTGALLERY_DOWN_MEMORYLIMIT', 'Memory limit (memory_limit directive in php.ini): ');
+define('_AM_EXTGALLERY_DOWN_MODULE_MAXFILESIZE', 'Module max file size: %s (module config value)');
+define('_AM_EXTGALLERY_UPLOAD_MAXFILESIZE', 'Upload file size limit: %s');
