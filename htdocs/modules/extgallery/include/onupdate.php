@@ -154,7 +154,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         // delete old HTML template files ============================
         $templateDirectory = $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/templates/');
         if (is_dir($templateDirectory)) {
-            $templateList = array_diff(scandir($templateDirectory), array('..', '.'));
+            $templateList = array_diff(scandir($templateDirectory, SCANDIR_SORT_NONE), array('..', '.'));
             foreach ($templateList as $k => $v) {
                 $fileInfo = new SplFileInfo($templateDirectory . $v);
                 if ($fileInfo->getExtension() === 'html' && $fileInfo->getFilename() !== 'index.html') {
@@ -167,7 +167,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         // delete old block html template files ============================
         $templateDirectory = $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/templates/blocks/');
         if (is_dir($templateDirectory)) {
-            $templateList = array_diff(scandir($templateDirectory), array('..', '.'));
+            $templateList = array_diff(scandir($templateDirectory, SCANDIR_SORT_NONE), array('..', '.'));
             foreach ($templateList as $k => $v) {
                 $fileInfo = new SplFileInfo($templateDirectory . $v);
                 if ($fileInfo->getExtension() === 'html' && $fileInfo->getFilename() !== 'index.html') {
@@ -181,7 +181,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         // delete old admin html template files ============================
         $templateDirectory = $GLOBALS['xoops']->path('modules/' . $module->getVar('dirname', 'n') . '/templates/admin/');
         if (is_dir($templateDirectory)) {
-            $templateList = array_diff(scandir($templateDirectory), array('..', '.'));
+            $templateList = array_diff(scandir($templateDirectory, SCANDIR_SORT_NONE), array('..', '.'));
             foreach ($templateList as $k => $v) {
                 $fileInfo = new SplFileInfo($templateDirectory . $v);
                 if ($fileInfo->getExtension() === 'html' && $fileInfo->getFilename() !== 'index.html') {
