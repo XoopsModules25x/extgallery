@@ -41,9 +41,9 @@ $modversion = array(
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . "/modules/{$moduleDirName}/docs/install.txt",
     'min_php'             => '5.5',
-    'min_xoops'           => '2.5.8',
+    'min_xoops'           => '2.5.9',
     'min_admin'           => '1.2',
-    'min_db'              => array('mysql' => '5.1'),
+    'min_db'              => array('mysql' => '5.5'),
     'image'               => 'assets/images/logoModule.png', // Path and name of the module’s logo
     'official'            => 1, //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
     'dirname'             => "{$moduleDirName}",
