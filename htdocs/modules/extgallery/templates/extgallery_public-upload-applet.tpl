@@ -1,6 +1,7 @@
 <div class="txtcenter">
 
     <form name="uploadForm" id="uploadForm">
+        <{securityToken}><{*//mb*}>
         <{$categorySelect}>
         <input type="hidden" name="step" value="enreg"/>
         <input type="hidden" name="photo_title" value=""/>
