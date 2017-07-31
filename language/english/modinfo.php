@@ -180,7 +180,7 @@ define('_MI_EXTGAL_PREFERENCE_BREAK_SLIDESHOW', 'Slideshow');
 
 //Help
 define('_MI_EXTGALLERY_DIRNAME', basename(dirname(dirname(__DIR__))));
-define('_MI_EXTGALLERY_HELP_HEADER', __DIR__ . '/help/helpheader.html');
+define('_MI_EXTGALLERY_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_EXTGALLERY_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_EXTGALLERY_OVERVIEW', 'Overview');
 

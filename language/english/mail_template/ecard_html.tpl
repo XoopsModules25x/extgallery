@@ -6,11 +6,11 @@
 <table style="border:1px solid black; padding:7px; margin:0 auto 0 auto;">
     <tr>
         <td>
-            <img src="{PHOTO_SRC}"/><br>
+            <img src="{PHOTO_SRC}"><br>
         </td>
         <td style="vertical-align:top; padding-left:7px;">
             <div style="text-align:right;">
-                <img src="{STAMP_SRC}"/>
+                <img src="{STAMP_SRC}">
             </div>
             <h2>{GREETINGS}</h2>
             <p>{DESCRIPTION}</p>
