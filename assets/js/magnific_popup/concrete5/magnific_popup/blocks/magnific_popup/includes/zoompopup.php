@@ -14,7 +14,7 @@ $fileDescription = $po->getDescription();
 ?>
 <div id="<?php echo $magnific_type . '-' . $bID ?>" class="<?php echo $magnific_type . '-gallery' . ' ' . $cssFrameworkClass; ?>">
     <a href="<?php echo $fileName; ?>" data-source="<?php echo $fileName; ?>" title="<?php echo $title; ?>">
-        <img class="<?php echo $cssImageClass; ?>" src="<?php echo $thumbnail->src; ?>" width="<?php echo $thumbnail->width; ?>" height="<?php echo $thumbnail->height; ?>" alt="<?php echo $fileDescription; ?>"/>
+        <img class="<?php echo $cssImageClass; ?>" src="<?php echo $thumbnail->src; ?>" width="<?php echo $thumbnail->width; ?>" height="<?php echo $thumbnail->height; ?>" alt="<?php echo $fileDescription; ?>">
     </a>
 </div>
 <?php

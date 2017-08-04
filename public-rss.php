@@ -66,7 +66,7 @@ if (!$xoopsTpl->is_cached('db:extgallery_public-rss.tpl')) {
 
     if ($catId != 0) {
         $channel_category .= ' > ' . $catObj->getVar('cat_name');
-        $categories = $catId;
+        $categories       = $catId;
     } else {
         $categories = array();
     }

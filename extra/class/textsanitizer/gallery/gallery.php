@@ -14,7 +14,7 @@ class MytsGallery extends MyTextSanitizerExtension
                       . _EXT_EXTGALLERY_TEXTID
                       . "\", \""
                       . _EXT_EXTGALLERY_TEXTTITLE
-                      . "\");'  onmouseover='style.cursor=\"hand\"'/>&nbsp;";
+                      . "\");'  onmouseover='style.cursor=\"hand\"'>&nbsp;";
         $javascript = <<<EOH
             function xoopsCodeGallery(id, textId, photoTitle) {
                 var selection = xoopsGetSelect(id);

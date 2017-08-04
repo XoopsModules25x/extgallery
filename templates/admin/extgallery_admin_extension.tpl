@@ -7,8 +7,8 @@
         <br>
         <form action="install-extension.php" method="post">
             <{securityToken}><{*//mb*}>
-            <input type="hidden" name="step" value="download"/>
-            <input class="formButton" value="<{$smarty.const._AM_EXTGALLERY_INSTALL_EXTENSION}>" type="submit"/>
+            <input type="hidden" name="step" value="download">
+            <input class="formButton" value="<{$smarty.const._AM_EXTGALLERY_INSTALL_EXTENSION}>" type="submit">
         </form>
     <{/if}>
     <div class="marg10"><{$smarty.const._AM_EXTGALLERY_EXTENSION_NOTICE}></div>

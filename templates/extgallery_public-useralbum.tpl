@@ -57,7 +57,7 @@
     <{if $use_ajax_effects == lightbox}>
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?Frameworks/jquery/plugins/jquery.lightbox.js}>"></script>
-        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/system/css/lightbox.css}>"/>
+        <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/system/css/lightbox.css}>">
         <script type="text/javascript">
             $(function () {
                 $('#gallery a').lightBox({
@@ -74,7 +74,7 @@
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.js}>"></script>
         <link rel="stylesheet" type="text/css"
-              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.css}>"/>
+              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.css}>">
         <style>#screenshot img {
                 max-width: <{$album_tooltip_width}>px;
                 border: <{$album_tooltip_borderwidth}>px solid <{$album_tooltip_bordercolor}>;
@@ -84,7 +84,7 @@
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?modules/extgallery/assets/js/overlay/overlay.jquery.tools.min.js}>"></script>
         <link rel="stylesheet" type="text/css"
-              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/overlay/overlay.css}>" media="screen"/>
+              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/overlay/overlay.css}>" media="screen">
         <style>
             .apple_overlay {
                 background-color: <{$album_overlay_bg}>;
@@ -104,7 +104,7 @@
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?modules/extgallery/assets/js/fancybox/fancybox.pack.js}>"></script>
         <link rel="stylesheet" type="text/css"
-              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/fancybox/fancybox.css}>"/>
+              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/fancybox/fancybox.css}>">
         <script type="text/javascript">
             $(document).ready(function () {
                 <{if $album_fancybox_showtype == group }>
@@ -129,13 +129,13 @@
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?modules/extgallery/assets/js/prettyphoto/jquery.prettyPhoto.js}>"></script>
         <link rel="stylesheet" type="text/css"
-              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/prettyphoto/prettyPhoto.css}>"/>
+              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/prettyphoto/prettyPhoto.css}>">
     <{/if}>
 <{/if}>
 
 <div class="extgallery">
     <a title="<{$extgalleryName}>" href="<{xoAppUrl modules/extgallery/}>"><{$extgalleryName}></a> <img
-            src="assets/images/breadcrumb-link.gif" alt="BreadCrumb"/> <{$lang.albumName}>
+            src="assets/images/breadcrumb-link.gif" alt="BreadCrumb"> <{$lang.albumName}>
     <div class="center">
         <div class="bold"><{$extgallerySortbyOrderby}></div>
         <div class="margin-top10">
@@ -143,46 +143,46 @@
                title="<{$smarty.const._MD_EXTGALLERY_SORTDATEDESC}>"><img
                         src="<{xoAppUrl /modules/extgallery/assets/images/sort_up.png}>" width="16" height="16"
                         border="0" align="middle"
-                        alt="<{$smarty.const._MD_EXTGALLERY_SORTDATEDESC}>"/></a>
+                        alt="<{$smarty.const._MD_EXTGALLERY_SORTDATEDESC}>"></a>
             <span class="smallsort"><{$smarty.const._MD_EXTGALLERY_SORTDATE}></span>
             <a href="<{xoAppUrl modules/extgallery/}>public-useralbum.php?id=<{$extgalleryUID}>&amp;start=<{$extgalleryStart}>&amp;sortby=photo_date&amp;orderby=ASC"
                title="<{$smarty.const._MD_EXTGALLERY_SORTDATEASC}>"><img
                         src="<{xoAppUrl /modules/extgallery/assets/images/sort_down.png}>" width="16" height="16"
                         border="0" align="middle"
-                        alt="<{$smarty.const._MD_EXTGALLERY_SORTDATEASC}>"/></a>&nbsp;
+                        alt="<{$smarty.const._MD_EXTGALLERY_SORTDATEASC}>"></a>&nbsp;
             <a href="<{xoAppUrl modules/extgallery/}>public-useralbum.php?id=<{$extgalleryUID}>&amp;start=<{$extgalleryStart}>&amp;sortby=photo_title&amp;orderby=ASC"
                title="<{$smarty.const._MD_EXTGALLERY_SORTNAMEASC}>"><img
                         src="<{xoAppUrl /modules/extgallery/assets/images/sort_up.png}>" width="16" height="16"
                         border="0" align="middle"
-                        alt="<{$smarty.const._MD_EXTGALLERY_SORTNAMEASC}>"/></a>
+                        alt="<{$smarty.const._MD_EXTGALLERY_SORTNAMEASC}>"></a>
             <span class="smallsort"><{$smarty.const._MD_EXTGALLERY_SORTNAME}></span>
             <a href="<{xoAppUrl modules/extgallery/}>public-useralbum.php?id=<{$extgalleryUID}>&amp;start=<{$extgalleryStart}>&amp;sortby=photo_title&amp;orderby=DESC"
                title="<{$smarty.const._MD_EXTGALLERY_SORTNAMEDESC}>"><img
                         src="<{xoAppUrl /modules/extgallery/assets/images/sort_down.png}>" width="16" height="16"
                         border="0" align="middle"
-                        alt="<{$smarty.const._MD_EXTGALLERY_SORTNAMEDESC}>"/></a>&nbsp;
+                        alt="<{$smarty.const._MD_EXTGALLERY_SORTNAMEDESC}>"></a>&nbsp;
             <a href="<{xoAppUrl modules/extgallery/}>public-useralbum.php?id=<{$extgalleryUID}>&amp;start=<{$extgalleryStart}>&amp;sortby=photo_hits&amp;orderby=DESC"
                title="<{$smarty.const._MD_EXTGALLERY_SORTHITSDESC}>"><img
                         src="<{xoAppUrl /modules/extgallery/assets/images/sort_up.png}>" width="16" height="16"
                         border="0" align="middle"
-                        alt="<{$smarty.const._MD_EXTGALLERY_SORTHITSDESC}>"/></a>
+                        alt="<{$smarty.const._MD_EXTGALLERY_SORTHITSDESC}>"></a>
             <span class="smallsort"><{$smarty.const._MD_EXTGALLERY_SORTHITS}></span>
             <a href="<{xoAppUrl modules/extgallery/}>public-useralbum.php?id=<{$extgalleryUID}>&amp;start=<{$extgalleryStart}>&amp;sortby=photo_hits&amp;orderby=ASC"
                title="<{$smarty.const._MD_EXTGALLERY_SORTHITSASC}>"><img
                         src="<{xoAppUrl /modules/extgallery/assets/images/sort_down.png}>" width="16" height="16"
                         border="0" align="middle"
-                        alt="<{$smarty.const._MD_EXTGALLERY_SORTHITSASC}>"/></a>&nbsp;
+                        alt="<{$smarty.const._MD_EXTGALLERY_SORTHITSASC}>"></a>&nbsp;
             <a href="<{xoAppUrl modules/extgallery/}>public-useralbum.php?id=<{$extgalleryUID}>&amp;start=<{$extgalleryStart}>&amp;sortby=photo_rating&amp;orderby=DESC"
                title="<{$smarty.const._MD_EXTGALLERY_SORTNOTEDESC}>"><img
                         src="<{xoAppUrl /modules/extgallery/assets/images/sort_up.png}>" width="16" height="16"
                         border="0" align="middle"
-                        alt="<{$smarty.const._MD_EXTGALLERY_SORTNOTEDESC}>"/></a>
+                        alt="<{$smarty.const._MD_EXTGALLERY_SORTNOTEDESC}>"></a>
             <span class="smallsort"><{$smarty.const._MD_EXTGALLERY_SORTNOTE}></span>
             <a href="<{xoAppUrl modules/extgallery/}>public-useralbum.php?id=<{$extgalleryUID}>&amp;start=<{$extgalleryStart}>&amp;sortby=photo_rating&amp;orderby=ASC"
                title="<{$smarty.const._MD_EXTGALLERY_SORTNOTEASC}>"><img
                         src="<{xoAppUrl /modules/extgallery/assets/images/sort_down.png}>" width="16" height="16"
                         border="0" align="middle"
-                        alt="<{$smarty.const._MD_EXTGALLERY_SORTNOTEASC}>"/></a>
+                        alt="<{$smarty.const._MD_EXTGALLERY_SORTNOTEASC}>"></a>
         </div>
     </div>
     <div class="pageNav">
@@ -209,10 +209,10 @@
                         <div class="photoadmin">
                             <a title="edit"
                                href="<{xoAppUrl modules/extgallery/}>public-modify.php?op=edit&id=<{$photos[photo].photo_id}>"><img
-                                        src="assets/images/edit.png" alt="edit"/></a>&nbsp;
+                                        src="assets/images/edit.png" alt="edit"></a>&nbsp;
                             <a title="delete"
                                href="<{xoAppUrl modules/extgallery/}>public-modify.php?op=delete&id=<{$photos[photo].photo_id}>"><img
-                                        src="assets/images/delete.png" alt="delete"/></a>
+                                        src="assets/images/delete.png" alt="delete"></a>
                         </div>
                     <{/if}>
                     <!-- End Admin link -->
@@ -225,14 +225,14 @@
                                         class="thumb"
                                         src="<{$photos[photo].photo_serveur}>thumb_<{$photos[photo].photo_name}>"
                                         alt="<{$photos[photo].photo_title}>"
-                                        title="<{$photos[photo].photo_title}>"/></a>
+                                        title="<{$photos[photo].photo_title}>"></a>
                         <{elseif $photos[photo].photo_name}>
                             <a title="<{$photos[photo].photo_title}>"
                                href="<{xoAppUrl modules/extgallery/}>public-userphoto.php?photoId=<{$photos[photo].photo_id}>"><img
                                         class="thumb"
                                         src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photos[photo].photo_name}>"
                                         alt="<{$photos[photo].photo_title}>"
-                                        title="<{$photos[photo].photo_title}>"/></a>
+                                        title="<{$photos[photo].photo_title}>"></a>
                         <{/if}>
                     <{/if}>
                     <!-- End Normal show -->
@@ -246,7 +246,7 @@
                                         class="thumb"
                                         src="<{$photos[photo].photo_serveur}>thumb_<{$photos[photo].photo_name}>"
                                         alt="<{$photos[photo].photo_title}>"
-                                        title="<{$photos[photo].photo_title}>"/></a>
+                                        title="<{$photos[photo].photo_title}>"></a>
                         <{elseif $photos[photo].photo_name}>
                             <a class="screenshot" title="<{$photos[photo].photo_title}>"
                                href="<{xoAppUrl modules/extgallery/}>public-userphoto.php?photoId=<{$photos[photo].photo_id}>"
@@ -254,7 +254,7 @@
                                         class="thumb"
                                         src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photos[photo].photo_name}>"
                                         alt="<{$photos[photo].photo_title}>"
-                                        title="<{$photos[photo].photo_title}>"/></a>
+                                        title="<{$photos[photo].photo_title}>"></a>
                         <{/if}>
                     <{/if}>
                     <!-- End Tooltip show -->
@@ -268,14 +268,14 @@
                                             class="thumb"
                                             src="<{$photos[photo].photo_serveur}>thumb_<{$photos[photo].photo_name}>"
                                             alt="<{$photos[photo].photo_title}>"
-                                            title="<{$photos[photo].photo_title}>"/></a>
+                                            title="<{$photos[photo].photo_title}>"></a>
                             <{elseif $photos[photo].photo_name}>
                                 <a title="<{$photos[photo].photo_title}>"
                                    href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photos[photo].photo_name}>"><img
                                             class="thumb"
                                             src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photos[photo].photo_name}>"
                                             alt="<{$photos[photo].photo_title}>"
-                                            title="<{$photos[photo].photo_title}>"/></a>
+                                            title="<{$photos[photo].photo_title}>"></a>
                             <{/if}>
                         </div>
                     <{/if}>
@@ -287,11 +287,11 @@
                             <{if $photos[photo].photo_serveur && $photos[photo].photo_name}>
                                 <img rel="#photo<{$photos[photo].photo_id}>" class="thumb"
                                      src="<{$photos[photo].photo_serveur}>thumb_<{$photos[photo].photo_name}>"
-                                     alt="<{$photos[photo].photo_title}>" title="<{$photos[photo].photo_title}>"/>
+                                     alt="<{$photos[photo].photo_title}>" title="<{$photos[photo].photo_title}>">
                             <{elseif $photos[photo].photo_name}>
                                 <img rel="#photo<{$photos[photo].photo_id}>" class="thumb"
                                      src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photos[photo].photo_name}>"
-                                     alt="<{$photos[photo].photo_title}>" title="<{$photos[photo].photo_title}>"/>
+                                     alt="<{$photos[photo].photo_title}>" title="<{$photos[photo].photo_title}>">
                             <{/if}>
                         </div>
                         <div class="apple_overlay" id="photo<{$photos[photo].photo_id}>"><a class="close"></a>
@@ -318,7 +318,7 @@
                            href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photos[photo].photo_name}>"
                            title="<{$photos[photo].photo_title}>"><img class="last thumb"
                                                                        alt="<{$photos[photo].photo_title}>"
-                                                                       src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photos[photo].photo_name}>"/></a>
+                                                                       src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photos[photo].photo_name}>"></a>
                     <{/if}>
                     <!-- End Fansybox -->
 
@@ -330,13 +330,13 @@
                                        href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photos[photo].photo_name}>"
                                        rel="prettyPhoto[gallery2]"><img class="thumb"
                                                                         src="<{$photos[photo].photo_serveur}>thumb_<{$photos[photo].photo_name}>"
-                                                                        alt="<{$photos[photo].photo_title}>"/></a></li>
+                                                                        alt="<{$photos[photo].photo_title}>"></a></li>
                             <{elseif $photos[photo].photo_name}>
                                 <li><a title="<{$photos[photo].photo_title}>"
                                        href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photos[photo].photo_name}>"
                                        rel="prettyPhoto[gallery2]"><img class="thumb"
                                                                         src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photos[photo].photo_name}>"
-                                                                        alt="<{$photos[photo].photo_title}>"/></a></li>
+                                                                        alt="<{$photos[photo].photo_title}>"></a></li>
                             <{/if}>
                         </ul>
                     <{/if}>
@@ -383,7 +383,7 @@
                             <div class="photoRating"><img
                                         src="<{xoAppUrl modules/extgallery/}>assets/images/rating_<{$photos[photo].photo_rating}>.gif"
                                         alt="<{$lang.rate_score}> : <{$photos[photo].photo_rating}>"
-                                        title="<{$lang.rate_score}>"/></div>
+                                        title="<{$lang.rate_score}>"></div>
                             <!-- End Rating score -->
                         <{/if}>
 
@@ -402,7 +402,7 @@
 
                     <!-- Start Displaying Hook code -->
                     <!--<{if $xoops_isadmin}>
-                    <div class=""> <input type="text" value='[gallery title="<{$photos[photo].photo_title}>"]<{$photos[photo].photo_id}>[/gallery]' ></div>
+                    <div class=""> <input type="text" value='[gallery title="<{$photos[photo].photo_title}>"]<{$photos[photo].photo_id}>[/gallery]'></div>
                 <{/if}>-->
                     <!-- End Displaying Hook code -->
                 <{/if}>
@@ -421,7 +421,7 @@
         <div id="rss">
             <a href="<{xoAppUrl modules/extgallery/public-rss.php}>" title="<{$smarty.const._MD_EXTGALLERY_RSS}>">
                 <img src="<{xoAppUrl modules/extgallery/assets/images/feed.png}>"
-                     alt="<{$smarty.const._MD_EXTGALLERY_RSS}>"/>
+                     alt="<{$smarty.const._MD_EXTGALLERY_RSS}>">
             </a>
         </div>
     <{/if}>

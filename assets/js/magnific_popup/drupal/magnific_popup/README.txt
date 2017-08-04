@@ -15,7 +15,7 @@ jQuery lightbox plugin with Drupal as a field formatter.
 This module provides a "Magnific Popup" field formatter for File Entity and
 Image fields. Fields with multiple items (cardinality > 1) can be grouped into a
 Magnific Popup gallery, or shown individually as a stand-alone popup (no
-"previous"/"next" navigation options). 
+"previous"/"next" navigation options).
 
 From the author of the jQuery plugin:
   Magnific Popup is a responsive jQuery lightbox plugin that is focused on

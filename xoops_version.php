@@ -57,7 +57,7 @@ $modversion = array(
     'modicons32'          => 'assets/images/icons',
 
     //About
-    'demo_site_url'       => 'http://www.xoops.org',
+    'demo_site_url'       => 'https://xoops.org',
     'demo_site_name'      => 'XOOPS Demo Site',
     'support_url'         => 'https://xoops.org/modules/newbb',
     'support_name'        => 'Support Forum',
@@ -89,19 +89,19 @@ if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule']) && $GLO
         $modversion['sub'][0]['name'] = _MI_EXTGALLERY_USERALBUM;
         $modversion['sub'][0]['url']  = 'public-useralbum.php?id=' . $GLOBALS['xoopsUser']->uid();
 
-//        if (isset($GLOBALS['xoopsUser']) && '' !== $GLOBALS['xoopsUser']) {
-            require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/publicPerm.php";
-            $permHandler = ExtgalleryPublicPermHandler::getInstance();
-            if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
-                $modversion['sub'][1]['name'] = _MI_EXTGALLERY_PUBLIC_UPLOAD;
-                if ($GLOBALS['xoopsModuleConfig']['use_extended_upload'] === 'html') {
-                    $modversion['sub'][1]['url'] = 'public-upload.php';
-                } else {
-                    $modversion['sub'][1]['url'] = 'public-upload-extended.php';
-                }
+        //        if (isset($GLOBALS['xoopsUser']) && '' !== $GLOBALS['xoopsUser']) {
+        require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/publicPerm.php";
+        $permHandler = ExtgalleryPublicPermHandler::getInstance();
+        if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
+            $modversion['sub'][1]['name'] = _MI_EXTGALLERY_PUBLIC_UPLOAD;
+            if ($GLOBALS['xoopsModuleConfig']['use_extended_upload'] === 'html') {
+                $modversion['sub'][1]['url'] = 'public-upload.php';
+            } else {
+                $modversion['sub'][1]['url'] = 'public-upload-extended.php';
             }
         }
-//    }
+    }
+    //    }
 }
 
 // ------------------- Mysql ------------------- //

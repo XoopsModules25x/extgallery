@@ -2,10 +2,10 @@
     <a title="<{$extgalleryName}>"
        href="<{xoAppUrl modules/extgallery/}>"><{$extgalleryName}></a><{foreachq item=node from=$catPath name=breadcrumb}>
     <img src="assets/images/breadcrumb-link.gif"
-         alt="BreadCrumb"/> <a
+         alt="BreadCrumb"> <a
             href="<{xoAppUrl modules/extgallery/}>public-<{if $node.cat_isalbum}><{$display_type}><{else}>categories<{/if}>.php?id=<{$node.cat_id}>"><{$node.cat_name}></a><{/foreach}>
     <img
-            src="assets/images/breadcrumb-link.gif" alt="BreadCrumb"/> <{$photo.photo_title}>
+            src="assets/images/breadcrumb-link.gif" alt="BreadCrumb"> <{$photo.photo_title}>
 
     <table id="photoNav" class="outer">
         <tr>
@@ -23,10 +23,10 @@
     <div id="photo">
         <{if $photo.photo_serveur}>
             <img src="<{$photo.photo_serveur}><{$photo.photo_name}>" alt="<{$photo.photo_desc}>"
-                 title="<{$photo.photo_title}>"/>
+                 title="<{$photo.photo_title}>">
         <{else}>
             <img src="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>"
-                 alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>"/>
+                 alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>">
         <{/if}>
     </div>
 
@@ -61,9 +61,9 @@
     <{if $xoops_isadmin}>
         <div class="adminLink">
             <a title="edit" href="<{xoAppUrl modules/extgallery/}>public-modify.php?op=edit&id=<{$photo.photo_id}>"><img
-                        src="assets/images/edit.png" alt="edit"/></a>&nbsp;
+                        src="assets/images/edit.png" alt="edit"></a>&nbsp;
             <a title="delete" href="<{xoAppUrl modules/extgallery/}>public-modify.php?op=delete&id=<{$photo.photo_id}>"><img
-                        src="assets/images/delete.png" alt="delete"/></a>
+                        src="assets/images/delete.png" alt="delete"></a>
         </div>
     <{/if}>
     <!-- End Admin link -->
@@ -89,31 +89,31 @@
                                     href="<{xoAppUrl modules/extgallery/}>public-rating.php?id=<{$photo.photo_id}>&amp;rate=1"><img
                                 src="assets/images/rating_1.gif"
                                 alt="<{$lang.voteFor}> : 1"
-                                title="<{$lang.voteFor}> : 1"/></a>
+                                title="<{$lang.voteFor}> : 1"></a>
                 </td>
                 <td class="even"><a title="<{$lang.voteFor}> : 2"
                                     href="<{xoAppUrl modules/extgallery/}>public-rating.php?id=<{$photo.photo_id}>&amp;rate=2"><img
                                 src="assets/images/rating_2.gif"
                                 alt="<{$lang.voteFor}> : 2"
-                                title="<{$lang.voteFor}> : 2"/></a>
+                                title="<{$lang.voteFor}> : 2"></a>
                 </td>
                 <td class="even"><a title="<{$lang.voteFor}> : 3"
                                     href="<{xoAppUrl modules/extgallery/}>public-rating.php?id=<{$photo.photo_id}>&amp;rate=3"><img
                                 src="assets/images/rating_3.gif"
                                 alt="<{$lang.voteFor}> : 3"
-                                title="<{$lang.voteFor}> : 3"/></a>
+                                title="<{$lang.voteFor}> : 3"></a>
                 </td>
                 <td class="even"><a title="<{$lang.voteFor}> : 4"
                                     href="<{xoAppUrl modules/extgallery/}>public-rating.php?id=<{$photo.photo_id}>&amp;rate=4"><img
                                 src="assets/images/rating_4.gif"
                                 alt="<{$lang.voteFor}> : 4"
-                                title="<{$lang.voteFor}> : 4"/></a>
+                                title="<{$lang.voteFor}> : 4"></a>
                 </td>
                 <td class="even"><a title="<{$lang.voteFor}> : 5"
                                     href="<{xoAppUrl modules/extgallery/}>public-rating.php?id=<{$photo.photo_id}>&amp;rate=5"><img
                                 src="assets/images/rating_5.gif"
                                 alt="<{$lang.voteFor}> : 5"
-                                title="<{$lang.voteFor}> : 5"/></a>
+                                title="<{$lang.voteFor}> : 5"></a>
                 </td>
             </tr>
         </table>
@@ -154,7 +154,7 @@
             </tr>
             <{if $canRate}>
                 <tr>
-                    <td class="even"><{$lang.score}> : <img src="assets/images/rating_<{$rating}>.gif" alt="rating"/>
+                    <td class="even"><{$lang.score}> : <img src="assets/images/rating_<{$rating}>.gif" alt="rating">
                     </td>
                     <td class="even"><{$photo.photo_nbrating}> <{$lang.votes}></td>
                 </tr>
@@ -164,7 +164,7 @@
                     <td class="even"><a title="<{$lang.downloadOrig}>"
                                         href="<{xoAppUrl modules/extgallery/}>public-download.php?id=<{$photo.photo_id}>"><{$lang.downloadOrig}>
                             <img
-                                    src="assets/images/download.gif" alt="<{$lang.downloadOrig}>"/></a></td>
+                                    src="assets/images/download.gif" alt="<{$lang.downloadOrig}>"></a></td>
                     <td class="even"><{$photo.photo_download}> <{$lang.donwloads}></td>
                 </tr>
             <{/if}>
@@ -173,7 +173,7 @@
                     <td class="even"><a title="<{$lang.sendEcard}>"
                                         href="<{xoAppUrl modules/extgallery/}>public-sendecard.php?id=<{$photo.photo_id}>"><{$lang.sendEcard}>
                             <img
-                                    src="assets/images/mail_forward.png" alt="<{$lang.sendEcard}>"/></a></td>
+                                    src="assets/images/mail_forward.png" alt="<{$lang.sendEcard}>"></a></td>
                     <td class="even"><{$photo.photo_ecard}> <{$lang.sends}></td>
                 </tr>
             <{/if}>
@@ -185,7 +185,7 @@
         <div id="rss">
             <a href="<{xoAppUrl modules/extgallery/public-rss.php}>" title="<{$smarty.const._MD_EXTGALLERY_RSS}>">
                 <img src="<{xoAppUrl modules/extgallery/assets/images/feed.png}>"
-                     alt="<{$smarty.const._MD_EXTGALLERY_RSS}>"/>
+                     alt="<{$smarty.const._MD_EXTGALLERY_RSS}>">
             </a>
         </div>
     <{/if}>

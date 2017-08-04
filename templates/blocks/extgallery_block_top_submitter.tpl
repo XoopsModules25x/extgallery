@@ -2,7 +2,7 @@
 <script type="text/javascript" src="<{xoAppUrl /jseffects/smoothbox/mootools.js}>"></script>
 <script type="text/javascript" src="<{xoAppUrl /jseffects/smoothbox/smoothbox.js}>"></script>
 <!-- Call to Slimbox CSS -->
-<link rel="stylesheet" type="text/css" media="screen" href="<{xoAppUrl /jseffects/smoothbox/smoothbox.css}>"/>
+<link rel="stylesheet" type="text/css" media="screen" href="<{xoAppUrl /jseffects/smoothbox/smoothbox.css}>">
 
 <{foreach item=designer from=$block.designers}>
     <table>

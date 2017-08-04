@@ -611,6 +611,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
             return $criteria;
         }
     }
+
     /**
      * @return ExtgalleryPublicPermHandler
      */

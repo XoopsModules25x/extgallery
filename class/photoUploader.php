@@ -97,7 +97,7 @@ class ExtgalleryPhotoUploader
 
         if ($jupart) {
             // got a chunk of a multi-part upload
-            $len = filesize($tmpname);
+            $len                       = filesize($tmpname);
             $_SESSION['juvar.tmpsize'] += $len;
             if ($len > 0) {
                 $src = fopen($tmpname, 'rb');

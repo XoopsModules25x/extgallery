@@ -51,6 +51,7 @@ function desactivateExtension()
     $conf['extensions']['gallery'] = 0;
     file_put_contents(XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php', "<?php\rreturn \$config = " . var_export($conf, true) . "\r?>");
 }
+
 /** @var XoopsTpl $xoopsTpl */
 if (file_exists(XOOPS_ROOT_PATH . '/class/textsanitizer/gallery/gallery.php')) {
     $xoopsTpl->assign('extensioninstalled', true);

@@ -52,16 +52,16 @@ if ($sql->getRows() == 1) {
 
             <fieldset class="rex-form-col-1">
                 <div class="rex-form-wrapper">
-                    <input type="hidden" name="page" value="magnific_popup"/>
-                    <input type="hidden" name="subpage" value="settings"/>
-                    <input type="hidden" name="func" value="update"/>
+                    <input type="hidden" name="page" value="magnific_popup">
+                    <input type="hidden" name="subpage" value="settings">
+                    <input type="hidden" name="func" value="update">
 
                     <div class="rex-form-row rex-form-element-v1">
                         <p class="rex-form-text">
                             <label for="include_jquery"><?php echo $I18N->msg('magnific_popup_settings_include_jquery'); ?></label>
                             <input type="checkbox" name="include_jquery" id="include_jquery" value="1" <?php if ($REX['ADDON']['magnific_popup']['settings']['include_jquery'] == 1) {
-                                echo 'checked="checked"';
-                            } ?>>
+    echo 'checked="checked"';
+} ?>>
                         </p>
                     </div>
 
@@ -88,7 +88,7 @@ if ($sql->getRows() == 1) {
 
                     <div class="rex-form-row rex-form-element-v1">
                         <p class="rex-form-submit">
-                            <input type="submit" class="rex-form-submit" name="sendit" value="<?php echo $I18N->msg('magnific_popup_settings_save'); ?>"/>
+                            <input type="submit" class="rex-form-submit" name="sendit" value="<?php echo $I18N->msg('magnific_popup_settings_save'); ?>">
                         </p>
                     </div>
                 </div>

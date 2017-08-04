@@ -9,10 +9,10 @@ if ($imageFile != '') {
 
     // get title and description
     if (OOMedia::isValid($media)) {
-        $title = $media->getValue('title');
+        $title       = $media->getValue('title');
         $description = $media->getValue('med_description');
     } else {
-        $title = '';
+        $title       = '';
         $description = '';
     }
 
@@ -20,7 +20,7 @@ if ($imageFile != '') {
     if (isset($REX['MEDIA_DIR'])) {
         $mediaDir = $REX['MEDIA_DIR'];
     } else {
-        $mediaDir =  'files';
+        $mediaDir = 'files';
     }
 
     // generate image url
@@ -39,7 +39,7 @@ if ($imageFile != '') {
 
     // get dimensions of image manager image
     $resizedFile = $REX['INCLUDE_PATH'] . '/generated/files/image_manager__' . $imageType . '_' . $imageFile;
-    $imageSize = @getimagesize($resizedFile);
+    $imageSize   = @getimagesize($resizedFile);
 
     if ($imageSize != false) {
         $imageDimensions = ' width="' . $imageSize[0] . '" height="' . $imageSize[1] . '"';

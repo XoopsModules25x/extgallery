@@ -631,7 +631,7 @@ class MetaSliderPlugin
                 foreach ($row['options'] as $k => $v) {
                     $checked        = checked($k, $row['value'], false);
                     $disabled       = $k === 'thumbnails' ? 'disabled' : '';
-                    $navigation_row .= "<li><label><input type='radio' name='settings[{$id}]' value='{$k}' {$checked} {$disabled}/>{$v['label']}</label></li>";
+                    $navigation_row .= "<li><label><input type='radio' name='settings[{$id}]' value='{$k}' {$checked} {$disabled}>{$v['label']}</label></li>";
                 }
 
                 $navigation_row .= '</ul></td></tr>';
@@ -646,7 +646,7 @@ class MetaSliderPlugin
                 foreach ($row['options'] as $k => $v) {
                     $checked        = checked($k, $row['value'], false);
                     $class          = isset($v['class']) ? $v['class'] : '';
-                    $navigation_row .= "<li><label><input type='radio' name='settings[{$id}]' value='{$k}' {$checked} class='radio {$class}'/>{$v['label']}</label></li>";
+                    $navigation_row .= "<li><label><input type='radio' name='settings[{$id}]' value='{$k}' {$checked} class='radio {$class}'>{$v['label']}</label></li>";
                 }
 
                 $navigation_row .= '</ul></td></tr>';
@@ -871,9 +871,9 @@ class MetaSliderPlugin
                                     <div class="postbox">
                                         <h3 class='configuration'>
                                             <?php _e('Settings', 'metaslider') ?>
-                                            <input class='alignright button button-primary' type='submit' name='save' id='ms-save' value='<?php _e('Save', 'metaslider') ?>'/>
+                                            <input class='alignright button button-primary' type='submit' name='save' id='ms-save' value='<?php _e('Save', 'metaslider') ?>'>
                                             <input class='alignright button button-primary' type='submit' name='preview' id='ms-preview' value='<?php _e('Save & Preview', 'metaslider') ?>' data-slider_id='<?php echo $this->slider->id ?>'
-                                                   data-slider_width='<?php echo $this->slider->get_setting('width') ?>' data-slider_height='<?php echo $this->slider->get_setting('height') ?>'/>
+                                                   data-slider_width='<?php echo $this->slider->get_setting('width') ?>' data-slider_height='<?php echo $this->slider->get_setting('height') ?>'>
                                             <span class="spinner"></span>
                                         </h3>
                                         <div class="inside">
@@ -1275,7 +1275,7 @@ class MetaSliderPlugin
                                             <div class='tabs-content'>
                                                 <div class='tab tab-1'>
                                                     <p><?php _e('Copy & paste the shortcode directly into any WordPress post or page.', 'metaslider'); ?></p>
-                                                    <input readonly='readonly' type='text' value='[metaslider id=<?php echo $this->slider->id ?>]'/></div>
+                                                    <input readonly='readonly' type='text' value='[metaslider id=<?php echo $this->slider->id ?>]'></div>
                                                 <div class='tab tab-2' style='display: none'>
                                                     <p><?php _e('Copy & paste this code into a template file to include the slideshow within your theme.', 'metaslider'); ?></p>
                                                     <textarea readonly='readonly'>&lt;?php &#13;&#10;    echo do_shortcode("[metaslider id=<?php echo $this->slider->id ?>]"); &#13;&#10;?></textarea></div>

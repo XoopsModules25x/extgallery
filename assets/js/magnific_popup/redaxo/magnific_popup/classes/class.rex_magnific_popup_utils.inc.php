@@ -30,7 +30,7 @@ class rex_magnific_popup_utils
     }
 
     /**
-     * @param $mdFile
+     * @param       $mdFile
      * @param array $search
      * @param array $replace
      * @return mixed|string

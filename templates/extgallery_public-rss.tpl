@@ -30,7 +30,7 @@
                 <description><{$photos[photo].photo_desc}>
                     <![CDATA[<br><img
                             src=<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photos[photo].photo_name}>
-                            alt='<{$photos[photo].photo_title}>'/> ]]>
+                            alt='<{$photos[photo].photo_title}>'> ]]>
                 </description>
             </item>
         <{/section}>

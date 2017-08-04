@@ -7,140 +7,140 @@
  *
  */
 
-(function( $, window ) {
+(function ($, window) {
 
-/*global jQuery, Galleria, window */
+    /*global jQuery, Galleria, window */
 
-Galleria.requires(1.25, 'The History Plugin requires Galleria version 1.2.5 or later.');
+    Galleria.requires(1.25, 'The History Plugin requires Galleria version 1.2.5 or later.');
 
-Galleria.History = (function() {
+    Galleria.History = (function () {
 
-    var onloads = [],
+        var onloads = [],
 
-        init = false,
+            init = false,
 
-        loc = window.location,
+            loc = window.location,
 
-        doc = window.document,
+            doc = window.document,
 
-        ie = Galleria.IE,
+            ie = Galleria.IE,
 
-        support = 'onhashchange' in window && ( doc.mode === undefined || doc.mode > 7 ),
+            support = 'onhashchange' in window && ( doc.mode === undefined || doc.mode > 7 ),
 
-        iframe,
+            iframe,
 
-        get = function( winloc ) {
-            if( iframe && !support && Galleria.IE ) {
-                winloc = winloc || iframe.location;
-            }  else {
-                winloc = loc;
-            }
-            return parseInt( winloc.hash.substr(2), 10 );
-        },
+            get = function (winloc) {
+                if (iframe && !support && Galleria.IE) {
+                    winloc = winloc || iframe.location;
+                } else {
+                    winloc = loc;
+                }
+                return parseInt(winloc.hash.substr(2), 10);
+            },
 
-        saved = get( loc ),
+            saved = get(loc),
 
-        callbacks = [],
+            callbacks = [],
 
-        onchange = function() {
-            $.each( callbacks, function( i, fn ) {
-                fn.call( window, get() );
+            onchange = function () {
+                $.each(callbacks, function (i, fn) {
+                    fn.call(window, get());
+                });
+            },
+
+            ready = function () {
+                $.each(onloads, function (i, fn) {
+                    fn();
+                });
+
+                init = true;
+            },
+
+            setHash = function (val) {
+                return '/' + val;
+            };
+
+        // always remove support if IE < 8
+        if (support && ie < 8) {
+            support = false;
+        }
+
+        if (!support) {
+
+            $(function () {
+
+                var interval = window.setInterval(function () {
+
+                    var hash = get();
+
+                    if (!isNaN(hash) && hash != saved) {
+                        saved = hash;
+                        loc.hash = setHash(hash);
+                        onchange();
+                    }
+
+                }, 50);
+
+                if (ie) {
+
+                    $('<iframe tabindex="-1" title="empty">').hide().attr('src', 'about:blank').one('load', function () {
+
+                        iframe = this.contentWindow;
+
+                        ready();
+
+                    }).insertAfter(doc.body);
+
+                } else {
+                    ready();
+                }
             });
-        },
+        } else {
+            ready();
+        }
 
-        ready = function() {
-            $.each( onloads, function(i, fn) {
-                fn();
-            });
+        return {
 
-            init = true;
-        },
+            change: function (fn) {
 
-        setHash = function( val ) {
-            return '/' + val;
-        };
+                callbacks.push(fn);
 
-    // always remove support if IE < 8
-    if ( support && ie < 8 ) {
-        support = false;
-    }
+                if (support) {
+                    window.onhashchange = onchange;
+                }
+            },
 
-    if ( !support ) {
+            set: function (val) {
 
-        $(function() {
-
-            var interval = window.setInterval(function() {
-
-                var hash = get();
-
-                if ( !isNaN( hash ) && hash != saved ) {
-                    saved = hash;
-                    loc.hash = setHash( hash );
-                    onchange();
+                if (isNaN(val)) {
+                    return;
                 }
 
-            }, 50);
+                if (!support && ie) {
 
-            if ( ie ) {
+                    this.ready(function () {
 
-                $('<iframe tabindex="-1" title="empty">').hide().attr( 'src', 'about:blank' ).one('load', function() {
+                        var idoc = iframe.document;
+                        idoc.open();
+                        idoc.close();
 
-                    iframe = this.contentWindow;
+                        iframe.location.hash = setHash(val);
 
-                    ready();
+                    });
+                }
 
-                }).insertAfter(doc.body);
+                loc.hash = setHash(val);
+            },
 
-            } else {
-                ready();
+            ready: function (fn) {
+                if (!init) {
+                    onloads.push(fn);
+                } else {
+                    fn();
+                }
             }
-        });
-    } else {
-        ready();
-    }
+        };
+    }());
 
-    return {
-
-        change: function( fn ) {
-
-            callbacks.push( fn );
-
-            if( support ) {
-                window.onhashchange = onchange;
-            }
-        },
-
-        set: function( val ) {
-
-            if ( isNaN( val ) ) {
-                return;
-            }
-
-            if ( !support && ie ) {
-
-                this.ready(function() {
-
-                    var idoc = iframe.document;
-                    idoc.open();
-                    idoc.close();
-
-                    iframe.location.hash = setHash( val );
-
-                });
-            }
-
-            loc.hash = setHash( val );
-        },
-
-        ready: function(fn) {
-            if (!init) {
-                onloads.push(fn);
-            } else {
-                fn();
-            }
-        }
-    };
-}());
-
-}( jQuery, this ));
+}(jQuery, this));
 

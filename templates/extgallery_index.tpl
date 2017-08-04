@@ -24,13 +24,13 @@
                                    href="<{xoAppUrl modules/extgallery/}>public-<{$display_type}>.php?id=<{$child.cat_id}>"><img
                                             src="<{$child.cat_imgurl}>"
                                             alt="<{$child.cat_name}>"
-                                            title="<{$child.cat_name}>"/></a>
+                                            title="<{$child.cat_name}>"></a>
                             <{else}>
                                 <a title="<{$child.cat_name}>"
                                    href="<{xoAppUrl modules/extgallery/}>public-categories.php?id=<{$child.cat_id}>"><img
                                             src="<{$child.cat_imgurl}>"
                                             alt="<{$child.cat_name}>"
-                                            title="<{$child.cat_name}>"/></a>
+                                            title="<{$child.cat_name}>"></a>
                             <{/if}>
                         </div>
                     <{else}>
@@ -41,13 +41,13 @@
                                        href="<{xoAppUrl modules/extgallery/}>public-<{$display_type}>.php?id=<{$child.cat_id}>"><img
                                                 src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$child.photo.photo_name}>"
                                                 alt="<{$child.photo.photo_title}>"
-                                                title="<{$child.photo.photo_title}>"/></a>
+                                                title="<{$child.photo.photo_title}>"></a>
                                 <{else}>
                                     <a title="<{$child.cat_name}>"
                                        href="<{$extgalleryName}>public-categories.php?id=<{$child.cat_id}>"><img
                                                 src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$child.photo.photo_name}>"
                                                 alt="<{$child.photo.photo_title}>"
-                                                title="<{$child.photo.photo_title}>"/></a>
+                                                title="<{$child.photo.photo_title}>"></a>
                                 <{/if}>
                             </div>
                         <{/if}>
@@ -60,13 +60,13 @@
                                    href="<{xoAppUrl modules/extgallery/}>public-<{$display_type}>.php?id=<{$child.cat_id}>"><img
                                             src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$child.photo.photo_name}>"
                                             alt="<{$child.photo.photo_title}>"
-                                            title="<{$child.photo.photo_title}>"/></a>
+                                            title="<{$child.photo.photo_title}>"></a>
                             <{else}>
                                 <a title="<{$child.cat_name}>"
                                    href="<{xoAppUrl modules/extgallery/}>public-categories.php?id=<{$child.cat_id}>"><img
                                             src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$child.photo.photo_name}>"
                                             alt="<{$child.photo.photo_title}>"
-                                            title="<{$child.photo.photo_title}>"/></a>
+                                            title="<{$child.photo.photo_title}>"></a>
                             <{/if}>
                         </div>
                     <{/if}>
@@ -95,7 +95,7 @@
 
      <{*pk ------------------- add upload and view-my-album links to main page*}>
     <div>
-        <a title="<{$albumlinkname}>" href="<{xoAppUrl modules/extgallery/}><{$albumurl}>"><{$albumlinkname}></a> <br >
+        <a title="<{$albumlinkname}>" href="<{xoAppUrl modules/extgallery/}><{$albumurl}>"><{$albumlinkname}></a> <br>
         <a title="<{$uploadlinkname}>" href="<{xoAppUrl modules/extgallery/}><{$uploadurl}>"><{$uploadlinkname}></a>
 
     </div>
@@ -106,7 +106,7 @@
         <div id="rss">
             <a href="<{xoAppUrl modules/extgallery/public-rss.php}>" title="<{$smarty.const._MD_EXTGALLERY_RSS}>">
                 <img src="<{xoAppUrl modules/extgallery/assets/images/feed.png}>"
-                     alt="<{$smarty.const._MD_EXTGALLERY_RSS}>"/>
+                     alt="<{$smarty.const._MD_EXTGALLERY_RSS}>">
             </a>
         </div>
     <{/if}>

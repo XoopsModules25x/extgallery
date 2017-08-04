@@ -120,7 +120,7 @@
 <{else}>
     <{if $block.ajaxeffect == galleryview}>
         <link rel="stylesheet" type="text/css"
-              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/galleryview/galleryview.css}>"/>
+              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/galleryview/galleryview.css}>">
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?modules/extgallery/assets/js/galleryview/galleryview.js}>"></script>
         <script type="text/javascript"
@@ -223,7 +223,7 @@
             });
         </script>
         <link rel="stylesheet" type="text/css"
-              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/microgallery/style.css}>"/>
+              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/microgallery/style.css}>">
     <{/if}>
 <{/if}>
 
@@ -238,7 +238,7 @@
                 </div>
                 <img class="galleryview_imagesize"
                      src="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>"
-                     alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>"/>
+                     alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>">
             </li>
         <{/foreach}>
     </ul>
@@ -249,7 +249,7 @@
         <div id="galleria">
             <{foreach item=photo from=$block.photos}>
                 <img src="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>"
-                     alt="<{$photo.photo_desc}>" title="<{$photo.photo_title}>"/>
+                     alt="<{$photo.photo_desc}>" title="<{$photo.photo_title}>">
             <{/foreach}>
         </div>
     </div>
@@ -274,7 +274,7 @@
         <div id="mG1" class="microGallery">
             <{foreach item=photo from=$block.photos}>
                 <img src="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>"
-                     alt="<{$photo.photo_desc}>" title="<{$photo.photo_title}>"/>
+                     alt="<{$photo.photo_desc}>" title="<{$photo.photo_title}>">
             <{/foreach}>
         </div>
     </div>

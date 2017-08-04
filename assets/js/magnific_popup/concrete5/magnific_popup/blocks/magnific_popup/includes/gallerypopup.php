@@ -18,7 +18,7 @@ $errortxt = $json->encode(t('The image %s could not be loaded.', '#%curr%</a>'))
             <?php $fileDescription = $image->getDescription(); ?>
             <li>
                 <a class="<?php echo $cssAnchorClass; ?>" title="<?php echo $fileDescription; ?>" href="<?php echo $image->getRelativePath() ?>">
-                    <img class="<?php echo $cssImageClass; ?>" src="<?php echo $thumbnail->src ?>" width="<?php echo $thumbnailWidth; ?>" height="<?php echo $thumbnailHeight; ?>" alt="<?php echo $fileDescription; ?>"/>
+                    <img class="<?php echo $cssImageClass; ?>" src="<?php echo $thumbnail->src ?>" width="<?php echo $thumbnailWidth; ?>" height="<?php echo $thumbnailHeight; ?>" alt="<?php echo $fileDescription; ?>">
                 </a>
             </li>
         <?php endforeach; ?>

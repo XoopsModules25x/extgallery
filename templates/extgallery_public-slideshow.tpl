@@ -94,7 +94,7 @@
 <{else}>
     <{if $use_slideshow_effects == galleryview}>
         <link rel="stylesheet" type="text/css"
-              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/galleryview/galleryview.css}>"/>
+              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/galleryview/galleryview.css}>">
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?modules/extgallery/assets/js/galleryview/galleryview.js}>"></script>
         <script type="text/javascript"
@@ -196,11 +196,11 @@
             });
         </script>
         <link rel="stylesheet" type="text/css"
-              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/microgallery/style.css}>"/>
+              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/microgallery/style.css}>">
     <{/if}>
     <{if $use_slideshow_effects == galleriffic}>
         <link rel="stylesheet" type="text/css"
-              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/galleriffic/galleriffic2.css}>"/>
+              href="<{xoAppUrl browse.php?modules/extgallery/assets/js/galleriffic/galleriffic2.css}>">
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?modules/extgallery/assets/js/galleriffic/jquery.galleriffic.js}>"></script>
         <script type="text/javascript"
@@ -214,11 +214,11 @@
     <a title="<{$extgalleryName}>"
        href="<{xoAppUrl modules/extgallery/}>"><{$extgalleryName}></a><{foreachq item=node from=$catPath name=breadcrumb}>
     <img src="assets/images/breadcrumb-link.gif"
-         alt="BreadCrumb"/> <a
+         alt="BreadCrumb"> <a
             title="<{$node.cat_name}>"
             href="<{xoAppUrl modules/extgallery/}>public-categories.php?id=<{$node.cat_id}>"><{$node.cat_name}></a><{/foreach}>
     <img src="assets/images/breadcrumb-link.gif"
-         alt="BreadCrumb"/> <{$cat.cat_name}>
+         alt="BreadCrumb"> <{$cat.cat_name}>
 
     <{if $use_slideshow_effects == galleryview}>
         <ul id="gallery">
@@ -231,7 +231,7 @@
                     </div>
                     <img class="galleryview_imagesize"
                          src="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>"
-                         alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>"/>
+                         alt="<{$photo.photo_title}>" title="<{$photo.photo_title}>">
                 </li>
             <{/foreach}>
         </ul>
@@ -243,7 +243,7 @@
             <div id="galleria">
                 <{foreach item=photo from=$photos}>
                     <img src="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>"
-                         alt="<{$photo.photo_desc}>" title="<{$photo.photo_title}>"/>
+                         alt="<{$photo.photo_desc}>" title="<{$photo.photo_title}>">
                 <{/foreach}>
             </div>
         </div>
@@ -254,7 +254,7 @@
             <div id="mG1" class="microGallery">
                 <{foreach item=photo from=$photos}>
                     <img src="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photo.photo_name}>"
-                         alt="<{$photo.photo_desc}>" title="<{$photo.photo_title}>"/>
+                         alt="<{$photo.photo_desc}>" title="<{$photo.photo_title}>">
                 <{/foreach}>
             </div>
         </div>
@@ -282,7 +282,7 @@
                                    title="<{$photo.photo_title}>">
                                     <img width="75" height="75"
                                          src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$photo.photo_name}>"
-                                         alt="<{$photo.photo_title}>"/>
+                                         alt="<{$photo.photo_title}>">
                                 </a>
                                 <div class="caption">
                                     <div class="image-title"><{$photo.photo_title}></div>
@@ -309,11 +309,11 @@
             <a href="<{xoAppUrl modules/extgallery/public-rss.php?id=}><{$extgalleryID}>"
                title="<{$smarty.const._MD_EXTGALLERY_ALBUMRSS}>">
                 <img src="<{xoAppUrl modules/extgallery/assets/images/feedblue.png}>"
-                     alt="<{$smarty.const._MD_EXTGALLERY_ALBUMRSS}>"/>
+                     alt="<{$smarty.const._MD_EXTGALLERY_ALBUMRSS}>">
             </a>
             <a href="<{xoAppUrl modules/extgallery/public-rss.php}>" title="<{$smarty.const._MD_EXTGALLERY_RSS}>">
                 <img src="<{xoAppUrl modules/extgallery/assets/images/feed.png}>"
-                     alt="<{$smarty.const._MD_EXTGALLERY_RSS}>"/>
+                     alt="<{$smarty.const._MD_EXTGALLERY_RSS}>">
             </a>
         </div>
     <{/if}>

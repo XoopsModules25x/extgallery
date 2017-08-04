@@ -1,11 +1,11 @@
 <?php defined('C5_EXECUTE') || die('Access denied.');
-$v        = View::GetInstance();
-$page     = Page::getCurrentPage();
+$v    = View::GetInstance();
+$page = Page::getCurrentPage();
 
 ?>
-<a id="mag-modal-<?php echo $bID;?>" href="#magnific_modal-<?php echo $bID;?>"><?php echo $modalLink; ?></a>
+<a id="mag-modal-<?php echo $bID; ?>" href="#magnific_modal-<?php echo $bID; ?>"><?php echo $modalLink; ?></a>
 
-<div id="magnific_modal-<?php echo $bID;?>" class="mfp-hide white-popup-block">
+<div id="magnific_modal-<?php echo $bID; ?>" class="mfp-hide white-popup-block">
     <?php echo $modalText; ?>
     <p><a class="popup-modal-dismiss" href="#">Dismiss</a></p>
 </div>

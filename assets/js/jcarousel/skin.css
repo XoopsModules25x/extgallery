@@ -5,7 +5,7 @@
 }
 
 .jcarousel-skin-tango .jcarousel-direction-rtl {
-	direction: rtl;
+    direction: rtl;
 }
 
 .jcarousel-skin-tango .jcarousel-container-horizontal {
@@ -24,7 +24,7 @@
 }
 
 .jcarousel-skin-tango .jcarousel-clip-vertical {
-    width:  auto;
+    width: auto;
 }
 
 .jcarousel-skin-tango .jcarousel-item {
@@ -33,12 +33,12 @@
 }
 
 .jcarousel-skin-tango .jcarousel-item-horizontal {
-	margin-left: 0;
+    margin-left: 0;
     margin-right: 10px;
 }
 
 .jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-item-horizontal {
-	margin-left: 10px;
+    margin-left: 10px;
     margin-right: 0;
 }
 
