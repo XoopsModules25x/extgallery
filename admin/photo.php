@@ -40,7 +40,7 @@ if (isset($_GET['start'])) {
 }
 
 $moduleDirName = basename(dirname(__DIR__));
-$classUtility  = ucfirst($moduleDirName) . 'Utility';
+$utilityClass  = ucfirst($moduleDirName) . 'Utility';
 switch ($op) {
 
     case 'add_photo':
@@ -559,7 +559,7 @@ switch ($op) {
         $form->addElement(new XoopsFormLabel(_AM_EXTGALLERY_ALBUMS, $catHandler->getLeafSelect('cat_id', false, 0, '', 'public_upload')));
         //DNPROSSI - editors
         $form->addElement(new XoopsFormText(_AM_EXTGALLERY_PHOTO_TITLE, 'photo_title', '50', '150'), false);
-        $editor = $classUtility::getWysiwygForm(_AM_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
+        $editor = $utilityClass::getWysiwygForm(_AM_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
         $form->addElement($editor, false);
         $form->addElement(new XoopsFormFile(_AM_EXTGALLERY_PHOTO, 'photo_file', $xoopsModuleConfig['max_photosize']), false);
         if ($xoopsModuleConfig['display_extra_field']) {

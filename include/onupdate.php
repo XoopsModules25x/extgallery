@@ -43,17 +43,17 @@ function tableExists($tablename)
 function xoops_module_pre_update_extgallery(XoopsModule $module)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    $classUtility  = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($classUtility)) {
+    $utilityClass  = ucfirst($moduleDirName) . 'Utility';
+    if (!class_exists($utilityClass)) {
         xoops_load('utility', $moduleDirName);
     }
     //check for minimum XOOPS version
-    if (!$classUtility::checkVerXoops($module)) {
+    if (!$utilityClass::checkVerXoops($module)) {
         return false;
     }
 
     // check for minimum PHP version
-    if (!$classUtility::checkVerPhp($module)) {
+    if (!$utilityClass::checkVerPhp($module)) {
         return false;
     }
 
@@ -192,8 +192,9 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         }
 
         $configurator = include __DIR__ . '/config.php';
-        $classUtility = ucfirst($moduleDirName) . 'Utility';
-        if (!class_exists($classUtility)) {
+        /** @var ExtgalleryUtility $utilityClass */
+        $utilityClass = ucfirst($moduleDirName) . 'Utility';
+        if (!class_exists($utilityClass)) {
             xoops_load('utility', $moduleDirName);
         }
 
@@ -202,7 +203,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
             $file = __DIR__ . '/../assets/images/blank.png';
             foreach (array_keys($configurator['copyFiles']) as $i) {
                 $dest = $configurator['copyFiles'][$i] . '/blank.png';
-                $classUtility::copyFile($file, $dest);
+                $utilityClass::copyFile($file, $dest);
             }
         }
 

@@ -24,7 +24,6 @@ include XOOPS_ROOT_PATH . '/header.php';
 $permHandler = ExtgalleryPublicPermHandler::getInstance();
 if (count($permHandler->getAuthorizedPublicCat($xoopsUser, 'public_upload')) < 1) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
-    exit;
 }
 
 //echo "<pre>";print_r($xoopsModuleConfig);echo "</pre>";

@@ -25,17 +25,17 @@
 function xoops_module_pre_install_extgallery(XoopsModule $module)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    $classUtility  = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($classUtility)) {
+    $utilityClass  = ucfirst($moduleDirName) . 'Utility';
+    if (!class_exists($utilityClass)) {
         xoops_load('utility', $moduleDirName);
     }
     //check for minimum XOOPS version
-    if (!$classUtility::checkVerXoops($module)) {
+    if (!$utilityClass::checkVerXoops($module)) {
         return false;
     }
 
     // check for minimum PHP version
-    if (!$classUtility::checkVerPhp($module)) {
+    if (!$utilityClass::checkVerPhp($module)) {
         return false;
     }
 
@@ -173,9 +173,9 @@ function xoops_module_install_extgallery(XoopsModule $xoopsModule)
 
     //    $moduleDirName = $xoopsModule->getVar('dirname');
     $configurator = include $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
-
-    $classUtility = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($classUtility)) {
+    /** @var ExtgalleryUtility $utilityClass */
+    $utilityClass = ucfirst($moduleDirName) . 'Utility';
+    if (!class_exists($utilityClass)) {
         xoops_load('utility', $moduleDirName);
     }
 
@@ -184,14 +184,14 @@ function xoops_module_install_extgallery(XoopsModule $xoopsModule)
     if (count($configurator['uploadFolders']) > 0) {
         //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
         foreach (array_keys($configurator['uploadFolders']) as $i) {
-            $classUtility::createFolder($configurator['uploadFolders'][$i]);
+            $utilityClass::createFolder($configurator['uploadFolders'][$i]);
         }
     }
     if (count($configurator['copyFiles']) > 0) {
         $file = __DIR__ . '/../assets/images/blank.png';
         foreach (array_keys($configurator['copyFiles']) as $i) {
             $dest = $configurator['copyFiles'][$i] . '/blank.png';
-            $classUtility::copyFile($file, $dest);
+            $utilityClass::copyFile($file, $dest);
         }
     }
 

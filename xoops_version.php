@@ -20,8 +20,8 @@ $moduleDirName = basename(__DIR__);
 // ------------------- Informations ------------------- //
 $modversion = array(
     'version'             => 1.13,
-    'module_status'       => 'RC1',
-    'release_date'        => '2016/11/18', // YYYY/mm/dd
+    'module_status'       => 'RC-2',
+    'release_date'        => '2017/08/12', // YYYY/mm/dd
     'name'                => _MI_EXTGALLERY_NAME,
     'description'         => _MI_EXTGAL_DESC,
     'author'              => 'Zoullou, contributors: Voltan, Mamba, Goffy',

@@ -17,31 +17,31 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: config.php 8088 2011-11-06 09:38:12Z beckmi $
  */
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 return $config = array(
-    "extensions" => array(
-        "iframe"  => 0,
-        "image"   => 1,
-        "flash"   => 1,
-        "youtube" => 1,
-        "mp3"     => 0,
-        "wmp"     => 0,
+    'extensions' => array(
+        'iframe'  => 0,
+        'image'   => 1,
+        'flash'   => 1,
+        'youtube' => 1,
+        'mp3'     => 0,
+        'wmp'     => 0,
         // If other module is used, please modify the following detection and 'link' in /wiki/config.php
-        "wiki"    => is_dir(XOOPS_ROOT_PATH . '/modules/mediawiki/'),
-        "mms"     => 0,
-        "rtsp"    => 0,
-        "ul"      => 1,
-        "li"      => 1,
-        "gallery" => 1
+        'wiki'    => is_dir(XOOPS_ROOT_PATH . '/modules/mediawiki/'),
+        'mms'     => 0,
+        'rtsp'    => 0,
+        'ul'      => 1,
+        'li'      => 1,
+        'gallery' => 1
     ),
 
-    "truncate_length"      => 60,
+    'truncate_length'      => 60,
 
     // Stop request processing if malicious words found
-    "censor_stop"          => false,
+    'censor_stop'          => false,
 
     // Filters XSS scripts on display of text
     // There is considerable trade-off between security and performance
-    "filterxss_on_display" => false
+    'filterxss_on_display' => false
 );

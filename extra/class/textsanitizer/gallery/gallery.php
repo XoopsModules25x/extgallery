@@ -1,7 +1,14 @@
 <?php
 
+/**
+ * Class MytsGallery
+ */
 class MytsGallery extends MyTextSanitizerExtension
 {
+    /**
+     * @param string $textarea_id
+     * @return array
+     */
     public function encode($textarea_id)
     {
         xoops_loadLanguage('extention', 'extgallery');
@@ -12,7 +19,7 @@ class MytsGallery extends MyTextSanitizerExtension
                       . _EXT_EXTGALLERY_ALTWMP
                       . "' onclick='xoopsCodeGallery(\"{$textarea_id}\", \""
                       . _EXT_EXTGALLERY_TEXTID
-                      . "\", \""
+                      . '", "'
                       . _EXT_EXTGALLERY_TEXTTITLE
                       . "\");'  onmouseover='style.cursor=\"hand\"'>&nbsp;";
         $javascript = <<<EOH
@@ -47,6 +54,9 @@ EOH;
         return array($code, $javascript);
     }
 
+    /**
+     * @param $ts
+     */
     public function load($ts)
     {
         $ts->patterns[]     = "/\[gallery]([0-9]*)\[\/gallery\]/sU";

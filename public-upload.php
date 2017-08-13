@@ -32,7 +32,7 @@ if (count($permHandler->getAuthorizedPublicCat($xoopsUser, 'public_upload')) < 1
 }
 
 $moduleDirName = basename(__DIR__);
-$classUtility  = ucfirst($moduleDirName) . 'Utility';
+$utilityClass  = ucfirst($moduleDirName) . 'Utility';
 switch ($step) {
 
     case 'enreg':
@@ -66,7 +66,7 @@ switch ($step) {
 
         //DNPROSSI - editors
         $form->addElement(new XoopsFormText(_MD_EXTGALLERY_PHOTO_TITLE, 'photo_title', '50', '150'), false);
-        $editor = $classUtility::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
+        $editor = $utilityClass::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
         $form->addElement($editor, false);
 
         $form->addElement(new XoopsFormFile(_MD_EXTGALLERY_PHOTO, 'photo_file', $xoopsModuleConfig['max_photosize']), false);
