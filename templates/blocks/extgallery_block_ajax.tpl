@@ -1,5 +1,5 @@
 <{if $block.jquery}>
-    <{if $block.ajaxeffect == galleryview}>
+    <{if $block.ajaxeffect == 'galleryview'}>
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#gallery').galleryView({
@@ -55,7 +55,7 @@
             }
         </style>
     <{/if}>
-    <{if $block.ajaxeffect == galleria}>
+    <{if $block.ajaxeffect == 'galleria'}>
         <style>
 
 
@@ -106,7 +106,7 @@
             }
         </style>
     <{/if}>
-    <{if $block.ajaxeffect == microgallery}>
+    <{if $block.ajaxeffect == 'microgallery'}>
         <script type="text/javascript">
             $(function () {
                 $("#mG1").microgallery({
@@ -118,7 +118,7 @@
         </script>
     <{/if}>
 <{else}>
-    <{if $block.ajaxeffect == galleryview}>
+    <{if $block.ajaxeffect == 'galleryview'}>
         <link rel="stylesheet" type="text/css"
               href="<{xoAppUrl browse.php?modules/extgallery/assets/js/galleryview/galleryview.css}>">
         <script type="text/javascript"
@@ -182,7 +182,7 @@
             }
         </style>
     <{/if}>
-    <{if $block.ajaxeffect == galleria}>
+    <{if $block.ajaxeffect == 'galleria'}>
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?modules/extgallery/assets/js/galleria/galleria.js}>"></script>
         <style>
@@ -210,7 +210,7 @@
             }
         </style>
     <{/if}>
-    <{if $block.ajaxeffect == microgallery}>
+    <{if $block.ajaxeffect == 'microgallery'}>
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?modules/extgallery/assets/js/microgallery/jquery.microgallery.js}>"></script>
         <script type="text/javascript">
@@ -227,7 +227,7 @@
     <{/if}>
 <{/if}>
 
-<{if $block.ajaxeffect == galleryview}>
+<{if $block.ajaxeffect == 'galleryview'}>
     <ul id="gallery">
         <{foreach item=photo from=$block.photos}>
             <li>
@@ -244,7 +244,7 @@
     </ul>
 <{/if}>
 
-<{if $block.ajaxeffect == galleria}>
+<{if $block.ajaxeffect == 'galleria'}>
     <div class="content">
         <div id="galleria">
             <{foreach item=photo from=$block.photos}>
@@ -269,7 +269,7 @@
     </script>
 <{/if}>
 
-<{if $block.ajaxeffect == microgallery}>
+<{if $block.ajaxeffect == 'microgallery'}>
     <div class="extmicrogalleryblock">
         <div id="mG1" class="microGallery">
             <{foreach item=photo from=$block.photos}>
