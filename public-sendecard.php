@@ -37,7 +37,7 @@ $photo        = $photoHandler->getPhoto($photoId);
 
 $permHandler = ExtgalleryPublicPermHandler::getInstance();
 
-if (!$permHandler->isAllowed($xoopsUser, 'public_ecard', $photo->getVar('cat_id'))) {
+if (!$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_ecard', $photo->getVar('cat_id'))) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
 }
 /** @var xos_opal_Theme $xoTheme */
@@ -66,7 +66,7 @@ switch ($step) {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
 
-        $data = array(
+        $data = [
             'ecard_fromname'  => $_POST['ecard_fromname'],
             'ecard_fromemail' => $_POST['ecard_fromemail'],
             'ecard_toname'    => $_POST['ecard_toname'],
@@ -75,7 +75,7 @@ switch ($step) {
             'ecard_desc'      => $_POST['ecard_desc'],
             'ecard_ip'        => $ip,
             'photo_id'        => $photoId
-        );
+        ];
 
         $ecardHandler->createEcard($data);
         $photoHandler->updateEcard($photoId);
@@ -96,8 +96,8 @@ switch ($step) {
             $photoUrl = XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name');
         }
 
-        $fromName  = is_a($xoopsUser, 'XoopsUser') ? $xoopsUser->getVar('uname') : '';
-        $fromEmail = is_a($xoopsUser, 'XoopsUser') ? $xoopsUser->getVar('email') : '';
+        $fromName  = is_a($GLOBALS['xoopsUser'], 'XoopsUser') ? $GLOBALS['xoopsUser']->getVar('uname') : '';
+        $fromEmail = is_a($GLOBALS['xoopsUser'], 'XoopsUser') ? $GLOBALS['xoopsUser']->getVar('email') : '';
 
         $form = new XoopsThemeForm(_MD_EXTGALLERY_SEND_ECARD, 'send_ecard', 'public-sendecard.php', 'post', true);
         $form->addElement(new XoopsFormText(_MD_EXTGALLERY_FROM_NAME, 'ecard_fromname', '70', '255', $fromName), false);
@@ -127,10 +127,10 @@ switch ($step) {
         $xoTheme->addMeta('link', $rel, $attributes);
         $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 
-        $lang = array(
+        $lang = [
             'to'   => _MD_EXTGALLERY_TO,
             'from' => _MD_EXTGALLERY_FROM
-        );
+        ];
         $xoopsTpl->assign('lang', $lang);
 
         include XOOPS_ROOT_PATH . '/footer.php';

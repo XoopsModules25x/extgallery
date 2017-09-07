@@ -34,11 +34,11 @@ class NestedTree
     {
         $this->db     = $db;
         $this->table  = $db->prefix($table);
-        $this->fields = array(
+        $this->fields = [
             'id'     => $idField,
             'parent' => $parentField,
             'sort'   => $sortField
-        );
+        ];
     }
 
     /**
@@ -108,7 +108,7 @@ class NestedTree
 
         $result = $this->db->query($query);
 
-        $arr = array();
+        $arr = [];
         while (false !== ($row = $this->db->fetchArray($result))) {
             $arr[$row[$idField]] = $row;
         }
@@ -144,7 +144,7 @@ class NestedTree
     {
         $node = $this->getNode($id);
         if (null === $node) {
-            return array();
+            return [];
         }
 
         if ($includeSelf) {
@@ -156,7 +156,7 @@ class NestedTree
         $result = $this->db->query($query);
 
         $idField = $this->fields['id'];
-        $arr     = array();
+        $arr     = [];
         while (false !== ($row = $this->db->fetchArray($result))) {
             $arr[$row[$idField]] = $row;
         }
@@ -291,18 +291,18 @@ class NestedTree
         $result = $this->db->query($query);
 
         // create a root node to hold child data about first level items
-        $root                      = array();
+        $root                      = [];
         $root[$this->fields['id']] = 0;
-        $root['children']          = array();
+        $root['children']          = [];
 
-        $arr = array(
+        $arr = [
             $root
-        );
+        ];
 
         // populate the array and create an empty children array
         while (false !== ($row = $this->db->fetchArray($result))) {
             $arr[$row[$this->fields['id']]]             = $row;
-            $arr[$row[$this->fields['id']]]['children'] = array();
+            $arr[$row[$this->fields['id']]]['children'] = [];
         }
 
         // now process the array and build the child data

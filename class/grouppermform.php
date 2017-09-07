@@ -45,7 +45,7 @@ class ExtgalleryGroupPermForm extends XoopsGroupPermForm
     {
         // load all child ids for javascript codes
         foreach (array_keys($this->_itemTree) as $item_id) {
-            $this->_itemTree[$item_id]['allchild'] = array();
+            $this->_itemTree[$item_id]['allchild'] = [];
             $this->_loadAllChildItemIds($item_id, $this->_itemTree[$item_id]['allchild']);
         }
         /** @var XoopsGroupPermHandler $gpermHandler */
@@ -137,7 +137,7 @@ class ExtgalleryGroupFormCheckBox extends XoopsGroupFormCheckBox
             ++$cols;
         }
         echo '</tr></table></td><td class="even" valign="top">';
-        $option_ids = array();
+        $option_ids = [];
         foreach (array_keys($this->_optionTree) as $id) {
             if (!empty($id)) {
                 $option_ids[] = '\'' . $ele_name . '[groups][' . $this->_groupId . '][' . $id . ']' . '\'';

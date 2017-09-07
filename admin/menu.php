@@ -22,63 +22,63 @@ if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
 } else {
     $moduleHelper = Xmf\Module\Helper::getHelper('system');
 }
-$adminObject = \Xmf\Module\Admin::getInstance();
+
 
 $pathIcon32    = \Xmf\Module\Admin::menuIconPath('');
 $pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
 
 $moduleHelper->loadLanguage('modinfo');
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _AM_MODULEADMIN_HOME,
     'link'  => 'admin/index.php',
     'icon'  => $pathIcon32 . '/home.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_EXTGALLERY_PUBLIC_CAT,
     'link'  => 'admin/public-category.php',
     'icon'  => $pathIcon32 . '/category.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_EXTGALLERY_PHOTO,
     'link'  => 'admin/photo.php',
     'icon'  => $pathIcon32 . '/photo.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_EXTGALLERY_PERMISSIONS,
     'link'  => 'admin/perm-quota.php',
     'icon'  => $pathIcon32 . '/permissions.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_EXTGALLERY_WATERMARK_BORDER,
     'link'  => 'admin/watermark-border.php',
     'icon'  => $pathIcon32 . '/watermark.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_EXTGALLERY_SLIDESHOW,
     'link'  => 'admin/slideshow.php',
     'icon'  => $pathIcon32 . '/slideshow.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_EXTGALLERY_EXTENSION,
     'link'  => 'admin/extension.php',
     'icon'  => $pathModIcon32 . '/extension.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_EXTGALLERY_ALBUM,
     'link'  => 'admin/album.php',
     'icon'  => $pathIcon32 . '/album.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _AM_MODULEADMIN_ABOUT,
     'link'  => 'admin/about.php',
     'icon'  => $pathIcon32 . '/about.png'
-);
+];

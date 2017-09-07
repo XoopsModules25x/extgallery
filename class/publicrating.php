@@ -24,7 +24,7 @@ require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
  */
 class ExtgalleryPublicRating extends XoopsObject
 {
-    public $externalKey = array();
+    public $externalKey = [];
 
     /**
      * ExtgalleryPublicRating constructor.
@@ -37,18 +37,18 @@ class ExtgalleryPublicRating extends XoopsObject
         $this->initVar('uid', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('rating_rate', XOBJ_DTYPE_INT, 0, false);
 
-        $this->externalKey['photo_id'] = array(
+        $this->externalKey['photo_id'] = [
             'className'      => 'publicphoto',
             'getMethodeName' => 'getPhoto',
             'keyName'        => 'photo',
             'core'           => false
-        );
-        $this->externalKey['uid']      = array(
+        ];
+        $this->externalKey['uid']      = [
             'className'      => 'user',
             'getMethodeName' => 'get',
             'keyName'        => 'user',
             'core'           => true
-        );
+        ];
     }
 
     /**

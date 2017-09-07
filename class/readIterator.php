@@ -63,7 +63,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
             $sql .= " ORDER BY `{$this->handler->keyName}` DESC";
         }
         $result = $this->handler->db->query($sql, $limit, $start);
-        $ret    = array();
+        $ret    = [];
         if ($asObject) {
             while (false !== ($myrow = $this->handler->db->fetchArray($result))) {
                 $object = $this->handler->create(false);
@@ -120,7 +120,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
      */
     public function getList(CriteriaElement $criteria = null, $limit = 0, $start = 0)
     {
-        $ret = array();
+        $ret = [];
         if ($criteria === null) {
             $criteria = new CriteriaCompo();
         }
@@ -160,7 +160,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
      */
     public function &getIds(CriteriaElement $criteria = null)
     {
-        $ret   = array();
+        $ret   = [];
         $sql   = "SELECT `{$this->handler->keyName}` FROM `{$this->handler->table}`";
         $limit = $start = null;
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -225,7 +225,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
     {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
         trigger_error(__CLASS__ . '::' . __FUNCTION__ . '() is deprecated.' . ". Called from {$trace[0]['file']}line {$trace[0]['line']}", E_USER_WARNING);
-        $ret = array();
+        $ret = [];
         while (false !== ($myrow = $this->handler->db->fetchArray($result))) {
             $obj = $this->handler->create(false);
             $obj->assignVars($myrow);
@@ -233,7 +233,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
                 if ($as_object) {
                     $ret[] =& $obj;
                 } else {
-                    $row  = array();
+                    $row  = [];
                     $vars = $obj->getVars();
                     foreach (array_keys($vars) as $i) {
                         $row[$i] = $obj->getVar($i);
@@ -244,7 +244,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
                 if ($as_object) {
                     $ret[$myrow[$this->handler->keyName]] =& $obj;
                 } else {
-                    $row  = array();
+                    $row  = [];
                     $vars = $obj->getVars();
                     foreach (array_keys($vars) as $i) {
                         $row[$i] = $obj->getVar($i);

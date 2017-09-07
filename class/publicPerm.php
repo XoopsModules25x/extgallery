@@ -72,13 +72,13 @@ class ExtgalleryPublicPermHandler
     }
 
     /**
-     * @param $user
+     * @param XoopsUser $user
      * @param $perm
      * @param $catId
      *
      * @return bool
      */
-    public function isAllowed($user, $perm, $catId)
+    public function isAllowed(XoopsUser $user, $perm, $catId)
     {
         $autorizedCat = $this->getAuthorizedPublicCat($user, $perm);
 

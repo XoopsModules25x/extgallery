@@ -18,7 +18,8 @@ class MetaSlider_Widget extends WP_Widget
      */
     public function __construct()
     {
-        parent::__construct('metaslider_widget', // Base ID
+        parent::__construct(
+            'metaslider_widget', // Base ID
                             'Meta Slider', // Name
                             array('description' => __('Meta Slider', 'metaslider')) // Args
         );

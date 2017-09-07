@@ -37,7 +37,7 @@ if (!$ecardObj) {
     redirect_header('index.php', 3, _NOPERM);
 }
 
-$ecard = $ecardHandler->objectToArray($ecardObj, array('photo_id'));
+$ecard = $ecardHandler->objectToArray($ecardObj, ['photo_id']);
 
 if ($ecard['photo']['photo_serveur'] == '') {
     $ecard['photoUrl'] = XOOPS_URL . '/uploads/extgallery/public-photo/medium/' . $ecard['photo']['photo_name'];
@@ -55,9 +55,9 @@ $attributes['href']  = XOOPS_URL . '/modules/extgallery/public-rss.php';
 $xoTheme->addMeta('link', $rel, $attributes);
 $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 
-$lang = array(
+$lang = [
     'clickFormMore' => _MD_EXTGALLERY_CLICK_FOR_MORE
-);
+];
 $xoopsTpl->assign('lang', $lang);
 
 include XOOPS_ROOT_PATH . '/footer.php';

@@ -26,7 +26,7 @@ class extgalleryMailer
 {
     public $mailer;
     public $type;
-    public $tags = array();
+    public $tags = [];
 
     public $ecardId;
     public $subject;

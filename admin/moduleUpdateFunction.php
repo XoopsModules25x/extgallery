@@ -43,7 +43,7 @@ function moduleLastVersionInfo()
     xml_parse_into_struct($parser, $data, $values, $tags);
     xml_parser_free($parser);
 
-    $result = array();
+    $result = [];
 
     // boucle à travers les structures
     foreach ($tags as $key => $val) {

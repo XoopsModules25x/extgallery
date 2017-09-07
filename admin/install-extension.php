@@ -53,7 +53,7 @@ switch ($step) {
             fclose($handle);
         }
 
-        xoops_confirm(array('step' => 'install'), 'install-extension.php', _AM_EXTGALLERY_DOWN_DONE, _AM_EXTGALLERY_INSTALL);
+        xoops_confirm(['step' => 'install'], 'install-extension.php', _AM_EXTGALLERY_DOWN_DONE, _AM_EXTGALLERY_INSTALL);
 
         xoops_cp_footer();
 

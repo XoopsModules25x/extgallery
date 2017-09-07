@@ -150,7 +150,7 @@ class ExtgalleryUtility extends XoopsObject
     public static function getModuleOption($option)
     {
         global $xoopsModuleConfig, $xoopsModule;
-        static $tbloptions = array();
+        static $tbloptions = [];
         if (is_array($tbloptions) && array_key_exists($option, $tbloptions)) {
             return $tbloptions[$option];
         }
@@ -197,7 +197,7 @@ class ExtgalleryUtility extends XoopsObject
     {
         $editor_option            = strtolower(static::getModuleOption('form_options'));
         $editor                   = false;
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = $name;
         $editor_configs['value']  = $value;
         $editor_configs['rows']   = $rows;

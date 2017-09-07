@@ -83,7 +83,7 @@ switch ($step) {
             }
         }
 
-        xoops_confirm(array('step' => 'install'), 'upgrade.php', _AM_EXTGALLERY_DOWN_DONE, _AM_EXTGALLERY_INSTALL);
+        xoops_confirm(['step' => 'install'], 'upgrade.php', _AM_EXTGALLERY_DOWN_DONE, _AM_EXTGALLERY_INSTALL);
 
         xoops_cp_footer();
 
@@ -134,7 +134,7 @@ switch ($step) {
         }
         //TrDisplay();
 
-        xoops_confirm(array('dirname' => $localModuleDir, 'op' => 'update_ok', 'fct' => 'modulesadmin'), XOOPS_URL . '/modules/system/admin.php', _AM_EXTGALLERY_INSTALL_DONE, _AM_EXTGALLERY_UPDATE);
+        xoops_confirm(['dirname' => $localModuleDir, 'op' => 'update_ok', 'fct' => 'modulesadmin'], XOOPS_URL . '/modules/system/admin.php', _AM_EXTGALLERY_INSTALL_DONE, _AM_EXTGALLERY_UPDATE);
 
         xoops_cp_footer();
 

@@ -32,29 +32,29 @@ if (!defined('EXTGALLERY_DIRNAME')) {
 }
 
 //Configurator
-return array(
+return [
     'name'          => 'Module Configurator',
-    'uploadFolders' => array(
+    'uploadFolders' => [
         EXTGALLERY_UPLOAD_PATH,
         EXTGALLERY_UPLOAD_PATH . '/public-photo',
         EXTGALLERY_UPLOAD_PATH . '/public-photo/original',
         EXTGALLERY_UPLOAD_PATH . '/public-photo/large',
         EXTGALLERY_UPLOAD_PATH . '/public-photo/medium',
         EXTGALLERY_UPLOAD_PATH . '/public-photo/thumb',
-    ),
-    'copyFiles'     => array(
+    ],
+    'copyFiles'     => [
         EXTGALLERY_UPLOAD_PATH,
         EXTGALLERY_UPLOAD_PATH . '/public-photo',
         EXTGALLERY_UPLOAD_PATH . '/public-photo/original',
         EXTGALLERY_UPLOAD_PATH . '/public-photo/large',
         EXTGALLERY_UPLOAD_PATH . '/public-photo/medium',
         EXTGALLERY_UPLOAD_PATH . '/public-photo/thumb',
-    ),
-    'oldFiles'      => array(
+    ],
+    'oldFiles'      => [
         '/include/update_functions.php',
         '/include/install_functions.php'
-    ),
-);
+    ],
+];
 
 // module information
 $mod_copyright = "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>

@@ -207,7 +207,7 @@ class ExtgalleryPublicPhotoHandler extends ExtgalleryPhotoHandler
         $sql = 'SELECT photo_id FROM ' . $this->db->prefix('extgallery_publicphoto') . ' ' . $criteria->renderWhere() . ' ORDER BY photo_date, photo_id DESC;';
 
         $result = $this->db->query($sql);
-        $ret    = array();
+        $ret    = [];
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[] = $myrow['photo_id'];
         }

@@ -34,7 +34,7 @@ $photo        = $photoHandler->get($photoId);
 
 $permHandler = ExtgalleryPublicPermHandler::getInstance();
 if ($xoopsModuleConfig['enable_rating']
-    && !$permHandler->isAllowed($xoopsUser, 'public_rate', $photo->getVar('cat_id'))) {
+    && !$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_rate', $photo->getVar('cat_id'))) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
 }
 
@@ -42,7 +42,7 @@ $ratingHandler = xoops_getModuleHandler('publicrating', 'extgallery');
 
 if ($ratingHandler->rate($photoId, $rate)) {
     $rating = $ratingHandler->getRate($photoId);
-    $photoHandler->modifyPhoto($photoId, array('photo_rating' => $rating));
+    $photoHandler->modifyPhoto($photoId, ['photo_rating' => $rating]);
 
     redirect_header('public-photo.php?photoId=' . $photoId . '#photoNav', 3, _MD_EXTGALLERY_VOTE_THANKS);
 } else {

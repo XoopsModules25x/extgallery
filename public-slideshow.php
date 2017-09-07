@@ -29,7 +29,7 @@ if (!isset($_GET['id'])) {
 
 // Check the access permission
 $permHandler = ExtgalleryPublicPermHandler::getInstance();
-if (!$permHandler->isAllowed($xoopsUser, 'public_access', $catId)) {
+if (!$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_access', $catId)) {
     redirect_header('index.php', 3, _NOPERM);
 }
 /** @var ExtgalleryCatHandler $catHandler */

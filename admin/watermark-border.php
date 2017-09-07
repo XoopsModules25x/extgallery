@@ -59,7 +59,7 @@ switch ($op) {
 
                 $xoopsTpl->assign('uploadfont', true);
 
-                $fonts = array();
+                $fonts = [];
 
                 $rep = XOOPS_ROOT_PATH . '/modules/extgallery/fonts/';
                 $dir = opendir($rep);
@@ -99,7 +99,7 @@ switch ($op) {
                 $moduleIdCriteria = new Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
                 // Param for applied to the test photo
-                $testParam                       = array();
+                $testParam                       = [];
                 $testParam['watermark_type']     = $xoopsModuleConfig['watermark_font'];
                 $testParam['watermark_font']     = $xoopsModuleConfig['watermark_font'];
                 $testParam['watermark_text']     = $xoopsModuleConfig['watermark_text'];
@@ -120,14 +120,14 @@ switch ($op) {
                         $criteria->add(new Criteria('conf_name', 'watermark_font'));
                         $config      = $configHandler->getConfigs($criteria);
                         $config      = $config[0];
-                        $configValue = array(
+                        $configValue = [
                             'conf_modid'     => $xoopsModule->getVar('mid'),
                             'conf_catid'     => 0,
                             'conf_name'      => 'watermark_font',
                             'conf_value'     => $_POST['watermark_font'],
                             'conf_formtype'  => 'hidden',
                             'conf_valuetype' => 'text'
-                        );
+                        ];
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -139,14 +139,14 @@ switch ($op) {
                         $criteria->add(new Criteria('conf_name', 'watermark_type'));
                         $config      = $configHandler->getConfigs($criteria);
                         $config      = $config[0];
-                        $configValue = array(
+                        $configValue = [
                             'conf_modid'     => $xoopsModule->getVar('mid'),
                             'conf_catid'     => 0,
                             'conf_name'      => 'watermark_type',
                             'conf_value'     => $_POST['watermark_type'],
                             'conf_formtype'  => 'hidden',
                             'conf_valuetype' => 'int'
-                        );
+                        ];
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -159,14 +159,14 @@ switch ($op) {
                             $criteria->add(new Criteria('conf_name', 'watermark_text'));
                             $config      = $configHandler->getConfigs($criteria);
                             $config      = $config[0];
-                            $configValue = array(
+                            $configValue = [
                                 'conf_modid'     => $xoopsModule->getVar('mid'),
                                 'conf_catid'     => 0,
                                 'conf_name'      => 'watermark_text',
                                 'conf_value'     => $_POST['watermark_text'],
                                 'conf_formtype'  => 'hidden',
                                 'conf_valuetype' => 'text'
-                            );
+                            ];
                             $config->setVars($configValue);
                             $configHandler->insertConfig($config);
                         }
@@ -179,14 +179,14 @@ switch ($op) {
                         $criteria->add(new Criteria('conf_name', 'watermark_position'));
                         $config      = $configHandler->getConfigs($criteria);
                         $config      = $config[0];
-                        $configValue = array(
+                        $configValue = [
                             'conf_modid'     => $xoopsModule->getVar('mid'),
                             'conf_catid'     => 0,
                             'conf_name'      => 'watermark_position',
                             'conf_value'     => $_POST['watermark_position'],
                             'conf_formtype'  => 'hidden',
                             'conf_valuetype' => 'text'
-                        );
+                        ];
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -198,14 +198,14 @@ switch ($op) {
                         $criteria->add(new Criteria('conf_name', 'watermark_color'));
                         $config      = $configHandler->getConfigs($criteria);
                         $config      = $config[0];
-                        $configValue = array(
+                        $configValue = [
                             'conf_modid'     => $xoopsModule->getVar('mid'),
                             'conf_catid'     => 0,
                             'conf_name'      => 'watermark_color',
                             'conf_value'     => $_POST['watermark_color'],
                             'conf_formtype'  => 'hidden',
                             'conf_valuetype' => 'text'
-                        );
+                        ];
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -217,14 +217,14 @@ switch ($op) {
                         $criteria->add(new Criteria('conf_name', 'watermark_fontsize'));
                         $config      = $configHandler->getConfigs($criteria);
                         $config      = $config[0];
-                        $configValue = array(
+                        $configValue = [
                             'conf_modid'     => $xoopsModule->getVar('mid'),
                             'conf_catid'     => 0,
                             'conf_name'      => 'watermark_fontsize',
                             'conf_value'     => $_POST['watermark_fontsize'],
                             'conf_formtype'  => 'hidden',
                             'conf_valuetype' => 'int'
-                        );
+                        ];
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -236,14 +236,14 @@ switch ($op) {
                         $criteria->add(new Criteria('conf_name', 'watermark_padding'));
                         $config      = $configHandler->getConfigs($criteria);
                         $config      = $config[0];
-                        $configValue = array(
+                        $configValue = [
                             'conf_modid'     => $xoopsModule->getVar('mid'),
                             'conf_catid'     => 0,
                             'conf_name'      => 'watermark_padding',
                             'conf_value'     => $_POST['watermark_padding'],
                             'conf_formtype'  => 'hidden',
                             'conf_valuetype' => 'int'
-                        );
+                        ];
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -257,14 +257,14 @@ switch ($op) {
                         $criteria->add(new Criteria('conf_name', 'inner_border_color'));
                         $config      = $configHandler->getConfigs($criteria);
                         $config      = $config[0];
-                        $configValue = array(
+                        $configValue = [
                             'conf_modid'     => $xoopsModule->getVar('mid'),
                             'conf_catid'     => 0,
                             'conf_name'      => 'inner_border_color',
                             'conf_value'     => $_POST['inner_border_color'],
                             'conf_formtype'  => 'hidden',
                             'conf_valuetype' => 'text'
-                        );
+                        ];
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -276,14 +276,14 @@ switch ($op) {
                         $criteria->add(new Criteria('conf_name', 'inner_border_size'));
                         $config      = $configHandler->getConfigs($criteria);
                         $config      = $config[0];
-                        $configValue = array(
+                        $configValue = [
                             'conf_modid'     => $xoopsModule->getVar('mid'),
                             'conf_catid'     => 0,
                             'conf_name'      => 'inner_border_size',
                             'conf_value'     => $_POST['inner_border_size'],
                             'conf_formtype'  => 'hidden',
                             'conf_valuetype' => 'int'
-                        );
+                        ];
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -295,14 +295,14 @@ switch ($op) {
                         $criteria->add(new Criteria('conf_name', 'outer_border_color'));
                         $config      = $configHandler->getConfigs($criteria);
                         $config      = $config[0];
-                        $configValue = array(
+                        $configValue = [
                             'conf_modid'     => $xoopsModule->getVar('mid'),
                             'conf_catid'     => 0,
                             'conf_name'      => 'outer_border_color',
                             'conf_value'     => $_POST['outer_border_color'],
                             'conf_formtype'  => 'hidden',
                             'conf_valuetype' => 'text'
-                        );
+                        ];
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -314,14 +314,14 @@ switch ($op) {
                         $criteria->add(new Criteria('conf_name', 'outer_border_size'));
                         $config      = $configHandler->getConfigs($criteria);
                         $config      = $config[0];
-                        $configValue = array(
+                        $configValue = [
                             'conf_modid'     => $xoopsModule->getVar('mid'),
                             'conf_catid'     => 0,
                             'conf_name'      => 'outer_border_size',
                             'conf_value'     => $_POST['outer_border_size'],
                             'conf_formtype'  => 'hidden',
                             'conf_valuetype' => 'int'
-                        );
+                        ];
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
                     }
@@ -369,9 +369,9 @@ switch ($op) {
                     $y = 1;
                 }
 
-                $text = ($testParam['watermark_type'] == 0) ? $xoopsUser->getVar('uname') : $testParam['watermark_text'];
+                $text = ($testParam['watermark_type'] == 0) ? $GLOBALS['xoopsUser']->getVar('uname') : $testParam['watermark_text'];
 
-                $watermarkParams = array(
+                $watermarkParams = [
                     'text'         => $text,
                     'x'            => $x,
                     'y'            => $y,
@@ -380,19 +380,19 @@ switch ($op) {
                     'size'         => $testParam['watermark_fontsize'],
                     'resize_first' => false,
                     'padding'      => $testParam['watermark_padding']
-                );
+                ];
                 $imageTransform->addText($watermarkParams);
 
                 // Making border
-                $borders   = array();
-                $borders[] = array(
+                $borders   = [];
+                $borders[] = [
                     'borderWidth' => $testParam['inner_border_size'],
                     'borderColor' => $testParam['inner_border_color']
-                );
-                $borders[] = array(
+                ];
+                $borders[] = [
                     'borderWidth' => $testParam['outer_border_size'],
                     'borderColor' => $testParam['outer_border_color']
-                );
+                ];
                 $imageTransform->addBorders($borders);
 
                 // Remove old test image
@@ -415,7 +415,7 @@ switch ($op) {
         xoops_cp_header();
 
         $nbFonts = 0;
-        $fonts   = array();
+        $fonts   = [];
 
         $rep = XOOPS_ROOT_PATH . '/modules/extgallery/assets/fonts/';
         $dir = opendir($rep);
@@ -508,7 +508,7 @@ switch ($op) {
  */
 function getImageTest()
 {
-    $ret = array();
+    $ret = [];
     $rep = __DIR__ . '/../assets/images/';
     $dir = opendir($rep);
     while ($f = readdir($dir)) {

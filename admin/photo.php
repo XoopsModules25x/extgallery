@@ -86,7 +86,7 @@ switch ($op) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_NOT_AN_ALBUM);
         }
 
-        $photos = array();
+        $photos = [];
 
         $batchRep = XOOPS_ROOT_PATH . "/modules/{$moduleDirName}/batch/";
         $photoRep = XOOPS_ROOT_PATH . "/uploads/{$moduleDirName}/public-photo/";
@@ -120,11 +120,10 @@ switch ($op) {
                 break;
             }
         }
-        global $xoopsUser;
         // Set the category as album only if photo is approve
         require_once __DIR__ . '/../class/publicPerm.php';
         $permHandler = ExtgalleryPublicPermHandler::getInstance();
-        if ($permHandler->isAllowed($xoopsUser, 'public_autoapprove', $cat->getVar('cat_id'))) {
+        if ($permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_autoapprove', $cat->getVar('cat_id'))) {
             $cat->setVar('cat_isalbum', 1);
             $catHandler->insert($cat);
         }
@@ -145,20 +144,20 @@ switch ($op) {
             echo '</form>';
             echo '</div>';
 
-            xoops_confirm(array(
+            xoops_confirm([
                               'cat_id'     => $_POST['cat_id'],
                               'photo_desc' => $_POST['photo_desc'],
                               'nbPhoto'    => $nbPhotos
-                          ), 'photo.php?op=batchAdd', _AM_EXTGALLERY_DELETE_CAT_CONFIRM);
+                          ], 'photo.php?op=batchAdd', _AM_EXTGALLERY_DELETE_CAT_CONFIRM);
 
             xoops_cp_footer();
         } else {
             /** @var XoopsNotificationHandler $notificationHandler */
             $notificationHandler = xoops_getHandler('notification');
-            $extraTags           = array(
+            $extraTags           = [
                 'X_ITEM_CAT'     => $cat->getVar('cat_name'),
                 'X_ITEM_NBPHOTO' => $i + $nbPhotos
-            );
+            ];
             if ($photoStatus == 1) {
                 $extraTags['X_ITEM_URL'] = XOOPS_URL . "/modules/{$moduleDirName}/public-album.php?id=" . $cat->getVar('cat_id');
                 $notificationHandler->triggerEvent('global', 0, 'new_photo', $extraTags);
@@ -171,7 +170,7 @@ switch ($op) {
             // Update photo count if photo needn't approve
             require_once __DIR__ . '/../class/publicPerm.php';
             $permHandler = ExtgalleryPublicPermHandler::getInstance();
-            if ($permHandler->isAllowed($xoopsUser, 'public_autoapprove', $cat->getVar('cat_id'))) {
+            if ($permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_autoapprove', $cat->getVar('cat_id'))) {
                 // Update album count
                 if ($cat->getVar('cat_nb_photo') == 0) {
                     $criteria = new CriteriaCompo();
@@ -205,7 +204,7 @@ switch ($op) {
             $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
 
             // If we have only one photo we put in in an array
-            $categories = array();
+            $categories = [];
             foreach (array_keys($_POST['photoId']) as $photoId) {
                 $photo = $photoHandler->get($photoId);
                 $photo->setVar('photo_approved', 1);
@@ -221,11 +220,11 @@ switch ($op) {
 
             foreach ($categories as $k => $v) {
                 $cat       = $catHandler->getCat($k);
-                $extraTags = array(
+                $extraTags = [
                     'X_ITEM_CAT'     => $cat->getVar('cat_name'),
                     'X_ITEM_NBPHOTO' => $v,
                     'X_ITEM_URL'     => XOOPS_URL . '/modules/extgallery/public-album.php?id=' . $cat->getVar('cat_id')
-                );
+                ];
                 $notificationHandler->triggerEvent('global', 0, 'new_photo', $extraTags);
                 $notificationHandler->triggerEvent('album', $cat->getVar('cat_id'), 'new_photo_album', $extraTags);
 
@@ -296,14 +295,14 @@ switch ($op) {
                 $message = '';
 
                 if (isset($_POST['modify'])) {
-                    $toCategories = array();
+                    $toCategories = [];
                     foreach (array_keys($_POST['photoId']) as $photoId) {
-                        $data = array(
+                        $data = [
                             'cat_id'       => $_POST['catId'][$photoId],
                             'photo_desc'   => $_POST['photoDesc'][$photoId],
                             'photo_title'  => $_POST['photoTitre'][$photoId],
                             'photo_weight' => $_POST['photoPoids'][$photoId]
-                        );
+                        ];
                         $photoHandler->modifyPhoto($photoId, $data);
 
                         if (!isset($toCategories[$_POST['catId'][$photoId]])) {
@@ -313,7 +312,7 @@ switch ($op) {
                     }
 
                     // Get from and to categories
-                    $categories                   = array();
+                    $categories                   = [];
                     $categories[$_POST['cat_id']] = $catHandler->getCat($_POST['cat_id']);
                     foreach (array_keys($_POST['photoId']) as $photoId) {
                         if ($_POST['catId'][$photoId] == $_POST['cat_id']) {
@@ -451,7 +450,7 @@ switch ($op) {
                 echo '</tr>' . "\n";
 
                 $i              = 0;
-                $cat            = array();
+                $cat            = [];
                 $scriptCheckbox = '';
                 $scriptSelect   = '';
                 $first          = true;
@@ -658,7 +657,7 @@ switch ($op) {
         echo '<th>' . _AM_EXTGALLERY_ACTION . '</th>' . "\n";
         echo '</tr>' . "\n";
         $i      = 0;
-        $cat    = array();
+        $cat    = [];
         $script = '';
         $first  = true;
         foreach ($pendingPhoto as $photo) {

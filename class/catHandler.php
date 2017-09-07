@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once __DIR__ . '/publicPerm.php';
 require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
@@ -25,7 +25,7 @@ require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
  */
 class ExtgalleryCat extends XoopsObject
 {
-    public $externalKey = array();
+    public $externalKey = [];
 
     /**
      * ExtgalleryCat constructor.
@@ -48,12 +48,12 @@ class ExtgalleryCat extends XoopsObject
         $this->initVar('cat_imgurl', XOBJ_DTYPE_URL, '', false, 150);
         $this->initVar('photo_id', XOBJ_DTYPE_INT, 0, false);
 
-        $this->externalKey['photo_id'] = array(
+        $this->externalKey['photo_id'] = [
             'className'      => 'publicphoto',
             'getMethodeName' => 'getPhoto',
             'keyName'        => 'photo',
             'core'           => false
-        );
+        ];
     }
 
     /**
@@ -189,8 +189,14 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
             }
         }
         if ($withRestrict) {
-            $criteria->add($this->getCatRestrictCriteria($permType));
-            $criteria->add($this->getCatRestrictCriteria('public_displayed'));
+            $temp = $this->getCatRestrictCriteria($permType);
+            if (null !== $temp) {
+                $criteria->add($temp);
+            }
+            $temp = $this->getCatRestrictCriteria('public_displayed');
+            if (null !== $temp) {
+                $criteria->add($temp);
+            }
         }
         $criteria->setSort('nleft');
 
@@ -254,7 +260,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     {
         $cat = $this->get($id);
         if (null === $cat) {
-            return array();
+            return [];
         }
 
         $criteria = new CriteriaCompo();
@@ -421,7 +427,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
      *
      * @return string
      */
-    public function getBlockSelect($selected = array())
+    public function getBlockSelect($selected = [])
     {
         $cats           = $this->getDescendants();
         $ret            = '<select name="options[]" multiple="multiple">';
@@ -466,13 +472,13 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
         $categories = $this->getObjects($criteria, false, false);
 
         // create a root node to hold child data about first level items
-        $root             = array();
+        $root             = [];
         $root['cat_id']   = 0;
-        $root['children'] = array();
+        $root['children'] = [];
 
-        $arr = array(
+        $arr = [
             $root
-        );
+        ];
 
         // populate the array and create an empty children array
         /*while ($row = $this->db->fetchArray($result)) {
@@ -481,7 +487,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
         }*/
         foreach ($categories as $row) {
             $arr[$row['cat_id']]             = $row;
-            $arr[$row['cat_id']]['children'] = array();
+            $arr[$row['cat_id']]['children'] = [];
         }
 
         // now process the array and build the child data

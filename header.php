@@ -10,7 +10,12 @@ require_once __DIR__ . '/class/utility.php';
 
 $myts = MyTextSanitizer::getInstance();
 
-xoops_loadLanguage('main', $moduleDirName);
+if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
+} else {
+    $moduleHelper = Xmf\Module\Helper::getHelper('system');
+}
+
+$moduleHelper->loadLanguage('main');
 
 //------------------------------------------------------
 // Getting eXtCal object's handler
@@ -18,5 +23,5 @@ xoops_loadLanguage('main', $moduleDirName);
 //$eventHandler      = xoops_getModuleHandler(_EXTCAL_CLS_EVENT, _EXTCAL_MODULE);
 //$extcalTimeHandler = ExtcalTime::getHandler();
 //$permHandler       = ExtcalPerm::getHandler();
-//$xoopsUser         = $xoopsUser ?: null;
+//$GLOBALS['xoopsUser']         = $GLOBALS['xoopsUser'] ?: null;
 //------------------------------------------------------

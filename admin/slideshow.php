@@ -38,14 +38,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_panelwidth'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_panelwidth',
                     'conf_value'     => $_POST['galleryview_panelwidth'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -58,14 +58,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_panelheight'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_panelheight',
                     'conf_value'     => $_POST['galleryview_panelheight'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -78,14 +78,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_framewidth'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_framewidth',
                     'conf_value'     => $_POST['galleryview_framewidth'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -98,14 +98,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_frameheight'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_frameheight',
                     'conf_value'     => $_POST['galleryview_frameheight'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -118,14 +118,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_tspeed'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_tspeed',
                     'conf_value'     => $_POST['galleryview_tspeed'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -138,14 +138,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_tterval'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_tterval',
                     'conf_value'     => $_POST['galleryview_tterval'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -158,14 +158,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_overlayheight'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_overlayheight',
                     'conf_value'     => $_POST['galleryview_overlayheight'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -178,14 +178,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_opacity'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_opacity',
                     'conf_value'     => $_POST['galleryview_opacity'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -198,14 +198,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_overlayfs'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_overlayfs',
                     'conf_value'     => $_POST['galleryview_overlayfs'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -218,14 +218,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_borderwidth'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_borderwidth',
                     'conf_value'     => $_POST['galleryview_borderwidth'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -238,14 +238,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_bordercolor'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_bordercolor',
                     'conf_value'     => $_POST['galleryview_bordercolor'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -258,14 +258,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_bgcolor'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_bgcolor',
                     'conf_value'     => $_POST['galleryview_bgcolor'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -278,14 +278,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_overlaycolor'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_overlaycolor',
                     'conf_value'     => $_POST['galleryview_overlaycolor'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -298,14 +298,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_overlaytc'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_overlaytc',
                     'conf_value'     => $_POST['galleryview_overlaytc'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -318,14 +318,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_captiontc'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_captiontc',
                     'conf_value'     => $_POST['galleryview_captiontc'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -338,14 +338,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_navtheme'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_navtheme',
                     'conf_value'     => $_POST['galleryview_navtheme'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -358,14 +358,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_position'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_position',
                     'conf_value'     => $_POST['galleryview_position'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -378,14 +378,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleryview_easing'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleryview_easing',
                     'conf_value'     => $_POST['galleryview_easing'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -405,14 +405,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleria_height'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleria_height',
                     'conf_value'     => $_POST['galleria_height'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -425,14 +425,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleria_panelwidth'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleria_panelwidth',
                     'conf_value'     => $_POST['galleria_panelwidth'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -445,14 +445,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleria_bgcolor'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleria_bgcolor',
                     'conf_value'     => $_POST['galleria_bgcolor'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -465,14 +465,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleria_bcolor'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleria_bcolor',
                     'conf_value'     => $_POST['galleria_bcolor'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -485,14 +485,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleria_bgimg'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleria_bgimg',
                     'conf_value'     => $_POST['galleria_bgimg'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -505,14 +505,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleria_autoplay'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleria_autoplay',
                     'conf_value'     => $_POST['galleria_autoplay'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -525,14 +525,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleria_transition'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleria_transition',
                     'conf_value'     => $_POST['galleria_transition'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -545,14 +545,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleria_tspeed'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleria_tspeed',
                     'conf_value'     => $_POST['galleria_tspeed'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -572,14 +572,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleriffic_height'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleriffic_height',
                     'conf_value'     => $_POST['galleriffic_height'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -592,14 +592,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleriffic_width'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleriffic_width',
                     'conf_value'     => $_POST['galleriffic_width'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -612,14 +612,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleriffic_bgcolor'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleriffic_bgcolor',
                     'conf_value'     => $_POST['galleriffic_bgcolor'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -632,14 +632,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleriffic_bordercolor'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleriffic_bordercolor',
                     'conf_value'     => $_POST['galleriffic_bordercolor'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -652,14 +652,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleriffic_fontcolor'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleriffic_fontcolor',
                     'conf_value'     => $_POST['galleriffic_fontcolor'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -672,14 +672,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleriffic_autoplay'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleriffic_autoplay',
                     'conf_value'     => $_POST['galleriffic_autoplay'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -692,14 +692,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleriffic_nb_thumbs'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleriffic_nb_thumbs',
                     'conf_value'     => $_POST['galleriffic_nb_thumbs'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -712,14 +712,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleriffic_nb_colthumbs'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleriffic_nb_colthumbs',
                     'conf_value'     => $_POST['galleriffic_nb_colthumbs'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -732,14 +732,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleriffic_nb_preload'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleriffic_nb_preload',
                     'conf_value'     => $_POST['galleriffic_nb_preload'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -752,14 +752,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleriffic_tdelay'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleriffic_tdelay',
                     'conf_value'     => $_POST['galleriffic_tdelay'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -772,14 +772,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleriffic_tspeed'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleriffic_tspeed',
                     'conf_value'     => $_POST['galleriffic_tspeed'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -792,14 +792,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleriffic_show_descr'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleriffic_show_descr',
                     'conf_value'     => $_POST['galleriffic_show_descr'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
@@ -812,14 +812,14 @@ switch ($op) {
                 $criteria->add(new Criteria('conf_name', 'galleriffic_download'));
                 $config      = $configHandler->getConfigs($criteria);
                 $config      = $config[0];
-                $configValue = array(
+                $configValue = [
                     'conf_modid'     => $xoopsModule->getVar('mid'),
                     'conf_catid'     => 0,
                     'conf_name'      => 'galleriffic_download',
                     'conf_value'     => $_POST['galleriffic_download'],
                     'conf_formtype'  => 'hidden',
                     'conf_valuetype' => 'text'
-                );
+                ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }

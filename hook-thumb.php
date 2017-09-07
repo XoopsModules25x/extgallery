@@ -50,7 +50,7 @@ if ($photo->getVar('cat_id') == 0) {
     readfile(__DIR__ . '/assets/images/dont-exist.jpg');
 
     // If user is allowed to view this picture
-} elseif ($permHandler->isAllowed($xoopsUser, 'public_access', $photo->getVar('cat_id'))) {
+} elseif ($permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_access', $photo->getVar('cat_id'))) {
     $photo = $photoHandler->objectToArray($photo);
 
     header('Content - type: ' . $type . '');

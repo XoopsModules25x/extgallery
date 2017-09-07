@@ -39,14 +39,14 @@ switch ($op) {
             case 'enreg':
 
                 $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
-                $data       = array(
+                $data       = [
                     'cat_pid'    => $_POST['cat_pid'],
                     'cat_name'   => $_POST['cat_name'],
                     'cat_desc'   => $_POST['cat_desc'],
                     'cat_weight' => $_POST['cat_weight'],
                     'cat_date'   => time(),
                     'cat_imgurl' => $_POST['cat_imgurl']
-                );
+                ];
                 $catHandler->createCat($data);
 
                 redirect_header('public-category.php', 3, _AM_EXTGALLERY_CAT_CREATED);
@@ -71,7 +71,7 @@ switch ($op) {
                 } elseif ($_POST['delete']) {
                     xoops_cp_header();
 
-                    xoops_confirm(array('cat_id' => $_POST['cat_id'], 'step' => 'enreg'), 'public-category.php?op=delete', _AM_EXTGALLERY_DELETE_CAT_CONFIRM);
+                    xoops_confirm(['cat_id' => $_POST['cat_id'], 'step' => 'enreg'], 'public-category.php?op=delete', _AM_EXTGALLERY_DELETE_CAT_CONFIRM);
                     //                    xoops_cp_footer();
                     require_once __DIR__ . '/admin_footer.php';
                 }
@@ -96,7 +96,7 @@ switch ($op) {
                 xoops_cp_header();
 
                 $selectedPhoto = '../assets/images/blank.gif';
-                $photoArray    = array();
+                $photoArray    = [];
                 foreach ($photosCat as $photo) {
                     if ($photo->getVar('photo_serveur') != '') {
                         $url = $photo->getVar('photo_serveur') . 'thumb_' . $photo->getVar('photo_name');

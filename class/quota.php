@@ -24,7 +24,7 @@ require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
  */
 class ExtgalleryQuota extends XoopsObject
 {
-    public $externalKey = array();
+    public $externalKey = [];
 
     /**
      * ExtgalleryQuota constructor.

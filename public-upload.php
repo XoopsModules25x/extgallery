@@ -27,7 +27,7 @@ if (isset($_POST['step'])) {
 }
 
 $permHandler = ExtgalleryPublicPermHandler::getInstance();
-if (count($permHandler->getAuthorizedPublicCat($xoopsUser, 'public_upload')) < 1) {
+if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) < 1) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
 }
 

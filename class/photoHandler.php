@@ -25,7 +25,7 @@ require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
  */
 class ExtgalleryPhoto extends XoopsObject
 {
-    public $externalKey = array();
+    public $externalKey = [];
 
     /**
      * ExtgalleryPhoto constructor.
@@ -57,18 +57,18 @@ class ExtgalleryPhoto extends XoopsObject
         $this->initVar('photo_weight', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('dohtml', XOBJ_DTYPE_INT, 0, false);
 
-        $this->externalKey['cat_id'] = array(
+        $this->externalKey['cat_id'] = [
             'className'      => 'publiccat',
             'getMethodeName' => 'getCat',
             'keyName'        => 'cat',
             'core'           => false
-        );
-        $this->externalKey['uid']    = array(
+        ];
+        $this->externalKey['uid']    = [
             'className'      => 'user',
             'getMethodeName' => 'get',
             'keyName'        => 'user',
             'core'           => true
-        );
+        ];
     }
 
     /**
@@ -256,7 +256,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         $sql = 'SELECT photo_id FROM ' . $this->db->prefix('extgallery_publicphoto') . ' ' . $criteria->renderWhere() . ' ORDER BY photo_weight, photo_id ASC;';
 
         $result = $this->db->query($sql);
-        $ret    = array();
+        $ret    = [];
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[] = $myrow['photo_id'];
         }
@@ -489,7 +489,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
 
         $text = ($xoopsModuleConfig['watermark_type'] == 0) ? $GLOBALS['xoopsUser']->getVar('uname') : $xoopsModuleConfig['watermark_text'];
 
-        $watermarkParams = array(
+        $watermarkParams = [
             'text'         => $text,
             'x'            => $x,
             'y'            => $y,
@@ -498,7 +498,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             'size'         => $xoopsModuleConfig['watermark_fontsize'],
             'resize_first' => false,
             'padding'      => $xoopsModuleConfig['watermark_padding']
-        );
+        ];
         $imageTransform->addText($watermarkParams);
     }
 
@@ -509,15 +509,15 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
     {
         global $xoopsModuleConfig;
 
-        $borders   = array();
-        $borders[] = array(
+        $borders   = [];
+        $borders[] = [
             'borderWidth' => $xoopsModuleConfig['inner_border_size'],
             'borderColor' => $xoopsModuleConfig['inner_border_color']
-        );
-        $borders[] = array(
+        ];
+        $borders[] = [
             'borderWidth' => $xoopsModuleConfig['outer_border_size'],
             'borderColor' => $xoopsModuleConfig['outer_border_color']
-        );
+        ];
         $imageTransform->addBorders($borders);
     }
 
@@ -668,7 +668,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         $imageFactory   = new Image_Transform;
         $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
-        $ret = array();
+        $ret = [];
         if ($this->_haveLargePhoto($photoName)) {
             $imageTransform->load($this->_getUploadPhotoPath() . 'large/large_' . $photoName);
             $ret['width']  = $imageTransform->getImageWidth();
@@ -707,7 +707,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
 
             return preg_replace($patterns, $replacements, substr($newphotoName,0,-12));
         } else { */
-        $matches = array();
+        $matches = [];
         preg_match_all($xoopsModuleConfig['photoname_pattern'], substr($photoName, 0, -12), $matches);
         preg_match_all($xoopsModuleConfig['photoname_pattern'], $photoName, $matches);
 
@@ -795,7 +795,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             return 2;
         }
 
-        $allowedMimeTypes = array('image/jpeg', 'image/jpg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png');
+        $allowedMimeTypes = ['image/jpeg', 'image/jpg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png'];
         //        $allowedMimeTypes = array('jpg/jpeg', 'image/bmp', 'image/gif', 'image/jpeg', 'image/jpg', 'image/x-png', 'image/png');
 
         $uploadDir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/';
@@ -863,10 +863,10 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
 
         /** @var XoopsNotificationHandler $notificationHandler */
         $notificationHandler = xoops_getHandler('notification');
-        $extraTags           = array(
+        $extraTags           = [
             'X_ITEM_CAT'     => $cat->getVar('cat_name'),
             'X_ITEM_NBPHOTO' => 1
-        );
+        ];
 
         if ($photoStatus == 1) {
             $extraTags['X_ITEM_URL'] = XOOPS_URL . '/modules/extgallery/public-album.php?id=' . $cat->getVar('cat_id');
@@ -916,7 +916,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
     ) {
         require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
 
-        global $xoopsUser, $xoopsModuleConfig;
+        global $xoopsModuleConfig;
         $permHandler = ExtgalleryPublicPermHandler::getInstance();
 
         // Replace all bad file name character
@@ -945,8 +945,8 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
 
         $imageDimension = $this->_getImageDimension($photoName);
 
-        $userId = is_object($xoopsUser) ? $xoopsUser->getVar('uid') : 0;
-        $data   = array(
+        $userId = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid') : 0;
+        $data   = [
             'cat_id'          => $catId,
             'photo_title'     => $photoTitle,
             'photo_desc'      => $photoDesc,
@@ -958,10 +958,10 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             'photo_res_y'     => $imageDimension['height'],
             'photo_date'      => time(),
             'photo_havelarge' => $this->_haveLargePhoto($photoName),
-            'photo_approved'  => $permHandler->isAllowed($xoopsUser, 'public_autoapprove', $catId),
+            'photo_approved'  => $permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_autoapprove', $catId),
             'photo_extra'     => $photoExtra,
             'dohtml'          => $xoopsModuleConfig['allow_html']
-        );
+        ];
 
         // Deleting working photo
         unlink($this->_getUploadPhotoPath() . $photoName);
@@ -1011,20 +1011,20 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
 
         $photos = $this->getObjects($criteria);
 
-        $ret = array();
+        $ret = [];
         foreach ($photos as $photo) {
             if ($photo->getVar('photo_title')) {
                 $title = $photo->getVar('photo_title');
             } else {
                 $title = $photo->getVar('photo_desc');
             }
-            $data  = array(
+            $data  = [
                 'image' => 'assets/images/extgallery-posticon.gif',
                 'link'  => 'public-photo.php?photoId=' . $photo->getVar('photo_id'),
                 'title' => $title,
                 'time'  => $photo->getVar('photo_date'),
                 'uid'   => $photo->getVar('uid')
-            );
+            ];
             $ret[] = $data;
         }
 
@@ -1067,14 +1067,14 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
     public function getRandomPhoto($param)
     {
         $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+        $criteria   = new CriteriaCompo();
         if (null !== $catHandler->getCatRestrictCriteria()) {
-            $criteria = new CriteriaCompo();
             $criteria->add($catHandler->getCatRestrictCriteria());
-            $criteria->add(new Criteria('photo_approved', 1));
-            $this->_addInCriteria($criteria, $param['cat']);
-            $criteria->setSort('RAND()');
-            $criteria->setLimit($param['limit']);
         }
+        $criteria->add(new Criteria('photo_approved', 1));
+        $this->_addInCriteria($criteria, $param['cat']);
+        $criteria->setSort('RAND()');
+        $criteria->setLimit($param['limit']);
 
         return $this->getObjects($criteria);
     }

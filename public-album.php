@@ -20,7 +20,7 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-album.tpl';
-include XOOPS_ROOT_PATH . '/header.php';
+//mbinclude XOOPS_ROOT_PATH . '/header.php';
 
 if (!isset($_GET['id'])) {
     $catId = 0;
@@ -61,7 +61,7 @@ $SortbyOrderby = $sortby . ' ' . $orderby;
  */
 function convertorderbytrans($SortbyOrderby)
 {
-    $orderbyTrans = array();
+    $orderbyTrans = [];
     if ($SortbyOrderby === 'photo_date DESC') {
         $orderbyTrans = _MD_EXTGALLERY_ORDERBY_DATEASC;
     }
@@ -98,7 +98,7 @@ function convertorderbytrans($SortbyOrderby)
 
 // Check the access permission
 $permHandler = ExtgalleryPublicPermHandler::getInstance();
-if (!$permHandler->isAllowed($xoopsUser, 'public_access', $catId)) {
+if ((null === $GLOBALS['xoopsUser'] || !is_object($GLOBALS['xoopsUser'])) || !$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_access', $catId)) {
     redirect_header('index.php', 3, _NOPERM);
 }
 /** @var ExtgalleryPublicCatHandler $catHandler */
@@ -122,13 +122,13 @@ $xoopsTpl->assign('cat', $cat);
 $catPath = $photoHandler->objectToArray($catHandler->getPath($catId));
 $xoopsTpl->assign('catPath', $catPath);
 
-$photos = $photoHandler->objectToArray($photoHandler->getAlbumPhotoPage($catId, $start, $sortby, $orderby), array('uid')); //xoops - blueteen - tri de l'affichage
+$photos = $photoHandler->objectToArray($photoHandler->getAlbumPhotoPage($catId, $start, $sortby, $orderby), ['uid']); //xoops - blueteen - tri de l'affichage
 
 // Plugin traitement
 $plugin  = xoops_getModuleHandler('plugin', 'extgallery');
 $nbPhoto = count($photos);
 for ($i = 0; $i < $nbPhoto; ++$i) {
-    $params = array('catId' => $catId, 'photoId' => $photos[$i]['photo_id'], 'link' => array());
+    $params = ['catId' => $catId, 'photoId' => $photos[$i]['photo_id'], 'link' => []];
     $plugin->triggerEvent('photoAlbumLink', $params);
     $photos[$i]['link'] = $params['link'];
 }
@@ -136,7 +136,7 @@ for ($i = 0; $i < $nbPhoto; ++$i) {
 $k = $xoopsModuleConfig['nb_column'] - (count($photos) % $xoopsModuleConfig['nb_column']);
 if ($k != $xoopsModuleConfig['nb_column']) {
     for ($i = 0; $i < $k; ++$i) {
-        $photos[] = array();
+        $photos[] = [];
     }
 }
 
@@ -199,11 +199,11 @@ $attributes['href']  = XOOPS_URL . '/modules/extgallery/public-rss.php';
 $xoTheme->addMeta('link', $rel, $attributes);
 $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 
-$lang = array(
+$lang = [
     'hits'       => _MD_EXTGALLERY_HITS,
     'comments'   => _MD_EXTGALLERY_COMMENTS,
     'rate_score' => _MD_EXTGALLERY_RATING_SCORE
-);
+];
 $xoopsTpl->assign('lang', $lang);
 
 $xoopsTpl->assign('enableExtra', $xoopsModuleConfig['display_extra_field']);

@@ -15,6 +15,6 @@
  * @package     ExtGallery
  */
 
-$extgalleryPlugin = array(
+$extgalleryPlugin = [
     'lolbuilder' => 0
-);
+];

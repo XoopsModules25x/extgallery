@@ -203,9 +203,9 @@ class ExtgalleryPhotoUploader
     {
         //  $imageExtensions = array(IMAGETYPE_GIF => 'gif', IMAGETYPE_JPEG => 'jpeg', IMAGETYPE_JPG => 'jpg', IMAGETYPE_PNG => 'png');
 
-        $valid_types = array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP);
+        $valid_types = [IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP];
 
-        $imageExtensions = array('gif', 'jpg', 'jpeg', 'png');
+        $imageExtensions = ['gif', 'jpg', 'jpeg', 'png'];
 
         // Check IE XSS before returning success
         $ext       = strtolower(substr(strrchr($this->savedDestination, '.'), 1));
@@ -305,7 +305,7 @@ class ExtgalleryPhotoUploader
     public function checkImageType($photoInfo)
     {
         //  $allowedMimeTypes = array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_JPG, IMAGETYPE_PNG);
-        $allowedMimeTypes = array('image/gif', 'image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png');
+        $allowedMimeTypes = ['image/gif', 'image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png'];
         if (!in_array($photoInfo['mime'], $allowedMimeTypes)) {
             return false;
         }

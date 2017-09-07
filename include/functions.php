@@ -20,7 +20,7 @@
 function gal_getmoduleoption($option)
 {
     global $xoopsModuleConfig, $xoopsModule;
-    static $tbloptions = array();
+    static $tbloptions = [];
     if (is_array($tbloptions) && array_key_exists($option, $tbloptions)) {
         return $tbloptions[$option];
     }
@@ -67,7 +67,7 @@ function gal_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $heig
 {
     $editor_option            = strtolower(gal_getmoduleoption('form_options'));
     $editor                   = false;
-    $editor_configs           = array();
+    $editor_configs           = [];
     $editor_configs['name']   = $name;
     $editor_configs['value']  = $value;
     $editor_configs['rows']   = $rows;

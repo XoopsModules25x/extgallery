@@ -22,12 +22,12 @@
 function extgalleryPhotoShow($options)
 {
     global $xoopsConfig;
-    $photos = array();
+    $photos = [];
 
     /** @var ExtgalleryPhotoHandler $photoHandler */
     $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
-    $param                = array('limit' => $options[0]);
+    $param                = ['limit' => $options[0]];
     $direction            = $options[1];
     $title                = $options[2];
     $photoHandlertype     = $options[3];
@@ -81,10 +81,10 @@ function extgalleryPhotoShow($options)
     array_shift($options);
     array_shift($options);
 
-    $categories = array();
+    $categories = [];
     foreach ($options as $cat) {
         if ($cat == 0) {
-            $categories = array();
+            $categories = [];
             break;
         }
         $categories[] = $cat;
@@ -153,10 +153,10 @@ function extgalleryPhotoShow($options)
     }
 
     if (count($photos) == 0) {
-        return array();
+        return [];
     }
 
-    $ret = array(
+    $ret = [
         'photos'               => $photos,
         'column'               => $column,
         'direction'            => $direction,
@@ -182,7 +182,7 @@ function extgalleryPhotoShow($options)
         'jcarouselhwidth'      => $jcarouselhwidth,
         'jcarouselvwidth'      => $jcarouselvwidth,
         'jcarouselvheight'     => $jcarouselvheight
-    );
+    ];
 
     return $ret;
 }
@@ -218,7 +218,7 @@ function extgalleryTopSubmitterShow($options)
 {
     global $xoopsDB, $xoopsConfig;
     $catauth = '';
-    $block   = array();
+    $block   = [];
     if ($options[1] != 0) {
         $cat     = array_slice($options, 1); //Get information about categories to display
         $catauth = implodeArray2Dextgallery(',', $cat); //Creation of categories list to use - separated by a coma
@@ -240,7 +240,7 @@ function extgalleryTopSubmitterShow($options)
         $uid                  = $myrow['uid'];
         $countphoto           = $myrow['countphoto'];
         $uname                = XoopsUser::getUnameFromId($myrow['uid']);
-        $block['designers'][] = array('uid' => $uid, 'uname' => $uname, 'countphoto' => $countphoto);
+        $block['designers'][] = ['uid' => $uid, 'uname' => $uname, 'countphoto' => $countphoto];
     }
 
     return $block;
@@ -256,7 +256,7 @@ function extgalleryAjax($options)
 {
     /** @var ExtgalleryPhotoHandler $photoHandler */
     $photoHandler       = xoops_getModuleHandler('publicphoto', 'extgallery');
-    $param              = array('limit' => $options[0]);
+    $param              = ['limit' => $options[0]];
     $photoHandlertype   = $options[1];
     $jquery             = $options[2];
     $ajaxeffect         = $options[3];
@@ -318,10 +318,10 @@ function extgalleryAjax($options)
     array_shift($options);
     array_shift($options);
 
-    $categories = array();
+    $categories = [];
     foreach ($options as $cat) {
         if ($cat == 0) {
-            $categories = array();
+            $categories = [];
             break;
         }
         $categories[] = $cat;
@@ -369,10 +369,10 @@ function extgalleryAjax($options)
     }
 
     if (count($photos) == 0) {
-        return array();
+        return [];
     }
 
-    $ret = array(
+    $ret = [
         'photos'              => $photos,
         'jquery'              => $jquery,
         'ajaxeffect'          => $ajaxeffect,
@@ -402,7 +402,7 @@ function extgalleryAjax($options)
         'galleria_transition' => $gria_transition,
         'galleria_tspeed'     => $gria_tspeed,
         'micro_size'          => $micro_size
-    );
+    ];
 
     return $ret;
 }
@@ -415,7 +415,6 @@ function extgalleryAjax($options)
  */
 function extgalleryBlockEdit($options)
 {
-    global $xoopsUser;
 
     /** @var ExtgalleryCat $catHandler */
     $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
@@ -573,8 +572,6 @@ function extgalleryBlockEdit($options)
  */
 function extgalleryAjaxEdit($options)
 {
-    global $xoopsUser;
-
     $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
 
     $form = _MB_EXTGALLERY_PHOTO_NUMBER . ' : <input name="options[]" size="5" maxlength="255" value="' . $options[0] . '" type="text"><br>';
@@ -711,8 +708,6 @@ function extgalleryAjaxEdit($options)
  */
 function extgalleryTopSubmitterEdit($options)
 {
-    global $xoopsUser;
-
     $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
 
     $form = _MB_EXTGALLERY_USER_NUMBER . ' : <input name="options[]" size="5" maxlength="255" value="' . $options[0] . '" type="text"><br>';
@@ -735,7 +730,7 @@ function extgalleryList($options)
 
     /** @var ExtgalleryPhotoHandler $photoHandler */
     $photoHandler     = xoops_getModuleHandler('publicphoto', 'extgallery');
-    $param            = array('limit' => $options[0]);
+    $param            = ['limit' => $options[0]];
     $date             = $options[1];
     $hits             = $options[2];
     $rate             = $options[3];
@@ -747,10 +742,10 @@ function extgalleryList($options)
     array_shift($options);
     array_shift($options);
 
-    $categories = array();
+    $categories = [];
     foreach ($options as $cat) {
         if ($cat == 0) {
-            $categories = array();
+            $categories = [];
             break;
         }
         $categories[] = $cat;
@@ -776,7 +771,7 @@ function extgalleryList($options)
     }
 
     if (count($photos) == 0) {
-        return array();
+        return [];
     }
 
     foreach (array_keys($photos) as $i) {
@@ -785,12 +780,12 @@ function extgalleryList($options)
         }
     }
 
-    $ret = array(
+    $ret = [
         'photos' => $photos,
         'date'   => $date,
         'hits'   => $hits,
         'rate'   => $rate
-    );
+    ];
 
     return $ret;
 }
@@ -802,7 +797,6 @@ function extgalleryList($options)
  */
 function extgalleryListEdit($options)
 {
-    global $xoopsUser;
     $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
     $form       = _MB_EXTGALLERY_PHOTO_NUMBER . ' : <input name="options[]" size="5" maxlength="255" value="' . $options[0] . '" type="text"><br>';
     //==================================

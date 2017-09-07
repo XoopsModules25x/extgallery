@@ -90,7 +90,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
     public function deleteById($id, $force = false)
     {
         if (is_array($this->keyName)) {
-            $clause = array();
+            $clause = [];
             for ($i = 0, $iMax = count($this->keyName); $i < $iMax; ++$i) {
                 $clause[] = $this->keyName[$i] . ' = ' . $id[$i];
             }
@@ -141,7 +141,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
     public function _toObject($data)
     {
         if (is_array($data)) {
-            $ret = array();
+            $ret = [];
             foreach ($data as $v) {
                 $object = new $this->className();
                 $object->assignVars($v);
@@ -164,11 +164,11 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
      *
      * @return array
      */
-    public function objectToArray($objects, $externalKeys = array(), $format = 's')
+    public function objectToArray($objects, $externalKeys = [], $format = 's')
     {
         static $cached;
 
-        $ret = array();
+        $ret = [];
         if (is_array($objects)) {
             $i = 0;
             foreach ($objects as $object) {
@@ -230,7 +230,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
      */
     public function objectToArrayWithoutExternalKey($object, $format = 's')
     {
-        $ret = array();
+        $ret = [];
         if (null !== $object) {
             $vars = $object->getVars();
             foreach ($vars as $k => $v) {
@@ -292,7 +292,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
 
             return $sum;
         } else {
-            $ret = array();
+            $ret = [];
             while (list($id, $sum) = $this->db->fetchRow($result)) {
                 $ret[$id] = $sum;
             }
@@ -333,7 +333,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
 
             return $max;
         } else {
-            $ret = array();
+            $ret = [];
             while (list($id, $max) = $this->db->fetchRow($result)) {
                 $ret[$id] = $max;
             }

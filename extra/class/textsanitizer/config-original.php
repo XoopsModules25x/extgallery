@@ -19,8 +19,8 @@
  */
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
 
-return $config = array(
-    'extensions' => array(
+return $config = [
+    'extensions' => [
         'iframe'  => 0,
         'image'   => 1,
         'flash'   => 1,
@@ -33,7 +33,7 @@ return $config = array(
         'rtsp'    => 0,
         'ul'      => 1,
         'li'      => 1
-    ),
+    ],
 
     'truncate_length'      => 60,
 
@@ -43,4 +43,4 @@ return $config = array(
     // Filters XSS scripts on display of text
     // There is considerable trade-off between security and performance
     'filterxss_on_display' => false
-);
+];

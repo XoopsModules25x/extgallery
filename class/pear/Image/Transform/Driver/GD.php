@@ -451,6 +451,7 @@ class Image_Transform_Driver_GD extends Image_Transform
         switch ($type) {
             case 'jpg':
                 $type = 'jpeg';
+                // no break
             case 'jpeg':
                 if (is_numeric($quality)) {
                     $options['quality'] = $quality;

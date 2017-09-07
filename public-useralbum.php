@@ -64,7 +64,7 @@ $SortbyOrderby = $sortby . ' ' . $orderby;
  */
 function convertorderbytrans($SortbyOrderby)
 {
-    $orderbyTrans = array();
+    $orderbyTrans = [];
     if ($SortbyOrderby === 'photo_date DESC') {
         $orderbyTrans = _MD_EXTGALLERY_ORDERBY_DATEASC;
     }
@@ -102,11 +102,11 @@ function convertorderbytrans($SortbyOrderby)
 /** @var ExtgalleryPublicPhotoHandler $photoHandler */
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
-$photos = $photoHandler->objectToArray($photoHandler->getUserAlbumPhotoPage($userId, $start, $sortby, $orderby), array('uid'));
+$photos = $photoHandler->objectToArray($photoHandler->getUserAlbumPhotoPage($userId, $start, $sortby, $orderby), ['uid']);
 $k      = $xoopsModuleConfig['nb_column'] - (count($photos) % $xoopsModuleConfig['nb_column']);
 if ($k != $xoopsModuleConfig['nb_column']) {
     for ($i = 0; $i < $k; ++$i) {
-        $photos[] = array();
+        $photos[] = [];
     }
 }
 
@@ -171,7 +171,7 @@ $attributes['href']  = XOOPS_URL . '/modules/extgallery/public-rss.php';
 $xoTheme->addMeta('link', $rel, $attributes);
 $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 
-$lang = array('hits' => _MD_EXTGALLERY_HITS, 'comments' => _MD_EXTGALLERY_COMMENTS, 'albumName' => $albumName);
+$lang = ['hits' => _MD_EXTGALLERY_HITS, 'comments' => _MD_EXTGALLERY_COMMENTS, 'albumName' => $albumName];
 $xoopsTpl->assign('lang', $lang);
 
 $xoopsTpl->assign('enableExtra', $xoopsModuleConfig['display_extra_field']);

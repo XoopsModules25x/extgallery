@@ -36,7 +36,7 @@ $catObj       = $catHandler->getCat($catId);
 
 if ($catId != 0) {
     $permHandler = ExtgalleryPublicPermHandler::getInstance();
-    if ($permHandler->isAllowed($xoopsUser, 'public_access', $catId)) {
+    if ($permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_access', $catId)) {
         $catObj = $catHandler->getCat($catId);
         $cat    = $catHandler->objectToArray($catObj);
     }
@@ -68,7 +68,7 @@ if (!$xoopsTpl->is_cached('db:extgallery_public-rss.tpl')) {
         $channel_category .= ' > ' . $catObj->getVar('cat_name');
         $categories       = $catId;
     } else {
-        $categories = array();
+        $categories = [];
     }
 
     $xoopsTpl->assign('channel_category', htmlspecialchars($channel_category));
@@ -89,10 +89,10 @@ if (!$xoopsTpl->is_cached('db:extgallery_public-rss.tpl')) {
     $xoopsTpl->assign('image_width', $width);
     $xoopsTpl->assign('image_height', $height);
 
-    $param = array(
+    $param = [
         'limit' => $xoopsModuleConfig['perpage_rss'],
         'cat'   => $categories
-    );
+    ];
 
     $photos = $photoHandler->objectToArray($photoHandler->getLastPhoto($param));
     $xoopsTpl->assign('photos', $photos);

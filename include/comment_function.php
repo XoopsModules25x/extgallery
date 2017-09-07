@@ -25,5 +25,5 @@ function extgalleryComUpdate($photoId, $nbCom)
 {
     /** @var ExtgalleryPhotoHandler $photoHandler */
     $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
-    $photoHandler->modifyPhoto($photoId, array('photo_comment' => $nbCom));
+    $photoHandler->modifyPhoto($photoId, ['photo_comment' => $nbCom]);
 }

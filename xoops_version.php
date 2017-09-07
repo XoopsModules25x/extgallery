@@ -18,7 +18,7 @@
 $moduleDirName = basename(__DIR__);
 
 // ------------------- Informations ------------------- //
-$modversion = array(
+$modversion = [
     'version'             => 1.13,
     'module_status'       => 'RC-2',
     'release_date'        => '2017/08/12', // YYYY/mm/dd
@@ -42,7 +42,7 @@ $modversion = array(
     'min_php'             => '5.5',
     'min_xoops'           => '2.5.9',
     'min_admin'           => '1.2',
-    'min_db'              => array('mysql' => '5.5'),
+    'min_db'              => ['mysql' => '5.5'],
     'image'               => 'assets/images/logoModule.png', // Path and name of the module’s logo
     'official'            => 1, //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
     'dirname'             => "{$moduleDirName}",
@@ -80,7 +80,7 @@ $modversion = array(
     'hasComments'         => 1,
     // Notification
     'hasNotification'     => 1
-);
+];
 
 // Menu
 $modversion['hasMain'] = 1;
@@ -108,25 +108,25 @@ if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule']) && $GLO
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 
 // Tables created by sql file (without prefix!)
-$modversion['tables'] = array(
+$modversion['tables'] = [
     $moduleDirName . '_' . 'publiccat',
     $moduleDirName . '_' . 'publicphoto',
     $moduleDirName . '_' . 'quota',
     $moduleDirName . '_' . 'publicrating',
     $moduleDirName . '_' . 'publicecard'
-);
+];
 
 // ------------------- Help files ------------------- //
-$modversion['helpsection'] = array(
-    array('name' => _MI_EXTGALLERY_OVERVIEW, 'link' => 'page=help'),
-    array('name' => _MI_EXTGALLERY_HELP1, 'link' => 'page=help1'),
-    array('name' => _MI_EXTGALLERY_HELP2, 'link' => 'page=help2'),
-    array('name' => _MI_EXTGALLERY_HELP3, 'link' => 'page=help3'),
-    array('name' => _MI_EXTGALLERY_HELP4, 'link' => 'page=help4'),
-    array('name' => _MI_EXTGALLERY_HELP5, 'link' => 'page=help5'),
-    array('name' => _MI_EXTGALLERY_HELP6, 'link' => 'page=help6'),
-    array('name' => _MI_EXTGALLERY_HELP7, 'link' => 'page=help7')
-);
+$modversion['helpsection'] = [
+    ['name' => _MI_EXTGALLERY_OVERVIEW, 'link' => 'page=help'],
+    ['name' => _MI_EXTGALLERY_HELP1, 'link' => 'page=help1'],
+    ['name' => _MI_EXTGALLERY_HELP2, 'link' => 'page=help2'],
+    ['name' => _MI_EXTGALLERY_HELP3, 'link' => 'page=help3'],
+    ['name' => _MI_EXTGALLERY_HELP4, 'link' => 'page=help4'],
+    ['name' => _MI_EXTGALLERY_HELP5, 'link' => 'page=help5'],
+    ['name' => _MI_EXTGALLERY_HELP6, 'link' => 'page=help6'],
+    ['name' => _MI_EXTGALLERY_HELP7, 'link' => 'page=help7']
+];
 
 // Comments
 $modversion['hasComments']                    = 1;
@@ -154,10 +154,10 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_DISP_TYPE';
 $modversion['config'][$i]['description'] = '_MI_EXTGAL_DISP_TYPE_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     _MI_EXTGALLERY_SLIDESHOW => 'slideshow',
     _MI_EXTGALLERY_ALBUM     => 'album'
-);
+];
 $modversion['config'][$i]['default']     = 'album';
 ++$i;
 $modversion['config'][$i]['name']        = 'display_set_order';
@@ -165,10 +165,10 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_DISP_SET_ORDER';
 $modversion['config'][$i]['description'] = '_MI_EXTGAL_DISP_SET_ORDER_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     _MI_EXTGALLERY_DESC => 'DESC',
     _MI_EXTGALLERY_ASC  => 'ASC'
-);
+];
 $modversion['config'][$i]['default']     = 'DESC';
 ++$i;
 $modversion['config'][$i]['name']        = 'use_extended_upload';
@@ -177,10 +177,10 @@ $modversion['config'][$i]['description'] = '_MI_EXTGAL_EXT_UPLOAD_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'applet';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     _MI_EXTGALLERY_EXTENDED => 'applet',
     _MI_EXTGALLERY_STANDARD => 'html'
-);
+];
 ++$i;
 $modversion['config'][$i]['name']        = 'enable_jquery';
 $modversion['config'][$i]['title']       = '_MI_EXTGAL_JQUERY';
@@ -235,14 +235,14 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_DISP_TYPE';
 $modversion['config'][$i]['description'] = '_MI_EXTGAL_DISP_TYPE_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     _MI_EXTGAL_AJAX_NONE       => 'none',
     _MI_EXTGAL_AJAX_LIGHTBOX   => 'lightbox',
     _MI_EXTGAL_AJAX_OVERLAY    => 'overlay',
     _MI_EXTGAL_AJAX_TOOLTIP    => 'tooltip',
     _MI_EXTGAL_AJAX_FANCYBOX   => 'fancybox',
     _MI_EXTGAL_AJAX_PRETTPHOTO => 'prettyphoto'
-);
+];
 $modversion['config'][$i]['default']     = 'none';
 ++$i;
 $modversion['config'][$i]['name']        = 'nb_column';
@@ -271,12 +271,12 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_DISP_TYPE';
 $modversion['config'][$i]['description'] = '_MI_EXTGAL_DISP_TYPE_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     _MI_EXTGAL_SLIDESHOW_GVIEW => 'galleryview',
     _MI_EXTGAL_SLIDESHOW_GRIA  => 'galleria',
     _MI_EXTGAL_SLIDESHOW_MICRO => 'microgallery',
     _MI_EXTGAL_SLIDESHOW_GFIC  => 'galleriffic'
-);
+];
 $modversion['config'][$i]['default']     = 'galleryview';
 ++$i;
 $modversion['config'][$i]['name']        = 'break' . $i;
@@ -387,11 +387,11 @@ $modversion['config'][$i]['description'] = '_MI_EXTGAL_INFO_VIEW_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'both';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     _MI_EXTGAL_INFO_BOTH  => 'both',
     _MI_EXTGAL_INFO_ALBUM => 'album',
     _MI_EXTGAL_INFO_PHOTO => 'photo'
-);
+];
 /**
  * DNPROSSI - Public User Info
  * Shows-hides info from public or user album and photo
@@ -403,11 +403,11 @@ $modversion['config'][$i]['description'] = '_MI_EXTGAL_INFO_PUBUSR_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'both';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     _MI_EXTGAL_INFO_BOTH   => 'both',
     _MI_EXTGAL_INFO_USER   => 'user',
     _MI_EXTGAL_INFO_PUBLIC => 'public'
-);
+];
 /**
  * DNPROSSI - Enable Info
  */
@@ -532,12 +532,12 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_SOCIAL';
 $modversion['config'][$i]['description'] = '_MI_EXTGAL_SOCIAL_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     _MI_EXTGAL_NONE          => 0,
     _MI_EXTGAL_SOCIALNETWORM => 1,
     _MI_EXTGAL_BOOKMARK      => 2,
     _MI_EXTGAL_INFO_BOTH     => 3
-);
+];
 $modversion['config'][$i]['default']     = 0;
 ++$i;
 $modversion['config'][$i]['name']        = 'break' . $i;
@@ -602,7 +602,7 @@ $modversion['config'][$i]['description'] = '_MI_EXTGAL_GRAPHLIB_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'gd';
-$modversion['config'][$i]['options']     = array('GD 2' => 'gd', 'Imagick' => 'imagick');
+$modversion['config'][$i]['options']     = ['GD 2' => 'gd', 'Imagick' => 'imagick'];
 ++$i;
 $modversion['config'][$i]['name']        = 'graphic_lib_path';
 $modversion['config'][$i]['title']       = '_MI_EXTGAL_GRAPHLIB_PATH';
@@ -1092,20 +1092,20 @@ $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'true';
 
 // Templates
-$modversion['templates'] = array(
-    array('file' => 'extgallery_public-categories.tpl', 'description' => ''),
-    array('file' => 'extgallery_public-album.tpl', 'description' => ''),
-    array('file' => 'extgallery_public-photo.tpl', 'description' => ''),
-    array('file' => 'extgallery_index.tpl', 'description' => ''),
-    array('file' => 'extgallery_public-sendecard.tpl', 'description' => ''),
-    array('file' => 'extgallery_public-viewecard.tpl', 'description' => ''),
-    array('file' => 'extgallery_public-useralbum.tpl', 'description' => ''),
-    array('file' => 'extgallery_public-userphoto.tpl', 'description' => ''),
-    array('file' => 'extgallery_public-slideshow.tpl', 'description' => ''),
-    array('file' => 'extgallery_public-upload-applet.tpl', 'description' => ''),
-    array('file' => 'extgallery_public-bookmarkme.tpl', 'description' => ''),
-    array('file' => 'extgallery_public-rss.tpl', 'description' => '')
-);
+$modversion['templates'] = [
+    ['file' => 'extgallery_public-categories.tpl', 'description' => ''],
+    ['file' => 'extgallery_public-album.tpl', 'description' => ''],
+    ['file' => 'extgallery_public-photo.tpl', 'description' => ''],
+    ['file' => 'extgallery_index.tpl', 'description' => ''],
+    ['file' => 'extgallery_public-sendecard.tpl', 'description' => ''],
+    ['file' => 'extgallery_public-viewecard.tpl', 'description' => ''],
+    ['file' => 'extgallery_public-useralbum.tpl', 'description' => ''],
+    ['file' => 'extgallery_public-userphoto.tpl', 'description' => ''],
+    ['file' => 'extgallery_public-slideshow.tpl', 'description' => ''],
+    ['file' => 'extgallery_public-upload-applet.tpl', 'description' => ''],
+    ['file' => 'extgallery_public-bookmarkme.tpl', 'description' => ''],
+    ['file' => 'extgallery_public-rss.tpl', 'description' => '']
+];
 
 // Blocs
 $modversion['blocks'][1]['file']        = 'extgallery_blocks.php';
@@ -1180,7 +1180,7 @@ $modversion['notification']['category'][3]['subscribe_from'] = 'public-photo.php
 $modversion['notification']['category'][3]['item_name']      = 'photoId';
 $modversion['notification']['category'][3]['allow_bookmark'] = 1;
 
-$modversion['notification']['event'][1] = array(
+$modversion['notification']['event'][1] = [
     'name'          => 'new_photo',
     'category'      => 'global',
     'title'         => _MI_EXTGAL_NEW_PHOTO_NOTIFY,
@@ -1188,9 +1188,9 @@ $modversion['notification']['event'][1] = array(
     'description'   => _MI_EXTGAL_NEW_PHOTO_NOTIFYDSC,
     'mail_template' => 'global_new_photo',
     'mail_subject'  => _MI_EXTGAL_NEW_PHOTO_NOTIFYSBJ
-);
+];
 
-$modversion['notification']['event'][2] = array(
+$modversion['notification']['event'][2] = [
     'name'          => 'new_photo_pending',
     'category'      => 'global',
     'title'         => _MI_EXTGAL_NEW_PHOTO_PENDING_NOTIFY,
@@ -1199,9 +1199,9 @@ $modversion['notification']['event'][2] = array(
     'mail_template' => 'global_new_photo_pending',
     'mail_subject'  => _MI_EXTGAL_NEW_PHOTO_PENDING_NOTIFYSBJ,
     'admin_only'    => 1
-);
+];
 
-$modversion['notification']['event'][3] = array(
+$modversion['notification']['event'][3] = [
     'name'          => 'new_photo_album',
     'category'      => 'album',
     'title'         => _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFY,
@@ -1209,4 +1209,4 @@ $modversion['notification']['event'][3] = array(
     'description'   => _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYDSC,
     'mail_template' => 'album_new_photo',
     'mail_subject'  => _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYSBJ
-);
+];

@@ -41,11 +41,11 @@ if (!$photoObj) {
     redirect_header('index.php', 3, _NOPERM);
 }
 
-$photo = $photoHandler->objectToArray($photoObj, array('cat_id', 'uid'));
+$photo = $photoHandler->objectToArray($photoObj, ['cat_id', 'uid']);
 
 // Check the category access permission
 $permHandler = ExtgalleryPublicPermHandler::getInstance();
-if (!$permHandler->isAllowed($xoopsUser, 'public_access', $photo['cat']['cat_id'])) {
+if (!$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_access', $photo['cat']['cat_id'])) {
     redirect_header('index.php', 3, _NOPERM);
 }
 
@@ -94,7 +94,7 @@ $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 
 $xoopsTpl->assign('rating', $ratingHandler->getRate($photoId));
 
-$lang = array(
+$lang = [
     'preview'      => _MD_EXTGALLERY_PREVIEW,
     'next'         => _MD_EXTGALLERY_NEXT,
     'of'           => _MD_EXTGALLERY_OF,
@@ -115,11 +115,11 @@ $lang = array(
     'submitter'    => _MD_EXTGALLERY_SUBMITTER,
     'allPhotoBy'   => _MD_EXTGALLERY_ALL_PHOTO_BY,
     'albumName'    => $albumName
-);
+];
 $xoopsTpl->assign('lang', $lang);
 
 if ($xoopsModuleConfig['enable_rating']) {
-    $xoopsTpl->assign('canRate', $permHandler->isAllowed($xoopsUser, 'public_rate', $cat['cat_id']));
+    $xoopsTpl->assign('canRate', $permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_rate', $cat['cat_id']));
 } else {
     $xoopsTpl->assign('canRate', false);
     //DNPROSSI - added preferences option - enable_rating
@@ -152,8 +152,8 @@ $xoopsTpl->assign('enable_submitter_lnk', $xoopsModuleConfig['enable_submitter_l
 $xoopsTpl->assign('enable_photo_hits', $xoopsModuleConfig['enable_photo_hits']);
 
 $xoopsTpl->assign('enableExtra', $xoopsModuleConfig['display_extra_field']);
-$xoopsTpl->assign('canSendEcard', $permHandler->isAllowed($xoopsUser, 'public_ecard', $photo['cat']['cat_id']));
-$xoopsTpl->assign('canDownload', $permHandler->isAllowed($xoopsUser, 'public_download', $photo['cat']['cat_id']));
+$xoopsTpl->assign('canSendEcard', $permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_ecard', $photo['cat']['cat_id']));
+$xoopsTpl->assign('canDownload', $permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_download', $photo['cat']['cat_id']));
 
 $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));
 $xoopsTpl->assign('disp_ph_title', $xoopsModuleConfig['disp_ph_title']);

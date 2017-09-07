@@ -346,6 +346,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
                     return PEAR::raiseError('Couldn\'t find "ppmquant" binary', IMAGE_TRANSFORM_ERROR_UNSUPPORTED);
                 }
                 $this->command[] = $this->_prepare_cmd(IMAGE_TRANSFORM_NETPBM_PATH, 'ppmquant', 256);
+                // no break
             case 'acad':
             case 'bmp':
             case 'eyuv':
@@ -381,6 +382,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
             case 'text':
             case 'txt':
                 $type = 'ascii';
+                // no break
             case 'atk':
             case 'bbubg':
             case 'epsi':
@@ -411,6 +413,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
             // pamto* converters
             case 'jpc':
                 $type = 'jpeg2k';
+                // no break
             case 'html':
             case 'pfm':
             case 'tga':
@@ -426,8 +429,10 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
                 break;
             case 'jpg':
                 $type = 'jpeg';
+                // no break
             case 'jpeg':
                 $arg = '--quality=' . $quality;
+                // no break
             case 'jbig':
             case 'fits':
             case 'palm':

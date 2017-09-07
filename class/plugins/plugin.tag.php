@@ -10,7 +10,7 @@ function extgallery_tag_iteminfo(&$items)
         return false;
     }
 
-    $items_id = array();
+    $items_id = [];
     foreach (array_keys($items) as $cat_id) {
         foreach (array_keys($items[$cat_id]) as $item_id) {
             $items_id[] = (int)$item_id;
@@ -25,14 +25,14 @@ function extgallery_tag_iteminfo(&$items)
         foreach (array_keys($items[$cat_id]) as $item_id) {
             if (isset($items_obj[$item_id])) {
                 $item_obj                 =& $items_obj[$item_id];
-                $items[$cat_id][$item_id] = array(
+                $items[$cat_id][$item_id] = [
                     'title'   => $item_obj->getVar('photo_title'),
                     'uid'     => $item_obj->getVar('uid'),
                     'link'    => "public-photo.php?photoId={$item_id}#photoNav",
                     'time'    => $item_obj->getVar('photo_date'),
                     'tags'    => '',
                     'content' => ''
-                );
+                ];
             }
         }
     }

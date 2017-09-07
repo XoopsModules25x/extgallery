@@ -41,7 +41,7 @@ $xoopsTpl->assign('cat', $cat);
 $catPath = $catHandler->objectToArray($catHandler->getPath($catId));
 $xoopsTpl->assign('catPath', $catPath);
 
-$catChild = $catHandler->objectToArray($catHandler->getChildren($catId), array('photo_id'));
+$catChild = $catHandler->objectToArray($catHandler->getChildren($catId), ['photo_id']);
 $xoopsTpl->assign('catChild', $catChild);
 /** @var xos_opal_Theme $xoTheme */
 if (isset($catObj)) {
@@ -57,11 +57,11 @@ $attributes['href']  = XOOPS_URL . '/modules/extgallery/public-rss.php';
 $xoTheme->addMeta('link', $rel, $attributes);
 $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 
-$lang = array(
+$lang = [
     'categoriesAlbums' => _MD_EXTGALLERY_CATEGORIESALBUMS,
     'nbAlbums'         => _MD_EXTGALLERY_NBALBUMS,
     'nbPhotos'         => _MD_EXTGALLERY_NBPHOTOS
-);
+];
 $xoopsTpl->assign('lang', $lang);
 
 $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));

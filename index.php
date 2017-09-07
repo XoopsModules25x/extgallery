@@ -24,7 +24,7 @@ include XOOPS_ROOT_PATH . '/header.php';
 /** @var ExtgalleryPublicCatHandler $catHandler */
 $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
 
-$cats = $catHandler->objectToArray($catHandler->getChildren(0), array('photo_id'));
+$cats = $catHandler->objectToArray($catHandler->getChildren(0), ['photo_id']);
 $xoopsTpl->assign('cats', $cats);
 
 $rel                 = 'alternate';
@@ -36,11 +36,11 @@ $attributes['href']  = XOOPS_URL . '/modules/extgallery/public-rss.php';
 $xoTheme->addMeta('link', $rel, $attributes);
 $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 
-$lang = array(
+$lang = [
     'categoriesAlbums' => _MD_EXTGALLERY_CATEGORIESALBUMS,
     'nbAlbums'         => _MD_EXTGALLERY_NBALBUMS,
     'nbPhotos'         => _MD_EXTGALLERY_NBPHOTOS
-);
+];
 $xoopsTpl->assign('lang', $lang);
 
 $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));
@@ -49,26 +49,26 @@ $xoopsTpl->assign('display_type', $xoopsModuleConfig['display_type']);
 $xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
 
 // pk ------------------- add upload and view-my-album links to main page
+if (null !== $GLOBALS['xoopsUser'] && is_object($GLOBALS['xoopsUser'])) {
+    if (isset($GLOBALS['xoopsModule']) && $GLOBALS['xoopsModule']->getVar('dirname') == $moduleDirName) {
+        if ($GLOBALS['xoopsUser'] != null) {
+            $albumlinkname = _MD_EXTGALLERY_USERALBUM;
+            $albumurl      = 'public-useralbum.php?id=' . $GLOBALS['xoopsUser']->uid();
+        }
 
-if (isset($GLOBALS['xoopsModule']) && $GLOBALS['xoopsModule']->getVar('dirname') == $moduleDirName) {
-    if ($GLOBALS['xoopsUser'] != null) {
-        $albumlinkname = _MD_EXTGALLERY_USERALBUM;
-        $albumurl      = 'public-useralbum.php?id=' . $GLOBALS['xoopsUser']->uid();
-    }
+        require_once XOOPS_ROOT_PATH . "/modules/{$moduleDirName}/class/publicPerm.php";
 
-    require_once XOOPS_ROOT_PATH . "/modules/{$moduleDirName}/class/publicPerm.php";
-
-    $permHandler = ExtgalleryPublicPermHandler::getInstance();
-    if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
-        $uploadlinkname = _MD_EXTGALLERY_PUBLIC_UPLOAD;
-        if ($GLOBALS['xoopsModuleConfig']['use_extended_upload'] === 'html') {
-            $uploadurl = 'public-upload.php';
-        } else {
-            $uploadurl = 'public-upload-extended.php';
+        $permHandler = ExtgalleryPublicPermHandler::getInstance();
+        if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
+            $uploadlinkname = _MD_EXTGALLERY_PUBLIC_UPLOAD;
+            if ($GLOBALS['xoopsModuleConfig']['use_extended_upload'] === 'html') {
+                $uploadurl = 'public-upload.php';
+            } else {
+                $uploadurl = 'public-upload-extended.php';
+            }
         }
     }
 }
-
 $xoopsTpl->assign('albumlinkname', $albumlinkname);
 $xoopsTpl->assign('albumurl', $albumurl);
 $xoopsTpl->assign('uploadlinkname', $uploadlinkname);

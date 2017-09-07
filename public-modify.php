@@ -31,9 +31,9 @@ if (isset($_POST['step'])) {
     $step = 'default';
 }
 
-if (!isset($xoopsUser)) {
+if (!isset($GLOBALS['xoopsUser'])) {
     redirect_header('index.php');
-} elseif (!$xoopsUser->isAdmin()) {
+} elseif (!$GLOBALS['xoopsUser']->isAdmin()) {
     redirect_header('index.php');
 }
 $moduleDirName = basename(__DIR__);
@@ -74,7 +74,7 @@ switch ($op) {
                     $newCat     = $catHandler->getCat($_POST['cat_id']);
 
                     // Set new category as album
-                    $catHandler->modifyCat(array('cat_id' => (int)$_POST['cat_id'], 'cat_isalbum' => 1));
+                    $catHandler->modifyCat(['cat_id' => (int)$_POST['cat_id'], 'cat_isalbum' => 1]);
 
                     // Update album count
                     if ($oldCat->getVar('cat_nb_photo') == 1) {
@@ -104,7 +104,7 @@ switch ($op) {
 
                     // If the old album don't contains other photo
                     if ($photoHandler->nbPhoto($oldCat) == 0) {
-                        $catHandler->modifyCat(array('cat_id' => $photo->getVar('cat_id'), 'cat_isalbum' => 0));
+                        $catHandler->modifyCat(['cat_id' => $photo->getVar('cat_id'), 'cat_isalbum' => 0]);
                         redirect_header('public-categories.php?id=' . $photo->getVar('cat_id'), 3, _MD_EXTGALLERY_PHOTO_UPDATED);
                     } else {
                         redirect_header('public-album.php?id=' . $photo->getVar('cat_id'), 3, _MD_EXTGALLERY_PHOTO_UPDATED);
@@ -187,7 +187,7 @@ switch ($op) {
             $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>'));
             $catHandler->updateFieldValue('cat_nb_album', 'cat_nb_album - 1', $criteria);
 
-            $catHandler->modifyCat(array('cat_id' => $photo->getVar('cat_id'), 'cat_isalbum' => 0));
+            $catHandler->modifyCat(['cat_id' => $photo->getVar('cat_id'), 'cat_isalbum' => 0]);
 
             redirect_header('public-categories.php?id=' . $photo->getVar('cat_id'));
         } else {
