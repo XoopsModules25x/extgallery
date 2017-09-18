@@ -160,7 +160,7 @@ $xoopsTpl->assign('disp_ph_title', $xoopsModuleConfig['disp_ph_title']);
 $xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
 
 // For xoops tag
-if (($xoopsModuleConfig['usetag'] == 1) and is_dir('../tag')) {
+if (($xoopsModuleConfig['usetag'] == 1) && is_dir('../tag')) {
     require_once XOOPS_ROOT_PATH . '/modules/tag/include/tagbar.php';
     $xoopsTpl->assign('tagbar', tagBar($photo['photo_id'], $catid = 0));
     $xoopsTpl->assign('tags', true);

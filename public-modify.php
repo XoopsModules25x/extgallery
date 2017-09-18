@@ -62,7 +62,7 @@ switch ($op) {
                 $photoHandler->modifyPhoto((int)$_POST['photo_id'], $data);
 
                 // For xoops tag
-                if (($xoopsModuleConfig['usetag'] == 1) and is_dir('../tag')) {
+                if (($xoopsModuleConfig['usetag'] == 1) && is_dir('../tag')) {
                     $tagHandler = xoops_getModuleHandler('tag', 'tag');
                     $tagHandler->updateByItem($_POST['tag'], $_POST['photo_id'], $xoopsModule->getVar('dirname'), 0);
                 }
@@ -143,7 +143,7 @@ switch ($op) {
                 }
 
                 // For xoops tag
-                if (($xoopsModuleConfig['usetag'] == 1) and is_dir('../tag')) {
+                if (($xoopsModuleConfig['usetag'] == 1) && is_dir('../tag')) {
                     $tagId = $photo->isNew() ? 0 : $photo->getVar('photo_id');
                     require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
                     $form->addElement(new TagFormTag('tag', 60, 255, $tagId, 0));
