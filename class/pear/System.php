@@ -67,7 +67,7 @@ class System
      */
     public static function _parseArgs($argv, $short_options, $long_options = null)
     {
-        if (!is_array($argv) && $argv !== null) {
+        if (!is_array($argv) && null !== $argv) {
             /*
             // Quote all items that are a short option
             $av = preg_split('/(\A| )--?[a-z0-9]+[ =]?((?<!\\\\)((,\s*)|((?<!,)\s+))?)/i', $argv, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_OFFSET_CAPTURE);
@@ -142,7 +142,7 @@ class System
     protected static function _dirToStruct($sPath, $maxinst, $aktinst = 0, $silent = false)
     {
         $struct = array('dirs' => array(), 'files' => array());
-        if (($dir = @opendir($sPath)) === false) {
+        if (false === ($dir = @opendir($sPath))) {
             if (!$silent) {
                 System::raiseError("Could not open dir $sPath");
             }
@@ -153,14 +153,14 @@ class System
         $struct['dirs'][] = $sPath = realpath($sPath); // XXX don't add if '.' or '..' ?
         $list             = array();
         while (false !== ($file = readdir($dir))) {
-            if ($file != '.' && $file != '..') {
+            if ('.' != $file && '..' != $file) {
                 $list[] = $file;
             }
         }
 
         closedir($dir);
         natsort($list);
-        if ($aktinst < $maxinst || $maxinst == 0) {
+        if ($aktinst < $maxinst || 0 == $maxinst) {
             foreach ($list as $val) {
                 $path = $sPath . DIRECTORY_SEPARATOR . $val;
                 if (is_dir($path) && !is_link($path)) {
@@ -217,7 +217,7 @@ class System
             return System::raiseError($opts);
         }
         foreach ($opts[0] as $opt) {
-            if ($opt[0] == 'r') {
+            if ('r' == $opt[0]) {
                 $do_recursive = true;
             }
         }
@@ -264,12 +264,12 @@ class System
 
         $mode = 0777; // default mode
         foreach ($opts[0] as $opt) {
-            if ($opt[0] == 'p') {
+            if ('p' == $opt[0]) {
                 $create_parents = true;
-            } elseif ($opt[0] == 'm') {
+            } elseif ('m' == $opt[0]) {
                 // if the mode is clearly an octal number (starts with 0)
                 // convert it to decimal
-                if (strlen($opt[1]) && $opt[1]{0} == '0') {
+                if (strlen($opt[1]) && '0' == $opt[1]{0}) {
                     $opt[1] = octdec($opt[1]);
                 } else {
                     // convert to int
@@ -284,7 +284,7 @@ class System
             foreach ($opts[1] as $dir) {
                 $dirstack = array();
                 while ((!file_exists($dir) || !is_dir($dir))
-                       && $dir != DIRECTORY_SEPARATOR) {
+                       && DIRECTORY_SEPARATOR != $dir) {
                     array_unshift($dirstack, $dir);
                     $dir = dirname($dir);
                 }
@@ -334,11 +334,11 @@ class System
 
         $count_args = count($args);
         for ($i = 0; $i < $count_args; $i++) {
-            if ($args[$i] == '>') {
+            if ('>' == $args[$i]) {
                 $mode       = 'wb';
                 $outputfile = $args[$i + 1];
                 break;
-            } elseif ($args[$i] == '>>') {
+            } elseif ('>>' == $args[$i]) {
                 $mode       = 'ab+';
                 $outputfile = $args[$i + 1];
                 break;
@@ -407,9 +407,9 @@ class System
         }
 
         foreach ($opts[0] as $opt) {
-            if ($opt[0] == 'd') {
+            if ('d' == $opt[0]) {
                 $tmp_is_dir = true;
-            } elseif ($opt[0] == 't') {
+            } elseif ('t' == $opt[0]) {
                 $tmpdir = $opt[1];
             }
         }
@@ -523,7 +523,7 @@ class System
         if (OS_WINDOWS) {
             $exe_suffixes = getenv('PATHEXT') ? explode(PATH_SEPARATOR, getenv('PATHEXT')) : array('.exe', '.bat', '.cmd', '.com');
             // allow passing a command.exe param
-            if (strpos($program, '.') !== false) {
+            if (false !== strpos($program, '.')) {
                 array_unshift($exe_suffixes, '');
             }
         } else {
@@ -581,7 +581,7 @@ class System
             switch ($args[$i]) {
                 case '-type':
                     if (in_array($args[$i + 1], array('d', 'f'))) {
-                        if ($args[$i + 1] == 'd') {
+                        if ('d' == $args[$i + 1]) {
                             $do_files = false;
                         } else {
                             $do_dirs = false;

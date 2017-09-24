@@ -7,7 +7,7 @@ $sql = new rex_sql();
 // add single image imagetype
 $sql->setQuery('SELECT * FROM `' . $REX['TABLE_PREFIX'] . "679_types` WHERE name LIKE 'magnific_popup_image_thumb'");
 
-if ($sql->getRows() == 0) {
+if (0 == $sql->getRows()) {
     // imagetype
     $sql->setQuery('INSERT INTO `' . $REX['TABLE_PREFIX'] . "679_types` (status, name, description) VALUES (0, 'magnific_popup_image_thumb', 'Magnific Popup Einzelbild Vorschaubild')");
 
@@ -37,7 +37,7 @@ if ($sql->getRows() == 0) {
 // add gallery image imagetype
 $sql->setQuery('SELECT * FROM `' . $REX['TABLE_PREFIX'] . "679_types` WHERE name LIKE 'magnific_popup_gallery_thumb'");
 
-if ($sql->getRows() == 0) {
+if (0 == $sql->getRows()) {
     // imagetype
     $sql->setQuery('INSERT INTO `' . $REX['TABLE_PREFIX'] . "679_types` (status, name, description) VALUES (0, 'magnific_popup_gallery_thumb', 'Magnific Popup Galerie Vorschaubild')");
 
@@ -73,7 +73,7 @@ if ($sql->getRows() == 0) {
                    . ",'admin')");
 }
 
-if ($error == '') {
+if ('' == $error) {
     $REX['ADDON']['install']['magnific_popup'] = true;
 } else {
     $REX['ADDON']['installmsg']['magnific_popup'] = $error;

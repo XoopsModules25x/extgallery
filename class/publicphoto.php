@@ -65,7 +65,7 @@ class ExtgalleryPublicPhotoHandler extends ExtgalleryPhotoHandler
             unlink(XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large/large_' . $photo->getVar('photo_name'));
         }
 
-        if ($photo->getVar('photo_orig_name') != ''
+        if ('' != $photo->getVar('photo_orig_name')
             && file_exists(XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original/' . $photo->getVar('photo_orig_name'))) {
             unlink(XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original/' . $photo->getVar('photo_orig_name'));
         }

@@ -105,9 +105,9 @@ if (!defined('PCL_TAR')) {
         $v_result = 1;
 
         // ----- Look for default mode
-        if (($p_mode == '') || (($p_mode !== 'tar') && ($p_mode !== 'tgz'))) {
+        if (('' == $p_mode) || (('tar' !== $p_mode) && ('tgz' !== $p_mode))) {
             // ----- Extract the tar format from the extension
-            if (($p_mode = PclTarHandleExtension($p_tarname)) == '') {
+            if ('' == ($p_mode = PclTarHandleExtension($p_tarname))) {
                 // ----- Return
                 TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
 
@@ -174,7 +174,7 @@ if (!defined('PCL_TAR')) {
         $v_list_detail = [];
 
         // ----- Extract the tar format from the extension
-        if (($p_mode = PclTarHandleExtension($p_tarname)) == '') {
+        if ('' == ($p_mode = PclTarHandleExtension($p_tarname))) {
             // ----- Return
             TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
 
@@ -250,8 +250,8 @@ if (!defined('PCL_TAR')) {
         $p_list_detail = [];
 
         // ----- Extract the tar format from the extension
-        if (($p_mode == '') || (($p_mode !== 'tar') && ($p_mode !== 'tgz'))) {
-            if (($p_mode = PclTarHandleExtension($p_tarname)) === '') {
+        if (('' == $p_mode) || (('tar' !== $p_mode) && ('tgz' !== $p_mode))) {
+            if ('' === ($p_mode = PclTarHandleExtension($p_tarname))) {
                 // ----- Return
                 TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
 
@@ -278,7 +278,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Return
-        if ($v_result != 1) {
+        if (1 != $v_result) {
             TrFctEnd(__FILE__, __LINE__, 0);
 
             return 0;
@@ -323,8 +323,8 @@ if (!defined('PCL_TAR')) {
         $v_result = 1;
 
         // ----- Extract the tar format from the extension
-        if (($p_mode == '') || (($p_mode !== 'tar') && ($p_mode !== 'tgz'))) {
-            if (($p_mode = PclTarHandleExtension($p_tarname)) == '') {
+        if (('' == $p_mode) || (('tar' !== $p_mode) && ('tgz' !== $p_mode))) {
+            if ('' == ($p_mode = PclTarHandleExtension($p_tarname))) {
                 // ----- Return
                 TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
 
@@ -334,7 +334,7 @@ if (!defined('PCL_TAR')) {
 
         // ----- Call the extracting fct
         $p_list = [];
-        if (($v_result = PclTarHandleExtract($p_tarname, 0, $p_list, 'list', '', $p_mode, '')) != 1) {
+        if (1 != ($v_result = PclTarHandleExtract($p_tarname, 0, $p_list, 'list', '', $p_mode, ''))) {
             unset($p_list);
             TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
 
@@ -386,8 +386,8 @@ if (!defined('PCL_TAR')) {
         $v_result = 1;
 
         // ----- Extract the tar format from the extension
-        if (($p_mode == '') || (($p_mode !== 'tar') && ($p_mode !== 'tgz'))) {
-            if (($p_mode = PclTarHandleExtension($p_tarname)) == '') {
+        if (('' == $p_mode) || (('tar' !== $p_mode) && ('tgz' !== $p_mode))) {
+            if ('' == ($p_mode = PclTarHandleExtension($p_tarname))) {
                 // ----- Return
                 TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
 
@@ -396,7 +396,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Call the extracting fct
-        if (($v_result = PclTarHandleExtract($p_tarname, 0, $p_list, 'complete', $p_path, $p_mode, $p_remove_path)) != 1) {
+        if (1 != ($v_result = PclTarHandleExtract($p_tarname, 0, $p_list, 'complete', $p_path, $p_mode, $p_remove_path))) {
             TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
 
             return 0;
@@ -455,8 +455,8 @@ if (!defined('PCL_TAR')) {
         $v_result = 1;
 
         // ----- Extract the tar format from the extension
-        if (($p_mode === '') || (($p_mode !== 'tar') && ($p_mode !== 'tgz'))) {
-            if (($p_mode = PclTarHandleExtension($p_tarname)) === '') {
+        if (('' === $p_mode) || (('tar' !== $p_mode) && ('tgz' !== $p_mode))) {
+            if ('' === ($p_mode = PclTarHandleExtension($p_tarname))) {
                 // ----- Return
                 TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
 
@@ -467,7 +467,7 @@ if (!defined('PCL_TAR')) {
         // ----- Look if the $p_filelist is really an array
         if (is_array($p_filelist)) {
             // ----- Call the extracting fct
-            if (($v_result = PclTarHandleExtract($p_tarname, $p_filelist, $p_list, 'partial', $p_path, $v_tar_mode, $p_remove_path)) != 1) {
+            if (1 != ($v_result = PclTarHandleExtract($p_tarname, $p_filelist, $p_list, 'partial', $p_path, $v_tar_mode, $p_remove_path))) {
                 TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
 
                 return 0;
@@ -478,7 +478,7 @@ if (!defined('PCL_TAR')) {
             $v_list = explode(' ', $p_filelist);
 
             // ----- Call the extracting fct
-            if (($v_result = PclTarHandleExtract($p_tarname, $v_list, $p_list, 'partial', $p_path, $v_tar_mode, $p_remove_path)) != 1) {
+            if (1 != ($v_result = PclTarHandleExtract($p_tarname, $v_list, $p_list, 'partial', $p_path, $v_tar_mode, $p_remove_path))) {
                 TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
 
                 return 0;
@@ -548,8 +548,8 @@ if (!defined('PCL_TAR')) {
         $v_result = 1;
 
         // ----- Extract the tar format from the extension
-        if (($p_mode === '') || (($p_mode !== 'tar') && ($p_mode !== 'tgz'))) {
-            if (($p_mode = PclTarHandleExtension($p_tarname)) == '') {
+        if (('' === $p_mode) || (('tar' !== $p_mode) && ('tgz' !== $p_mode))) {
+            if ('' == ($p_mode = PclTarHandleExtension($p_tarname))) {
                 // ----- Return
                 TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
 
@@ -560,7 +560,7 @@ if (!defined('PCL_TAR')) {
         // ----- Look if the $p_index is really an integer
         if (is_int($p_index)) {
             // ----- Call the extracting fct
-            if (($v_result = PclTarHandleExtractByIndexList($p_tarname, "$p_index", $p_list, $p_path, $p_remove_path, $v_tar_mode)) != 1) {
+            if (1 != ($v_result = PclTarHandleExtractByIndexList($p_tarname, "$p_index", $p_list, $p_path, $p_remove_path, $v_tar_mode))) {
                 TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
 
                 return 0;
@@ -568,7 +568,7 @@ if (!defined('PCL_TAR')) {
         } // ----- Look if the $p_filelist is a string
         elseif (is_string($p_index)) {
             // ----- Call the extracting fct
-            if (($v_result = PclTarHandleExtractByIndexList($p_tarname, $p_index, $p_list, $p_path, $p_remove_path, $v_tar_mode)) != 1) {
+            if (1 != ($v_result = PclTarHandleExtractByIndexList($p_tarname, $p_index, $p_list, $p_path, $p_remove_path, $v_tar_mode))) {
                 TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
 
                 return 0;
@@ -619,8 +619,8 @@ if (!defined('PCL_TAR')) {
         $v_result = 1;
 
         // ----- Extract the tar format from the extension
-        if (($p_mode === '') || (($p_mode !== 'tar') && ($p_mode !== 'tgz'))) {
-            if (($p_mode = PclTarHandleExtension($p_tarname)) == '') {
+        if (('' === $p_mode) || (('tar' !== $p_mode) && ('tgz' !== $p_mode))) {
+            if ('' == ($p_mode = PclTarHandleExtension($p_tarname))) {
                 // ----- Return
                 TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
 
@@ -631,7 +631,7 @@ if (!defined('PCL_TAR')) {
         // ----- Look if the $p_filelist is really an array
         if (is_array($p_filelist)) {
             // ----- Call the extracting fct
-            if (($v_result = PclTarHandleDelete($p_tarname, $p_filelist, $p_list, $p_mode)) != 1) {
+            if (1 != ($v_result = PclTarHandleDelete($p_tarname, $p_filelist, $p_list, $p_mode))) {
                 TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
 
                 return 0;
@@ -642,7 +642,7 @@ if (!defined('PCL_TAR')) {
             $v_list = explode(' ', $p_filelist);
 
             // ----- Call the extracting fct
-            if (($v_result = PclTarHandleDelete($p_tarname, $v_list, $p_list, $p_mode)) != 1) {
+            if (1 != ($v_result = PclTarHandleDelete($p_tarname, $v_list, $p_list, $p_mode))) {
                 TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
 
                 return 0;
@@ -696,8 +696,8 @@ if (!defined('PCL_TAR')) {
         $v_result = 1;
 
         // ----- Extract the tar format from the extension
-        if (($p_mode === '') || (($p_mode !== 'tar') && ($p_mode !== 'tgz'))) {
-            if (($p_mode = PclTarHandleExtension($p_tarname)) == '') {
+        if (('' === $p_mode) || (('tar' !== $p_mode) && ('tgz' !== $p_mode))) {
+            if ('' == ($p_mode = PclTarHandleExtension($p_tarname))) {
                 // ----- Return
                 TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
 
@@ -708,7 +708,7 @@ if (!defined('PCL_TAR')) {
         // ----- Look if the $p_filelist is really an array
         if (is_array($p_filelist)) {
             // ----- Call the extracting fct
-            if (($v_result = PclTarHandleUpdate($p_tarname, $p_filelist, $p_list, $p_mode, $p_add_dir, $p_remove_dir)) != 1) {
+            if (1 != ($v_result = PclTarHandleUpdate($p_tarname, $p_filelist, $p_list, $p_mode, $p_add_dir, $p_remove_dir))) {
                 TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
 
                 return 0;
@@ -719,7 +719,7 @@ if (!defined('PCL_TAR')) {
             $v_list = explode(' ', $p_filelist);
 
             // ----- Call the extracting fct
-            if (($v_result = PclTarHandleUpdate($p_tarname, $v_list, $p_list, $p_mode, $p_add_dir, $p_remove_dir)) != 1) {
+            if (1 != ($v_result = PclTarHandleUpdate($p_tarname, $v_list, $p_list, $p_mode, $p_add_dir, $p_remove_dir))) {
                 TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
 
                 return 0;
@@ -772,7 +772,7 @@ if (!defined('PCL_TAR')) {
         $v_result = 1;
 
         // ----- Check the parameters
-        if (($p_tarname == '') || ($p_tarname_add == '')) {
+        if (('' == $p_tarname) || ('' == $p_tarname_add)) {
             // ----- Error log
             PclErrorLog(-3, 'Invalid empty archive name');
 
@@ -783,16 +783,16 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Extract the tar format from the extension
-        if (($p_mode === '') || (($p_mode !== 'tar') && ($p_mode !== 'tgz'))) {
-            if (($p_mode = PclTarHandleExtension($p_tarname)) == '') {
+        if (('' === $p_mode) || (('tar' !== $p_mode) && ('tgz' !== $p_mode))) {
+            if ('' == ($p_mode = PclTarHandleExtension($p_tarname))) {
                 // ----- Return
                 TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
 
                 return 0;
             }
         }
-        if (($p_mode_add === '') || (($p_mode_add !== 'tar') && ($p_mode_add !== 'tgz'))) {
-            if (($p_mode_add = PclTarHandleExtension($p_tarname_add)) == '') {
+        if (('' === $p_mode_add) || (('tar' !== $p_mode_add) && ('tgz' !== $p_mode_add))) {
+            if ('' == ($p_mode_add = PclTarHandleExtension($p_tarname_add))) {
                 // ----- Return
                 TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
 
@@ -804,7 +804,7 @@ if (!defined('PCL_TAR')) {
         clearstatcache();
 
         // ----- Check the file size
-        if ((!is_file($p_tarname)) || (((($v_size = filesize($p_tarname)) % 512) != 0) && ($p_mode === 'tar'))) {
+        if ((!is_file($p_tarname)) || ((0 != (($v_size = filesize($p_tarname)) % 512)) && ('tar' === $p_mode))) {
             // ----- Error log
             if (!is_file($p_tarname)) {
                 PclErrorLog(-4, "Archive '$p_tarname' does not exist");
@@ -818,8 +818,8 @@ if (!defined('PCL_TAR')) {
             return PclErrorCode();
         }
         if ((!is_file($p_tarname_add))
-            || (((($v_size_add = filesize($p_tarname_add)) % 512) != 0)
-                && ($p_mode_add === 'tar'))) {
+            || ((0 != (($v_size_add = filesize($p_tarname_add)) % 512))
+                && ('tar' === $p_mode_add))) {
             // ----- Error log
             if (!is_file($p_tarname_add)) {
                 PclErrorLog(-4, "Archive '$p_tarname_add' does not exist");
@@ -834,9 +834,9 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Look for compressed archive
-        if ($p_mode === 'tgz') {
+        if ('tgz' === $p_mode) {
             // ----- Open the file in read mode
-            if (($p_tar = @gzopen($p_tarname, 'rb')) == 0) {
+            if (0 == ($p_tar = @gzopen($p_tarname, 'rb'))) {
                 // ----- Error log
                 PclErrorLog(-2, "Unable to open file '$p_tarname' in binary read mode");
 
@@ -849,7 +849,7 @@ if (!defined('PCL_TAR')) {
             // ----- Open a temporary file in write mode
             $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
-            if (($v_temp_tar = @gzopen($v_temp_tarname, 'wb')) == 0) {
+            if (0 == ($v_temp_tar = @gzopen($v_temp_tarname, 'wb'))) {
                 // ----- Close tar file
                 gzclose($p_tar);
 
@@ -886,9 +886,9 @@ if (!defined('PCL_TAR')) {
                 TrFctMessage(__FILE__, __LINE__, 3, "$i 512 bytes blocks");
             }
         } // ----- Look for uncompressed tar file
-        elseif ($p_mode === 'tar') {
+        elseif ('tar' === $p_mode) {
             // ----- Open the tar file
-            if (($p_tar = fopen($p_tarname, 'r+b')) == 0) {
+            if (0 == ($p_tar = fopen($p_tarname, 'r+b'))) {
                 // ----- Error log
                 PclErrorLog(-1, "Unable to open file '$p_tarname' in binary write mode");
 
@@ -899,9 +899,9 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Go to the beginning of last block
-            TrFctMessage(__FILE__, __LINE__, 4, 'Position before :' . ($p_mode === 'tar' ? ftell($p_tar) : gztell($p_tar)));
+            TrFctMessage(__FILE__, __LINE__, 4, 'Position before :' . ('tar' === $p_mode ? ftell($p_tar) : gztell($p_tar)));
             fseek($p_tar, $v_size - 512);
-            TrFctMessage(__FILE__, __LINE__, 4, 'Position after :' . ($p_mode === 'tar' ? ftell($p_tar) : gztell($p_tar)));
+            TrFctMessage(__FILE__, __LINE__, 4, 'Position after :' . ('tar' === $p_mode ? ftell($p_tar) : gztell($p_tar)));
         } // ----- Look for unknown type
         else {
             // ----- Error log
@@ -914,11 +914,11 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Look for type of archive to add
-        if ($p_mode_add === 'tgz') {
+        if ('tgz' === $p_mode_add) {
             TrFctMessage(__FILE__, __LINE__, 4, "Opening file $p_tarname_add");
 
             // ----- Open the file in read mode
-            if (($p_tar_add = @gzopen($p_tarname_add, 'rb')) == 0) {
+            if (0 == ($p_tar_add = @gzopen($p_tarname_add, 'rb'))) {
                 // ----- Error log
                 PclErrorLog(-2, "Unable to open file '$p_tarname_add' in binary read mode");
 
@@ -940,7 +940,7 @@ if (!defined('PCL_TAR')) {
                 do {
                     // ----- Write the already read block
                     $v_binary_data = pack('a512', "$v_buffer");
-                    if ($p_mode === 'tar') {
+                    if ('tar' === $p_mode) {
                         fwrite($p_tar, $v_binary_data);
                     } else {
                         gzputs($v_temp_tar, $v_binary_data);
@@ -959,9 +959,9 @@ if (!defined('PCL_TAR')) {
             // ----- Close the files
             gzclose($p_tar_add);
         } // ----- Look for uncompressed tar file
-        elseif ($p_mode === 'tar') {
+        elseif ('tar' === $p_mode) {
             // ----- Open the file in read mode
-            if (($p_tar_add = @fopen($p_tarname_add, 'rb')) == 0) {
+            if (0 == ($p_tar_add = @fopen($p_tarname_add, 'rb'))) {
                 // ----- Error log
                 PclErrorLog(-2, "Unable to open file '$p_tarname_add' in binary read mode");
 
@@ -983,7 +983,7 @@ if (!defined('PCL_TAR')) {
                 do {
                     // ----- Write the already read block
                     $v_binary_data = pack('a512', "$v_buffer");
-                    if ($p_mode === 'tar') {
+                    if ('tar' === $p_mode) {
                         fwrite($p_tar, $v_binary_data);
                     } else {
                         gzputs($v_temp_tar, $v_binary_data);
@@ -1007,7 +1007,7 @@ if (!defined('PCL_TAR')) {
         $v_result = PclTarHandleFooter($p_tar, $p_mode);
 
         // ----- Look for closing compressed archive
-        if ($p_mode === 'tgz') {
+        if ('tgz' === $p_mode) {
             // ----- Close the files
             gzclose($p_tar);
             gzclose($v_temp_tar);
@@ -1034,7 +1034,7 @@ if (!defined('PCL_TAR')) {
 
             return $v_result;
         } // ----- Look for closing uncompressed tar file
-        elseif ($p_mode === 'tar') {
+        elseif ('tar' === $p_mode) {
             // ----- Close the tarfile
             fclose($p_tar);
         }
@@ -1078,9 +1078,9 @@ if (!defined('PCL_TAR')) {
         $v_list_detail = [];
 
         // ----- Check the parameters
-        if (($p_tarname === '') || (($p_mode !== 'tar') && ($p_mode !== 'tgz'))) {
+        if (('' === $p_tarname) || (('tar' !== $p_mode) && ('tgz' !== $p_mode))) {
             // ----- Error log
-            if ($p_tarname == '') {
+            if ('' == $p_tarname) {
                 PclErrorLog(-3, 'Invalid empty archive name');
             } else {
                 PclErrorLog(-3, "Unknown mode '$p_mode'");
@@ -1093,9 +1093,9 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Look for tar file
-        if ($p_mode === 'tar') {
+        if ('tar' === $p_mode) {
             // ----- Open the tar file
-            if (($p_tar = fopen($p_tarname, 'wb')) == 0) {
+            if (0 == ($p_tar = fopen($p_tarname, 'wb'))) {
                 // ----- Error log
                 PclErrorLog(-1, "Unable to open file [$p_tarname] in binary write mode");
 
@@ -1106,7 +1106,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Call the adding fct inside the tar
-            if (($v_result = PclTarHandleAddList($p_tar, $p_list, $p_mode, $v_list_detail, $p_add_dir, $p_remove_dir)) == 1) {
+            if (1 == ($v_result = PclTarHandleAddList($p_tar, $p_list, $p_mode, $v_list_detail, $p_add_dir, $p_remove_dir))) {
                 // ----- Call the footer of the tar archive
                 $v_result = PclTarHandleFooter($p_tar, $p_mode);
             }
@@ -1116,7 +1116,7 @@ if (!defined('PCL_TAR')) {
         } // ----- Look for tgz file
         else {
             // ----- Open the tar file
-            if (($p_tar = @gzopen($p_tarname, 'wb')) == 0) {
+            if (0 == ($p_tar = @gzopen($p_tarname, 'wb'))) {
                 // ----- Error log
                 PclErrorLog(-1, "Unable to open file [$p_tarname] in binary write mode");
 
@@ -1127,7 +1127,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Call the adding fct inside the tar
-            if (($v_result = PclTarHandleAddList($p_tar, $p_list, $p_mode, $v_list_detail, $p_add_dir, $p_remove_dir)) == 1) {
+            if (1 == ($v_result = PclTarHandleAddList($p_tar, $p_list, $p_mode, $v_list_detail, $p_add_dir, $p_remove_dir))) {
                 // ----- Call the footer of the tar archive
                 $v_result = PclTarHandleFooter($p_tar, $p_mode);
             }
@@ -1169,7 +1169,7 @@ if (!defined('PCL_TAR')) {
         $v_result = 1;
 
         // ----- Check the parameters
-        if ($p_tarname == '') {
+        if ('' == $p_tarname) {
             // ----- Error log
             PclErrorLog(-3, 'Invalid empty archive name');
 
@@ -1182,7 +1182,7 @@ if (!defined('PCL_TAR')) {
         clearstatcache();
 
         // ----- Check the file size
-        if ((!is_file($p_tarname)) || (((($v_size = filesize($p_tarname)) % 512) != 0) && ($p_mode === 'tar'))) {
+        if ((!is_file($p_tarname)) || ((0 != (($v_size = filesize($p_tarname)) % 512)) && ('tar' === $p_mode))) {
             // ----- Error log
             if (!is_file($p_tarname)) {
                 PclErrorLog(-4, "Archive '$p_tarname' does not exist");
@@ -1197,9 +1197,9 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Look for compressed archive
-        if ($p_mode === 'tgz') {
+        if ('tgz' === $p_mode) {
             // ----- Open the file in read mode
-            if (($p_tar = @gzopen($p_tarname, 'rb')) == 0) {
+            if (0 == ($p_tar = @gzopen($p_tarname, 'rb'))) {
                 // ----- Error log
                 PclErrorLog(-2, "Unable to open file '$p_tarname' in binary read mode");
 
@@ -1212,7 +1212,7 @@ if (!defined('PCL_TAR')) {
             // ----- Open a temporary file in write mode
             $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
-            if (($v_temp_tar = @gzopen($v_temp_tarname, 'wb')) == 0) {
+            if (0 == ($v_temp_tar = @gzopen($v_temp_tarname, 'wb'))) {
                 // ----- Close tar file
                 gzclose($p_tar);
 
@@ -1250,7 +1250,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Call the adding fct inside the tar
-            if (($v_result = PclTarHandleAddList($v_temp_tar, $p_list, $p_mode, $p_list_detail, $p_add_dir, $p_remove_dir)) == 1) {
+            if (1 == ($v_result = PclTarHandleAddList($v_temp_tar, $p_list, $p_mode, $p_list_detail, $p_add_dir, $p_remove_dir))) {
                 // ----- Call the footer of the tar archive
                 $v_result = PclTarHandleFooter($v_temp_tar, $p_mode);
             }
@@ -1281,9 +1281,9 @@ if (!defined('PCL_TAR')) {
 
             return $v_result;
         } // ----- Look for uncompressed tar file
-        elseif ($p_mode === 'tar') {
+        elseif ('tar' === $p_mode) {
             // ----- Open the tar file
-            if (($p_tar = fopen($p_tarname, 'r+b')) == 0) {
+            if (0 == ($p_tar = fopen($p_tarname, 'r+b'))) {
                 // ----- Error log
                 PclErrorLog(-1, "Unable to open file '$p_tarname' in binary write mode");
 
@@ -1294,12 +1294,12 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Go to the beginning of last block
-            TrFctMessage(__FILE__, __LINE__, 4, 'Position before :' . ($p_mode === 'tar' ? ftell($p_tar) : gztell($p_tar)));
+            TrFctMessage(__FILE__, __LINE__, 4, 'Position before :' . ('tar' === $p_mode ? ftell($p_tar) : gztell($p_tar)));
             fseek($p_tar, $v_size - 512);
-            TrFctMessage(__FILE__, __LINE__, 4, 'Position after :' . ($p_mode === 'tar' ? ftell($p_tar) : gztell($p_tar)));
+            TrFctMessage(__FILE__, __LINE__, 4, 'Position after :' . ('tar' === $p_mode ? ftell($p_tar) : gztell($p_tar)));
 
             // ----- Call the adding fct inside the tar
-            if (($v_result = PclTarHandleAddList($p_tar, $p_list, $p_mode, $p_list_detail, $p_add_dir, $p_remove_dir)) == 1) {
+            if (1 == ($v_result = PclTarHandleAddList($p_tar, $p_list, $p_mode, $p_list_detail, $p_add_dir, $p_remove_dir))) {
                 // ----- Call the footer of the tar archive
                 $v_result = PclTarHandleFooter($p_tar, $p_mode);
             }
@@ -1360,7 +1360,7 @@ if (!defined('PCL_TAR')) {
         $v_nb = count($p_list_detail);
 
         // ----- Check the parameters
-        if ($p_tar == 0) {
+        if (0 == $p_tar) {
             // ----- Error log
             PclErrorLog(-3, 'Invalid file descriptor in file ' . __FILE__ . ', line ' . __LINE__);
 
@@ -1371,7 +1371,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Check the arguments
-        if (count($p_list) == 0) {
+        if (0 == count($p_list)) {
             // ----- Error log
             PclErrorLog(-3, 'Invalid file list parameter (invalid or empty list)');
 
@@ -1382,14 +1382,14 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Loop on the files
-        for ($j = 0; ($j < count($p_list)) && ($v_result == 1); ++$j) {
+        for ($j = 0; ($j < count($p_list)) && (1 == $v_result); ++$j) {
             // ----- Recuperate the filename
             $p_filename = $p_list[$j];
 
             TrFctMessage(__FILE__, __LINE__, 2, "Looking for file [$p_filename]");
 
             // ----- Skip empty file names
-            if ($p_filename == '') {
+            if ('' == $p_filename) {
                 TrFctMessage(__FILE__, __LINE__, 2, 'Skip empty filename');
                 continue;
             }
@@ -1417,10 +1417,10 @@ if (!defined('PCL_TAR')) {
                 return PclErrorCode();
             }
 
-            TrFctMessage(__FILE__, __LINE__, 4, 'File position before header =' . ($p_mode === 'tar' ? ftell($p_tar) : gztell($p_tar)));
+            TrFctMessage(__FILE__, __LINE__, 4, 'File position before header =' . ('tar' === $p_mode ? ftell($p_tar) : gztell($p_tar)));
 
             // ----- Add the file
-            if (($v_result = PclTarHandleAddFile($p_tar, $p_filename, $p_mode, $v_header, $p_add_dir, $p_remove_dir)) != 1) {
+            if (1 != ($v_result = PclTarHandleAddFile($p_tar, $p_filename, $p_mode, $v_header, $p_add_dir, $p_remove_dir))) {
                 // ----- Return status
                 TrFctEnd(__FILE__, __LINE__, $v_result);
 
@@ -1435,7 +1435,7 @@ if (!defined('PCL_TAR')) {
                 TrFctMessage(__FILE__, __LINE__, 2, "$p_filename is a directory");
 
                 // ----- Look for path
-                if ($p_filename !== '.') {
+                if ('.' !== $p_filename) {
                     $v_path = $p_filename . '/';
                 } else {
                     $v_path = '';
@@ -1451,7 +1451,7 @@ if (!defined('PCL_TAR')) {
                         TrFctMessage(__FILE__, __LINE__, 4, "Add the file '" . $v_path . $p_hitem . "'");
 
                         // ----- Add the file
-                        if (($v_result = PclTarHandleAddFile($p_tar, $v_path . $p_hitem, $p_mode, $v_header, $p_add_dir, $p_remove_dir)) != 1) {
+                        if (1 != ($v_result = PclTarHandleAddFile($p_tar, $v_path . $p_hitem, $p_mode, $v_header, $p_add_dir, $p_remove_dir))) {
                             // ----- Return status
                             TrFctEnd(__FILE__, __LINE__, $v_result);
 
@@ -1473,7 +1473,7 @@ if (!defined('PCL_TAR')) {
                 // ----- Free memory for the recursive loop
                 unset($p_temp_list, $p_hdir, $p_hitem);
             } else {
-                TrFctMessage(__FILE__, __LINE__, 4, 'File position after blocks =' . ($p_mode === 'tar' ? ftell($p_tar) : gztell($p_tar)));
+                TrFctMessage(__FILE__, __LINE__, 4, 'File position after blocks =' . ('tar' === $p_mode ? ftell($p_tar) : gztell($p_tar)));
             }
         }
 
@@ -1507,7 +1507,7 @@ if (!defined('PCL_TAR')) {
         $v_result = 1;
 
         // ----- Check the parameters
-        if ($p_tar == 0) {
+        if (0 == $p_tar) {
             // ----- Error log
             PclErrorLog(-3, 'Invalid file descriptor in file ' . __FILE__ . ', line ' . __LINE__);
 
@@ -1518,7 +1518,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Skip empty file names
-        if ($p_filename == '') {
+        if ('' == $p_filename) {
             // ----- Error log
             PclErrorLog(-3, 'Invalid file list parameter (invalid or empty list)');
 
@@ -1530,16 +1530,16 @@ if (!defined('PCL_TAR')) {
 
         // ----- Calculate the stored filename
         $v_stored_filename = $p_filename;
-        if ($p_remove_dir != '') {
-            if (substr($p_remove_dir, -1) !== '/') {
+        if ('' != $p_remove_dir) {
+            if ('/' !== substr($p_remove_dir, -1)) {
                 $p_remove_dir .= '/';
             }
 
-            if ((substr($p_filename, 0, 2) === './') || (substr($p_remove_dir, 0, 2) === './')) {
-                if ((substr($p_filename, 0, 2) === './') && (substr($p_remove_dir, 0, 2) !== './')) {
+            if (('./' === substr($p_filename, 0, 2)) || ('./' === substr($p_remove_dir, 0, 2))) {
+                if (('./' === substr($p_filename, 0, 2)) && ('./' !== substr($p_remove_dir, 0, 2))) {
                     $p_remove_dir = './' . $p_remove_dir;
                 }
-                if ((substr($p_filename, 0, 2) !== './') && (substr($p_remove_dir, 0, 2) === './')) {
+                if (('./' !== substr($p_filename, 0, 2)) && ('./' === substr($p_remove_dir, 0, 2))) {
                     $p_remove_dir = substr($p_remove_dir, 2);
                 }
             }
@@ -1549,8 +1549,8 @@ if (!defined('PCL_TAR')) {
                 TrFctMessage(__FILE__, __LINE__, 3, "Remove path '$p_remove_dir' in file '$p_filename' = '$v_stored_filename'");
             }
         }
-        if ($p_add_dir != '') {
-            if (substr($p_add_dir, -1) === '/') {
+        if ('' != $p_add_dir) {
+            if ('/' === substr($p_add_dir, -1)) {
                 $v_stored_filename = $p_add_dir . $v_stored_filename;
             } else {
                 $v_stored_filename = $p_add_dir . '/' . $v_stored_filename;
@@ -1572,7 +1572,7 @@ if (!defined('PCL_TAR')) {
         // ----- Look for a file
         if (is_file($p_filename)) {
             // ----- Open the source file
-            if (($v_file = fopen($p_filename, 'rb')) == 0) {
+            if (0 == ($v_file = fopen($p_filename, 'rb'))) {
                 // ----- Error log
                 PclErrorLog(-2, "Unable to open file '$p_filename' in binary read mode");
 
@@ -1583,20 +1583,20 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Call the header generation
-            if (($v_result = PclTarHandleHeader($p_tar, $p_filename, $p_mode, $p_header, $v_stored_filename)) != 1) {
+            if (1 != ($v_result = PclTarHandleHeader($p_tar, $p_filename, $p_mode, $p_header, $v_stored_filename))) {
                 // ----- Return status
                 TrFctEnd(__FILE__, __LINE__, $v_result);
 
                 return $v_result;
             }
 
-            TrFctMessage(__FILE__, __LINE__, 4, 'File position after header =' . ($p_mode === 'tar' ? ftell($p_tar) : gztell($p_tar)));
+            TrFctMessage(__FILE__, __LINE__, 4, 'File position after header =' . ('tar' === $p_mode ? ftell($p_tar) : gztell($p_tar)));
 
             // ----- Read the file by 512 octets blocks
             $i = 0;
-            while (($v_buffer = fread($v_file, 512)) != '') {
+            while ('' != ($v_buffer = fread($v_file, 512))) {
                 $v_binary_data = pack('a512', "$v_buffer");
-                if ($p_mode === 'tar') {
+                if ('tar' === $p_mode) {
                     fwrite($p_tar, $v_binary_data);
                 } else {
                     gzputs($p_tar, $v_binary_data);
@@ -1608,18 +1608,18 @@ if (!defined('PCL_TAR')) {
             // ----- Close the file
             fclose($v_file);
 
-            TrFctMessage(__FILE__, __LINE__, 4, 'File position after blocks =' . ($p_mode === 'tar' ? ftell($p_tar) : gztell($p_tar)));
+            TrFctMessage(__FILE__, __LINE__, 4, 'File position after blocks =' . ('tar' === $p_mode ? ftell($p_tar) : gztell($p_tar)));
         } // ----- Look for a directory
         else {
             // ----- Call the header generation
-            if (($v_result = PclTarHandleHeader($p_tar, $p_filename, $p_mode, $p_header, $v_stored_filename)) != 1) {
+            if (1 != ($v_result = PclTarHandleHeader($p_tar, $p_filename, $p_mode, $p_header, $v_stored_filename))) {
                 // ----- Return status
                 TrFctEnd(__FILE__, __LINE__, $v_result);
 
                 return $v_result;
             }
 
-            TrFctMessage(__FILE__, __LINE__, 4, 'File position after header =' . ($p_mode === 'tar' ? ftell($p_tar) : gztell($p_tar)));
+            TrFctMessage(__FILE__, __LINE__, 4, 'File position after header =' . ('tar' === $p_mode ? ftell($p_tar) : gztell($p_tar)));
         }
 
         // ----- Return
@@ -1664,7 +1664,7 @@ if (!defined('PCL_TAR')) {
         $v_result = 1;
 
         // ----- Check the parameters
-        if (($p_tar == 0) || ($p_filename == '')) {
+        if ((0 == $p_tar) || ('' == $p_filename)) {
             // ----- Error log
             PclErrorLog(-3, 'Invalid file descriptor in file ' . __FILE__ . ', line ' . __LINE__);
 
@@ -1675,7 +1675,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Filename (reduce the path of stored name)
-        if ($p_stored_filename == '') {
+        if ('' == $p_stored_filename) {
             $p_stored_filename = $p_filename;
         }
         $v_reduce_filename = PclTarHandlePathReduction($p_stored_filename);
@@ -1758,7 +1758,7 @@ if (!defined('PCL_TAR')) {
         TrFctMessage(__FILE__, __LINE__, 3, "Calculated checksum : $v_checksum");
 
         // ----- Write the first 148 bytes of the header in the archive
-        if ($p_mode === 'tar') {
+        if ('tar' === $p_mode) {
             fwrite($p_tar, $v_binary_data_first, 148);
         } else {
             gzputs($p_tar, $v_binary_data_first, 148);
@@ -1767,14 +1767,14 @@ if (!defined('PCL_TAR')) {
         // ----- Write the calculated checksum
         $v_checksum    = sprintf('%6s ', decoct($v_checksum));
         $v_binary_data = pack('a8', $v_checksum);
-        if ($p_mode === 'tar') {
+        if ('tar' === $p_mode) {
             fwrite($p_tar, $v_binary_data, 8);
         } else {
             gzputs($p_tar, $v_binary_data, 8);
         }
 
         // ----- Write the last 356 bytes of the header in the archive
-        if ($p_mode === 'tar') {
+        if ('tar' === $p_mode) {
             fwrite($p_tar, $v_binary_data_last, 356);
         } else {
             gzputs($p_tar, $v_binary_data_last, 356);
@@ -1817,7 +1817,7 @@ if (!defined('PCL_TAR')) {
 
         // ----- Write the last 0 filled block for end of archive
         $v_binary_data = pack('a512', '');
-        if ($p_mode === 'tar') {
+        if ('tar' === $p_mode) {
             fwrite($p_tar, $v_binary_data);
         } else {
             gzputs($p_tar, $v_binary_data);
@@ -1879,12 +1879,12 @@ if (!defined('PCL_TAR')) {
 
         // ----- Check the path
         //if (($p_path == "") || ((substr($p_path, 0, 1) != "/") && (substr($p_path, 0, 3) != "../")))
-        if ($p_path == '') {
+        if ('' == $p_path) {
             $p_path = './' . $p_path;
         }
 
         // ----- Look for path to remove format (should end by /)
-        if (($p_remove_path != '') && (substr($p_remove_path, -1) !== '/')) {
+        if (('' != $p_remove_path) && ('/' !== substr($p_remove_path, -1))) {
             $p_remove_path .= '/';
         }
         $p_remove_path_size = strlen($p_remove_path);
@@ -1917,7 +1917,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Open the tar file
-        if ($p_tar_mode === 'tar') {
+        if ('tar' === $p_tar_mode) {
             TrFctMessage(__FILE__, __LINE__, 3, 'Open file in binary read mode');
             $v_tar = fopen($p_tarname, 'rb');
         } else {
@@ -1926,7 +1926,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Check that the archive is open
-        if ($v_tar == 0) {
+        if (0 == $v_tar) {
             // ----- Error log
             PclErrorLog(-2, "Unable to open archive '$p_tarname' in binary read mode");
 
@@ -1937,7 +1937,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Read the blocks
-        while (!($v_end_of_file = ($p_tar_mode === 'tar' ? feof($v_tar) : gzeof($v_tar)))) {
+        while (!($v_end_of_file = ('tar' === $p_tar_mode ? feof($v_tar) : gzeof($v_tar)))) {
             TrFctMessage(__FILE__, __LINE__, 3, 'Looking for next header ...');
 
             // ----- Clear cache of file infos
@@ -1948,16 +1948,16 @@ if (!defined('PCL_TAR')) {
             $v_extraction_stopped = 0;
 
             // ----- Read the 512 bytes header
-            if ($p_tar_mode === 'tar') {
+            if ('tar' === $p_tar_mode) {
                 $v_binary_data = fread($v_tar, 512);
             } else {
                 $v_binary_data = gzread($v_tar, 512);
             }
 
             // ----- Read the header properties
-            if (($v_result = PclTarHandleReadHeader($v_binary_data, $v_header)) != 1) {
+            if (1 != ($v_result = PclTarHandleReadHeader($v_binary_data, $v_header))) {
                 // ----- Close the archive file
-                if ($p_tar_mode === 'tar') {
+                if ('tar' === $p_tar_mode) {
                     fclose($v_tar);
                 } else {
                     gzclose($v_tar);
@@ -1970,7 +1970,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Look for empty blocks to skip
-            if ($v_header['filename'] == '') {
+            if ('' == $v_header['filename']) {
                 TrFctMessage(__FILE__, __LINE__, 2, 'Empty block found. End of archive?');
                 continue;
             }
@@ -1989,7 +1989,7 @@ if (!defined('PCL_TAR')) {
                     TrFctMessage(__FILE__, __LINE__, 2, 'Compare archived file ' . $v_header['filename'] . " from asked list file '" . $p_file_list[$i] . "'");
 
                     // ----- Look if it is a directory
-                    if (substr($p_file_list[$i], -1) === '/') {
+                    if ('/' === substr($p_file_list[$i], -1)) {
                         TrFctMessage(__FILE__, __LINE__, 3, 'Compare file ' . $v_header['filename'] . " with directory '$p_file_list[$i]'");
 
                         // ----- Look if the directory is in the filename path
@@ -2025,7 +2025,7 @@ if (!defined('PCL_TAR')) {
             // ----- Look if this file need to be extracted
             if ($v_extract_file && (!$v_listing)) {
                 // ----- Look for path to remove
-                if (($p_remove_path != '')
+                if (('' != $p_remove_path)
                     && (substr($v_header['filename'], 0, $p_remove_path_size) == $p_remove_path)) {
                     TrFctMessage(__FILE__, __LINE__, 3, "Found path '$p_remove_path' to remove in file " . $v_header['filename'] . '');
                     // ----- Remove the path
@@ -2034,16 +2034,16 @@ if (!defined('PCL_TAR')) {
                 }
 
                 // ----- Add the path to the file
-                if (($p_path !== './') && ($p_path !== '/')) {
+                if (('./' !== $p_path) && ('/' !== $p_path)) {
                     // ----- Look for the path end '/'
-                    while (substr($p_path, -1) === '/') {
+                    while ('/' === substr($p_path, -1)) {
                         TrFctMessage(__FILE__, __LINE__, 3, "Destination path [$p_path] ends by '/'");
                         $p_path = substr($p_path, 0, -1);
                         TrFctMessage(__FILE__, __LINE__, 3, "Modified to [$p_path]");
                     }
 
                     // ----- Add the path
-                    if (substr($v_header['filename'], 0, 1) === '/') {
+                    if ('/' === substr($v_header['filename'], 0, 1)) {
                         $v_header['filename'] = $p_path . $v_header['filename'];
                     } else {
                         $v_header['filename'] = $p_path . '/' . $v_header['filename'];
@@ -2091,7 +2091,7 @@ if (!defined('PCL_TAR')) {
           }*/
                 } // ----- Check the directory availability and create it if necessary
                 else {
-                    if ($v_header['typeflag'] == '5') {
+                    if ('5' == $v_header['typeflag']) {
                         $v_dir_to_check = $v_header['filename'];
                     } elseif (false === strpos($v_header['filename'], '/')) {
                         $v_dir_to_check = '';
@@ -2099,7 +2099,7 @@ if (!defined('PCL_TAR')) {
                         $v_dir_to_check = dirname($v_header['filename']);
                     }
 
-                    if (($v_result = PclTarHandlerDirCheck($v_dir_to_check)) != 1) {
+                    if (1 != ($v_result = PclTarHandlerDirCheck($v_dir_to_check))) {
                         TrFctMessage(__FILE__, __LINE__, 2, 'Unable to create path for ' . $v_header['filename'] . '');
 
                         // ----- Change the file status
@@ -2112,9 +2112,9 @@ if (!defined('PCL_TAR')) {
                 }
 
                 // ----- Do the extraction
-                if ($v_extract_file && ($v_header['typeflag'] != '5')) {
+                if ($v_extract_file && ('5' != $v_header['typeflag'])) {
                     // ----- Open the destination file in write mode
-                    if (($v_dest_file = @fopen($v_header['filename'], 'wb')) == 0) {
+                    if (0 == ($v_dest_file = @fopen($v_header['filename'], 'wb'))) {
                         TrFctMessage(__FILE__, __LINE__, 2, 'Error while opening ' . $v_header['filename'] . ' in write binary mode');
 
                         // ----- Change the file status
@@ -2122,7 +2122,7 @@ if (!defined('PCL_TAR')) {
 
                         // ----- Jump to next file
                         TrFctMessage(__FILE__, __LINE__, 2, 'Jump to next file');
-                        if ($p_tar_mode === 'tar') {
+                        if ('tar' === $p_tar_mode) {
                             fseek($v_tar, ftell($v_tar) + (ceil($v_header['size'] / 512) * 512));
                         } else {
                             gzseek($v_tar, gztell($v_tar) + (ceil($v_header['size'] / 512) * 512));
@@ -2134,16 +2134,16 @@ if (!defined('PCL_TAR')) {
                         $n = floor($v_header['size'] / 512);
                         for ($i = 0; $i < $n; ++$i) {
                             TrFctMessage(__FILE__, __LINE__, 3, 'Read complete 512 bytes block number ' . ($i + 1));
-                            if ($p_tar_mode === 'tar') {
+                            if ('tar' === $p_tar_mode) {
                                 $v_content = fread($v_tar, 512);
                             } else {
                                 $v_content = gzread($v_tar, 512);
                             }
                             fwrite($v_dest_file, $v_content, 512);
                         }
-                        if (($v_header['size'] % 512) != 0) {
+                        if (0 != ($v_header['size'] % 512)) {
                             TrFctMessage(__FILE__, __LINE__, 3, 'Read last ' . ($v_header['size'] % 512) . ' bytes in a 512 block');
-                            if ($p_tar_mode === 'tar') {
+                            if ('tar' === $p_tar_mode) {
                                 $v_content = fread($v_tar, 512);
                             } else {
                                 $v_content = gzread($v_tar, 512);
@@ -2163,7 +2163,7 @@ if (!defined('PCL_TAR')) {
                     clearstatcache();
                     if (filesize($v_header['filename']) != $v_header['size']) {
                         // ----- Close the archive file
-                        if ($p_tar_mode === 'tar') {
+                        if ('tar' === $p_tar_mode) {
                             fclose($v_tar);
                         } else {
                             gzclose($v_tar);
@@ -2185,7 +2185,7 @@ if (!defined('PCL_TAR')) {
 
                     // ----- Jump to next file
                     TrFctMessage(__FILE__, __LINE__, 2, 'Jump to next file');
-                    if ($p_tar_mode === 'tar') {
+                    if ('tar' === $p_tar_mode) {
                         fseek($v_tar, ftell($v_tar) + (ceil($v_header['size'] / 512) * 512));
                     } else {
                         gzseek($v_tar, gztell($v_tar) + (ceil($v_header['size'] / 512) * 512));
@@ -2195,19 +2195,19 @@ if (!defined('PCL_TAR')) {
             else {
                 // ----- Trace
                 TrFctMessage(__FILE__, __LINE__, 2, 'Jump file ' . $v_header['filename'] . '');
-                TrFctMessage(__FILE__, __LINE__, 4, 'Position avant jump [' . ($p_tar_mode === 'tar' ? ftell($v_tar) : gztell($v_tar)) . ']');
+                TrFctMessage(__FILE__, __LINE__, 4, 'Position avant jump [' . ('tar' === $p_tar_mode ? ftell($v_tar) : gztell($v_tar)) . ']');
 
                 // ----- Jump to next file
-                if ($p_tar_mode === 'tar') {
-                    fseek($v_tar, ($p_tar_mode === 'tar' ? ftell($v_tar) : gztell($v_tar)) + (ceil($v_header['size'] / 512) * 512));
+                if ('tar' === $p_tar_mode) {
+                    fseek($v_tar, ('tar' === $p_tar_mode ? ftell($v_tar) : gztell($v_tar)) + (ceil($v_header['size'] / 512) * 512));
                 } else {
                     gzseek($v_tar, gztell($v_tar) + (ceil($v_header['size'] / 512) * 512));
                 }
 
-                TrFctMessage(__FILE__, __LINE__, 4, 'Position après jump [' . ($p_tar_mode === 'tar' ? ftell($v_tar) : gztell($v_tar)) . ']');
+                TrFctMessage(__FILE__, __LINE__, 4, 'Position après jump [' . ('tar' === $p_tar_mode ? ftell($v_tar) : gztell($v_tar)) . ']');
             }
 
-            if ($p_tar_mode === 'tar') {
+            if ('tar' === $p_tar_mode) {
                 $v_end_of_file = feof($v_tar);
             } else {
                 $v_end_of_file = gzeof($v_tar);
@@ -2221,7 +2221,7 @@ if (!defined('PCL_TAR')) {
                 if (($v_file_dir = dirname($v_header['filename'])) == $v_header['filename']) {
                     $v_file_dir = '';
                 }
-                if ((substr($v_header['filename'], 0, 1) === '/') && ($v_file_dir == '')) {
+                if (('/' === substr($v_header['filename'], 0, 1)) && ('' == $v_file_dir)) {
                     $v_file_dir = '/';
                 }
 
@@ -2234,7 +2234,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Close the tarfile
-        if ($p_tar_mode === 'tar') {
+        if ('tar' === $p_tar_mode) {
             fclose($v_tar);
         } else {
             gzclose($v_tar);
@@ -2286,20 +2286,20 @@ if (!defined('PCL_TAR')) {
         // ----- TBC : I should check the string by a regexp
 
         // ----- Check the path
-        if (($p_path == '')
-            || ((substr($p_path, 0, 1) !== '/') && (substr($p_path, 0, 3) !== '../')
-                && (substr($p_path, 0, 2) !== './'))) {
+        if (('' == $p_path)
+            || (('/' !== substr($p_path, 0, 1)) && ('../' !== substr($p_path, 0, 3))
+                && ('./' !== substr($p_path, 0, 2)))) {
             $p_path = './' . $p_path;
         }
 
         // ----- Look for path to remove format (should end by /)
-        if (($p_remove_path != '') && (substr($p_remove_path, -1) !== '/')) {
+        if (('' != $p_remove_path) && ('/' !== substr($p_remove_path, -1))) {
             $p_remove_path .= '/';
         }
         $p_remove_path_size = strlen($p_remove_path);
 
         // ----- Open the tar file
-        if ($p_tar_mode === 'tar') {
+        if ('tar' === $p_tar_mode) {
             TrFctMessage(__FILE__, __LINE__, 3, 'Open file in binary read mode');
             $v_tar = @fopen($p_tarname, 'rb');
         } else {
@@ -2308,7 +2308,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Check that the archive is open
-        if ($v_tar == 0) {
+        if (0 == $v_tar) {
             // ----- Error log
             PclErrorLog(-2, "Unable to open archive '$p_tarname' in binary read mode");
 
@@ -2330,12 +2330,12 @@ if (!defined('PCL_TAR')) {
             // ----- Extract range
             $v_index_list      = explode('-', $v_list[$i]);
             $v_size_index_list = count($v_index_list);
-            if ($v_size_index_list == 1) {
+            if (1 == $v_size_index_list) {
                 TrFctMessage(__FILE__, __LINE__, 3, "Only one index '$v_index_list[0]'");
 
                 // ----- Do the extraction
                 $v_result = PclTarHandleExtractByIndex($v_tar, $v_index, $v_index_list[0], $v_index_list[0], $p_list_detail, $p_path, $p_remove_path, $p_tar_mode);
-            } elseif ($v_size_index_list == 2) {
+            } elseif (2 == $v_size_index_list) {
                 TrFctMessage(__FILE__, __LINE__, 3, "Two indexes '$v_index_list[0]' and '$v_index_list[1]'");
 
                 // ----- Do the extraction
@@ -2344,7 +2344,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Close the tarfile
-        if ($p_tar_mode === 'tar') {
+        if ('tar' === $p_tar_mode) {
             fclose($v_tar);
         } else {
             gzclose($v_tar);
@@ -2397,7 +2397,7 @@ if (!defined('PCL_TAR')) {
         $v_nb = count($p_list_detail);
 
         // ----- Read the blocks
-        while (!($v_end_of_file = ($p_tar_mode === 'tar' ? feof($v_tar) : gzeof($v_tar)))) {
+        while (!($v_end_of_file = ('tar' === $p_tar_mode ? feof($v_tar) : gzeof($v_tar)))) {
             TrFctMessage(__FILE__, __LINE__, 3, 'Looking for next file ...');
             TrFctMessage(__FILE__, __LINE__, 3, "Index current=$p_index_current, range=[$p_index_start, $p_index_stop])");
 
@@ -2414,14 +2414,14 @@ if (!defined('PCL_TAR')) {
             $v_extraction_stopped = 0;
 
             // ----- Read the 512 bytes header
-            if ($p_tar_mode === 'tar') {
+            if ('tar' === $p_tar_mode) {
                 $v_binary_data = fread($v_tar, 512);
             } else {
                 $v_binary_data = gzread($v_tar, 512);
             }
 
             // ----- Read the header properties
-            if (($v_result = PclTarHandleReadHeader($v_binary_data, $v_header)) != 1) {
+            if (1 != ($v_result = PclTarHandleReadHeader($v_binary_data, $v_header))) {
                 // ----- Return
                 TrFctEnd(__FILE__, __LINE__, $v_result);
 
@@ -2429,7 +2429,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Look for empty blocks to skip
-            if ($v_header['filename'] == '') {
+            if ('' == $v_header['filename']) {
                 TrFctMessage(__FILE__, __LINE__, 2, 'Empty block found. End of archive?');
                 continue;
             }
@@ -2447,7 +2447,7 @@ if (!defined('PCL_TAR')) {
 
             // ----- Look if this file need to be extracted
             if ($v_extract_file) {
-                if (($v_result = PclTarHandleExtractFile($v_tar, $v_header, $p_path, $p_remove_path, $p_tar_mode)) != 1) {
+                if (1 != ($v_result = PclTarHandleExtractFile($v_tar, $v_header, $p_path, $p_remove_path, $p_tar_mode))) {
                     // ----- Return
                     TrFctEnd(__FILE__, __LINE__, $v_result);
 
@@ -2457,19 +2457,19 @@ if (!defined('PCL_TAR')) {
             else {
                 // ----- Trace
                 TrFctMessage(__FILE__, __LINE__, 2, 'Jump file ' . $v_header['filename'] . '');
-                TrFctMessage(__FILE__, __LINE__, 4, 'Position avant jump [' . ($p_tar_mode === 'tar' ? ftell($v_tar) : gztell($v_tar)) . ']');
+                TrFctMessage(__FILE__, __LINE__, 4, 'Position avant jump [' . ('tar' === $p_tar_mode ? ftell($v_tar) : gztell($v_tar)) . ']');
 
                 // ----- Jump to next file
-                if ($p_tar_mode === 'tar') {
-                    fseek($v_tar, ($p_tar_mode === 'tar' ? ftell($v_tar) : gztell($v_tar)) + (ceil($v_header['size'] / 512) * 512));
+                if ('tar' === $p_tar_mode) {
+                    fseek($v_tar, ('tar' === $p_tar_mode ? ftell($v_tar) : gztell($v_tar)) + (ceil($v_header['size'] / 512) * 512));
                 } else {
                     gzseek($v_tar, gztell($v_tar) + (ceil($v_header['size'] / 512) * 512));
                 }
 
-                TrFctMessage(__FILE__, __LINE__, 4, 'Position après jump [' . ($p_tar_mode === 'tar' ? ftell($v_tar) : gztell($v_tar)) . ']');
+                TrFctMessage(__FILE__, __LINE__, 4, 'Position après jump [' . ('tar' === $p_tar_mode ? ftell($v_tar) : gztell($v_tar)) . ']');
             }
 
-            if ($p_tar_mode === 'tar') {
+            if ('tar' === $p_tar_mode) {
                 $v_end_of_file = feof($v_tar);
             } else {
                 $v_end_of_file = gzeof($v_tar);
@@ -2483,7 +2483,7 @@ if (!defined('PCL_TAR')) {
                 if (($v_file_dir = dirname($v_header['filename'])) == $v_header['filename']) {
                     $v_file_dir = '';
                 }
-                if ((substr($v_header['filename'], 0, 1) === '/') && ($v_file_dir === '')) {
+                if (('/' === substr($v_header['filename'], 0, 1)) && ('' === $v_file_dir)) {
                     $v_file_dir = '/';
                 }
 
@@ -2533,7 +2533,7 @@ if (!defined('PCL_TAR')) {
         $p_remove_path_size = strlen($p_remove_path);
 
         // ----- Look for path to remove
-        if (($p_remove_path != '') && (substr($v_header['filename'], 0, $p_remove_path_size) == $p_remove_path)) {
+        if (('' != $p_remove_path) && (substr($v_header['filename'], 0, $p_remove_path_size) == $p_remove_path)) {
             TrFctMessage(__FILE__, __LINE__, 3, "Found path '$p_remove_path' to remove in file " . $v_header['filename'] . '');
             // ----- Remove the path
             $v_header['filename'] = substr($v_header['filename'], $p_remove_path_size);
@@ -2541,16 +2541,16 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Add the path to the file
-        if (($p_path !== './') && ($p_path !== '/')) {
+        if (('./' !== $p_path) && ('/' !== $p_path)) {
             // ----- Look for the path end '/'
-            while (substr($p_path, -1) === '/') {
+            while ('/' === substr($p_path, -1)) {
                 TrFctMessage(__FILE__, __LINE__, 3, "Destination path [$p_path] ends by '/'");
                 $p_path = substr($p_path, 0, -1);
                 TrFctMessage(__FILE__, __LINE__, 3, "Modified to [$p_path]");
             }
 
             // ----- Add the path
-            if (substr($v_header['filename'], 0, 1) === '/') {
+            if ('/' === substr($v_header['filename'], 0, 1)) {
                 $v_header['filename'] = $p_path . $v_header['filename'];
             } else {
                 $v_header['filename'] = $p_path . '/' . $v_header['filename'];
@@ -2597,7 +2597,7 @@ if (!defined('PCL_TAR')) {
             }
         } // ----- Check the directory availability and create it if necessary
         else {
-            if ($v_header['typeflag'] == '5') {
+            if ('5' == $v_header['typeflag']) {
                 $v_dir_to_check = $v_header['filename'];
             } elseif (false === strpos($v_header['filename'], '/')) {
                 $v_dir_to_check = '';
@@ -2605,7 +2605,7 @@ if (!defined('PCL_TAR')) {
                 $v_dir_to_check = dirname($v_header['filename']);
             }
 
-            if (($v_result = PclTarHandlerDirCheck($v_dir_to_check)) != 1) {
+            if (1 != ($v_result = PclTarHandlerDirCheck($v_dir_to_check))) {
                 TrFctMessage(__FILE__, __LINE__, 2, 'Unable to create path for ' . $v_header['filename'] . '');
 
                 // ----- Change the file status
@@ -2618,9 +2618,9 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Do the real bytes extraction (if not a directory)
-        if ($v_extract_file && ($v_header['typeflag'] != '5')) {
+        if ($v_extract_file && ('5' != $v_header['typeflag'])) {
             // ----- Open the destination file in write mode
-            if (($v_dest_file = @fopen($v_header['filename'], 'wb')) == 0) {
+            if (0 == ($v_dest_file = @fopen($v_header['filename'], 'wb'))) {
                 TrFctMessage(__FILE__, __LINE__, 2, 'Error while opening ' . $v_header['filename'] . ' in write binary mode');
 
                 // ----- Change the file status
@@ -2628,7 +2628,7 @@ if (!defined('PCL_TAR')) {
 
                 // ----- Jump to next file
                 TrFctMessage(__FILE__, __LINE__, 2, 'Jump to next file');
-                if ($p_tar_mode === 'tar') {
+                if ('tar' === $p_tar_mode) {
                     fseek($v_tar, ftell($v_tar) + (ceil($v_header['size'] / 512) * 512));
                 } else {
                     gzseek($v_tar, gztell($v_tar) + (ceil($v_header['size'] / 512) * 512));
@@ -2640,16 +2640,16 @@ if (!defined('PCL_TAR')) {
                 $n = floor($v_header['size'] / 512);
                 for ($i = 0; $i < $n; ++$i) {
                     TrFctMessage(__FILE__, __LINE__, 3, 'Read complete 512 bytes block number ' . ($i + 1));
-                    if ($p_tar_mode === 'tar') {
+                    if ('tar' === $p_tar_mode) {
                         $v_content = fread($v_tar, 512);
                     } else {
                         $v_content = gzread($v_tar, 512);
                     }
                     fwrite($v_dest_file, $v_content, 512);
                 }
-                if (($v_header['size'] % 512) != 0) {
+                if (0 != ($v_header['size'] % 512)) {
                     TrFctMessage(__FILE__, __LINE__, 3, 'Read last ' . ($v_header['size'] % 512) . ' bytes in a 512 block');
-                    if ($p_tar_mode === 'tar') {
+                    if ('tar' === $p_tar_mode) {
                         $v_content = fread($v_tar, 512);
                     } else {
                         $v_content = gzread($v_tar, 512);
@@ -2684,7 +2684,7 @@ if (!defined('PCL_TAR')) {
 
             // ----- Jump to next file
             TrFctMessage(__FILE__, __LINE__, 2, 'Jump to next file');
-            if ($p_tar_mode === 'tar') {
+            if ('tar' === $p_tar_mode) {
                 fseek($v_tar, ftell($v_tar) + (ceil($v_header['size'] / 512) * 512));
             } else {
                 gzseek($v_tar, gztell($v_tar) + (ceil($v_header['size'] / 512) * 512));
@@ -2720,10 +2720,10 @@ if (!defined('PCL_TAR')) {
         $v_nb     = 0;
 
         // ----- Look for regular tar file
-        if ($p_tar_mode === 'tar') {
+        if ('tar' === $p_tar_mode) {
             // ----- Open file
             TrFctMessage(__FILE__, __LINE__, 3, 'Open file in binary read mode');
-            if (($v_tar = @fopen($p_tarname, 'rb')) == 0) {
+            if (0 == ($v_tar = @fopen($p_tarname, 'rb'))) {
                 // ----- Error log
                 PclErrorLog(-2, "Unable to open file '$p_tarname' in binary read mode");
 
@@ -2736,7 +2736,7 @@ if (!defined('PCL_TAR')) {
             // ----- Open a temporary file in write mode
             $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
-            if (($v_temp_tar = @fopen($v_temp_tarname, 'wb')) == 0) {
+            if (0 == ($v_temp_tar = @fopen($v_temp_tarname, 'wb'))) {
                 // ----- Close tar file
                 fclose($v_tar);
 
@@ -2752,7 +2752,7 @@ if (!defined('PCL_TAR')) {
         else {
             // ----- Open the file in read mode
             TrFctMessage(__FILE__, __LINE__, 3, 'Open file in gzip binary read mode');
-            if (($v_tar = @gzopen($p_tarname, 'rb')) == 0) {
+            if (0 == ($v_tar = @gzopen($p_tarname, 'rb'))) {
                 // ----- Error log
                 PclErrorLog(-2, "Unable to open file '$p_tarname' in binary read mode");
 
@@ -2765,7 +2765,7 @@ if (!defined('PCL_TAR')) {
             // ----- Open a temporary file in write mode
             $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
-            if (($v_temp_tar = @gzopen($v_temp_tarname, 'wb')) == 0) {
+            if (0 == ($v_temp_tar = @gzopen($v_temp_tarname, 'wb'))) {
                 // ----- Close tar file
                 gzclose($v_tar);
 
@@ -2780,7 +2780,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Read the blocks
-        while (!($v_end_of_file = ($p_tar_mode === 'tar' ? feof($v_tar) : gzeof($v_tar)))) {
+        while (!($v_end_of_file = ('tar' === $p_tar_mode ? feof($v_tar) : gzeof($v_tar)))) {
             TrFctMessage(__FILE__, __LINE__, 3, 'Looking for next header ...');
 
             // ----- Clear cache of file infos
@@ -2790,16 +2790,16 @@ if (!defined('PCL_TAR')) {
             $v_delete_file = false;
 
             // ----- Read the first 512 block header
-            if ($p_tar_mode === 'tar') {
+            if ('tar' === $p_tar_mode) {
                 $v_binary_data = fread($v_tar, 512);
             } else {
                 $v_binary_data = gzread($v_tar, 512);
             }
 
             // ----- Read the header properties
-            if (($v_result = PclTarHandleReadHeader($v_binary_data, $v_header)) != 1) {
+            if (1 != ($v_result = PclTarHandleReadHeader($v_binary_data, $v_header))) {
                 // ----- Close the archive file
-                if ($p_tar_mode === 'tar') {
+                if ('tar' === $p_tar_mode) {
                     fclose($v_tar);
                     fclose($v_temp_tar);
                 } else {
@@ -2815,7 +2815,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Look for empty blocks to skip
-            if ($v_header['filename'] == '') {
+            if ('' == $v_header['filename']) {
                 TrFctMessage(__FILE__, __LINE__, 2, 'Empty block found. End of archive?');
                 continue;
             }
@@ -2827,12 +2827,12 @@ if (!defined('PCL_TAR')) {
                 // ----- Compare the file names
                 //        if ($p_file_list[$i] == $v_header['filename'])
                 if (($v_len = strcmp($p_file_list[$i], $v_header['filename'])) <= 0) {
-                    if ($v_len == 0) {
+                    if (0 == $v_len) {
                         TrFctMessage(__FILE__, __LINE__, 3, 'Found that ' . $v_header['filename'] . ' need to be deleted');
                         $v_delete_file = true;
                     } else {
                         TrFctMessage(__FILE__, __LINE__, 3, 'Look if ' . $v_header['filename'] . " is a file in $p_file_list[$i]");
-                        if (substr($v_header['filename'], strlen($p_file_list[$i]), 1) === '/') {
+                        if ('/' === substr($v_header['filename'], strlen($p_file_list[$i]), 1)) {
                             TrFctMessage(__FILE__, __LINE__, 3, '' . $v_header['filename'] . " is a file in $p_file_list[$i]");
                             $v_delete_file = true;
                         }
@@ -2845,7 +2845,7 @@ if (!defined('PCL_TAR')) {
                 TrFctMessage(__FILE__, __LINE__, 2, 'Keep file ' . $v_header['filename'] . '');
 
                 // ----- Write the file header
-                if ($p_tar_mode === 'tar') {
+                if ('tar' === $p_tar_mode) {
                     fwrite($v_temp_tar, $v_binary_data, 512);
                 } else {
                     gzputs($v_temp_tar, $v_binary_data, 512);
@@ -2855,7 +2855,7 @@ if (!defined('PCL_TAR')) {
                 $n = ceil($v_header['size'] / 512);
                 for ($i = 0; $i < $n; ++$i) {
                     TrFctMessage(__FILE__, __LINE__, 3, 'Read complete 512 bytes block number ' . ($i + 1));
-                    if ($p_tar_mode === 'tar') {
+                    if ('tar' === $p_tar_mode) {
                         $v_content = fread($v_tar, 512);
                         fwrite($v_temp_tar, $v_content, 512);
                     } else {
@@ -2877,20 +2877,20 @@ if (!defined('PCL_TAR')) {
             else {
                 // ----- Trace
                 TrFctMessage(__FILE__, __LINE__, 2, 'Start deletion of ' . $v_header['filename'] . '');
-                TrFctMessage(__FILE__, __LINE__, 4, 'Position avant jump [' . ($p_tar_mode === 'tar' ? ftell($v_tar) : gztell($v_tar)) . ']');
+                TrFctMessage(__FILE__, __LINE__, 4, 'Position avant jump [' . ('tar' === $p_tar_mode ? ftell($v_tar) : gztell($v_tar)) . ']');
 
                 // ----- Jump to next file
-                if ($p_tar_mode === 'tar') {
+                if ('tar' === $p_tar_mode) {
                     fseek($v_tar, ftell($v_tar) + (ceil($v_header['size'] / 512) * 512));
                 } else {
                     gzseek($v_tar, gztell($v_tar) + (ceil($v_header['size'] / 512) * 512));
                 }
 
-                TrFctMessage(__FILE__, __LINE__, 4, 'Position après jump [' . ($p_tar_mode === 'tar' ? ftell($v_tar) : gztell($v_tar)) . ']');
+                TrFctMessage(__FILE__, __LINE__, 4, 'Position après jump [' . ('tar' === $p_tar_mode ? ftell($v_tar) : gztell($v_tar)) . ']');
             }
 
             // ----- Look for end of file
-            if ($p_tar_mode === 'tar') {
+            if ('tar' === $p_tar_mode) {
                 $v_end_of_file = feof($v_tar);
             } else {
                 $v_end_of_file = gzeof($v_tar);
@@ -2901,7 +2901,7 @@ if (!defined('PCL_TAR')) {
         PclTarHandleFooter($v_temp_tar, $p_tar_mode);
 
         // ----- Close the tarfile
-        if ($p_tar_mode === 'tar') {
+        if ('tar' === $p_tar_mode) {
             fclose($v_tar);
             fclose($v_temp_tar);
         } else {
@@ -2958,10 +2958,10 @@ if (!defined('PCL_TAR')) {
         $v_found_list = [];
 
         // ----- Look for regular tar file
-        if ($p_tar_mode === 'tar') {
+        if ('tar' === $p_tar_mode) {
             // ----- Open file
             TrFctMessage(__FILE__, __LINE__, 3, 'Open file in binary read mode');
-            if (($v_tar = @fopen($p_tarname, 'rb')) == 0) {
+            if (0 == ($v_tar = @fopen($p_tarname, 'rb'))) {
                 // ----- Error log
                 PclErrorLog(-2, "Unable to open file '$p_tarname' in binary read mode");
 
@@ -2974,7 +2974,7 @@ if (!defined('PCL_TAR')) {
             // ----- Open a temporary file in write mode
             $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
-            if (($v_temp_tar = @fopen($v_temp_tarname, 'wb')) == 0) {
+            if (0 == ($v_temp_tar = @fopen($v_temp_tarname, 'wb'))) {
                 // ----- Close tar file
                 fclose($v_tar);
 
@@ -2990,7 +2990,7 @@ if (!defined('PCL_TAR')) {
         else {
             // ----- Open the file in read mode
             TrFctMessage(__FILE__, __LINE__, 3, 'Open file in gzip binary read mode');
-            if (($v_tar = @gzopen($p_tarname, 'rb')) == 0) {
+            if (0 == ($v_tar = @gzopen($p_tarname, 'rb'))) {
                 // ----- Error log
                 PclErrorLog(-2, "Unable to open file '$p_tarname' in binary read mode");
 
@@ -3003,7 +3003,7 @@ if (!defined('PCL_TAR')) {
             // ----- Open a temporary file in write mode
             $v_temp_tarname = uniqid('pcltar-', true) . '.tmp';
             TrFctMessage(__FILE__, __LINE__, 2, "Creating temporary archive file $v_temp_tarname");
-            if (($v_temp_tar = @gzopen($v_temp_tarname, 'wb')) == 0) {
+            if (0 == ($v_temp_tar = @gzopen($v_temp_tarname, 'wb'))) {
                 // ----- Close tar file
                 gzclose($v_tar);
 
@@ -3024,8 +3024,8 @@ if (!defined('PCL_TAR')) {
 
             // ----- Calculate the stored filename
             $v_stored_list[$i] = $p_file_list[$i];
-            if ($p_remove_dir != '') {
-                if (substr($p_file_list[$i], -1) !== '/') {
+            if ('' != $p_remove_dir) {
+                if ('/' !== substr($p_file_list[$i], -1)) {
                     $p_remove_dir .= '/';
                 }
 
@@ -3034,8 +3034,8 @@ if (!defined('PCL_TAR')) {
                     TrFctMessage(__FILE__, __LINE__, 3, "Remove path '$p_remove_dir' in file '$p_file_list[$i]' = '$v_stored_list[$i]'");
                 }
             }
-            if ($p_add_dir != '') {
-                if (substr($p_add_dir, -1) === '/') {
+            if ('' != $p_add_dir) {
+                if ('/' === substr($p_add_dir, -1)) {
                     $v_stored_list[$i] = $p_add_dir . $v_stored_list[$i];
                 } else {
                     $v_stored_list[$i] = $p_add_dir . '/' . $v_stored_list[$i];
@@ -3050,7 +3050,7 @@ if (!defined('PCL_TAR')) {
         clearstatcache();
 
         // ----- Read the blocks
-        while (!($v_end_of_file = ($p_tar_mode === 'tar' ? feof($v_tar) : gzeof($v_tar)))) {
+        while (!($v_end_of_file = ('tar' === $p_tar_mode ? feof($v_tar) : gzeof($v_tar)))) {
             TrFctMessage(__FILE__, __LINE__, 3, 'Looking for next header ...');
 
             // ----- Clear cache of file infos
@@ -3063,16 +3063,16 @@ if (!defined('PCL_TAR')) {
             $v_delete_file = false;
 
             // ----- Read the first 512 block header
-            if ($p_tar_mode === 'tar') {
+            if ('tar' === $p_tar_mode) {
                 $v_binary_data = fread($v_tar, 512);
             } else {
                 $v_binary_data = gzread($v_tar, 512);
             }
 
             // ----- Read the header properties
-            if (($v_result = PclTarHandleReadHeader($v_binary_data, $v_header)) != 1) {
+            if (1 != ($v_result = PclTarHandleReadHeader($v_binary_data, $v_header))) {
                 // ----- Close the archive file
-                if ($p_tar_mode === 'tar') {
+                if ('tar' === $p_tar_mode) {
                     fclose($v_tar);
                     fclose($v_temp_tar);
                 } else {
@@ -3088,7 +3088,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Look for empty blocks to skip
-            if ($v_header['filename'] == '') {
+            if ('' == $v_header['filename']) {
                 TrFctMessage(__FILE__, __LINE__, 2, 'Empty block found. End of archive?');
                 continue;
             }
@@ -3130,7 +3130,7 @@ if (!defined('PCL_TAR')) {
                 TrFctMessage(__FILE__, __LINE__, 2, 'Keep file ' . $v_header['filename'] . '');
 
                 // ----- Write the file header
-                if ($p_tar_mode === 'tar') {
+                if ('tar' === $p_tar_mode) {
                     fwrite($v_temp_tar, $v_binary_data, 512);
                 } else {
                     gzputs($v_temp_tar, $v_binary_data, 512);
@@ -3140,7 +3140,7 @@ if (!defined('PCL_TAR')) {
                 $n = ceil($v_header['size'] / 512);
                 for ($j = 0; $j < $n; ++$j) {
                     TrFctMessage(__FILE__, __LINE__, 3, 'Read complete 512 bytes block number ' . ($j + 1));
-                    if ($p_tar_mode === 'tar') {
+                    if ('tar' === $p_tar_mode) {
                         $v_content = fread($v_tar, 512);
                         fwrite($v_temp_tar, $v_content, 512);
                     } else {
@@ -3167,9 +3167,9 @@ if (!defined('PCL_TAR')) {
                 $v_old_size = $v_header['size'];
 
                 // ----- Add the file
-                if (($v_result = PclTarHandleAddFile($v_temp_tar, $v_current_filename, $p_tar_mode, $v_header, $p_add_dir, $p_remove_dir)) != 1) {
+                if (1 != ($v_result = PclTarHandleAddFile($v_temp_tar, $v_current_filename, $p_tar_mode, $v_header, $p_add_dir, $p_remove_dir))) {
                     // ----- Close the tarfile
-                    if ($p_tar_mode === 'tar') {
+                    if ('tar' === $p_tar_mode) {
                         fclose($v_tar);
                         fclose($v_temp_tar);
                     } else {
@@ -3188,7 +3188,7 @@ if (!defined('PCL_TAR')) {
                 TrFctMessage(__FILE__, __LINE__, 2, 'Skip old file ' . $v_header['filename'] . '');
 
                 // ----- Jump to next file
-                if ($p_tar_mode === 'tar') {
+                if ('tar' === $p_tar_mode) {
                     fseek($v_tar, ftell($v_tar) + (ceil($v_old_size / 512) * 512));
                 } else {
                     gzseek($v_tar, gztell($v_tar) + (ceil($v_old_size / 512) * 512));
@@ -3203,7 +3203,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Look for end of file
-            if ($p_tar_mode === 'tar') {
+            if ('tar' === $p_tar_mode) {
                 $v_end_of_file = feof($v_tar);
             } else {
                 $v_end_of_file = gzeof($v_tar);
@@ -3217,9 +3217,9 @@ if (!defined('PCL_TAR')) {
                 TrFctMessage(__FILE__, __LINE__, 3, "File '$p_file_list[$i]' need to be added");
 
                 // ----- Add the file
-                if (($v_result = PclTarHandleAddFile($v_temp_tar, $p_file_list[$i], $p_tar_mode, $v_header, $p_add_dir, $p_remove_dir)) != 1) {
+                if (1 != ($v_result = PclTarHandleAddFile($v_temp_tar, $p_file_list[$i], $p_tar_mode, $v_header, $p_add_dir, $p_remove_dir))) {
                     // ----- Close the tarfile
-                    if ($p_tar_mode === 'tar') {
+                    if ('tar' === $p_tar_mode) {
                         fclose($v_tar);
                         fclose($v_temp_tar);
                     } else {
@@ -3249,7 +3249,7 @@ if (!defined('PCL_TAR')) {
         PclTarHandleFooter($v_temp_tar, $p_tar_mode);
 
         // ----- Close the tarfile
-        if ($p_tar_mode === 'tar') {
+        if ('tar' === $p_tar_mode) {
             fclose($v_tar);
             fclose($v_temp_tar);
         } else {
@@ -3308,7 +3308,7 @@ if (!defined('PCL_TAR')) {
     */
 
         // ----- Look for no more block
-        if (strlen($v_binary_data) == 0) {
+        if (0 == strlen($v_binary_data)) {
             $v_header['filename'] = '';
             $v_header['status']   = 'empty';
 
@@ -3319,7 +3319,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Look for invalid block size
-        if (strlen($v_binary_data) != 512) {
+        if (512 != strlen($v_binary_data)) {
             $v_header['filename'] = '';
             $v_header['status']   = 'invalid_header';
             TrFctMessage(__FILE__, __LINE__, 2, 'Invalid block size : ' . strlen($v_binary_data));
@@ -3363,7 +3363,7 @@ if (!defined('PCL_TAR')) {
             $v_header['status']   = 'invalid_header';
 
             // ----- Look for last block (empty block)
-            if (($v_checksum == 256) && ($v_header['checksum'] == 0)) {
+            if ((256 == $v_checksum) && (0 == $v_header['checksum'])) {
                 $v_header['status'] = 'empty';
                 // ----- Return
                 TrFctEnd(__FILE__, __LINE__, $v_result, 'End of archive found');
@@ -3394,7 +3394,7 @@ if (!defined('PCL_TAR')) {
         TrFctMessage(__FILE__, __LINE__, 2, "Size : '" . $v_header['size'] . "'");
         $v_header['mtime'] = octdec(trim($v_data['mtime']));
         TrFctMessage(__FILE__, __LINE__, 2, 'Date : ' . date('l dS of F Y h:i:s A', $v_header['mtime']));
-        if (($v_header['typeflag'] = $v_data['typeflag']) == '5') {
+        if ('5' == ($v_header['typeflag'] = $v_data['typeflag'])) {
             $v_header['size'] = 0;
             TrFctMessage(__FILE__, __LINE__, 2, "Size (folder) : '" . $v_header['size'] . "'");
         }
@@ -3450,7 +3450,7 @@ if (!defined('PCL_TAR')) {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandlerDirCheck', "$p_dir");
 
         // ----- Check the directory availability
-        if (is_dir($p_dir) || ($p_dir == '')) {
+        if (is_dir($p_dir) || ('' == $p_dir)) {
             TrFctEnd(__FILE__, __LINE__, "'$p_dir' is a directory");
 
             return 1;
@@ -3472,8 +3472,8 @@ if (!defined('PCL_TAR')) {
         // ----- Just a check
         if ($p_parent_dir != $p_dir) {
             // ----- Look for parent directory
-            if ($p_parent_dir != '') {
-                if (($v_result = PclTarHandlerDirCheck($p_parent_dir)) != 1) {
+            if ('' != $p_parent_dir) {
+                if (1 != ($v_result = PclTarHandlerDirCheck($p_parent_dir))) {
                     TrFctEnd(__FILE__, __LINE__, $v_result);
 
                     return $v_result;
@@ -3517,10 +3517,10 @@ if (!defined('PCL_TAR')) {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtension', "tar=$p_tarname");
 
         // ----- Look for file extension
-        if ((substr($p_tarname, -7) === '.tar.gz') || (substr($p_tarname, -4) === '.tgz')) {
+        if (('.tar.gz' === substr($p_tarname, -7)) || ('.tgz' === substr($p_tarname, -4))) {
             TrFctMessage(__FILE__, __LINE__, 2, 'Archive is a gzip tar');
             $v_tar_mode = 'tgz';
-        } elseif (substr($p_tarname, -4) === '.tar') {
+        } elseif ('.tar' === substr($p_tarname, -4)) {
             TrFctMessage(__FILE__, __LINE__, 2, 'Archive is a tar');
             $v_tar_mode = 'tar';
         } else {
@@ -3557,20 +3557,20 @@ if (!defined('PCL_TAR')) {
         $v_result = '';
 
         // ----- Look for not empty path
-        if ($p_dir != '') {
+        if ('' != $p_dir) {
             // ----- Explode path by directory names
             $v_list = explode('/', $p_dir);
 
             // ----- Study directories from last to first
             for ($i = count($v_list) - 1; $i >= 0; $i--) {
                 // ----- Look for current path
-                if ($v_list[$i] === '.') {
+                if ('.' === $v_list[$i]) {
                     // ----- Ignore this directory
                     // Should be the first $i=0, but no check is done
-                } elseif ($v_list[$i] === '..') {
+                } elseif ('..' === $v_list[$i]) {
                     // ----- Ignore it and ignore the $i-1
                     $i--;
-                } elseif (($v_list[$i] == '') && ($i != (count($v_list) - 1)) && ($i != 0)) {
+                } elseif (('' == $v_list[$i]) && ($i != (count($v_list) - 1)) && (0 != $i)) {
                     // ----- Ignore only the double '//' in path,
                     // but not the first and last '/'
                 } else {

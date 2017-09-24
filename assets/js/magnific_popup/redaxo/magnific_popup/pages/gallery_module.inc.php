@@ -6,7 +6,7 @@ $moduleOutput = rex_get_file_contents($REX['INCLUDE_PATH'] . '/addons/magnific_p
 $searchtext = 'module: magnific_popup_gallery_out';
 
 $gm = rex_sql::factory();
-$gm->setQuery('SELECT * FROM ' . $REX['TABLE_PREFIX'] . 'module WHERE ausgabe LIKE "%' . $searchtext . '%"');
+$gm->setQuery('SELECT * FROM ' . $REX['TABLE_PREFIX'] . 'module WHERE ausgabe LIKE %' . $searchtext . '%');
 
 $module_id   = 0;
 $module_name = '';
@@ -16,7 +16,7 @@ foreach ($gm->getArray() as $module) {
     $module_name = $module['name'];
 }
 
-if (isset($_REQUEST['install']) && $_REQUEST['install'] == 1) {
+if (isset($_REQUEST['install']) && 1 == $_REQUEST['install']) {
     $module_name = $I18N->msg('magnific_popup_module_name_gallery');
 
     $mi = rex_sql::factory();

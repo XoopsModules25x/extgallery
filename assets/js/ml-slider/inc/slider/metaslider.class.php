@@ -214,7 +214,7 @@ class MetaSlider
         }
 
         // apply random setting
-        if ($this->get_setting('random') === 'true' && !is_admin()) {
+        if ('true' === $this->get_setting('random') && !is_admin()) {
             shuffle($slides);
         }
 
@@ -280,7 +280,7 @@ class MetaSlider
         $class = "metaslider metaslider-{$this->get_setting('type')} metaslider-{$this->id} ml-slider";
 
         // apply the css class setting
-        if ($this->get_setting('cssClass') !== 'false') {
+        if ('false' !== $this->get_setting('cssClass')) {
             $class .= ' ' . $this->get_setting('cssClass');
         }
 
@@ -299,17 +299,17 @@ class MetaSlider
         $style = "max-width: {$this->get_setting('width')}px;";
 
         // carousels are always 100% wide
-        if ($this->get_setting('carouselMode') === 'true' || ($this->get_setting('fullWidth') === 'true') && $this->get_setting('type') !== 'coin') {
+        if ('true' === $this->get_setting('carouselMode') || ('true' === $this->get_setting('fullWidth')) && 'coin' !== $this->get_setting('type')) {
             $style = 'width: 100%;';
         }
 
         // percentWidth showcode parameter takes precedence
-        if ($this->get_setting('percentwidth') !== 'false' && $this->get_setting('percentwidth') > 0) {
+        if ('false' !== $this->get_setting('percentwidth') && $this->get_setting('percentwidth') > 0) {
             $style = "width: {$this->get_setting('percentwidth')}%;";
         }
 
         // center align the slideshow
-        if ($this->get_setting('center') !== 'false') {
+        if ('false' !== $this->get_setting('center')) {
             $style .= ' margin: 0 auto;';
         }
 
@@ -373,7 +373,7 @@ class MetaSlider
 
         $javascript = '';
 
-        if ($this->get_setting('noConflict') === 'true' && $type === 'flex') {
+        if ('true' === $this->get_setting('noConflict') && 'flex' === $type) {
             $javascript = "$('#metaslider_{$this->id}').addClass('flexslider'); // theme/plugin conflict avoidance";
         }
 
@@ -416,7 +416,7 @@ class MetaSlider
             if ($param = $this->get_param($name)) {
                 $val = $this->get_setting($name);
 
-                if (gettype($default) === 'integer' || $val === 'true' || $val === 'false') {
+                if ('integer' === gettype($default) || 'true' === $val || 'false' === $val) {
                     $options[$param] = $val;
                 } else {
                     $options[$param] = '"' . $val . '"';
@@ -427,7 +427,7 @@ class MetaSlider
         // deal with any customised parameters
         $type    = $this->get_setting('type');
         $options = apply_filters("metaslider_{$type}_slider_parameters", $options, $this->id, $this->settings);
-        $arg     = $type === 'flex' ? 'slider' : '';
+        $arg     = 'flex' === $type ? 'slider' : '';
 
         // create key:value strings
         foreach ($options as $key => $value) {
@@ -465,11 +465,11 @@ class MetaSlider
      */
     public function enqueue_scripts()
     {
-        if ($this->get_setting('printJs') === 'true') {
+        if ('true' === $this->get_setting('printJs')) {
             wp_enqueue_script('metaslider-' . $this->get_setting('type') . '-slider', METASLIDER_ASSETS_URL . $this->js_path, array('jquery'), METASLIDER_VERSION);
         }
 
-        if ($this->get_setting('printCss') === 'true') {
+        if ('true' === $this->get_setting('printCss')) {
             // this will be added to the bottom of the page as <head> has already been processed by WordPress.
             // For HTML5 compatibility, use a minification plugin to move the CSS to the <head>
             wp_enqueue_style('metaslider-' . $this->get_setting('type') . '-slider', METASLIDER_ASSETS_URL . $this->css_path, false, METASLIDER_VERSION);
@@ -491,7 +491,7 @@ class MetaSlider
         $checkboxes = array('noConflict', 'fullWidth', 'hoverPause', 'links', 'reverse', 'random', 'printCss', 'printJs', 'smoothHeight', 'center', 'smartCrop', 'carouselMode', 'autoPlay');
 
         foreach ($checkboxes as $checkbox) {
-            if (isset($new_settings[$checkbox]) && $new_settings[$checkbox] === 'on') {
+            if (isset($new_settings[$checkbox]) && 'on' === $new_settings[$checkbox]) {
                 $new_settings[$checkbox] = 'true';
             } else {
                 $new_settings[$checkbox] = 'false';

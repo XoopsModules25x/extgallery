@@ -41,13 +41,13 @@ switch ($step) {
 
         $result = $photoHandler->postPhotoTraitement('photo_file', false);
 
-        if ($result == 2) {
+        if (2 == $result) {
             redirect_header('public-upload.php', 3, _MD_EXTGALLERY_NOT_AN_ALBUM);
-        } elseif ($result == 4 || $result == 5) {
+        } elseif (4 == $result || 5 == $result) {
             redirect_header('public-upload.php', 3, _MD_EXTGALLERY_UPLOAD_ERROR . ' :<br>' . $photoHandler->photoUploader->getError());
-        } elseif ($result == 0) {
+        } elseif (0 == $result) {
             redirect_header('public-upload.php', 3, _MD_EXTGALLERY_PHOTO_UPLOADED);
-        } elseif ($result == 1) {
+        } elseif (1 == $result) {
             redirect_header('public-upload.php', 3, _MD_EXTGALLERY_PHOTO_PENDING);
         }
 
@@ -75,7 +75,7 @@ switch ($step) {
         }
 
         // For xoops tag
-        if (($xoopsModuleConfig['usetag'] == 1) && is_dir('../tag')) {
+        if ((1 == $xoopsModuleConfig['usetag']) && is_dir('../tag')) {
             require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
             $form->addElement(new TagFormTag('tag', 60, 255, '', 0));
         }

@@ -3,7 +3,7 @@ $v      = View::GetInstance();
 $page   = Page::getCurrentPage();
 $custom = $customAnim;
 
-if ($dialogType === 'custom-anim') {
+if ('custom-anim' === $dialogType) {
     $dialogType = $custom;
 }
 ?>

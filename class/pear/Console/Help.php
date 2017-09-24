@@ -89,7 +89,7 @@ class Console_GetoptPlus_Help
         is_null($paddingLength) and $paddingLength = $addon ? (strlen($addon) + 1) : 0;
         // extracts the first line
         $firstLine      = (string)current($lines);
-        $firstLineEmpty = $firstLine == '';
+        $firstLineEmpty = '' == $firstLine;
 
         if (!$addon or $firstLineEmpty or $paddingLength > strlen($addon)) {
             // no addon or padding larger than addon
@@ -163,7 +163,7 @@ class Console_GetoptPlus_Help
             // extracts the option example value from the description
             // encloses with angle/square brackets if mandatory/optional
             $value = '';
-            empty($option['type']) or $option['type'] == 'mandatory' and $value = '<' . array_shift($desc) . '>' or $option['type'] == 'optional' and $value = '[' . array_shift($desc) . ']';
+            empty($option['type']) or 'mandatory' == $option['type'] and $value = '<' . array_shift($desc) . '>' or 'optional' == $option['type'] and $value = '[' . array_shift($desc) . ']';
             // sets the option names
             $optionNames = array();
             isset($option['short']) and $optionNames[] = "-{$option['short']}";

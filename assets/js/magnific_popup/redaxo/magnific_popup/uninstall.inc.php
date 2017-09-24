@@ -6,7 +6,7 @@ $sql = new rex_sql();
 // remove single image imagetype
 $sql->setQuery('SELECT id FROM `' . $REX['TABLE_PREFIX'] . "679_types` WHERE name LIKE 'magnific_popup_image_thumb'");
 
-if ($sql->getRows() == 1) {
+if (1 == $sql->getRows()) {
     $imageTypeId = $sql->getValue('id');
 
     // imagetype
@@ -19,7 +19,7 @@ if ($sql->getRows() == 1) {
 // add gallery image imagetype
 $sql->setQuery('SELECT id FROM `' . $REX['TABLE_PREFIX'] . "679_types` WHERE name LIKE 'magnific_popup_gallery_thumb'");
 
-if ($sql->getRows() == 1) {
+if (1 == $sql->getRows()) {
     $imageTypeId = $sql->getValue('id');
 
     // imagetype

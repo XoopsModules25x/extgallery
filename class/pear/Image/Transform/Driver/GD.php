@@ -248,7 +248,7 @@ class Image_Transform_Driver_GD extends Image_Transform
      */
     public function rotate($angle, $options = null)
     {
-        if (($angle % 360) == 0) {
+        if (0 == ($angle % 360)) {
             return true;
         }
 
@@ -384,7 +384,7 @@ class Image_Transform_Driver_GD extends Image_Transform
      */
     public function _resize($new_x, $new_y, $options = null)
     {
-        if ($this->resized === true) {
+        if (true === $this->resized) {
             return PEAR::raiseError('You have already resized the image without saving it.  Your previous resizing will be overwritten', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE);
         }
 
@@ -396,11 +396,11 @@ class Image_Transform_Driver_GD extends Image_Transform
 
         // Make sure to get a true color image if doing resampled resizing
         // otherwise get the same type of image
-        $trueColor = ($scaleMethod == 'pixel') ? null : true;
+        $trueColor = ('pixel' == $scaleMethod) ? null : true;
         $new_img   = $this->_createImage($new_x, $new_y, $trueColor);
 
         $icr_res = null;
-        if ($scaleMethod != 'pixel' && function_exists('ImageCopyResampled')) {
+        if ('pixel' != $scaleMethod && function_exists('ImageCopyResampled')) {
             $icr_res = ImageCopyResampled($new_img, $this->imageHandle, 0, 0, 0, 0, $new_x, $new_y, $this->img_x, $this->img_y);
         }
         if (!$icr_res) {
@@ -426,7 +426,7 @@ class Image_Transform_Driver_GD extends Image_Transform
      */
     public function gamma($outputgamma = 1.0)
     {
-        if ($outputgamma != 1.0) {
+        if (1.0 != $outputgamma) {
             ImageGammaCorrect($this->imageHandle, 1.0, $outputgamma);
         }
 
@@ -446,7 +446,7 @@ class Image_Transform_Driver_GD extends Image_Transform
      */
     public function _generate($filename, $type = '', $quality = null)
     {
-        $type    = strtolower(($type == '') ? $this->type : $type);
+        $type    = strtolower(('' == $type) ? $this->type : $type);
         $options = (is_array($quality)) ? $quality : array();
         switch ($type) {
             case 'jpg':
@@ -463,7 +463,7 @@ class Image_Transform_Driver_GD extends Image_Transform
             return PEAR::raiseError('Image type not supported for output', IMAGE_TRANSFORM_ERROR_UNSUPPORTED);
         }
 
-        if ($filename == '') {
+        if ('' == $filename) {
             header('Content-type: ' . $this->getMimeType($type));
             $action = 'output image';
         } else {
@@ -476,7 +476,7 @@ class Image_Transform_Driver_GD extends Image_Transform
                 $result = $functionName($this->imageHandle, $filename, $quality);
                 break;
             default:
-                if ($filename == '') {
+                if ('' == $filename) {
                     $result = $functionName($this->imageHandle);
                 } else {
                     $result = $functionName($this->imageHandle, $filename);
@@ -579,7 +579,7 @@ class Image_Transform_Driver_GD extends Image_Transform
             && function_exists('ImageCreateTrueColor')) {
             $new_img = @ImageCreateTrueColor($width, $height);
             //GIF Transparent Patch
-            if ($this->type != 'gif') {
+            if ('gif' != $this->type) {
                 imagealphablending($new_img, false);
                 imagesavealpha($new_img, true);
             }
@@ -596,7 +596,7 @@ class Image_Transform_Driver_GD extends Image_Transform
         }
 
         //GIF Transparent Patch
-        if ($this->type == 'gif') {
+        if ('gif' == $this->type) {
             $transparencyIndex = imagecolortransparent($this->imageHandle);
             $transparencyColor = array('red' => 255, 'green' => 255, 'blue' => 255);
 

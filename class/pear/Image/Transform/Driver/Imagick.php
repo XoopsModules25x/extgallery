@@ -186,7 +186,7 @@ class Image_Transform_Driver_Imagick extends Image_Transform
      */
     public function save($filename, $type = '', $quality = 75)
     {
-        if ($type == '') {
+        if ('' == $type) {
             $type = strtoupper($type);
             imagick_write($this->imageHandle, $filename, $type);
         } else {
@@ -205,7 +205,7 @@ class Image_Transform_Driver_Imagick extends Image_Transform
      */
     public function display($type = '', $quality = 75)
     {
-        if ($type == '') {
+        if ('' == $type) {
             header('Content-type: image/' . $this->type);
             if (!imagick_dump($this->imageHandle)) {
             }

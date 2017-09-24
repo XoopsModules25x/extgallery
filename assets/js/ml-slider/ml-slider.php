@@ -167,7 +167,7 @@ class MetaSliderPlugin
     public function custom_media_uploader_tabs($strings)
     {
         //update strings
-        if (isset($_GET['page']) && $_GET['page'] == 'metaslider') {
+        if (isset($_GET['page']) && 'metaslider' == $_GET['page']) {
             $strings['insertMediaTitle'] = __('Image', 'metaslider');
             $strings['insertIntoPost']   = __('Add to slider', 'metaslider');
             // remove options
@@ -193,7 +193,7 @@ class MetaSliderPlugin
         $metaslider_tabs = array('post_feed', 'layer', 'youtube', 'vimeo');
 
         // restrict our tab changes to the meta slider plugin page
-        if ((isset($_GET['page']) && $_GET['page'] === 'metaslider') || (isset($_GET['tab']) && in_array($_GET['tab'], $metaslider_tabs))) {
+        if ((isset($_GET['page']) && 'metaslider' === $_GET['page']) || (isset($_GET['tab']) && in_array($_GET['tab'], $metaslider_tabs))) {
             $newtabs = array();
 
             if (function_exists('is_plugin_active') && !is_plugin_active('ml-slider-pro/ml-slider-pro.php')) {
@@ -367,7 +367,7 @@ class MetaSliderPlugin
         $slider = get_post($atts['id']);
 
         // check the slider is published
-        if ($slider->post_status !== 'publish') {
+        if ('publish' !== $slider->post_status) {
             return false;
         }
 
@@ -614,7 +614,7 @@ class MetaSliderPlugin
         // loop through the array and build the settings HTML
         foreach ($aFields as $id => $row) {
             // checkbox input type
-            if ($row['type'] === 'checkbox') {
+            if ('checkbox' === $row['type']) {
                 $return .= "<tr><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><input class='option {$row['class']} {$id}' type='checkbox' name='settings[{$id}]' {$row['checked']} >";
 
                 if (isset($row['after'])) {
@@ -625,12 +625,12 @@ class MetaSliderPlugin
             }
 
             // navigation row
-            if ($row['type'] === 'navigation') {
+            if ('navigation' === $row['type']) {
                 $navigation_row = "<tr class='{$row['type']}'><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><ul>";
 
                 foreach ($row['options'] as $k => $v) {
                     $checked        = checked($k, $row['value'], false);
-                    $disabled       = $k === 'thumbnails' ? 'disabled' : '';
+                    $disabled       = 'thumbnails' === $k ? 'disabled' : '';
                     $navigation_row .= "<li><label><input type='radio' name='settings[{$id}]' value='{$k}' {$checked} {$disabled}>{$v['label']}</label></li>";
                 }
 
@@ -640,7 +640,7 @@ class MetaSliderPlugin
             }
 
             // navigation row
-            if ($row['type'] === 'radio') {
+            if ('radio' === $row['type']) {
                 $navigation_row = "<tr class='{$row['type']}'><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><ul>";
 
                 foreach ($row['options'] as $k => $v) {
@@ -655,12 +655,12 @@ class MetaSliderPlugin
             }
 
             // header/divider row
-            if ($row['type'] === 'divider') {
+            if ('divider' === $row['type']) {
                 $return .= "<tr class='{$row['type']}'><td colspan='2' class='divider'><b>{$row['value']}</b></td></tr>";
             }
 
             // slideshow select row
-            if ($row['type'] === 'slider-lib') {
+            if ('slider-lib' === $row['type']) {
                 $return .= "<tr class='{$row['type']}'><td colspan='2' class='slider-lib-row'>";
 
                 foreach ($row['options'] as $k => $v) {
@@ -673,12 +673,12 @@ class MetaSliderPlugin
             }
 
             // number input type
-            if ($row['type'] === 'number') {
+            if ('number' === $row['type']) {
                 $return .= "<tr class='{$row['type']}'><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><input class='option {$row['class']} {$id}' type='number' min='{$row['min']}' max='{$row['max']}' step='{$row['step']}' name='settings[{$id}]' value='{$row['value']}' ><span class='after'>{$row['after']}</span></td></tr>";
             }
 
             // select drop down
-            if ($row['type'] === 'select') {
+            if ('select' === $row['type']) {
                 $return .= "<tr class='{$row['type']}'><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><select class='option {$row['class']} {$id}' name='settings[{$id}]'>";
                 foreach ($row['options'] as $k => $v) {
                     $selected = selected($k, $row['value'], false);
@@ -688,7 +688,7 @@ class MetaSliderPlugin
             }
 
             // theme drop down
-            if ($row['type'] === 'theme') {
+            if ('theme' === $row['type']) {
                 $return .= "<tr class='{$row['type']}'><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><select class='option {$row['class']} {$id}' name='settings[{$id}]'>";
                 $themes = '';
 
@@ -703,12 +703,12 @@ class MetaSliderPlugin
             }
 
             // text input type
-            if ($row['type'] === 'text') {
+            if ('text' === $row['type']) {
                 $return .= "<tr class='{$row['type']}'><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><input class='option {$row['class']} {$id}' type='text' name='settings[{$id}]' value='{$row['value']}' ></td></tr>";
             }
 
             // text input type
-            if ($row['type'] === 'title') {
+            if ('title' === $row['type']) {
                 $return .= "<tr class='{$row['type']}'><td class='tipsy-tooltip' title=\"{$row['helptext']}\">{$row['label']}</td><td><input class='option {$row['class']} {$id}' type='text' name='{$id}' value='{$row['value']}' ></td></tr>";
             }
         }
@@ -796,7 +796,7 @@ class MetaSliderPlugin
 
         if ($tabs = $this->all_meta_sliders()) {
             if ($max_tabs && count($tabs) > $max_tabs) {
-                if (isset($_GET['add']) && $_GET['add'] === 'true') {
+                if (isset($_GET['add']) && 'true' === $_GET['add']) {
                     echo "<div id='message' class='updated'><p>" . __("New slideshow created. Click 'Add Slide' to get started!", 'metaslider') . '</p></div>';
                 }
                 echo "<div style='margin-top: 20px;'><label for='select-slider'>Select Slider: </label>";
@@ -965,7 +965,7 @@ class MetaSliderPlugin
                                                         'type'     => 'checkbox',
                                                         'label'    => __('Arrows', 'metaslider'),
                                                         'class'    => 'option coin flex nivo responsive',
-                                                        'checked'  => $this->slider->get_setting('links') === 'true' ? 'checked' : '',
+                                                        'checked'  => 'true' === $this->slider->get_setting('links') ? 'checked' : '',
                                                         'helptext' => __('Show the previous/next arrows', 'metaslider')
                                                     ),
                                                     'navigation' => array(
@@ -1016,7 +1016,7 @@ class MetaSliderPlugin
                                                         'label'    => __('Stretch', 'metaslider'),
                                                         'class'    => 'option flex nivo responsive',
                                                         'after'    => __('100% wide output', 'metaslider'),
-                                                        'checked'  => $this->slider->get_setting('fullWidth') === 'true' ? 'checked' : '',
+                                                        'checked'  => 'true' === $this->slider->get_setting('fullWidth') ? 'checked' : '',
                                                         'helptext' => __("Stretch the slideshow output to fill it's parent container", 'metaslider')
                                                     ),
                                                     'center'           => array(
@@ -1024,7 +1024,7 @@ class MetaSliderPlugin
                                                         'type'     => 'checkbox',
                                                         'label'    => __('Center align', 'metaslider'),
                                                         'class'    => 'option coin flex nivo responsive',
-                                                        'checked'  => $this->slider->get_setting('center') === 'true' ? 'checked' : '',
+                                                        'checked'  => 'true' === $this->slider->get_setting('center') ? 'checked' : '',
                                                         'helptext' => __('Center align the slideshow', 'metaslider')
                                                     ),
                                                     'autoPlay'         => array(
@@ -1032,7 +1032,7 @@ class MetaSliderPlugin
                                                         'type'     => 'checkbox',
                                                         'label'    => __('Auto play', 'metaslider'),
                                                         'class'    => 'option flex nivo responsive',
-                                                        'checked'  => $this->slider->get_setting('autoPlay') === 'true' ? 'checked' : '',
+                                                        'checked'  => 'true' === $this->slider->get_setting('autoPlay') ? 'checked' : '',
                                                         'helptext' => __('Transition between slides automatically', 'metaslider')
                                                     ),
                                                     'smartCrop'        => array(
@@ -1040,7 +1040,7 @@ class MetaSliderPlugin
                                                         'type'     => 'checkbox',
                                                         'label'    => __('Smart crop', 'metaslider'),
                                                         'class'    => 'option coin flex nivo responsive',
-                                                        'checked'  => $this->slider->get_setting('smartCrop') === 'true' ? 'checked' : '',
+                                                        'checked'  => 'true' === $this->slider->get_setting('smartCrop') ? 'checked' : '',
                                                         'helptext' => __('Smart Crop ensures your responsive slides are cropped to a ratio that results in a consistent slideshow size', 'metaslider')
                                                     ),
                                                     'carouselMode'     => array(
@@ -1048,7 +1048,7 @@ class MetaSliderPlugin
                                                         'type'     => 'checkbox',
                                                         'label'    => __('Carousel mode', 'metaslider'),
                                                         'class'    => 'option flex',
-                                                        'checked'  => $this->slider->get_setting('carouselMode') === 'true' ? 'checked' : '',
+                                                        'checked'  => 'true' === $this->slider->get_setting('carouselMode') ? 'checked' : '',
                                                         'helptext' => __('Display multiple slides at once. Slideshow output will be 100% wide.', 'metaslider')
                                                     ),
                                                     'random'           => array(
@@ -1056,7 +1056,7 @@ class MetaSliderPlugin
                                                         'type'     => 'checkbox',
                                                         'label'    => __('Random', 'metaslider'),
                                                         'class'    => 'option coin flex nivo responsive',
-                                                        'checked'  => $this->slider->get_setting('random') === 'true' ? 'checked' : '',
+                                                        'checked'  => 'true' === $this->slider->get_setting('random') ? 'checked' : '',
                                                         'helptext' => __('Randomise the order of the slides', 'metaslider')
                                                     ),
                                                     'hoverPause'       => array(
@@ -1064,7 +1064,7 @@ class MetaSliderPlugin
                                                         'type'     => 'checkbox',
                                                         'label'    => __('Hover pause', 'metaslider'),
                                                         'class'    => 'option coin flex nivo responsive',
-                                                        'checked'  => $this->slider->get_setting('hoverPause') === 'true' ? 'checked' : '',
+                                                        'checked'  => 'true' === $this->slider->get_setting('hoverPause') ? 'checked' : '',
                                                         'helptext' => __('Pause the slideshow when hovering over slider, then resume when no longer hovering.', 'metaslider')
                                                     ),
                                                     'reverse'          => array(
@@ -1072,7 +1072,7 @@ class MetaSliderPlugin
                                                         'type'     => 'checkbox',
                                                         'label'    => __('Reverse', 'metaslider'),
                                                         'class'    => 'option flex',
-                                                        'checked'  => $this->slider->get_setting('reverse') === 'true' ? 'checked' : '',
+                                                        'checked'  => 'true' === $this->slider->get_setting('reverse') ? 'checked' : '',
                                                         'helptext' => __('Reverse the animation direction', 'metaslider')
                                                     ),
                                                     'delay'            => array(
@@ -1167,7 +1167,7 @@ class MetaSliderPlugin
                                                         'label'    => __('Previous text', 'metaslider'),
                                                         'class'    => 'option coin flex responsive nivo',
                                                         'helptext' => __("Set the text for the 'previous' direction item", 'metaslider'),
-                                                        'value'    => $this->slider->get_setting('prevText') === 'false' ? '' : $this->slider->get_setting('prevText')
+                                                        'value'    => 'false' === $this->slider->get_setting('prevText') ? '' : $this->slider->get_setting('prevText')
                                                     ),
                                                     'nextText'         => array(
                                                         'priority' => 160,
@@ -1175,7 +1175,7 @@ class MetaSliderPlugin
                                                         'label'    => __('Next text', 'metaslider'),
                                                         'class'    => 'option coin flex responsive nivo',
                                                         'helptext' => __("Set the text for the 'next' direction item", 'metaslider'),
-                                                        'value'    => $this->slider->get_setting('nextText') === 'false' ? '' : $this->slider->get_setting('nextText')
+                                                        'value'    => 'false' === $this->slider->get_setting('nextText') ? '' : $this->slider->get_setting('nextText')
                                                     ),
                                                     'sDelay'           => array(
                                                         'priority' => 170,
@@ -1228,14 +1228,14 @@ class MetaSliderPlugin
                                                         'label'    => __('CSS classes', 'metaslider'),
                                                         'class'    => 'option coin flex responsive nivo',
                                                         'helptext' => __('Specify any custom CSS Classes you would like to be added to the slider wrapper', 'metaslider'),
-                                                        'value'    => $this->slider->get_setting('cssClass') === 'false' ? '' : $this->slider->get_setting('cssClass')
+                                                        'value'    => 'false' === $this->slider->get_setting('cssClass') ? '' : $this->slider->get_setting('cssClass')
                                                     ),
                                                     'printCss'         => array(
                                                         'priority' => 210,
                                                         'type'     => 'checkbox',
                                                         'label'    => __('Print CSS', 'metaslider'),
                                                         'class'    => 'option coin flex responsive nivo useWithCaution',
-                                                        'checked'  => $this->slider->get_setting('printCss') === 'true' ? 'checked' : '',
+                                                        'checked'  => 'true' === $this->slider->get_setting('printCss') ? 'checked' : '',
                                                         'helptext' => __('Uncheck this is you would like to include your own CSS', 'metaslider')
                                                     ),
                                                     'printJs'          => array(
@@ -1243,7 +1243,7 @@ class MetaSliderPlugin
                                                         'type'     => 'checkbox',
                                                         'label'    => __('Print JS', 'metaslider'),
                                                         'class'    => 'option coin flex responsive nivo useWithCaution',
-                                                        'checked'  => $this->slider->get_setting('printJs') === 'true' ? 'checked' : '',
+                                                        'checked'  => 'true' === $this->slider->get_setting('printJs') ? 'checked' : '',
                                                         'helptext' => __('Uncheck this is you would like to include your own Javascript', 'metaslider')
                                                     ),
                                                     'noConflict'       => array(
@@ -1251,7 +1251,7 @@ class MetaSliderPlugin
                                                         'type'     => 'checkbox',
                                                         'label'    => __('No conflict mode', 'metaslider'),
                                                         'class'    => 'option flex',
-                                                        'checked'  => $this->slider->get_setting('noConflict') === 'true' ? 'checked' : '',
+                                                        'checked'  => 'true' === $this->slider->get_setting('noConflict') ? 'checked' : '',
                                                         'helptext' => __('Delay adding the flexslider class to the slideshow', 'metaslider')
                                                     )
                                                 );

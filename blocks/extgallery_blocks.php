@@ -83,7 +83,7 @@ function extgalleryPhotoShow($options)
 
     $categories = [];
     foreach ($options as $cat) {
-        if ($cat == 0) {
+        if (0 == $cat) {
             $categories = [];
             break;
         }
@@ -113,7 +113,7 @@ function extgalleryPhotoShow($options)
             break;
     }
 
-    if ($jquery === 'true' && $ajaxeffect !== 'none') {
+    if ('true' === $jquery && 'none' !== $ajaxeffect) {
         global $xoTheme;
         $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
 
@@ -152,7 +152,7 @@ function extgalleryPhotoShow($options)
         }
     }
 
-    if (count($photos) == 0) {
+    if (0 == count($photos)) {
         return [];
     }
 
@@ -219,13 +219,13 @@ function extgalleryTopSubmitterShow($options)
     global $xoopsDB, $xoopsConfig;
     $catauth = '';
     $block   = [];
-    if ($options[1] != 0) {
+    if (0 != $options[1]) {
         $cat     = array_slice($options, 1); //Get information about categories to display
         $catauth = implodeArray2Dextgallery(',', $cat); //Creation of categories list to use - separated by a coma
     }
     $sql = 'SELECT uid, count(photo_id) AS countphoto FROM ' . $xoopsDB->prefix('extgallery_publicphoto');
     $sql .= ' WHERE (uid>0)';
-    if ($options[1] != 0) {
+    if (0 != $options[1]) {
         $sql .= ' AND cat_id IN (' . $catauth . ')';
     }
     $sql .= ' GROUP BY uid ORDER BY countphoto DESC';
@@ -320,7 +320,7 @@ function extgalleryAjax($options)
 
     $categories = [];
     foreach ($options as $cat) {
-        if ($cat == 0) {
+        if (0 == $cat) {
             $categories = [];
             break;
         }
@@ -347,7 +347,7 @@ function extgalleryAjax($options)
             break;
     }
 
-    if ($jquery === 'true') {
+    if ('true' === $jquery) {
         global $xoTheme;
         $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
 
@@ -368,7 +368,7 @@ function extgalleryAjax($options)
         }
     }
 
-    if (count($photos) == 0) {
+    if (0 == count($photos)) {
         return [];
     }
 
@@ -429,7 +429,7 @@ function extgalleryBlockEdit($options)
 
     $yChecked = '';
     $nChecked = '';
-    if ($options[2] == 1) {
+    if (1 == $options[2]) {
         $yChecked = ' checked';
     } else {
         $nChecked = ' checked';
@@ -744,7 +744,7 @@ function extgalleryList($options)
 
     $categories = [];
     foreach ($options as $cat) {
-        if ($cat == 0) {
+        if (0 == $cat) {
             $categories = [];
             break;
         }
@@ -770,7 +770,7 @@ function extgalleryList($options)
             break;
     }
 
-    if (count($photos) == 0) {
+    if (0 == count($photos)) {
         return [];
     }
 
@@ -802,7 +802,7 @@ function extgalleryListEdit($options)
     //==================================
     $y2Checked = '';
     $n2Checked = '';
-    if ($options[1] == 1) {
+    if (1 == $options[1]) {
         $y2Checked = ' checked';
     } else {
         $n2Checked = ' checked';
@@ -811,7 +811,7 @@ function extgalleryListEdit($options)
     //==================================
     $y3Checked = '';
     $n3Checked = '';
-    if ($options[2] == 1) {
+    if (1 == $options[2]) {
         $y3Checked = ' checked';
     } else {
         $n3Checked = ' checked';
@@ -820,7 +820,7 @@ function extgalleryListEdit($options)
     //==================================
     $y4Checked = '';
     $n4Checked = '';
-    if ($options[3] == 1) {
+    if (1 == $options[3]) {
         $y4Checked = ' checked';
     } else {
         $n4Checked = ' checked';

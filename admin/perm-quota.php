@@ -37,7 +37,7 @@ switch ($step) {
     case 'enreg':
         /** @var XoopsGroupPermHandler $gpermHandler */
         $gpermHandler = xoops_getHandler('groupperm');
-        if ($_POST['type'] === 'public') {
+        if ('public' === $_POST['type']) {
             // Delete old public mask
             $criteria = new CriteriaCompo();
             $criteria->add(new Criteria('gperm_name', 'extgallery_public_mask'));
@@ -222,7 +222,7 @@ switch ($step) {
         echo '</tr>';
         $i = 0;
         foreach ($glist as $k => $v) {
-            $style = (++$i % 2 == 0) ? 'odd' : 'even';
+            $style = (0 == ++$i % 2) ? 'odd' : 'even';
             echo '<tr>';
             echo '<td class="' . $style . '">' . $v . '</td>';
 

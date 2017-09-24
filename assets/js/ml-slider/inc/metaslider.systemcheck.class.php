@@ -57,7 +57,7 @@ class MetaSliderSystemCheck
      */
     private function checkWordPressVersion()
     {
-        if (isset($this->options['wordPressVersion']) && $this->options['wordPressVersion'] === false) {
+        if (isset($this->options['wordPressVersion']) && false === $this->options['wordPressVersion']) {
             return;
         }
 
@@ -74,7 +74,7 @@ class MetaSliderSystemCheck
      */
     private function checkImageLibrary()
     {
-        if (isset($this->options['imageLibrary']) && $this->options['imageLibrary'] === false) {
+        if (isset($this->options['imageLibrary']) && false === $this->options['imageLibrary']) {
             return;
         }
 
@@ -91,7 +91,7 @@ class MetaSliderSystemCheck
      */
     private function checkRoleScoper()
     {
-        if (isset($this->options['roleScoper']) && $this->options['roleScoper'] === false) {
+        if (isset($this->options['roleScoper']) && false === $this->options['roleScoper']) {
             return;
         }
 
@@ -115,7 +115,7 @@ class MetaSliderSystemCheck
 
         $key = 'wpFooter:' . $theme_name;
 
-        if (isset($this->options[$key]) && $this->options[$key] === false) {
+        if (isset($this->options[$key]) && false === $this->options[$key]) {
             return;
         }
 
@@ -139,7 +139,7 @@ class MetaSliderSystemCheck
             }
         }
 
-        if ($theme_type === 'parent') {
+        if ('parent' === $theme_type) {
             $file_path = $parent_footer;
         } else {
             $file_path = $child_footer;

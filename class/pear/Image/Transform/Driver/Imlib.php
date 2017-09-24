@@ -143,7 +143,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
         extract($params);
 
         if (!is_array($color)) {
-            if ($color[0] == '#') {
+            if ('#' == $color[0]) {
                 $color = $this->colorhex2colorarray($color);
             } else {
                 require_once 'Image/Transform/Driver/ColorsDefs.php';
@@ -175,8 +175,8 @@ class Image_Transform_Driver_Imlib extends Image_Transform
         $new_y             = imlib_image_get_height($this->imageHandle);
         // when rotating it creates a bigger picture than before so that it can rotate at any angle
         // so for right angles we crop it back to the original size
-        if ($angle % 90 == 0) {
-            if (abs($angle) == 90 || $angle == 270) {
+        if (0 == $angle % 90) {
+            if (90 == abs($angle) || 270 == $angle) {
                 $y_pos = ($new_x - $this->img_x) / 2;
                 $x_pos = ($new_y - $this->img_y) / 2;
                 $y_pos++;
@@ -243,7 +243,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
         }
 
         $err     = 0;
-        $type    = ($type == '') ? $this->type : $type;
+        $type    = ('' == $type) ? $this->type : $type;
         $quality = (is_null($quality)) ? $this->_options['quality'] : $quality;
         imlib_image_set_format($this->imageHandle, $type);
         $return            = imlib_save_image($this->imageHandle, $filename, $err, $quality);
@@ -275,7 +275,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
             return PEAR::raiseError('Invalid image', true);
         }
 
-        $type    = ($type == '') ? $this->type : $type;
+        $type    = ('' == $type) ? $this->type : $type;
         $quality = (is_null($quality)) ? $this->_options['quality'] : $quality;
         imlib_image_set_format($this->imageHandle, $type);
         $err = 0;
@@ -323,7 +323,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
      */
     public function _resize($new_x, $new_y, $options = null)
     {
-        if ($this->resized === true) {
+        if (true === $this->resized) {
             return PEAR::raiseError('You have already resized the image without saving it.  Your previous resizing will be overwritten', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE);
         }
 
@@ -350,7 +350,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
         $this->img_x = imlib_image_get_width($this->imageHandle);
         $this->img_y = imlib_image_get_height($this->imageHandle);
         $this->type  = imlib_image_format($this->imageHandle);
-        $this->type  = ($this->type == '') ? 'png' : $this->type;
+        $this->type  = ('' == $this->type) ? 'png' : $this->type;
 
         return true;
     }

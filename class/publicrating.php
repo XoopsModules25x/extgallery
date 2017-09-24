@@ -124,7 +124,7 @@ class ExtgalleryPublicRatingHandler extends ExtgalleryPersistableObjectHandler
     public function _haveRated(&$rate)
     {
         // If the user is annonymous
-        if ($rate->getVar('uid') == 0) {
+        if (0 == $rate->getVar('uid')) {
             return false;
         }
 

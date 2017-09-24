@@ -223,7 +223,7 @@ class NestedTree
      */
     public function numDescendants($id)
     {
-        if ($id == 0) {
+        if (0 == $id) {
             $query  = sprintf('SELECT count(*) AS num_descendants FROM %s', $this->table);
             $result = $this->db->query($query);
             if ($row = $this->db->fetchArray($result)) {
@@ -264,7 +264,7 @@ class NestedTree
     public function numLeef($id)
     {
         $query = sprintf('SELECT count(*) AS num_leef FROM %s WHERE nright - nleft = 1', $this->table);
-        if ($id != 0) {
+        if (0 != $id) {
             $node  = $this->getNode($id);
             $query .= sprintf(' AND nleft > %d AND nright < %d', $node['nleft'], $node['nright']);
         }
@@ -337,7 +337,7 @@ class NestedTree
         foreach ($data as $id => $row) {
 
             // skip the root node
-            if ($id == 0) {
+            if (0 == $id) {
                 continue;
             }
 

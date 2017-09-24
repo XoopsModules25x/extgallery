@@ -61,7 +61,7 @@ class ExtgalleryPhotoUploader
         $jufinal = isset($_POST['jufinal']) ? (int)$_POST['jufinal'] : 1;
         $md5sums = isset($_POST['md5sum'][0]) ? $_POST['md5sum'][0] : null;
 
-        if ($this->uploadDir == '') {
+        if ('' == $this->uploadDir) {
             $this->abort('upload dir not defined');
 
             return false;
@@ -101,7 +101,7 @@ class ExtgalleryPhotoUploader
             $_SESSION['juvar.tmpsize'] += $len;
             if ($len > 0) {
                 $src = fopen($tmpname, 'rb');
-                $dst = fopen($dstname, ($jupart == 1) ? 'wb' : 'ab');
+                $dst = fopen($dstname, (1 == $jupart) ? 'wb' : 'ab');
                 while ($len > 0) {
                     $rlen = ($len > 8192) ? 8192 : $len;
                     $buf  = fread($src, $rlen);
@@ -210,7 +210,7 @@ class ExtgalleryPhotoUploader
         // Check IE XSS before returning success
         $ext       = strtolower(substr(strrchr($this->savedDestination, '.'), 1));
         $photoInfo = getimagesize($tmpDestination);
-        if ($photoInfo === false || $imageExtensions[(int)$photoInfo[2]] != $ext) {
+        if (false === $photoInfo || $imageExtensions[(int)$photoInfo[2]] != $ext) {
             $this->abort('Suspicious image upload refused');
 
             return false;

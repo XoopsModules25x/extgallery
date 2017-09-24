@@ -2,7 +2,7 @@
 
 $configFile = $REX['INCLUDE_PATH'] . '/addons/magnific_popup/settings.inc.php';
 
-if (rex_request('func', 'string') === 'update') {
+if ('update' === rex_request('func', 'string')) {
     $include_jquery = trim(rex_request('include_jquery', 'string'));
 
     $REX['ADDON']['magnific_popup']['settings']['include_jquery'] = $include_jquery;
@@ -11,7 +11,7 @@ if (rex_request('func', 'string') === 'update') {
         $REX[\'ADDON\'][\'magnific_popup\'][\'settings\'][\'include_jquery\'] = "' . $include_jquery . '";
     ';
 
-    if (rex_replace_dynamic_contents($configFile, str_replace("\t", '', $content)) !== false) {
+    if (false !== rex_replace_dynamic_contents($configFile, str_replace("\t", '', $content))) {
         echo rex_info($I18N->msg('magnific_popup_configfile_update'));
     } else {
         echo rex_warning($I18N->msg('magnific_popup_configfile_nosave'));
@@ -27,7 +27,7 @@ $sql = new rex_sql();
 //$sql->debugsql = true;
 $sql->setQuery('SELECT id FROM `' . $REX['TABLE_PREFIX'] . "679_types` WHERE name LIKE 'magnific_popup_image_thumb'");
 
-if ($sql->getRows() == 1) {
+if (1 == $sql->getRows()) {
     $imageManagerLinkImage = 'index.php?page=image_manager&subpage=effects&type_id=' . $sql->getValue('id');
 } else {
     $imageManagerLinkImage = 'index.php?page=image_manager&subpage=types';
@@ -35,7 +35,7 @@ if ($sql->getRows() == 1) {
 
 $sql->setQuery('SELECT id FROM `' . $REX['TABLE_PREFIX'] . "679_types` WHERE name LIKE 'magnific_popup_gallery_thumb'");
 
-if ($sql->getRows() == 1) {
+if (1 == $sql->getRows()) {
     $imageManagerLinkGallery = 'index.php?page=image_manager&subpage=effects&type_id=' . $sql->getValue('id');
 } else {
     $imageManagerLinkGallery = 'index.php?page=image_manager&subpage=types';
@@ -59,7 +59,7 @@ if ($sql->getRows() == 1) {
                     <div class="rex-form-row rex-form-element-v1">
                         <p class="rex-form-text">
                             <label for="include_jquery"><?php echo $I18N->msg('magnific_popup_settings_include_jquery'); ?></label>
-                            <input type="checkbox" name="include_jquery" id="include_jquery" value="1" <?php if ($REX['ADDON']['magnific_popup']['settings']['include_jquery'] == 1) {
+                            <input type="checkbox" name="include_jquery" id="include_jquery" value="1" <?php if (1 == $REX['ADDON']['magnific_popup']['settings']['include_jquery']) {
     echo 'checked="checked"';
 } ?>>
                         </p>

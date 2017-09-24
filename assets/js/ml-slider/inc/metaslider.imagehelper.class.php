@@ -48,7 +48,7 @@ class MetaSliderImageHelper
      */
     private function get_crop_dimensions($image_width, $image_height)
     {
-        if ($this->smart_crop === 'false') {
+        if ('false' === $this->smart_crop) {
             return array('width' => (int)$this->container_width, 'height' => (int)$this->container_height);
         }
 
@@ -183,7 +183,7 @@ class MetaSliderImageHelper
         $orig_size = $this->get_original_image_dimensions();
 
         // bail out if we can't find the image dimensions
-        if ($orig_size == false) {
+        if (false == $orig_size) {
             return $this->url;
         }
 

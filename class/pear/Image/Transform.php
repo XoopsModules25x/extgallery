@@ -201,7 +201,7 @@ class Image_Transform
      */
     public function &factory($driver = '')
     {
-        if ($driver == '') {
+        if ('' == $driver) {
             $extensions = array(
                 'imagick' => 'Imagick3',
                 'gd'      => 'GD',
@@ -365,7 +365,7 @@ class Image_Transform
      */
     public function scale($size)
     {
-        if ((strlen($size) > 1) && (substr($size, -1) == '%')) {
+        if ((strlen($size) > 1) && ('%' == substr($size, -1))) {
             return $this->scaleByPercentage(substr($size, 0, -1));
         } elseif ($size < 1) {
             return $this->scaleByFactor($size);
@@ -702,13 +702,13 @@ class Image_Transform
      */
     public function _parse_size($new_size, $old_size)
     {
-        if (substr($new_size, -1) == '%') {
+        if ('%' == substr($new_size, -1)) {
             $new_size = substr($new_size, 0, -1);
             $new_size = $new_size / 100;
         }
         if ($new_size > 1) {
             return (int)$new_size;
-        } elseif ($new_size == 0) {
+        } elseif (0 == $new_size) {
             return (int)$old_size;
         } else {
             return (int)round($new_size * $old_size, 0);
@@ -1022,7 +1022,7 @@ class Image_Transform
      */
     public function supportsType($type, $mode = 'rw')
     {
-        return (strpos(@$this->_supported_image_types[strtolower($type)], $mode) === false) ? false : true;
+        return (false === strpos(@$this->_supported_image_types[strtolower($type)], $mode)) ? false : true;
     }
 
     /**
@@ -1105,7 +1105,7 @@ class Image_Transform
         }
         $color = sprintf('#%02X%02X%02X', @$color[0], @$color[1], @$color[2]);
 
-        return (strlen($color) != 7) ? false : $color;
+        return (7 != strlen($color)) ? false : $color;
     }
 
     /**
@@ -1278,7 +1278,7 @@ class Image_Transform
             if (is_array($color)) {
                 return $color;
             }
-            if ($color{0} == '#') {
+            if ('#' == $color{0}) {
                 return $this->colorhex2colorarray($color);
             }
             static $colornames = array();

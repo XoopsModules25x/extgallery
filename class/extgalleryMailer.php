@@ -49,7 +49,7 @@ class extgalleryMailer
 
     public function imageIncluded()
     {
-        if ($this->photo->getVar('photo_serveur') === '') {
+        if ('' === $this->photo->getVar('photo_serveur')) {
             $photoPath = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium/' . $this->photo->getVar('photo_name');
         } else {
             $photoPath = $this->photo->getVar('photo_serveur') . $this->photo->getVar('photo_name');
@@ -62,7 +62,7 @@ class extgalleryMailer
 
     public function imageLinked()
     {
-        if ($this->photo->getVar('photo_serveur') == '') {
+        if ('' == $this->photo->getVar('photo_serveur')) {
             $photoUrl = XOOPS_URL . '/uploads/extgallery/public-photo/medium/' . $this->photo->getVar('photo_name');
         } else {
             $photoUrl = $this->photo->getVar('photo_serveur') . $this->photo->getVar('photo_name');
@@ -74,9 +74,9 @@ class extgalleryMailer
     public function send()
     {
         $this->assignTags();
-        if ($this->type === 'included') {
+        if ('included' === $this->type) {
             $this->imageIncluded();
-        } elseif ($this->type === 'linked') {
+        } elseif ('linked' === $this->type) {
             $this->imageLinked();
         }
 

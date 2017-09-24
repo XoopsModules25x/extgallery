@@ -130,7 +130,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
      */
     public function deletePhoto(&$photo)
     {
-        if ($photo->getVar('photo_serveur') == '') {
+        if ('' == $photo->getVar('photo_serveur')) {
             $this->deleteFile($photo);
         }
         $this->deleteById($photo->getVar('photo_id'), true);
@@ -165,7 +165,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         $criteria->add(new Criteria('photo_approved', 1));
 
         $photo = $this->getObjects($criteria);
-        if (count($photo) != 1) {
+        if (1 != count($photo)) {
             return false;
         }
 
@@ -199,7 +199,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         $criteria->add(new Criteria('photo_approved', 1));
         $criteria->setStart($start);
         $criteria->setLimit($GLOBALS['xoopsModuleConfig']['nb_column'] * $GLOBALS['xoopsModuleConfig']['nb_line']);
-        if ($criteria->getSort() == '') {
+        if ('' == $criteria->getSort()) {
             $criteria->setSort($sortby);
             $criteria->setOrder($orderby);
         }
@@ -458,36 +458,36 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         /   1 : center
         /
         */
-        if ($xoopsModuleConfig['watermark_position'] === 'tl') {
+        if ('tl' === $xoopsModuleConfig['watermark_position']) {
             $x = 0;
             $y = 0;
-        } elseif ($xoopsModuleConfig['watermark_position'] === 'tr') {
+        } elseif ('tr' === $xoopsModuleConfig['watermark_position']) {
             $x = -1;
             $y = 0;
-        } elseif ($xoopsModuleConfig['watermark_position'] === 'bl') {
+        } elseif ('bl' === $xoopsModuleConfig['watermark_position']) {
             $x = 0;
             $y = -1;
-        } elseif ($xoopsModuleConfig['watermark_position'] === 'br') {
+        } elseif ('br' === $xoopsModuleConfig['watermark_position']) {
             $x = -1;
             $y = -1;
-        } elseif ($xoopsModuleConfig['watermark_position'] === 'tc') {
+        } elseif ('tc' === $xoopsModuleConfig['watermark_position']) {
             $x = 1;
             $y = 0;
-        } elseif ($xoopsModuleConfig['watermark_position'] === 'bc') {
+        } elseif ('bc' === $xoopsModuleConfig['watermark_position']) {
             $x = 1;
             $y = -1;
-        } elseif ($xoopsModuleConfig['watermark_position'] === 'lc') {
+        } elseif ('lc' === $xoopsModuleConfig['watermark_position']) {
             $x = 0;
             $y = 1;
-        } elseif ($xoopsModuleConfig['watermark_position'] === 'rc') {
+        } elseif ('rc' === $xoopsModuleConfig['watermark_position']) {
             $x = -1;
             $y = 1;
-        } elseif ($xoopsModuleConfig['watermark_position'] === 'cc') {
+        } elseif ('cc' === $xoopsModuleConfig['watermark_position']) {
             $x = 1;
             $y = 1;
         }
 
-        $text = ($xoopsModuleConfig['watermark_type'] == 0) ? $GLOBALS['xoopsUser']->getVar('uname') : $xoopsModuleConfig['watermark_text'];
+        $text = (0 == $xoopsModuleConfig['watermark_type']) ? $GLOBALS['xoopsUser']->getVar('uname') : $xoopsModuleConfig['watermark_text'];
 
         $watermarkParams = [
             'text'         => $text,
@@ -537,7 +537,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         if ($xoopsModuleConfig['save_large']) {
 
             // Define Graphical library path
-            if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'imagick') {
+            if (!defined('IMAGE_TRANSFORM_IM_PATH') && 'imagick' === $xoopsModuleConfig['graphic_lib']) {
                 define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
             }
             $imageFactory   = new Image_Transform;
@@ -577,7 +577,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         global $xoopsModuleConfig;
 
         // Define Graphical library path
-        if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'imagick') {
+        if (!defined('IMAGE_TRANSFORM_IM_PATH') && 'imagick' === $xoopsModuleConfig['graphic_lib']) {
             define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
         }
         $imageFactory   = new Image_Transform;
@@ -627,7 +627,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         global $xoopsModuleConfig;
 
         // Define Graphical library path
-        if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'imagick') {
+        if (!defined('IMAGE_TRANSFORM_IM_PATH') && 'imagick' === $xoopsModuleConfig['graphic_lib']) {
             define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
         }
         $imageFactory   = new Image_Transform;
@@ -662,7 +662,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
         global $xoopsModuleConfig;
 
         // Define Graphical library path
-        if (!defined('IMAGE_TRANSFORM_IM_PATH') && $xoopsModuleConfig['graphic_lib'] === 'imagick') {
+        if (!defined('IMAGE_TRANSFORM_IM_PATH') && 'imagick' === $xoopsModuleConfig['graphic_lib']) {
             define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
         }
         $imageFactory   = new Image_Transform;
@@ -791,7 +791,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
 
         // If isn't an album when stop the traitment
         $cat = $catHandler->getCat($catId);
-        if (null !== $cat && ($cat->getVar('nright') - $cat->getVar('nleft') != 1)) {
+        if (null !== $cat && (1 != $cat->getVar('nright') - $cat->getVar('nleft'))) {
             return 2;
         }
 
@@ -868,13 +868,13 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             'X_ITEM_NBPHOTO' => 1
         ];
 
-        if ($photoStatus == 1) {
+        if (1 == $photoStatus) {
             $extraTags['X_ITEM_URL'] = XOOPS_URL . '/modules/extgallery/public-album.php?id=' . $cat->getVar('cat_id');
             $notificationHandler->triggerEvent('global', 0, 'new_photo', $extraTags);
             $notificationHandler->triggerEvent('album', $cat->getVar('cat_id'), 'new_photo_album', $extraTags);
 
             // Update album count
-            if ($cat->getVar('cat_nb_photo') == 0) {
+            if (0 == $cat->getVar('cat_nb_photo')) {
                 $criteria = new CriteriaCompo();
                 $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '<'));
                 $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>'));
@@ -925,7 +925,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
 
         //DNPROSSI - changed photo_desc to photo_title
         // Making auto description
-        if ($photoTitle === '') {
+        if ('' === $photoTitle) {
             $photoTitle = $this->_getAutoDescription($photoName);
         }
 
@@ -968,7 +968,7 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
 
         $this->createPhoto($data);
 
-        if ($xoopsModuleConfig['usetag'] == 1 || (is_dir('../tag') || is_dir('../../tag'))) {
+        if (1 == $xoopsModuleConfig['usetag'] || (is_dir('../tag') || is_dir('../../tag'))) {
             $newid      = $this->db->getInsertId();
             $tagHandler = xoops_getModuleHandler('tag', 'tag');
             $tagHandler->updateByItem($photoTag, $newid, 'extgallery', 0);

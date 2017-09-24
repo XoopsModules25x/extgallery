@@ -121,7 +121,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
     public function getList(CriteriaElement $criteria = null, $limit = 0, $start = 0)
     {
         $ret = [];
-        if ($criteria === null) {
+        if (null === $criteria) {
             $criteria = new CriteriaCompo();
         }
 

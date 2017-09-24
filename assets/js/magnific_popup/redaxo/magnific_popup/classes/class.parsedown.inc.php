@@ -84,11 +84,11 @@ class Parsedown
 
         # encodes escape sequences
 
-        if (strpos($text, '\\') !== false) {
+        if (false !== strpos($text, '\\')) {
             $escape_sequences = array('\\\\', '\`', '\*', '\_', '\{', '\}', '\[', '\]', '\(', '\)', '\>', '\#', '\+', '\-', '\.', '\!');
 
             foreach ($escape_sequences as $index => $escape_sequence) {
-                if (strpos($text, $escape_sequence) !== false) {
+                if (false !== strpos($text, $escape_sequence)) {
                     $code = "\x1A" . '\\' . $index . ';';
 
                     $text = str_replace($escape_sequence, $code, $text);
@@ -146,7 +146,7 @@ class Parsedown
                         if (preg_match('/^[ ]*' . $element['fence'][0] . '{3,}[ ]*$/', $line)) {
                             $element['closed'] = true;
                         } else {
-                            $element['text'] !== '' and $element['text'] .= "\n";
+                            '' !== $element['text'] and $element['text'] .= "\n";
 
                             $element['text'] .= $line;
                         }
@@ -159,11 +159,11 @@ class Parsedown
                 case 'block-level markup':
 
                     if (!isset($element['closed'])) {
-                        if (strpos($line, $element['start']) !== false) { # opening tag
+                        if (false !== strpos($line, $element['start'])) { # opening tag
                             $element['depth']++;
                         }
 
-                        if (strpos($line, $element['end']) !== false) { # closing tag
+                        if (false !== strpos($line, $element['end'])) { # closing tag
                             $element['depth'] > 0 ? $element['depth']-- : $element['closed'] = true;
                         }
 
@@ -179,7 +179,7 @@ class Parsedown
 
             $deindented_line = ltrim($line);
 
-            if ($deindented_line === '') {
+            if ('' === $deindented_line) {
                 $element['interrupted'] = true;
 
                 continue;
@@ -224,7 +224,7 @@ class Parsedown
                     }
 
                     if (isset($element['interrupted'])) {
-                        if ($line[0] === ' ') {
+                        if (' ' === $line[0]) {
                             $element['lines'] [] = '';
 
                             $line = preg_replace('/^[ ]{0,4}/', '', $line);
@@ -253,10 +253,10 @@ class Parsedown
 
                     # code block
 
-                    if (isset($line[3]) and $line[3] === ' ' and $line[2] === ' ' and $line[1] === ' ') {
+                    if (isset($line[3]) and ' ' === $line[3] and ' ' === $line[2] and ' ' === $line[1]) {
                         $code_line = substr($line, 4);
 
-                        if ($element['type'] === 'code block') {
+                        if ('code block' === $element['type']) {
                             if (isset($element['interrupted'])) {
                                 $element['text'] .= "\n";
 
@@ -287,7 +287,7 @@ class Parsedown
 
                         $level = 1;
 
-                        while (isset($line[$level]) and $line[$level] === '#') {
+                        while (isset($line[$level]) and '#' === $line[$level]) {
                             ++$level;
                         }
 
@@ -307,7 +307,7 @@ class Parsedown
 
                     # setext heading
 
-                    if ($element['type'] === 'paragraph' and isset($element['interrupted']) === false) {
+                    if ('paragraph' === $element['type'] and false === isset($element['interrupted'])) {
                         $chopped_line = rtrim($line);
 
                         $i = 1;
@@ -321,7 +321,7 @@ class Parsedown
                         }
 
                         $element['type']  = 'heading';
-                        $element['level'] = $line[0] === '-' ? 2 : 1;
+                        $element['level'] = '-' === $line[0] ? 2 : 1;
 
                         continue 2;
                     }
@@ -340,7 +340,7 @@ class Parsedown
                         $name = substr($deindented_line, 1, $position - 1);
                         $name = rtrim($name);
 
-                        if (substr($name, -1) === '/') {
+                        if ('/' === substr($name, -1)) {
                             $self_closing = true;
 
                             $name = substr($name, 0, -1);
@@ -506,7 +506,7 @@ class Parsedown
 
             # paragraph
 
-            if ($element['type'] === 'paragraph') {
+            if ('paragraph' === $element['type']) {
                 if (isset($element['interrupted'])) {
                     $elements [] = $element;
 
@@ -542,7 +542,7 @@ class Parsedown
 
                     $text = $this->parse_span_elements($element['text']);
 
-                    if ($context === 'li' and $markup === '') {
+                    if ('li' === $context and '' === $markup) {
                         if (isset($element['interrupted'])) {
                             $markup .= "\n" . '<p>' . $text . '</p>' . "\n";
                         } else {
@@ -566,7 +566,7 @@ class Parsedown
 
                     $text = htmlspecialchars($element['text'], ENT_NOQUOTES, 'UTF-8');
 
-                    strpos($text, "\x1A\\") !== false and $text = strtr($text, $this->escape_sequence_map);
+                    false !== strpos($text, "\x1A\\") and $text = strtr($text, $this->escape_sequence_map);
 
                     $markup .= isset($element['language']) ? '<pre><code class="language-' . $element['language'] . '">' . $text . '</code></pre>' : '<pre><code>' . $text . '</code></pre>';
 
@@ -578,7 +578,7 @@ class Parsedown
 
                     $text = $element['text'];
 
-                    strpos($text, "\x1A\\") !== false and $text = strtr($text, $this->escape_sequence_map);
+                    false !== strpos($text, "\x1A\\") and $text = strtr($text, $this->escape_sequence_map);
 
                     $markup .= rex_highlight_string($text, true) . "\n";
 
@@ -642,7 +642,7 @@ class Parsedown
      */
     private function parse_span_elements($text, $markers = array('![', '&', '*', '<', '[', '_', '`', 'http', '~~'))
     {
-        if (isset($text[2]) === false or $markers === array()) {
+        if (false === isset($text[2]) or $markers === array()) {
             return $text;
         }
 
@@ -658,13 +658,13 @@ class Parsedown
             foreach ($markers as $index => $marker) {
                 $marker_position = strpos($text, $marker);
 
-                if ($marker_position === false) {
+                if (false === $marker_position) {
                     unset($markers[$index]);
 
                     continue;
                 }
 
-                if ($closest_marker === null or $marker_position < $closest_marker_position) {
+                if (null === $closest_marker or $marker_position < $closest_marker_position) {
                     $closest_marker          = $marker;
                     $closest_marker_index    = $index;
                     $closest_marker_position = $marker_position;
@@ -673,7 +673,7 @@ class Parsedown
 
             # ~
 
-            if ($closest_marker === null or isset($text[$closest_marker_position + 2]) === false) {
+            if (null === $closest_marker or false === isset($text[$closest_marker_position + 2])) {
                 $markup .= $text;
 
                 break;
@@ -695,7 +695,7 @@ class Parsedown
 
                     if (strpos($text, ']') and preg_match('/\[((?:[^][]|(?R))*)\]/', $text, $matches)) {
                         $element = array(
-                            '!' => $text[0] === '!',
+                            '!' => '!' === $text[0],
                             'a' => $matches[1]
                         );
 
@@ -705,7 +705,7 @@ class Parsedown
 
                         $remaining_text = substr($text, $offset);
 
-                        if ($remaining_text[0] === '(' and preg_match('/\([ ]*(.*?)(?:[ ]+[\'"](.+?)[\'"])?[ ]*\)/', $remaining_text, $matches)) {
+                        if ('(' === $remaining_text[0] and preg_match('/\([ ]*(.*?)(?:[ ]+[\'"](.+?)[\'"])?[ ]*\)/', $remaining_text, $matches)) {
                             $element['»'] = $matches[1];
 
                             if (isset($matches[2])) {
@@ -754,7 +754,7 @@ class Parsedown
                     } else {
                         $markup .= $closest_marker;
 
-                        $offset = $closest_marker === '![' ? 2 : 1;
+                        $offset = '![' === $closest_marker ? 2 : 1;
                     }
 
                     break;
@@ -812,8 +812,8 @@ class Parsedown
 
                 case '<':
 
-                    if (strpos($text, '>') !== false) {
-                        if ($text[1] === 'h' and preg_match('/^<(https?:[\/]{2}[^\s]+?)>/i', $text, $matches)) {
+                    if (false !== strpos($text, '>')) {
+                        if ('h' === $text[1] and preg_match('/^<(https?:[\/]{2}[^\s]+?)>/i', $text, $matches)) {
                             $element_url = $matches[1];
                             $element_url = str_replace('&', '&amp;', $element_url);
                             $element_url = str_replace('<', '&lt;', $element_url);
@@ -844,7 +844,7 @@ class Parsedown
                         $element_text = $matches[1];
                         $element_text = htmlspecialchars($element_text, ENT_NOQUOTES, 'UTF-8');
 
-                        if ($this->escape_sequence_map and strpos($element_text, "\x1A") !== false) {
+                        if ($this->escape_sequence_map and false !== strpos($element_text, "\x1A")) {
                             $element_text = strtr($element_text, $this->escape_sequence_map);
                         }
 

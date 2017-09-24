@@ -416,7 +416,7 @@ switch ($op) {
     default:
         xoops_cp_header();
 
-        $xoopsTpl->assign('displayalbum', $xoopsModuleConfig['display_type'] === 'album');
+        $xoopsTpl->assign('displayalbum', 'album' === $xoopsModuleConfig['display_type']);
 
         $form = new XoopsThemeForm(_AM_EXTGALLERY_OVERLAY_CONF, 'overlay_conf', 'album.php', 'post', true);
         $form->addElement(new XoopsFormColorPicker(_AM_EXTGALLERY_OVERLAY_BG, 'album_overlay_bg', $xoopsModuleConfig['album_overlay_bg']), false);

@@ -200,7 +200,7 @@ class MetaImageSlide extends MetaSlide
         );
 
         // fix slide URLs
-        if (strpos($slide['url'], 'www.') === 0) {
+        if (0 === strpos($slide['url'], 'www.')) {
             $slide['url'] = 'http://' . $slide['url'];
         }
 
@@ -389,7 +389,7 @@ class MetaImageSlide extends MetaSlide
         }
 
         // store the 'new window' setting
-        $new_window = isset($fields['new_window']) && $fields['new_window'] === 'on' ? 'true' : 'false';
+        $new_window = isset($fields['new_window']) && 'on' === $fields['new_window'] ? 'true' : 'false';
 
         $this->add_or_update_or_delete_meta($this->slide->ID, 'new_window', $new_window);
     }

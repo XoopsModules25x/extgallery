@@ -236,7 +236,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     {
         $nbPhoto = $this->nbPhoto($cat);
 
-        return $nbPhoto != 0;
+        return 0 != $nbPhoto;
     }
 
     /**
@@ -308,7 +308,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     {
         $criteria = new CriteriaCompo(new Criteria('nright - nleft', 1));
         //$query = sprintf('select count(*) as num_leef from %s where nright - nleft = 1', $this->table);
-        if ($id != 0) {
+        if (0 != $id) {
             $cat = $this->get($id);
             $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '>'));
             $criteria->add(new Criteria('nright', $cat->getVar('nright'), '<'));
@@ -390,14 +390,14 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
         /** @var ExtgalleryCat $cat */
         foreach ($cats as $cat) {
             $disableOption = '';
-            if ($selectMode === 'node' && ($cat->getVar('nright') - $cat->getVar('nleft') != 1)) {
+            if ('node' === $selectMode && (1 != $cat->getVar('nright') - $cat->getVar('nleft'))) {
                 // If the brownser is IE the parent cat isn't displayed
                 //                if (preg_match('`MSIE`', $_SERVER['HTTP_USER_AGENT'])) {
                 if (false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
                     continue;
                 }
                 $disableOption = ' disabled="disabled"';
-            } elseif ($selectMode === 'leaf' && ($cat->getVar('cat_isalbum') == 1)) {
+            } elseif ('leaf' === $selectMode && (1 == $cat->getVar('cat_isalbum'))) {
                 continue;
             }
 
@@ -448,7 +448,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
                 $selectedOption = ' selected';
             }
 
-            if ($cat->getVar('nright') - $cat->getVar('nleft') != 1) {
+            if (1 != $cat->getVar('nright') - $cat->getVar('nleft')) {
                 $disableOption = ' disabled="disabled"';
             }
 
@@ -516,22 +516,22 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
         // give it an initial nleft value of 0 and an nlevel of 0.
         $this->_generateTreeData($data, 0, 0, $n);
         //echo "<pre>";print_r($data);echo "</pre>";
-        // at this point the the root node will have nleft of 0, nlevel of 0
+        // at this point the root node will have nleft of 0, nlevel of 0
         // and nright of (tree size * 2 + 1)
 
         // Errase category and photo counter
-        $query = sprintf('UPDATE "%s" SET cat_nb_album = 0, cat_nb_photo = 0;', $this->table);
+        $query = sprintf('UPDATE %s SET cat_nb_album = 0, cat_nb_photo = 0;', $this->table);
         $this->db->queryF($query);
 
         foreach ($data as $id => $row) {
 
             // skip the root node
-            if ($id == 0) {
+            if (0 == $id) {
                 continue;
             }
 
             // Update the photo number
-            if ($row['nright'] - $row['nleft'] == 1) {
+            if (1 == $row['nright'] - $row['nleft']) {
                 // Get the number of photo in this album
                 $criteria = new CriteriaCompo();
                 $criteria->add(new Criteria('cat_id', $id));
@@ -541,22 +541,22 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
 
                 // Update all parent of this album
                 $upNbAlbum = '';
-                if ($nbPhoto != 0) {
+                if (0 != $nbPhoto) {
                     $upNbAlbum = 'cat_nb_album = cat_nb_album + 1, ';
                 }
-                $sql   = 'UPDATE "%s" SET ' . $upNbAlbum . 'cat_nb_photo = cat_nb_photo + "%d" WHERE nleft < "%d" AND nright > "%d";';
+                $sql   = 'UPDATE %s SET ' . $upNbAlbum . 'cat_nb_photo = cat_nb_photo + %d WHERE nleft < %d AND nright > %d;';
                 $query = sprintf($sql, $this->table, $nbPhoto, $row['nleft'], $row['nright']);
                 $this->db->queryF($query);
 
                 // Update this album if needed
-                if ($nbPhoto != 0) {
-                    $sql   = 'UPDATE %s SET cat_nb_photo = %d WHERE %s = %d';
+                if (0 != $nbPhoto) {
+                    $sql   = "UPDATE %s SET cat_nb_photo = %d WHERE %s = %d";
                     $query = sprintf($sql, $this->table, $nbPhoto, $this->keyName, $id);
                     $this->db->queryF($query);
                 }
             }
 
-            $query = sprintf('UPDATE "%s" SET nlevel = "%d", nleft = "%d", nright = "%d" WHERE "%s" = "%d";', $this->table, $row['nlevel'], $row['nleft'], $row['nright'], $this->keyName, $id);
+            $query = sprintf('UPDATE %s SET nlevel = %d, nleft = %d, nright = %d WHERE %s = %d;', $this->table, $row['nlevel'], $row['nleft'], $row['nright'], $this->keyName, $id);
             $this->db->queryF($query);
         }
     }

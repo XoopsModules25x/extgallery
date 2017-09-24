@@ -4,7 +4,7 @@ $page    = rex_request('page', 'string');
 $subpage = rex_request('subpage', 'string');
 
 // if no subpage specified, use this one
-if ($subpage == '') {
+if ('' == $subpage) {
     $subpage = 'start';
 }
 

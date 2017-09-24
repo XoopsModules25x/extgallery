@@ -4,7 +4,7 @@
 $imageType = 'magnific_popup_image_thumb';
 $imageFile = 'REX_MEDIA[1]';
 
-if ($imageFile != '') {
+if ('' != $imageFile) {
     $media = OOMedia::getMediaByFilename($imageFile);
 
     // get title and description
@@ -41,7 +41,7 @@ if ($imageFile != '') {
     $resizedFile = $REX['INCLUDE_PATH'] . '/generated/files/image_manager__' . $imageType . '_' . $imageFile;
     $imageSize   = @getimagesize($resizedFile);
 
-    if ($imageSize != false) {
+    if (false != $imageSize) {
         $imageDimensions = ' width="' . $imageSize[0] . '" height="' . $imageSize[1] . '"';
     } else {
         $imageDimensions = '';

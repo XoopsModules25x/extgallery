@@ -69,7 +69,7 @@ $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 
 $jquery = $xoopsModuleConfig['enable_jquery'];
 $xoopsTpl->assign('jquery', $jquery);
-if ($jquery == 1) {
+if (1 == $jquery) {
     $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
     switch ($ajaxeffect) {
         case 'galleryview':
@@ -125,7 +125,7 @@ $xoopsTpl->assign('galleria_panelwidth', $xoopsModuleConfig['galleria_panelwidth
 $xoopsTpl->assign('galleria_bgcolor', $xoopsModuleConfig['galleria_bgcolor']);
 $xoopsTpl->assign('galleria_bcolor', $xoopsModuleConfig['galleria_bcolor']);
 $xoopsTpl->assign('galleria_bgimg', $xoopsModuleConfig['galleria_bgimg']);
-if ($xoopsModuleConfig['galleria_autoplay'] == 1) {
+if (1 == $xoopsModuleConfig['galleria_autoplay']) {
     $xoopsTpl->assign('galleria_autoplay', 'true');
 } else {
     $xoopsTpl->assign('galleria_autoplay', 'false');
@@ -137,7 +137,7 @@ $xoopsTpl->assign('galleria_tspeed', $xoopsModuleConfig['galleria_tspeed']);
 $xoopsTpl->assign('galleriffic_nb_thumbs', $xoopsModuleConfig['galleriffic_nb_thumbs']);
 $xoopsTpl->assign('galleriffic_nb_colthumbs', $xoopsModuleConfig['galleriffic_nb_colthumbs']);
 $xoopsTpl->assign('galleriffic_nb_preload', $xoopsModuleConfig['galleriffic_nb_preload']);
-if ($xoopsModuleConfig['galleriffic_autoplay'] == 1) {
+if (1 == $xoopsModuleConfig['galleriffic_autoplay']) {
     $xoopsTpl->assign('galleriffic_autoplay', 'true');
 } else {
     $xoopsTpl->assign('galleriffic_autoplay', 'false');

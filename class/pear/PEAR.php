@@ -33,7 +33,7 @@ define('PEAR_ERROR_CALLBACK', 16);
 define('PEAR_ERROR_EXCEPTION', 32);
 /**#@-*/
 
-if (substr(PHP_OS, 0, 3) == 'WIN') {
+if ('WIN' == substr(PHP_OS, 0, 3)) {
     define('OS_WINDOWS', true);
     define('OS_UNIX', false);
     define('PEAR_OS', 'Windows');
@@ -162,7 +162,7 @@ class PEAR
             print "PEAR constructor called, class=$classname\n";
         }
 
-        if ($error_class !== null) {
+        if (null !== $error_class) {
             $this->_error_class = $error_class;
         }
 
@@ -347,7 +347,7 @@ class PEAR
         $mode = null,
         $options = null
     ) {
-        if ($object !== null) {
+        if (null !== $object) {
             $setmode    = &$object->_default_error_mode;
             $setoptions = &$object->_default_error_options;
         } else {
@@ -533,11 +533,11 @@ class PEAR
             $message                       = $message->getMessage();
         }
 
-        if ($object !== null
+        if (null !== $object
             && isset($object->_expected_errors)
             && count($object->_expected_errors) > 0
             && count($exp = end($object->_expected_errors))) {
-            if ($exp[0] == "*"
+            if ("*" == $exp[0]
                 || (is_int(reset($exp)) && in_array($code, $exp))
                 || (is_string(reset($exp)) && in_array($message, $exp))) {
                 $mode = PEAR_ERROR_RETURN;
@@ -545,9 +545,9 @@ class PEAR
         }
 
         // No mode given, try global ones
-        if ($mode === null) {
+        if (null === $mode) {
             // Class error handler
-            if ($object !== null && isset($object->_default_error_mode)) {
+            if (null !== $object && isset($object->_default_error_mode)) {
                 $mode    = $object->_default_error_mode;
                 $options = $object->_default_error_options;
                 // Global error handler
@@ -557,9 +557,9 @@ class PEAR
             }
         }
 
-        if ($error_class !== null) {
+        if (null !== $error_class) {
             $ec = $error_class;
-        } elseif ($object !== null && isset($object->_error_class)) {
+        } elseif (null !== $object && isset($object->_error_class)) {
             $ec = $object->_error_class;
         } else {
             $ec = 'PEAR_Error';
@@ -591,7 +591,7 @@ class PEAR
      */
     protected static function _throwError($object, $message = null, $code = null, $userinfo = null)
     {
-        if ($object !== null) {
+        if (null !== $object) {
             $a = &$object->raiseError($message, $code, null, null, $userinfo);
 
             return $a;
@@ -690,7 +690,7 @@ class PEAR
     protected static function _pushErrorHandling($object, $mode, $options = null)
     {
         $stack = &$GLOBALS['_PEAR_error_handler_stack'];
-        if ($object !== null) {
+        if (null !== $object) {
             $def_mode    = &$object->_default_error_mode;
             $def_options = &$object->_default_error_options;
         } else {
@@ -699,7 +699,7 @@ class PEAR
         }
         $stack[] = array($def_mode, $def_options);
 
-        if ($object !== null) {
+        if (null !== $object) {
             $object->setErrorHandling($mode, $options);
         } else {
             PEAR::setErrorHandling($mode, $options);
@@ -722,7 +722,7 @@ class PEAR
         array_pop($stack);
         list($mode, $options) = $stack[sizeof($stack) - 1];
         array_pop($stack);
-        if ($object !== null) {
+        if (null !== $object) {
             $object->setErrorHandling($mode, $options);
         } else {
             PEAR::setErrorHandling($mode, $options);
@@ -745,8 +745,8 @@ class PEAR
         }
 
         // if either returns true dl() will produce a FATAL error, stop that
-        if (function_exists('dl') === false
-            || ini_get('enable_dl') != 1) {
+        if (false === function_exists('dl')
+            || 1 != ini_get('enable_dl')) {
             return false;
         }
 
@@ -860,7 +860,7 @@ class PEAR_Error
         $options = null,
         $userinfo = null
     ) {
-        if ($mode === null) {
+        if (null === $mode) {
             $mode = PEAR_ERROR_RETURN;
         }
         $this->message  = $message;
@@ -881,7 +881,7 @@ class PEAR_Error
             $this->level    = E_USER_NOTICE;
             $this->callback = $options;
         } else {
-            if ($options === null) {
+            if (null === $options) {
                 $options = E_USER_NOTICE;
             }
 
@@ -907,7 +907,7 @@ class PEAR_Error
             $msg = $this->getMessage();
             if (is_null($options) || is_int($options)) {
                 $format = "%s";
-                if (substr($msg, -1) != "\n") {
+                if ("\n" != substr($msg, -1)) {
                     $msg .= "\n";
                 }
             } else {
@@ -1038,7 +1038,7 @@ class PEAR_Error
         if (defined('PEAR_IGNORE_BACKTRACE')) {
             return null;
         }
-        if ($frame === null) {
+        if (null === $frame) {
             return $this->backtrace;
         }
 

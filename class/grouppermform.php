@@ -54,7 +54,7 @@ class ExtgalleryGroupPermForm extends XoopsGroupPermForm
         $memberHandler = xoops_getHandler('member');
         $glist         = $memberHandler->getGroupList();
         foreach (array_keys($glist) as $i) {
-            if ($i == XOOPS_GROUP_ANONYMOUS && !$this->_showAnonymous) {
+            if (XOOPS_GROUP_ANONYMOUS == $i && !$this->_showAnonymous) {
                 continue;
             }
             // get selected item id(s) for each group
@@ -80,7 +80,7 @@ class ExtgalleryGroupPermForm extends XoopsGroupPermForm
                 echo $elements[$i];
             } elseif (!$elements[$i]->isHidden()) {
                 echo "<tr valign='top' align='left'><td class='head'>" . $elements[$i]->getCaption();
-                if ($elements[$i]->getDescription() != '') {
+                if ('' != $elements[$i]->getDescription()) {
                     echo '<br><br><span style="font-weight: normal;">' . $elements[$i]->getDescription() . '</span>';
                 }
                 echo "</td>\n<td class='even'>\n";

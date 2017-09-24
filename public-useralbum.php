@@ -39,17 +39,17 @@ $xoopsTpl->assign('use_ajax_effects', $ajaxeffect);
 //HACK BLUETEEN TO SORT PHOTOS BY USERS
 //photo_date - photo_title - photo_hits - photo_rating
 if (isset($_GET['sortby'])
-    && ($_GET['sortby'] === 'photo_date'
-        || $_GET['sortby'] === 'photo_title'
-        || $_GET['sortby'] === 'photo_hits'
-        || $_GET['sortby'] === 'photo_rating')) {
+    && ('photo_date' === $_GET['sortby']
+        || 'photo_title' === $_GET['sortby']
+        || 'photo_hits' === $_GET['sortby']
+        || 'photo_rating' === $_GET['sortby'])) {
     $sortby = $_GET['sortby'];
 } else {
     $sortby = 'photo_date';
 }
 
 //ASC ou DESC
-if (isset($_GET['orderby']) && ($_GET['orderby'] === 'DESC' || $_GET['orderby'] === 'ASC')) {
+if (isset($_GET['orderby']) && ('DESC' === $_GET['orderby'] || 'ASC' === $_GET['orderby'])) {
     $orderby = $_GET['orderby'];
 } else {
     $orderby = $GLOBALS['xoopsModuleConfig']['display_set_order'];
@@ -65,34 +65,34 @@ $SortbyOrderby = $sortby . ' ' . $orderby;
 function convertorderbytrans($SortbyOrderby)
 {
     $orderbyTrans = [];
-    if ($SortbyOrderby === 'photo_date DESC') {
+    if ('photo_date DESC' === $SortbyOrderby) {
         $orderbyTrans = _MD_EXTGALLERY_ORDERBY_DATEASC;
     }
-    if ($SortbyOrderby === 'photo_date ASC') {
+    if ('photo_date ASC' === $SortbyOrderby) {
         $orderbyTrans = _MD_EXTGALLERY_ORDERBY_DATEDESC;
     }
-    if ($SortbyOrderby === 'photo_title ASC') {
+    if ('photo_title ASC' === $SortbyOrderby) {
         $orderbyTrans = _MD_EXTGALLERY_ORDERBY_TITREASC;
     }
-    if ($SortbyOrderby === 'photo_title DESC') {
+    if ('photo_title DESC' === $SortbyOrderby) {
         $orderbyTrans = _MD_EXTGALLERY_ORDERBY_TITREDESC;
     }
-    if ($SortbyOrderby === 'uid ASC') {
+    if ('uid ASC' === $SortbyOrderby) {
         $orderbyTrans = _MD_EXTGALLERY_ORDERBY_DESIGNERASC;
     }
-    if ($SortbyOrderby === 'uid DESC') {
+    if ('uid DESC' === $SortbyOrderby) {
         $orderbyTrans = _MD_EXTGALLERY_ORDERBY_DESIGNERDESC;
     }
-    if ($SortbyOrderby === 'photo_hits DESC') {
+    if ('photo_hits DESC' === $SortbyOrderby) {
         $orderbyTrans = _MD_EXTGALLERY_ORDERBY_HITSASC;
     }
-    if ($SortbyOrderby === 'photo_hits ASC') {
+    if ('photo_hits ASC' === $SortbyOrderby) {
         $orderbyTrans = _MD_EXTGALLERY_ORDERBY_HITSDESC;
     }
-    if ($SortbyOrderby === 'photo_rating DESC') {
+    if ('photo_rating DESC' === $SortbyOrderby) {
         $orderbyTrans = _MD_EXTGALLERY_ORDERBY_NOTEASC;
     }
-    if ($SortbyOrderby === 'photo_rating ASC') {
+    if ('photo_rating ASC' === $SortbyOrderby) {
         $orderbyTrans = _MD_EXTGALLERY_ORDERBY_NOTEDESC;
     }
 
@@ -132,7 +132,7 @@ if (count($photos) > 0) {
 
 $jquery = $xoopsModuleConfig['enable_jquery'];
 $xoopsTpl->assign('jquery', $jquery);
-if ($jquery == 1 && $ajaxeffect !== 'none') {
+if (1 == $jquery && 'none' !== $ajaxeffect) {
     $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
     switch ($ajaxeffect) {
         case 'lightbox':
@@ -186,9 +186,9 @@ $xoopsTpl->assign('extgallerySortbyOrderby', _MD_EXTGALLERY_ORDERBY . convertord
 
 //DNPROSSI - VOLTAN - added preferences option
 //  enable_info, enable_submitter_lnk, enable_photo_hits
-if ($xoopsModuleConfig['info_view'] === 'album' || $xoopsModuleConfig['info_view'] === 'both') {
-    if ($xoopsModuleConfig['pubusr_info_view'] === 'user' || $xoopsModuleConfig['pubusr_info_view'] === 'both') {
-        if ($xoopsModuleConfig['enable_info'] == 0) {
+if ('album' === $xoopsModuleConfig['info_view'] || 'both' === $xoopsModuleConfig['info_view']) {
+    if ('user' === $xoopsModuleConfig['pubusr_info_view'] || 'both' === $xoopsModuleConfig['pubusr_info_view']) {
+        if (0 == $xoopsModuleConfig['enable_info']) {
             $enable_info = $xoopsModuleConfig['enable_info'];
         } else {
             $enable_info = 1;

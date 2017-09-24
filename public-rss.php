@@ -34,7 +34,7 @@ $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 $catObj       = $catHandler->getCat($catId);
 
-if ($catId != 0) {
+if (0 != $catId) {
     $permHandler = ExtgalleryPublicPermHandler::getInstance();
     if ($permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_access', $catId)) {
         $catObj = $catHandler->getCat($catId);
@@ -64,7 +64,7 @@ if (!$xoopsTpl->is_cached('db:extgallery_public-rss.tpl')) {
     $xoopsTpl->assign('channel_webmaster', $xoopsConfig['adminmail']);
     $xoopsTpl->assign('channel_editor', $xoopsConfig['adminmail']);
 
-    if ($catId != 0) {
+    if (0 != $catId) {
         $channel_category .= ' > ' . $catObj->getVar('cat_name');
         $categories       = $catId;
     } else {

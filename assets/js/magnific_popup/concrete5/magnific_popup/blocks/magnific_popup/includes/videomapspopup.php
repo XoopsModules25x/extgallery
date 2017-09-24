@@ -10,10 +10,10 @@ $v = View::GetInstance(); ?>
     ?>
 
     <a class="popup-<?php echo $videoOptions; ?>" href="<?php echo $vidMapURL; ?>"><?php echo $vidMapLinkText; ?>
-        <?php if ($videoOptions === 'youtubeThumb') : ?>
+        <?php if ('youtubeThumb' === $videoOptions) : ?>
         <img class="<?php echo $cssImageClass; ?>" src="http://img.youtube.com/vi/<?php echo $str . '/' . $youtubeThumbnailOption; ?>.jpg"></a>
 <?php endif; ?>
-    <?php if ($videoOptions === 'vimeoThumb') : ?>
+    <?php if ('vimeoThumb' === $videoOptions) : ?>
         <img class="<?php echo $cssImageClass; ?>" src="http://placehold.it/350x150" data-vimeo-id="<?php echo $vimStr; ?>" class="<?php echo $vimeoThumbnailOption; ?>"></a>
     <?php endif; ?>
 </div>

@@ -62,7 +62,7 @@ switch ($op) {
                 $photoHandler->modifyPhoto((int)$_POST['photo_id'], $data);
 
                 // For xoops tag
-                if (($xoopsModuleConfig['usetag'] == 1) && is_dir('../tag')) {
+                if ((1 == $xoopsModuleConfig['usetag']) && is_dir('../tag')) {
                     $tagHandler = xoops_getModuleHandler('tag', 'tag');
                     $tagHandler->updateByItem($_POST['tag'], $_POST['photo_id'], $xoopsModule->getVar('dirname'), 0);
                 }
@@ -77,14 +77,14 @@ switch ($op) {
                     $catHandler->modifyCat(['cat_id' => (int)$_POST['cat_id'], 'cat_isalbum' => 1]);
 
                     // Update album count
-                    if ($oldCat->getVar('cat_nb_photo') == 1) {
+                    if (1 == $oldCat->getVar('cat_nb_photo')) {
                         $criteria = new CriteriaCompo();
                         $criteria->add(new Criteria('nleft', $oldCat->getVar('nleft'), '<'));
                         $criteria->add(new Criteria('nright', $oldCat->getVar('nright'), '>'));
                         $catHandler->updateFieldValue('cat_nb_album', 'cat_nb_album - 1', $criteria);
                     }
 
-                    if ($newCat->getVar('cat_nb_photo') == 0) {
+                    if (0 == $newCat->getVar('cat_nb_photo')) {
                         $criteria = new CriteriaCompo();
                         $criteria->add(new Criteria('nleft', $newCat->getVar('nleft'), '<'));
                         $criteria->add(new Criteria('nright', $newCat->getVar('nright'), '>'));
@@ -103,7 +103,7 @@ switch ($op) {
                     $catHandler->updateFieldValue('cat_nb_photo', 'cat_nb_photo - 1', $criteria);
 
                     // If the old album don't contains other photo
-                    if ($photoHandler->nbPhoto($oldCat) == 0) {
+                    if (0 == $photoHandler->nbPhoto($oldCat)) {
                         $catHandler->modifyCat(['cat_id' => $photo->getVar('cat_id'), 'cat_isalbum' => 0]);
                         redirect_header('public-categories.php?id=' . $photo->getVar('cat_id'), 3, _MD_EXTGALLERY_PHOTO_UPDATED);
                     } else {
@@ -143,7 +143,7 @@ switch ($op) {
                 }
 
                 // For xoops tag
-                if (($xoopsModuleConfig['usetag'] == 1) && is_dir('../tag')) {
+                if ((1 == $xoopsModuleConfig['usetag']) && is_dir('../tag')) {
                     $tagId = $photo->isNew() ? 0 : $photo->getVar('photo_id');
                     require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
                     $form->addElement(new TagFormTag('tag', 60, 255, $tagId, 0));
@@ -179,7 +179,7 @@ switch ($op) {
         $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>='));
         $catHandler->updateFieldValue('cat_nb_photo', 'cat_nb_photo - 1', $criteria);
 
-        if ($cat->getVar('cat_nb_photo') == 1) {
+        if (1 == $cat->getVar('cat_nb_photo')) {
 
             // Update album count
             $criteria = new CriteriaCompo();

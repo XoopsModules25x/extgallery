@@ -28,10 +28,9 @@ if (!class_exists($utilityClass)) {
 
 $configurator = include __DIR__ . '/../include/config.php';
 
-foreach (array_keys($configurator['uploadFolders']) as $i) {
-    $utilityClass::createFolder($configurator['uploadFolders'][$i]);
-    $adminObject->addConfigBoxLine($configurator['uploadFolders'][$i], 'folder');
-    //    $adminObject->addConfigBoxLine(array($configurator['uploadFolders'][$i], '777'), 'chmod');
+foreach (array_keys($configurator->uploadFolders) as $i) {
+    $utilityClass::createFolder($configurator->uploadFolders[$i]);
+    $adminObject->addConfigBoxLine($configurator->uploadFolders[$i], 'folder');
 }
 
 // DNPROSSI - In PHP 5.3.0 "JPG Support" was renamed to "JPEG Support".
@@ -44,10 +43,10 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) {
 }
 
 $adminObject->addInfoBox(_AM_EXTGALLERY_SERVER_CONF);
-if ($xoopsModuleConfig['graphic_lib'] === 'gd') {
+if ('gd' === $xoopsModuleConfig['graphic_lib']) {
     $gd = gd_info();
     // GD graphic lib
-    $test1 = ($gd['GD Version'] == '') ? '<span style="color:#FF0000;"><b>KO</b></span>' : $gd['GD Version'];
+    $test1 = ('' == $gd['GD Version']) ? '<span style="color:#FF0000;"><b>KO</b></span>' : $gd['GD Version'];
     ($gd['GIF Read Support'] && $gd['GIF Create Support']) ? $test2 = '<span style="color:#33CC33;"><b>OK</b></span>' : $test2 = '<span style="color:#FF0000;"><b>KO</b></span>';
     $gd['' . $jpegsupport . ''] ? $test3 = '<span style="color:#33CC33;"><b>OK</b></span>' : $test3 = '<span style="color:#FF0000;"><b>KO</b></span>';
     $gd['PNG Support'] ? $test4 = '<span style="color:#33CC33;"><b>OK</b></span>' : $test4 = '<span style="color:#FF0000;"><b>KO</b></span>';
@@ -58,7 +57,7 @@ if ($xoopsModuleConfig['graphic_lib'] === 'gd') {
     $adminObject->addInfoBoxLine(sprintf(_AM_EXTGALLERY_PNG_SUPPORT . ' ' . $test4));
 }
 
-if ($xoopsModuleConfig['graphic_lib'] === 'imagick') {
+if ('imagick' === $xoopsModuleConfig['graphic_lib']) {
     // ImageMagick graphic lib
     $cmd = $xoopsModuleConfig['graphic_lib_path'] . 'convert -version';
     exec($cmd, $data, $error);
@@ -75,5 +74,7 @@ $adminObject->addInfoBoxLine(sprintf(_AM_EXTGALLERY_POST_MAX_SIZE . get_cfg_var(
 
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayIndex();
+
+echo $utilityClass::getServerStats();
 
 require_once __DIR__ . '/admin_footer.php';

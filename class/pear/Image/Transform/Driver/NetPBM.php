@@ -171,7 +171,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
             $angle           -= $quarters * 90;
         }
 
-        if ($angle != 0) {
+        if (0 != $angle) {
             if ($angle > 45) {
                 $angle -= 360;
             }
@@ -184,7 +184,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
             $bgcolor = $this->colorarray2colorhex($bgcolor);
 
             $scaleMethod = $this->_getOption('scaleMethod', $options, 'smooth');
-            if ($scaleMethod != 'pixel') {
+            if ('pixel' != $scaleMethod) {
                 $this->command[] = $this->_prepare_cmd(IMAGE_TRANSFORM_NETPBM_PATH, 'pnmrotate', '-background=' . $bgcolor . ' -' . (float)$angle);
             } else {
                 $this->command[] = $this->_prepare_cmd(IMAGE_TRANSFORM_NETPBM_PATH, 'pnmrotate', '-background=' . $bgcolor . ' -noantialias -' . (float)$angle);
@@ -211,7 +211,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         if (!$this->intersects($width, $height, $x, $y)) {
             return PEAR::raiseError('Nothing to crop', IMAGE_TRANSFORM_ERROR_OUTOFBOUND);
         }
-        if ($x != 0 || $y != 0
+        if (0 != $x || 0 != $y
             || $width != $this->img_x
             || $height != $this->img_y) {
             if (!System::which(IMAGE_TRANSFORM_NETPBM_PATH . 'pnmcut' . ((OS_WINDOWS) ? '.exe' : ''))) {
@@ -233,7 +233,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      */
     public function gamma($outputgamma = 1.0)
     {
-        if ($outputgamme != 1.0) {
+        if (1.0 != $outputgamme) {
             if (!System::which(IMAGE_TRANSFORM_NETPBM_PATH . 'pnmgamma' . ((OS_WINDOWS) ? '.exe' : ''))) {
                 return PEAR::raiseError('Couldn\'t find "pnmgamma" binary', IMAGE_TRANSFORM_ERROR_UNSUPPORTED);
             }
@@ -450,7 +450,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
 
         } // switch
 
-        if ($program == '') {
+        if ('' == $program) {
             $program = 'pnmto' . $type;
         }
 
@@ -487,7 +487,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
             $this->free();
         }
 
-        return ($exit == 0) ? true : PEAR::raiseError(implode('. ', $res), IMAGE_TRANSFORM_ERROR_IO);
+        return (0 == $exit) ? true : PEAR::raiseError(implode('. ', $res), IMAGE_TRANSFORM_ERROR_IO);
     } // End save
 
     /**

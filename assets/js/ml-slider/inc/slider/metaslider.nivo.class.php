@@ -34,7 +34,7 @@ class MetaNivoSlider extends MetaSlider
     {
         global $wp_filter;
         if (isset($options['autoPlay'])) {
-            if ($options['autoPlay'] === 'true') {
+            if ('true' === $options['autoPlay']) {
                 $options['manualAdvance'] = 'false';
             } else {
                 $options['manualAdvance'] = 'true';
@@ -86,7 +86,7 @@ class MetaNivoSlider extends MetaSlider
     {
         parent::enqueue_scripts();
 
-        if ($this->get_setting('printCss') === 'true') {
+        if ('true' === $this->get_setting('printCss')) {
             $theme = $this->get_theme();
             wp_enqueue_style('metaslider-' . $this->get_setting('type') . '-slider-' . $theme, METASLIDER_ASSETS_URL . "sliders/nivoslider/themes/{$theme}/{$theme}.css", false, METASLIDER_VERSION);
         }

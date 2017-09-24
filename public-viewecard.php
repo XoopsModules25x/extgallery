@@ -39,7 +39,7 @@ if (!$ecardObj) {
 
 $ecard = $ecardHandler->objectToArray($ecardObj, ['photo_id']);
 
-if ($ecard['photo']['photo_serveur'] == '') {
+if ('' == $ecard['photo']['photo_serveur']) {
     $ecard['photoUrl'] = XOOPS_URL . '/uploads/extgallery/public-photo/medium/' . $ecard['photo']['photo_name'];
 } else {
     $ecard['photoUrl'] = $ecard['photo']['photo_serveur'] . $ecard['photo']['photo_name'];

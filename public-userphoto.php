@@ -62,10 +62,10 @@ $photosIds = $photoHandler->getUserPhotoAlbumId($photoObj->getVar('uid'));
 $nbPhoto           = count($photosIds);
 $currentPhotoPlace = array_search($photoId, $photosIds);
 
-if ($nbPhoto == 1) {
+if (1 == $nbPhoto) {
     $prev = 0;
     $next = 0;
-} elseif ($currentPhotoPlace == 0) {
+} elseif (0 == $currentPhotoPlace) {
     $prev = 0;
     $next = $photosIds[$currentPhotoPlace + 1];
 } elseif (($currentPhotoPlace + 1) == $nbPhoto) {
@@ -129,9 +129,9 @@ if ($xoopsModuleConfig['enable_rating']) {
 //DNPROSSI - added preferences option
 //  enable_info, enable_resolution, enable_download, enable_date
 //  enable_ecards, enable_submitter_lnk, enable_photo_hits
-if ($xoopsModuleConfig['info_view'] === 'photo' || $xoopsModuleConfig['info_view'] === 'both') {
-    if ($xoopsModuleConfig['pubusr_info_view'] === 'user' || $xoopsModuleConfig['pubusr_info_view'] === 'both') {
-        if ($xoopsModuleConfig['enable_info'] == 0) {
+if ('photo' === $xoopsModuleConfig['info_view'] || 'both' === $xoopsModuleConfig['info_view']) {
+    if ('user' === $xoopsModuleConfig['pubusr_info_view'] || 'both' === $xoopsModuleConfig['pubusr_info_view']) {
+        if (0 == $xoopsModuleConfig['enable_info']) {
             $enable_info = $xoopsModuleConfig['enable_info'];
         } else {
             $enable_info = 1;
@@ -160,7 +160,7 @@ $xoopsTpl->assign('disp_ph_title', $xoopsModuleConfig['disp_ph_title']);
 $xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
 
 // For xoops tag
-if (($xoopsModuleConfig['usetag'] == 1) && is_dir('../tag')) {
+if ((1 == $xoopsModuleConfig['usetag']) && is_dir('../tag')) {
     require_once XOOPS_ROOT_PATH . '/modules/tag/include/tagbar.php';
     $xoopsTpl->assign('tagbar', tagBar($photo['photo_id'], $catid = 0));
     $xoopsTpl->assign('tags', true);

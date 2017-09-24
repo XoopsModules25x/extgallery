@@ -47,7 +47,7 @@ function moduleLastVersionInfo()
 
     // boucle à travers les structures
     foreach ($tags as $key => $val) {
-        if ($key === 'module') {
+        if ('module' === $key) {
             $ranges = $val;
             // each contiguous pair of array entries are the
             // lower and upper range for each joueur definition

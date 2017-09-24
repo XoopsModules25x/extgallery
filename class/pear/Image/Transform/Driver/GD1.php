@@ -70,7 +70,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
      */
     public function _resize($new_x, $new_y, $options = null)
     {
-        if ($this->resized === true) {
+        if (true === $this->resized) {
             return PEAR::raiseError('You have already resized the image without saving it.  Your previous resizing will be overwritten', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE);
         }
         $new_img = ImageCreate($new_x, $new_y);
@@ -87,7 +87,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
 
     public function rotate($angle, $options = null)
     {
-        if ($options == null) {
+        if (null == $options) {
             $autoresize = true;
             $color_mask = array(255, 255, 0);
         } else {
@@ -105,7 +105,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
 
         if (!is_array($color_mask)) {
             // Not already in numberical format, so we convert it.
-            if ($color_mask{0} == '#') {
+            if ('#' == $color_mask{0}) {
                 $color_mask = $this->colorhex2colorarray($color_mask);
             } else {
                 require_once 'Image/Transform/Driver/ColorsDefs.php';

@@ -65,7 +65,7 @@ class MetaSlide
      */
     public function get_slide_html()
     {
-        if (is_admin() && isset($_GET['page']) && $_GET['page'] === 'metaslider-theme-editor') {
+        if (is_admin() && isset($_GET['page']) && 'metaslider-theme-editor' === $_GET['page']) {
             return $this->get_public_slide();
         }
 
@@ -95,7 +95,7 @@ class MetaSlide
     {
         $type = get_post_meta($slide_id, 'ml-slider_type', true);
 
-        return !strlen($type) || $type === 'image';
+        return !strlen($type) || 'image' === $type;
     }
 
     /**
@@ -219,7 +219,7 @@ class MetaSlide
     {
         $key = 'ml-slider_' . $name;
 
-        if ($value === 'false' || $value === '' || !$value) {
+        if ('false' === $value || '' === $value || !$value) {
             if (get_post_meta($post_id, $key)) {
                 delete_post_meta($post_id, $key);
             }

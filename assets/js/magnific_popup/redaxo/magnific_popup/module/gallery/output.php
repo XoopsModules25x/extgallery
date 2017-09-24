@@ -4,7 +4,7 @@
 $imageType = 'magnific_popup_gallery_thumb';
 $mediaList = 'REX_MEDIALIST[1]';
 
-if ($mediaList != '') {
+if ('' != $mediaList) {
     echo '<div class="magnific-popup-gallery">';
 
     // get media dir
@@ -48,7 +48,7 @@ if ($mediaList != '') {
         $resizedFile = $REX['INCLUDE_PATH'] . '/generated/files/image_manager__' . $imageType . '_' . $imageFile;
         $imageSize   = @getimagesize($resizedFile);
 
-        if ($imageSize != false) {
+        if (false != $imageSize) {
             $imageDimensions = ' width="' . $imageSize[0] . '" height="' . $imageSize[1] . '"';
         } else {
             $imageDimensions = '';

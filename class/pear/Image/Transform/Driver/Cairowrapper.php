@@ -87,7 +87,7 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
         }
 
         $this->surface = cairo_image_surface_create_from_png($this->image);
-        if (cairo_surface_status($this->surface) != CAIRO_STATUS_SUCCESS) {
+        if (CAIRO_STATUS_SUCCESS != cairo_surface_status($this->surface)) {
             $this->surface = null;
 
             return PEAR::raiseError('Error while loading image file.', IMAGE_TRANSFORM_ERROR_IO);
@@ -109,7 +109,7 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
      */
     public function _resize($new_x, $new_y, $options = null)
     {
-        if ($this->resized === true) {
+        if (true === $this->resized) {
             return PEAR::raiseError('You have already resized the image without saving it.' . ' Your previous resizing will be overwritten', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE);
         }
 

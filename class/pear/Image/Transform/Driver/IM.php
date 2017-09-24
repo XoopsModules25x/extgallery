@@ -127,7 +127,7 @@ class Image_Transform_Driver_IM extends Image_Transform
             $cmd = $this->_prepare_cmd(IMAGE_TRANSFORM_IM_PATH, 'identify', '-format %w:%h:%m ' . escapeshellarg($image));
             exec($cmd, $res, $exit);
 
-            if ($exit != 0) {
+            if (0 != $exit) {
                 return PEAR::raiseError("Cannot fetch image or images details.", true);
             }
 
@@ -255,7 +255,7 @@ class Image_Transform_Driver_IM extends Image_Transform
      */
     public function gamma($outputgamma = 1.0)
     {
-        if ($outputgamme != 1.0) {
+        if (1.0 != $outputgamme) {
             $this->command['gamma'] = '-gamma ' . (float)$outputgamma;
         }
 
@@ -324,7 +324,7 @@ class Image_Transform_Driver_IM extends Image_Transform
      */
     public function save($filename, $type = '', $quality = null)
     {
-        $type = strtoupper(($type == '') ? $this->type : $type);
+        $type = strtoupper(('' == $type) ? $this->type : $type);
         switch ($type) {
             case 'JPEG':
                 $type = 'JPG';
@@ -343,7 +343,7 @@ class Image_Transform_Driver_IM extends Image_Transform
             $this->free();
         }
 
-        return ($exit == 0) ? true : PEAR::raiseError(implode('. ', $res), IMAGE_TRANSFORM_ERROR_IO);
+        return (0 == $exit) ? true : PEAR::raiseError(implode('. ', $res), IMAGE_TRANSFORM_ERROR_IO);
     } // End save
 
     /**
@@ -360,7 +360,7 @@ class Image_Transform_Driver_IM extends Image_Transform
      */
     public function display($type = '', $quality = null)
     {
-        $type = strtoupper(($type == '') ? $this->type : $type);
+        $type = strtoupper(('' == $type) ? $this->type : $type);
         switch ($type) {
             case 'JPEG':
                 $type = 'JPG';

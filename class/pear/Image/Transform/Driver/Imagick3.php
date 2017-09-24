@@ -124,7 +124,7 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
     {
         try {
             $scaleMethod = $this->_getOption('scaleMethod', $options, 'smooth');
-            $blur        = ($scaleMethod == 'pixel') ? 0 : 1;
+            $blur        = ('pixel' == $scaleMethod) ? 0 : 1;
             $this->imagick->resizeImage($new_x, $new_y, imagick::FILTER_UNDEFINED, $blur);
         } catch (ImagickException $e) {
             return $this->raiseError('Could not resize image.', IMAGE_TRANSFORM_ERROR_FAILED);
@@ -150,7 +150,7 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
      */
     public function rotate($angle, $options = null)
     {
-        if (($angle % 360) == 0) {
+        if (0 == ($angle % 360)) {
             return true;
         }
         $color = $this->_getColor('canvasColor', $options, array(255, 255, 255));
@@ -302,7 +302,7 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
      */
     public function gamma($outputgamma = 1.0)
     {
-        if ($outputgamma != 1.0) {
+        if (1.0 != $outputgamma) {
             $this->imagick->setImageGamma($outputgamma);
         }
 

@@ -833,7 +833,7 @@ switch ($op) {
         xoops_cp_header();
 
         //echo "<pre>";print_r($xoopsModuleConfig);echo "</pre>";
-        $xoopsTpl->assign('displayslideshow', $xoopsModuleConfig['display_type'] === 'slideshow');
+        $xoopsTpl->assign('displayslideshow', 'slideshow' === $xoopsModuleConfig['display_type']);
 
         $form = new XoopsThemeForm(_AM_EXTGALLERY_GVIEW_CONF, 'galleryview_conf', 'slideshow.php', 'post', true);
         $form->addElement(new XoopsFormText(_AM_EXTGALLERY_GVIEW_PANELWIDE, 'galleryview_panelwidth', '5', '5', $xoopsModuleConfig['galleryview_panelwidth']), false);

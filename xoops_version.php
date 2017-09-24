@@ -84,7 +84,7 @@ $modversion = [
 
 // Menu
 $modversion['hasMain'] = 1;
-if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule']) && $GLOBALS['xoopsModule']->getVar('dirname') === 'extgallery') {
+if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule']) && 'extgallery' === $GLOBALS['xoopsModule']->getVar('dirname')) {
     if (null !== $GLOBALS['xoopsUser'] && is_object($GLOBALS['xoopsUser'])) {
         $modversion['sub'][0]['name'] = _MI_EXTGALLERY_USERALBUM;
         $modversion['sub'][0]['url']  = 'public-useralbum.php?id=' . $GLOBALS['xoopsUser']->uid();
@@ -94,7 +94,7 @@ if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule']) && $GLO
         $permHandler = ExtgalleryPublicPermHandler::getInstance();
         if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
             $modversion['sub'][1]['name'] = _MI_EXTGALLERY_PUBLIC_UPLOAD;
-            if ($GLOBALS['xoopsModuleConfig']['use_extended_upload'] === 'html') {
+            if ('html' === $GLOBALS['xoopsModuleConfig']['use_extended_upload']) {
                 $modversion['sub'][1]['url'] = 'public-upload.php';
             } else {
                 $modversion['sub'][1]['url'] = 'public-upload-extended.php';

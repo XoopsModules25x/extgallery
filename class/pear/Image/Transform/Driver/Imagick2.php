@@ -142,7 +142,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
      */
     public function rotate($angle, $options = null)
     {
-        if (($angle % 360) == 0) {
+        if (0 == ($angle % 360)) {
             return true;
         }
         if (!imagick_rotate($this->imageHandle, $angle)) {
@@ -278,7 +278,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
      */
     public function gamma($outputgamma = 1.0)
     {
-        if ($outputgamma != 1.0) {
+        if (1.0 != $outputgamma) {
             imagick_gamma($this->imageHandle, $outputgamma);
         }
 

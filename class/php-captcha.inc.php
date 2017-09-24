@@ -185,7 +185,7 @@ class PhpCaptcha
         if (is_array($vCharSet)) {
             $this->aCharSet = $vCharSet;
         } else {
-            if ($vCharSet != '') {
+            if ('' != $vCharSet) {
                 // split items on commas
                 $aCharSet = explode(',', $vCharSet);
 
@@ -195,12 +195,12 @@ class PhpCaptcha
                 // loop through items
                 foreach ($aCharSet as $sCurrentItem) {
                     // a range should have 3 characters, otherwise is normal character
-                    if (strlen($sCurrentItem) == 3) {
+                    if (3 == strlen($sCurrentItem)) {
                         // split on range character
                         $aRange = explode('-', $sCurrentItem);
 
                         // check for valid range
-                        if (count($aRange) == 2 && $aRange[0] < $aRange[1]) {
+                        if (2 == count($aRange) && $aRange[0] < $aRange[1]) {
                             // create array of characters from range
                             $aRange = range($aRange[0], $aRange[1]);
 
@@ -386,20 +386,20 @@ class PhpCaptcha
      */
     public function WriteFile($sFilename)
     {
-        if ($sFilename == '') {
+        if ('' == $sFilename) {
             // tell browser that data is jpeg
             header("Content-type: image/$this->sFileType");
         }
 
         switch ($this->sFileType) {
             case 'gif':
-                $sFilename != '' ? imagegif($this->oImage, $sFilename) : imagegif($this->oImage);
+                '' != $sFilename ? imagegif($this->oImage, $sFilename) : imagegif($this->oImage);
                 break;
             case 'png':
-                $sFilename != '' ? imagepng($this->oImage, $sFilename) : imagepng($this->oImage);
+                '' != $sFilename ? imagepng($this->oImage, $sFilename) : imagepng($this->oImage);
                 break;
             default:
-                $sFilename != '' ? imagejpeg($this->oImage, $sFilename) : imagejpeg($this->oImage);
+                '' != $sFilename ? imagejpeg($this->oImage, $sFilename) : imagejpeg($this->oImage);
         }
     }
 
@@ -412,12 +412,12 @@ class PhpCaptcha
     {
         // check for required gd functions
         if (!function_exists('imagecreate') || !function_exists("image$this->sFileType")
-            || ($this->vBackgroundImages != '' && !function_exists('imagecreatetruecolor'))) {
+            || ('' != $this->vBackgroundImages && !function_exists('imagecreatetruecolor'))) {
             return false;
         }
 
         // get background image if specified and copy to CAPTCHA
-        if (is_array($this->vBackgroundImages) || $this->vBackgroundImages != '') {
+        if (is_array($this->vBackgroundImages) || '' != $this->vBackgroundImages) {
             // create new image
             $this->oImage = imagecreatetruecolor($this->iWidth, $this->iHeight);
 
@@ -443,12 +443,12 @@ class PhpCaptcha
         imagecolorallocate($this->oImage, 255, 255, 255);
 
         // check for owner text
-        if ($this->sOwnerText != '') {
+        if ('' != $this->sOwnerText) {
             $this->DrawOwnerText();
         }
 
         // check for background image before drawing lines
-        if (!is_array($this->vBackgroundImages) && $this->vBackgroundImages == '') {
+        if (!is_array($this->vBackgroundImages) && '' == $this->vBackgroundImages) {
             $this->DrawLines();
         }
 

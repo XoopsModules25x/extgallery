@@ -21,12 +21,12 @@ $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
 
 $result = $photoHandler->postPhotoTraitement('File0');
 
-if ($result == 2) {
+if (2 == $result) {
     echo 'ERROR: ' . _MD_EXTGALLERY_NOT_AN_ALBUM;
-} elseif ($result == 4 || $result == 5) {
+} elseif (4 == $result || 5 == $result) {
     echo 'ERROR: ' . $photoHandler->photoUploader->getError();
-} elseif ($result == 0) {
+} elseif (0 == $result) {
     echo "SUCCESS\n";
-} elseif ($result == 1) {
+} elseif (1 == $result) {
     echo "SUCCESS\n";
 }

@@ -21,7 +21,7 @@ $chapterpages = array(
 $chapternav = '';
 
 foreach ($chapterpages as $chapterparam => $chapterprops) {
-    if ($chapterprops[0] != '') {
+    if ('' != $chapterprops[0]) {
         if ($chapter != $chapterparam) {
             $chapternav .= ' | <a href="?page=' . $mypage . '&amp;subpage=' . $subpage . '&amp;chapter=' . $chapterparam . '">' . $chapterprops[0] . '</a>';
         } else {

@@ -38,6 +38,7 @@ switch ($op) {
 
             case 'enreg':
 
+                /** @var \ExtgalleryPublicCatHandler $catHandler */
                 $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
                 $data       = [
                     'cat_pid'    => $_POST['cat_pid'],
@@ -98,7 +99,7 @@ switch ($op) {
                 $selectedPhoto = '../assets/images/blank.gif';
                 $photoArray    = [];
                 foreach ($photosCat as $photo) {
-                    if ($photo->getVar('photo_serveur') != '') {
+                    if ('' != $photo->getVar('photo_serveur')) {
                         $url = $photo->getVar('photo_serveur') . 'thumb_' . $photo->getVar('photo_name');
                     } else {
                         $url = XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name');

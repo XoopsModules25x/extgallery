@@ -179,7 +179,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
                 foreach ($externalKeys as $key) {
                     // Replace external key by corresponding object
                     $externalKey = $object->getExternalKey($key);
-                    if ($ret[$i][$key] != 0) {
+                    if (0 != $ret[$i][$key]) {
                         // Retriving data if isn't cached
                         if (!isset($cached[$externalKey['keyName']][$ret[$i][$key]])) {
                             if ($externalKey['core']) {
@@ -203,7 +203,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
             foreach ($externalKeys as $key) {
                 // Replace external key by corresponding object
                 $externalKey = $objects->getExternalKey($key);
-                if ($ret[$key] != 0) {
+                if (0 != $ret[$key]) {
                     // Retriving data if isn't cached
                     if (!isset($cached[$externalKey['keyName']][$ret[$key]])) {
                         if ($externalKey['core']) {
@@ -271,7 +271,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
         $field   = '';
         $groupby = false;
         if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
-            if ($criteria->groupby != '') {
+            if ('' != $criteria->groupby) {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
@@ -279,7 +279,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
         $sql = 'SELECT ' . $field . "SUM($sum) FROM " . $this->table;
         if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
-            if ($criteria->groupby != '') {
+            if ('' != $criteria->groupby) {
                 $sql .= $criteria->getGroupby();
             }
         }
@@ -287,7 +287,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
         if (!$result) {
             return 0;
         }
-        if ($groupby === false) {
+        if (false === $groupby) {
             list($sum) = $this->db->fetchRow($result);
 
             return $sum;
@@ -312,7 +312,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
         $field   = '';
         $groupby = false;
         if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
-            if ($criteria->groupby != '') {
+            if ('' != $criteria->groupby) {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
@@ -320,7 +320,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
         $sql = 'SELECT ' . $field . "MAX($max) FROM " . $this->table;
         if (null !== $criteria && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
-            if ($criteria->groupby != '') {
+            if ('' != $criteria->groupby) {
                 $sql .= $criteria->getGroupby();
             }
         }

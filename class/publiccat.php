@@ -54,6 +54,7 @@ class ExtgalleryPublicCatHandler extends ExtgalleryCatHandler
      */
     public function createCat($data)
     {
+        /** @var ExtgalleryPublicCat $cat */
         $cat = $this->create();
         $cat->setVars($data);
 
@@ -86,6 +87,7 @@ class ExtgalleryPublicCatHandler extends ExtgalleryCatHandler
         $permMask = $gpermHandler->getObjects($criteria);
 
         // Retriving group list
+        /** @var \XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         $glist         = $memberHandler->getGroupList();
 

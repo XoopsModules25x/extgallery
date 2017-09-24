@@ -36,7 +36,7 @@ function magnific_popup_field_formatter_settings_form($field, $instance, $view_m
   $settings = $display['settings'];
   
   // Gallery Mode is TRUE when this field supports multiple items.
-  $gallery_available = $field['cardinality'] !== 1;
+  $gallery_available = 1 !== $field['cardinality'];
   $gallery_options = _magnific_popup_gallery_options();
   
   $element = array();
@@ -116,7 +116,7 @@ function magnific_popup_field_formatter_prepare_view($entity_type, $entities, $f
           $wrappers[$scheme]->setUri($item['uri']);
         }
         // Check that the resource was accessible.
-        if ($wrappers[$scheme] && $wrappers[$scheme]->url_stat($item['uri'], STREAM_URL_STAT_QUIET) !== FALSE) {
+        if ($wrappers[$scheme] && FALSE !== $wrappers[$scheme]->url_stat($item['uri'], STREAM_URL_STAT_QUIET)) {
           $wrapper = $wrappers[$scheme];
           // Determine the file's info and store it.
           $thumbnail_path = FALSE;
@@ -199,14 +199,14 @@ function magnific_popup_field_formatter_view($entity_type, $entity, $field, $ins
   );
   // Determine if/what the allowed trigger item is (which will get a thumbnail).
   $trigger_item = key($items);
-  if ($settings['gallery_style'] === 'random_item') {
+  if ('random_item' === $settings['gallery_style']) {
     $trigger_item = array_rand($items);
   }
   // Figure out the base-class for the gallery/nogallery, which is generally
   // something like 'mfp-nogallery-image' or 'mfp-gallery-iframe'.
-  $gallery_base_class = $settings['gallery_style'] === 'no_gallery' ?
+  $gallery_base_class = 'no_gallery' === $settings['gallery_style'] ?
     'mfp-nogallery' : 'mfp-gallery';
-  if ($field['type'] === 'image') {
+  if ('image' === $field['type']) {
     $gallery_base_class .= '-image';
   }
   else {
@@ -230,7 +230,7 @@ function magnific_popup_field_formatter_view($entity_type, $entity, $field, $ins
     //  - the Gallery Type is "no gallery", or
     //  - the Gallery Type is "first item" and this $delta is the first item, or
     //  - the Gallery Type is "random item" and this $delta is the random item.
-    if ($settings['gallery_style'] === 'all_items' || $settings['gallery_style'] === 'no_gallery' || $delta == $trigger_item) {
+    if ('all_items' === $settings['gallery_style'] || 'no_gallery' === $settings['gallery_style'] || $delta == $trigger_item) {
       $image = array(
         // Try to use a "figure" theme implementation if it exists, or fall back
         // to "image".

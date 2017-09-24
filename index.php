@@ -51,7 +51,7 @@ $xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
 // pk ------------------- add upload and view-my-album links to main page
 if (null !== $GLOBALS['xoopsUser'] && is_object($GLOBALS['xoopsUser'])) {
     if (isset($GLOBALS['xoopsModule']) && $GLOBALS['xoopsModule']->getVar('dirname') == $moduleDirName) {
-        if ($GLOBALS['xoopsUser'] != null) {
+        if (null != $GLOBALS['xoopsUser']) {
             $albumlinkname = _MD_EXTGALLERY_USERALBUM;
             $albumurl      = 'public-useralbum.php?id=' . $GLOBALS['xoopsUser']->uid();
         }
@@ -61,7 +61,7 @@ if (null !== $GLOBALS['xoopsUser'] && is_object($GLOBALS['xoopsUser'])) {
         $permHandler = ExtgalleryPublicPermHandler::getInstance();
         if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
             $uploadlinkname = _MD_EXTGALLERY_PUBLIC_UPLOAD;
-            if ($GLOBALS['xoopsModuleConfig']['use_extended_upload'] === 'html') {
+            if ('html' === $GLOBALS['xoopsModuleConfig']['use_extended_upload']) {
                 $uploadurl = 'public-upload.php';
             } else {
                 $uploadurl = 'public-upload-extended.php';

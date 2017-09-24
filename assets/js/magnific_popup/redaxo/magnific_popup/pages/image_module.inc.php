@@ -16,7 +16,7 @@ foreach ($gm->getArray() as $module) {
     $module_name = $module['name'];
 }
 
-if (isset($_REQUEST['install']) && $_REQUEST['install'] == 1) {
+if (isset($_REQUEST['install']) && 1 == $_REQUEST['install']) {
     $module_name = $I18N->msg('magnific_popup_module_name_image');
 
     $mi = rex_sql::factory();

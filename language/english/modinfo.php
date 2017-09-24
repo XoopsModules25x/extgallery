@@ -15,7 +15,7 @@ define('_MI_EXTGALLERY_PERMISSIONS', 'Permissions');
 define('_MI_EXTGALLERY_WATERMARK_BORDER', 'Watermark &amp; Border');
 define('_MI_EXTGALLERY_SLIDESHOW', 'Slideshow');
 define('_MI_EXTGALLERY_EXTENSION', 'Extension');
-define('_MI_EXTGALLERY_ALBUM', 'Album');
+define('_MI_EXTGALLERY_ALBUM', 'Configs');
 define('_MI_EXTGALLERY_ABOUT', 'About');
 
 // Module options

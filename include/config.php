@@ -17,45 +17,66 @@
  * @author       XOOPS Development Team
  */
 
-require_once __DIR__ . '/../../../mainfile.php';
-$moduleDirName = basename(dirname(__DIR__));
-
-if (!defined('EXTGALLERY_DIRNAME')) {
-    define('EXTGALLERY_DIRNAME', $moduleDirName);
-    define('EXTGALLERY_PATH', XOOPS_ROOT_PATH . '/modules/' . EXTGALLERY_DIRNAME);
-    define('EXTGALLERY_URL', XOOPS_URL . '/modules/' . EXTGALLERY_DIRNAME);
-    define('EXTGALLERY_ADMIN', EXTGALLERY_URL . '/admin/index.php');
-    define('EXTGALLERY_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/' . EXTGALLERY_DIRNAME);
-    define('EXTGALLERY_AUTHOR_LOGOIMG', EXTGALLERY_URL . '/assets/images/logoModule.png');
-    define('EXTGALLERY_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . EXTGALLERY_DIRNAME); // WITHOUT Trailing slash
-    define('EXTGALLERY_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . EXTGALLERY_DIRNAME); // WITHOUT Trailing slash
-}
+require_once __DIR__ . '/common.php';
+//$moduleDirName = basename(dirname(__DIR__));
+//$capsDirName   = strtoupper($moduleDirName);
+//
+//if (!defined($capsDirName . '_DIRNAME')) {
+//    //if (!defined(constant($capsDirName . '_DIRNAME'))) {
+//    define($capsDirName . '_DIRNAME', $GLOBALS['xoopsModule']->dirname());
+//    define($capsDirName . '_PATH', XOOPS_ROOT_PATH . '/modules/' . constant($capsDirName . '_DIRNAME'));
+//    define($capsDirName . '_URL', XOOPS_URL . '/modules/' . constant($capsDirName . '_DIRNAME'));
+//    define($capsDirName . '_ADMIN', constant($capsDirName . '_URL') . '/admin/index.php');
+//    define($capsDirName . '_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/' . constant($capsDirName . '_DIRNAME'));
+//    define($capsDirName . '_AUTHOR_LOGOIMG', constant($capsDirName . '_URL') . '/assets/images/logoModule.png');
+//    define($capsDirName . '_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . $moduleDirName); // WITHOUT Trailing slash
+//    define($capsDirName . '_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . $moduleDirName); // WITHOUT Trailing slash
+//}
 
 //Configurator
-return [
-    'name'          => 'Module Configurator',
-    'uploadFolders' => [
-        EXTGALLERY_UPLOAD_PATH,
-        EXTGALLERY_UPLOAD_PATH . '/public-photo',
-        EXTGALLERY_UPLOAD_PATH . '/public-photo/original',
-        EXTGALLERY_UPLOAD_PATH . '/public-photo/large',
-        EXTGALLERY_UPLOAD_PATH . '/public-photo/medium',
-        EXTGALLERY_UPLOAD_PATH . '/public-photo/thumb',
+return (object)[
+    'name'            => strtoupper($moduleDirName) . ' Module Configurator',
+    'paths'           => [
+        'dirname'    => $moduleDirName,
+        'admin'      => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/admin',
+        //        'path'       => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName,
+        //        'url'        => XOOPS_URL . '/modules/' . $moduleDirName,
+        'uploadPath' => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+        'uploadUrl'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
     ],
-    'copyFiles'     => [
-        EXTGALLERY_UPLOAD_PATH,
-        EXTGALLERY_UPLOAD_PATH . '/public-photo',
-        EXTGALLERY_UPLOAD_PATH . '/public-photo/original',
-        EXTGALLERY_UPLOAD_PATH . '/public-photo/large',
-        EXTGALLERY_UPLOAD_PATH . '/public-photo/medium',
-        EXTGALLERY_UPLOAD_PATH . '/public-photo/thumb',
+    'uploadFolders'   => [
+        constant($capsDirName . '_UPLOAD_PATH'),
+        constant($capsDirName . '_UPLOAD_PATH') . '/public-photo',
+        constant($capsDirName . '_UPLOAD_PATH') . '/public-photo/original',
+        constant($capsDirName . '_UPLOAD_PATH') . '/public-photo/large',
+        constant($capsDirName . '_UPLOAD_PATH') . '/public-photo/medium',
+        constant($capsDirName . '_UPLOAD_PATH') . '/public-photo/thumb',
     ],
-    'oldFiles'      => [
+    'blankFiles'      => [
+        constant($capsDirName . '_UPLOAD_PATH'),
+        constant($capsDirName . '_UPLOAD_PATH') . '/public-photo',
+        constant($capsDirName . '_UPLOAD_PATH') . '/public-photo/original',
+        constant($capsDirName . '_UPLOAD_PATH') . '/public-photo/large',
+        constant($capsDirName . '_UPLOAD_PATH') . '/public-photo/medium',
+        constant($capsDirName . '_UPLOAD_PATH') . '/public-photo/thumb',
+    ],
+    'templateFolders' => [
+        '/templates/',
+        '/templates/blocks/',
+        '/templates/admin/'
+
+    ],
+    'oldFiles'        => [
         '/include/update_functions.php',
         '/include/install_functions.php'
     ],
+    'oldFolders'      => [
+        '/images',
+        '/css',
+        '/js',
+        '/tcpdf',
+        '/images',
+    ],
+    'modCopyright'    => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
+                     <img src='" . constant($capsDirName . '_AUTHOR_LOGOIMG') . '\' alt=\'XOOPS Project\' /></a>',
 ];
-
-// module information
-$mod_copyright = "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
-                     <img src='" . EXTGALLERY_AUTHOR_LOGOIMG . "' alt='XOOPS Project'></a>";

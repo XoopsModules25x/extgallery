@@ -44,24 +44,24 @@ $utilityClass  = ucfirst($moduleDirName) . 'Utility';
 switch ($op) {
 
     case 'add_photo':
-        /** @var ExtgalleryPhotoHandler $photoHandler */
+        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
         $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
         $result       = $photoHandler->postPhotoTraitement('photo_file', false);
 
-        if ($result == 2) {
+        if (2 == $result) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_NOT_AN_ALBUM);
-        } elseif ($result == 4 || $result == 5) {
+        } elseif (4 == $result || 5 == $result) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_UPLOAD_ERROR . ' :<br>' . $photoHandler->photoUploader->getErrors());
-        } elseif ($result == 0) {
+        } elseif (0 == $result) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_PHOTO_UPLOADED);
-        } elseif ($result == 1) {
+        } elseif (1 == $result) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_PHOTO_PENDING);
         }
         break;
 
     case 'batchAdd':
 
-        if (get_cfg_var('max_execution_time') === null) {
+        if (null === get_cfg_var('max_execution_time')) {
             $maxExecTime = 30;
         } else {
             $maxExecTime = get_cfg_var('max_execution_time');
@@ -82,7 +82,7 @@ switch ($op) {
         // If isn't an album when stop the traitment
         /** @var ExtgalleryCat $cat */
         $cat = $catHandler->getCat($_POST['cat_id']);
-        if ($cat->getVar('nright') - $cat->getVar('nleft') != 1) {
+        if (1 != $cat->getVar('nright') - $cat->getVar('nleft')) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_NOT_AN_ALBUM);
         }
 
@@ -158,7 +158,7 @@ switch ($op) {
                 'X_ITEM_CAT'     => $cat->getVar('cat_name'),
                 'X_ITEM_NBPHOTO' => $i + $nbPhotos
             ];
-            if ($photoStatus == 1) {
+            if (1 == $photoStatus) {
                 $extraTags['X_ITEM_URL'] = XOOPS_URL . "/modules/{$moduleDirName}/public-album.php?id=" . $cat->getVar('cat_id');
                 $notificationHandler->triggerEvent('global', 0, 'new_photo', $extraTags);
                 $notificationHandler->triggerEvent('album', $cat->getVar('cat_id'), 'new_photo_album', $extraTags);
@@ -172,7 +172,7 @@ switch ($op) {
             $permHandler = ExtgalleryPublicPermHandler::getInstance();
             if ($permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_autoapprove', $cat->getVar('cat_id'))) {
                 // Update album count
-                if ($cat->getVar('cat_nb_photo') == 0) {
+                if (0 == $cat->getVar('cat_nb_photo')) {
                     $criteria = new CriteriaCompo();
                     $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '<'));
                     $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>'));
@@ -229,7 +229,7 @@ switch ($op) {
                 $notificationHandler->triggerEvent('album', $cat->getVar('cat_id'), 'new_photo_album', $extraTags);
 
                 // Update album count
-                if ($cat->getVar('cat_nb_photo') == 0) {
+                if (0 == $cat->getVar('cat_nb_photo')) {
                     $criteria = new CriteriaCompo();
                     $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '<'));
                     $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>'));
@@ -243,7 +243,7 @@ switch ($op) {
                 $catHandler->updateFieldValue('cat_nb_photo', 'cat_nb_photo + ' . $v, $criteria);
             }
 
-            if ($cat->getVar('cat_isalbum') == 0) {
+            if (0 == $cat->getVar('cat_isalbum')) {
                 $cat->setVar('cat_isalbum', 1);
                 $catHandler->insert($cat);
             }
@@ -288,7 +288,7 @@ switch ($op) {
 
                 // If isn't an album when stop the traitment
                 $cat = $catHandler->getCat($_POST['cat_id']);
-                if ($cat->getVar('nright') - $cat->getVar('nleft') != 1) {
+                if (1 != $cat->getVar('nright') - $cat->getVar('nleft')) {
                     redirect_header('photo.php', 3, _AM_EXTGALLERY_NOT_AN_ALBUM);
                 }
 
@@ -323,7 +323,7 @@ switch ($op) {
 
                     // Set dest categories as album
                     foreach ($toCategories as $k => $v) {
-                        if ($categories[$k]->getVar('cat_isalbum') == 0) {
+                        if (0 == $categories[$k]->getVar('cat_isalbum')) {
                             $categories[$k]->setVar('cat_isalbum', 1);
                             $catHandler->insert($categories[$k]);
                         }
@@ -333,7 +333,7 @@ switch ($op) {
                     $nbPhotoFromCat = $catHandler->nbPhoto($categories[$_POST['cat_id']]);
 
                     // Update cat counter and is_album for from category
-                    if ($nbPhotoFromCat == 0) {
+                    if (0 == $nbPhotoFromCat) {
                         $categories[$_POST['cat_id']]->setVar('cat_isalbum', 0);
                         $catHandler->insert($categories[$_POST['cat_id']]);
 
@@ -351,7 +351,7 @@ switch ($op) {
                         }
 
                         // If category hasn't photo before the changes
-                        if ($categories[$k]->getVar('cat_nb_photo') == 0) {
+                        if (0 == $categories[$k]->getVar('cat_nb_photo')) {
                             $criteria = new CriteriaCompo();
                             $criteria->add(new Criteria('nleft', $categories[$k]->getVar('nleft'), '<'));
                             $criteria->add(new Criteria('nright', $categories[$k]->getVar('nright'), '>'));
@@ -375,7 +375,7 @@ switch ($op) {
                     }
 
                     // Update the photo counter of the from gallery
-                    if ($nbPhotoMoved != 0) {
+                    if (0 != $nbPhotoMoved) {
                         $criteria = new CriteriaCompo();
                         $criteria->add(new Criteria('nleft', $categories[$_POST['cat_id']]->getVar('nleft'), '<='));
                         $criteria->add(new Criteria('nright', $categories[$_POST['cat_id']]->getVar('nright'), '>='));
@@ -418,7 +418,7 @@ switch ($op) {
             case 'default':
             default:
                 xoops_cp_header();
-                /** @var ExtgalleryCatHandler $catHandler */
+                /** @var ExtgalleryPublicCatHandler $catHandler */
                 $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
                 /** @var ExtgalleryPublicPhotoHandler $photoHandler */
                 $photoHandler = xoops_getModuleHandler('publicphoto', $moduleDirName);
@@ -455,7 +455,7 @@ switch ($op) {
                 $scriptSelect   = '';
                 $first          = true;
                 foreach ($photos as $photo) {
-                    $class = ((++$i % 2) == 0) ? 'even' : 'odd';
+                    $class = (0 == (++$i % 2)) ? 'even' : 'odd';
                     /*if (!isset($cat[$photo->getVar('cat_id')])) {
                         $cat[$photo->getVar('cat_id')] = $catHandler->get($photo->getVar('cat_id'));
                     }*/
@@ -541,6 +541,7 @@ switch ($op) {
 
     case 'default':
     default:
+        require_once __DIR__ . '/../class/utility.php';
         /** @var ExtgalleryCatHandler $catHandler */
         $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
         /** @var ExtgalleryPublicPhotoHandler $photoHandler */
@@ -548,7 +549,7 @@ switch ($op) {
 
         xoops_cp_header();
 
-        require_once __DIR__ . '/../class/utility.php';
+
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTGALLERY_ADD_PHOTO . '</legend>';
 
@@ -565,7 +566,7 @@ switch ($op) {
             $form->addElement(new XoopsFormTextArea(_AM_EXTGALLERY_EXTRA_INFO, 'photo_extra'));
         }
         // For xoops tag
-        if (($xoopsModuleConfig['usetag'] == 1) && is_dir(__DIR__ . '/../../tag')) {
+        if ((1 == $xoopsModuleConfig['usetag']) && is_dir(__DIR__ . '/../../tag')) {
             require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
             $form->addElement(new TagFormTag('tag', 60, 255, '', 0));
         }
@@ -664,7 +665,7 @@ switch ($op) {
             if (++$i < $start + 1 || $i > ($start + $xoopsModuleConfig['admin_nb_photo'])) {
                 continue;
             }
-            $class = (($i % 2) == 0) ? 'even' : 'odd';
+            $class = (0 == ($i % 2)) ? 'even' : 'odd';
             if (!isset($cat[$photo->getVar('cat_id')])) {
                 $cat[$photo->getVar('cat_id')] = $catHandler->get($photo->getVar('cat_id'));
             }

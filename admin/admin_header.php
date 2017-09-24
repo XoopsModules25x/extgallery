@@ -19,6 +19,8 @@
 
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
+require_once __DIR__ . '/../class/utility.php';
+require_once __DIR__ . '/../include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 
@@ -28,7 +30,7 @@ if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
 }
 $adminObject = \Xmf\Module\Admin::getInstance();
 
-require_once __DIR__ . '/../include/config.php';
+//require_once __DIR__ . '/../include/config.php';
 
 //xoops_cp_header();
 $adminObject = \Xmf\Module\Admin::getInstance();
@@ -55,3 +57,4 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl))
 $moduleHelper->loadLanguage('admin');
 $moduleHelper->loadLanguage('modinfo');
 $moduleHelper->loadLanguage('main');
+$moduleHelper->loadLanguage('common');
