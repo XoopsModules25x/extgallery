@@ -567,7 +567,7 @@ switch ($op) {
         // For xoops tag
         if (($xoopsModuleConfig['usetag'] == 1) && is_dir(__DIR__ . '/../../tag')) {
             require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
-            $form->addElement(new XoopsFormTag('tag', 60, 255, '', 0));
+            $form->addElement(new TagFormTag('tag', 60, 255, '', 0));
         }
         $form->addElement(new XoopsFormHidden('op', 'add_photo'));
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
