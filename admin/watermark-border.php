@@ -39,7 +39,7 @@ switch ($op) {
 
             case 'enreg':
 
-                $uploaddir  = XOOPS_ROOT_PATH . '/modules/extgallery/fonts/';
+                $uploaddir  = XOOPS_ROOT_PATH . '/modules/extgallery/assets/fonts/';
                 $uploadfile = $uploaddir . basename($_FILES['font_file']['name']);
 
                 if (file_exists($uploadfile)) {
@@ -61,7 +61,7 @@ switch ($op) {
 
                 $fonts = [];
 
-                $rep = XOOPS_ROOT_PATH . '/modules/extgallery/fonts/';
+                $rep = XOOPS_ROOT_PATH . '/modules/extgallery/assets/fonts/';
                 $dir = opendir($rep);
                 while ($f = readdir($dir)) {
                     if (is_file($rep . $f)) {
