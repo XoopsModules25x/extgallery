@@ -20,7 +20,7 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-album.tpl';
-//mbinclude XOOPS_ROOT_PATH . '/header.php';
+include XOOPS_ROOT_PATH . '/header.php';
 
 if (!isset($_GET['id'])) {
     $catId = 0;
