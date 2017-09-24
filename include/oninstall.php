@@ -181,16 +181,16 @@ function xoops_module_install_extgallery(XoopsModule $xoopsModule)
 
     //    require_once __DIR__ . '/config.php';
 
-    if (count($configurator['uploadFolders']) > 0) {
+    if (count($configurator->uploadFolders) > 0) {
         //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-        foreach (array_keys($configurator['uploadFolders']) as $i) {
-            $utilityClass::createFolder($configurator['uploadFolders'][$i]);
+        foreach (array_keys($configurator->uploadFolders) as $i) {
+            $utilityClass::createFolder($configurator->uploadFolders[$i]);
         }
     }
-    if (count($configurator['copyFiles']) > 0) {
+    if (count($configurator->blankFiles) > 0) {
         $file = __DIR__ . '/../assets/images/blank.png';
-        foreach (array_keys($configurator['copyFiles']) as $i) {
-            $dest = $configurator['copyFiles'][$i] . '/blank.png';
+        foreach (array_keys($configurator->blankFiles) as $i) {
+            $dest = $configurator->blankFiles[$i] . '/blank.png';
             $utilityClass::copyFile($file, $dest);
         }
     }

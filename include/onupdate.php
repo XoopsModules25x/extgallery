@@ -199,19 +199,19 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         }
 
         //  ---  COPY blank.png FILES ---------------
-        if (count($configurator['copyFiles']) > 0) {
+        if (count($configurator->blankFiles) > 0) {
             $file = __DIR__ . '/../assets/images/blank.png';
-            foreach (array_keys($configurator['copyFiles']) as $i) {
-                $dest = $configurator['copyFiles'][$i] . '/blank.png';
+            foreach (array_keys($configurator->copyFiles) as $i) {
+                $dest = $configurator->copyFiles[$i] . '/blank.png';
                 $utilityClass::copyFile($file, $dest);
             }
         }
 
         //  ---  DELETE OLD FILES ---------------
-        if (count($configurator['oldFiles']) > 0) {
+        if (count($configurator->oldFiles) > 0) {
             //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-            foreach (array_keys($configurator['oldFiles']) as $i) {
-                $tempFile = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator['oldFiles'][$i]);
+            foreach (array_keys($configurator->oldFiles) as $i) {
+                $tempFile = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFiles[$i]);
                 if (is_file($tempFile)) {
                     unlink($tempFile);
                 }
