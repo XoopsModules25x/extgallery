@@ -194,3 +194,6 @@ define('_MI_EXTGALLERY_HELP4', 'Watermark & Border');
 define('_MI_EXTGALLERY_HELP5', 'Slideshow');
 define('_MI_EXTGALLERY_HELP6', 'Extension');
 define('_MI_EXTGALLERY_HELP7', 'Configuration');
+define('_MI_EXTGALLERY_HELP_DISCLAIMER', 'Disclaimer');
+define('_MI_EXTGALLERY_LICENSE', 'License');
+define('_MI_EXTGALLERY_SUPPORT', 'Support');

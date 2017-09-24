@@ -125,7 +125,10 @@ $modversion['helpsection'] = [
     ['name' => _MI_EXTGALLERY_HELP4, 'link' => 'page=help4'],
     ['name' => _MI_EXTGALLERY_HELP5, 'link' => 'page=help5'],
     ['name' => _MI_EXTGALLERY_HELP6, 'link' => 'page=help6'],
-    ['name' => _MI_EXTGALLERY_HELP7, 'link' => 'page=help7']
+    ['name' => _MI_EXTGALLERY_HELP7, 'link' => 'page=help7'],
+    ['name' => _MI_EXTGALLERY_HELP_DISCLAIMER, 'link' => 'page=disclaimer'],
+    ['name' => _MI_EXTGALLERY_LICENSE, 'link' => 'page=license'],
+    ['name' => _MI_EXTGALLERY_SUPPORT, 'link' => 'page=support'],
 ];
 
 // Comments
