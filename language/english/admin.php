@@ -45,7 +45,7 @@ define('_AM_EXTGALLERY_ADD_PUBLIC_CAT_INFO', 'You can add a category only under 
 define('_AM_EXTGALLERY_NAME', 'Name');
 define('_AM_EXTGALLERY_DELETE_CAT_CONFIRM', 'All the contents of this category or album will be deleted.');
 define('_AM_EXTGALLERY_MOD_PUBLIC_CAT', 'Modify a public category');
-define('_AM_EXTGALLERY_CAT_IMG', 'Category Image');
+define('_AM_EXTGALLERY_CAT_IMG', 'URL Category Image');
 define('_AM_EXTGALLERY_THUMB', 'Thumbnail');
 define('_AM_EXTGALLERY_CAT_CREATED', 'Category created');
 define('_AM_EXTGALLERY_CAT_MODIFIED', 'Category modified');
