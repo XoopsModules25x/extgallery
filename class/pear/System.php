@@ -297,7 +297,7 @@ class System
                 }
             }
         } else {
-            foreach($opts[1] as $dir) {
+            foreach ($opts[1] as $dir) {
                 if ((@file_exists($dir) || !is_dir($dir)) && !mkdir($dir, $mode)) {
                     $ret = false;
                 }

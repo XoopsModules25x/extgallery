@@ -171,7 +171,7 @@ class Image_Transform_Driver_GD extends Image_Transform
      * @return bool TRUE
      * @access public
      */
-    public function addBorder($border_width, $color = '')
+    public function addBorder($border_width=null, $color = '')
     {
         $this->new_x = $this->img_x + 2 * $border_width;
         $this->new_y = $this->img_y + 2 * $border_width;
@@ -212,7 +212,7 @@ class Image_Transform_Driver_GD extends Image_Transform
      *
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      */
-    public function addText($params)
+    public function addText($params=null)
     {
         $this->oldImage = $this->imageHandle;
         $params         = array_merge($this->_get_default_text_params(), $params);
@@ -382,7 +382,7 @@ class Image_Transform_Driver_GD extends Image_Transform
      * @return bool|PEAR_Error TRUE on success or PEAR_Error object on error
      * @access protected
      */
-    public function _resize($new_x, $new_y, $options = null)
+    public function _resize($new_x=null, $new_y=null, $options = null)
     {
         if (true === $this->resized) {
             return PEAR::raiseError('You have already resized the image without saving it.  Your previous resizing will be overwritten', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE);

@@ -43,7 +43,7 @@ switch ($op) {
                 $uploadfile = $uploaddir . basename($_FILES['font_file']['name']);
 
                 if (file_exists($uploadfile)) {
-                    echo 'La police est déja présente sur le serveur.';
+                    echo 'The font is already present on the server.';
                 }
 
                 move_uploaded_file($_FILES['font_file']['tmp_name'], $uploadfile);
@@ -336,7 +336,9 @@ switch ($op) {
                 if ('imagick' === $xoopsModuleConfig['graphic_lib']) {
                     define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
                 }
-                $imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
+                $newImageTransform = new Image_Transform;
+                //                $imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
+                $imageTransform = $newImageTransform->factory($xoopsModuleConfig['graphic_lib']);
                 $imageTransform->load('../assets/images/watermark-border-orig.jpg');
 
                 // Making Watermark
@@ -376,7 +378,7 @@ switch ($op) {
                     'x'            => $x,
                     'y'            => $y,
                     'color'        => $testParam['watermark_color'],
-                    'font'         => '../fonts/' . $testParam['watermark_font'],
+                    'font'         => '../assets/fonts/' . $testParam['watermark_font'],
                     'size'         => $testParam['watermark_fontsize'],
                     'resize_first' => false,
                     'padding'      => $testParam['watermark_padding']
@@ -393,7 +395,10 @@ switch ($op) {
                     'borderWidth' => $testParam['outer_border_size'],
                     'borderColor' => $testParam['outer_border_color']
                 ];
-                $imageTransform->addBorders($borders);
+
+                foreach ($borders as $border) {
+                    $imageTransform->addBorder($border['borderWidth'], $border['borderColor']);
+                }
 
                 // Remove old test image
                 deleteImageTest();
@@ -493,8 +498,9 @@ switch ($op) {
 
         $imageTest = getImageTest();
 
-        $xoopsTpl->assign('imagetest', $imageTest[0]);
-
+        if (isset($imageTest[0])) {
+            $xoopsTpl->assign('imagetest', $imageTest[0]);
+        }
         // Call template file
         $xoopsTpl->display(__DIR__ . '/../templates/admin/extgallery_admin_watermark_border.tpl');
         xoops_cp_footer();
