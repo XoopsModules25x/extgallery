@@ -518,7 +518,10 @@ class ExtgalleryPhotoHandler extends ExtgalleryPersistableObjectHandler
             'borderWidth' => $xoopsModuleConfig['outer_border_size'],
             'borderColor' => $xoopsModuleConfig['outer_border_color']
         ];
-        $imageTransform->addBorders($borders);
+//        $imageTransform->addBorders($borders);
+        foreach ($borders as $border) {
+            $imageTransform->addBorder($border['borderWidth'], $border['borderColor']);
+        }
     }
 
     public function _getUploadPhotoPath()
