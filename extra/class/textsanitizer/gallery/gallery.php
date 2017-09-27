@@ -15,7 +15,7 @@ class MytsGallery extends MyTextSanitizerExtension
 
         $code       = "<img src='"
                       . XOOPS_URL
-                      . "/modules/extgallery/images/extgallery-posticon.gif' alt='"
+                      . "/modules/extgallery/assets/images/extgallery-posticon.gif' alt='"
                       . _EXT_EXTGALLERY_ALTWMP
                       . "' onclick='xoopsCodeGallery(\"{$textarea_id}\", \""
                       . _EXT_EXTGALLERY_TEXTID
