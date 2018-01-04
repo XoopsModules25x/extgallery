@@ -17,7 +17,7 @@
 
 include __DIR__ . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-require_once __DIR__ . '/class/utility.php';
+require_once __DIR__ . '/class/Utility.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -47,7 +47,7 @@ switch ($op) {
             case 'enreg':
                 /** @var ExtgalleryPublicPhotoHandler $photoHandler */
                 $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
-                $myts         = MyTextSanitizer::getInstance();
+                $myts         = \MyTextSanitizer::getInstance();
                 $photo        = $photoHandler->getPhoto($_POST['photo_id']);
 
                 $data['cat_id']       = $_POST['cat_id'];
@@ -119,7 +119,7 @@ switch ($op) {
             default:
 
                 require_once XOOPS_ROOT_PATH . '/header.php';
-                $myts = MyTextSanitizer::getInstance();
+                $myts = \MyTextSanitizer::getInstance();
                 /** @var ExtgalleryPublicCatHandler $catHandler */
                 $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
                 /** @var ExtgalleryPublicPhotoHandler $photoHandler */

@@ -9,7 +9,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright   {@link http://xoops.org/ XOOPS Project}
+ * @copyright   {@link https://xoops.org/ XOOPS Project}
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
@@ -47,7 +47,7 @@ switch (strtolower(strrchr($photo->getVar('photo_name'), '.'))) {
 $permHandler = ExtgalleryPublicPermHandler::getInstance();
 
 // If require image don't exist
-if ($photo->getVar('cat_id') == 0) {
+if (0 == $photo->getVar('cat_id')) {
     header('Content-type: image/jpeg');
     readfile(XOOPS_ROOT_PATH . '/modules/extgallery/assets/images/dont-exist.jpg');
 

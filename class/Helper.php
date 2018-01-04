@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -19,25 +19,26 @@
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
- * Class ExtgalleryHelper
+ * Class Helper
  */
-class Extgallery extends Xmf\Module\Helper
+class Helper extends \Xmf\Module\Helper
 {
-//    public $debugArray = [];
+    public $debug;
 
     /**
      * @internal param $debug
+     * @param bool $debug
      */
-    protected function __construct()
+    protected function __construct($debug = false)
     {
-        //        $this->debug   = $debug;
+        $this->debug   = $debug;
         $this->dirname = basename(dirname(__DIR__));
     }
 
     /**
      * @param bool $debug
      *
-     * @return Newbb
+     * @return \Helper
      */
     public static function getInstance($debug = false)
     {

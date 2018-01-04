@@ -550,7 +550,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
 
                 // Update this album if needed
                 if (0 != $nbPhoto) {
-                    $sql   = "UPDATE %s SET cat_nb_photo = %d WHERE %s = %d";
+                    $sql   = 'UPDATE %s SET cat_nb_photo = %d WHERE %s = %d';
                     $query = sprintf($sql, $this->table, $nbPhoto, $this->keyName, $id);
                     $this->db->queryF($query);
                 }

@@ -12,8 +12,8 @@
             </td>
             <td id="photoNavCenter" class="even"><{$currentPhoto}> <{$lang.of}> <{$totalPhoto}></td>
             <td id="photoNavRight" class="even"><{if $nextId != 0}><a
-                    href="<{xoAppUrl modules/extgallery/}>public-userphoto.php?photoId=<{$nextId}>"><{$lang.next}> &gt;
-                    &gt;</a><{else}>&nbsp;<{/if}>
+                    href="<{xoAppUrl modules/extgallery/}>public-userphoto.php?photoId=<{$nextId}>"><{$lang.next}> >
+                    ></a><{else}>&nbsp;<{/if}>
             </td>
         </tr>
     </table>

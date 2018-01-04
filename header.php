@@ -6,16 +6,12 @@ require_once __DIR__ . '/include/common.php';
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-require_once __DIR__ . '/class/utility.php';
+require_once __DIR__ . '/class/Utility.php';
 
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
+$helper = \Xmf\Module\Helper::getHelper($moduleDirName);
 
-if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
-} else {
-    $moduleHelper = Xmf\Module\Helper::getHelper('system');
-}
-
-$moduleHelper->loadLanguage('main');
+$helper->loadLanguage('main');
 
 //------------------------------------------------------
 // Getting eXtCal object's handler

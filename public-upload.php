@@ -18,7 +18,7 @@
 include __DIR__ . '/header.php';
 require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-require_once __DIR__ . '/class/utility.php';
+require_once __DIR__ . '/class/Utility.php';
 
 if (isset($_POST['step'])) {
     $step = $_POST['step'];

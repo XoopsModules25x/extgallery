@@ -46,7 +46,7 @@ header('Content-Type:text/xml; charset=' . _CHARSET);
 $xoopsTpl          = new XoopsTpl();
 $xoopsTpl->caching = 2;
 $xoopsTpl->xoops_setCacheTime($xoopsModuleConfig['timecache_rss'] * 60);
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 if (!$xoopsTpl->is_cached('db:extgallery_public-rss.tpl')) {
     $channel_category = $xoopsModule->getVar('dirname');
     // Check if ML Hack is installed, and if yes, parse the $content in formatForML

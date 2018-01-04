@@ -1,22 +1,20 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
 
 use Xmf\Request;
+use  XoopsModules\Extgallery\Common;
 
-require_once __DIR__ . '/common/traitversionchecks.php';
-require_once __DIR__ . '/common/traitserverstats.php';
-require_once __DIR__ . '/common/traitfilesmgmt.php';
 
 //require_once __DIR__ . '/../include/common.php';
 /**
  * Class ExtgalleryUtility
  */
-class ExtgalleryUtility extends XoopsObject
+class Utility extends \XoopsObject
 {
-    use VersionChecks; //checkVerXoops, checkVerPhp Traits
+    use common\VersionChecks; //checkVerXoops, checkVerPhp Traits
 
-    use ServerStats; // getServerStats Trait
+    use common\ServerStats; // getServerStats Trait
 
-    use FilesManagement; // Files Management Trait
+    use common\FilesManagement; // Files Management Trait
 
 
     /**

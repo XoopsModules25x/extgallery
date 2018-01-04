@@ -8,7 +8,7 @@ define('_MI_EXTGALLERY_USERALBUM', 'My album');
 define('_MI_EXTGALLERY_PUBLIC_UPLOAD', 'Public Upload');
 
 // Main administration menu
-define('_MI_EXTGALLERY_INDEX', 'Index');
+define('_MI_EXTGALLERY_INDEX', 'Home');
 define('_MI_EXTGALLERY_PUBLIC_CAT', 'Category &amp; Albums');
 define('_MI_EXTGALLERY_PHOTO', 'Photos');
 define('_MI_EXTGALLERY_PERMISSIONS', 'Permissions');

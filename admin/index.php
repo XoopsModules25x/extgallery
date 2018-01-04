@@ -17,21 +17,21 @@
  * @author       XOOPS Development Team
  */
 
+use XoopsModules\Extgallery;
+use XoopsModules\Extgallery\Common;
+
 require_once __DIR__ . '/admin_header.php';
 // Display Admin header
 xoops_cp_header();
-/** @var ExtgalleryUtility $utilityClass */
-$utilityClass = ucfirst($moduleDirName) . 'Utility';
-if (!class_exists($utilityClass)) {
-    xoops_load('utility', $moduleDirName);
-}
+$adminObject = \Xmf\Module\Admin::getInstance();
 
-$configurator = include __DIR__ . '/../include/config.php';
-
+//check or upload folders
+$configurator = new common\Configurator();
 foreach (array_keys($configurator->uploadFolders) as $i) {
-    $utilityClass::createFolder($configurator->uploadFolders[$i]);
+    $utility::createFolder($configurator->uploadFolders[$i]);
     $adminObject->addConfigBoxLine($configurator->uploadFolders[$i], 'folder');
 }
+
 
 // DNPROSSI - In PHP 5.3.0 "JPG Support" was renamed to "JPEG Support".
 // This leads to the following error: "Undefined index: JPG Support in
@@ -75,6 +75,6 @@ $adminObject->addInfoBoxLine(sprintf(_AM_EXTGALLERY_POST_MAX_SIZE . get_cfg_var(
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayIndex();
 
-echo $utilityClass::getServerStats();
+echo $utility::getServerStats();
 
 require_once __DIR__ . '/admin_footer.php';

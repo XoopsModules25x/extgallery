@@ -541,7 +541,7 @@ switch ($op) {
 
     case 'default':
     default:
-        require_once __DIR__ . '/../class/utility.php';
+        require_once __DIR__ . '/../class/Utility.php';
         /** @var ExtgalleryCatHandler $catHandler */
         $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
         /** @var ExtgalleryPublicPhotoHandler $photoHandler */

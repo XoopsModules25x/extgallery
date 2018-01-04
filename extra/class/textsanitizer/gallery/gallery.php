@@ -13,15 +13,15 @@ class MytsGallery extends MyTextSanitizerExtension
     {
         xoops_loadLanguage('extention', 'extgallery');
 
-     /*   $code       = "<img src='"
-                      . XOOPS_URL
-                      . "/modules/extgallery/assets/images/extgallery-posticon.gif' alt='"
-                      . _EXT_EXTGALLERY_ALTWMP
-                      . "' onclick='xoopsCodeGallery(\"{$textarea_id}\", \""
-                      . _EXT_EXTGALLERY_TEXTID
-                      . '", "'
-                      . _EXT_EXTGALLERY_TEXTTITLE
-                      . "\");'  onmouseover='style.cursor=\"hand\"'>&nbsp;"; */
+        /*   $code       = "<img src='"
+                         . XOOPS_URL
+                         . "/modules/extgallery/assets/images/extgallery-posticon.gif' alt='"
+                         . _EXT_EXTGALLERY_ALTWMP
+                         . "' onclick='xoopsCodeGallery(\"{$textarea_id}\", \""
+                         . _EXT_EXTGALLERY_TEXTID
+                         . '", "'
+                         . _EXT_EXTGALLERY_TEXTTITLE
+                         . "\");'  onmouseover='style.cursor=\"hand\"'>&nbsp;"; */
         $code = "<button type='button' class='btn btn-default' onclick='xoopsCodeGallery(\"{$textarea_id}\",\"" . _EXT_EXTGALLERY_TEXTID .'", "'. _EXT_EXTGALLERY_TEXTTITLE. "\");' onmouseover='style.cursor=\"hand\"' title='" . _EXT_EXTGALLERY_ALTWMP . "'><span class='fa fa-file-image-o' aria-hidden='true'></span><span style='font-size:75%;'> Gallery</span></button>";
         $javascript = <<<EOH
             function xoopsCodeGallery(id, textId, photoTitle) {

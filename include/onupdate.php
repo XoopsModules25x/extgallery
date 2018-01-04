@@ -42,22 +42,15 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_extgallery(XoopsModule $module)
 {
+    /** @var Extgallery\Helper $helper */
+    /** @var Extgallery\Utility $utility */
     $moduleDirName = basename(dirname(__DIR__));
-    $utilityClass  = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($utilityClass)) {
-        xoops_load('utility', $moduleDirName);
-    }
-    //check for minimum XOOPS version
-    if (!$utilityClass::checkVerXoops($module)) {
-        return false;
-    }
+    $helper       = Extgallery\Helper::getInstance();
+    $utility      = new Extgallery\Utility();
 
-    // check for minimum PHP version
-    if (!$utilityClass::checkVerPhp($module)) {
-        return false;
-    }
-
-    return true;
+    $xoopsSuccess = $utility::checkVerXoops($module);
+    $phpSuccess   = $utility::checkVerPhp($module);
+    return $xoopsSuccess && $phpSuccess;
 }
 
 /**
@@ -74,6 +67,14 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
     global $xoopsDB;
 
     $moduleDirName = basename(dirname(__DIR__));
+    $capsDirName   = strtoupper($moduleDirName);
+
+    /** @var Extgallery\Helper $helper */
+    /** @var Extgallery\Utility $utility */
+    /** @var Extgallery\Configurator $configurator */
+    $helper  = Extgallery\Helper::getInstance();
+    $utility = new Extgallery\Utility();
+    $configurator = new Extgallery\Configurator();
 
     $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
     $catHandler->rebuild();
