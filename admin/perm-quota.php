@@ -39,9 +39,9 @@ switch ($step) {
         $gpermHandler = xoops_getHandler('groupperm');
         if ('public' === $_POST['type']) {
             // Delete old public mask
-            $criteria = new CriteriaCompo();
-            $criteria->add(new Criteria('gperm_name', 'extgallery_public_mask'));
-            $criteria->add(new Criteria('gperm_modid', $module_id));
+            $criteria = new \CriteriaCompo();
+            $criteria->add(new \Criteria('gperm_name', 'extgallery_public_mask'));
+            $criteria->add(new \Criteria('gperm_modid', $module_id));
             $gpermHandler->deleteAll($criteria);
 
             foreach ($_POST['perms']['extgallery_public_mask']['group'] as $groupId => $perms) {

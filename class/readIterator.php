@@ -122,7 +122,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
     {
         $ret = [];
         if (null === $criteria) {
-            $criteria = new CriteriaCompo();
+            $criteria = new \CriteriaCompo();
         }
 
         $sql = "SELECT `{$this->handler->keyName}`";
@@ -203,7 +203,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
             $criteria->setLimit($limit);
             $criteria->setStart($start);
         } elseif (!empty($limit)) {
-            $criteria = new CriteriaCompo();
+            $criteria = new \CriteriaCompo();
             $criteria->setLimit($limit);
             $criteria->setStart($start);
         }

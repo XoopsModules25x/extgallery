@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
 
@@ -56,7 +56,7 @@ class ExtgalleryQuotaHandler extends ExtgalleryPersistableObjectHandler
      * ExtgalleryQuotaHandler constructor.
      * @param XoopsDatabase $db
      */
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'extgallery_quota', 'ExtgalleryQuota', 'quota_id');
     }
@@ -79,7 +79,7 @@ class ExtgalleryQuotaHandler extends ExtgalleryPersistableObjectHandler
      */
     public function deleteQuota()
     {
-        $criteria = new Criteria('quota_name', 'private');
+        $criteria = new \Criteria('quota_name', 'private');
 
         return $this->deleteAll($criteria);
     }
@@ -92,10 +92,10 @@ class ExtgalleryQuotaHandler extends ExtgalleryPersistableObjectHandler
      */
     public function getQuota($groupid, $quotaName)
     {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('groupid', $groupid));
-        $criteria->add(new Criteria('quota_name', $quotaName));
-        $ret = $this->getObjects($criteria);
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('groupid', $groupid));
+        $criteria->add(new \Criteria('quota_name', $quotaName));
+        $ret =& $this->getObjects($criteria);
         if (empty($ret)) {
             return $this->create();
         } else {

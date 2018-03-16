@@ -61,7 +61,7 @@ function gal_getmoduleoption($option)
  * @param $height
  * @param $supplemental
  *
- * @return bool|XoopsFormEditor
+ * @return bool|\XoopsFormEditor
  */
 function gal_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $height, $supplemental)
 {
@@ -76,7 +76,7 @@ function gal_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $heig
     $editor_configs['height'] = $height;
     $editor_configs['editor'] = $editor_option;
 
-    $editor = new XoopsFormEditor($caption, $name, $editor_configs);
+    $editor = new \XoopsFormEditor($caption, $name, $editor_configs);
 
     return $editor;
 }

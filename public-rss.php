@@ -43,7 +43,7 @@ if (0 != $catId) {
 }
 
 header('Content-Type:text/xml; charset=' . _CHARSET);
-$xoopsTpl          = new XoopsTpl();
+$xoopsTpl          = new \XoopsTpl();
 $xoopsTpl->caching = 2;
 $xoopsTpl->xoops_setCacheTime($xoopsModuleConfig['timecache_rss'] * 60);
 $myts = \MyTextSanitizer::getInstance();

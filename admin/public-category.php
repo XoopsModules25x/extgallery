@@ -138,21 +138,21 @@ switch ($op) {
                 }
                 $photoSelect .= '</select>' . "\n";
 
-                $form = new XoopsThemeForm(_AM_EXTGALLERY_MOD_PUBLIC_CAT, 'create_cat', 'public-category.php?op=modify', 'post', true);
-                $form->addElement(new XoopsFormLabel(_AM_EXTGALLERY_PARENT_CAT, $catHandler->getSelect('cat_pid', 'leaf', true, $cat->getVar('cat_pid'))));
-                $form->addElement(new XoopsFormText(_AM_EXTGALLERY_NAME, 'cat_name', '70', '255', $cat->getVar('cat_name', 'e')), false);
-                $form->addElement(new XoopsFormText(_AM_EXTGALLERY_WEIGHT, 'cat_weight', '4', '4', $cat->getVar('cat_weight')), false);
-                $form->addElement(new XoopsFormDhtmlTextArea(_AM_EXTGALLERY_DESC, 'cat_desc', $cat->getVar('cat_desc', 'e')), false);
-                $elementTrayThumb = new XoopsFormElementTray(_AM_EXTGALLERY_THUMB);
-                $elementTrayThumb->addElement(new XoopsFormLabel('', $photoSelect . "<img style=\"float:left; margin-top:5px;\" id=\"thumb\" src=\"$selectedPhoto\">"));
-                $form->addElement(new XoopsFormText(_AM_EXTGALLERY_CAT_IMG, 'cat_imgurl', '70', '150', $cat->getVar('cat_imgurl', 'e')), false);
+                $form = new \XoopsThemeForm(_AM_EXTGALLERY_MOD_PUBLIC_CAT, 'create_cat', 'public-category.php?op=modify', 'post', true);
+                $form->addElement(new \XoopsFormLabel(_AM_EXTGALLERY_PARENT_CAT, $catHandler->getSelect('cat_pid', 'leaf', true, $cat->getVar('cat_pid'))));
+                $form->addElement(new \XoopsFormText(_AM_EXTGALLERY_NAME, 'cat_name', '70', '255', $cat->getVar('cat_name', 'e')), false);
+                $form->addElement(new \XoopsFormText(_AM_EXTGALLERY_WEIGHT, 'cat_weight', '4', '4', $cat->getVar('cat_weight')), false);
+                $form->addElement(new \XoopsFormDhtmlTextArea(_AM_EXTGALLERY_DESC, 'cat_desc', $cat->getVar('cat_desc', 'e')), false);
+                $elementTrayThumb = new \XoopsFormElementTray(_AM_EXTGALLERY_THUMB);
+                $elementTrayThumb->addElement(new \XoopsFormLabel('', $photoSelect . "<img style=\"float:left; margin-top:5px;\" id=\"thumb\" src=\"$selectedPhoto\">"));
+                $form->addElement(new \XoopsFormText(_AM_EXTGALLERY_CAT_IMG, 'cat_imgurl', '70', '150', $cat->getVar('cat_imgurl', 'e')), false);
                 $form->addElement($elementTrayThumb);
-                $elementTrayButton = new XoopsFormElementTray('');
-                $elementTrayButton->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
-                $elementTrayButton->addElement(new XoopsFormButton('', 'delete', _DELETE, 'submit'));
+                $elementTrayButton = new \XoopsFormElementTray('');
+                $elementTrayButton->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+                $elementTrayButton->addElement(new \XoopsFormButton('', 'delete', _DELETE, 'submit'));
                 $form->addElement($elementTrayButton);
-                $form->addElement(new XoopsFormHidden('cat_id', $_POST['cat_id']));
-                $form->addElement(new XoopsFormHidden('step', 'enreg'));
+                $form->addElement(new \XoopsFormHidden('cat_id', $_POST['cat_id']));
+                $form->addElement(new \XoopsFormHidden('step', 'enreg'));
                 $xoopsTpl->assign('formmodifcat', $form->render());
 
                 $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/extgallery/templates/admin/extgallery_admin_public_category.tpl');
@@ -191,19 +191,19 @@ switch ($op) {
 
         xoops_cp_header();
 
-        $form = new XoopsThemeForm(_AM_EXTGALLERY_MODDELETE_PUBLICCAT, 'modify_cat', 'public-category.php?op=modify', 'post', true);
-        $form->addElement(new XoopsFormLabel(_AM_EXTGALLERY_CATEGORY, $catHandler->getSelect('cat_id', false, false, 0, '', true)));
-        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $form = new \XoopsThemeForm(_AM_EXTGALLERY_MODDELETE_PUBLICCAT, 'modify_cat', 'public-category.php?op=modify', 'post', true);
+        $form->addElement(new \XoopsFormLabel(_AM_EXTGALLERY_CATEGORY, $catHandler->getSelect('cat_id', false, false, 0, '', true)));
+        $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
         $xoopsTpl->assign('formselectcat', $form->render());
 
-        $form = new XoopsThemeForm(_AM_EXTGALLERY_ADD_PUBLIC_CAT, 'create_cat', 'public-category.php?op=create', 'post', true);
-        $form->addElement(new XoopsFormLabel(_AM_EXTGALLERY_PARENT_CAT, $catHandler->getSelect('cat_pid', 'leaf', true)));
-        $form->addElement(new XoopsFormText(_AM_EXTGALLERY_NAME, 'cat_name', '70', '255'), true);
-        $form->addElement(new XoopsFormText(_AM_EXTGALLERY_WEIGHT, 'cat_weight', '4', '4'), false);
-        $form->addElement(new XoopsFormDhtmlTextArea(_AM_EXTGALLERY_DESC, 'cat_desc', ''), false);
-        $form->addElement(new XoopsFormText(_AM_EXTGALLERY_CAT_IMG, 'cat_imgurl', '70', '150'), false);
-        $form->addElement(new XoopsFormHidden('step', 'enreg'));
-        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $form = new \XoopsThemeForm(_AM_EXTGALLERY_ADD_PUBLIC_CAT, 'create_cat', 'public-category.php?op=create', 'post', true);
+        $form->addElement(new \XoopsFormLabel(_AM_EXTGALLERY_PARENT_CAT, $catHandler->getSelect('cat_pid', 'leaf', true)));
+        $form->addElement(new \XoopsFormText(_AM_EXTGALLERY_NAME, 'cat_name', '70', '255'), true);
+        $form->addElement(new \XoopsFormText(_AM_EXTGALLERY_WEIGHT, 'cat_weight', '4', '4'), false);
+        $form->addElement(new \XoopsFormDhtmlTextArea(_AM_EXTGALLERY_DESC, 'cat_desc', ''), false);
+        $form->addElement(new \XoopsFormText(_AM_EXTGALLERY_CAT_IMG, 'cat_imgurl', '70', '150'), false);
+        $form->addElement(new \XoopsFormHidden('step', 'enreg'));
+        $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
         $xoopsTpl->assign('formcreatecat', $form->render());
 
         // Call template file

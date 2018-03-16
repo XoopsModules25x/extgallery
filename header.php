@@ -1,5 +1,7 @@
 <?php
 
+use XoopsModules\Extgallery;
+
 include __DIR__ . '/../../mainfile.php';
 $moduleDirName = basename(__DIR__);
 require_once __DIR__ . '/include/common.php';
@@ -9,7 +11,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once __DIR__ . '/class/Utility.php';
 
 $myts = \MyTextSanitizer::getInstance();
-$helper = \Xmf\Module\Helper::getHelper($moduleDirName);
+$helper = Extgallery\Helper::getInstance();
 
 $helper->loadLanguage('main');
 

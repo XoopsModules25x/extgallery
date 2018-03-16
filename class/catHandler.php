@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once __DIR__ . '/publicPerm.php';
 require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
@@ -79,7 +79,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
      * @param $db
      * @param $type
      */
-    public function __construct(XoopsDatabase $db, $type)
+    public function __construct(\XoopsDatabase $db, $type)
     {
         parent::__construct($db, 'extgallery_' . $type . 'cat', 'Extgallery' . ucfirst($type) . 'Cat', 'cat_id');
         //$this->_nestedTree = new NestedTree($db, 'extgallery_'.$type.'cat', 'cat_id', 'cat_pid', 'cat_id');
@@ -163,25 +163,25 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
         $nright    = $cat->getVar('nright');
         $parent_id = $cat->getVar('cat_id');
 
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
 
         if ($childrenOnly) {
-            $criteria->add(new Criteria('cat_pid', $parent_id), 'OR');
+            $criteria->add(new \Criteria('cat_pid', $parent_id), 'OR');
             if ($includeSelf) {
-                $criteria->add(new Criteria('cat_id', $parent_id));
+                $criteria->add(new \Criteria('cat_id', $parent_id));
                 //$query = sprintf('select * from %s where %s = %d or %s = %d order by nleft', $this->table, $this->fields['id'], $parent_id, $this->fields['parent'], $parent_id);
             }/* else {
                 //$query = sprintf('select * from %s where %s = %d order by nleft', $this->table, $this->fields['parent'], $parent_id);
             }*/
         } else {
             if ($nleft > 0 && $includeSelf) {
-                $criteria->add(new Criteria('nleft', $nleft, '>='));
-                $criteria->add(new Criteria('nright', $nright, '<='));
+                $criteria->add(new \Criteria('nleft', $nleft, '>='));
+                $criteria->add(new \Criteria('nright', $nright, '<='));
                 //$query = sprintf('select * from %s where nleft >= %d and nright <= %d order by nleft', $this->table, $nleft, $nright);
             } else {
                 if ($nleft > 0) {
-                    $criteria->add(new Criteria('nleft', $nleft, '>'));
-                    $criteria->add(new Criteria('nright', $nright, '<'));
+                    $criteria->add(new \Criteria('nleft', $nleft, '>'));
+                    $criteria->add(new \Criteria('nright', $nright, '<'));
                     //$query = sprintf('select * from %s where nleft > %d and nright < %d order by nleft', $this->table, $nleft, $nright);
                 }/* else {
                 $query = sprintf('select * from %s order by nleft', $this->table);
@@ -210,10 +210,10 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
      */
     public function getCat($id = 0)
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->add($this->getCatRestrictCriteria('public_displayed'));
-        $criteria->add(new Criteria('cat_id', $id));
-        $ret = $this->getObjects($criteria);
+        $criteria->add(new \Criteria('cat_id', $id));
+        $ret =& $this->getObjects($criteria);
 
         if (count($ret) > 0) {
             return $ret[0];
@@ -263,14 +263,14 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
             return [];
         }
 
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         if ($includeSelf) {
-            $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '<='));
-            $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>='));
+            $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<='));
+            $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>='));
             //$query = sprintf('select * from %s where nleft <= %d and nright >= %d order by nlevel', $this->table, $node['nleft'], $node['nright']);
         } else {
-            $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '<'));
-            $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>'));
+            $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<'));
+            $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>'));
             //$query = sprintf('select * from %s where nleft < %d and nright > %d order by nlevel', $this->table, $node['nleft'], $node['nright']);
         }
         $criteria->add($this->getCatRestrictCriteria());
@@ -306,12 +306,12 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
      */
     public function nbAlbum($id = 0)
     {
-        $criteria = new CriteriaCompo(new Criteria('nright - nleft', 1));
+        $criteria = new \CriteriaCompo(new \Criteria('nright - nleft', 1));
         //$query = sprintf('select count(*) as num_leef from %s where nright - nleft = 1', $this->table);
         if (0 != $id) {
             $cat = $this->get($id);
-            $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '>'));
-            $criteria->add(new Criteria('nright', $cat->getVar('nright'), '<'));
+            $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '>'));
+            $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '<'));
             //$query .= sprintf(' AND nleft > %d AND nright < %d', $node['nleft'], $node['nright']);
         }
 
@@ -464,12 +464,12 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
      */
     public function getTreeWithChildren()
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort('cat_weight, cat_name');
         //$query = sprintf('select * from %s order by %s', $this->table, $this->fields['sort']);
 
         //$result = $this->db->query($query);
-        $categories = $this->getObjects($criteria, false, false);
+        $categories =& $this->getObjects($criteria, false, false);
 
         // create a root node to hold child data about first level items
         $root             = [];
@@ -481,7 +481,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
         ];
 
         // populate the array and create an empty children array
-        /*while ($row = $this->db->fetchArray($result)) {
+        /*while (false !== ($row = $this->db->fetchArray($result))) {
             $arr[$row[$this->fields['id']]] = $row;
             $arr[$row[$this->fields['id']]]['children'] = array ();
         }*/
@@ -533,9 +533,9 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
             // Update the photo number
             if (1 == $row['nright'] - $row['nleft']) {
                 // Get the number of photo in this album
-                $criteria = new CriteriaCompo();
-                $criteria->add(new Criteria('cat_id', $id));
-                $criteria->add(new Criteria('photo_approved', 1));
+                $criteria = new \CriteriaCompo();
+                $criteria->add(new \Criteria('cat_id', $id));
+                $criteria->add(new \Criteria('photo_approved', 1));
                 /** @var ExtgalleryPublicPhotoHandler $this ->_photoHandler */
                 $nbPhoto = $this->_photoHandler->getCount($criteria);
 
@@ -609,9 +609,9 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
                     $in .= ',' . $allowedCategory;
                 }
                 $in       .= ')';
-                $criteria = new Criteria('cat_id', $in, 'IN');
+                $criteria = new \Criteria('cat_id', $in, 'IN');
             } else {
-                $criteria = new Criteria('cat_id', '(0)', 'IN');
+                $criteria = new \Criteria('cat_id', '(0)', 'IN');
             }
 
             return $criteria;

@@ -19,7 +19,7 @@
 require_once __DIR__ . '/admin_header.php';
 include __DIR__ . '/../../../class/pagenav.php';
 
-require_once __DIR__ . '/../class/pear/Image/Transform.php';
+// require_once __DIR__ . '/../class/pear/Image/Transform.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -121,7 +121,7 @@ switch ($op) {
             }
         }
         // Set the category as album only if photo is approve
-        require_once __DIR__ . '/../class/publicPerm.php';
+        // require_once __DIR__ . '/../class/publicPerm.php';
         $permHandler = ExtgalleryPublicPermHandler::getInstance();
         if ($permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_autoapprove', $cat->getVar('cat_id'))) {
             $cat->setVar('cat_isalbum', 1);
@@ -168,21 +168,21 @@ switch ($op) {
             }
 
             // Update photo count if photo needn't approve
-            require_once __DIR__ . '/../class/publicPerm.php';
+            // require_once __DIR__ . '/../class/publicPerm.php';
             $permHandler = ExtgalleryPublicPermHandler::getInstance();
             if ($permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_autoapprove', $cat->getVar('cat_id'))) {
                 // Update album count
                 if (0 == $cat->getVar('cat_nb_photo')) {
-                    $criteria = new CriteriaCompo();
-                    $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '<'));
-                    $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>'));
+                    $criteria = new \CriteriaCompo();
+                    $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<'));
+                    $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>'));
                     $catHandler->updateFieldValue('cat_nb_album', 'cat_nb_album + 1', $criteria);
                 }
 
                 // Update photo count
-                $criteria = new CriteriaCompo();
-                $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '<='));
-                $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>='));
+                $criteria = new \CriteriaCompo();
+                $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<='));
+                $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>='));
                 $catHandler->updateFieldValue('cat_nb_photo', 'cat_nb_photo + ' . ($i + $nbPhotos), $criteria);
             }
 
@@ -230,16 +230,16 @@ switch ($op) {
 
                 // Update album count
                 if (0 == $cat->getVar('cat_nb_photo')) {
-                    $criteria = new CriteriaCompo();
-                    $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '<'));
-                    $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>'));
+                    $criteria = new \CriteriaCompo();
+                    $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<'));
+                    $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>'));
                     $catHandler->updateFieldValue('cat_nb_album', 'cat_nb_album + 1', $criteria);
                 }
 
                 // Update photo count
-                $criteria = new CriteriaCompo();
-                $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '<='));
-                $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>='));
+                $criteria = new \CriteriaCompo();
+                $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<='));
+                $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>='));
                 $catHandler->updateFieldValue('cat_nb_photo', 'cat_nb_photo + ' . $v, $criteria);
             }
 
@@ -337,9 +337,9 @@ switch ($op) {
                         $categories[$_POST['cat_id']]->setVar('cat_isalbum', 0);
                         $catHandler->insert($categories[$_POST['cat_id']]);
 
-                        $criteria = new CriteriaCompo();
-                        $criteria->add(new Criteria('nleft', $categories[$_POST['cat_id']]->getVar('nleft'), '<'));
-                        $criteria->add(new Criteria('nright', $categories[$_POST['cat_id']]->getVar('nright'), '>'));
+                        $criteria = new \CriteriaCompo();
+                        $criteria->add(new \Criteria('nleft', $categories[$_POST['cat_id']]->getVar('nleft'), '<'));
+                        $criteria->add(new \Criteria('nright', $categories[$_POST['cat_id']]->getVar('nright'), '>'));
                         $catHandler->updateFieldValue('cat_nb_album', 'cat_nb_album - 1', $criteria);
                     }
 
@@ -352,9 +352,9 @@ switch ($op) {
 
                         // If category hasn't photo before the changes
                         if (0 == $categories[$k]->getVar('cat_nb_photo')) {
-                            $criteria = new CriteriaCompo();
-                            $criteria->add(new Criteria('nleft', $categories[$k]->getVar('nleft'), '<'));
-                            $criteria->add(new Criteria('nright', $categories[$k]->getVar('nright'), '>'));
+                            $criteria = new \CriteriaCompo();
+                            $criteria->add(new \Criteria('nleft', $categories[$k]->getVar('nleft'), '<'));
+                            $criteria->add(new \Criteria('nright', $categories[$k]->getVar('nright'), '>'));
                             $catHandler->updateFieldValue('cat_nb_album', 'cat_nb_album + 1', $criteria);
                         }
                     }
@@ -368,17 +368,17 @@ switch ($op) {
                         }
                         $nbPhotoMoved += $v;
 
-                        $criteria = new CriteriaCompo();
-                        $criteria->add(new Criteria('nleft', $categories[$k]->getVar('nleft'), '<='));
-                        $criteria->add(new Criteria('nright', $categories[$k]->getVar('nright'), '>='));
+                        $criteria = new \CriteriaCompo();
+                        $criteria->add(new \Criteria('nleft', $categories[$k]->getVar('nleft'), '<='));
+                        $criteria->add(new \Criteria('nright', $categories[$k]->getVar('nright'), '>='));
                         $catHandler->updateFieldValue('cat_nb_photo', 'cat_nb_photo + ' . $v, $criteria);
                     }
 
                     // Update the photo counter of the from gallery
                     if (0 != $nbPhotoMoved) {
-                        $criteria = new CriteriaCompo();
-                        $criteria->add(new Criteria('nleft', $categories[$_POST['cat_id']]->getVar('nleft'), '<='));
-                        $criteria->add(new Criteria('nright', $categories[$_POST['cat_id']]->getVar('nright'), '>='));
+                        $criteria = new \CriteriaCompo();
+                        $criteria->add(new \Criteria('nleft', $categories[$_POST['cat_id']]->getVar('nleft'), '<='));
+                        $criteria->add(new \Criteria('nright', $categories[$_POST['cat_id']]->getVar('nright'), '>='));
                         $catHandler->updateFieldValue('cat_nb_photo', 'cat_nb_photo - ' . $nbPhotoMoved, $criteria);
                     }
 
@@ -397,15 +397,15 @@ switch ($op) {
                         $cat->setVar('cat_isalbum', 0);
                         $catHandler->insert($cat);
 
-                        $criteria = new CriteriaCompo();
-                        $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '<'));
-                        $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>'));
+                        $criteria = new \CriteriaCompo();
+                        $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<'));
+                        $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>'));
                         $catHandler->updateFieldValue('cat_nb_album', 'cat_nb_album - 1', $criteria);
                     }
 
-                    $criteria = new CriteriaCompo();
-                    $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '<='));
-                    $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>='));
+                    $criteria = new \CriteriaCompo();
+                    $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<='));
+                    $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>='));
                     $catHandler->updateFieldValue('cat_nb_photo', 'cat_nb_photo - ' . $nbPhotoDeleted, $criteria);
 
                     $message = sprintf(_AM_EXTGALLERY_X_PHOTO_DELETED, count($_POST['photoId']));
@@ -435,7 +435,7 @@ switch ($op) {
                 echo _AM_EXTGALLERY_EDITDELETE_PHOTOTABLE_INFO . "\n";
                 echo '</fieldset><br>' . "\n";
 
-                $pageNav         = new XoopsPageNav($nbPhoto, $xoopsModuleConfig['admin_nb_photo'], $start, 'start', 'op=modify&cat_id=' . $_GET['cat_id']);
+                $pageNav         = new \XoopsPageNav($nbPhoto, $xoopsModuleConfig['admin_nb_photo'], $start, 'start', 'op=modify&cat_id=' . $_GET['cat_id']);
                 $globalCatSelect = $catHandler->getLeafSelect('changeAllCat', false, $_GET['cat_id'], ' onChange="return changeAllCategory();"');
 
                 echo '<div style="text-align:right;">' . $pageNav->renderNav() . '</div>' . "\n";
@@ -541,7 +541,7 @@ switch ($op) {
 
     case 'default':
     default:
-        require_once __DIR__ . '/../class/Utility.php';
+        // require_once __DIR__ . '/../class/Utility.php';
         /** @var ExtgalleryCatHandler $catHandler */
         $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
         /** @var ExtgalleryPublicPhotoHandler $photoHandler */
@@ -553,25 +553,25 @@ switch ($op) {
 
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTGALLERY_ADD_PHOTO . '</legend>';
 
-        $form = new XoopsThemeForm(_AM_EXTGALLERY_UPLOAD, 'add_photo', 'photo.php?op=add_photo', 'post', true);
-        //$form = new XoopsThemeForm($title, 'form', $action, 'post', true);
+        $form = new \XoopsThemeForm(_AM_EXTGALLERY_UPLOAD, 'add_photo', 'photo.php?op=add_photo', 'post', true);
+        //$form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
-        $form->addElement(new XoopsFormLabel(_AM_EXTGALLERY_ALBUMS, $catHandler->getLeafSelect('cat_id', false, 0, '', 'public_upload')));
+        $form->addElement(new \XoopsFormLabel(_AM_EXTGALLERY_ALBUMS, $catHandler->getLeafSelect('cat_id', false, 0, '', 'public_upload')));
         //DNPROSSI - editors
-        $form->addElement(new XoopsFormText(_AM_EXTGALLERY_PHOTO_TITLE, 'photo_title', '50', '150'), false);
+        $form->addElement(new \XoopsFormText(_AM_EXTGALLERY_PHOTO_TITLE, 'photo_title', '50', '150'), false);
         $editor = $utilityClass::getWysiwygForm(_AM_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
         $form->addElement($editor, false);
-        $form->addElement(new XoopsFormFile(_AM_EXTGALLERY_PHOTO, 'photo_file', $xoopsModuleConfig['max_photosize']), false);
+        $form->addElement(new \XoopsFormFile(_AM_EXTGALLERY_PHOTO, 'photo_file', $xoopsModuleConfig['max_photosize']), false);
         if ($xoopsModuleConfig['display_extra_field']) {
-            $form->addElement(new XoopsFormTextArea(_AM_EXTGALLERY_EXTRA_INFO, 'photo_extra'));
+            $form->addElement(new \XoopsFormTextArea(_AM_EXTGALLERY_EXTRA_INFO, 'photo_extra'));
         }
         // For xoops tag
         if ((1 == $xoopsModuleConfig['usetag']) && is_dir(__DIR__ . '/../../tag')) {
             require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
             $form->addElement(new TagFormTag('tag', 60, 255, '', 0));
         }
-        $form->addElement(new XoopsFormHidden('op', 'add_photo'));
-        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $form->addElement(new \XoopsFormHidden('op', 'add_photo'));
+        $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
         $form->display();
 
         echo '</fieldset><br>';
@@ -597,11 +597,11 @@ switch ($op) {
         echo '<b>' . _AM_EXTGALLERY_BATCH_PATH . '</b> : ' . XOOPS_ROOT_PATH . '/modules/extgallery/batch/<br><br>' . sprintf(_AM_EXTGALLERY_ADD_BATCH_INFO, $nbPhotos);
         echo '</fieldset><br>';
 
-        $form = new XoopsThemeForm(_AM_EXTGALLERY_ADD_BATCH, 'batch_photo', 'photo.php?op=batchAdd', 'post', true);
-        $form->addElement(new XoopsFormLabel(_AM_EXTGALLERY_ALBUM, $catHandler->getLeafSelect('cat_id')));
-        $form->addElement(new XoopsFormText(_AM_EXTGALLERY_DESC, 'photo_desc', '70', '255'), false);
-        $form->addElement(new XoopsFormHidden('step', 'enreg'));
-        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $form = new \XoopsThemeForm(_AM_EXTGALLERY_ADD_BATCH, 'batch_photo', 'photo.php?op=batchAdd', 'post', true);
+        $form->addElement(new \XoopsFormLabel(_AM_EXTGALLERY_ALBUM, $catHandler->getLeafSelect('cat_id')));
+        $form->addElement(new \XoopsFormText(_AM_EXTGALLERY_DESC, 'photo_desc', '70', '255'), false);
+        $form->addElement(new \XoopsFormHidden('step', 'enreg'));
+        $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
         $form->display();
 
         echo '</fieldset><br>';
@@ -613,10 +613,10 @@ switch ($op) {
         echo _AM_EXTGALLERY_REBUILD_THUMB_INFO;
         echo '</fieldset><br>';
 
-        $form = new XoopsThemeForm(_AM_EXTGALLERY_REBUILD_THUMB, 'rebuild_thumb', 'photo.php', 'get', true);
-        $form->addElement(new XoopsFormLabel(_AM_EXTGALLERY_ALBUM, $catHandler->getSelect('cat_id', 'node')));
-        $form->addElement(new XoopsFormHidden('op', 'rebuildthumb'));
-        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $form = new \XoopsThemeForm(_AM_EXTGALLERY_REBUILD_THUMB, 'rebuild_thumb', 'photo.php', 'get', true);
+        $form->addElement(new \XoopsFormLabel(_AM_EXTGALLERY_ALBUM, $catHandler->getSelect('cat_id', 'node')));
+        $form->addElement(new \XoopsFormHidden('op', 'rebuildthumb'));
+        $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
         $form->display();
 
         echo '</fieldset><br>';
@@ -628,10 +628,10 @@ switch ($op) {
         echo _AM_EXTGALLERY_EDITDELETE_PHOTO_INFO;
         echo '</fieldset><br>';
 
-        $form = new XoopsThemeForm(_AM_EXTGALLERY_EDITDELETE_PHOTO, 'modify_photo', 'photo.php', 'get', true);
-        $form->addElement(new XoopsFormLabel(_AM_EXTGALLERY_ALBUM, $catHandler->getSelect('cat_id', 'node')));
-        $form->addElement(new XoopsFormHidden('op', 'modify'));
-        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $form = new \XoopsThemeForm(_AM_EXTGALLERY_EDITDELETE_PHOTO, 'modify_photo', 'photo.php', 'get', true);
+        $form->addElement(new \XoopsFormLabel(_AM_EXTGALLERY_ALBUM, $catHandler->getSelect('cat_id', 'node')));
+        $form->addElement(new \XoopsFormHidden('op', 'modify'));
+        $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
         $form->display();
 
         echo '</fieldset><br>';
@@ -645,7 +645,7 @@ switch ($op) {
         echo '</fieldset><br>';
 
         $pendingPhoto = $photoHandler->getPendingPhoto();
-        $pageNav      = new XoopsPageNav(count($pendingPhoto), $xoopsModuleConfig['admin_nb_photo'], $start);
+        $pageNav      = new \XoopsPageNav(count($pendingPhoto), $xoopsModuleConfig['admin_nb_photo'], $start);
 
         echo '<div id="pending-photo" style="text-align:right;">' . $pageNav->renderNav() . '</div>';
         echo '<form action="photo.php?op=batchApprove" method="post">';

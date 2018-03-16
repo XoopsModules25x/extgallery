@@ -16,7 +16,7 @@
  * @author       XOOPS Development Team
  */
 
-if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
+if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->IsAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
@@ -40,7 +40,7 @@ function tableExists($tablename)
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_update_extgallery(XoopsModule $module)
+function xoops_module_pre_update_extgallery(\XoopsModule $module)
 {
     /** @var Extgallery\Helper $helper */
     /** @var Extgallery\Utility $utility */
@@ -62,7 +62,7 @@ function xoops_module_pre_update_extgallery(XoopsModule $module)
  * @return bool true if update successful, false if not
  */
 
-function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = null)
+function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion = null)
 {
     global $xoopsDB;
 
@@ -80,14 +80,14 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
     $catHandler->rebuild();
 
     if ($previousVersion < 101) {
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        $db = \XoopsDatabaseFactory::getDatabaseConnection();
         // Remove the UNIQUE key on the rating table. This constraint is software cheked now
         $sql = 'ALTER TABLE `' . $db->prefix($moduleDirName . '_publicrating') . '` DROP INDEX `photo_rate` ;';
         $db->query($sql);
     }
 
     if ($previousVersion < 102) {
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        $db = \XoopsDatabaseFactory::getDatabaseConnection();
 
         $sql = 'ALTER TABLE `' . $db->prefix($moduleDirName . '_publiccat') . '` ADD `cat_imgurl` VARCHAR(150) NOT NULL AFTER `cat_nb_photo` ;';
         $db->query($sql);
@@ -100,7 +100,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
     }
 
     if ($previousVersion < 104) {
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        $db = \XoopsDatabaseFactory::getDatabaseConnection();
 
         $sql = 'ALTER TABLE `' . $db->prefix($moduleDirName . '_publicphoto') . "` ADD `dohtml` BOOL NOT NULL DEFAULT '0';";
         $db->query($sql);
@@ -144,7 +144,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
     }
 
     if ($previousVersion < 109) {
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        $db = \XoopsDatabaseFactory::getDatabaseConnection();
 
         $sql = 'ALTER TABLE `' . $db->prefix($moduleDirName . '_publiccat') . "` CHANGE `cat_weight` `cat_weight` INT( 11 ) NOT NULL DEFAULT '0' ;";
         $db->query($sql);
@@ -156,7 +156,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         if (is_dir($templateDirectory)) {
             $templateList = array_diff(scandir($templateDirectory, SCANDIR_SORT_NONE), ['..', '.']);
             foreach ($templateList as $k => $v) {
-                $fileInfo = new SplFileInfo($templateDirectory . $v);
+                $fileInfo = new \SplFileInfo($templateDirectory . $v);
                 if ('html' === $fileInfo->getExtension() && 'index.html' !== $fileInfo->getFilename()) {
                     if (file_exists($templateDirectory . $v)) {
                         unlink($templateDirectory . $v);
@@ -169,7 +169,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         if (is_dir($templateDirectory)) {
             $templateList = array_diff(scandir($templateDirectory, SCANDIR_SORT_NONE), ['..', '.']);
             foreach ($templateList as $k => $v) {
-                $fileInfo = new SplFileInfo($templateDirectory . $v);
+                $fileInfo = new \SplFileInfo($templateDirectory . $v);
                 if ('html' === $fileInfo->getExtension() && 'index.html' !== $fileInfo->getFilename()) {
                     if (file_exists($templateDirectory . $v)) {
                         unlink($templateDirectory . $v);
@@ -183,7 +183,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         if (is_dir($templateDirectory)) {
             $templateList = array_diff(scandir($templateDirectory, SCANDIR_SORT_NONE), ['..', '.']);
             foreach ($templateList as $k => $v) {
-                $fileInfo = new SplFileInfo($templateDirectory . $v);
+                $fileInfo = new \SplFileInfo($templateDirectory . $v);
                 if ('html' === $fileInfo->getExtension() && 'index.html' !== $fileInfo->getFilename()) {
                     if (file_exists($templateDirectory . $v)) {
                         unlink($templateDirectory . $v);
@@ -200,7 +200,7 @@ function xoops_module_update_extgallery(XoopsModule $module, $previousVersion = 
         }
 
         //  ---  COPY blank.png FILES ---------------
-        if (count($configurator->blankFiles) > 0) {
+        if (count($configurator->copyBlankFiles) > 0) {
             $file = __DIR__ . '/../assets/images/blank.png';
             foreach (array_keys($configurator->copyFiles) as $i) {
                 $dest = $configurator->copyFiles[$i] . '/blank.png';

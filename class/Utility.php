@@ -10,11 +10,11 @@ use  XoopsModules\Extgallery\Common;
  */
 class Utility extends \XoopsObject
 {
-    use common\VersionChecks; //checkVerXoops, checkVerPhp Traits
+    use Common\VersionChecks; //checkVerXoops, checkVerPhp Traits
 
-    use common\ServerStats; // getServerStats Trait
+    use Common\ServerStats; // getServerStats Trait
 
-    use common\FilesManagement; // Files Management Trait
+    use Common\FilesManagement; // Files Management Trait
 
 
     /**
@@ -65,7 +65,7 @@ class Utility extends \XoopsObject
      * @param $height
      * @param $supplemental
      *
-     * @return bool|XoopsFormEditor
+     * @return bool|\XoopsFormEditor
      */
     public static function getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $height, $supplemental)
     {
@@ -80,7 +80,7 @@ class Utility extends \XoopsObject
         $editor_configs['height'] = $height;
         $editor_configs['editor'] = $editor_option;
 
-        $editor = new XoopsFormEditor($caption, $name, $editor_configs);
+        $editor = new \XoopsFormEditor($caption, $name, $editor_configs);
 
         return $editor;
     }

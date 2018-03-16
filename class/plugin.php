@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class ExtgalleryPluginHandler
@@ -26,7 +26,7 @@ class ExtgalleryPluginHandler
      * ExtgalleryPluginHandler constructor.
      * @param $db
      */
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
     }
 

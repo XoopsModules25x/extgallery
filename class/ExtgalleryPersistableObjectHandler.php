@@ -50,10 +50,10 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
      *
      */
 
-    public function __construct(XoopsDatabase $db, $tablename, $classname, $keyname, $idenfierName = false)
+    public function __construct(\XoopsDatabase $db, $tablename, $classname, $keyname, $idenfierName = false)
     {
         parent::__construct($db);
-        //        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        //        $db = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->table     = $db->prefix($tablename);
         $this->keyName   = $keyname;
         $this->className = $classname;
@@ -293,7 +293,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
             return $sum;
         } else {
             $ret = [];
-            while (list($id, $sum) = $this->db->fetchRow($result)) {
+            while (false !== (list($id, $sum) = $this->db->fetchRow($result))) {
                 $ret[$id] = $sum;
             }
 
@@ -334,7 +334,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
             return $max;
         } else {
             $ret = [];
-            while (list($id, $max) = $this->db->fetchRow($result)) {
+            while (false !== (list($id, $max) = $this->db->fetchRow($result))) {
                 $ret[$id] = $max;
             }
 

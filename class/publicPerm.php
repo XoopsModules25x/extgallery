@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class ExtgalleryPublicPermHandler
@@ -55,7 +55,7 @@ class ExtgalleryPublicPermHandler
      *
      * @return mixed
      */
-    public function getAuthorizedPublicCat(XoopsUser $user, $perm)
+    public function getAuthorizedPublicCat(\XoopsUser $user, $perm)
     {
         static $authorizedCat;
         $userId = $user ? $user->getVar('uid') : 0;
@@ -78,7 +78,7 @@ class ExtgalleryPublicPermHandler
      *
      * @return bool
      */
-    public function isAllowed(XoopsUser $user, $perm, $catId)
+    public function isAllowed(\XoopsUser $user, $perm, $catId)
     {
         $autorizedCat = $this->getAuthorizedPublicCat($user, $perm);
 

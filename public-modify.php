@@ -63,7 +63,7 @@ switch ($op) {
 
                 // For xoops tag
                 if ((1 == $xoopsModuleConfig['usetag']) && is_dir('../tag')) {
-                    $tagHandler = xoops_getModuleHandler('tag', 'tag');
+                    $tagHandler = \XoopsModules\Tag\Helper::getInstance()->getHandler('Tag'); // xoops_getModuleHandler('tag', 'tag');
                     $tagHandler->updateByItem($_POST['tag'], $_POST['photo_id'], $xoopsModule->getVar('dirname'), 0);
                 }
 
@@ -78,28 +78,28 @@ switch ($op) {
 
                     // Update album count
                     if (1 == $oldCat->getVar('cat_nb_photo')) {
-                        $criteria = new CriteriaCompo();
-                        $criteria->add(new Criteria('nleft', $oldCat->getVar('nleft'), '<'));
-                        $criteria->add(new Criteria('nright', $oldCat->getVar('nright'), '>'));
+                        $criteria = new \CriteriaCompo();
+                        $criteria->add(new \Criteria('nleft', $oldCat->getVar('nleft'), '<'));
+                        $criteria->add(new \Criteria('nright', $oldCat->getVar('nright'), '>'));
                         $catHandler->updateFieldValue('cat_nb_album', 'cat_nb_album - 1', $criteria);
                     }
 
                     if (0 == $newCat->getVar('cat_nb_photo')) {
-                        $criteria = new CriteriaCompo();
-                        $criteria->add(new Criteria('nleft', $newCat->getVar('nleft'), '<'));
-                        $criteria->add(new Criteria('nright', $newCat->getVar('nright'), '>'));
+                        $criteria = new \CriteriaCompo();
+                        $criteria->add(new \Criteria('nleft', $newCat->getVar('nleft'), '<'));
+                        $criteria->add(new \Criteria('nright', $newCat->getVar('nright'), '>'));
                         $catHandler->updateFieldValue('cat_nb_album', 'cat_nb_album + 1', $criteria);
                     }
 
                     // Update photo count
-                    $criteria = new CriteriaCompo();
-                    $criteria->add(new Criteria('nleft', $newCat->getVar('nleft'), '<='));
-                    $criteria->add(new Criteria('nright', $newCat->getVar('nright'), '>='));
+                    $criteria = new \CriteriaCompo();
+                    $criteria->add(new \Criteria('nleft', $newCat->getVar('nleft'), '<='));
+                    $criteria->add(new \Criteria('nright', $newCat->getVar('nright'), '>='));
                     $catHandler->updateFieldValue('cat_nb_photo', 'cat_nb_photo + 1', $criteria);
 
-                    $criteria = new CriteriaCompo();
-                    $criteria->add(new Criteria('nleft', $oldCat->getVar('nleft'), '<='));
-                    $criteria->add(new Criteria('nright', $oldCat->getVar('nright'), '>='));
+                    $criteria = new \CriteriaCompo();
+                    $criteria->add(new \Criteria('nleft', $oldCat->getVar('nleft'), '<='));
+                    $criteria->add(new \Criteria('nright', $oldCat->getVar('nright'), '>='));
                     $catHandler->updateFieldValue('cat_nb_photo', 'cat_nb_photo - 1', $criteria);
 
                     // If the old album don't contains other photo
@@ -129,17 +129,17 @@ switch ($op) {
 
                 echo '<img src="' . XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name') . '">';
 
-                $form = new XoopsThemeForm(_MD_EXTGALLERY_MODIFY_PHOTO, 'add_photo', 'public-modify.php?op=edit', 'post', true);
-                $form->addElement(new XoopsFormLabel(_MD_EXTGALLERY_CATEGORY, $catHandler->getLeafSelect('cat_id', false, $photo->getVar('cat_id'))));
-                $form->addElement(new XoopsFormText(_MD_EXTGALLERY_PHOTO_WEIGHT, 'photo_weight', '3', '11', $photo->getVar('photo_weight')), false);
-                $form->addElement(new XoopsFormText(_MD_EXTGALLERY_PHOTO_TITLE, 'photo_title', '50', '150', $photo->getVar('photo_title')), false);
+                $form = new \XoopsThemeForm(_MD_EXTGALLERY_MODIFY_PHOTO, 'add_photo', 'public-modify.php?op=edit', 'post', true);
+                $form->addElement(new \XoopsFormLabel(_MD_EXTGALLERY_CATEGORY, $catHandler->getLeafSelect('cat_id', false, $photo->getVar('cat_id'))));
+                $form->addElement(new \XoopsFormText(_MD_EXTGALLERY_PHOTO_WEIGHT, 'photo_weight', '3', '11', $photo->getVar('photo_weight')), false);
+                $form->addElement(new \XoopsFormText(_MD_EXTGALLERY_PHOTO_TITLE, 'photo_title', '50', '150', $photo->getVar('photo_title')), false);
                 //DNPROSSI - wysiwyg editors from xoopseditors
                 //TODO dohtml - dobr
                 $photo_desc = $myts->displayTarea($photo->getVar('photo_desc'), 0, 1, 1, 1, 0);
                 $editor     = $utilityClass::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', $photo_desc, 15, 60, '100%', '350px', 'hometext_hidden');
                 $form->addElement($editor, false);
                 if ($xoopsModuleConfig['display_extra_field']) {
-                    $form->addElement(new XoopsFormTextArea(_MD_EXTGALLERY_EXTRA_INFO, 'photo_extra', $photo->getVar('photo_extra')));
+                    $form->addElement(new \XoopsFormTextArea(_MD_EXTGALLERY_EXTRA_INFO, 'photo_extra', $photo->getVar('photo_extra')));
                 }
 
                 // For xoops tag
@@ -149,9 +149,9 @@ switch ($op) {
                     $form->addElement(new TagFormTag('tag', 60, 255, $tagId, 0));
                 }
 
-                $form->addElement(new XoopsFormHidden('photo_id', $_GET['id']));
-                $form->addElement(new XoopsFormHidden('step', 'enreg'));
-                $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+                $form->addElement(new \XoopsFormHidden('photo_id', $_GET['id']));
+                $form->addElement(new \XoopsFormHidden('step', 'enreg'));
+                $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
                 $form->display();
 
                 include XOOPS_ROOT_PATH . '/footer.php';
@@ -174,17 +174,17 @@ switch ($op) {
         $cat = $catHandler->getCat($photo->getVar('cat_id'));
 
         // Update photo count
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '<='));
-        $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>='));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<='));
+        $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>='));
         $catHandler->updateFieldValue('cat_nb_photo', 'cat_nb_photo - 1', $criteria);
 
         if (1 == $cat->getVar('cat_nb_photo')) {
 
             // Update album count
-            $criteria = new CriteriaCompo();
-            $criteria->add(new Criteria('nleft', $cat->getVar('nleft'), '<'));
-            $criteria->add(new Criteria('nright', $cat->getVar('nright'), '>'));
+            $criteria = new \CriteriaCompo();
+            $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<'));
+            $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>'));
             $catHandler->updateFieldValue('cat_nb_album', 'cat_nb_album - 1', $criteria);
 
             $catHandler->modifyCat(['cat_id' => $photo->getVar('cat_id'), 'cat_isalbum' => 0]);

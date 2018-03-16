@@ -99,20 +99,20 @@ switch ($step) {
         $fromName  = is_a($GLOBALS['xoopsUser'], 'XoopsUser') ? $GLOBALS['xoopsUser']->getVar('uname') : '';
         $fromEmail = is_a($GLOBALS['xoopsUser'], 'XoopsUser') ? $GLOBALS['xoopsUser']->getVar('email') : '';
 
-        $form = new XoopsThemeForm(_MD_EXTGALLERY_SEND_ECARD, 'send_ecard', 'public-sendecard.php', 'post', true);
-        $form->addElement(new XoopsFormText(_MD_EXTGALLERY_FROM_NAME, 'ecard_fromname', '70', '255', $fromName), false);
-        $form->addElement(new XoopsFormText(_MD_EXTGALLERY_FROM_EMAIL, 'ecard_fromemail', '70', '255', $fromEmail), false);
-        $form->addElement(new XoopsFormText(_MD_EXTGALLERY_TO_NAME, 'ecard_toname', '70', '255', ''), false);
-        $form->addElement(new XoopsFormText(_MD_EXTGALLERY_TO_EMAIL, 'ecard_toemail', '70', '255', ''), false);
-        $form->addElement(new XoopsFormText(_MD_EXTGALLERY_GREETINGS, 'ecard_greetings', '110', '255', ''), false);
-        $form->addElement(new XoopsFormTextArea(_MD_EXTGALLERY_DESC, 'ecard_desc', ''), false);
+        $form = new \XoopsThemeForm(_MD_EXTGALLERY_SEND_ECARD, 'send_ecard', 'public-sendecard.php', 'post', true);
+        $form->addElement(new \XoopsFormText(_MD_EXTGALLERY_FROM_NAME, 'ecard_fromname', '70', '255', $fromName), false);
+        $form->addElement(new \XoopsFormText(_MD_EXTGALLERY_FROM_EMAIL, 'ecard_fromemail', '70', '255', $fromEmail), false);
+        $form->addElement(new \XoopsFormText(_MD_EXTGALLERY_TO_NAME, 'ecard_toname', '70', '255', ''), false);
+        $form->addElement(new \XoopsFormText(_MD_EXTGALLERY_TO_EMAIL, 'ecard_toemail', '70', '255', ''), false);
+        $form->addElement(new \XoopsFormText(_MD_EXTGALLERY_GREETINGS, 'ecard_greetings', '110', '255', ''), false);
+        $form->addElement(new \XoopsFormTextArea(_MD_EXTGALLERY_DESC, 'ecard_desc', ''), false);
         // Enable captcha only if GD is Used
         if ('gd' === $xoopsModuleConfig['graphic_lib']) {
-            $form->addElement(new XoopsFormText(_MD_EXTGALLERY_SECURITY, 'captcha', '10', '5', ''), false);
+            $form->addElement(new \XoopsFormText(_MD_EXTGALLERY_SECURITY, 'captcha', '10', '5', ''), false);
         }
-        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
-        $form->addElement(new XoopsFormHidden('photo_id', $photoId));
-        $form->addElement(new XoopsFormHidden('step', 'send'));
+        $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $form->addElement(new \XoopsFormHidden('photo_id', $photoId));
+        $form->addElement(new \XoopsFormHidden('step', 'send'));
         $form->assign($xoopsTpl);
 
         $xoopsTpl->assign('photo', $photoUrl);

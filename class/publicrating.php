@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
 
@@ -70,7 +70,7 @@ class ExtgalleryPublicRatingHandler extends ExtgalleryPersistableObjectHandler
     /**
      * @param XoopsDatabase $db
      */
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'extgallery_publicrating', 'ExtgalleryPublicRating', 'rating_id');
     }
@@ -110,7 +110,7 @@ class ExtgalleryPublicRatingHandler extends ExtgalleryPersistableObjectHandler
      */
     public function getRate($photoId)
     {
-        $criteria = new Criteria('photo_id', $photoId);
+        $criteria = new \Criteria('photo_id', $photoId);
         $avg      = $this->getAvg($criteria, 'rating_rate');
 
         return round($avg);
@@ -128,9 +128,9 @@ class ExtgalleryPublicRatingHandler extends ExtgalleryPersistableObjectHandler
             return false;
         }
 
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('photo_id', $rate->getVar('photo_id')));
-        $criteria->add(new Criteria('uid', $rate->getVar('uid')));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('photo_id', $rate->getVar('photo_id')));
+        $criteria->add(new \Criteria('uid', $rate->getVar('uid')));
 
         return $this->getCount($criteria) > 0;
     }

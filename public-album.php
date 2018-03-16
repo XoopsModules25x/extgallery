@@ -151,7 +151,7 @@ foreach (array_keys($photos) as $i) {
 $xoopsTpl->assign('photos', $photos);
 /** @var xos_opal_Theme $xoTheme */
 
-$pageNav = new XoopsPageNav($photoHandler->getAlbumCount($catId), $xoopsModuleConfig['nb_column'] * $xoopsModuleConfig['nb_line'], $start, 'start', 'id=' . $catId . '&orderby=' . $orderby . '&sortby=' . $sortby); //xoops - blueteen - tri de l'affichage
+$pageNav = new \XoopsPageNav($photoHandler->getAlbumCount($catId), $xoopsModuleConfig['nb_column'] * $xoopsModuleConfig['nb_line'], $start, 'start', 'id=' . $catId . '&orderby=' . $orderby . '&sortby=' . $sortby); //xoops - blueteen - tri de l'affichage
 $xoopsTpl->assign('pageNav', $pageNav->renderNav());
 if (isset($catObj)) {
     $xoopsTpl->assign('xoops_pagetitle', $catObj->getVar('cat_name'));

@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 
@@ -64,9 +64,9 @@ class ExtgalleryGroupPermForm extends XoopsGroupPermForm
             $this->addElement($ele);
             unset($ele);
         }
-        $tray = new XoopsFormElementTray('');
-        $tray->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
-        $tray->addElement(new XoopsFormButton('', 'reset', _CANCEL, 'reset'));
+        $tray = new \XoopsFormElementTray('');
+        $tray->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $tray->addElement(new \XoopsFormButton('', 'reset', _CANCEL, 'reset'));
         $this->addElement($tray);
         echo '<h4>' . $this->getTitle() . '</h4>';
         if ($this->_permDesc) {

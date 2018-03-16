@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once __DIR__ . '/catHandler.php';
 
@@ -42,7 +42,7 @@ class ExtgalleryPublicCatHandler extends ExtgalleryCatHandler
      * ExtgalleryPublicCatHandler constructor.
      * @param XoopsDatabase $db
      */
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'public');
     }
@@ -65,12 +65,12 @@ class ExtgalleryPublicCatHandler extends ExtgalleryCatHandler
         $this->insert($cat, true);
         $this->rebuild();
 
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort('cat_id');
         $criteria->setOrder('DESC');
         $criteria->setLimit(1);
 
-        $cat = $this->getObjects($criteria);
+        $cat =& $this->getObjects($criteria);
         $cat = $cat[0];
 
         $moduleId = $GLOBALS['xoopsModule']->getVar('mid');
@@ -81,9 +81,9 @@ class ExtgalleryPublicCatHandler extends ExtgalleryCatHandler
         $moduleId     = $GLOBALS['xoopsModule']->getVar('mid');
         $groups       = $GLOBALS['xoopsUser']->getGroups();
 
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('gperm_name', 'extgallery_public_mask'));
-        $criteria->add(new Criteria('gperm_modid', $moduleId));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('gperm_name', 'extgallery_public_mask'));
+        $criteria->add(new \Criteria('gperm_modid', $moduleId));
         $permMask = $gpermHandler->getObjects($criteria);
 
         // Retriving group list
@@ -116,7 +116,7 @@ class ExtgalleryPublicCatHandler extends ExtgalleryCatHandler
      *
      * @return bool
      */
-    public function _haveValidParent(XoopsObject $cat = null)
+    public function _haveValidParent(\XoopsObject $cat = null)
     {
         // Check if haven't photo in parent category (parent category isn't an album)
         $parentCat = $this->get($cat->getVar('cat_pid'));

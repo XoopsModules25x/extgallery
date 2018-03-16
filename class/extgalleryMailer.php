@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/mail/xoopsmultimailer.php';
 
@@ -43,7 +43,7 @@ class extgalleryMailer
      */
     public function __construct($type)
     {
-        $this->mailer = new XoopsMultiMailer();
+        $this->mailer = new \XoopsMultiMailer();
         $this->type   = $type;
     }
 

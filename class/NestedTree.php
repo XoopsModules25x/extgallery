@@ -30,7 +30,7 @@ class NestedTree
      * @param string $parentField Name of the parent ID field
      * @param string $sortField   Name of the field to sort data.
      */
-    public function __construct(XoopsDatabase $db, $table, $idField, $parentField, $sortField)
+    public function __construct(\XoopsDatabase $db, $table, $idField, $parentField, $sortField)
     {
         $this->db     = $db;
         $this->table  = $db->prefix($table);
@@ -45,7 +45,7 @@ class NestedTree
      * Fetch the node data for the node identified by $id
      *
      * @param  int $id   The ID of the node to fetch
-     * @return null|XoopsObject An object containing the node's
+     * @return null|\XoopsObject An object containing the node's
      *                   data, or null if node not found
      */
     public function getNode($id)

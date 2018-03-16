@@ -747,7 +747,7 @@ extension.php (added file)
 - Fix bug : language constant wasn't use on admin side (permission page)
 - Add a directory permission checker to display error message if eXtGallery photo directories isn't writable
 - Add title for photos and choice to display or not (jbboschung)
-- Add weight for photos. All request SQL order (new criteria : ASC) by weight now (jbboschung)
+- Add weight for photos. All request SQL order (new Criteria : ASC) by weight now (jbboschung)
 - Add image url for category and choice to display or not. Display image url witdh = 100 px. (jbboschung)
 - Note : Image url is priority as 'Miniature' of category. If not image url, the 'Miniature' image was display.
 
@@ -757,7 +757,7 @@ extension.php (added file)
 ============================
 
 - Fix bug : eCard not sent
-- Add a new criteria order for category. Category name is used after weight
+- Add a new Criteria order for category. Category name is used after weight
 - Fix bug : blank page when an anonymous rate a photo
 - Fix bug : only one anonymous user could rate a photo
 - Fix bug : Medium photo not resized when border or watermark are enable

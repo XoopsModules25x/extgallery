@@ -19,7 +19,7 @@ function extgallery_tag_iteminfo(&$items)
 
     /** @var ExtgalleryPublicPhotoHandler $itemHandler */
     $itemHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
-    $items_obj   = $itemHandler->getObjects(new Criteria('photo_id', '(' . implode(', ', $items_id) . ')', 'IN'), true);
+    $items_obj   = $itemHandler->getObjects(new \Criteria('photo_id', '(' . implode(', ', $items_id) . ')', 'IN'), true);
 
     foreach (array_keys($items) as $cat_id) {
         foreach (array_keys($items[$cat_id]) as $item_id) {
@@ -48,7 +48,7 @@ function extgallery_tag_synchronization($mid)
     /** @var ExtgalleryPublicPhotoHandler $itemHandler */
     $itemHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
     /** @var TagLinkHandler $linkHandler */
-    $linkHandler = xoops_getModuleHandler('link', 'tag');
+    $linkHandler = \XoopsModules\Tag\Helper::getInstance()->getHandler('Link'); //@var \XoopsModules\Tag\Handler $tagHandler
 
     /* clear tag-item links */
     if (version_compare(mysqli_get_server_info($XoopsDB->conn), '4.1.0', 'ge')):

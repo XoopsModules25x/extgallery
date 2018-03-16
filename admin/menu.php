@@ -18,7 +18,7 @@
 
 use XoopsModules\Extgallery;
 
-require_once __DIR__ . '/../class/Helper.php';
+// require_once __DIR__ . '/../class/Helper.php';
 //require_once __DIR__ . '/../include/common.php';
 $helper = Extgallery\Helper::getInstance();
 

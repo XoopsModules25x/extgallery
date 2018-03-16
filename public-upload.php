@@ -60,18 +60,18 @@ switch ($step) {
 
         $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
 
-        $form = new XoopsThemeForm(_MD_EXTGALLERY_PUBLIC_UPLOAD, 'add_photo', 'public-upload.php', 'post', true);
+        $form = new \XoopsThemeForm(_MD_EXTGALLERY_PUBLIC_UPLOAD, 'add_photo', 'public-upload.php', 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
-        $form->addElement(new XoopsFormLabel(_MD_EXTGALLERY_ALBUMS, $catHandler->getLeafSelect('cat_id', false, 0, '', 'public_upload')));
+        $form->addElement(new \XoopsFormLabel(_MD_EXTGALLERY_ALBUMS, $catHandler->getLeafSelect('cat_id', false, 0, '', 'public_upload')));
 
         //DNPROSSI - editors
-        $form->addElement(new XoopsFormText(_MD_EXTGALLERY_PHOTO_TITLE, 'photo_title', '50', '150'), false);
+        $form->addElement(new \XoopsFormText(_MD_EXTGALLERY_PHOTO_TITLE, 'photo_title', '50', '150'), false);
         $editor = $utilityClass::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
         $form->addElement($editor, false);
 
-        $form->addElement(new XoopsFormFile(_MD_EXTGALLERY_PHOTO, 'photo_file', $xoopsModuleConfig['max_photosize']), false);
+        $form->addElement(new \XoopsFormFile(_MD_EXTGALLERY_PHOTO, 'photo_file', $xoopsModuleConfig['max_photosize']), false);
         if ($xoopsModuleConfig['display_extra_field']) {
-            $form->addElement(new XoopsFormTextArea(_MD_EXTGALLERY_EXTRA_INFO, 'photo_extra'));
+            $form->addElement(new \XoopsFormTextArea(_MD_EXTGALLERY_EXTRA_INFO, 'photo_extra'));
         }
 
         // For xoops tag
@@ -83,8 +83,8 @@ switch ($step) {
         $plugin = xoops_getModuleHandler('plugin', 'extgallery');
         $plugin->triggerEvent('photoForm', $form);
 
-        $form->addElement(new XoopsFormHidden('step', 'enreg'));
-        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $form->addElement(new \XoopsFormHidden('step', 'enreg'));
+        $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
 
         $form->display();
 
