@@ -1,6 +1,6 @@
 <div class="extgallery">
     <a title="<{$extgalleryName}>"
-       href="<{xoAppUrl modules/extgallery/}>"><{$extgalleryName}></a><{foreachq item=node from=$catPath name=breadcrumb}>
+       href="<{xoAppUrl modules/extgallery/}>"><{$extgalleryName}></a><{foreach item=node from=$catPath name=breadcrumb}>
     <img src="assets/images/breadcrumb-link.gif"
          alt="BreadCrumb"> <a
             href="<{xoAppUrl modules/extgallery/}>public-<{if $node.cat_isalbum}><{$display_type}><{else}>categories<{/if}>.php?id=<{$node.cat_id}>"><{$node.cat_name}></a><{/foreach}>
@@ -46,12 +46,12 @@
         <!-- End extra filed -->
     <{/if}>
 
-    <{foreachq item=pluginLink from=$pluginPhotoAlbumLink}>
+    <{foreach item=pluginLink from=$pluginPhotoAlbumLink}>
     <div class="txtcenter">
         <a href="<{$pluginLink.link}><{$photo.photo_id}>" title="<{$pluginLink.name}>"><{$pluginLink.name}></a>
     </div>
     <{/foreach}>
-    <{foreachq item=pluginLink from=$photo.link}>
+    <{foreach item=pluginLink from=$photo.link}>
     <div class="txtcenter">
         <a href="<{$pluginLink.link}><{$photo.photo_id}>" title="<{$pluginLink.name}>"><{$pluginLink.name}></a>
     </div>

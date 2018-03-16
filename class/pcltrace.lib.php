@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
+
 // --------------------------------------------------------------------------------
 // PhpConcept Library (PCL) Trace 1.0
 // --------------------------------------------------------------------------------
@@ -34,6 +35,8 @@
 //   de loisir.
 //
 // --------------------------------------------------------------------------------
+
+use XoopsModules\Extgallery;
 
 // ----- Look for double include
 if (!defined('PCLTRACE_LIB')) {

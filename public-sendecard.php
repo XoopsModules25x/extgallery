@@ -15,8 +15,10 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 include __DIR__ . '/header.php';
-require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+//require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 if (isset($_GET['id'])) {
@@ -31,11 +33,11 @@ if (isset($_POST['step'])) {
 } else {
     $step = 'default';
 }
-/** @var ExtgalleryPublicPhotoHandler $photoHandler */
-$photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+/** @var Extgallery\PublicPhotoHandler $photoHandler */
+$photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 $photo        = $photoHandler->getPhoto($photoId);
 
-$permHandler = ExtgalleryPublicPermHandler::getInstance();
+$permHandler = Extgallery\PublicPermHandler::getInstance();
 
 if (!$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_ecard', $photo->getVar('cat_id'))) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
@@ -45,18 +47,18 @@ switch ($step) {
 
     case 'send':
 
-        require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/php-captcha.inc.php';
+//        require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/php-captcha.inc.php';
 
         // Enable captcha only if GD is Used
         if ('gd' === $xoopsModuleConfig['graphic_lib']) {
-            if (!PhpCaptcha::Validate($_POST['captcha'])) {
+            if (!Extgallery\PhpCaptcha::Validate($_POST['captcha'])) {
                 redirect_header('public-photo.php?photoId=' . $photoId . '#photoNav', 3, _MD_EXTGALLERY_CAPTCHA_ERROR);
             }
         }
-        /** @var ExtgalleryPublicEcardHandler $ecardHandler */
-        $ecardHandler = xoops_getModuleHandler('publicecard', 'extgallery');
-        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-        $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+        /** @var Extgallery\PublicEcardHandler $ecardHandler */
+        $ecardHandler = Extgallery\Helper::getInstance()->getHandler('PublicEcard');
+        /** @var Extgallery\PublicPhotoHandler $photoHandler */
+        $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];

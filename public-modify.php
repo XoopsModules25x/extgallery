@@ -15,9 +15,12 @@
  * @package     ExtGallery
  */
 
+
+use XoopsModules\Extgallery;
+
 include __DIR__ . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-require_once __DIR__ . '/class/Utility.php';
+//require_once __DIR__ . '/class/Utility.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -45,8 +48,8 @@ switch ($op) {
         switch ($step) {
 
             case 'enreg':
-                /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-                $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+                /** @var Extgallery\PublicPhotoHandler $photoHandler */
+                $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
                 $myts         = \MyTextSanitizer::getInstance();
                 $photo        = $photoHandler->getPhoto($_POST['photo_id']);
 
@@ -69,7 +72,7 @@ switch ($op) {
 
                 // If the photo category change
                 if ($photo->getVar('cat_id') != $_POST['cat_id']) {
-                    $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+                    $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
                     $oldCat     = $catHandler->getCat($photo->getVar('cat_id'));
                     $newCat     = $catHandler->getCat($_POST['cat_id']);
 
@@ -120,10 +123,10 @@ switch ($op) {
 
                 require_once XOOPS_ROOT_PATH . '/header.php';
                 $myts = \MyTextSanitizer::getInstance();
-                /** @var ExtgalleryPublicCatHandler $catHandler */
-                $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
-                /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-                $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+                /** @var Extgallery\PublicCategoryHandler $catHandler */
+                $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+                /** @var Extgallery\PublicPhotoHandler $photoHandler */
+                $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
                 $photo = $photoHandler->getPhoto((int)$_GET['id']);
 
@@ -163,10 +166,10 @@ switch ($op) {
         break;
 
     case 'delete':
-        /** @var ExtgalleryPublicCatHandler $catHandler */
-        $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
-        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-        $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+        /** @var Extgallery\PublicCategoryHandler $catHandler */
+        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+        /** @var Extgallery\PublicPhotoHandler $photoHandler */
+        $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
         $photo = $photoHandler->getPhoto((int)$_GET['id']);
         $photoHandler->deletePhoto($photo);

@@ -15,15 +15,17 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 include __DIR__ . '/preloads/autoloader.php';
 
 $moduleDirName = basename(__DIR__);
 
 // ------------------- Informations ------------------- //
 $modversion = [
-    'version'             => 1.13,
-    'module_status'       => 'RC-2',
-    'release_date'        => '2017/08/12', // YYYY/mm/dd
+    'version'             => 1.14,
+    'module_status'       => 'Beta 1',
+    'release_date'        => '2018/03/15', // YYYY/mm/dd
     'name'                => _MI_EXTGALLERY_NAME,
     'description'         => _MI_EXTGAL_DESC,
     'author'              => 'Zoullou, contributors: Voltan, Mamba, Goffy',
@@ -48,13 +50,6 @@ $modversion = [
     'image'               => 'assets/images/logoModule.png', // Path and name of the module’s logo
     'official'            => 1, //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
     'dirname'             => "{$moduleDirName}",
-    //Frameworks paths
-    //    'dirmoduleadmin'      => 'Frameworks/moduleclasses/moduleadmin',
-    //    'systemIcons16'       => 'Frameworks/moduleclasses/icons/16',
-    //    'systemIcons32'       => 'Frameworks/moduleclasses/icons/32',
-    // Local icons paths
-    //    'moduleIcons16'       => 'assets/images/icons/16',
-    //    'moduleIcons32'       => 'assets/images/icons',
     'modicons16'          => 'assets/images/icons/16',
     'modicons32'          => 'assets/images/icons',
 
@@ -92,8 +87,8 @@ if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule']) && 'ext
         $modversion['sub'][0]['url']  = 'public-useralbum.php?id=' . $GLOBALS['xoopsUser']->uid();
 
         //        if (isset($GLOBALS['xoopsUser']) && '' !== $GLOBALS['xoopsUser']) {
-        require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/publicPerm.php";
-        $permHandler = ExtgalleryPublicPermHandler::getInstance();
+//        require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/publicPerm.php";
+        $permHandler = Extgallery\PublicPermHandler::getInstance();
         if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
             $modversion['sub'][1]['name'] = _MI_EXTGALLERY_PUBLIC_UPLOAD;
             if ('html' === $GLOBALS['xoopsModuleConfig']['use_extended_upload']) {

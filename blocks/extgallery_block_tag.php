@@ -19,7 +19,7 @@
 /**
  * @param $options
  *
- * @return string
+ * @return array
  */
 function extgallery_tag_block_cloud_show($options)
 {

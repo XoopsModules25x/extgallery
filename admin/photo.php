@@ -16,6 +16,8 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 require_once __DIR__ . '/admin_header.php';
 include __DIR__ . '/../../../class/pagenav.php';
 
@@ -40,12 +42,12 @@ if (isset($_GET['start'])) {
 }
 
 $moduleDirName = basename(dirname(__DIR__));
-$utilityClass  = ucfirst($moduleDirName) . 'Utility';
+$utility  = new Extgallery\Utility();
 switch ($op) {
 
     case 'add_photo':
-        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-        $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+        /** @var Extgallery\PublicPhotoHandler $photoHandler */
+        $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
         $result       = $photoHandler->postPhotoTraitement('photo_file', false);
 
         if (2 == $result) {
@@ -69,10 +71,10 @@ switch ($op) {
         $maxTime        = time() + $maxExecTime - 5;
         $maxTimeReached = false;
 
-        /** @var ExtgalleryPublicCatHandler $catHandler */
-        $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
-        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-        $photoHandler = xoops_getModuleHandler('publicphoto', $moduleDirName);
+        /** @var Extgallery\PublicCategoryHandler $catHandler */
+        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+        /** @var Extgallery\PublicPhotoHandler $photoHandler */
+        $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
         // Test if an album is selected
         if (!isset($_POST['cat_id'])) {
@@ -80,7 +82,7 @@ switch ($op) {
         }
 
         // If isn't an album when stop the traitment
-        /** @var ExtgalleryCat $cat */
+        /** @var Extgallery\Category $cat */
         $cat = $catHandler->getCat($_POST['cat_id']);
         if (1 != $cat->getVar('nright') - $cat->getVar('nleft')) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_NOT_AN_ALBUM);
@@ -122,7 +124,7 @@ switch ($op) {
         }
         // Set the category as album only if photo is approve
         // require_once __DIR__ . '/../class/publicPerm.php';
-        $permHandler = ExtgalleryPublicPermHandler::getInstance();
+        $permHandler = Extgallery\PublicPermHandler::getInstance();
         if ($permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_autoapprove', $cat->getVar('cat_id'))) {
             $cat->setVar('cat_isalbum', 1);
             $catHandler->insert($cat);
@@ -169,7 +171,7 @@ switch ($op) {
 
             // Update photo count if photo needn't approve
             // require_once __DIR__ . '/../class/publicPerm.php';
-            $permHandler = ExtgalleryPublicPermHandler::getInstance();
+            $permHandler = Extgallery\PublicPermHandler::getInstance();
             if ($permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_autoapprove', $cat->getVar('cat_id'))) {
                 // Update album count
                 if (0 == $cat->getVar('cat_nb_photo')) {
@@ -192,8 +194,8 @@ switch ($op) {
         break;
 
     case 'batchApprove':
-        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-        $photoHandler = xoops_getModuleHandler('publicphoto', $moduleDirName);
+        /** @var Extgallery\PublicPhotoHandler $photoHandler */
+        $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
         // Check if they are selected photo
         if (!isset($_POST['photoId'])) {
@@ -201,7 +203,7 @@ switch ($op) {
         }
 
         if (isset($_POST['approve'])) {
-            $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
+            $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
             // If we have only one photo we put in in an array
             $categories = [];
@@ -261,8 +263,8 @@ switch ($op) {
         break;
 
     case 'rebuildthumb':
-        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-        $photoHandler = xoops_getModuleHandler('publicphoto', $moduleDirName);
+        /** @var Extgallery\PublicPhotoHandler $photoHandler */
+        $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
         $photoHandler->rebuildThumbnail($_GET['cat_id']);
 
         redirect_header('photo.php', 3, _AM_EXTGALLERY_THUMB_REBUILDED);
@@ -276,10 +278,10 @@ switch ($op) {
                 if (!isset($_POST['photoId'])) {
                     redirect_header('photo.php', 3, _AM_EXTGALLERY_NO_PHOTO_SELECTED);
                 }
-                /** @var ExtgalleryCatHandler $catHandler */
-                $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
-                /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-                $photoHandler = xoops_getModuleHandler('publicphoto', $moduleDirName);
+                /** @var Extgallery\CategoryHandler $catHandler */
+                $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+                /** @var Extgallery\PublicPhotoHandler $photoHandler */
+                $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
                 // Test if an album is selected
                 if (!isset($_POST['cat_id'])) {
@@ -390,7 +392,7 @@ switch ($op) {
                     }
 
                     $nbPhotoDeleted = count($_POST['photoId']);
-                    /** @var ExtgalleryCat $cat */
+                    /** @var Extgallery\Category $cat */
                     $cat = $catHandler->getCat($_POST['cat_id']);
 
                     if ($cat->getVar('cat_nb_photo') == $nbPhotoDeleted) {
@@ -418,10 +420,10 @@ switch ($op) {
             case 'default':
             default:
                 xoops_cp_header();
-                /** @var ExtgalleryPublicCatHandler $catHandler */
-                $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
-                /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-                $photoHandler = xoops_getModuleHandler('publicphoto', $moduleDirName);
+                /** @var Extgallery\PublicCategoryHandler $catHandler */
+                $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+                /** @var Extgallery\PublicPhotoHandler $photoHandler */
+                $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
                 $photos  = $photoHandler->getAlbumPhotoAdminPage($_GET['cat_id'], $start);
                 $nbPhoto = $photoHandler->getAlbumCount($_GET['cat_id']);
@@ -506,8 +508,8 @@ switch ($op) {
 
     /*case 'approve':
 
-        $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
-        $photoHandler = xoops_getModuleHandler('publicphoto', $moduleDirName);
+        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+        $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
         $photo = $photoHandler->getPhoto($_GET['id']);
         $photo->setVar('photo_approve',1);
@@ -530,7 +532,7 @@ switch ($op) {
 
     /*case 'delete':
 
-        $photoHandler = xoops_getModuleHandler('publicphoto', $moduleDirName);
+        $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
         $photo = $photoHandler->getPhoto($_GET['id']);
         $photoHandler->deletePhoto($photo);
@@ -542,10 +544,10 @@ switch ($op) {
     case 'default':
     default:
         // require_once __DIR__ . '/../class/Utility.php';
-        /** @var ExtgalleryCatHandler $catHandler */
-        $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
-        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-        $photoHandler = xoops_getModuleHandler('publicphoto', $moduleDirName);
+        /** @var Extgallery\CategoryHandler $catHandler */
+        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+        /** @var Extgallery\PublicPhotoHandler $photoHandler */
+        $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
         xoops_cp_header();
 
@@ -559,7 +561,7 @@ switch ($op) {
         $form->addElement(new \XoopsFormLabel(_AM_EXTGALLERY_ALBUMS, $catHandler->getLeafSelect('cat_id', false, 0, '', 'public_upload')));
         //DNPROSSI - editors
         $form->addElement(new \XoopsFormText(_AM_EXTGALLERY_PHOTO_TITLE, 'photo_title', '50', '150'), false);
-        $editor = $utilityClass::getWysiwygForm(_AM_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
+        $editor = $utility::getWysiwygForm(_AM_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
         $form->addElement($editor, false);
         $form->addElement(new \XoopsFormFile(_AM_EXTGALLERY_PHOTO, 'photo_file', $xoopsModuleConfig['max_photosize']), false);
         if ($xoopsModuleConfig['display_extra_field']) {

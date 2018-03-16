@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
+
 /**
  * ExtGallery Class Manager
  *
@@ -15,6 +16,8 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 /**
  * Persistable Object Handler class.
  * This class is responsible for providing data access mechanisms to the data source
@@ -24,7 +27,7 @@
  * @copyright copyright (c) 2000-2004 XOOPS.org
  * @package   Kernel
  */
-class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler //XoopsObjectHandler
+class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObjectHandler
 {
     /**#@+
      * Information about the class, the handler is managing
@@ -40,14 +43,13 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
     /**
      * Constructor - called from child classes
      *
-     * @param XoopsDatabase $db        {@link XoopsDatabase}
-     *                                 object
-     * @param string        $tablename Name of database table
-     * @param string        $classname Name of Class, this handler is managing
-     * @param string        $keyname   Name of the property, holding the key
+     * @param \XoopsDatabase $db        {@link XoopsDatabase}
+     *                                  object
+     * @param string         $tablename Name of database table
+     * @param string         $classname Name of Class, this handler is managing
+     * @param string         $keyname   Name of the property, holding the key
      *
-     * @param bool          $idenfierName
-     *
+     * @param bool           $idenfierName
      */
 
     public function __construct(\XoopsDatabase $db, $tablename, $classname, $keyname, $idenfierName = false)
@@ -56,7 +58,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
         //        $db = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->table     = $db->prefix($tablename);
         $this->keyName   = $keyname;
-        $this->className = $classname;
+        $this->className = '\\XoopsModules\\Extgallery\\' .$classname;
         if (false !== $idenfierName) {
             $this->identifierName = $idenfierName;
         }
@@ -67,7 +69,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
      *
      * @param bool $isNew Flag the new objects as "new"?
      *
-     * @return XoopsObject
+     * @return \XoopsObject
      */
 
     public function create($isNew = true)
@@ -185,7 +187,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
                             if ($externalKey['core']) {
                                 $handler = xoops_getHandler($externalKey['className']);
                             } else {
-                                $handler = xoops_getModuleHandler($externalKey['className'], 'extgallery');
+                                $handler = Extgallery\Helper::getInstance()->getHandler($externalKey['className']);
                             }
                             $cached[$externalKey['keyName']][$ret[$i][$key]] = $this->objectToArrayWithoutExternalKey($handler->{$externalKey['getMethodeName']}($ret[$i][$key]), $format);
                         }
@@ -209,7 +211,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
                         if ($externalKey['core']) {
                             $handler = xoops_getHandler($externalKey['className']);
                         } else {
-                            $handler = xoops_getModuleHandler($externalKey['className'], 'extgallery');
+                            $handler = Extgallery\Helper::getInstance()->getHandler($externalKey['className']);
                         }
                         $cached[$externalKey['keyName']][$ret[$key]] = $this->objectToArrayWithoutExternalKey($handler->{$externalKey['getMethodeName']}($ret[$key]), $format);
                     }
@@ -266,7 +268,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
      *
      * @return array|int|string
      */
-    public function getSum(CriteriaElement $criteria = null, $sum = '*')
+    public function getSum(\CriteriaElement $criteria = null, $sum = '*')
     {
         $field   = '';
         $groupby = false;
@@ -307,7 +309,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
      *
      * @return array|int|string
      */
-    public function getMax(CriteriaElement $criteria = null, $max = '*')
+    public function getMax(\CriteriaElement $criteria = null, $max = '*')
     {
         $field   = '';
         $groupby = false;
@@ -348,7 +350,7 @@ class ExtgalleryPersistableObjectHandler extends XoopsPersistableObjectHandler /
      *
      * @return int
      */
-    public function getAvg(CriteriaElement $criteria = null, $avg = '*')
+    public function getAvg(\CriteriaElement $criteria = null, $avg = '*')
     {
         $field = '';
 

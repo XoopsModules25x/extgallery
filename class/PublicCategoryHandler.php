@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
+
 /**
  * ExtGallery Class Manager
  *
@@ -15,32 +16,19 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-require_once __DIR__ . '/catHandler.php';
 
 /**
- * Class ExtgalleryPublicCat
+ * Class Extgallery\PublicCategoryHandler
  */
-class ExtgalleryPublicCat extends ExtgalleryCat
+class PublicCategoryHandler extends Extgallery\CategoryHandler
 {
     /**
-     * ExtgalleryPublicCat constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-}
-
-/**
- * Class ExtgalleryPublicCatHandler
- */
-class ExtgalleryPublicCatHandler extends ExtgalleryCatHandler
-{
-    /**
-     * ExtgalleryPublicCatHandler constructor.
-     * @param XoopsDatabase $db
+     * Extgallery\PublicCategoryHandler constructor.
+     * @param \XoopsDatabase $db
      */
     public function __construct(\XoopsDatabase $db)
     {
@@ -54,7 +42,7 @@ class ExtgalleryPublicCatHandler extends ExtgalleryCatHandler
      */
     public function createCat($data)
     {
-        /** @var ExtgalleryPublicCat $cat */
+        /** @var Extgallery\PublicCategory $cat */
         $cat = $this->create();
         $cat->setVars($data);
 
@@ -112,7 +100,7 @@ class ExtgalleryPublicCatHandler extends ExtgalleryCatHandler
     }
 
     /**
-     * @param XoopsObject $cat
+     * @param \XoopsObject $cat
      *
      * @return bool
      */
@@ -125,10 +113,10 @@ class ExtgalleryPublicCatHandler extends ExtgalleryCatHandler
     }
 
     /**
-     * @return ExtgalleryPublicPermHandler
+     * @return Extgallery\PublicPermHandler
      */
     public function _getPermHandler()
     {
-        return ExtgalleryPublicPermHandler::getInstance();
+        return Extgallery\PublicPermHandler::getInstance();
     }
 }

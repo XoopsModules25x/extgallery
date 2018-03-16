@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
+
 /**
  * ExtGallery Class Manager
  *
@@ -15,62 +16,14 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-require_once __DIR__ . '/publicPerm.php';
-require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
-
 /**
- * Class ExtgalleryCat
+ * Class Extgallery\CategoryHandler
  */
-class ExtgalleryCat extends XoopsObject
-{
-    public $externalKey = [];
-
-    /**
-     * ExtgalleryCat constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->initVar('cat_id', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('cat_pid', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('nleft', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('nright', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('nlevel', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('cat_name', XOBJ_DTYPE_TXTBOX, '', true, 255);
-        $this->initVar('cat_desc', XOBJ_DTYPE_TXTAREA, '', false);
-        $this->initVar('cat_date', XOBJ_DTYPE_INT, 0, true);
-        $this->initVar('cat_isalbum', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('cat_weight', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('cat_nb_album', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('cat_nb_photo', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('cat_imgurl', XOBJ_DTYPE_URL, '', false, 150);
-        $this->initVar('photo_id', XOBJ_DTYPE_INT, 0, false);
-
-        $this->externalKey['photo_id'] = [
-            'className'      => 'publicphoto',
-            'getMethodeName' => 'getPhoto',
-            'keyName'        => 'photo',
-            'core'           => false
-        ];
-    }
-
-    /**
-     * @param $key
-     *
-     * @return mixed
-     */
-    public function getExternalKey($key)
-    {
-        return $this->externalKey[$key];
-    }
-}
-
-/**
- * Class ExtgalleryCatHandler
- */
-class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
+class CategoryHandler extends Extgallery\PersistableObjectHandler
 {
     //var $_nestedTree;
     public $_photoHandler;
@@ -81,9 +34,9 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
      */
     public function __construct(\XoopsDatabase $db, $type)
     {
-        parent::__construct($db, 'extgallery_' . $type . 'cat', 'Extgallery' . ucfirst($type) . 'Cat', 'cat_id');
+        parent::__construct($db, 'extgallery_' . $type . 'cat',  ucfirst($type) . 'Category', 'cat_id');
         //$this->_nestedTree = new NestedTree($db, 'extgallery_'.$type.'cat', 'cat_id', 'cat_pid', 'cat_id');
-        $this->_photoHandler = xoops_getModuleHandler($type . 'photo', 'extgallery');
+        $this->_photoHandler = Extgallery\Helper::getInstance()->getHandler($type . 'photo');
     }
 
     /**
@@ -240,13 +193,13 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     }
 
     /**
-     * @param ExtgalleryCat $cat
+     * @param Extgallery\Category $cat
      *
      * @return mixed
      */
     public function nbPhoto(&$cat)
     {
-        /** @var ExtgalleryPublicPhotoHandler $this ->_photoHandler */
+        /** @var Extgallery\PublicPhotoHandler $this ->_photoHandler */
         return $this->_photoHandler->nbPhoto($cat);
     }
 
@@ -387,7 +340,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
         if ($addEmpty) {
             $ret .= '<option value="0">-----</option>';
         }
-        /** @var ExtgalleryCat $cat */
+        /** @var Extgallery\Category $cat */
         foreach ($cats as $cat) {
             $disableOption = '';
             if ('node' === $selectMode && (1 != $cat->getVar('nright') - $cat->getVar('nleft'))) {
@@ -536,7 +489,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
                 $criteria = new \CriteriaCompo();
                 $criteria->add(new \Criteria('cat_id', $id));
                 $criteria->add(new \Criteria('photo_approved', 1));
-                /** @var ExtgalleryPublicPhotoHandler $this ->_photoHandler */
+                /** @var Extgallery\PublicPhotoHandler $this ->_photoHandler */
                 $nbPhoto = $this->_photoHandler->getCount($criteria);
 
                 // Update all parent of this album
@@ -593,7 +546,7 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     /**
      * @param string $permType
      *
-     * @return Criteria
+     * @return \Criteria
      */
     public function getCatRestrictCriteria($permType = 'public_access')
     {
@@ -619,10 +572,10 @@ class ExtgalleryCatHandler extends ExtgalleryPersistableObjectHandler
     }
 
     /**
-     * @return ExtgalleryPublicPermHandler
+     * @return Extgallery\PublicPermHandler
      */
     public function _getPermHandler()
     {
-        return ExtgalleryPublicPermHandler::getInstance();
+        return Extgallery\PublicPermHandler::getInstance();
     }
 }

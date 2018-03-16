@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
+
 /**
  * ExtGallery Class Manager
  *
@@ -15,15 +16,18 @@
  * @package     ExtGallery
  */
 
+
+use XoopsModules\Extgallery;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
- * Class ExtgalleryPluginHandler
+ * Class Extgallery\PluginHandler
  */
-class ExtgalleryPluginHandler
+class PluginHandler
 {
     /**
-     * ExtgalleryPluginHandler constructor.
+     * Extgallery\PluginHandler constructor.
      * @param $db
      */
     public function __construct(\XoopsDatabase $db)
@@ -36,14 +40,14 @@ class ExtgalleryPluginHandler
      */
     public function triggerEvent($event, &$param)
     {
-        include XOOPS_ROOT_PATH . '/modules/extgallery/plugin/plugin.php';
+//        include XOOPS_ROOT_PATH . '/modules/extgallery/plugin/plugin.php';
 
         foreach ($extgalleryPlugin as $plugin => $status) {
             if (!$status) {
                 continue;
             }
 
-            require_once XOOPS_ROOT_PATH . "/modules/extgallery/plugin/$plugin/$plugin.php";
+//            require_once XOOPS_ROOT_PATH . "/modules/extgallery/plugin/$plugin/$plugin.php";
 
             $class = 'Extgallery' . ucfirst($plugin);
 

@@ -8,7 +8,7 @@ require_once __DIR__ . '/include/common.php';
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-require_once __DIR__ . '/class/Utility.php';
+//require_once __DIR__ . '/class/Utility.php';
 
 $myts = \MyTextSanitizer::getInstance();
 $helper = Extgallery\Helper::getInstance();

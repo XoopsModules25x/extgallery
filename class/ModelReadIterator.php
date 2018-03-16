@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
 /**
  * Extended object handlers
  *
@@ -17,6 +17,8 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
+use XoopsModules\Extgallery;
+
 /**
  * Object render handler class.
  *
@@ -26,18 +28,18 @@
  * {@link XoopsObjectAbstract}
  *
  */
-class ExtgalleryModelReadIterator extends XoopsModelRead
+class ModelReadIterator extends \XoopsModelRead
 {
     /**
      * get all objects matching a condition
      *
-     * @param  CriteriaElement $criteria  {@link CriteriaElement} to match
+     * @param  \CriteriaElement $criteria  {@link CriteriaElement} to match
      * @param  array           $fields    variables to fetch
      * @param  bool            $asObject  flag indicating as object, otherwise as array
      * @param  bool            $id_as_key use the ID as key for the array
      * @return array           of objects/array {@link XoopsObject}
      */
-    public function &getAll(CriteriaElement $criteria = null, $fields = null, $asObject = true, $id_as_key = true)
+    public function &getAll(\CriteriaElement $criteria = null, $fields = null, $asObject = true, $id_as_key = true)
     {
         if (is_array($fields) && count($fields) > 0) {
             if (!in_array($this->handler->keyName, $fields)) {
@@ -102,7 +104,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
      *
      * @return array
      */
-    public function &getObjects(CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
+    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $objects =& $this->getAll($criteria, null, $as_object, $id_as_key);
 
@@ -112,13 +114,13 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
     /**
      * Retrieve a list of objects data
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement} conditions to be met
+     * @param \CriteriaElement $criteria {@link CriteriaElement} conditions to be met
      * @param int             $limit    Max number of objects to fetch
      * @param int             $start    Which record to start at
      *
      * @return array
      */
-    public function getList(CriteriaElement $criteria = null, $limit = 0, $start = 0)
+    public function getList(\CriteriaElement $criteria = null, $limit = 0, $start = 0)
     {
         $ret = [];
         if (null === $criteria) {
@@ -155,10 +157,10 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
     /**
      * get IDs of objects matching a condition
      *
-     * @param  CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param  \CriteriaElement $criteria {@link CriteriaElement} to match
      * @return array           of object IDs
      */
-    public function &getIds(CriteriaElement $criteria = null)
+    public function &getIds(\CriteriaElement $criteria = null)
     {
         $ret   = [];
         $sql   = "SELECT `{$this->handler->keyName}` FROM `{$this->handler->table}`";
@@ -185,7 +187,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
      *
      * @param  int             $limit    Max number of objects to fetch
      * @param  int             $start    Which record to start at
-     * @param  CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param  \CriteriaElement $criteria {@link CriteriaElement} to match
      * @param  array           $fields   variables to fetch
      * @param  bool            $asObject flag indicating as object, otherwise as array
      * @return array           of objects    {@link XoopsObject}
@@ -193,7 +195,7 @@ class ExtgalleryModelReadIterator extends XoopsModelRead
     public function &getByLimit(
         $limit = 0,
         $start = 0,
-        CriteriaElement $criteria = null,
+        \CriteriaElement $criteria = null,
         $fields = null,
         $asObject = true
     ) {

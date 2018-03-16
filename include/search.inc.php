@@ -15,6 +15,8 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
@@ -28,8 +30,8 @@
  */
 function extgallerySearch($queryarray, $andor, $limit, $offset, $userid)
 {
-    /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-    $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+    /** @var Extgallery\PublicPhotoHandler $photoHandler */
+    $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
     return $photoHandler->getSearchedPhoto($queryarray, $andor, $limit, $offset, $userid);
 }

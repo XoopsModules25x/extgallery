@@ -3,7 +3,7 @@
         Click here if you have problem viewing your eCard
     </a>
 </p>
-<table style="border:1px solid black; padding:7px; margin:0 auto 0 auto;">
+<table style="border:1px solid #000000; padding:7px; margin:0 auto 0 auto;">
     <tr>
         <td>
             <img src="{PHOTO_SRC}"><br>

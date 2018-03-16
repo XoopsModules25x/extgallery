@@ -1,9 +1,14 @@
 <?php
+
+use XoopsModules\Extgallery;
+
 /**
  * @param $items
  *
  * @return bool
  */
+
+
 function extgallery_tag_iteminfo(&$items)
 {
     if (empty($items) || !is_array($items)) {
@@ -17,8 +22,8 @@ function extgallery_tag_iteminfo(&$items)
         }
     }
 
-    /** @var ExtgalleryPublicPhotoHandler $itemHandler */
-    $itemHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+    /** @var Extgallery\PublicPhotoHandler $itemHandler */
+    $itemHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
     $items_obj   = $itemHandler->getObjects(new \Criteria('photo_id', '(' . implode(', ', $items_id) . ')', 'IN'), true);
 
     foreach (array_keys($items) as $cat_id) {
@@ -45,8 +50,8 @@ function extgallery_tag_iteminfo(&$items)
 function extgallery_tag_synchronization($mid)
 {
     global $XoopsDB;
-    /** @var ExtgalleryPublicPhotoHandler $itemHandler */
-    $itemHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+    /** @var Extgallery\PublicPhotoHandler $itemHandler */
+    $itemHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
     /** @var TagLinkHandler $linkHandler */
     $linkHandler = \XoopsModules\Tag\Helper::getInstance()->getHandler('Link'); //@var \XoopsModules\Tag\Handler $tagHandler
 

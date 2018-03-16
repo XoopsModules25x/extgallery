@@ -15,20 +15,22 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 include __DIR__ . '/header.php';
-require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+//require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-upload-applet.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
 
-$permHandler = ExtgalleryPublicPermHandler::getInstance();
+$permHandler = Extgallery\PublicPermHandler::getInstance();
 if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) < 1) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
 }
 
 //echo "<pre>";print_r($xoopsModuleConfig);echo "</pre>";
 $_SESSION['juvar.tmpsize'] = 0;
-$catHandler                = xoops_getModuleHandler('publiccat', 'extgallery');
+$catHandler                = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
 $xoopsTpl->assign('categorySelect', $catHandler->getLeafSelect('cat_id', false, 0, '', 'public_upload'));
 $xoopsTpl->assign('imageQuality', $xoopsModuleConfig['medium_quality'] / 100);

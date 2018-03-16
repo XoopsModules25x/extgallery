@@ -50,7 +50,6 @@
                     }
                 });
             })
-                ;
         </script>
     <{/if}>
 <{else}>
@@ -122,7 +121,6 @@
                     }
                 });
             })
-                ;
         </script>
     <{/if}>
     <{if $use_ajax_effects == prettyphoto}>
@@ -395,7 +393,7 @@
 
                     <{/if}>
 
-                    <{foreachq item=pluginLink from=$photos[photo].link}>
+                    <{foreach item=pluginLink from=$photos[photo].link}>
                     <a href="<{$pluginLink.link}><{$photos[photo].photo_id}>"
                        title="<{$pluginLink.name}>"><{$pluginLink.name}></a>
                 <{/foreach}>

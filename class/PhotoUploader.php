@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -15,7 +15,14 @@
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
  */
-class ExtgalleryPhotoUploader
+
+use XoopsModules\Extgallery;
+
+/**
+ * Class PhotoUploader
+ * @package XoopsModules\Extgallery
+ */
+class PhotoUploader
 {
     public $uploadDir;
     public $savedDestination;
@@ -28,7 +35,7 @@ class ExtgalleryPhotoUploader
     public $checkMd5;
 
     /**
-     * ExtgalleryPhotoUploader constructor.
+     * Extgallery\PhotoUploader constructor.
      * @param      $uploadDir
      * @param int  $maxFileSize
      * @param null $maxWidth

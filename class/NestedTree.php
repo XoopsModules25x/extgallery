@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -14,6 +14,13 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
+ */
+
+use XoopsModules\Extgallery;
+
+/**
+ * Class NestedTree
+ * @package XoopsModules\Extgallery
  */
 class NestedTree
 {
@@ -50,7 +57,7 @@ class NestedTree
      */
     public function getNode($id)
     {
-        $query = sprintf('SELECT * FROM %s WHERE %s = %d', $this->table, $this->fields['id'], $id);
+        $query = sprintf('SELECT * FROM `%s` WHERE %s = %d', $this->table, $this->fields['id'], $id);
 
         $result = $this->db->query($query);
         if ($row = $this->db->fetchArray($result)) {
@@ -90,18 +97,18 @@ class NestedTree
 
         if ($childrenOnly) {
             if ($includeSelf) {
-                $query = sprintf('SELECT * FROM %s WHERE %s = %d OR %s = %d ORDER BY nleft', $this->table, $this->fields['id'], $parent_id, $this->fields['parent'], $parent_id);
+                $query = sprintf('SELECT * FROM `%s` WHERE %s = %d OR %s = %d ORDER BY nleft', $this->table, $this->fields['id'], $parent_id, $this->fields['parent'], $parent_id);
             } else {
-                $query = sprintf('SELECT * FROM %s WHERE %s = %d ORDER BY nleft', $this->table, $this->fields['parent'], $parent_id);
+                $query = sprintf('SELECT * FROM `%s` WHERE %s = %d ORDER BY nleft', $this->table, $this->fields['parent'], $parent_id);
             }
         } else {
             if ($nleft > 0 && $includeSelf) {
-                $query = sprintf('SELECT * FROM %s WHERE nleft >= %d AND nright <= %d ORDER BY nleft', $this->table, $nleft, $nright);
+                $query = sprintf('SELECT * FROM `%s` WHERE nleft >= %d AND nright <= %d ORDER BY nleft', $this->table, $nleft, $nright);
             } else {
                 if ($nleft > 0) {
-                    $query = sprintf('SELECT * FROM %s WHERE nleft > %d AND nright < %d ORDER BY nleft', $this->table, $nleft, $nright);
+                    $query = sprintf('SELECT * FROM `%s` WHERE nleft > %d AND nright < %d ORDER BY nleft', $this->table, $nleft, $nright);
                 } else {
-                    $query = sprintf('SELECT * FROM %s ORDER BY nleft', $this->table);
+                    $query = sprintf('SELECT * FROM `%s` ORDER BY nleft', $this->table);
                 }
             }
         }
@@ -341,7 +348,7 @@ class NestedTree
                 continue;
             }
 
-            $query = sprintf('UPDATE %s SET nlevel = %d, nleft = %d, nright = %d WHERE %s = %d', $this->table, $row['nlevel'], $row['nleft'], $row['nright'], $this->fields['id'], $id);
+            $query = sprintf('UPDATE `%s` SET nlevel = %d, nleft = %d, nright = %d WHERE %s = %d', $this->table, $row['nlevel'], $row['nleft'], $row['nright'], $this->fields['id'], $id);
             $this->db->queryF($query);
         }
     }

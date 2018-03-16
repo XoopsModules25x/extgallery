@@ -16,6 +16,9 @@
  * @since
  * @author     XOOPS Development Team
  */
+
+use XoopsModules\Extgallery;
+
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**

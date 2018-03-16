@@ -15,8 +15,10 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 include __DIR__ . '/header.php';
-require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+//require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 if (!isset($_GET['id'])) {
     $photoId = 0;
@@ -28,17 +30,17 @@ if (!isset($_GET['rate'])) {
 } else {
     $rate = (int)$_GET['rate'];
 }
-/** @var ExtgalleryPublicPhotoHandler $photoHandler */
-$photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+/** @var Extgallery\PublicPhotoHandler $photoHandler */
+$photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 $photo        = $photoHandler->get($photoId);
 
-$permHandler = ExtgalleryPublicPermHandler::getInstance();
+$permHandler = Extgallery\PublicPermHandler::getInstance();
 if ($xoopsModuleConfig['enable_rating']
     && !$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_rate', $photo->getVar('cat_id'))) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
 }
 
-$ratingHandler = xoops_getModuleHandler('publicrating', 'extgallery');
+$ratingHandler = Extgallery\Helper::getInstance()->getHandler('PublicRating');
 
 if ($ratingHandler->rate($photoId, $rate)) {
     $rating = $ratingHandler->getRate($photoId);

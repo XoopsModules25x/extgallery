@@ -23,13 +23,13 @@
     <comment>
         <script language="JavaScript" type="text/javascript"><!--
             var _ns = (navigator.appName.indexOf("Netscape") >= 0 && ((_info.indexOf("Win") > 0 && _info.indexOf("Win16") < 0 && java.lang.System.getProperty("os.version").indexOf("3.5") < 0) || (_info.indexOf("Sun") > 0) || (_info.indexOf("Linux") > 0) || (_info.indexOf("AIX") > 0) || (_info.indexOf("OS/2") > 0) || (_info.indexOf("IRIX") > 0)));
-            var _ns6 = ((_ns == true) && (_info.indexOf("Mozilla/5") >= 0));
+            var _ns6 = ((_ns === true) && (_info.indexOf("Mozilla/5") >= 0));
             //--></script>
     </comment>
 
     <script language="JavaScript" type="text/javascript"><!--
-        if (_ie == true) document.writeln('<object classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93" WIDTH = "0" HEIGHT = "0" NAME = "JUploadApplet"  codebase="http://java.sun.com/update/1.5.0/jinstall-1_5-windows-i586.cab#Version=5,0,0,3"><noembed><xmp>');
-        else if (_ns == true && _ns6 == false) document.writeln('<embed ' +
+        if (_ie === true) document.writeln('<object classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93" WIDTH = "0" HEIGHT = "0" NAME = "JUploadApplet"  codebase="http://java.sun.com/update/1.5.0/jinstall-1_5-windows-i586.cab#Version=5,0,0,3"><noembed><xmp>');
+        else if (_ns === true && _ns6 === false) document.writeln('<embed ' +
                 'type="application/x-java-applet;version=1.5" \
                     CODEBASE = "<{$xoops_url}>/modules/extgallery/include/applet" \
             ARCHIVE = "<{$xoops_url}>/modules/extgallery/include/applet/wjhk.jupload.jar" \

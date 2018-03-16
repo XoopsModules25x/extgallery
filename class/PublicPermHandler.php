@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
+
 /**
  * ExtGallery Class Manager
  *
@@ -15,15 +16,19 @@
  * @package     ExtGallery
  */
 
+
+use XoopsModules\Extgallery;
+
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
- * Class ExtgalleryPublicPermHandler
+ * Class Extgallery\PublicPermHandler
  */
-class ExtgalleryPublicPermHandler
+class PublicPermHandler
 {
     /**
-     * @return ExtgalleryPublicPermHandler
+     * @return Extgallery\PublicPermHandler
      */
     public static function getInstance()
     {
@@ -50,8 +55,8 @@ class ExtgalleryPublicPermHandler
     }
 
     /**
-     * @param XoopsUser $user
-     * @param           $perm
+     * @param \XoopsUser $user
+     * @param            $perm
      *
      * @return mixed
      */
@@ -72,9 +77,9 @@ class ExtgalleryPublicPermHandler
     }
 
     /**
-     * @param XoopsUser $user
-     * @param $perm
-     * @param $catId
+     * @param \XoopsUser $user
+     * @param            $perm
+     * @param            $catId
      *
      * @return bool
      */

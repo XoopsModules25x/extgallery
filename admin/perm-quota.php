@@ -16,8 +16,10 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 require_once __DIR__ . '/admin_header.php';
-include __DIR__ . '/../class/grouppermform.php';
+//include __DIR__ . '/../class/grouppermform.php';
 
 if (isset($_POST['step'])) {
     $step = $_POST['step'];
@@ -68,8 +70,8 @@ switch ($step) {
         $memberHandler = xoops_getHandler('member');
         /** @var XoopsGroupPermHandler $gpermHandler */
         $gpermHandler = xoops_getHandler('groupperm');
-        /** @var ExtgalleryPluginHandler $pluginHandler */
-        $pluginHandler = xoops_getModuleHandler('plugin', 'extgallery');
+        /** @var Extgallery\PluginHandler $pluginHandler */
+        $pluginHandler = Extgallery\Helper::getInstance()->getHandler('Plugin');
 
         $pluginHandler->includeLangFile();
 
@@ -123,7 +125,7 @@ switch ($step) {
         echo '</fieldset><br>';
 
         // Retriving category list for Group perm form
-        $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
         $cats       = $catHandler->getTree();
 
         foreach ($modulePermArray as $perm) {
@@ -131,7 +133,7 @@ switch ($step) {
                 continue;
             }
 
-            $form = new ExtgalleryGroupPermForm(constant($perm['title']), $module_id, $perm['name'], constant($perm['desc']), 'admin/perm-quota.php');
+            $form = new Extgallery\GroupPermForm(constant($perm['title']), $module_id, $perm['name'], constant($perm['desc']), 'admin/perm-quota.php');
             foreach ($cats as $cat) {
                 $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'), $cat->getVar('cat_pid'));
             }
@@ -165,7 +167,7 @@ switch ($step) {
                 continue;
             }
 
-            $form = new ExtgalleryGroupPermForm(constant($perm['title']), $module_id, $perm['name'], constant($perm['desc']), 'admin/perm-quota.php');
+            $form = new Extgallery\GroupPermForm(constant($perm['title']), $module_id, $perm['name'], constant($perm['desc']), 'admin/perm-quota.php');
             foreach ($cats as $cat) {
                 $form->addItem($cat->getVar('cat_id'), $cat->getVar('cat_name'), $cat->getVar('cat_pid'));
             }

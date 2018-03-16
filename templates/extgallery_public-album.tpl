@@ -50,7 +50,6 @@
                     }
                 });
             })
-                ;
         </script>
     <{/if}>
 <{else}>
@@ -122,7 +121,6 @@
                     }
                 });
             })
-                ;
         </script>
     <{/if}>
     <{if $use_ajax_effects == prettyphoto}>
@@ -135,7 +133,7 @@
 
 <div class="extgallery">
     <a title="<{$extgalleryName}>"
-       href="<{xoAppUrl modules/extgallery/}>"><{$extgalleryName}></a><{foreachq item=node from=$catPath name=breadcrumb}>
+       href="<{xoAppUrl modules/extgallery/}>"><{$extgalleryName}></a><{foreach item=node from=$catPath name=breadcrumb}>
     <img src="assets/images/breadcrumb-link.gif"
          alt="BreadCrumb"> <a
             title="<{$node.cat_name}>"
@@ -399,7 +397,7 @@
 
                     <{/if}>
 
-                    <{foreachq item=pluginLink from=$photos[photo].link}>
+                    <{foreach item=pluginLink from=$photos[photo].link}>
                     <a href="<{$pluginLink.link}><{$photos[photo].photo_id}>"
                        title="<{$pluginLink.name}>"><{$pluginLink.name}></a>
                 <{/foreach}>

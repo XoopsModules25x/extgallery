@@ -93,7 +93,7 @@ function getModuleVersion()
  */
 function isModuleUpToDate()
 {
-    if (compareVersion(getModuleVersion(), getLastModuleVersion()) != -1) {
+    if (-1 != compareVersion(getModuleVersion(), getLastModuleVersion())) {
         return true;
     } else {
         return false;
@@ -135,7 +135,7 @@ function compareVersion($v1, $v2)
  */
 function isXoopsVersionSupportInstalledModuleVersion()
 {
-    if (compareVersion(substr(XOOPS_VERSION, 6), _MU_MODULE_XOOPS_VERSION_SUPPORTED) != -1) {
+    if (-1 != compareVersion(substr(XOOPS_VERSION, 6), _MU_MODULE_XOOPS_VERSION_SUPPORTED)) {
         return true;
     } else {
         return false;
@@ -149,7 +149,7 @@ function isXoopsVersionSupportLastModuleVersion()
 {
     $moduleInfos = moduleLastVersionInfo();
 
-    if (compareVersion(substr(XOOPS_VERSION, 6), $moduleInfos['xoopsVersionNeeded']) != -1) {
+    if (-1 != compareVersion(substr(XOOPS_VERSION, 6), $moduleInfos['xoopsVersionNeeded'])) {
         return true;
     } else {
         return false;

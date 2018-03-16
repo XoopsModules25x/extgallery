@@ -1,3 +1,8 @@
+<h5>1.14 Beta 1  [NOT RELEASED]</h5>  Dev: Xoops 2.5.9, PHP 7.2.3
+<hr>
+- namespaces, autoloading (mamba)
+WORK IN PROGRESS
+
 ============================
 1.13 RC 1       NOT RELEASED
 ============================
@@ -54,7 +59,7 @@ _MB_EXTGALLERY_AJAX_TOSRUS (added) (luciorota)
 1.12 Beta 1     2013-08-12
 ============================
 - added .jpeg extension (mamba)
-- replaced ExtgalleryPhotoUploader with standard XoopsMediaUploader (mamba)
+- replaced Extgallery\PhotoUploader with standard XoopsMediaUploader (mamba)
 - fix for index template (Cifug)
 
 ============================

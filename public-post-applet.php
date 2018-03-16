@@ -15,9 +15,11 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 include __DIR__ . '/header.php';
-/** @var ExtgalleryPublicPhotoHandler $photoHandler */
-$photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+/** @var Extgallery\PublicPhotoHandler $photoHandler */
+$photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
 $result = $photoHandler->postPhotoTraitement('File0');
 

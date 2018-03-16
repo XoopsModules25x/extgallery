@@ -1,6 +1,6 @@
 <div class="extgallery">
     <a title="<{$extgalleryName}>" href="<{xoAppUrl modules/extgallery/}>"><{$extgalleryName}></a>
-    <{foreachq item=node from=$catPath name=breadcrumb}>
+    <{foreach item=node from=$catPath name=breadcrumb}>
     <img src="assets/images/breadcrumb-link.gif" alt="BreadCrumb">
     <a title="<{$node.cat_name}>"
        href="<{xoAppUrl modules/extgallery/}>public-categories.php?id=<{$node.cat_id}>"><{$node.cat_name}></a>
@@ -13,7 +13,7 @@
             <th class="txtcenter"><{$lang.nbAlbums}></th>
             <th class="txtcenter"><{$lang.nbPhotos}></th>
         </tr>
-        <{foreachq item=child from=$catChild}>
+        <{foreach item=child from=$catChild}>
         <tr class="<{cycle values="even,odd"}>">
             <{if $child.cat_nb_album == 0}>
             <td colspan="2">

@@ -15,19 +15,21 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 include __DIR__ . '/header.php';
-require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+//require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 if (!isset($_GET['id'])) {
     $photoId = 0;
 } else {
     $photoId = (int)$_GET['id'];
 }
-/** @var ExtgalleryPublicPhotoHandler $photoHandler */
-$photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+/** @var Extgallery\PublicPhotoHandler $photoHandler */
+$photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 $photo        = $photoHandler->get($photoId);
 
-$permHandler = ExtgalleryPublicPermHandler::getInstance();
+$permHandler = Extgallery\PublicPermHandler::getInstance();
 if (!$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_download', $photo->getVar('cat_id'))) {
     redirect_header('index.php');
 }

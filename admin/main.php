@@ -16,14 +16,16 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 require_once __DIR__ . '/admin_header.php';
 
 include __DIR__ . '/../../../include/cp_header.php';
 include __DIR__ . '/function.php';
 include __DIR__ . '/moduleUpdateFunction.php';
 
-$catHandler   = xoops_getModuleHandler('publiccat', 'extgallery');
-$photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+$catHandler   = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+$photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
 xoops_cp_header();
 

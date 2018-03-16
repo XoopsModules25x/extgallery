@@ -18,14 +18,20 @@
  * @return array
  */
 
+use XoopsModules\Extgallery;
+
 // Manage photo blocks
+/**
+ * @param $options
+ * @return array
+ */
 function extgalleryPhotoShow($options)
 {
     global $xoopsConfig;
     $photos = [];
 
-    /** @var ExtgalleryPhotoHandler $photoHandler */
-    $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+    /** @var Extgallery\PhotoHandler $photoHandler */
+    $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
     $param                = ['limit' => $options[0]];
     $direction            = $options[1];
@@ -254,8 +260,8 @@ function extgalleryTopSubmitterShow($options)
  */
 function extgalleryAjax($options)
 {
-    /** @var ExtgalleryPhotoHandler $photoHandler */
-    $photoHandler       = xoops_getModuleHandler('publicphoto', 'extgallery');
+    /** @var Extgallery\PhotoHandler $photoHandler */
+    $photoHandler       = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
     $param              = ['limit' => $options[0]];
     $photoHandlertype   = $options[1];
     $jquery             = $options[2];
@@ -416,8 +422,8 @@ function extgalleryAjax($options)
 function extgalleryBlockEdit($options)
 {
 
-    /** @var ExtgalleryCat $catHandler */
-    $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+    /** @var Extgallery\Category $catHandler */
+    $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
     $form = _MB_EXTGALLERY_PHOTO_NUMBER . ' : <input name="options[]" size="5" maxlength="255" value="' . $options[0] . '" type="text"><br>';
 
@@ -572,7 +578,7 @@ function extgalleryBlockEdit($options)
  */
 function extgalleryAjaxEdit($options)
 {
-    $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+    $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
     $form = _MB_EXTGALLERY_PHOTO_NUMBER . ' : <input name="options[]" size="5" maxlength="255" value="' . $options[0] . '" type="text"><br>';
 
@@ -708,7 +714,7 @@ function extgalleryAjaxEdit($options)
  */
 function extgalleryTopSubmitterEdit($options)
 {
-    $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+    $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
     $form = _MB_EXTGALLERY_USER_NUMBER . ' : <input name="options[]" size="5" maxlength="255" value="' . $options[0] . '" type="text"><br>';
 
@@ -728,8 +734,8 @@ function extgalleryList($options)
 {
     global $xoopsConfig;
 
-    /** @var ExtgalleryPhotoHandler $photoHandler */
-    $photoHandler     = xoops_getModuleHandler('publicphoto', 'extgallery');
+    /** @var Extgallery\PhotoHandler $photoHandler */
+    $photoHandler     = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
     $param            = ['limit' => $options[0]];
     $date             = $options[1];
     $hits             = $options[2];
@@ -797,7 +803,7 @@ function extgalleryList($options)
  */
 function extgalleryListEdit($options)
 {
-    $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+    $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
     $form       = _MB_EXTGALLERY_PHOTO_NUMBER . ' : <input name="options[]" size="5" maxlength="255" value="' . $options[0] . '" type="text"><br>';
     //==================================
     $y2Checked = '';

@@ -212,7 +212,7 @@
 
 <div class="extgallery">
     <a title="<{$extgalleryName}>"
-       href="<{xoAppUrl modules/extgallery/}>"><{$extgalleryName}></a><{foreachq item=node from=$catPath name=breadcrumb}>
+       href="<{xoAppUrl modules/extgallery/}>"><{$extgalleryName}></a><{foreach item=node from=$catPath name=breadcrumb}>
     <img src="assets/images/breadcrumb-link.gif"
          alt="BreadCrumb"> <a
             title="<{$node.cat_name}>"
@@ -423,7 +423,7 @@
 
             $.historyInit(pageload, "advanced.html");
             $("a[rel='history']").live('click', function (e) {
-                if (e.button != 0) return true;
+                if (e.button !== 0) return true;
                 var hash = this.href;
                 hash = hash.replace(/^.*#/, '');
                 $.historyLoad(hash);

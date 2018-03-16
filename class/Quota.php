@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
+
 /**
  * ExtGallery Class Manager
  *
@@ -15,19 +16,20 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
 
 /**
- * Class ExtgalleryQuota
+ * Class Extgallery\Quota
  */
-class ExtgalleryQuota extends XoopsObject
+class Quota extends \XoopsObject
 {
     public $externalKey = [];
 
     /**
-     * ExtgalleryQuota constructor.
+     * Extgallery\Quota constructor.
      */
     public function __construct()
     {
@@ -48,17 +50,17 @@ class ExtgalleryQuota extends XoopsObject
 }
 
 /**
- * Class ExtgalleryQuotaHandler
+ * Class Extgallery\QuotaHandler
  */
-class ExtgalleryQuotaHandler extends ExtgalleryPersistableObjectHandler
+class QuotaHandler extends Extgallery\PersistableObjectHandler
 {
     /**
-     * ExtgalleryQuotaHandler constructor.
-     * @param XoopsDatabase $db
+     * Extgallery\QuotaHandler constructor.
+     * @param \XoopsDatabase $db
      */
     public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'extgallery_quota', 'ExtgalleryQuota', 'quota_id');
+        parent::__construct($db, 'extgallery_quota', 'Extgallery\Quota', 'quota_id');
     }
 
     /**

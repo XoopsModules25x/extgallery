@@ -15,9 +15,12 @@
  * @package     ExtGallery
  */
 
+
+use XoopsModules\Extgallery;
+
 include __DIR__ . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+//require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-album.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
@@ -97,14 +100,14 @@ function convertorderbytrans($SortbyOrderby)
 }
 
 // Check the access permission
-$permHandler = ExtgalleryPublicPermHandler::getInstance();
+$permHandler = Extgallery\PublicPermHandler::getInstance();
 if ((null === $GLOBALS['xoopsUser'] || !is_object($GLOBALS['xoopsUser'])) || !$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_access', $catId)) {
     redirect_header('index.php', 3, _NOPERM);
 }
-/** @var ExtgalleryPublicCatHandler $catHandler */
-$catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
-/** @var ExtgalleryPublicPhotoHandler $photoHandler */
-$photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+/** @var Extgallery\PublicCategoryHandler $catHandler */
+$catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+/** @var Extgallery\PublicPhotoHandler $photoHandler */
+$photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
 $catObj = $catHandler->getCat($catId);
 
@@ -125,7 +128,7 @@ $xoopsTpl->assign('catPath', $catPath);
 $photos = $photoHandler->objectToArray($photoHandler->getAlbumPhotoPage($catId, $start, $sortby, $orderby), ['uid']); //xoops - blueteen - tri de l'affichage
 
 // Plugin traitement
-$plugin  = xoops_getModuleHandler('plugin', 'extgallery');
+$plugin  = Extgallery\Helper::getInstance()->getHandler('Plugin');
 $nbPhoto = count($photos);
 for ($i = 0; $i < $nbPhoto; ++$i) {
     $params = ['catId' => $catId, 'photoId' => $photos[$i]['photo_id'], 'link' => []];

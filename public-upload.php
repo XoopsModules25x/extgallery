@@ -15,10 +15,12 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 include __DIR__ . '/header.php';
-require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+//require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-require_once __DIR__ . '/class/Utility.php';
+//require_once __DIR__ . '/class/Utility.php';
 
 if (isset($_POST['step'])) {
     $step = $_POST['step'];
@@ -26,7 +28,7 @@ if (isset($_POST['step'])) {
     $step = 'default';
 }
 
-$permHandler = ExtgalleryPublicPermHandler::getInstance();
+$permHandler = Extgallery\PublicPermHandler::getInstance();
 if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) < 1) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
 }
@@ -36,8 +38,8 @@ $utilityClass  = ucfirst($moduleDirName) . 'Utility';
 switch ($step) {
 
     case 'enreg':
-        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-        $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+        /** @var Extgallery\PublicPhotoHandler $photoHandler */
+        $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
         $result = $photoHandler->postPhotoTraitement('photo_file', false);
 
@@ -58,7 +60,7 @@ switch ($step) {
 
         require_once XOOPS_ROOT_PATH . '/header.php';
 
-        $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
         $form = new \XoopsThemeForm(_MD_EXTGALLERY_PUBLIC_UPLOAD, 'add_photo', 'public-upload.php', 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
@@ -80,7 +82,7 @@ switch ($step) {
             $form->addElement(new TagFormTag('tag', 60, 255, '', 0));
         }
 
-        $plugin = xoops_getModuleHandler('plugin', 'extgallery');
+        $plugin = Extgallery\Helper::getInstance()->getHandler('Plugin');
         $plugin->triggerEvent('photoForm', $form);
 
         $form->addElement(new \XoopsFormHidden('step', 'enreg'));

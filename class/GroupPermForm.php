@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
+
 /**
  * ExtGallery Class Manager
  *
@@ -15,17 +16,19 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 
 /**
- * Class ExtgalleryGroupPermForm
+ * Class Extgallery\GroupPermForm
  */
-class ExtgalleryGroupPermForm extends XoopsGroupPermForm
+class GroupPermForm extends \XoopsGroupPermForm
 {
     /**
-     * ExtgalleryGroupPermForm constructor.
+     * Extgallery\GroupPermForm constructor.
      * @param string $title
      * @param string $modid
      * @param string $permname
@@ -59,7 +62,7 @@ class ExtgalleryGroupPermForm extends XoopsGroupPermForm
             }
             // get selected item id(s) for each group
             $selected = $gpermHandler->getItemIds($this->_permName, $i, $this->_modid);
-            $ele      = new ExtgalleryGroupFormCheckBox($glist[$i], 'perms[' . $this->_permName . ']', $i, $selected);
+            $ele      = new Extgallery\GroupFormCheckBox($glist[$i], 'perms[' . $this->_permName . ']', $i, $selected);
             $ele->setOptionTree($this->_itemTree);
             $this->addElement($ele);
             unset($ele);
@@ -84,7 +87,7 @@ class ExtgalleryGroupPermForm extends XoopsGroupPermForm
                     echo '<br><br><span style="font-weight: normal;">' . $elements[$i]->getDescription() . '</span>';
                 }
                 echo "</td>\n<td class='even'>\n";
-                if (is_a($elements[$i], 'ExtgalleryGroupFormCheckBox')) {
+                if (is_a($elements[$i], 'Extgallery\GroupFormCheckBox')) {
                     $elements[$i]->render();
                 } else {
                     echo $elements[$i]->render();
@@ -96,56 +99,5 @@ class ExtgalleryGroupPermForm extends XoopsGroupPermForm
         }
         echo "</table>$hidden</form>";
         echo $this->renderValidationJS(true);
-    }
-}
-
-/**
- * Class ExtgalleryGroupFormCheckBox
- */
-class ExtgalleryGroupFormCheckBox extends XoopsGroupFormCheckBox
-{
-    /**
-     * ExtgalleryGroupFormCheckBox constructor.
-     * @param      $caption
-     * @param      $name
-     * @param      $groupId
-     * @param null $values
-     */
-    public function __construct($caption, $name, $groupId, $values = null)
-    {
-        parent::__construct($caption, $name, $groupId, $values);
-    }
-
-    /**
-     *
-     */
-    public function render()
-    {
-        $ele_name = $this->getName();
-        echo '<table class="outer"><tr><td class="odd"><table><tr>';
-        $cols = 1;
-        foreach ($this->_optionTree[0]['children'] as $topitem) {
-            if ($cols > 4) {
-                echo '</tr><tr>';
-                $cols = 1;
-            }
-            $tree   = '<td valign="top">';
-            $prefix = '';
-            $this->_renderOptionTree($tree, $this->_optionTree[$topitem], $prefix);
-            echo $tree;
-            echo '</td>';
-            ++$cols;
-        }
-        echo '</tr></table></td><td class="even" valign="top">';
-        $option_ids = [];
-        foreach (array_keys($this->_optionTree) as $id) {
-            if (!empty($id)) {
-                $option_ids[] = '\'' . $ele_name . '[groups][' . $this->_groupId . '][' . $id . ']' . '\'';
-            }
-        }
-        $checkallbtn_id = $ele_name . '[checkallbtn][' . $this->_groupId . ']';
-        $option_ids_str = implode(', ', $option_ids);
-        echo _ALL . ' <input id="' . $checkallbtn_id . '" type="checkbox" value="" onclick="var optionids = new Array(' . $option_ids_str . "); xoopsCheckAllElements(optionids, '" . $checkallbtn_id . '\');">';
-        echo '</td></tr></table>';
     }
 }

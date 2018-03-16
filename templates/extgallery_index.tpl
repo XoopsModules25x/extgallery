@@ -7,7 +7,7 @@
             <th class="txtcenter"><{$lang.nbAlbums}></th>
             <th class="txtcenter"><{$lang.nbPhotos}></th>
         </tr>
-        <{foreachq item=child from=$cats}>
+        <{foreach item=child from=$cats}>
         <tr class="<{cycle values="even,odd"}>">
             <{if $child.cat_nb_album == 0}>
             <td colspan="2">

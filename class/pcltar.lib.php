@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
 // --------------------------------------------------------------------------------
 // PhpConcept Library - Tar Module 1.3.1
 // --------------------------------------------------------------------------------
@@ -23,6 +23,8 @@
 //   The use of this software is at the risk of the user.
 //
 // --------------------------------------------------------------------------------
+
+use XoopsModules\Extgallery;
 
 // ----- Look for double include
 if (!defined('PCL_TAR')) {

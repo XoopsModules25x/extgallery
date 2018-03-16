@@ -15,6 +15,9 @@
  * @package     ExtGallery
  */
 
+
+use XoopsModules\Extgallery;
+
 include __DIR__ . '/header.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-categories.tpl';
@@ -26,8 +29,8 @@ if (!isset($_GET['id'])) {
     $catId = (int)$_GET['id'];
 }
 
-$catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
-/** @var ExtgalleryCat $catObj */
+$catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+/** @var Extgallery\Category $catObj */
 $catObj = $catHandler->getCat($catId);
 
 if (null === $catObj) {

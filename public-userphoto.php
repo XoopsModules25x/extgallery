@@ -15,8 +15,10 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 include __DIR__ . '/header.php';
-require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+//require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-userphoto.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
@@ -26,13 +28,13 @@ if (!isset($_GET['photoId'])) {
 } else {
     $photoId = (int)$_GET['photoId'];
 }
-/** @var ExtgalleryCatHandler $catHandler */
-$catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
-/** @var ExtgalleryPublicPhotoHandler $photoHandler */
-$photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
-/** @var ExtgalleryPublicRatingHandler $ratingHandler */
-$ratingHandler = xoops_getModuleHandler('publicrating', 'extgallery');
-$permHandler   = ExtgalleryPublicPermHandler::getInstance();
+/** @var Extgallery\CategoryHandler $catHandler */
+$catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+/** @var Extgallery\PublicPhotoHandler $photoHandler */
+$photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
+/** @var Extgallery\PublicRatingHandler $ratingHandler */
+$ratingHandler = Extgallery\Helper::getInstance()->getHandler('PublicRating');
+$permHandler   = Extgallery\PublicPermHandler::getInstance();
 
 $photoObj = $photoHandler->getPhoto($photoId);
 
@@ -44,7 +46,7 @@ if (!$photoObj) {
 $photo = $photoHandler->objectToArray($photoObj, ['cat_id', 'uid']);
 
 // Check the category access permission
-$permHandler = ExtgalleryPublicPermHandler::getInstance();
+$permHandler = Extgallery\PublicPermHandler::getInstance();
 if (!$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_access', $photo['cat']['cat_id'])) {
     redirect_header('index.php', 3, _NOPERM);
 }

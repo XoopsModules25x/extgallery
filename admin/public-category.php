@@ -16,6 +16,8 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 require_once __DIR__ . '/admin_header.php';
 
 if (isset($_GET['op'])) {
@@ -38,8 +40,8 @@ switch ($op) {
 
             case 'enreg':
 
-                /** @var \ExtgalleryPublicCatHandler $catHandler */
-                $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+                /** @var \Extgallery\PublicCategoryHandler $catHandler */
+                $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
                 $data       = [
                     'cat_pid'    => $_POST['cat_pid'],
                     'cat_name'   => $_POST['cat_name'],
@@ -65,7 +67,7 @@ switch ($op) {
             case 'enreg':
 
                 if (isset($_POST['submit'])) {
-                    $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+                    $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
                     $catHandler->modifyCat($_POST);
 
                     redirect_header('public-category.php', 3, _AM_EXTGALLERY_CAT_MODIFIED);
@@ -87,9 +89,9 @@ switch ($op) {
                     redirect_header('photo.php', 3, _AM_EXTGALLERY_NO_CATEGORY_SELECTED);
                 }
 
-                $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
-                /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-                $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+                $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+                /** @var Extgallery\PublicPhotoHandler $photoHandler */
+                $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
                 $cat       = $catHandler->getCat($_POST['cat_id']);
                 $photosCat = $photoHandler->getCatPhoto($cat);
@@ -172,7 +174,7 @@ switch ($op) {
 
             case 'enreg':
 
-                $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+                $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
                 $catHandler->deleteCat($_POST['cat_id']);
 
@@ -187,7 +189,7 @@ switch ($op) {
     case 'default':
     default:
 
-        $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
         xoops_cp_header();
 

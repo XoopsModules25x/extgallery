@@ -20,9 +20,17 @@
  * @param  null        $oldVersion
  * @return bool
  */
+
+use XoopsModules\Extgallery;
+
+/**
+ * @param \XoopsModule $xoopsModule
+ * @param null         $oldVersion
+ * @return bool
+ */
 function xoops_module_update_extgallery(\XoopsModule $xoopsModule, $oldVersion = null)
 {
-    $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+    $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
     $catHandler->rebuild();
 
     if ($oldVersion < 101) {

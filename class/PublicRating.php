@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
+
 /**
  * ExtGallery Class Manager
  *
@@ -15,19 +16,19 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
-
 /**
- * Class ExtgalleryPublicRating
+ * Class Extgallery\PublicRating
  */
-class ExtgalleryPublicRating extends XoopsObject
+class PublicRating extends \XoopsObject
 {
     public $externalKey = [];
 
     /**
-     * ExtgalleryPublicRating constructor.
+     * Extgallery\PublicRating constructor.
      */
     public function __construct()
     {
@@ -63,16 +64,16 @@ class ExtgalleryPublicRating extends XoopsObject
 }
 
 /**
- * Class ExtgalleryPublicRatingHandler
+ * Class Extgallery\PublicRatingHandler
  */
-class ExtgalleryPublicRatingHandler extends ExtgalleryPersistableObjectHandler
+class PublicRatingHandler extends Extgallery\PersistableObjectHandler
 {
     /**
-     * @param XoopsDatabase $db
+     * @param \XoopsDatabase $db
      */
     public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'extgallery_publicrating', 'ExtgalleryPublicRating', 'rating_id');
+        parent::__construct($db, 'extgallery_publicrating', 'Extgallery\PublicRating', 'rating_id');
     }
 
     /**
@@ -83,8 +84,8 @@ class ExtgalleryPublicRatingHandler extends ExtgalleryPersistableObjectHandler
      */
     public function rate($photoId, $rating)
     {
-        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-        $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+        /** @var Extgallery\PublicPhotoHandler $photoHandler */
+        $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
         $userId = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid') : 0;
         $rate   = $this->create();

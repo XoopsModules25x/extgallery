@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
+
 /**
  * ExtGallery Class Manager
  *
@@ -15,74 +16,24 @@
  * @package     ExtGallery
  */
 
+
+use XoopsModules\Extgallery;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-require_once __DIR__ . '/ExtgalleryPersistableObjectHandler.php';
-require_once __DIR__ . '/extgalleryMailer.php';
 
 /**
- * Class ExtgalleryPublicEcard
+ * Class Extgallery\PublicEcardHandler
  */
-class ExtgalleryPublicEcard extends XoopsObject
-{
-    public $externalKey = [];
-
-    /**
-     * ExtgalleryPublicEcard constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->initVar('ecard_id', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('ecard_cardid', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('ecard_fromname', XOBJ_DTYPE_TXTBOX, 0, false);
-        $this->initVar('ecard_fromemail', XOBJ_DTYPE_EMAIL, '', false, 255);
-        $this->initVar('ecard_toname', XOBJ_DTYPE_TXTBOX, '', false, 255);
-        $this->initVar('ecard_toemail', XOBJ_DTYPE_EMAIL, '', false, 255);
-        $this->initVar('ecard_greetings', XOBJ_DTYPE_TXTBOX, 0, false);
-        $this->initVar('ecard_desc', XOBJ_DTYPE_TXTAREA, 0, false);
-        $this->initVar('ecard_date', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('ecard_ip', XOBJ_DTYPE_TXTBOX, 0, true);
-        $this->initVar('uid', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('photo_id', XOBJ_DTYPE_INT, 0, false);
-
-        $this->externalKey['photo_id'] = [
-            'className'      => 'publicphoto',
-            'getMethodeName' => 'getPhoto',
-            'keyName'        => 'photo',
-            'core'           => false
-        ];
-        $this->externalKey['uid']      = [
-            'className'      => 'user',
-            'getMethodeName' => 'get',
-            'keyName'        => 'user',
-            'core'           => true
-        ];
-    }
-
-    /**
-     * @param $key
-     *
-     * @return mixed
-     */
-    public function getExternalKey($key)
-    {
-        return $this->externalKey[$key];
-    }
-}
-
-/**
- * Class ExtgalleryPublicEcardHandler
- */
-class ExtgalleryPublicEcardHandler extends ExtgalleryPersistableObjectHandler
+class PublicEcardHandler extends \Extgallery\PersistableObjectHandler
 {
     /**
-     * ExtgalleryPublicEcardHandler constructor.
-     * @param XoopsDatabase $db
+     * Extgallery\PublicEcardHandler constructor.
+     * @param \XoopsDatabase $db
      */
     public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'extgallery_publicecard', 'ExtgalleryPublicEcard', 'ecard_id');
+        parent::__construct($db, 'extgallery_publicecard', Extgallery\PublicEcard::class, 'ecard_id');
     }
 
     /**
@@ -110,11 +61,11 @@ class ExtgalleryPublicEcardHandler extends ExtgalleryPersistableObjectHandler
      */
     public function send(&$ecard)
     {
-        /** @var ExtgalleryPublicPhotoHandler $photoHandler */
-        $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+        /** @var Extgallery\PublicPhotoHandler $photoHandler */
+        $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
         $photo        = $photoHandler->get($ecard->getVar('photo_id'));
 
-        $mailer = new extgalleryMailer('included');
+        $mailer = new Extgallery\Mailer('included');
 
         $mailer->setEcardId($ecard->getVar('ecard_cardid', 'p'));
         $mailer->setSubject(sprintf(_MD_EXTGALLERY_ECARD_TITLE, $ecard->getVar('ecard_fromname', 'p')));

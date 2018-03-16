@@ -1,6 +1,7 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
+
 /**
- * ExtGallery User area
+ * ExtGallery Class Manager
  *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -17,19 +18,21 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/../../mainfile.php';
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-$com_itemid = isset($_GET['com_itemid']) ? (int)$_GET['com_itemid'] : 0;
-if ($com_itemid > 0) {
-    /** @var Extgallery\PublicPhotoHandler $photoHandler */
-    $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
-    /** @var Extgallery\Photo $photo */
-    $photo = $photoHandler->getPhoto($com_itemid);
-    if ($photo->getVar('photo_title')) {
-        $title = $photo->getVar('photo_title');
-    } else {
-        $title = $photo->getVar('photo_desc');
+//require_once __DIR__ . '/photoHandler.php';
+//require_once __DIR__ . '/publicPerm.php';
+
+/**
+ * Class Extgallery\PublicPhoto
+ */
+class PublicPhoto extends Extgallery\Photo
+{
+    /**
+     * Extgallery\PublicPhoto constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
     }
-    $com_replytitle = $title;
-    require_once XOOPS_ROOT_PATH . '/include/comment_new.php';
 }

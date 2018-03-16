@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
+
 /**
  * ExtGallery Class Manager
  *
@@ -15,33 +16,22 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-require_once __DIR__ . '/photoHandler.php';
-require_once __DIR__ . '/publicPerm.php';
+//require_once __DIR__ . '/photoHandler.php';
+//require_once __DIR__ . '/publicPerm.php';
+
 
 /**
- * Class ExtgalleryPublicPhoto
+ * Class Extgallery\PublicPhotoHandler
  */
-class ExtgalleryPublicPhoto extends ExtgalleryPhoto
+class PublicPhotoHandler extends Extgallery\PhotoHandler
 {
     /**
-     * ExtgalleryPublicPhoto constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-}
-
-/**
- * Class ExtgalleryPublicPhotoHandler
- */
-class ExtgalleryPublicPhotoHandler extends ExtgalleryPhotoHandler
-{
-    /**
-     * ExtgalleryPublicPhotoHandler constructor.
-     * @param XoopsDatabase $db
+     * Extgallery\PublicPhotoHandler constructor.
+     * @param \XoopsDatabase $db
      */
     public function __construct(\XoopsDatabase $db)
     {
@@ -97,7 +87,7 @@ class ExtgalleryPublicPhotoHandler extends ExtgalleryPhotoHandler
      */
     public function getUserAlbumPhotoPage($userId, $start, $sortby, $orderby)
     {
-        $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
         $criteria = new \CriteriaCompo();
         $criteria->add($catHandler->getCatRestrictCriteria());
@@ -119,7 +109,7 @@ class ExtgalleryPublicPhotoHandler extends ExtgalleryPhotoHandler
      */
     public function getUserAlbumPrevPhoto($userId, $photoDate)
     {
-        $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
         $criteria = new \CriteriaCompo();
         $criteria->add($catHandler->getCatRestrictCriteria());
@@ -141,7 +131,7 @@ class ExtgalleryPublicPhotoHandler extends ExtgalleryPhotoHandler
      */
     public function getUserAlbumNextPhoto($userId, $photoDate)
     {
-        $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
         $criteria = new \CriteriaCompo();
         $criteria->add($catHandler->getCatRestrictCriteria());
@@ -163,7 +153,7 @@ class ExtgalleryPublicPhotoHandler extends ExtgalleryPhotoHandler
      */
     public function getUserAlbumCurrentPhotoPlace($userId, $photoDate)
     {
-        $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
         $criteria = new \CriteriaCompo();
         $criteria->add($catHandler->getCatRestrictCriteria());
@@ -183,7 +173,7 @@ class ExtgalleryPublicPhotoHandler extends ExtgalleryPhotoHandler
      */
     public function getUserAlbumCount($userId)
     {
-        $catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
+        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
         $criteria = new \CriteriaCompo();
         $criteria->add($catHandler->getCatRestrictCriteria());

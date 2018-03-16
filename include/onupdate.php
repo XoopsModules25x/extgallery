@@ -62,6 +62,13 @@ function xoops_module_pre_update_extgallery(\XoopsModule $module)
  * @return bool true if update successful, false if not
  */
 
+use XoopsModules\Extgallery;
+
+/**
+ * @param \XoopsModule $module
+ * @param null         $previousVersion
+ * @return bool
+ */
 function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion = null)
 {
     global $xoopsDB;
@@ -76,7 +83,7 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
     $utility = new Extgallery\Utility();
     $configurator = new Extgallery\Configurator();
 
-    $catHandler = xoops_getModuleHandler('publiccat', $moduleDirName);
+    $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
     $catHandler->rebuild();
 
     if ($previousVersion < 101) {

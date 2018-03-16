@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
+
 /**
  * ExtGallery Class Manager
  *
@@ -15,14 +16,16 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/mail/xoopsmultimailer.php';
 
 /**
- * Class extgalleryMailer
+ * Class Extgallery\Mailer
  */
-class extgalleryMailer
+class Mailer
 {
     public $mailer;
     public $type;
@@ -87,7 +90,11 @@ class extgalleryMailer
         $this->mailer->AltBody  = $this->loadTemplate('ecard_text.tpl');
         $this->mailer->addAddress($this->toEmail, $this->toName);
         //$this->mailer->AddReplyTo($this->fromEmail, $this->fromName);
-        $this->mailer->send();
+        try {
+            $this->mailer->send();
+        }
+        catch (\phpmailerException $e) {
+        }
     }
 
     public function assignTags()

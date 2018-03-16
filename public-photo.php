@@ -15,8 +15,10 @@
  * @package     ExtGallery
  */
 
+
+use XoopsModules\Extgallery;
+
 include __DIR__ . '/header.php';
-require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-photo.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
@@ -26,13 +28,13 @@ if (!isset($_GET['photoId'])) {
 } else {
     $photoId = (int)$_GET['photoId'];
 }
-/** @var ExtgalleryPublicCatHandler $catHandler */
-$catHandler = xoops_getModuleHandler('publiccat', 'extgallery');
-/** @var ExtgalleryPublicPhotoHandler $photoHandler */
-$photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
-/** @var ExtgalleryPublicRatingHandler $ratingHandler */
-$ratingHandler = xoops_getModuleHandler('publicrating', 'extgallery');
-$permHandler   = ExtgalleryPublicPermHandler::getInstance();
+/** @var Extgallery\PublicCategoryHandler $catHandler */
+$catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+/** @var Extgallery\PublicPhotoHandler $photoHandler */
+$photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
+/** @var Extgallery\PublicRatingHandler $ratingHandler */
+$ratingHandler = Extgallery\Helper::getInstance()->getHandler('PublicRating');
+$permHandler   = Extgallery\PublicPermHandler::getInstance();
 
 $photoObj = $photoHandler->getPhoto($photoId);
 
@@ -44,7 +46,7 @@ if (!$photoObj) {
 $photo = $photoHandler->objectToArray($photoObj, ['cat_id', 'uid']);
 
 // Check the category access permission
-$permHandler = ExtgalleryPublicPermHandler::getInstance();
+$permHandler = Extgallery\PublicPermHandler::getInstance();
 if (!$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_access', $photo['cat']['cat_id'])) {
     redirect_header('index.php', 3, _NOPERM);
 }
@@ -55,7 +57,7 @@ if (isset($_SERVER['HTTP_REFERER']) && basename($_SERVER['HTTP_REFERER']) != 'pu
 }
 
 // Plugin traitement
-$plugin = xoops_getModuleHandler('plugin', 'extgallery');
+$plugin = Extgallery\Helper::getInstance()->getHandler('Plugin');
 $params = ['catId' => $photo['cat']['cat_id'], 'photoId' => $photo['photo_id'], 'link' => []];
 $plugin->triggerEvent('photoAlbumLink', $params);
 $photo['link'] = $params['link'];
