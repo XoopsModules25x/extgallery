@@ -64,7 +64,7 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
         $moduleId = $GLOBALS['xoopsModule']->getVar('mid');
 
         // Retriving permission mask
-        /** @var XoopsGroupPermHandler $gpermHandler */
+        /** @var \XoopsGroupPermHandler $gpermHandler */
         $gpermHandler = xoops_getHandler('groupperm');
         $moduleId     = $GLOBALS['xoopsModule']->getVar('mid');
         $groups       = $GLOBALS['xoopsUser']->getGroups();

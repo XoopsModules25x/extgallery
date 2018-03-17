@@ -34,7 +34,7 @@ $attributes['rel']   = $rel;
 $attributes['type']  = 'application/rss+xml';
 $attributes['title'] = _MD_EXTGALLERY_RSS;
 $attributes['href']  = XOOPS_URL . '/modules/extgallery/public-rss.php';
-/** @var xos_opal_Theme $xoTheme */
+/** @var \xos_opal_Theme $xoTheme */
 $xoTheme->addMeta('link', $rel, $attributes);
 $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 
@@ -73,8 +73,12 @@ if (null !== $GLOBALS['xoopsUser'] && is_object($GLOBALS['xoopsUser'])) {
 }
 $xoopsTpl->assign('albumlinkname', $albumlinkname);
 $xoopsTpl->assign('albumurl', $albumurl);
-$xoopsTpl->assign('uploadlinkname', $uploadlinkname);
-$xoopsTpl->assign('uploadurl', $uploadurl);
+if (isset($uploadlinkname)) {
+    $xoopsTpl->assign('uploadlinkname', $uploadlinkname);
+}
+if (isset($uploadurl)) {
+    $xoopsTpl->assign('uploadurl', $uploadurl);
+}
 
 // end pk mod ------------------------------
 

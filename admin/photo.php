@@ -16,6 +16,7 @@
  * @package     ExtGallery
  */
 
+use Xmf\Request;
 use XoopsModules\Extgallery;
 
 require_once __DIR__ . '/admin_header.php';
@@ -425,8 +426,8 @@ switch ($op) {
                 /** @var Extgallery\PublicPhotoHandler $photoHandler */
                 $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
-                $photos  = $photoHandler->getAlbumPhotoAdminPage($_GET['cat_id'], $start);
-                $nbPhoto = $photoHandler->getAlbumCount($_GET['cat_id']);
+                $photos  = $photoHandler->getAlbumPhotoAdminPage(Request::getInt('cat_id', 0, 'GET'), $start);
+                $nbPhoto = $photoHandler->getAlbumCount(Request::getInt('cat_id', 0, 'GET'));
                 // Check if they are selected photo
                 if ($nbPhoto < 1) {
                     redirect_header('photo.php', 3, _AM_EXTGALLERY_NO_PHOTO_IN_THIS_ALBUM);

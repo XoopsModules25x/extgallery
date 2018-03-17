@@ -40,7 +40,7 @@ class PluginHandler
      */
     public function triggerEvent($event, &$param)
     {
-//        include XOOPS_ROOT_PATH . '/modules/extgallery/plugin/plugin.php';
+        include XOOPS_ROOT_PATH . '/modules/extgallery/plugin/plugin.php';
 
         foreach ($extgalleryPlugin as $plugin => $status) {
             if (!$status) {

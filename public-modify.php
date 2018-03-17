@@ -40,7 +40,7 @@ if (!isset($GLOBALS['xoopsUser'])) {
     redirect_header('index.php');
 }
 $moduleDirName = basename(__DIR__);
-$utilityClass  = ucfirst($moduleDirName) . 'Utility';
+$utility  = new Extgallery\Utility();
 switch ($op) {
 
     case 'edit':
@@ -139,7 +139,7 @@ switch ($op) {
                 //DNPROSSI - wysiwyg editors from xoopseditors
                 //TODO dohtml - dobr
                 $photo_desc = $myts->displayTarea($photo->getVar('photo_desc'), 0, 1, 1, 1, 0);
-                $editor     = $utilityClass::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', $photo_desc, 15, 60, '100%', '350px', 'hometext_hidden');
+                $editor     = $utility::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', $photo_desc, 15, 60, '100%', '350px', 'hometext_hidden');
                 $form->addElement($editor, false);
                 if ($xoopsModuleConfig['display_extra_field']) {
                     $form->addElement(new \XoopsFormTextArea(_MD_EXTGALLERY_EXTRA_INFO, 'photo_extra', $photo->getVar('photo_extra')));

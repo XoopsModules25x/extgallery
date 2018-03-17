@@ -336,7 +336,7 @@ switch ($op) {
                 if ('imagick' === $xoopsModuleConfig['graphic_lib']) {
                     define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
                 }
-                $newImageTransform = new Image_Transform;
+                $newImageTransform = new \Image_Transform;
                 //                $imageTransform = Image_Transform::factory($xoopsModuleConfig['graphic_lib']);
                 $imageTransform = $newImageTransform->factory($xoopsModuleConfig['graphic_lib']);
                 $imageTransform->load('../assets/images/watermark-border-orig.jpg');

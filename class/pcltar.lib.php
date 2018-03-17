@@ -562,7 +562,7 @@ if (!defined('PCL_TAR')) {
         // ----- Look if the $p_index is really an integer
         if (is_int($p_index)) {
             // ----- Call the extracting fct
-            if (1 != ($v_result = PclTarHandleExtractByIndexList($p_tarname, "$p_index", $p_list, $p_path, $p_remove_path, $v_tar_mode))) {
+            if (1 != ($v_result = PclTarHandleExtractByIndexList($p_tarname, (string)$p_index, $p_list, $p_path, $p_remove_path, $v_tar_mode))) {
                 TrFctEnd(__FILE__, __LINE__, 0, PclErrorString());
 
                 return 0;
@@ -875,7 +875,7 @@ if (!defined('PCL_TAR')) {
                 // ----- Read new 512 block and write the already read
                 do {
                     // ----- Write the already read block
-                    $v_binary_data = pack('a512', "$v_buffer");
+                    $v_binary_data = pack('a512', $v_buffer);
                     gzputs($v_temp_tar, $v_binary_data);
 
                     ++$i;
@@ -941,7 +941,7 @@ if (!defined('PCL_TAR')) {
                 // ----- Read new 512 block and write the already read
                 do {
                     // ----- Write the already read block
-                    $v_binary_data = pack('a512', "$v_buffer");
+                    $v_binary_data = pack('a512', $v_buffer);
                     if ('tar' === $p_mode) {
                         fwrite($p_tar, $v_binary_data);
                     } else {
@@ -984,7 +984,7 @@ if (!defined('PCL_TAR')) {
                 // ----- Read new 512 block and write the already read
                 do {
                     // ----- Write the already read block
-                    $v_binary_data = pack('a512', "$v_buffer");
+                    $v_binary_data = pack('a512', (string)$v_buffer);
                     if ('tar' === $p_mode) {
                         fwrite($p_tar, $v_binary_data);
                     } else {
@@ -1238,7 +1238,7 @@ if (!defined('PCL_TAR')) {
                 // ----- Read new 512 block and write the already read
                 do {
                     // ----- Write the already read block
-                    $v_binary_data = pack('a512', "$v_buffer");
+                    $v_binary_data = pack('a512', $v_buffer);
                     gzputs($v_temp_tar, $v_binary_data);
 
                     ++$i;
@@ -1597,7 +1597,7 @@ if (!defined('PCL_TAR')) {
             // ----- Read the file by 512 octets blocks
             $i = 0;
             while ('' != ($v_buffer = fread($v_file, 512))) {
-                $v_binary_data = pack('a512', "$v_buffer");
+                $v_binary_data = pack('a512', (string)$v_buffer);
                 if ('tar' === $p_mode) {
                     fwrite($p_tar, $v_binary_data);
                 } else {
@@ -3449,7 +3449,7 @@ if (!defined('PCL_TAR')) {
     {
         $v_result = 1;
 
-        TrFctStart(__FILE__, __LINE__, 'PclTarHandlerDirCheck', "$p_dir");
+        TrFctStart(__FILE__, __LINE__, 'PclTarHandlerDirCheck', (string)$p_dir);
 
         // ----- Check the directory availability
         if (is_dir($p_dir) || ('' == $p_dir)) {

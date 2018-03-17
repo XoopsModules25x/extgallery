@@ -30,7 +30,7 @@ function tableExists($tablename)
 {
     $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '$tablename'");
 
-    return ($GLOBALS['xoopsDB']->getRowsNum($result) > 0) ? true : false;
+    return $GLOBALS['xoopsDB']->getRowsNum($result) > 0;
 }
 
 /**
@@ -78,10 +78,10 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
 
     /** @var Extgallery\Helper $helper */
     /** @var Extgallery\Utility $utility */
-    /** @var Extgallery\Configurator $configurator */
+    /** @var Extgallery\Common\Configurator $configurator */
     $helper  = Extgallery\Helper::getInstance();
     $utility = new Extgallery\Utility();
-    $configurator = new Extgallery\Configurator();
+    $configurator = new Extgallery\Common\Configurator();
 
     $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
     $catHandler->rebuild();
@@ -200,18 +200,15 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
         }
 
         $configurator = include __DIR__ . '/config.php';
-        /** @var ExtgalleryUtility $utilityClass */
-        $utilityClass = ucfirst($moduleDirName) . 'Utility';
-        if (!class_exists($utilityClass)) {
-            xoops_load('utility', $moduleDirName);
-        }
+        /** @var Extgallery\Utility $utility */
+        $utility = new Extgallery\Utility();
 
         //  ---  COPY blank.png FILES ---------------
         if (count($configurator->copyBlankFiles) > 0) {
             $file = __DIR__ . '/../assets/images/blank.png';
             foreach (array_keys($configurator->copyFiles) as $i) {
                 $dest = $configurator->copyFiles[$i] . '/blank.png';
-                $utilityClass::copyFile($file, $dest);
+                $utility::copyFile($file, $dest);
             }
         }
 

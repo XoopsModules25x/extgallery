@@ -15,6 +15,9 @@
  * @author       XOOPS Development Team
  */
 
+use XoopsModules\Extgallery;
+use XoopsModules\Extgallery\Common;
+
 /**
  *
  * Prepares system prior to attempting to install module
@@ -24,40 +27,37 @@
  */
 function xoops_module_pre_install_extgallery(\XoopsModule $module)
 {
-    $moduleDirName = basename(dirname(__DIR__));
-    $utilityClass  = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($utilityClass)) {
-        xoops_load('utility', $moduleDirName);
-    }
+    //    include __DIR__ . '/../preloads/autoloader.php';
+    include __DIR__ . '/common.php';
+    /** @var Extgallery\Utility $utility */
+    $utility = new Extgallery\Utility();
     //check for minimum XOOPS version
-    if (!$utilityClass::checkVerXoops($module)) {
-        return false;
-    }
+    $xoopsSuccess = $utility::checkVerXoops($module);
 
     // check for minimum PHP version
-    if (!$utilityClass::checkVerPhp($module)) {
-        return false;
+    $phpSuccess   = $utility::checkVerPhp($module);
+
+    if (false !== $xoopsSuccess && false !==  $phpSuccess) {
+        $moduleTables =& $module->getInfo('tables');
+        foreach ($moduleTables as $table) {
+            $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
+        }
     }
 
-    $mod_tables = $module->getInfo('tables');
-    foreach ($mod_tables as $table) {
-        $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
-    }
-
-    return true;
+    return $xoopsSuccess && $phpSuccess;
 }
 
 /**
  *
  * Performs tasks required during installation of the module
- * @param XoopsModule $xoopsModule
+ * @param XoopsModule $module
  * @return bool true if installation successful, false if not
  * @internal param XoopsModule $module <a href='psi_element://XoopsModule'>XoopsModule</a>
  *
  */
-function xoops_module_install_extgallery(\XoopsModule $xoopsModule)
+function xoops_module_install_extgallery(\XoopsModule $module)
 {
-    $module_id = $xoopsModule->getVar('mid');
+    $module_id = $module->getVar('mid');
     /** @var XoopsGroupPermHandler $gpermHandler */
     $gpermHandler = xoops_getHandler('groupperm');
     /** @var XoopsModuleHandler $moduleHandler */
@@ -171,29 +171,75 @@ function xoops_module_install_extgallery(\XoopsModule $xoopsModule)
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    //    $moduleDirName = $xoopsModule->getVar('dirname');
-    $configurator = include $GLOBALS['xoops']->path('modules/' . $moduleDirName . '/include/config.php');
-    /** @var ExtgalleryUtility $utilityClass */
-    $utilityClass = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($utilityClass)) {
-        xoops_load('utility', $moduleDirName);
-    }
+    /** @var Extgallery\Helper $helper */
+    /** @var Extgallery\Utility $utility */
+    /** @var Extgallery\Common\Configurator $configurator */
+    $helper = Extgallery\Helper::getInstance();
+    $utility      = new Extgallery\Utility();
+    $configurator = new Common\Configurator();
+
+    // Load language files
+    $helper->loadLanguage('admin');
+    $helper->loadLanguage('modinfo');
+
+
+
+    $moduleId     = $module->getVar('mid');
+    $moduleId2    = $helper->getModule()->mid();
+    //$moduleName = $module->getVar('name');
+    $gpermHandler = xoops_getHandler('groupperm');
+
+    /** @var Extgallery\Utility $utility */
+    $utility = new Extgallery\Utility();
 
     //    require_once __DIR__ . '/config.php';
 
     if (count($configurator->uploadFolders) > 0) {
         //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
         foreach (array_keys($configurator->uploadFolders) as $i) {
-            $utilityClass::createFolder($configurator->uploadFolders[$i]);
+            $utility::createFolder($configurator->uploadFolders[$i]);
         }
     }
     if (count($configurator->copyBlankFiles) > 0) {
         $file = __DIR__ . '/../assets/images/blank.png';
         foreach (array_keys($configurator->copyBlankFiles) as $i) {
             $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
-            $utilityClass::copyFile($file, $dest);
+            $utility::copyFile($file, $dest);
         }
     }
+
+    //  ---  CREATE FOLDERS ---------------
+    if (count($configurator->uploadFolders) > 0) {
+        //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
+        foreach (array_keys($configurator->uploadFolders) as $i) {
+            $utility::createFolder($configurator->uploadFolders[$i]);
+        }
+    }
+
+    //  ---  COPY blank.png FILES ---------------
+    if (count($configurator->copyBlankFiles) > 0) {
+        $file = __DIR__ . '/../assets/images/blank.png';
+        foreach (array_keys($configurator->copyBlankFiles) as $i) {
+            $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
+            $utility::copyFile($file, $dest);
+        }
+    }
+
+    /*
+    //  ---  COPY test folder files ---------------
+if (count($configurator->copyTestFolders) > 0) {
+    //        $file = __DIR__ . '/../testdata/images/';
+    foreach (array_keys($configurator->copyTestFolders) as $i) {
+        $src  = $configurator->copyTestFolders[$i][0];
+        $dest = $configurator->copyTestFolders[$i][1];
+        $utility::xcopy($src, $dest);
+    }
+}
+*/
+
+    //delete .html entries from the tpl table
+    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+    $GLOBALS['xoopsDB']->queryF($sql);
 
     return true;
 }

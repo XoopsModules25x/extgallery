@@ -25,7 +25,7 @@ use XoopsModules\Extgallery;
 /**
  * Class Extgallery\PublicEcardHandler
  */
-class PublicEcardHandler extends \Extgallery\PersistableObjectHandler
+class PublicEcardHandler extends Extgallery\PersistableObjectHandler
 {
     /**
      * Extgallery\PublicEcardHandler constructor.

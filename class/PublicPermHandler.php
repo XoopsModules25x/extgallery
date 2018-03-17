@@ -65,9 +65,9 @@ class PublicPermHandler
         static $authorizedCat;
         $userId = $user ? $user->getVar('uid') : 0;
         if (!isset($authorizedCat[$perm][$userId])) {
-            /** @var XoopsGroupPermHandler $groupPermHandler */
+            /** @var \XoopsGroupPermHandler $groupPermHandler */
             $groupPermHandler = xoops_getHandler('groupperm');
-            /** @var XoopsModuleHandler $moduleHandler */
+            /** @var \XoopsModuleHandler $moduleHandler */
             $moduleHandler                 = xoops_getHandler('module');
             $module                        = $moduleHandler->getByDirname('extgallery');
             $authorizedCat[$perm][$userId] = $groupPermHandler->getItemIds($perm, $this->_getUserGroup($user), $module->getVar('mid'));

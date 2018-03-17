@@ -61,13 +61,13 @@ class Photo extends \XoopsObject
         $this->initVar('dohtml', XOBJ_DTYPE_INT, 0, false);
 
         $this->externalKey['cat_id'] = [
-            'className'      => PublicCategory::class,
+            'className'      => 'PublicCategory',
             'getMethodeName' => 'getCat',
             'keyName'        => 'cat',
             'core'           => false
         ];
         $this->externalKey['uid']    = [
-            'className'      => 'user',
+            'className'      => 'User',
             'getMethodeName' => 'get',
             'keyName'        => 'user',
             'core'           => true

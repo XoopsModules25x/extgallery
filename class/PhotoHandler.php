@@ -482,7 +482,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
             if (!defined('IMAGE_TRANSFORM_IM_PATH') && 'imagick' === $xoopsModuleConfig['graphic_lib']) {
                 define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
             }
-            $imageFactory   = new Image_Transform;
+            $imageFactory   = new \Image_Transform;
             $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
             $filePath = $this->_getUploadPhotoPath();
@@ -522,7 +522,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         if (!defined('IMAGE_TRANSFORM_IM_PATH') && 'imagick' === $xoopsModuleConfig['graphic_lib']) {
             define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
         }
-        $imageFactory   = new Image_Transform;
+        $imageFactory   = new \Image_Transform;
         $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
         if (null === $filePath) {
@@ -572,7 +572,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         if (!defined('IMAGE_TRANSFORM_IM_PATH') && 'imagick' === $xoopsModuleConfig['graphic_lib']) {
             define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
         }
-        $imageFactory   = new Image_Transform;
+        $imageFactory   = new \Image_Transform;
         $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
         $filePath  = $this->_getUploadPhotoPath() . 'medium/' . $photoName;
@@ -607,7 +607,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         if (!defined('IMAGE_TRANSFORM_IM_PATH') && 'imagick' === $xoopsModuleConfig['graphic_lib']) {
             define('IMAGE_TRANSFORM_IM_PATH', $xoopsModuleConfig['graphic_lib_path']);
         }
-        $imageFactory   = new Image_Transform;
+        $imageFactory   = new \Image_Transform;
         $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
         $ret = [];
@@ -803,7 +803,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $cat->setVar('cat_isalbum', 1);
         $catHandler->insert($cat);
 
-        /** @var XoopsNotificationHandler $notificationHandler */
+        /** @var \XoopsNotificationHandler $notificationHandler */
         $notificationHandler = xoops_getHandler('notification');
         $extraTags           = [
             'X_ITEM_CAT'     => $cat->getVar('cat_name'),

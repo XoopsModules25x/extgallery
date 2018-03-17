@@ -58,7 +58,8 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
         //        $db = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->table     = $db->prefix($tablename);
         $this->keyName   = $keyname;
-        $this->className = '\\XoopsModules\\Extgallery\\' .$classname;
+//        $this->className = '\\XoopsModules\\Extgallery\\' .$classname;
+        $this->className = $classname;
         if (false !== $idenfierName) {
             $this->identifierName = $idenfierName;
         }
@@ -74,11 +75,12 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
 
     public function create($isNew = true)
     {
-        $obj = new $this->className();
-        if (true === $isNew) {
+        $temp = '\\XoopsModules\\Extgallery\\' . $this->className;
+        $obj = new $temp;
+
+       if (true === $isNew) {
             $obj->setNew();
         }
-
         return $obj;
     }
 
@@ -263,7 +265,7 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
     }
 
     /**
-     * @param null|CriteriaElement $criteria
+     * @param null|\CriteriaElement $criteria
      * @param string               $sum
      *
      * @return array|int|string
@@ -304,8 +306,8 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
     }
 
     /**
-     * @param null|CriteriaElement $criteria
-     * @param string               $max
+     * @param \CriteriaElement $criteria
+     * @param string           $max
      *
      * @return array|int|string
      */
@@ -345,8 +347,8 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
     }
 
     /**
-     * @param null|CriteriaElement $criteria
-     * @param string               $avg
+     * @param \CriteriaElement $criteria
+     * @param string           $avg
      *
      * @return int
      */

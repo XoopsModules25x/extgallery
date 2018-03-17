@@ -9,6 +9,8 @@
  */
 
 
+use XoopsModules\Extgallery;
+
 /**
  * Prepares system prior to attempting to uninstall module
  * @param XoopsModule $module {@link XoopsModule}
@@ -16,7 +18,7 @@
  * @return bool true if ready to uninstall, false if not
  */
 
-function xoops_module_pre_uninstall_xxxx(\XoopsModule $module)
+function xoops_module_pre_uninstall_extgallery(\XoopsModule $module)
 {
     // Do some synchronization
     return true;
@@ -29,16 +31,16 @@ function xoops_module_pre_uninstall_xxxx(\XoopsModule $module)
  *
  * @return bool true if uninstallation successful, false if not
  */
-function xoops_module_uninstall_xxxx(\XoopsModule $module)
+function xoops_module_uninstall_extgallery(\XoopsModule $module)
 {
 //    return true;
 
     $moduleDirName = basename(dirname(__DIR__));
     $xsitemapHelper      = \Xmf\Module\Helper::getHelper($moduleDirName);
 
-    /** @var XXXXXXUtility $utilityClass */
-    $utilityClass     = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($utilityClass)) {
+    /** @var Extgallery\Utility $utility */
+    $utility     = new Extgallery\Utility();
+    if (!class_exists($utility)) {
         xoops_load('utility', $moduleDirName);
     }
 
@@ -55,7 +57,7 @@ function xoops_module_uninstall_xxxx(\XoopsModule $module)
         $dirInfo = new \SplFileInfo($old_dir);
         if ($dirInfo->isDir()) {
             // The directory exists so delete it
-            if (false === $utilityClass::rrmdir($old_dir)) {
+            if (false === $utility::rrmdir($old_dir)) {
                 $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH'), $old_dir));
                 $success = false;
             }

@@ -49,7 +49,7 @@ $modversion = [
     'min_db'              => ['mysql' => '5.5'],
     'image'               => 'assets/images/logoModule.png', // Path and name of the module’s logo
     'official'            => 1, //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
-    'dirname'             => "{$moduleDirName}",
+    'dirname'             => $moduleDirName,
     'modicons16'          => 'assets/images/icons/16',
     'modicons32'          => 'assets/images/icons',
 

@@ -98,9 +98,10 @@ class ModelReadIterator extends \XoopsModelRead
      *
      * For performance consideration, getAll() is recommended
      *
-     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
-     * @param bool            $id_as_key use the ID as key for the array
-     * @param bool            $as_object return an array of objects?
+     * @param \CriteriaElement $criteria  {@link CriteriaElement}
+     *                                    conditions to be met
+     * @param bool             $id_as_key use the ID as key for the array
+     * @param bool             $as_object return an array of objects?
      *
      * @return array
      */

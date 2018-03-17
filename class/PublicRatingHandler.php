@@ -40,13 +40,13 @@ class PublicRating extends \XoopsObject
         $this->initVar('rating_rate', XOBJ_DTYPE_INT, 0, false);
 
         $this->externalKey['photo_id'] = [
-            'className'      => 'publicphoto',
+            'className'      => 'PublicPhoto',
             'getMethodeName' => 'getPhoto',
             'keyName'        => 'photo',
             'core'           => false
         ];
         $this->externalKey['uid']      = [
-            'className'      => 'user',
+            'className'      => 'User',
             'getMethodeName' => 'get',
             'keyName'        => 'user',
             'core'           => true
@@ -74,7 +74,7 @@ class PublicRatingHandler extends Extgallery\PersistableObjectHandler
      */
     public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'extgallery_publicrating', 'Extgallery\PublicRating', 'rating_id');
+        parent::__construct($db, 'extgallery_publicrating', 'PublicRating', 'rating_id');
     }
 
     /**

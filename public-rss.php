@@ -73,7 +73,7 @@ if (!$xoopsTpl->is_cached('db:extgallery_public-rss.tpl')) {
         $categories = [];
     }
 
-    $xoopsTpl->assign('channel_category', htmlspecialchars($channel_category));
+    $xoopsTpl->assign('channel_category', htmlspecialchars($channel_category, ENT_QUOTES));
     $xoopsTpl->assign('channel_generator', $xoopsModule->getVar('dirname'));
     $xoopsTpl->assign('channel_language', _LANGCODE);
     $xoopsTpl->assign('image_url', XOOPS_URL . $xoopsModuleConfig['logo_rss']);

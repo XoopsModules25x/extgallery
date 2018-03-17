@@ -51,9 +51,9 @@ class GroupPermForm extends \XoopsGroupPermForm
             $this->_itemTree[$item_id]['allchild'] = [];
             $this->_loadAllChildItemIds($item_id, $this->_itemTree[$item_id]['allchild']);
         }
-        /** @var XoopsGroupPermHandler $gpermHandler */
+        /** @var \XoopsGroupPermHandler $gpermHandler */
         $gpermHandler = xoops_getHandler('groupperm');
-        /** @var XoopsMemberHandler $memberHandler */
+        /** @var \XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         $glist         = $memberHandler->getGroupList();
         foreach (array_keys($glist) as $i) {

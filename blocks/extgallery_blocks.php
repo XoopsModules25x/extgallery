@@ -204,7 +204,7 @@ function implodeArray2Dextgallery($sep, $array)
 {
     $num = count($array);
     $str = '';
-    for ($i = 0; $i < $num; ++$i) {
+    foreach ($array as $i => $iValue) {
         if ($i) {
             $str .= $sep;
         }

@@ -90,7 +90,7 @@ class QuotaHandler extends Extgallery\PersistableObjectHandler
      * @param $groupid
      * @param $quotaName
      *
-     * @return XoopsObject
+     * @return \XoopsObject
      */
     public function getQuota($groupid, $quotaName)
     {

@@ -49,7 +49,7 @@ class Category extends \XoopsObject
         $this->initVar('photo_id', XOBJ_DTYPE_INT, 0, false);
 
         $this->externalKey['photo_id'] = [
-            'className'      => 'publicphoto',
+            'className'      => 'PublicPhoto',
             'getMethodeName' => 'getPhoto',
             'keyName'        => 'photo',
             'core'           => false

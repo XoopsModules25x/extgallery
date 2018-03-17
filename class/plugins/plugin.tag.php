@@ -52,7 +52,7 @@ function extgallery_tag_synchronization($mid)
     global $XoopsDB;
     /** @var Extgallery\PublicPhotoHandler $itemHandler */
     $itemHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
-    /** @var TagLinkHandler $linkHandler */
+    /** @var \TagLinkHandler $linkHandler */
     $linkHandler = \XoopsModules\Tag\Helper::getInstance()->getHandler('Link'); //@var \XoopsModules\Tag\Handler $tagHandler
 
     /* clear tag-item links */

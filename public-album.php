@@ -130,7 +130,7 @@ $photos = $photoHandler->objectToArray($photoHandler->getAlbumPhotoPage($catId, 
 // Plugin traitement
 $plugin  = Extgallery\Helper::getInstance()->getHandler('Plugin');
 $nbPhoto = count($photos);
-for ($i = 0; $i < $nbPhoto; ++$i) {
+foreach ($photos as $i => $iValue) {
     $params = ['catId' => $catId, 'photoId' => $photos[$i]['photo_id'], 'link' => []];
     $plugin->triggerEvent('photoAlbumLink', $params);
     $photos[$i]['link'] = $params['link'];

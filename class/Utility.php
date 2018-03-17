@@ -6,7 +6,7 @@ use  XoopsModules\Extgallery\Common;
 
 //require_once __DIR__ . '/../include/common.php';
 /**
- * Class ExtgalleryUtility
+ * Class Extgallery\Utility
  */
 class Utility extends \XoopsObject
 {
@@ -37,11 +37,11 @@ class Utility extends \XoopsObject
                 $retval = $xoopsModuleConfig[$option];
             }
         } else {
-            /** @var XoopsModuleHandler $moduleHandler */
+            /** @var \XoopsModuleHandler $moduleHandler */
             $moduleHandler = xoops_getHandler('module');
             $module        = $moduleHandler->getByDirname('extgallery');
 
-            /** @var XoopsModuleHandler $moduleHandler */
+            /** @var \XoopsModuleHandler $moduleHandler */
             $configHandler = xoops_getHandler('config');
             if ($module) {
                 $configurator = $configHandler->getConfigsByCat(0, $module->getVar('mid'));

@@ -40,7 +40,7 @@ switch ($op) {
 
             case 'enreg':
 
-                /** @var \Extgallery\PublicCategoryHandler $catHandler */
+                /** @var Extgallery\PublicCategoryHandler $catHandler */
                 $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
                 $data       = [
                     'cat_pid'    => $_POST['cat_pid'],

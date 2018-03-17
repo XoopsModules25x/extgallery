@@ -32,7 +32,7 @@ xoops_cp_header();
 // DNPROSSI - In PHP 5.3.0 "JPG Support" was renamed to "JPEG Support".
 // This leads to the following error: "Undefined index: JPG Support in
 // Fixed with version compare
-if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+if (PHP_VERSION_ID < 50300) {
     $jpegsupport = 'JPG Support';
 } else {
     $jpegsupport = 'JPEG Support';
