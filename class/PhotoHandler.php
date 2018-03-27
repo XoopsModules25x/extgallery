@@ -34,7 +34,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function __construct(\XoopsDatabase $db, $type)
     {
-        parent::__construct($db, 'extgallery_' . $type . 'photo',  ucfirst($type) . 'Photo', 'photo_id');
+        parent::__construct($db, 'extgallery_' . $type . 'photo', ucfirst($type) . 'Photo', 'photo_id');
     }
 
     /**
@@ -463,9 +463,9 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         }
     }
 
-    public function _getUploadPhotoPath()
+    public function getUploadPhotoPath()
     {
-        exit('_getUploadPhotoPath() method must be defined on sub classes');
+        exit('getUploadPhotoPath() method must be defined on sub classes');
     }
 
     /**
@@ -485,7 +485,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
             $imageFactory   = new \Image_Transform;
             $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
-            $filePath = $this->_getUploadPhotoPath();
+            $filePath = $this->getUploadPhotoPath();
             $imageTransform->load($filePath . $photoName);
 
             // Save large photo only if it's bigger than medium size
@@ -526,7 +526,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
         if (null === $filePath) {
-            $filePath = $this->_getUploadPhotoPath();
+            $filePath = $this->getUploadPhotoPath();
         }
         if (null === $mediumFilePath) {
             $mediumFilePath = $filePath . 'medium/' . $photoName;
@@ -575,8 +575,8 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $imageFactory   = new \Image_Transform;
         $imageTransform = $imageFactory->factory($xoopsModuleConfig['graphic_lib']);
 
-        $filePath  = $this->_getUploadPhotoPath() . 'medium/' . $photoName;
-        $thumbPath = $this->_getUploadPhotoPath() . 'thumb/thumb_' . $photoName;
+        $filePath  = $this->getUploadPhotoPath() . 'medium/' . $photoName;
+        $thumbPath = $this->getUploadPhotoPath() . 'thumb/thumb_' . $photoName;
 
         $imageTransform->load($filePath);
         $imageTransform->fit($xoopsModuleConfig['thumb_width'], $xoopsModuleConfig['thumb_heigth']);
@@ -591,7 +591,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function _haveLargePhoto($photoName)
     {
-        return file_exists($this->_getUploadPhotoPath() . 'large/large_' . $photoName);
+        return file_exists($this->getUploadPhotoPath() . 'large/large_' . $photoName);
     }
 
     /**
@@ -612,11 +612,11 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
 
         $ret = [];
         if ($this->_haveLargePhoto($photoName)) {
-            $imageTransform->load($this->_getUploadPhotoPath() . 'large/large_' . $photoName);
+            $imageTransform->load($this->getUploadPhotoPath() . 'large/large_' . $photoName);
             $ret['width']  = $imageTransform->getImageWidth();
             $ret['height'] = $imageTransform->getImageHeight();
         } else {
-            $imageTransform->load($this->_getUploadPhotoPath() . 'medium/' . $photoName);
+            $imageTransform->load($this->getUploadPhotoPath() . 'medium/' . $photoName);
             $ret['width']  = $imageTransform->getImageWidth();
             $ret['height'] = $imageTransform->getImageHeight();
         }
@@ -630,7 +630,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      *
      * @return string
      */
-    public function _getAutoDescription($photoName)
+    public function getAutoDescription($photoName)
     {
         global $xoopsModuleConfig;
 
@@ -662,7 +662,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      *
      * @return string
      */
-    public function _makeFileName($fileName)
+    public function makeFileName($fileName)
     {
         //DNPROSSI
         //$fileName = preg_replace("/[^a-zA-Z0-9()_\.-]/", "-", $fileName);
@@ -679,12 +679,12 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      *
      * @return float
      */
-    public function _getPhotoSize($photoName)
+    public function getPhotoSize($photoName)
     {
         if ($this->_haveLargePhoto($photoName)) {
-            return $this->_getFileSize('large/large_' . $photoName);
+            return $this->getFileSize('large/large_' . $photoName);
         } else {
-            return $this->_getFileSize($photoName);
+            return $this->getFileSize($photoName);
         }
     }
 
@@ -693,9 +693,9 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      *
      * @return float
      */
-    public function _getFileSize($fileName)
+    public function getFileSize($fileName)
     {
-        return round(filesize($this->_getUploadPhotoPath() . $fileName) / 1024, 2);
+        return round(filesize($this->getUploadPhotoPath() . $fileName) / 1024, 2);
     }
 
     /**
@@ -862,13 +862,13 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $permHandler = Extgallery\PublicPermHandler::getInstance();
 
         // Replace all bad file name character
-        $photoName = $this->_makeFileName($dirtyPhotoName);
-        rename($this->_getUploadPhotoPath() . $dirtyPhotoName, $this->_getUploadPhotoPath() . $photoName);
+        $photoName = $this->makeFileName($dirtyPhotoName);
+        rename($this->getUploadPhotoPath() . $dirtyPhotoName, $this->getUploadPhotoPath() . $photoName);
 
         //DNPROSSI - changed photo_desc to photo_title
         // Making auto description
         if ('' === $photoTitle) {
-            $photoTitle = $this->_getAutoDescription($photoName);
+            $photoTitle = $this->getAutoDescription($photoName);
         }
 
         $originalName = '';
@@ -876,7 +876,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         if ($xoopsModuleConfig['save_large'] && $xoopsModuleConfig['save_original']) {
             $fileName     = explode('.', $photoName);
             $originalName = md5(uniqid(mt_rand(), true)) . '.' . $fileName[1];
-            copy($this->_getUploadPhotoPath() . $photoName, $this->_getUploadPhotoPath() . 'original/' . $originalName);
+            copy($this->getUploadPhotoPath() . $photoName, $this->getUploadPhotoPath() . 'original/' . $originalName);
         }
 
         $this->_largePhotoTreatment($photoName);
@@ -895,7 +895,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
             'photo_name'      => $photoName,
             'photo_orig_name' => $originalName,
             'uid'             => $userId,
-            'photo_size'      => $this->_getPhotoSize($photoName),
+            'photo_size'      => $this->getPhotoSize($photoName),
             'photo_res_x'     => $imageDimension['width'],
             'photo_res_y'     => $imageDimension['height'],
             'photo_date'      => time(),
@@ -906,7 +906,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         ];
 
         // Deleting working photo
-        unlink($this->_getUploadPhotoPath() . $photoName);
+        unlink($this->getUploadPhotoPath() . $photoName);
 
         $this->createPhoto($data);
 
@@ -987,7 +987,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      * @param $criteria
      * @param $data
      */
-    public function _addInCriteria(&$criteria, $data)
+    public function addInCriteria(&$criteria, $data)
     {
         $count = count($data);
         if ($count > 0) {
@@ -1014,7 +1014,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
             $criteria->add($catHandler->getCatRestrictCriteria());
         }
         $criteria->add(new \Criteria('photo_approved', 1));
-        $this->_addInCriteria($criteria, $param['cat']);
+        $this->addInCriteria($criteria, $param['cat']);
         $criteria->setSort('RAND()');
         $criteria->setLimit($param['limit']);
 
@@ -1033,7 +1033,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $criteria = new \CriteriaCompo();
         $criteria->add($catHandler->getCatRestrictCriteria());
         $criteria->add(new \Criteria('photo_approved', 1));
-        $this->_addInCriteria($criteria, $param['cat']);
+        $this->addInCriteria($criteria, $param['cat']);
         $criteria->setSort('photo_date');
         $criteria->setOrder('DESC');
         $criteria->setLimit($param['limit']);
@@ -1053,7 +1053,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $criteria = new \CriteriaCompo();
         $criteria->add($catHandler->getCatRestrictCriteria());
         $criteria->add(new \Criteria('photo_approved', 1));
-        $this->_addInCriteria($criteria, $param['cat']);
+        $this->addInCriteria($criteria, $param['cat']);
         $criteria->setSort('photo_hits');
         $criteria->setOrder('DESC');
         $criteria->setLimit($param['limit']);
@@ -1073,7 +1073,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $criteria = new \CriteriaCompo();
         $criteria->add($catHandler->getCatRestrictCriteria());
         $criteria->add(new \Criteria('photo_approved', 1));
-        $this->_addInCriteria($criteria, $param['cat']);
+        $this->addInCriteria($criteria, $param['cat']);
         $criteria->setSort('photo_rating');
         $criteria->setOrder('DESC');
         $criteria->setLimit($param['limit']);
@@ -1093,7 +1093,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $criteria = new \CriteriaCompo();
         $criteria->add($catHandler->getCatRestrictCriteria());
         $criteria->add(new \Criteria('photo_approved', 1));
-        $this->_addInCriteria($criteria, $param['cat']);
+        $this->addInCriteria($criteria, $param['cat']);
         $criteria->setSort('photo_ecard');
         $criteria->setOrder('DESC');
         $criteria->setLimit($param['limit']);
@@ -1109,7 +1109,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
         $criteria = new \Criteria();
-        $this->_addInCriteria($criteria, $param['cat']);
+        $this->addInCriteria($criteria, $param['cat']);
 
         echo $criteria->renderWhere();
     }

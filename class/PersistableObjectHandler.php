@@ -78,7 +78,7 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
         $temp = '\\XoopsModules\\Extgallery\\' . $this->className;
         $obj = new $temp;
 
-       if (true === $isNew) {
+        if (true === $isNew) {
             $obj->setNew();
         }
         return $obj;

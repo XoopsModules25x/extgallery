@@ -185,14 +185,13 @@ function is__writable($path)
 
     if ('/' === $path{strlen($path) - 1}) {
         // recursively return a temporary file path
-
         return is__writable($path . uniqid(mt_rand(), true) . '.tmp');
     } elseif (is_dir($path)) {
         return is__writable($path . '/' . uniqid(mt_rand(), true) . '.tmp');
     }
     // check tmp file for read/write capabilities
     $rm = file_exists($path);
-    $f  = @fopen($path, 'a');
+    $f  = @fopen($path, 'ab');
     if (false === $f) {
         return false;
     }

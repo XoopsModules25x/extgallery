@@ -30,6 +30,8 @@ use XoopsModules\Extgallery;
 function extgalleryNotifyIteminfo($category, $item_id)
 {
     /** @var Extgallery\PublicPhotoHandler $photoHandler */
+    /** @var Extgallery\Photo $photo */
+
     $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
     $photo        = $photoHandler->getPhoto($item_id);
     $item['name'] = $photo->getVar('photo_desc');

@@ -562,7 +562,7 @@ class PEAR
             if ($object !== null && isset($object->_default_error_mode)) {
                 $mode    = $object->_default_error_mode;
                 $options = $object->_default_error_options;
-                // Global error handler
+            // Global error handler
             } elseif (isset($GLOBALS['_PEAR_default_error_mode'])) {
                 $mode    = $GLOBALS['_PEAR_default_error_mode'];
                 $options = $GLOBALS['_PEAR_default_error_options'];

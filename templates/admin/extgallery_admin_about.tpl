@@ -31,7 +31,7 @@
                     <div>
                         <label><{$smarty.const._AM_EXTGALLERY_ABOUT_RELEASEDATE}></label>
                         <text class="bold"><{$module_update_date}></text>
-                        </br>
+                        <br>
                         <label><{$smarty.const._AM_EXTGALLERY_ABOUT_MODULE_STATUS}></label>
                         <text><{$module_status}></text>
                         <br>

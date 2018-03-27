@@ -14,7 +14,7 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
- * @param $options
+ * @param array $options
  * @return array
  */
 
@@ -22,7 +22,7 @@ use XoopsModules\Extgallery;
 
 // Manage photo blocks
 /**
- * @param $options
+ * @param array $options
  * @return array
  */
 function extgalleryPhotoShow($options)
@@ -196,7 +196,7 @@ function extgalleryPhotoShow($options)
 // converts a 2D array in a comma separated list (or separator of our choice)
 /**
  * @param $sep
- * @param $array
+ * @param array $array
  *
  * @return string
  */
@@ -216,9 +216,9 @@ function implodeArray2Dextgallery($sep, $array)
 
 // Manage Top Submitter blocks
 /**
- * @param $options
+ * @param array $options
  *
- * @return string
+ * @return string|array
  */
 function extgalleryTopSubmitterShow($options)
 {
@@ -254,12 +254,13 @@ function extgalleryTopSubmitterShow($options)
 
 // Manage Ajax photos
 /**
- * @param $options
+ * @param array $options
  *
  * @return array
  */
 function extgalleryAjax($options)
 {
+    $photos = [];
     /** @var Extgallery\PhotoHandler $photoHandler */
     $photoHandler       = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
     $param              = ['limit' => $options[0]];
@@ -415,7 +416,7 @@ function extgalleryAjax($options)
 
 // Options photo blocks
 /**
- * @param $options
+ * @param array $options
  *
  * @return string
  */
@@ -572,7 +573,7 @@ function extgalleryBlockEdit($options)
 
 // Options Ajax photos
 /**
- * @param $options
+ * @param array $options
  *
  * @return string
  */
@@ -708,7 +709,7 @@ function extgalleryAjaxEdit($options)
 
 // Options TopSubmiter
 /**
- * @param $options
+ * @param array $options
  *
  * @return string
  */
@@ -726,7 +727,7 @@ function extgalleryTopSubmitterEdit($options)
 }
 
 /**
- * @param $options
+ * @param array $options
  *
  * @return array
  */
@@ -797,7 +798,7 @@ function extgalleryList($options)
 }
 
 /**
- * @param $options
+ * @param array $options
  *
  * @return string
  */

@@ -57,7 +57,7 @@ class NestedTree
      */
     public function getNode($id)
     {
-        $query = sprintf('SELECT * FROM `%s` WHERE %s = %d', $this->table, $this->fields['id'], $id);
+        $query = sprintf('SELECT * FROM `%s` WHERE `%s` = %d', $this->table, $this->fields['id'], $id);
 
         $result = $this->db->query($query);
         if ($row = $this->db->fetchArray($result)) {
@@ -97,9 +97,9 @@ class NestedTree
 
         if ($childrenOnly) {
             if ($includeSelf) {
-                $query = sprintf('SELECT * FROM `%s` WHERE %s = %d OR %s = %d ORDER BY nleft', $this->table, $this->fields['id'], $parent_id, $this->fields['parent'], $parent_id);
+                $query = sprintf('SELECT * FROM `%s` WHERE `%s` = %d OR %s = %d ORDER BY nleft', $this->table, $this->fields['id'], $parent_id, $this->fields['parent'], $parent_id);
             } else {
-                $query = sprintf('SELECT * FROM `%s` WHERE %s = %d ORDER BY nleft', $this->table, $this->fields['parent'], $parent_id);
+                $query = sprintf('SELECT * FROM `%s` WHERE `%s` = %d ORDER BY nleft', $this->table, $this->fields['parent'], $parent_id);
             }
         } else {
             if ($nleft > 0 && $includeSelf) {
@@ -188,7 +188,7 @@ class NestedTree
 
         $query = sprintf('SELECT count(*) AS is_descendant
                                       FROM %s
-                                      WHERE %s = %d
+                                      WHERE `%s` = %d
                                       AND nleft > %d
                                       AND nright < %d', $this->table, $this->fields['id'], $descendant_id, $node->nleft, $node->nright);
 
@@ -211,7 +211,7 @@ class NestedTree
      */
     public function isChildOf($child_id, $parent_id)
     {
-        $query = sprintf('SELECT count(*) AS is_child FROM %s WHERE %s = %d AND %s = %d', $this->table, $this->fields['id'], $child_id, $this->fields['parent'], $parent_id);
+        $query = sprintf('SELECT count(*) AS is_child FROM %s WHERE `%s` = %d AND %s = %d', $this->table, $this->fields['id'], $child_id, $this->fields['parent'], $parent_id);
 
         $result = $this->db->query($query);
 
@@ -254,7 +254,7 @@ class NestedTree
      */
     public function numChildren($id)
     {
-        $query  = sprintf('SELECT count(*) AS num_children FROM %s WHERE %s = %d', $this->table, $this->fields['parent'], $id);
+        $query  = sprintf('SELECT count(*) AS num_children FROM %s WHERE `%s` = %d', $this->table, $this->fields['parent'], $id);
         $result = $this->db->query($query);
         if ($row = $this->db->fetchArray($result)) {
             return $row['num_children'];
@@ -348,7 +348,7 @@ class NestedTree
                 continue;
             }
 
-            $query = sprintf('UPDATE `%s` SET nlevel = %d, nleft = %d, nright = %d WHERE %s = %d', $this->table, $row['nlevel'], $row['nleft'], $row['nright'], $this->fields['id'], $id);
+            $query = sprintf('UPDATE `%s` SET nlevel = %d, nleft = %d, nright = %d WHERE `%s` = %d', $this->table, $row['nlevel'], $row['nleft'], $row['nright'], $this->fields['id'], $id);
             $this->db->queryF($query);
         }
     }

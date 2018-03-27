@@ -55,13 +55,11 @@ function moduleLastVersionInfo()
                 $offset     = $ranges[$i] + 1;
                 $len        = $ranges[$i + 1] - $offset;
                 $dataValues = array_slice($values, $offset, $len);
-                for ($j = 0, $jMax = count($dataValues); $j < $jMax; ++$j) {
+                foreach ($dataValues as $j => $jValue) {
                     $value                          = isset($dataValues[$j]['value']) ? $dataValues[$j]['value'] : '';
                     $result[$dataValues[$j]['tag']] = $value;
                 }
             }
-        } else {
-            continue;
         }
     }
 

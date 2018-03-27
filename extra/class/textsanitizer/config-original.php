@@ -17,7 +17,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: config-original.php 8088 2011-11-06 09:38:12Z beckmi $
  */
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 return $config = [
     'extensions' => [

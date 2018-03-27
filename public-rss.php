@@ -60,7 +60,7 @@ if (!$xoopsTpl->is_cached('db:extgallery_public-rss.tpl')) {
 
     $xoopsTpl->assign('channel_charset', _CHARSET);
     $xoopsTpl->assign('channel_title', htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES));
-    $xoopsTpl->assign('channel_link', PUBLISHER_URL);
+    $xoopsTpl->assign('channel_link', EXTGALLERY_URL);
     $xoopsTpl->assign('channel_desc', htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES));
     $xoopsTpl->assign('channel_lastbuild', formatTimestamp(time(), 'rss'));
     $xoopsTpl->assign('channel_webmaster', $xoopsConfig['adminmail']);

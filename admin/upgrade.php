@@ -48,12 +48,12 @@ switch ($step) {
             break;
         }
 
-        if (!$handle = @fopen($downloadServer . $moduleFileName, 'r')) {
+        if (!$handle = @fopen($downloadServer . $moduleFileName, 'rb')) {
             printf(_AM_EXTGALLERY_MD_FILE_DONT_EXIST, $downloadServer, $moduleFileName);
             xoops_cp_footer();
             break;
         }
-        $localHandle = @fopen(XOOPS_ROOT_PATH . '/uploads/' . $moduleFileName, 'w+');
+        $localHandle = @fopen(XOOPS_ROOT_PATH . '/uploads/' . $moduleFileName, 'wb+');
 
         // Downlad module archive
         if ($handle) {
@@ -67,10 +67,10 @@ switch ($step) {
 
         // English file are included on module package
         if ('english' !== $xoopsConfig['language']) {
-            if (!$handle = @fopen($downloadServer . $langFileName, 'r')) {
+            if (!$handle = @fopen($downloadServer . $langFileName, 'rb')) {
                 printf(_AM_EXTGALLERY_LG_FILE_DONT_EXIST, $downloadServer, $langFileName);
             } else {
-                $localHandle = @fopen(XOOPS_ROOT_PATH . '/uploads/' . $langFileName, 'w+');
+                $localHandle = @fopen(XOOPS_ROOT_PATH . '/uploads/' . $langFileName, 'wb+');
                 // Download language archive
                 if ($handle) {
                     while (!feof($handle)) {
@@ -123,7 +123,7 @@ switch ($step) {
         }
 
         // Delete template_c file
-        if ($handle = opendir(XOOPS_ROOT_PATH . '/templates_c')) {
+        if (false !== ($handle = opendir(XOOPS_ROOT_PATH . '/templates_c'))) {
             while (false !== ($file = readdir($handle))) {
                 if ('.' !== $file && '..' !== $file && 'index.html' !== $file) {
                     unlink(XOOPS_ROOT_PATH . '/templates_c/' . $file);

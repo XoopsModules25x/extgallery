@@ -19,14 +19,15 @@
 use XoopsModules\Extgallery;
 
 include __DIR__ . '/header.php';
-//include_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
+//require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 if (!isset($_GET['id'])) {
     $photoId = 0;
 } else {
     $photoId = (int)$_GET['id'];
 }
-
+/** @var Extgallery\PublicPhotoHandler $photoHandler */
+/** @var Extgallery\Photo $photo */
 $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 $photo        = $photoHandler->get($photoId);
 
@@ -52,14 +53,14 @@ if (0 == $photo->getVar('cat_id')) {
     header('Content-type: image/jpeg');
     readfile(XOOPS_ROOT_PATH . '/modules/extgallery/assets/images/dont-exist.jpg');
 
-    // If user is allowed to view this picture
+// If user is allowed to view this picture
 } elseif ($permHandler->isAllowed($xoopsUser, 'public_access', $photo->getVar('cat_id'))) {
     $photo = $photoHandler->objectToArray($photo);
 
     header('Content-type: ' . $type . '');
     readfile(XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo['photo_name']);
 
-    // If user isn't allowed to view this picture
+// If user isn't allowed to view this picture
 } else {
     header('Content-type: image/jpeg');
     readfile(XOOPS_ROOT_PATH . '/modules/extgallery/assets/images/not-allowed.jpg');

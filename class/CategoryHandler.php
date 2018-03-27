@@ -34,7 +34,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
      */
     public function __construct(\XoopsDatabase $db, $type)
     {
-        parent::__construct($db, 'extgallery_' . $type . 'cat',  ucfirst($type) . 'Category', 'cat_id');
+        parent::__construct($db, 'extgallery_' . $type . 'cat', ucfirst($type) . 'Category', 'cat_id');
         //$this->_nestedTree = new NestedTree($db, 'extgallery_'.$type.'cat', 'cat_id', 'cat_pid', 'cat_id');
         $this->_photoHandler = Extgallery\Helper::getInstance()->getHandler($type . 'Photo');
     }
@@ -49,7 +49,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         $cat = $this->create();
         $cat->setVars($data);
 
-        if (!$this->_haveValidParent($cat)) {
+        if (!$this->hasValidParent($cat)) {
             return false;
         }
 
@@ -69,7 +69,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         $cat = $this->get($data['cat_id']);
         $cat->setVars($data);
 
-        if (!$this->_haveValidParent($cat)) {
+        if (!$this->hasValidParent($cat)) {
             return false;
         }
         $this->insert($cat, true);
@@ -78,6 +78,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         if (isset($data['cat_pid']) || isset($data['nlevel']) || isset($data['nright']) || isset($data['nleft'])) {
             $this->rebuild();
         }
+        return '';
     }
 
     /**
@@ -130,7 +131,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
             if ($nleft > 0 && $includeSelf) {
                 $criteria->add(new \Criteria('nleft', $nleft, '>='));
                 $criteria->add(new \Criteria('nright', $nright, '<='));
-                //$query = sprintf('select * from %s where nleft >= %d and nright <= %d order by nleft', $this->table, $nleft, $nright);
+            //$query = sprintf('select * from %s where nleft >= %d and nright <= %d order by nleft', $this->table, $nleft, $nright);
             } else {
                 if ($nleft > 0) {
                     $criteria->add(new \Criteria('nleft', $nleft, '>'));
@@ -170,14 +171,14 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
 
         if (count($ret) > 0) {
             return $ret[0];
-        } else {
-            return null;
         }
+
+        return null;
     }
 
-    public function _haveValidParent()
+    public function hasValidParent()
     {
-        exit('_haveValidParent() method must be defined on sub classes');
+        exit('hasValidParent() method must be defined on sub classes');
     }
 
     /**
@@ -199,7 +200,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
      */
     public function nbPhoto(&$cat)
     {
-        /** @var Extgallery\PublicPhotoHandler $this ->_photoHandler */
+        /** @var Extgallery\CategoryHandler $this ->_photoHandler */
         return $this->_photoHandler->nbPhoto($cat);
     }
 
@@ -220,7 +221,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         if ($includeSelf) {
             $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<='));
             $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>='));
-            //$query = sprintf('select * from %s where nleft <= %d and nright >= %d order by nlevel', $this->table, $node['nleft'], $node['nright']);
+        //$query = sprintf('select * from %s where nleft <= %d and nright >= %d order by nlevel', $this->table, $node['nleft'], $node['nright']);
         } else {
             $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<'));
             $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>'));
@@ -473,7 +474,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         // and nright of (tree size * 2 + 1)
 
         // Errase category and photo counter
-        $query = sprintf('UPDATE %s SET cat_nb_album = 0, cat_nb_photo = 0;', $this->table);
+        $query = sprintf('UPDATE `%s` SET cat_nb_album = 0, cat_nb_photo = 0;', $this->table);
         $this->db->queryF($query);
 
         foreach ($data as $id => $row) {
@@ -489,7 +490,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
                 $criteria = new \CriteriaCompo();
                 $criteria->add(new \Criteria('cat_id', $id));
                 $criteria->add(new \Criteria('photo_approved', 1));
-                /** @var Extgallery\PublicPhotoHandler $this ->_photoHandler */
+                /** @var Extgallery\CategoryHandler $this ->_photoHandler */
                 $nbPhoto = $this->_photoHandler->getCount($criteria);
 
                 // Update all parent of this album
@@ -497,19 +498,19 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
                 if (0 != $nbPhoto) {
                     $upNbAlbum = 'cat_nb_album = cat_nb_album + 1, ';
                 }
-                $sql   = 'UPDATE %s SET ' . $upNbAlbum . 'cat_nb_photo = cat_nb_photo + %d WHERE nleft < %d AND nright > %d;';
+                $sql   = 'UPDATE `%s` SET ' . $upNbAlbum . 'cat_nb_photo = cat_nb_photo + %d WHERE nleft < %d AND nright > %d;';
                 $query = sprintf($sql, $this->table, $nbPhoto, $row['nleft'], $row['nright']);
                 $this->db->queryF($query);
 
                 // Update this album if needed
                 if (0 != $nbPhoto) {
-                    $sql   = 'UPDATE %s SET cat_nb_photo = %d WHERE %s = %d';
+                    $sql   = 'UPDATE `%s`SET cat_nb_photo = %d WHERE `%s` = %d';
                     $query = sprintf($sql, $this->table, $nbPhoto, $this->keyName, $id);
                     $this->db->queryF($query);
                 }
             }
 
-            $query = sprintf('UPDATE %s SET nlevel = %d, nleft = %d, nright = %d WHERE %s = %d;', $this->table, $row['nlevel'], $row['nleft'], $row['nright'], $this->keyName, $id);
+            $query = sprintf('UPDATE `%s`SET nlevel = %d, nleft = %d, nright = %d WHERE `%s` = %d;', $this->table, $row['nlevel'], $row['nleft'], $row['nright'], $this->keyName, $id);
             $this->db->queryF($query);
         }
     }
@@ -546,12 +547,12 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
     /**
      * @param string $permType
      *
-     * @return \Criteria
+     * @return bool|\Criteria
      */
     public function getCatRestrictCriteria($permType = 'public_access')
     {
         if (null !== $GLOBALS['xoopsUser'] && is_object($GLOBALS['xoopsUser'])) {
-            $permHandler       = $this->_getPermHandler();
+            $permHandler       = $this->getPermHandler();
             $allowedCategories = $permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], $permType);
 
             $count = count($allowedCategories);
@@ -569,12 +570,13 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
 
             return $criteria;
         }
+        return false;
     }
 
     /**
      * @return Extgallery\PublicPermHandler
      */
-    public function _getPermHandler()
+    public function getPermHandler()
     {
         return Extgallery\PublicPermHandler::getInstance();
     }

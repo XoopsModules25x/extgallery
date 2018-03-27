@@ -3,7 +3,6 @@
 use Xmf\Request;
 use  XoopsModules\Extgallery\Common;
 
-
 //require_once __DIR__ . '/../include/common.php';
 /**
  * Class Extgallery\Utility
@@ -101,6 +100,7 @@ class Utility extends \XoopsObject
      */
     public static function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true)
     {
+        $open_tags    = [];
         if ($considerHtml) {
             // if the plain text is shorter than the maximum length, return the whole text
             if (strlen(preg_replace('/<.*?' . '>/', '', $text)) <= $length) {
@@ -109,7 +109,6 @@ class Utility extends \XoopsObject
             // splits all html-tags to scanable lines
             preg_match_all('/(<.+?' . '>)?([^<>]*)/s', $text, $lines, PREG_SET_ORDER);
             $total_length = strlen($ending);
-            $open_tags    = [];
             $truncate     = '';
             foreach ($lines as $line_matchings) {
                 // if there is any html-tag in this line, handle it and add it (uncounted) to the output

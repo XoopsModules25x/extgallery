@@ -30,6 +30,7 @@ switch ($op) {
 
     case 'overlay':
         /** @var XoopsModuleHandler $moduleHandler */
+        /** @var \XoopsConfigHandler $configHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
 

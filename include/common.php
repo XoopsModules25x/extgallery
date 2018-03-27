@@ -19,6 +19,7 @@
 
 
 use XoopsModules\Extgallery;
+
 include __DIR__ . '/../preloads/autoloader.php';
 
 $moduleDirName = basename(dirname(__DIR__));

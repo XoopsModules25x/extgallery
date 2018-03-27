@@ -42,6 +42,8 @@ function extgallery_tag_iteminfo(&$items)
         }
     }
     unset($items_obj);
+
+    return true;
 }
 
 /**
@@ -52,7 +54,7 @@ function extgallery_tag_synchronization($mid)
     global $XoopsDB;
     /** @var Extgallery\PublicPhotoHandler $itemHandler */
     $itemHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
-    /** @var \TagLinkHandler $linkHandler */
+    /** @var \XoopsModules\Tag\LinkHandler $linkHandler */
     $linkHandler = \XoopsModules\Tag\Helper::getInstance()->getHandler('Link'); //@var \XoopsModules\Tag\Handler $tagHandler
 
     /* clear tag-item links */

@@ -36,12 +36,12 @@ switch ($step) {
 
         xoops_cp_header();
 
-        if (!$handle = @fopen($downloadServer . $extensionFileName, 'r')) {
+        if (!$handle = @fopen($downloadServer . $extensionFileName, 'rb')) {
             printf(_AM_EXTGALLERY_EXT_FILE_DONT_EXIST, $downloadServer, $extensionFileName);
             xoops_cp_footer();
             break;
         }
-        $localHandle = @fopen(XOOPS_ROOT_PATH . '/uploads/' . $extensionFileName, 'w+');
+        $localHandle = @fopen(XOOPS_ROOT_PATH . '/uploads/' . $extensionFileName, 'wb+');
 
         // Downlad module archive
         if ($handle) {
@@ -85,7 +85,7 @@ switch ($step) {
         // Activate extension
         $conf                          = include XOOPS_ROOT_PATH . '/class/textsanitizer/config.php';
         $conf['extensions']['gallery'] = 1;
-        file_put_contents(XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php', "<?php\rreturn \$config = " . var_export($conf, true) . "\r?>");
+        file_put_contents(XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php', "<?php\rreturn \$config = " . var_export($conf, true) . "\r?>", LOCK_EX);
 
         redirect_header('extension.php', 3, _AM_EXTGALLERY_EXTENSION_INSTALLED);
 

@@ -46,7 +46,7 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
         $cat = $this->create();
         $cat->setVars($data);
 
-        if (!$this->_haveValidParent($cat)) {
+        if (!$this->hasValidParent($cat)) {
             return false;
         }
 
@@ -97,6 +97,7 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
                 }
             }
         }
+        return true;
     }
 
     /**
@@ -104,7 +105,7 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
      *
      * @return bool
      */
-    public function _haveValidParent(\XoopsObject $cat = null)
+    public function hasValidParent(\XoopsObject $cat = null)
     {
         // Check if haven't photo in parent category (parent category isn't an album)
         $parentCat = $this->get($cat->getVar('cat_pid'));
@@ -115,7 +116,7 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
     /**
      * @return Extgallery\PublicPermHandler
      */
-    public function _getPermHandler()
+    public function getPermHandler()
     {
         return Extgallery\PublicPermHandler::getInstance();
     }

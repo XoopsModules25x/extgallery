@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\Extgallery;
+
 // --------------------------------------------------------------------------------
 // PhpConcept Library - Tar Module 1.3.1
 // --------------------------------------------------------------------------------
@@ -1447,7 +1448,7 @@ if (!defined('PCL_TAR')) {
                 $p_hdir  = opendir($p_filename);
                 $p_hitem = readdir($p_hdir); // '.' directory
                 $p_hitem = readdir($p_hdir); // '..' directory
-                while ($p_hitem = readdir($p_hdir)) {
+                while (false !== ($p_hitem = readdir($p_hdir))) {
                     // ----- Look for a file
                     if (is_file($v_path . $p_hitem)) {
                         TrFctMessage(__FILE__, __LINE__, 4, "Add the file '" . $v_path . $p_hitem . "'");
@@ -1987,8 +1988,8 @@ if (!defined('PCL_TAR')) {
                 $v_extract_file = false;
 
                 // ----- Look into the file list
-                for ($i = 0, $iMax = count($p_file_list); $i < $iMax; ++$i) {
-                    TrFctMessage(__FILE__, __LINE__, 2, 'Compare archived file ' . $v_header['filename'] . " from asked list file '" . $p_file_list[$i] . "'");
+                foreach ($p_file_list as $i => $iValue) {
+                    TrFctMessage(__FILE__, __LINE__, 2, 'Compare archived file ' . $v_header['filename'] . " from asked list file '" . $iValue . "'");
 
                     // ----- Look if it is a directory
                     if ('/' === substr($p_file_list[$i], -1)) {
@@ -1996,7 +1997,7 @@ if (!defined('PCL_TAR')) {
 
                         // ----- Look if the directory is in the filename path
                         if ((strlen($v_header['filename']) > strlen($p_file_list[$i]))
-                            && (substr($v_header['filename'], 0, strlen($p_file_list[$i])) == $p_file_list[$i])) {
+                            && (substr($v_header['filename'], 0, strlen($p_file_list[$i])) == $iValue)) {
                             // ----- The file is in the directory, so extract it
                             TrFctMessage(__FILE__, __LINE__, 2, 'File ' . $v_header['filename'] . " is in directory '$p_file_list[$i]' : extract it");
                             $v_extract_file = true;
@@ -2005,7 +2006,7 @@ if (!defined('PCL_TAR')) {
                             break;
                         }
                     } // ----- It is a file, so compare the file names
-                    elseif ($p_file_list[$i] == $v_header['filename']) {
+                    elseif ($iValue == $v_header['filename']) {
                         // ----- File found
                         TrFctMessage(__FILE__, __LINE__, 2, 'File ' . $v_header['filename'] . ' should be extracted');
                         $v_extract_file = true;

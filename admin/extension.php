@@ -42,14 +42,14 @@ function activateExtension()
 {
     $conf                          = include XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php';
     $conf['extensions']['gallery'] = 1;
-    file_put_contents(XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php', "<?php\rreturn \$config = " . var_export($conf, true) . "\r?>");
+    file_put_contents(XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php', "<?php\rreturn \$config = " . var_export($conf, true) . "\r?>", LOCK_EX);
 }
 
 function desactivateExtension()
 {
     $conf                          = include XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php';
     $conf['extensions']['gallery'] = 0;
-    file_put_contents(XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php', "<?php\rreturn \$config = " . var_export($conf, true) . "\r?>");
+    file_put_contents(XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php', "<?php\rreturn \$config = " . var_export($conf, true) . "\r?>", LOCK_EX);
 }
 
 /** @var XoopsTpl $xoopsTpl */

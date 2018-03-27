@@ -29,7 +29,6 @@ $helper = Extgallery\Helper::getInstance();
 $adminObject = \Xmf\Module\Admin::getInstance();
 
 //require_once __DIR__ . '/../include/config.php';
-
 $pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
 $pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
 $pathModIcon32 = $helper->getModule()->getInfo('modicons32');

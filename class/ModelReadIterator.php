@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\Extgallery;
+
 /**
  * Extended object handlers
  *
@@ -33,7 +34,7 @@ class ModelReadIterator extends \XoopsModelRead
     /**
      * get all objects matching a condition
      *
-     * @param  \CriteriaElement $criteria  {@link CriteriaElement} to match
+     * @param  \CriteriaCompo $criteria  {@link CriteriaElement} to match
      * @param  array           $fields    variables to fetch
      * @param  bool            $asObject  flag indicating as object, otherwise as array
      * @param  bool            $id_as_key use the ID as key for the array

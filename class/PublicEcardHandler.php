@@ -54,6 +54,7 @@ class PublicEcardHandler extends Extgallery\PersistableObjectHandler
             return false;
         }
         $this->send($ecard);
+        return true;
     }
 
     /**

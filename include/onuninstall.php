@@ -36,6 +36,7 @@ function xoops_module_uninstall_extgallery(\XoopsModule $module)
 //    return true;
 
     $moduleDirName = basename(dirname(__DIR__));
+    $moduleDirNameUpper   = strtoupper($moduleDirName);
     $xsitemapHelper      = \Xmf\Module\Helper::getHelper($moduleDirName);
 
     /** @var Extgallery\Utility $utility */
@@ -80,6 +81,4 @@ function xoops_module_uninstall_extgallery(\XoopsModule $module)
 
     return $success;
     //------------ END  ----------------
-
 }
-

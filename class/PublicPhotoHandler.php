@@ -72,7 +72,7 @@ class PublicPhotoHandler extends Extgallery\PhotoHandler
     /**
      * @return string
      */
-    public function _getUploadPhotoPath()
+    public function getUploadPhotoPath()
     {
         return XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/';
     }

@@ -93,7 +93,7 @@ class PublicRatingHandler extends Extgallery\PersistableObjectHandler
         $rate->assignVar('uid', $userId);
         $rate->assignVar('rating_rate', $rating);
 
-        if ($this->_haveRated($rate)) {
+        if ($this->hasRated($rate)) {
             return false;
         }
 
@@ -122,7 +122,7 @@ class PublicRatingHandler extends Extgallery\PersistableObjectHandler
      *
      * @return bool
      */
-    public function _haveRated(&$rate)
+    public function hasRated(&$rate)
     {
         // If the user is annonymous
         if (0 == $rate->getVar('uid')) {

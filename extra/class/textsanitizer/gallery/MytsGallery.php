@@ -1,9 +1,9 @@
-<?php
+<?php namespace XoopsModules\Extgallery;
 
 /**
  * Class MytsGallery
  */
-class MytsGallery extends MyTextSanitizerExtension
+class MytsGallery extends \MyTextSanitizerExtension
 {
     /**
      * @param string $textarea_id

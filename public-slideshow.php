@@ -147,6 +147,7 @@ if (1 == $xoopsModuleConfig['galleriffic_autoplay']) {
 $xoopsTpl->assign('galleriffic_tdelay', $xoopsModuleConfig['galleriffic_tdelay']);
 $xoopsTpl->assign('galleriffic_tspeed', $xoopsModuleConfig['galleriffic_tspeed']);
 
+$var_width = 0;
 $var_nav_width   = 0;
 $var_nav_visible = 'hidden';
 
@@ -171,7 +172,6 @@ $xoopsTpl->assign('nav_visibility', $var_nav_visible);
 $xoopsTpl->assign('galleriffic_bordercolor', $xoopsModuleConfig['galleriffic_bordercolor']);
 $xoopsTpl->assign('galleriffic_bgcolor', $xoopsModuleConfig['galleriffic_bgcolor']);
 $xoopsTpl->assign('galleriffic_fontcolor', $xoopsModuleConfig['galleriffic_fontcolor']);
-$var_width = 0;
 $var_width = $xoopsModuleConfig['galleriffic_width'];
 $xoopsTpl->assign('content_width', $var_width + 10);
 $var_width = $xoopsModuleConfig['galleriffic_width'] + $var_nav_width + 100;

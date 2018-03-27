@@ -44,7 +44,6 @@ Documentation is available at http://www.ejeliot.com/pages/2
 
 use XoopsModules\Extgallery;
 
-
 /************************ Default Options **********************/
 
 // start a PHP session - this class uses sessions to store the generated
@@ -335,6 +334,7 @@ class PhpCaptcha
 
     public function DrawCharacters()
     {
+        $iShadowColour = '';
         // loop through and write out selected number of characters
         for ($i = 0, $iMax = strlen($this->sCode); $i < $iMax; ++$i) {
             // select random font
@@ -551,7 +551,7 @@ class AudioPhpCaptcha
 
         // loop through characters in code and format
         $sFormattedText = '';
-        for ($i = 0; $i < $iLength; ++$i) {
+        foreach ($sText as $i => $iValue) {
             // comma separate all but first and last characters
             if ($i > 0 && $i < $iLength - 1) {
                 $sFormattedText .= ', ';

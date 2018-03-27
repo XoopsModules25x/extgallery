@@ -583,7 +583,7 @@ switch ($op) {
 
         $rep = XOOPS_ROOT_PATH . "/modules/$moduleDirName/batch/";
         $dir = opendir($rep);
-        while ($f = readdir($dir)) {
+        while (false !== ($f = readdir($dir))) {
             if (is_file($rep . $f)) {
                 if (preg_match('/.*gif/', strtolower($f)) || preg_match('/.*jpg/', strtolower($f))
                     || preg_match('/.*jpeg/', strtolower($f))

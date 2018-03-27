@@ -27,7 +27,8 @@ if (isset($_POST['op'])) {
 switch ($op) {
 
     case 'galleryview':
-        /** @var XoopsModuleHandler $moduleHandler */
+        /** @var \XoopsModuleHandler $moduleHandler */
+        /** @var \XoopsConfigHandler $configHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
 

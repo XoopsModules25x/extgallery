@@ -63,7 +63,7 @@ switch ($op) {
 
                 $rep = XOOPS_ROOT_PATH . '/modules/extgallery/assets/fonts/';
                 $dir = opendir($rep);
-                while ($f = readdir($dir)) {
+                while (false !== ($f = readdir($dir))) {
                     if (is_file($rep . $f)) {
                         if (preg_match('/.*ttf/', strtolower($f))) {
                             $fonts[] = $f;
@@ -95,6 +95,7 @@ switch ($op) {
         switch ($step) {
             case 'enreg':
                 /** @var XoopsModuleHandler $moduleHandler */
+                /** @var \XoopsConfigHandler $configHandler */
                 $configHandler    = xoops_getHandler('config');
                 $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -424,7 +425,7 @@ switch ($op) {
 
         $rep = XOOPS_ROOT_PATH . '/modules/extgallery/assets/fonts/';
         $dir = opendir($rep);
-        while ($f = readdir($dir)) {
+        while (false !== ($f = readdir($dir))) {
             if (is_file($rep . $f)) {
                 if (preg_match('/.*ttf/', strtolower($f))) {
                     ++$nbFonts;
@@ -481,7 +482,7 @@ switch ($op) {
 
             $xoopsTpl->assign('watermarkform', $form->render());
 
-            // Else display Warning message
+        // Else display Warning message
         } else {
             $xoopsTpl->assign('freetypewarn', _AM_EXTGALLERY_WATERMARK_FREETYPE_WARN);
         }
@@ -517,7 +518,7 @@ function getImageTest()
     $ret = [];
     $rep = __DIR__ . '/../assets/images/';
     $dir = opendir($rep);
-    while ($f = readdir($dir)) {
+    while (false !== ($f = readdir($dir))) {
         if (is_file($rep . $f)) {
             if (preg_match('/watermark-border-test/', $f)) {
                 $ret[] = $f;

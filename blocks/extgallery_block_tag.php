@@ -17,9 +17,9 @@
  */
 
 /**
- * @param $options
+ * @param array $options
  *
- * @return array
+ * @return bool|array
  */
 function extgallery_tag_block_cloud_show($options)
 {
@@ -30,10 +30,11 @@ function extgallery_tag_block_cloud_show($options)
 
         return tag_block_cloud_show($options, $module_dirname);
     }
+    return false;
 }
 
 /**
- * @param $options
+ * @param array $options
  *
  * @return string
  */
@@ -45,9 +46,9 @@ function extgallery_tag_block_cloud_edit($options)
 }
 
 /**
- * @param $options
+ * @param array $options
  *
- * @return array
+ * @return bool|array
  */
 function extgallery_tag_block_top_show($options)
 {
@@ -59,10 +60,11 @@ function extgallery_tag_block_top_show($options)
 
         return tag_block_top_show($options, $module_dirname);
     }
+    return false;
 }
 
 /**
- * @param $options
+ * @param array $options
  *
  * @return string
  */

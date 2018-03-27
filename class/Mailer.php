@@ -92,8 +92,8 @@ class Mailer
         //$this->mailer->AddReplyTo($this->fromEmail, $this->fromName);
         try {
             $this->mailer->send();
-        }
-        catch (\phpmailerException $e) {
+        } catch (\phpmailerException $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         }
     }
 
@@ -124,7 +124,7 @@ class Mailer
         } else {
             $path = XOOPS_ROOT_PATH . '/modules/extgallery/language/english/mail_template/' . $name;
         }
-        $fd   = @fopen($path, 'r');
+        $fd   = @fopen($path, 'rb');
         $body = fread($fd, filesize($path));
         // replace tags with actual values
         foreach ($this->tags as $k => $v) {

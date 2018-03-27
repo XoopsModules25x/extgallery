@@ -19,7 +19,6 @@
 
 use XoopsModules\Extgallery;
 
-
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
@@ -45,7 +44,7 @@ class PublicPermHandler
      *
      * @return string
      */
-    public function _getUserGroup($user)
+    public function getUserGroup($user)
     {
         if (is_a($user, 'XoopsUser')) {
             return $user->getGroups();
@@ -70,7 +69,7 @@ class PublicPermHandler
             /** @var \XoopsModuleHandler $moduleHandler */
             $moduleHandler                 = xoops_getHandler('module');
             $module                        = $moduleHandler->getByDirname('extgallery');
-            $authorizedCat[$perm][$userId] = $groupPermHandler->getItemIds($perm, $this->_getUserGroup($user), $module->getVar('mid'));
+            $authorizedCat[$perm][$userId] = $groupPermHandler->getItemIds($perm, $this->getUserGroup($user), $module->getVar('mid'));
         }
 
         return $authorizedCat[$perm][$userId];
