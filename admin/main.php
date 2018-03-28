@@ -142,9 +142,9 @@ function dskspace($dir)
  */
 function imageMagickSupportType()
 {
-    global $xoopsModuleConfig;
+    $helper = Extgallery\Helper::getInstance();
 
-    $cmd = $xoopsModuleConfig['graphic_lib_path'] . 'convert -list format';
+    $cmd = $helper->getConfig('graphic_lib_path') . 'convert -list format';
     exec($cmd, $data);
 
     $ret = [
@@ -216,7 +216,7 @@ $folder = [
 $adminObject = \Xmf\Module\Admin::getInstance();
 
 $adminObject->addInfoBox(_AM_EXTGALLERY_SERVER_CONF);
-if ('gd' === $xoopsModuleConfig['graphic_lib']) {
+if ('gd' === $helper->getConfig('graphic_lib')) {
     $gd = gd_info();
     // GD graphic lib
     $test1 = ('' == $gd['GD Version']) ? '<span style="color:#FF0000;"><b>KO</b></span>' : $gd['GD Version'];
@@ -231,9 +231,9 @@ if ('gd' === $xoopsModuleConfig['graphic_lib']) {
     $adminObject->addInfoBoxLine(sprintf(_AM_EXTGALLERY_PNG_SUPPORT . ' ' . $test4), '');
 }
 
-if ('imagick' === $xoopsModuleConfig['graphic_lib']) {
+if ('imagick' === $helper->getConfig('graphic_lib')) {
     // ImageMagick graphic lib
-    $cmd = $xoopsModuleConfig['graphic_lib_path'] . 'convert -version';
+    $cmd = $helper->getConfig('graphic_lib_path') . 'convert -version';
     exec($cmd, $data, $error);
     $test      = !isset($data[0]) ? '<span style="color:#FF0000;"><b>KO</b></span>' : $data[0];
     $imSupport = imageMagickSupportType();

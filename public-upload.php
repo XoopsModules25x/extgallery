@@ -71,13 +71,13 @@ switch ($step) {
         $editor = $utility::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
         $form->addElement($editor, false);
 
-        $form->addElement(new \XoopsFormFile(_MD_EXTGALLERY_PHOTO, 'photo_file', $xoopsModuleConfig['max_photosize']), false);
-        if ($xoopsModuleConfig['display_extra_field']) {
+        $form->addElement(new \XoopsFormFile(_MD_EXTGALLERY_PHOTO, 'photo_file', $helper->getConfig('max_photosize')), false);
+        if ($helper->getConfig('display_extra_field')) {
             $form->addElement(new \XoopsFormTextArea(_MD_EXTGALLERY_EXTRA_INFO, 'photo_extra'));
         }
 
         // For xoops tag
-        if ((1 == $xoopsModuleConfig['usetag']) && is_dir('../tag')) {
+        if ((1 == $helper->getConfig('usetag')) && is_dir('../tag')) {
             require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
             $form->addElement(new TagFormTag('tag', 60, 255, '', 0));
         }

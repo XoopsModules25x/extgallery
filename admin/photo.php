@@ -22,7 +22,7 @@ use XoopsModules\Extgallery;
 require_once __DIR__ . '/admin_header.php';
 include __DIR__ . '/../../../class/pagenav.php';
 
-// require_once __DIR__ . '/../class/pear/Image/Transform.php';
+require_once __DIR__ . '/../class/pear/Image/Transform.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -43,7 +43,8 @@ if (isset($_GET['start'])) {
 }
 
 $moduleDirName = basename(dirname(__DIR__));
-$utility  = new Extgallery\Utility();
+$utility       = new Extgallery\Utility();
+$helper        = Extgallery\Helper::getInstance();
 switch ($op) {
 
     case 'add_photo':
@@ -438,7 +439,7 @@ switch ($op) {
                 echo _AM_EXTGALLERY_EDITDELETE_PHOTOTABLE_INFO . "\n";
                 echo '</fieldset><br>' . "\n";
 
-                $pageNav         = new \XoopsPageNav($nbPhoto, $xoopsModuleConfig['admin_nb_photo'], $start, 'start', 'op=modify&cat_id=' . $_GET['cat_id']);
+                $pageNav         = new \XoopsPageNav($nbPhoto, $helper->getConfig('admin_nb_photo'), $start, 'start', 'op=modify&cat_id=' . $_GET['cat_id']);
                 $globalCatSelect = $catHandler->getLeafSelect('changeAllCat', false, $_GET['cat_id'], ' onChange="return changeAllCategory();"');
 
                 echo '<div style="text-align:right;">' . $pageNav->renderNav() . '</div>' . "\n";
@@ -552,8 +553,6 @@ switch ($op) {
 
         xoops_cp_header();
 
-
-
         echo '<fieldset><legend style="font-weight:bold; color:#990000;">' . _AM_EXTGALLERY_ADD_PHOTO . '</legend>';
 
         $form = new \XoopsThemeForm(_AM_EXTGALLERY_UPLOAD, 'add_photo', 'photo.php?op=add_photo', 'post', true);
@@ -564,12 +563,12 @@ switch ($op) {
         $form->addElement(new \XoopsFormText(_AM_EXTGALLERY_PHOTO_TITLE, 'photo_title', '50', '150'), false);
         $editor = $utility::getWysiwygForm(_AM_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
         $form->addElement($editor, false);
-        $form->addElement(new \XoopsFormFile(_AM_EXTGALLERY_PHOTO, 'photo_file', $xoopsModuleConfig['max_photosize']), false);
-        if ($xoopsModuleConfig['display_extra_field']) {
+        $form->addElement(new \XoopsFormFile(_AM_EXTGALLERY_PHOTO, 'photo_file', $helper->getConfig('max_photosize')), false);
+        if ($helper->getConfig('display_extra_field')) {
             $form->addElement(new \XoopsFormTextArea(_AM_EXTGALLERY_EXTRA_INFO, 'photo_extra'));
         }
         // For xoops tag
-        if ((1 == $xoopsModuleConfig['usetag']) && is_dir(__DIR__ . '/../../tag')) {
+        if (class_exists('\\XoopsModules\\Tag\\Helper') && 1 == $helper->getConfig('usetag')) {
             require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
             $form->addElement(new TagFormTag('tag', 60, 255, '', 0));
         }
@@ -648,7 +647,7 @@ switch ($op) {
         echo '</fieldset><br>';
 
         $pendingPhoto = $photoHandler->getPendingPhoto();
-        $pageNav      = new \XoopsPageNav(count($pendingPhoto), $xoopsModuleConfig['admin_nb_photo'], $start);
+        $pageNav      = new \XoopsPageNav(count($pendingPhoto), $helper->getConfig('admin_nb_photo'), $start);
 
         echo '<div id="pending-photo" style="text-align:right;">' . $pageNav->renderNav() . '</div>';
         echo '<form action="photo.php?op=batchApprove" method="post">';
@@ -665,7 +664,7 @@ switch ($op) {
         $script = '';
         $first  = true;
         foreach ($pendingPhoto as $photo) {
-            if (++$i < $start + 1 || $i > ($start + $xoopsModuleConfig['admin_nb_photo'])) {
+            if (++$i < $start + 1 || $i > ($start + $helper->getConfig('admin_nb_photo'))) {
                 continue;
             }
             $class = (0 == ($i % 2)) ? 'even' : 'odd';
