@@ -36,7 +36,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
     {
         parent::__construct($db, 'extgallery_' . $type . 'cat', ucfirst($type) . 'Category', 'cat_id');
         //$this->_nestedTree = new NestedTree($db, 'extgallery_'.$type.'cat', 'cat_id', 'cat_pid', 'cat_id');
-        $this->_photoHandler = Extgallery\Helper::getInstance()->getHandler($type . 'Photo');
+        $this->_photoHandler = Extgallery\Helper::getInstance()->getHandler(ucfirst($type) . 'Photo');
     }
 
     /**
