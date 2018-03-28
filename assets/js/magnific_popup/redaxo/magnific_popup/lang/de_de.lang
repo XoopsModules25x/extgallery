@@ -1,0 +1,40 @@
+magnific_popup_addon_help = Bindet das jQuery Lightbox Plugin Magnific Popup in REDAXO Websites ein. 
+
+magnific_popup_start = Start
+magnific_popup_image_module = Bild Modul
+magnific_popup_gallery_module = Galerie Modul
+magnific_popup_settings = Einstellungen
+magnific_popup_help = Hilfe
+
+magnific_popup_help_chapter_readme = Readme
+magnific_popup_help_chapter_changelog = Changelog
+magnific_popup_help_chapter_license = Lizenz
+
+magnific_popup_start_headline = Magnific Popup für REDAXO
+magnific_popup_start_magnific_popup = Magnific Popup
+magnific_popup_start_docs = Dokumentation
+magnific_popup_start_homepage = Beispiele und Plugin Homepage
+magnific_popup_start_examples1 = Weitere Beispiele in der
+magnific_popup_start_examples2 = CodePen Collection
+
+magnific_popup_settings_include_jquery = jQuery einbinden
+magnific_popup_settings_save = Einstellungen speichern
+
+magnific_popup_settings_imagetype_image = Einzelbild Bildtyp
+magnific_popup_settings_imagetype_gallery = Galeriebild Bildtyp
+magnific_popup_settings_custom_css = Custom CSS-Datei
+
+magnific_popup_configfile_update = Einstellungen wurden gespeichert.
+magnific_popup_configfile_nosave = Einstellungen konnten nicht gespeichert werden!
+magnific_popup_configfile_nowrite = Konfigurationsdatei "{0}" ist nicht beschreibbar!
+
+magnific_popup_module_input = Eingabe
+magnific_popup_module_output = Ausgabe
+
+magnific_popup_module_name_image = Bild (Magnific Popup)
+magnific_popup_module_name_gallery = Galerie (Magnific Popup)
+
+magnific_popup_module_added = Modul "{0}" wurde angelegt
+magnific_popup_module_update = Bestehendes Modul aktualisieren
+magnific_popup_module_install = Modul jetzt automatisch installieren
+
