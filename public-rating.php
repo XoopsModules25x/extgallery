@@ -16,6 +16,8 @@
  */
 
 use XoopsModules\Extgallery;
+/** @var Extgallery\Helper $helper */
+$helper = Extgallery\Helper::getInstance();
 
 include __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
@@ -35,7 +37,7 @@ $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 $photo        = $photoHandler->get($photoId);
 
 $permHandler = Extgallery\PublicPermHandler::getInstance();
-if ($xoopsModuleConfig['enable_rating']
+if ($helper->getConfig('enable_rating')
     && !$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_rate', $photo->getVar('cat_id'))) {
     redirect_header('index.php', 3, _MD_EXTGALLERY_NOPERM);
 }

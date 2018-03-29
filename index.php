@@ -15,7 +15,10 @@
  * @package     ExtGallery
  */
 
+
 use XoopsModules\Extgallery;
+/** @var Extgallery\Helper $helper */
+$helper = Extgallery\Helper::getInstance();
 
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
@@ -24,7 +27,7 @@ $GLOBALS['xoopsOption']['template_main'] = $moduleDirName . '_index.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
 
 /** @var Extgallery\PublicCategoryHandler $catHandler */
-$catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+$catHandler = $helper->getHandler('PublicCategory');
 
 $cats = $catHandler->objectToArray($catHandler->getChildren(0), ['photo_id']);
 $xoopsTpl->assign('cats', $cats);
@@ -46,9 +49,9 @@ $lang = [
 $xoopsTpl->assign('lang', $lang);
 
 $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));
-$xoopsTpl->assign('disp_cat_img', $xoopsModuleConfig['disp_cat_img']);
-$xoopsTpl->assign('display_type', $xoopsModuleConfig['display_type']);
-$xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
+$xoopsTpl->assign('disp_cat_img', $helper->getConfig('disp_cat_img'));
+$xoopsTpl->assign('display_type', $helper->getConfig('display_type'));
+$xoopsTpl->assign('show_rss', $helper->getConfig('show_rss'));
 
 // pk ------------------- add upload and view-my-album links to main page
 if (null !== $GLOBALS['xoopsUser'] && is_object($GLOBALS['xoopsUser'])) {

@@ -17,6 +17,8 @@
 
 
 use XoopsModules\Extgallery;
+/** @var Extgallery\Helper $helper */
+$helper = Extgallery\Helper::getInstance();
 
 include __DIR__ . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -65,7 +67,7 @@ switch ($op) {
                 $photoHandler->modifyPhoto((int)$_POST['photo_id'], $data);
 
                 // For xoops tag
-                if ((1 == $xoopsModuleConfig['usetag']) && is_dir('../tag')) {
+                if ((1 == $helper->getConfig('usetag')) && is_dir('../tag')) {
                     $tagHandler = \XoopsModules\Tag\Helper::getInstance()->getHandler('Tag'); // xoops_getModuleHandler('tag', 'tag');
                     $tagHandler->updateByItem($_POST['tag'], $_POST['photo_id'], $xoopsModule->getVar('dirname'), 0);
                 }
@@ -141,12 +143,12 @@ switch ($op) {
                 $photo_desc = $myts->displayTarea($photo->getVar('photo_desc'), 0, 1, 1, 1, 0);
                 $editor     = $utility::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', $photo_desc, 15, 60, '100%', '350px', 'hometext_hidden');
                 $form->addElement($editor, false);
-                if ($xoopsModuleConfig['display_extra_field']) {
+                if ($helper->getConfig('display_extra_field')) {
                     $form->addElement(new \XoopsFormTextArea(_MD_EXTGALLERY_EXTRA_INFO, 'photo_extra', $photo->getVar('photo_extra')));
                 }
 
                 // For xoops tag
-                if ((1 == $xoopsModuleConfig['usetag']) && is_dir('../tag')) {
+                if ((1 == $helper->getConfig('usetag')) && is_dir('../tag')) {
                     $tagId = $photo->isNew() ? 0 : $photo->getVar('photo_id');
                     require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
                     $form->addElement(new TagFormTag('tag', 60, 255, $tagId, 0));

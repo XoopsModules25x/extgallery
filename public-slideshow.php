@@ -16,6 +16,8 @@
  */
 
 use XoopsModules\Extgallery;
+/** @var Extgallery\Helper $helper */
+$helper = Extgallery\Helper::getInstance();
 
 include __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
@@ -45,7 +47,7 @@ if (null === $catObj) {
     include XOOPS_ROOT_PATH . '/footer.php';
     exit;
 }
-$ajaxeffect = $xoopsModuleConfig['use_slideshow_effects'];
+$ajaxeffect = $helper->getConfig('use_slideshow_effects');
 $xoopsTpl->assign('use_slideshow_effects', $ajaxeffect);
 
 $cat = $catHandler->objectToArray($catObj);
@@ -69,7 +71,7 @@ $attributes['href']  = XOOPS_URL . '/modules/extgallery/public-rss.php';
 $xoTheme->addMeta('link', $rel, $attributes);
 $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 
-$jquery = $xoopsModuleConfig['enable_jquery'];
+$jquery = $helper->getConfig('enable_jquery');
 $xoopsTpl->assign('jquery', $jquery);
 if (1 == $jquery) {
     $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
@@ -99,59 +101,59 @@ if (1 == $jquery) {
     }
 }
 
-$xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
+$xoopsTpl->assign('show_rss', $helper->getConfig('show_rss'));
 
 //for galleryview
-$xoopsTpl->assign('galleryview_panelwidth', $xoopsModuleConfig['galleryview_panelwidth']);
-$xoopsTpl->assign('galleryview_panelheight', $xoopsModuleConfig['galleryview_panelheight']);
-$xoopsTpl->assign('galleryview_framewidth', $xoopsModuleConfig['galleryview_framewidth']);
-$xoopsTpl->assign('galleryview_frameheight', $xoopsModuleConfig['galleryview_frameheight']);
-$xoopsTpl->assign('galleryview_backgroundcolor', $xoopsModuleConfig['galleryview_bgcolor']);
-$xoopsTpl->assign('galleryview_transitionspeed', $xoopsModuleConfig['galleryview_tspeed']);
-$xoopsTpl->assign('galleryview_transitioninterval', $xoopsModuleConfig['galleryview_tterval']);
-$xoopsTpl->assign('galleryview_overlayheight', $xoopsModuleConfig['galleryview_overlayheight']);
-$xoopsTpl->assign('galleryview_overlaycolor', $xoopsModuleConfig['galleryview_overlaycolor']);
-$xoopsTpl->assign('galleryview_overlaytextcolor', $xoopsModuleConfig['galleryview_overlaytc']);
-$xoopsTpl->assign('galleryview_captiontextcolor', $xoopsModuleConfig['galleryview_captiontc']);
-$xoopsTpl->assign('galleryview_borderwidth', $xoopsModuleConfig['galleryview_borderwidth']);
-$xoopsTpl->assign('galleryview_bordercolor', $xoopsModuleConfig['galleryview_bordercolor']);
-$xoopsTpl->assign('galleryview_overlayopacity', $xoopsModuleConfig['galleryview_opacity']);
-$xoopsTpl->assign('galleryview_overlayfontsize', $xoopsModuleConfig['galleryview_overlayfs']);
-$xoopsTpl->assign('galleryview_navtheme', $xoopsModuleConfig['galleryview_navtheme']);
-$xoopsTpl->assign('galleryview_position', $xoopsModuleConfig['galleryview_position']);
-$xoopsTpl->assign('galleryview_easing', $xoopsModuleConfig['galleryview_easing']);
+$xoopsTpl->assign('galleryview_panelwidth', $helper->getConfig('galleryview_panelwidth'));
+$xoopsTpl->assign('galleryview_panelheight', $helper->getConfig('galleryview_panelheight'));
+$xoopsTpl->assign('galleryview_framewidth', $helper->getConfig('galleryview_framewidth'));
+$xoopsTpl->assign('galleryview_frameheight', $helper->getConfig('galleryview_frameheight'));
+$xoopsTpl->assign('galleryview_backgroundcolor', $helper->getConfig('galleryview_bgcolor'));
+$xoopsTpl->assign('galleryview_transitionspeed', $helper->getConfig('galleryview_tspeed'));
+$xoopsTpl->assign('galleryview_transitioninterval', $helper->getConfig('galleryview_tterval'));
+$xoopsTpl->assign('galleryview_overlayheight', $helper->getConfig('galleryview_overlayheight'));
+$xoopsTpl->assign('galleryview_overlaycolor', $helper->getConfig('galleryview_overlaycolor'));
+$xoopsTpl->assign('galleryview_overlaytextcolor', $helper->getConfig('galleryview_overlaytc'));
+$xoopsTpl->assign('galleryview_captiontextcolor', $helper->getConfig('galleryview_captiontc'));
+$xoopsTpl->assign('galleryview_borderwidth', $helper->getConfig('galleryview_borderwidth'));
+$xoopsTpl->assign('galleryview_bordercolor', $helper->getConfig('galleryview_bordercolor'));
+$xoopsTpl->assign('galleryview_overlayopacity', $helper->getConfig('galleryview_opacity'));
+$xoopsTpl->assign('galleryview_overlayfontsize', $helper->getConfig('galleryview_overlayfs'));
+$xoopsTpl->assign('galleryview_navtheme', $helper->getConfig('galleryview_navtheme'));
+$xoopsTpl->assign('galleryview_position', $helper->getConfig('galleryview_position'));
+$xoopsTpl->assign('galleryview_easing', $helper->getConfig('galleryview_easing'));
 
 //for galleria
-$xoopsTpl->assign('galleria_height', $xoopsModuleConfig['galleria_height']);
-$xoopsTpl->assign('galleria_panelwidth', $xoopsModuleConfig['galleria_panelwidth']);
-$xoopsTpl->assign('galleria_bgcolor', $xoopsModuleConfig['galleria_bgcolor']);
-$xoopsTpl->assign('galleria_bcolor', $xoopsModuleConfig['galleria_bcolor']);
-$xoopsTpl->assign('galleria_bgimg', $xoopsModuleConfig['galleria_bgimg']);
-if (1 == $xoopsModuleConfig['galleria_autoplay']) {
+$xoopsTpl->assign('galleria_height', $helper->getConfig('galleria_height'));
+$xoopsTpl->assign('galleria_panelwidth', $helper->getConfig('galleria_panelwidth'));
+$xoopsTpl->assign('galleria_bgcolor', $helper->getConfig('galleria_bgcolor'));
+$xoopsTpl->assign('galleria_bcolor', $helper->getConfig('galleria_bcolor'));
+$xoopsTpl->assign('galleria_bgimg', $helper->getConfig('galleria_bgimg'));
+if (1 == $helper->getConfig('galleria_autoplay')) {
     $xoopsTpl->assign('galleria_autoplay', 'true');
 } else {
     $xoopsTpl->assign('galleria_autoplay', 'false');
 }
-$xoopsTpl->assign('galleria_transition', $xoopsModuleConfig['galleria_transition']);
-$xoopsTpl->assign('galleria_tspeed', $xoopsModuleConfig['galleria_tspeed']);
+$xoopsTpl->assign('galleria_transition', $helper->getConfig('galleria_transition'));
+$xoopsTpl->assign('galleria_tspeed', $helper->getConfig('galleria_tspeed'));
 
 //for galleriffic
-$xoopsTpl->assign('galleriffic_nb_thumbs', $xoopsModuleConfig['galleriffic_nb_thumbs']);
-$xoopsTpl->assign('galleriffic_nb_colthumbs', $xoopsModuleConfig['galleriffic_nb_colthumbs']);
-$xoopsTpl->assign('galleriffic_nb_preload', $xoopsModuleConfig['galleriffic_nb_preload']);
-if (1 == $xoopsModuleConfig['galleriffic_autoplay']) {
+$xoopsTpl->assign('galleriffic_nb_thumbs', $helper->getConfig('galleriffic_nb_thumbs'));
+$xoopsTpl->assign('galleriffic_nb_colthumbs', $helper->getConfig('galleriffic_nb_colthumbs'));
+$xoopsTpl->assign('galleriffic_nb_preload', $helper->getConfig('galleriffic_nb_preload'));
+if (1 == $helper->getConfig('galleriffic_autoplay')) {
     $xoopsTpl->assign('galleriffic_autoplay', 'true');
 } else {
     $xoopsTpl->assign('galleriffic_autoplay', 'false');
 }
-$xoopsTpl->assign('galleriffic_tdelay', $xoopsModuleConfig['galleriffic_tdelay']);
-$xoopsTpl->assign('galleriffic_tspeed', $xoopsModuleConfig['galleriffic_tspeed']);
+$xoopsTpl->assign('galleriffic_tdelay', $helper->getConfig('galleriffic_tdelay'));
+$xoopsTpl->assign('galleriffic_tspeed', $helper->getConfig('galleriffic_tspeed'));
 
 $var_width = 0;
 $var_nav_width   = 0;
 $var_nav_visible = 'hidden';
 
-switch ($xoopsModuleConfig['galleriffic_nb_colthumbs']) {
+switch ($helper->getConfig('galleriffic_nb_colthumbs')) {
     case 1:
         $var_nav_width   = 130;
         $var_nav_visible = 'visible';
@@ -169,17 +171,17 @@ switch ($xoopsModuleConfig['galleriffic_nb_colthumbs']) {
 }
 $xoopsTpl->assign('nav_width', $var_nav_width);
 $xoopsTpl->assign('nav_visibility', $var_nav_visible);
-$xoopsTpl->assign('galleriffic_bordercolor', $xoopsModuleConfig['galleriffic_bordercolor']);
-$xoopsTpl->assign('galleriffic_bgcolor', $xoopsModuleConfig['galleriffic_bgcolor']);
-$xoopsTpl->assign('galleriffic_fontcolor', $xoopsModuleConfig['galleriffic_fontcolor']);
-$var_width = $xoopsModuleConfig['galleriffic_width'];
+$xoopsTpl->assign('galleriffic_bordercolor', $helper->getConfig('galleriffic_bordercolor'));
+$xoopsTpl->assign('galleriffic_bgcolor', $helper->getConfig('galleriffic_bgcolor'));
+$xoopsTpl->assign('galleriffic_fontcolor', $helper->getConfig('galleriffic_fontcolor'));
+$var_width = $helper->getConfig('galleriffic_width');
 $xoopsTpl->assign('content_width', $var_width + 10);
-$var_width = $xoopsModuleConfig['galleriffic_width'] + $var_nav_width + 100;
+$var_width = $helper->getConfig('galleriffic_width') + $var_nav_width + 100;
 $xoopsTpl->assign('page_width', $var_width);
 
-$xoopsTpl->assign('pic_height', $xoopsModuleConfig['galleriffic_height']);
-$xoopsTpl->assign('pic_width', $xoopsModuleConfig['galleriffic_width']);
-$xoopsTpl->assign('galleriffic_show_descr', $xoopsModuleConfig['galleriffic_show_descr']);
-$xoopsTpl->assign('galleriffic_download', $xoopsModuleConfig['galleriffic_download']);
+$xoopsTpl->assign('pic_height', $helper->getConfig('galleriffic_height'));
+$xoopsTpl->assign('pic_width', $helper->getConfig('galleriffic_width'));
+$xoopsTpl->assign('galleriffic_show_descr', $helper->getConfig('galleriffic_show_descr'));
+$xoopsTpl->assign('galleriffic_download', $helper->getConfig('galleriffic_download'));
 
 include XOOPS_ROOT_PATH . '/footer.php';

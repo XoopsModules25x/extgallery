@@ -17,6 +17,8 @@
 
 
 use XoopsModules\Extgallery;
+/** @var Extgallery\Helper $helper */
+$helper = Extgallery\Helper::getInstance();
 
 include __DIR__ . '/header.php';
 
@@ -68,8 +70,8 @@ $lang = [
 $xoopsTpl->assign('lang', $lang);
 
 $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));
-$xoopsTpl->assign('disp_cat_img', $xoopsModuleConfig['disp_cat_img']);
-$xoopsTpl->assign('display_type', $xoopsModuleConfig['display_type']);
-$xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
+$xoopsTpl->assign('disp_cat_img', $helper->getConfig('disp_cat_img'));
+$xoopsTpl->assign('display_type', $helper->getConfig('display_type'));
+$xoopsTpl->assign('show_rss', $helper->getConfig('show_rss'));
 
 include XOOPS_ROOT_PATH . '/footer.php';
