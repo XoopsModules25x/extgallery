@@ -147,7 +147,8 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_GENERAL'
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'line_break';
 $modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
+$modversion['config'][$i]['default']     = 'odd';
+
 ++$i;
 $modversion['config'][$i]['name']        = 'display_type';
 $modversion['config'][$i]['title']       = '_MI_EXTGAL_DISP_TYPE';
@@ -228,7 +229,7 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_ALBUM';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'line_break';
 $modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
+$modversion['config'][$i]['default']     = 'odd';
 ++$i;
 $modversion['config'][$i]['name']        = 'use_ajax_effects';
 $modversion['config'][$i]['title']       = '_MI_EXTGAL_DISP_TYPE';
@@ -264,7 +265,7 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_SLIDESHO
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'line_break';
 $modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
+$modversion['config'][$i]['default']     = 'odd';
 ++$i;
 $modversion['config'][$i]['name']        = 'use_slideshow_effects';
 $modversion['config'][$i]['title']       = '_MI_EXTGAL_DISP_TYPE';
@@ -284,7 +285,7 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_PHOTO';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'line_break';
 $modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
+$modversion['config'][$i]['default']     = 'odd';
 ++$i;
 $modversion['config'][$i]['name']        = 'save_large';
 $modversion['config'][$i]['title']       = '_MI_EXTGAL_SAVE_L';
@@ -375,7 +376,7 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_INFO';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'line_break';
 $modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
+$modversion['config'][$i]['default']     = 'odd';
 /**
  * DNPROSSI - Info View
  * Shows-hides info from album thumbs or photo
@@ -545,7 +546,7 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_RSS';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'line_break';
 $modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
+$modversion['config'][$i]['default']     = 'odd';
 ++$i;
 $modversion['config'][$i]['name']        = 'show_rss';
 $modversion['config'][$i]['title']       = '_MI_EXTGAL_SHOW_RSS';
@@ -580,7 +581,7 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_ADMIN';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'line_break';
 $modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
+$modversion['config'][$i]['default']     = 'odd';
 ++$i;
 $modversion['config'][$i]['name']        = 'admin_nb_photo';
 $modversion['config'][$i]['title']       = '_MI_EXTGAL_ADM_NBPHOTO';
@@ -594,7 +595,7 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_GRAPHLIB
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'line_break';
 $modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
+$modversion['config'][$i]['default']     = 'odd';
 ++$i;
 $modversion['config'][$i]['name']        = 'graphic_lib';
 $modversion['config'][$i]['title']       = '_MI_EXTGAL_GRAPHLIB';
@@ -616,7 +617,7 @@ $modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_COMNOTI'
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'line_break';
 $modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
+$modversion['config'][$i]['default']     = 'odd';
 
 // Hidden preferences field
 ++$i;
