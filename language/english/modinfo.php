@@ -170,15 +170,15 @@ define('_MI_EXTGAL_SLIDESHOW_GRIA', 'galleria');
 define('_MI_EXTGAL_SLIDESHOW_MICRO', 'microgallery');
 define('_MI_EXTGAL_SLIDESHOW_GFIC', 'galleriffic');
 
-define('_MI_EXTGAL_PREFERENCE_BREAK_GENERAL', '<span style="color: #FF0000; font-size: Medium;  font-weight: bold;">--- General ---</span> ');
-define('_MI_EXTGAL_PREFERENCE_BREAK_PHOTO', '<span style="color: #FF0000; font-size: Medium;  font-weight: bold;">--- Photo ---</span> ');
-define('_MI_EXTGAL_PREFERENCE_BREAK_INFO', '<span style="color: #FF0000; font-size: Medium;  font-weight: bold;">--- Information ---</span> ');
-define('_MI_EXTGAL_PREFERENCE_BREAK_ADMIN', '<span style="color: #FF0000; font-size: Medium;  font-weight: bold;">--- Admin ---</span> ');
-define('_MI_EXTGAL_PREFERENCE_BREAK_RSS', '<span style="color: #FF0000; font-size: Medium;  font-weight: bold;">--- Rss ---</span> ');
-define('_MI_EXTGAL_PREFERENCE_BREAK_GRAPHLIB', '<span style="color: #FF0000; font-size: Medium;  font-weight: bold;">--- Graphic library ---</span> ');
-define('_MI_EXTGAL_PREFERENCE_BREAK_COMNOTI', '<span style="color: #FF0000; font-size: Medium;  font-weight: bold;">--- Comments and notifications ---</span> ');
-define('_MI_EXTGAL_PREFERENCE_BREAK_ALBUM', '<span style="color: #FF0000; font-size: Medium;  font-weight: bold;">--- Album ---</span> ');
-define('_MI_EXTGAL_PREFERENCE_BREAK_SLIDESHOW', '<span style="color: #FF0000; font-size: Medium;  font-weight: bold;">--- Slideshow ---</span> ');
+define('_MI_EXTGAL_PREFERENCE_BREAK_GENERAL', '<span style="color: #FF0000; font-size: Small;  font-weight: bold;">--- General ---</span> ');
+define('_MI_EXTGAL_PREFERENCE_BREAK_PHOTO', '<span style="color: #FF0000; font-size: Small;  font-weight: bold;">--- Photo ---</span> ');
+define('_MI_EXTGAL_PREFERENCE_BREAK_INFO', '<span style="color: #FF0000; font-size: Small;  font-weight: bold;">--- Information ---</span> ');
+define('_MI_EXTGAL_PREFERENCE_BREAK_ADMIN', '<span style="color: #FF0000; font-size: Small;  font-weight: bold;">--- Admin ---</span> ');
+define('_MI_EXTGAL_PREFERENCE_BREAK_RSS', '<span style="color: #FF0000; font-size: Small;  font-weight: bold;">--- Rss ---</span> ');
+define('_MI_EXTGAL_PREFERENCE_BREAK_GRAPHLIB', '<span style="color: #FF0000; font-size: Small;  font-weight: bold;">--- Graphic library ---</span> ');
+define('_MI_EXTGAL_PREFERENCE_BREAK_COMNOTI', '<span style="color: #FF0000; font-size: Small;  font-weight: bold;">--- Comments and notifications ---</span> ');
+define('_MI_EXTGAL_PREFERENCE_BREAK_ALBUM', '<span style="color: #FF0000; font-size: Small;  font-weight: bold;">--- Album ---</span> ');
+define('_MI_EXTGAL_PREFERENCE_BREAK_SLIDESHOW', '<span style="color: #FF0000; font-size: Small;  font-weight: bold;">--- Slideshow ---</span> ');
 
 //Help
 define('_MI_EXTGALLERY_DIRNAME', basename(dirname(dirname(__DIR__))));
