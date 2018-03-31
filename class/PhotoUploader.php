@@ -64,8 +64,8 @@ class PhotoUploader
      */
     public function fetchPhoto($file)
     {
-        $jupart  = isset($_POST['jupart']) ? (int)$_POST['jupart'] : 0;
-        $jufinal = isset($_POST['jufinal']) ? (int)$_POST['jufinal'] : 1;
+        $jupart  = \Xmf\Request::getInt('jupart', 0, 'POST');
+        $jufinal = \Xmf\Request::getInt('jufinal', 1, 'POST');
         $md5sums = isset($_POST['md5sum'][0]) ? $_POST['md5sum'][0] : null;
 
         if ('' == $this->uploadDir) {

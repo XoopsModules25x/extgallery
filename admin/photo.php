@@ -110,7 +110,7 @@ switch ($op) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_NO_PHOTO_IN_BATCH_DIR);
         }
 
-        $nbPhotos = isset($_POST['nbPhoto']) ? $_POST['nbPhoto'] : 0;
+        $nbPhotos = \Xmf\Request::getInt('nbPhoto', 0, POST);
         $i        = 0;
         foreach ($photos as $photo) {
 

@@ -751,8 +751,8 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $this->photoUploader = new \XoopsMediaUploader($uploadDir, $allowedMimeTypes, 50000000, 5000, 5000);
 
-        $jupart  = isset($_POST['jupart']) ? (int)$_POST['jupart'] : 0;
-        $jufinal = isset($_POST['jufinal']) ? (int)$_POST['jufinal'] : 1;
+        $jupart  = \Xmf\Request::getInt('jupart', 0, 'POST');
+        $jufinal = \Xmf\Request::getInt('jufinal', 1, 'POST');
 
         if ($this->photoUploader->fetchMedia($file) && $this->photoUploader->upload()) {
         } else {
