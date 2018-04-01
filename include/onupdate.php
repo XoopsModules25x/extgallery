@@ -42,10 +42,8 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_extgallery(\XoopsModule $module)
 {
-    /** @var Extgallery\Helper $helper */
+
     /** @var Extgallery\Utility $utility */
-    $moduleDirName = basename(dirname(__DIR__));
-    $helper       = Extgallery\Helper::getInstance();
     $utility      = new Extgallery\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);

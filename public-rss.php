@@ -29,7 +29,7 @@ if (function_exists('mb_http_output')) {
     mb_http_output('pass');
 }
 
-$catId = \Xmf\Request::getInt('id', 0, GET);
+$catId = \Xmf\Request::getInt('id', 0, 'GET');
 /** @var Extgallery\PublicCategoryHandler $catHandler */
 $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 /** @var Extgallery\PublicPhotoHandler $photoHandler */
