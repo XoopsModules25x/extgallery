@@ -18,6 +18,7 @@
 
 use XoopsModules\Extgallery;
 use XoopsModules\Tag;
+use XoopsModules\Tag\Helper;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -913,7 +914,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $this->createPhoto($data);
 
 //        if (1 == $helper->getConfig('usetag') || (is_dir('../tag') || is_dir('../../tag'))) {
-        if (class_exists('\\XoopsModules\\Tag\\Helper') && 1 == $helper->getConfig('usetag')) {
+        if (class_exists(Helper::class) && 1 == $helper->getConfig('usetag')) {
             $newid      = $this->db->getInsertId();
             $tagHandler = \XoopsModules\Tag\Helper::getInstance()->getHandler('Tag'); // xoops_getModuleHandler('tag', 'tag');
             $tagHandler->updateByItem($photoTag, $newid, 'extgallery', 0);

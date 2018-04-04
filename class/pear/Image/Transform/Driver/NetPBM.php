@@ -48,7 +48,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      * associative array commands to be executed
      * @var array
      */
-    public $command = array();
+    public $command = [];
 
     /**
      * Class Constructor
@@ -180,7 +180,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
                 return PEAR::raiseError('Couldn\'t find "pnmrotate" binary', IMAGE_TRANSFORM_ERROR_UNSUPPORTED);
             }
 
-            $bgcolor = $this->_getColor('canvasColor', $options, array(255, 255, 255));
+            $bgcolor = $this->_getColor('canvasColor', $options, [255, 255, 255]);
             $bgcolor = $this->colorarray2colorhex($bgcolor);
 
             $scaleMethod = $this->_getOption('scaleMethod', $options, 'smooth');
@@ -306,7 +306,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      *                                  // before drawing the text
      *                                  )
      *
-     * @return void
+     * @return object
      */
     public function addText($params)
     {
@@ -318,8 +318,8 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         // for the user to just call $this->_resize() _first_ ;)
         extract(array_merge($this->_get_default_text_params(), $params));
 
-        $options = array('colorFont' => $color);
-        $color   = $this->_getColor('colorFont', $options, array(0, 0, 0));
+        $options = ['colorFont' => $color];
+        $color   = $this->_getColor('colorFont', $options, [0, 0, 0]);
         $color   = $this->colorarray2colorhex($color);
 
         $this->command[] = $this->_prepare_cmd(IMAGE_TRANSFORM_NETPBM_PATH, 'ppmlabel', '-angle ' . ((int)$angle) . ' -colour ' . escapeshellarg($color) . ' -size ' . ((float)$size) . ' -x ' . ((int)$x) . ' -y ' . ((int)($y + $size)) . ' -text ' . escapeshellarg($text));
@@ -472,9 +472,9 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      */
     public function save($filename, $type = null, $quality = 75)
     {
-        $type    = (is_null($type)) ? $this->type : $type;
-        $options = array();
-        if (!is_null($quality)) {
+        $type    = (null === $type) ? $this->type : $type;
+        $options = [];
+        if (null !== $quality) {
             $options['quality'] = $quality;
         }
         $quality = $this->_getOption('quality', $options, $quality);
@@ -499,9 +499,9 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      */
     public function display($type = null, $quality = null)
     {
-        $type    = (is_null($type)) ? $this->type : $type;
-        $options = array();
-        if (!is_null($quality)) {
+        $type    = (null === $type) ? $this->type : $type;
+        $options = [];
+        if (null !== $quality) {
             $options['quality'] = $quality;
         }
         $quality = $this->_getOption('quality', $options, 75);
@@ -523,6 +523,6 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      */
     public function free()
     {
-        $this->command = array();
+        $this->command = [];
     }
 } // End class ImageIM

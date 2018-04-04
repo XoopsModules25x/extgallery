@@ -134,9 +134,8 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
      * Rotates the current image
      * Note: color mask are currently not supported
      *
-     * @param   int     Rotation angle in degree
-     * @param   array   No options are currently supported
-     *
+     * @param      $angle
+     * @param null $options
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
      */
@@ -184,11 +183,11 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
             $params['color'] = strtolower($params['color']);
         }
 
-        static $cmds = array(
+        static $cmds = [
             'setfillcolor' => 'color',
             'setfontsize'  => 'size',
             'setfontface'  => 'font'
-        );
+        ];
         imagick_begindraw($this->imageHandle);
 
         foreach ($cmds as $cmd => $v) {
@@ -206,13 +205,15 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
     /**
      * Saves the image to a file
      *
-     * @param $filename string the name of the file to write to
+     * @param        $filename string the name of the file to write to
+     * @param string $type
+     * @param null   $quality
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
      */
     public function save($filename, $type = '', $quality = null)
     {
-        $options = (is_array($quality)) ? $quality : array();
+        $options = (is_array($quality)) ? $quality : [];
         if (is_numeric($quality)) {
             $options['quality'] = $quality;
         }
@@ -248,7 +249,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
      */
     public function display($type = '', $quality = null)
     {
-        $options = (is_array($quality)) ? $quality : array();
+        $options = (is_array($quality)) ? $quality : [];
         if (is_numeric($quality)) {
             $options['quality'] = $quality;
         }

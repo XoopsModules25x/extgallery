@@ -81,7 +81,7 @@ class Image_Transform_Driver_IM extends Image_Transform
      **/
     public function _init()
     {
-        $this->command = array();
+        $this->command = [];
     }
 
     /**
@@ -169,8 +169,8 @@ class Image_Transform_Driver_IM extends Image_Transform
     /**
      * rotate
      *
-     * @param   int     angle   rotation angle
-     * @param   array   options no option allowed
+     * @param      $angle
+     * @param null $options
      * @return mixed TRUE or a PEAR error object on error
      */
     public function rotate($angle, $options = null)
@@ -330,8 +330,8 @@ class Image_Transform_Driver_IM extends Image_Transform
                 $type = 'JPG';
                 break;
         }
-        $options = array();
-        if (!is_null($quality)) {
+        $options = [];
+        if (null !== $quality) {
             $options['quality'] = $quality;
         }
         $quality = $this->_getOption('quality', $options, 75);
@@ -366,8 +366,8 @@ class Image_Transform_Driver_IM extends Image_Transform
                 $type = 'JPG';
                 break;
         }
-        $options = array();
-        if (!is_null($quality)) {
+        $options = [];
+        if (null !== $quality) {
             $options['quality'] = $quality;
         }
         $quality = $this->_getOption('quality', $options, 75);
@@ -391,7 +391,7 @@ class Image_Transform_Driver_IM extends Image_Transform
      */
     public function free()
     {
-        $this->command = array();
+        $this->command = [];
         $this->image   = '';
         $this->type    = '';
     }

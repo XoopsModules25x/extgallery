@@ -37,7 +37,7 @@ function xoops_module_uninstall_extgallery(\XoopsModule $module)
 
     $moduleDirName = basename(dirname(__DIR__));
     $moduleDirNameUpper   = strtoupper($moduleDirName);
-    $xsitemapHelper      = \Xmf\Module\Helper::getHelper($moduleDirName);
+     $helper      =XXX\Helper::getInstance();
 
     /** @var Extgallery\Utility $utility */
     $utility     = new Extgallery\Utility();
@@ -46,7 +46,7 @@ function xoops_module_uninstall_extgallery(\XoopsModule $module)
     }
 
     $success = true;
-    $xsitemapHelper->loadLanguage('admin');
+    $helper->loadLanguage('admin');
 
 
     //------------------------------------------------------------------

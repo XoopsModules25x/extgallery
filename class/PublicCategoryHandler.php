@@ -64,15 +64,15 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
         $moduleId = $GLOBALS['xoopsModule']->getVar('mid');
 
         // Retriving permission mask
-        /** @var \XoopsGroupPermHandler $gpermHandler */
-        $gpermHandler = xoops_getHandler('groupperm');
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
+        $grouppermHandler = xoops_getHandler('groupperm');
         $moduleId     = $GLOBALS['xoopsModule']->getVar('mid');
         $groups       = $GLOBALS['xoopsUser']->getGroups();
 
         $criteria = new \CriteriaCompo();
         $criteria->add(new \Criteria('gperm_name', 'extgallery_public_mask'));
         $criteria->add(new \Criteria('gperm_modid', $moduleId));
-        $permMask = $gpermHandler->getObjects($criteria);
+        $permMask = $grouppermHandler->getObjects($criteria);
 
         // Retriving group list
         /** @var \XoopsMemberHandler $memberHandler */
@@ -87,13 +87,13 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
         foreach ($permMask as $perm) {
             foreach ($modulePermArray as $permMask) {
                 if ($perm->getVar('gperm_itemid') == $permMask['maskId']) {
-                    $gpermHandler->addRight($permMask['name'], $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
+                    $grouppermHandler->addRight($permMask['name'], $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
                 }
             }
 
             foreach ($pluginPermArray as $permMask) {
                 if ($perm->getVar('gperm_itemid') == $permMask['maskId']) {
-                    $gpermHandler->addRight($permMask['name'], $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
+                    $grouppermHandler->addRight($permMask['name'], $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
                 }
             }
         }

@@ -83,10 +83,10 @@ class Console_GetoptPlus_Help
      */
     public function alignLines($lines, $addon = '', $paddingLength = null)
     {
-        settype($lines, 'array');
-        settype($addon, 'string');
+        $lines = (array)$lines;
+        $addon = (string)$addon;
         // defaults the left alignment to the length of the additional data + 1
-        is_null($paddingLength) and $paddingLength = $addon ? (strlen($addon) + 1) : 0;
+        null === $paddingLength and $paddingLength = $addon ? (strlen($addon) + 1) : 0;
         // extracts the first line
         $firstLine      = (string)current($lines);
         $firstLineEmpty = '' == $firstLine;
@@ -129,7 +129,7 @@ class Console_GetoptPlus_Help
     public function set($config, $command)
     {
         // sets all the help/usage section texts
-        $help = array();
+        $help = [];
         isset($config['header']) and $help[] = $this->tidyArray($config['header']);
         $help[] = $this->setUsage($config, $command);
         isset($config['options']) and $help[] = $this->setOptions($config['options']);
@@ -137,7 +137,7 @@ class Console_GetoptPlus_Help
         isset($config['footer']) and $help[] = $this->tidyArray($config['footer']);
         // merges the section texts together
         $callback = create_function('$array, $array1', '$array or $array = array(); return array_merge($array, $array1);');
-        $help     = array_reduce($help, $callback, array());
+        $help     = array_reduce($help, $callback, []);
 
         return implode("\n", $help);
     }
@@ -151,21 +151,21 @@ class Console_GetoptPlus_Help
      */
     public function setOptions($optionsConfig)
     {
-        settype($optionsConfig, 'array');
+        $optionsConfig = (array)$optionsConfig;
 
         $padding  = str_repeat(' ', self::optionPadding);
         $callback = create_function('$string', "return '$padding' . \$string;");
 
-        $lines = array();
+        $lines = [];
         foreach ($optionsConfig as $option) {
             $desc = isset($option['desc']) ? $option['desc'] : '';
-            settype($desc, 'array');
+            $desc = (array)$desc;
             // extracts the option example value from the description
             // encloses with angle/square brackets if mandatory/optional
             $value = '';
             empty($option['type']) or 'mandatory' == $option['type'] and $value = '<' . array_shift($desc) . '>' or 'optional' == $option['type'] and $value = '[' . array_shift($desc) . ']';
             // sets the option names
-            $optionNames = array();
+            $optionNames = [];
             isset($option['short']) and $optionNames[] = "-{$option['short']}";
             isset($option['long']) and $optionNames[] = "--{$option['long']}";
             $value and $optionNames[] = $value;
@@ -183,10 +183,8 @@ class Console_GetoptPlus_Help
     /**
      * Creates the usage help text section
      *
-     * @param  array  $usages        the usage descriptions
-     * @param  string $command       the command name
-     * @param  array  $optionsConfig the options descriptions
-     * @param  array  $paramsConfig  the parameters descriptions
+     * @param         $config
+     * @param  string $command the command name
      * @return array  the usage help text section
      * @access public
      */
@@ -195,16 +193,16 @@ class Console_GetoptPlus_Help
         if (empty($config['usage'])) {
             // usage is empty, defaults to a one line usage,
             // e.g. [options] [parameters]
-            $usage = array();
+            $usage = [];
             empty($config['options']) or $usage[] = '[options]';
             empty($config['parameters']) or $usage[] = '[parameters]';
             $config['usage'] = implode(' ', $usage);
         }
         // expecting an array of arrays of usage lines,
         // or possibly a single usage line
-        settype($config['usage'], 'array');
-        $lines   = array();
-        $padding = str_repeat(' ', strlen(self::usage));
+        $config['usage'] = (array)$config['usage'];
+        $lines           = [];
+        $padding         = str_repeat(' ', strlen(self::usage));
 
         foreach ($config['usage'] as $idx => $usage) {
             $usage = $this->tidyArray($usage);
@@ -233,9 +231,9 @@ class Console_GetoptPlus_Help
      */
     public function tidyArray($array, $tidyString = true)
     {
-        settype($array, 'array');
+        $array = (array)$array;
         // tidies the array string values
-        $tidyString and $array = array_map(array($this, 'tidyString'), $array);
+        $tidyString and $array = array_map([$this, 'tidyString'], $array);
 
         return $array;
     }

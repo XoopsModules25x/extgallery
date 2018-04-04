@@ -117,12 +117,12 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
         $sql       = 'SELECT cat_id FROM `' . $db->prefix($moduleDirName . '_publiccat') . '`;';
         $result    = $db->query($sql);
         $moduleId = $module->getVar('mid');
-        /** @var XoopsGroupPermHandler $gpermHandler */
-        $gpermHandler = xoops_getHandler('groupperm');
+        /** @var XoopsGroupPermHandler $grouppermHandler */
+        $grouppermHandler = xoops_getHandler('groupperm');
         while (false !== ($cat = $db->fetchArray($result))) {
-            $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ADMIN, $moduleId);
-            $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_USERS, $moduleId);
-            $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ANONYMOUS, $moduleId);
+            $grouppermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ADMIN, $moduleId);
+            $grouppermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_USERS, $moduleId);
+            $grouppermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ANONYMOUS, $moduleId);
         }
     }
 
@@ -236,7 +236,7 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
         $folderHandler->delete($imagesDirectory);
     }
 
-    $gpermHandler = xoops_getHandler('groupperm');
+    $grouppermHandler = xoops_getHandler('groupperm');
 
-    return $gpermHandler->deleteByModule($module->getVar('mid'), 'item_read');
+    return $grouppermHandler->deleteByModule($module->getVar('mid'), 'item_read');
 }

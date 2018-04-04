@@ -1,4 +1,6 @@
 <?php
+
+use XoopsModules\Tag\Helper;
 /**
  * ExtGallery Admin settings
  * Manage admin pages
@@ -568,7 +570,7 @@ switch ($op) {
             $form->addElement(new \XoopsFormTextArea(_AM_EXTGALLERY_EXTRA_INFO, 'photo_extra'));
         }
         // For xoops tag
-        if (class_exists('\\XoopsModules\\Tag\\Helper') && 1 == $helper->getConfig('usetag')) {
+        if (class_exists(Helper::class) && 1 == $helper->getConfig('usetag')) {
             require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
             $form->addElement(new TagFormTag('tag', 60, 255, '', 0));
         }

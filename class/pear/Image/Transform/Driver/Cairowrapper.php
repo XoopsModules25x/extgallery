@@ -42,9 +42,9 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
      * @var    array
      * @access protected
      */
-    public $_supported_image_types = array(
+    public $_supported_image_types = [
         'png' => 'rw'
-    );
+    ];
 
     /**
      * Check settings

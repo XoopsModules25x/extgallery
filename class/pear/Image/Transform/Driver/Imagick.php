@@ -147,12 +147,12 @@ class Image_Transform_Driver_Imagick extends Image_Transform
      *                                                  before drawing the text
      *                                                  )
      *
-     * @return none
+     * @return void
      * @see PEAR::isError()
      */
     public function addText($params)
     {
-        $default_params = array(
+        $default_params = [
             'text'         => 'This is a Text',
             'x'            => 10,
             'y'            => 20,
@@ -160,19 +160,19 @@ class Image_Transform_Driver_Imagick extends Image_Transform
             'color'        => 'red',
             'font'         => 'Arial.ttf',
             'resize_first' => false // Carry out the scaling of the image before annotation?
-        );
+        ];
         $params         = array_merge($default_params, $params);
         extract($params);
 
         $color = is_array($color) ? $this->colorarray2colorhex($color) : strtolower($color);
 
-        imagick_annotate($this->imageHandle, array(
+        imagick_annotate($this->imageHandle, [
             'primitive' => "text $x,$y " . $text,
             'pointsize' => $size,
             'antialias' => 0,
             'fill'      => $color,
             'font'      => $font
-        ));
+        ]);
     } // End addText
 
     /**
@@ -182,7 +182,7 @@ class Image_Transform_Driver_Imagick extends Image_Transform
      *
      * @param  string $type
      * @param  int    $quality
-     * @return none
+     * @return void
      */
     public function save($filename, $type = '', $quality = 75)
     {
@@ -201,7 +201,7 @@ class Image_Transform_Driver_Imagick extends Image_Transform
      * @param string type (JPG,PNG...);
      * @param int    quality 75
      *
-     * @return none
+     * @return void
      */
     public function display($type = '', $quality = 75)
     {
@@ -220,7 +220,7 @@ class Image_Transform_Driver_Imagick extends Image_Transform
     /**
      * Destroy image handle
      *
-     * @return none
+     * @return bool
      */
     public function free()
     {

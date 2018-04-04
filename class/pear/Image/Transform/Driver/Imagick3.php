@@ -84,6 +84,7 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
      * @param string $image filename
      *
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
+     * @throws \ImagickException
      * @access public
      */
     public function load($image)
@@ -125,7 +126,7 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
         try {
             $scaleMethod = $this->_getOption('scaleMethod', $options, 'smooth');
             $blur        = ('pixel' == $scaleMethod) ? 0 : 1;
-            $this->imagick->resizeImage($new_x, $new_y, imagick::FILTER_UNDEFINED, $blur);
+            $this->imagick->resizeImage($new_x, $new_y, Imagick::FILTER_UNDEFINED, $blur);
         } catch (ImagickException $e) {
             return $this->raiseError('Could not resize image.', IMAGE_TRANSFORM_ERROR_FAILED);
         }
@@ -153,7 +154,7 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
         if (0 == ($angle % 360)) {
             return true;
         }
-        $color = $this->_getColor('canvasColor', $options, array(255, 255, 255));
+        $color = $this->_getColor('canvasColor', $options, [255, 255, 255]);
         if (is_array($color)) {
             $color = $this->colorarray2colorhex($color);
         }
@@ -197,11 +198,11 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
             $params['color'] = strtolower($params['color']);
         }
 
-        static $cmds = array(
+        static $cmds = [
             'setFillColor' => 'color',
             'setFontSize'  => 'size',
             'setFontFace'  => 'font'
-        );
+        ];
         $this->imagick->beginDraw();
 
         foreach ($cmds as $cmd => $v) {
@@ -219,14 +220,16 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
     /**
      * Saves the image to a file
      *
-     * @param $filename string the name of the file to write to
+     * @param        $filename string the name of the file to write to
      *
+     * @param string $type
+     * @param null   $quality
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
      */
     public function save($filename, $type = '', $quality = null)
     {
-        $options = (is_array($quality)) ? $quality : array();
+        $options = (is_array($quality)) ? $quality : [];
         if (is_numeric($quality)) {
             $options['quality'] = $quality;
         }
@@ -267,7 +270,7 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
      */
     public function display($type = '', $quality = null)
     {
-        $options = (is_array($quality)) ? $quality : array();
+        $options = (is_array($quality)) ? $quality : [];
         if (is_numeric($quality)) {
             $options['quality'] = $quality;
         }
