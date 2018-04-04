@@ -470,7 +470,7 @@ class Image_Transform
     public function fit($width, $height)
     {
         if ($width <= 0 || $height <= 0) {
-            return PEAR::raiseError("Invalid arguments.", IMAGE_TRANSFORM_ERROR_ARGUMENT);
+            return PEAR::raiseError('Invalid arguments.', IMAGE_TRANSFORM_ERROR_ARGUMENT);
         }
         $x = $this->img_x / $width;
         $y = $this->img_y / $height;
@@ -582,7 +582,7 @@ class Image_Transform
         //  9 = JPC,  10 = JP2, 11 = JPX, 12 = JB2, 13 = SWC, 14 = IFF,
         // 15 = WBMP, 16 = XBM
         if (!is_array($data)) {
-            return PEAR::raiseError("Cannot fetch image or images details.", true);
+            return PEAR::raiseError('Cannot fetch image or images details.', true);
         }
 
         switch ($data[2]) {
@@ -633,7 +633,7 @@ class Image_Transform
                 $type = 'xbm';
                 break;
             default:
-                return PEAR::raiseError("Cannot recognize image format", IMAGE_TRANSFORM_ERROR_UNSUPPORTED);
+                return PEAR::raiseError('Cannot recognize image format', IMAGE_TRANSFORM_ERROR_UNSUPPORTED);
         }
         $this->img_x = $this->new_x = $data[0];
         $this->img_y = $this->new_y = $data[1];
@@ -1338,9 +1338,9 @@ class Image_Transform
             $bottom = $y;
         }
 
-        return (bool)($left < $this->new_x
-                      && $right >= 0
-                      && $top < $this->new_y
-                      && $bottom >= 0);
+        return ($left < $this->new_x
+                && $right >= 0
+                && $top < $this->new_y
+                && $bottom >= 0);
     }
 }

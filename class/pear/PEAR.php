@@ -166,13 +166,13 @@ class PEAR
             $this->_error_class = $error_class;
         }
 
-        while ($classname && strcasecmp($classname, "pear")) {
+        while ($classname && strcasecmp($classname, 'pear')) {
             $destructor = "_$classname";
             if (method_exists($this, $destructor)) {
                 global $_PEAR_destructor_object_list;
                 $_PEAR_destructor_object_list[] = $this;
                 if (!isset($GLOBALS['_PEAR_SHUTDOWN_REGISTERED'])) {
-                    register_shutdown_function("_PEAR_call_destructors");
+                    register_shutdown_function('_PEAR_call_destructors');
                     $GLOBALS['_PEAR_SHUTDOWN_REGISTERED'] = true;
                 }
                 break;
@@ -279,7 +279,7 @@ class PEAR
         // if we are called statically, there is a potential
         // that no shutdown func is registered.  Bug #6445
         if (!isset($GLOBALS['_PEAR_SHUTDOWN_REGISTERED'])) {
-            register_shutdown_function("_PEAR_call_destructors");
+            register_shutdown_function('_PEAR_call_destructors');
             $GLOBALS['_PEAR_SHUTDOWN_REGISTERED'] = true;
         }
         $GLOBALS['_PEAR_shutdown_funcs'][] = [$func, $args];
@@ -382,12 +382,12 @@ class PEAR
                 if (is_callable($options)) {
                     $setoptions = $options;
                 } else {
-                    trigger_error("invalid error callback", E_USER_WARNING);
+                    trigger_error('invalid error callback', E_USER_WARNING);
                 }
                 break;
 
             default:
-                trigger_error("invalid error mode", E_USER_WARNING);
+                trigger_error('invalid error mode', E_USER_WARNING);
                 break;
         }
     }
@@ -473,18 +473,18 @@ class PEAR
                 $deleted =  $this->_checkDelExpect($error) ? true : false;
             }
 
-            return $deleted ? true : self::raiseError("The expected error you submitted does not exist"); // IMPROVE ME
+            return $deleted ? true : self::raiseError('The expected error you submitted does not exist'); // IMPROVE ME
         } elseif (!empty($error_code)) {
             // $error_code comes alone, trying to unset it
             if ($this->_checkDelExpect($error_code)) {
                 return true;
             }
 
-            return self::raiseError("The expected error you submitted does not exist"); // IMPROVE ME
+            return self::raiseError('The expected error you submitted does not exist'); // IMPROVE ME
         }
 
         // $error_code is empty
-        return self::raiseError("The expected error you submitted is empty"); // IMPROVE ME
+        return self::raiseError('The expected error you submitted is empty'); // IMPROVE ME
     }
 
     /**
@@ -550,7 +550,7 @@ class PEAR
             count($object->_expected_errors) > 0 &&
             count($exp = end($object->_expected_errors))
         ) {
-            if ("*" == $exp[0]
+            if ('*' == $exp[0]
                 ||
                 (is_int(reset($exp)) && in_array($code, $exp)) ||
                 (is_string(reset($exp)) && in_array($message, $exp))
@@ -639,12 +639,12 @@ class PEAR
                 if (is_callable($options)) {
                     $def_options = $options;
                 } else {
-                    trigger_error("invalid error callback", E_USER_WARNING);
+                    trigger_error('invalid error callback', E_USER_WARNING);
                 }
                 break;
 
             default:
-                trigger_error("invalid error mode", E_USER_WARNING);
+                trigger_error('invalid error mode', E_USER_WARNING);
                 break;
         }
         $stack[] = [$mode, $options];
@@ -676,12 +676,12 @@ class PEAR
                 if (is_callable($options)) {
                     $setoptions = $options;
                 } else {
-                    trigger_error("invalid error callback", E_USER_WARNING);
+                    trigger_error('invalid error callback', E_USER_WARNING);
                 }
                 break;
 
             default:
-                trigger_error("invalid error mode", E_USER_WARNING);
+                trigger_error('invalid error mode', E_USER_WARNING);
                 break;
         }
         return true;
@@ -908,7 +908,7 @@ class PEAR_Error
 
         if ($this->mode & PEAR_ERROR_PRINT) {
             if (null === $options || is_int($options)) {
-                $format = "%s";
+                $format = '%s';
             } else {
                 $format = $options;
             }
@@ -923,7 +923,7 @@ class PEAR_Error
         if ($this->mode & PEAR_ERROR_DIE) {
             $msg = $this->getMessage();
             if (null === $options || is_int($options)) {
-                $format = "%s";
+                $format = '%s';
                 if ("\n" != substr($msg, -1)) {
                     $msg .= "\n";
                 }
@@ -939,7 +939,7 @@ class PEAR_Error
         }
 
         if ($this->mode & PEAR_ERROR_EXCEPTION) {
-            trigger_error("PEAR_ERROR_EXCEPTION is obsolete, use class PEAR_Exception for exceptions", E_USER_WARNING);
+            trigger_error('PEAR_ERROR_EXCEPTION is obsolete, use class PEAR_Exception for exceptions', E_USER_WARNING);
             eval('$e = new Exception($this->message, $this->code);throw($e);');
         }
     }
@@ -1127,7 +1127,7 @@ class PEAR_Error
                        strtolower(get_class($this)),
             $this->message,
             $this->code,
-                       implode("|", $modes),
+                       implode('|', $modes),
             $levels[$this->level],
                        $this->error_message_prefix,
                        $this->userinfo

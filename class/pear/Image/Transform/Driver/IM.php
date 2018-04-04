@@ -128,7 +128,7 @@ class Image_Transform_Driver_IM extends Image_Transform
             exec($cmd, $res, $exit);
 
             if (0 != $exit) {
-                return PEAR::raiseError("Cannot fetch image or images details.", true);
+                return PEAR::raiseError('Cannot fetch image or images details.', true);
             }
 
             $data        = explode(':', $res[0]);
@@ -374,7 +374,7 @@ class Image_Transform_Driver_IM extends Image_Transform
 
         $this->_send_display_headers($type);
 
-        $cmd = $this->_prepare_cmd(IMAGE_TRANSFORM_IM_PATH, 'convert', implode(' ', $this->command) . " -quality $quality " . $this->image . ' ' . $type . ":-");
+        $cmd = $this->_prepare_cmd(IMAGE_TRANSFORM_IM_PATH, 'convert', implode(' ', $this->command) . " -quality $quality " . $this->image . ' ' . $type . ':-');
         passthru($cmd);
 
         if (!$this->keep_settings_on_save) {

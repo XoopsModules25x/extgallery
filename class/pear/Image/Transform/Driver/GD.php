@@ -96,7 +96,7 @@ class Image_Transform_Driver_GD extends Image_Transform
     public function __construct()
     {
         if (!PEAR::loadExtension('gd')) {
-            $this->isError(PEAR::raiseError("GD library is not available.", IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
+            $this->isError(PEAR::raiseError('GD library is not available.', IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
         } else {
             $types = imagetypes();
             if ($types & IMG_PNG) {
@@ -115,7 +115,7 @@ class Image_Transform_Driver_GD extends Image_Transform
                 $this->_supported_image_types['wbmp'] = 'rw';
             }
             if (!$this->_supported_image_types) {
-                $this->isError(PEAR::raiseError("No supported image types available", IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
+                $this->isError(PEAR::raiseError('No supported image types available', IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
             }
         }
     } // End function Image

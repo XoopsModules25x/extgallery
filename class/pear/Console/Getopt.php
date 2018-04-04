@@ -498,6 +498,7 @@ class Console_GetoptPlus_Getopt
      * @param int     $version      the getopt version: 1 or 2
      * @return array   the parsed options, their arguments and parameters
      * @throws \Console_GetoptPlus_Exception
+     * @throws \PEAR_Exception
      * @access public
      */
     public function process(
