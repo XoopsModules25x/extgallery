@@ -21,11 +21,9 @@ use XoopsModules\Extgallery;
 include __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
-if (!isset($_GET['id'])) {
-    $photoId = 0;
-} else {
-    $photoId = (int)$_GET['id'];
-}
+
+$photoId = \Xmf\Request::getInt('id', 0, 'GET');
+
 /** @var Extgallery\PublicPhotoHandler $photoHandler */
 /** @var Extgallery\Photo $photo */
 $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');

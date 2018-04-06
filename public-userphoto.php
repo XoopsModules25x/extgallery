@@ -25,11 +25,8 @@ include __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-userphoto.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
 
-if (!isset($_GET['photoId'])) {
-    $photoId = 0;
-} else {
-    $photoId = (int)$_GET['photoId'];
-}
+$photoId = \Xmf\Request::getInt('photoId', 0, 'GET');
+
 /** @var Extgallery\CategoryHandler $catHandler */
 $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 /** @var Extgallery\PublicPhotoHandler $photoHandler */

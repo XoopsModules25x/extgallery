@@ -83,7 +83,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
     public function deletePhotoByCat($catId)
     {
         $criteria = new \Criteria('cat_id', $catId);
-        $photos   =& $this->getObjects($criteria);
+        $photos   = $this->getObjects($criteria);
         foreach ($photos as $photo) {
             $this->deletePhoto($photo);
         }
@@ -105,7 +105,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $criteria->add(new \Criteria('photo_id', $photoId));
         $criteria->add(new \Criteria('photo_approved', 1));
 
-        $photo =& $this->getObjects($criteria);
+        $photo = $this->getObjects($criteria);
         if (1 != count($photo)) {
             return false;
         }
@@ -731,7 +731,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
 
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
-        $catId = (int)$_POST['cat_id'];
+        $catId = \Xmf\Request::getInt('cat_id', 0, 'POST');
 
         // If isn't an album when stop the traitment
         $cat = $catHandler->getCat($catId);
@@ -955,7 +955,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $criteria->setLimit($limit);
         $criteria->setSort('photo_date');
 
-        $photos =& $this->getObjects($criteria);
+        $photos = $this->getObjects($criteria);
 
         $ret = [];
         foreach ($photos as $photo) {

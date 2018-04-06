@@ -30,12 +30,12 @@ include XOOPS_ROOT_PATH . '/header.php';
 if (!isset($_GET['id'])) {
     $catId = 0;
 } else {
-    $catId = (int)$_GET['id'];
+    $catId = \Xmf\Request::getInt('id', 0, 'GET');
 }
 if (!isset($_GET['start'])) {
     $start = 0;
 } else {
-    $start = (int)$_GET['start'];
+    $start = \Xmf\Request::getInt('start', 0, 'GET');
 }
 
 // HACK BLUETEEN TO SORT PHOTO BY USERS

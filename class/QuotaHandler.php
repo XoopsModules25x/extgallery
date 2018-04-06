@@ -97,7 +97,7 @@ class QuotaHandler extends Extgallery\PersistableObjectHandler
         $criteria = new \CriteriaCompo();
         $criteria->add(new \Criteria('groupid', $groupid));
         $criteria->add(new \Criteria('quota_name', $quotaName));
-        $ret =& $this->getObjects($criteria);
+        $ret = $this->getObjects($criteria);
         if (empty($ret)) {
             return $this->create();
         } else {

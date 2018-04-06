@@ -21,13 +21,9 @@ include __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-if (isset($_GET['id'])) {
-    $photoId = (int)$_GET['id'];
-} elseif (isset($_POST['photo_id'])) {
-    $photoId = (int)$_POST['photo_id'];
-} else {
-    $photoId = 0;
-}
+if (\Xmf\Request::hasVar('id', 'GET')) {
+ $photoId = \Xmf\Request::getInt('id', 0, 'GET');
+} else$photoId = \Xmf\Request::getInt('photo_id', 0, 'POST');
 if (isset($_POST['step'])) {
     $step = $_POST['step'];
 } else {

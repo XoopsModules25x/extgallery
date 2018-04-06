@@ -88,7 +88,7 @@ class PublicEcardHandler extends Extgallery\PersistableObjectHandler
     public function getEcard($ecardId)
     {
         $criteria = new \Criteria('ecard_cardid', $ecardId);
-        $ecard    =& $this->getObjects($criteria);
+        $ecard    = $this->getObjects($criteria);
         if (1 != count($ecard)) {
             return false;
         }

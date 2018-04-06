@@ -24,11 +24,7 @@ require_once __DIR__ . '/admin_header.php';
 
 //$GLOBALS['xoopsOption']['template_main'] = 'extgallery_admin_album.tpl';
 
-if (isset($_POST['op'])) {
-    $op = $_POST['op'];
-} else {
-    $op = 'default';
-}
+$op    = \Xmf\Request::getCmd('op', 'default');
 
 switch ($op) {
 

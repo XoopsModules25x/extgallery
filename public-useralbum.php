@@ -24,16 +24,10 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-useralbum.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
 
-if (!isset($_GET['id'])) {
-    $userId = 0;
-} else {
-    $userId = (int)$_GET['id'];
-}
-if (!isset($_GET['start'])) {
-    $start = 0;
-} else {
-    $start = (int)$_GET['start'];
-}
+
+$userId = \Xmf\Request::getInt('id', 0, 'GET');
+$start = \Xmf\Request::getInt('start', 0, 'GET');
+
 
 $ajaxeffect = $helper->getConfig('use_ajax_effects');
 $xoopsTpl->assign('use_ajax_effects', $ajaxeffect);

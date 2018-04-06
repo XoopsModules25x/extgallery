@@ -167,7 +167,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         $criteria = new \CriteriaCompo();
         $criteria->add($this->getCatRestrictCriteria('public_displayed'));
         $criteria->add(new \Criteria('cat_id', $id));
-        $ret =& $this->getObjects($criteria);
+        $ret = $this->getObjects($criteria);
 
         if (count($ret) > 0) {
             return $ret[0];
@@ -423,7 +423,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         //$query = sprintf('select * from %s order by %s', $this->table, $this->fields['sort']);
 
         //$result = $this->db->query($query);
-        $categories =& $this->getObjects($criteria, false, false);
+        $categories = $this->getObjects($criteria, false, false);
 
         // create a root node to hold child data about first level items
         $root             = [];

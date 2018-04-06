@@ -64,7 +64,7 @@ switch ($op) {
                     $data['photo_extra'] = $_POST['photo_extra'];
                 }
 
-                $photoHandler->modifyPhoto((int)$_POST['photo_id'], $data);
+                $photoHandler->modifyPhoto(\Xmf\Request::getInt('photo_id', 0, 'POST'), $data);
 
                 // For xoops tag
                 if ((1 == $helper->getConfig('usetag')) && is_dir('../tag')) {
@@ -79,7 +79,7 @@ switch ($op) {
                     $newCat     = $catHandler->getCat($_POST['cat_id']);
 
                     // Set new category as album
-                    $catHandler->modifyCat(['cat_id' => (int)$_POST['cat_id'], 'cat_isalbum' => 1]);
+                    $catHandler->modifyCat(['cat_id' => \Xmf\Request::getInt('cat_id', 0, 'POST'), 'cat_isalbum' => 1]);
 
                     // Update album count
                     if (1 == $oldCat->getVar('cat_nb_photo')) {
@@ -130,7 +130,7 @@ switch ($op) {
                 /** @var Extgallery\PublicPhotoHandler $photoHandler */
                 $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
-                $photo = $photoHandler->getPhoto((int)$_GET['id']);
+                $photo = $photoHandler->getPhoto(\Xmf\Request::getInt('id', 0, 'GET'));
 
                 echo '<img src="' . XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name') . '">';
 
@@ -173,7 +173,7 @@ switch ($op) {
         /** @var Extgallery\PublicPhotoHandler $photoHandler */
         $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
-        $photo = $photoHandler->getPhoto((int)$_GET['id']);
+        $photo = $photoHandler->getPhoto(\Xmf\Request::getInt('id', 0, 'GET'));
         $photoHandler->deletePhoto($photo);
 
         $cat = $catHandler->getCat($photo->getVar('cat_id'));

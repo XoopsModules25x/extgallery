@@ -22,16 +22,10 @@ $helper = Extgallery\Helper::getInstance();
 include __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
-if (!isset($_GET['id'])) {
-    $photoId = 0;
-} else {
-    $photoId = (int)$_GET['id'];
-}
-if (!isset($_GET['rate'])) {
-    $rate = 0;
-} else {
-    $rate = (int)$_GET['rate'];
-}
+$catId = \Xmf\Request::getInt('id', 0, 'GET');
+
+$rate = \Xmf\Request::getInt('rate', 0, 'GET');
+
 /** @var Extgallery\PublicPhotoHandler $photoHandler */
 $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 $photo        = $photoHandler->get($photoId);
