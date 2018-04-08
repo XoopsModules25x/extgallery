@@ -183,7 +183,7 @@ class MetaSliderImageHelper
         $orig_size = $this->get_original_image_dimensions();
 
         // bail out if we can't find the image dimensions
-        if (false == $orig_size) {
+        if (false === $orig_size) {
             return $this->url;
         }
 

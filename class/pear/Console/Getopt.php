@@ -34,7 +34,7 @@
  * @link      http://pear.php.net/package/Console_GetoptPlus
  */
 
-require_once 'Console/GetoptPlus/Exception.php';
+require_once __DIR__ . '/Console/GetoptPlus/Exception.php';
 require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/PEAR.php';
 
 /**
@@ -44,7 +44,7 @@ require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/PEAR.php';
  *
  * Code Example 1:
  * <code>
- * require_once 'Console/GetoptPlus.php';
+ * require_once __DIR__ . '/Console/GetoptPlus.php';
  *
  * try {
  *    $shortOptions = "b:c::";
@@ -61,7 +61,7 @@ require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/PEAR.php';
  *
  * Code Example 2:
  * <code>
- * require_once 'Console/GetoptPlus/Getopt.php';
+ * require_once __DIR__ . '/Console/GetoptPlus/Getopt.php';
  *
  * try {
  *    $shortOptions = "b:c::";

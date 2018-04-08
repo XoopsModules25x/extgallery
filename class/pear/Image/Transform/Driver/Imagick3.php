@@ -23,7 +23,7 @@
  * @link       http://pear.php.net/package/Image_Transform
  */
 
-require_once 'Image/Transform.php';
+require_once __DIR__ . '/Image/Transform.php';
 
 /**
  * imagick PECL extension implementation for Image_Transform package
@@ -72,7 +72,7 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
     public function __construct()
     {
         if (PEAR::loadExtension('imagick')) {
-            include 'Image/Transform/Driver/Imagick/ImageTypes.php';
+            include __DIR__ . '/Image/Transform/Driver/Imagick/ImageTypes.php';
         } else {
             $this->isError(PEAR::raiseError('Could not find the imagick extension.', IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
         }

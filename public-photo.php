@@ -15,7 +15,7 @@
  * @package     ExtGallery
  */
 
-
+use Xmf\Request;
 use XoopsModules\Extgallery;
 /** @var Extgallery\Helper $helper */
 $helper = Extgallery\Helper::getInstance();
@@ -54,7 +54,7 @@ if (!$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_access', $photo['cat
 }
 
 // Don't update counter if user come from rating page
-if (isset($_SERVER['HTTP_REFERER']) && basename($_SERVER['HTTP_REFERER']) != 'public-rating.php?photoId=' . $photoId) {
+if (isset(Request::getString('HTTP_REFERER', '', 'SERVER')) && basename(Request::getString('HTTP_REFERER', '', 'SERVER')) != 'public-rating.php?photoId=' . $photoId) {
     $photoHandler->updateHits($photoId);
 }
 

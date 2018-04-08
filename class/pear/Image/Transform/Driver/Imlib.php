@@ -17,7 +17,7 @@
 // $Id: Imlib.php 258825 2008-04-30 23:00:13Z cweiske $
 // {{{ requires
 
-//require_once 'Image/Transform.php';
+//require_once __DIR__ . '/Image/Transform.php';
 require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
 
 // }}}
@@ -146,7 +146,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
             if ('#' == $color[0]) {
                 $color = $this->colorhex2colorarray($color);
             } else {
-                require_once 'Image/Transform/Driver/ColorsDefs.php';
+                require_once __DIR__ . '/Image/Transform/Driver/ColorsDefs.php';
                 $color = isset($colornames[$color]) ? $colornames[$color] : false;
             }
         }

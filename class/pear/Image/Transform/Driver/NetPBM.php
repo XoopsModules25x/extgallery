@@ -23,8 +23,8 @@
  * @link       http://pear.php.net/package/Image_Transform
  */
 
-//require_once 'Image/Transform.php';
-//require_once 'System.php';
+//require_once __DIR__ . '/Image/Transform.php';
+//require_once __DIR__ . '/System.php';
 require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
 require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/System.php';
 

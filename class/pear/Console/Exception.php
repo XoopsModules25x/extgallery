@@ -34,7 +34,7 @@
  * @link      http://pear.php.net/package/Console_GetoptPlus
  */
 
-require_once 'PEAR/Exception.php';
+require_once __DIR__ . '/PEAR/Exception.php';
 
 /**
  * Handling of error messages and exceptions.

@@ -31,7 +31,7 @@ class MytsGallery extends \MyTextSanitizerExtension
                 } else {
                     var text = prompt(textId, "");
                 }
-                if(text == null) {
+                if(text === null) {
                  return false;
                 }
                 var domobj = xoopsGetElementById(id);

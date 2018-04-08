@@ -16,7 +16,7 @@
 // |          Alan Knowles <alan@akbkhome.com>                            |
 // +----------------------------------------------------------------------+
 
-//require_once 'Image/Transform/Driver/GD.php';
+//require_once __DIR__ . '/Image/Transform/Driver/GD.php';
 require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform/Driver/GD.php';
 
 /**
@@ -87,7 +87,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
 
     public function rotate($angle, $options = null)
     {
-        if (null == $options) {
+        if (null === $options) {
             $autoresize = true;
             $color_mask = [255, 255, 0];
         } else {
@@ -108,7 +108,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
             if ('#' == $color_mask{0}) {
                 $color_mask = $this->colorhex2colorarray($color_mask);
             } else {
-                require_once 'Image/Transform/Driver/ColorsDefs.php';
+                require_once __DIR__ . '/Image/Transform/Driver/ColorsDefs.php';
                 $color_mask = isset($colornames[$color_mask]) ? $colornames[$color_mask] : false;
             }
         }

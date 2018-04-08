@@ -29,7 +29,7 @@
 /**
  * Include for error handling
  */
-//require_once 'PEAR.php';
+//require_once __DIR__ . '/PEAR.php';
 require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/PEAR.php';
 
 /**
@@ -1122,7 +1122,7 @@ class Image_Transform
      */
     public function getTempDir()
     {
-        require_once 'System.php';
+        require_once __DIR__ . '/System.php';
 
         return System::tmpdir();
     }
@@ -1138,7 +1138,7 @@ class Image_Transform
     public function getTempFile($dirname = null)
     {
         if (null === $dirname) {
-            require_once 'System.php';
+            require_once __DIR__ . '/System.php';
             $dirname = System::tmpdir();
         }
 
@@ -1286,7 +1286,7 @@ class Image_Transform
                 return $this->colorhex2colorarray($color);
             }
             static $colornames = [];
-            require_once 'Image/Transform/Driver/ColorsDefs.php';
+            require_once __DIR__ . '/Image/Transform/Driver/ColorsDefs.php';
 
             return (isset($colornames[$color])) ? $colornames[$color] : $default;
         }
