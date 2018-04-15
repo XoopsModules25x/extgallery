@@ -16,7 +16,7 @@
  * @package     ExtGallery
  */
 require_once __DIR__ . '/admin_header.php';
-require_once __DIR__ . '/../../../include/cp_header.php';
+require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 xoops_load('XoopsFormLoader');
 
 if (isset($_GET['op'])) {
@@ -516,7 +516,7 @@ switch ($op) {
 function getImageTest()
 {
     $ret = [];
-    $rep = __DIR__ . '/../assets/images/';
+    $rep =  dirname(__DIR__) . '/assets/images/';
     $dir = opendir($rep);
     while (false !== ($f = readdir($dir))) {
         if (is_file($rep . $f)) {

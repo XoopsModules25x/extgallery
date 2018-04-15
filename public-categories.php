@@ -17,11 +17,11 @@
 
 
 use XoopsModules\Extgallery;
-/** @var Extgallery\Helper $helper */
-$helper = Extgallery\Helper::getInstance();
 
 include __DIR__ . '/header.php';
 
+/** @var Extgallery\Helper $helper */
+$helper = Extgallery\Helper::getInstance();
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-categories.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
 

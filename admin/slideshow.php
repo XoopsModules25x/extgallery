@@ -17,10 +17,11 @@
  */
 
 use XoopsModules\Extgallery;
-/** @var Extgallery\Helper $helper */
-$helper = Extgallery\Helper::getInstance();
 
 require_once __DIR__ . '/admin_header.php';
+
+/** @var Extgallery\Helper $helper */
+$helper = Extgallery\Helper::getInstance();
 
 if (isset($_POST['op'])) {
     $op = $_POST['op'];

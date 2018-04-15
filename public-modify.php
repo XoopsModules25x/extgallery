@@ -17,12 +17,13 @@
 
 
 use XoopsModules\Extgallery;
-/** @var Extgallery\Helper $helper */
-$helper = Extgallery\Helper::getInstance();
 
 include __DIR__ . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 //require_once __DIR__ . '/class/Utility.php';
+
+/** @var Extgallery\Helper $helper */
+$helper = Extgallery\Helper::getInstance();
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];

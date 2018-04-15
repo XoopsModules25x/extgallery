@@ -20,7 +20,7 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 /**
  * Class ExtgalleryCorePreload
  */
-class ExtgalleryCorePreload extends XoopsPreloadItem
+class ExtgalleryCorePreload extends \XoopsPreloadItem
 {
     // to add PSR-4 autoloader
     /**

@@ -3,7 +3,6 @@
 use Xmf\Request;
 use  XoopsModules\Extgallery\Common;
 
-//require_once __DIR__ . '/../include/common.php';
 /**
  * Class Extgallery\Utility
  */

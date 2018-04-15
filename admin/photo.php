@@ -22,9 +22,9 @@ use Xmf\Request;
 use XoopsModules\Extgallery;
 
 require_once __DIR__ . '/admin_header.php';
-include __DIR__ . '/../../../class/pagenav.php';
+include  dirname(dirname(dirname(__DIR__))) . '/class/pagenav.php';
 
-require_once __DIR__ . '/../class/pear/Image/Transform.php';
+require_once  dirname(__DIR__) . '/class/pear/Image/Transform.php';
 
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
@@ -127,7 +127,7 @@ switch ($op) {
             }
         }
         // Set the category as album only if photo is approve
-        // require_once __DIR__ . '/../class/publicPerm.php';
+        // require_once  dirname(__DIR__) . '/class/publicPerm.php';
         $permHandler = Extgallery\PublicPermHandler::getInstance();
         if ($permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_autoapprove', $cat->getVar('cat_id'))) {
             $cat->setVar('cat_isalbum', 1);
@@ -174,7 +174,7 @@ switch ($op) {
             }
 
             // Update photo count if photo needn't approve
-            // require_once __DIR__ . '/../class/publicPerm.php';
+            // require_once  dirname(__DIR__) . '/class/publicPerm.php';
             $permHandler = Extgallery\PublicPermHandler::getInstance();
             if ($permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_autoapprove', $cat->getVar('cat_id'))) {
                 // Update album count
@@ -547,7 +547,7 @@ switch ($op) {
 
     case 'default':
     default:
-        // require_once __DIR__ . '/../class/Utility.php';
+        // require_once  dirname(__DIR__) . '/class/Utility.php';
         /** @var Extgallery\CategoryHandler $catHandler */
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
         /** @var Extgallery\PublicPhotoHandler $photoHandler */

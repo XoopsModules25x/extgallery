@@ -2,7 +2,7 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/../../mainfile.php';
+include  dirname(dirname(__DIR__)) . '/mainfile.php';
 $moduleDirName = basename(__DIR__);
 require_once __DIR__ . '/include/common.php';
 

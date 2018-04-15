@@ -245,7 +245,7 @@ function extgalleryTopSubmitterShow($options)
     while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $uid                  = $myrow['uid'];
         $countphoto           = $myrow['countphoto'];
-        $uname                = XoopsUser::getUnameFromId($myrow['uid']);
+        $uname                = \XoopsUser::getUnameFromId($myrow['uid']);
         $block['designers'][] = ['uid' => $uid, 'uname' => $uname, 'countphoto' => $countphoto];
     }
 

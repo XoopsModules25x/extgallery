@@ -17,10 +17,11 @@
 
 
 use XoopsModules\Extgallery;
-/** @var Extgallery\Helper $helper */
-$helper = Extgallery\Helper::getInstance();
 
 include __DIR__ . '/header.php';
+
+/** @var Extgallery\Helper $helper */
+$helper = Extgallery\Helper::getInstance();
 $moduleDirName = basename(__DIR__);
 
 $GLOBALS['xoopsOption']['template_main'] = $moduleDirName . '_index.tpl';
@@ -47,7 +48,6 @@ $lang = [
     'nbPhotos'         => _MD_EXTGALLERY_NBPHOTOS
 ];
 $xoopsTpl->assign('lang', $lang);
-
 $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));
 $xoopsTpl->assign('disp_cat_img', $helper->getConfig('disp_cat_img'));
 $xoopsTpl->assign('display_type', $helper->getConfig('display_type'));

@@ -19,7 +19,7 @@
 use XoopsModules\Extgallery;
 
 require_once __DIR__ . '/admin_header.php';
-//include __DIR__ . '/../class/grouppermform.php';
+//include  dirname(__DIR__) . '/class/grouppermform.php';
 
 if (isset($_POST['step'])) {
     $step = $_POST['step'];

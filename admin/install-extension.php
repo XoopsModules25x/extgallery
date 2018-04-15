@@ -70,7 +70,7 @@ switch ($step) {
         }
 
         $g_pcltar_lib_dir = XOOPS_ROOT_PATH . '/modules/' . $localModuleDir . '/class';
-        include __DIR__ . '/../class/pcltar.lib.php';
+        include  dirname(__DIR__) . '/class/pcltar.lib.php';
 
         // Extract extension files
         PclTarExtract(XOOPS_ROOT_PATH . '/uploads/' . $extensionFileName, XOOPS_ROOT_PATH . '/class/textsanitizer/', 'class/textsanitizer/');

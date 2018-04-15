@@ -20,7 +20,7 @@ use XoopsModules\Extgallery;
 
 require_once __DIR__ . '/admin_header.php';
 
-include __DIR__ . '/../../../include/cp_header.php';
+include  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 include __DIR__ . '/function.php';
 include __DIR__ . '/moduleUpdateFunction.php';
 

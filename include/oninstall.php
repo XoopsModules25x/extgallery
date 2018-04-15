@@ -27,10 +27,9 @@ use XoopsModules\Extgallery\Common;
  */
 function xoops_module_pre_install_extgallery(\XoopsModule $module)
 {
-    //    include __DIR__ . '/../preloads/autoloader.php';
     include __DIR__ . '/common.php';
     /** @var Extgallery\Utility $utility */
-    $utility = new Extgallery\Utility();
+    $utility = new \XoopsModules\Extgallery\Utility();
     //check for minimum XOOPS version
     $xoopsSuccess = $utility::checkVerXoops($module);
 
@@ -57,6 +56,10 @@ function xoops_module_pre_install_extgallery(\XoopsModule $module)
  */
 function xoops_module_install_extgallery(\XoopsModule $module)
 {
+    include __DIR__ . '/../preloads/autoloader.php';
+
+    $moduleDirName = basename(dirname(__DIR__));
+
     $module_id = $module->getVar('mid');
     /** @var XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
@@ -116,130 +119,5 @@ function xoops_module_install_extgallery(\XoopsModule $module)
     // Private autoapprove
     $grouppermHandler->addRight('extgallery_private', 16, XOOPS_GROUP_ADMIN, $module_id);
 
-    /*
 
-      // Create eXtGallery main upload directory
-      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery';
-      if (!is_dir($dir)) {
-          mkdir($dir, 0777);
-      }
-      chmod($dir, 0777);
-      // Create directory for photo in public album
-      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo';
-      if (!is_dir($dir)) {
-          mkdir($dir, 0777);
-      }
-      chmod($dir, 0777);
-      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original';
-      if (!is_dir($dir)) {
-          mkdir($dir, 0777);
-      }
-      chmod($dir, 0777);
-      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large';
-      if (!is_dir($dir)) {
-          mkdir($dir, 0777);
-      }
-      chmod($dir, 0777);
-      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium';
-      if (!is_dir($dir)) {
-          mkdir($dir, 0777);
-      }
-      chmod($dir, 0777);
-      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb';
-      if (!is_dir($dir)) {
-          mkdir($dir, 0777);
-      }
-      chmod($dir, 0777);
-
-
-
-      // Create directory for photo in user's album
-      //mkdir(XOOPS_ROOT_PATH."/uploads/extgallery/user-photo");
-
-      // Copy index.html files on uploads folders
-      $indexFile = XOOPS_ROOT_PATH . '/modules/extgallery/include/index.html';
-      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/index.html');
-      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/index.html');
-      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original/index.html');
-      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large/index.html');
-      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium/index.html');
-      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb/index.html');
-
-  */
-
-    require_once __DIR__ . '/../../../include/cp_header.php';
-
-    $moduleDirName = basename(dirname(__DIR__));
-
-    /** @var Extgallery\Helper $helper */
-    /** @var Extgallery\Utility $utility */
-    /** @var Extgallery\Common\Configurator $configurator */
-    $helper = Extgallery\Helper::getInstance();
-    $utility      = new Extgallery\Utility();
-    $configurator = new Common\Configurator();
-
-    // Load language files
-    $helper->loadLanguage('admin');
-    $helper->loadLanguage('modinfo');
-
-
-
-    $moduleId     = $module->getVar('mid');
-    $moduleId2    = $helper->getModule()->mid();
-    //$moduleName = $module->getVar('name');
-    $grouppermHandler = xoops_getHandler('groupperm');
-
-    /** @var Extgallery\Utility $utility */
-    $utility = new Extgallery\Utility();
-
-    //    require_once __DIR__ . '/config.php';
-
-    if (count($configurator->uploadFolders) > 0) {
-        //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-        foreach (array_keys($configurator->uploadFolders) as $i) {
-            $utility::createFolder($configurator->uploadFolders[$i]);
-        }
-    }
-    if (count($configurator->copyBlankFiles) > 0) {
-        $file = __DIR__ . '/../assets/images/blank.png';
-        foreach (array_keys($configurator->copyBlankFiles) as $i) {
-            $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
-            $utility::copyFile($file, $dest);
-        }
-    }
-
-    //  ---  CREATE FOLDERS ---------------
-    if (count($configurator->uploadFolders) > 0) {
-        //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-        foreach (array_keys($configurator->uploadFolders) as $i) {
-            $utility::createFolder($configurator->uploadFolders[$i]);
-        }
-    }
-
-    //  ---  COPY blank.png FILES ---------------
-    if (count($configurator->copyBlankFiles) > 0) {
-        $file = __DIR__ . '/../assets/images/blank.png';
-        foreach (array_keys($configurator->copyBlankFiles) as $i) {
-            $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
-            $utility::copyFile($file, $dest);
-        }
-    }
-
-    /*
-    //  ---  COPY test folder files ---------------
-if (count($configurator->copyTestFolders) > 0) {
-    //        $file = __DIR__ . '/../testdata/images/';
-    foreach (array_keys($configurator->copyTestFolders) as $i) {
-        $src  = $configurator->copyTestFolders[$i][0];
-        $dest = $configurator->copyTestFolders[$i][1];
-        $utility::xcopy($src, $dest);
-    }
-}
-*/
-
-    //delete .html entries from the tpl table
-    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
-    $GLOBALS['xoopsDB']->queryF($sql);
-
-    return true;
 }
