@@ -27,7 +27,7 @@
                             <img src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$child.photo.photo_name}>" alt="<{$child.photo.photo_title}>">
                         </a>
                     <{else}>
-                        <a title="<{$child.cat_name}>" href="pu<{$extgalleryName}>blic-categories.php?id=<{$child.cat_id}>">
+                        <a title="<{$child.cat_name}>" href="public-categories.php?id=<{$child.cat_id}>">
                             <img src="<{$xoops_url}>/uploads/extgallery/public-photo/thumb/thumb_<{$child.photo.photo_name}>" alt="<{$child.photo.photo_title}>">
                         </a>
                     <{/if}>
