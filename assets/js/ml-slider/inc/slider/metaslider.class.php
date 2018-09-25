@@ -10,8 +10,8 @@ class MetaSlider
 {
     public $id         = 0; // slider ID
     public $identifier = 0; // unique identifier
-    public $slides     = array(); //slides belonging to this slider
-    public $settings   = array(); // slider settings
+    public $slides     = []; //slides belonging to this slider
+    public $settings   = []; // slider settings
 
     /**
      * Constructor
@@ -46,7 +46,7 @@ class MetaSlider
     {
         $settings = get_post_meta($this->id, 'ml-slider_settings', true);
 
-        if (is_array($settings) && isset($settings['type']) && in_array($settings['type'], array('flex', 'coin', 'nivo', 'responsive'))) {
+        if (is_array($settings) && isset($settings['type']) && in_array($settings['type'], ['flex', 'coin', 'nivo', 'responsive'])) {
             return $settings;
         } else {
             return $this->get_default_parameters();
@@ -85,7 +85,7 @@ class MetaSlider
      */
     public function get_default_parameters()
     {
-        $params = array(
+        $params = [
             'type'           => 'flex',
             'random'         => false,
             'cssClass'       => '',
@@ -119,7 +119,7 @@ class MetaSlider
             'thumb_height'   => 100,
             'fullWidth'      => false,
             'noConflict'     => false
-        );
+        ];
 
         $params = apply_filters('metaslider_default_parameters', $params);
 
@@ -136,20 +136,20 @@ class MetaSlider
         }
 
         // make changes to slider
-        if (isset($_POST['settings'])) {
+        if (\Xmf\Request::hasVar('settings', 'POST')) {
             check_admin_referer('metaslider_save_' . $this->id);
             $this->update_settings($_POST['settings']);
         }
-        if (isset($_POST['title'])) {
+        if (\Xmf\Request::hasVar('title', 'POST')) {
             check_admin_referer('metaslider_save_' . $this->id);
             $this->update_title($_POST['title']);
         }
-        if (isset($_GET['deleteSlide'])) {
+        if (\Xmf\Request::hasVar('deleteSlide', 'GET')) {
             $this->delete_slide((int)$_GET['deleteSlide']);
         }
 
         // make changes to slides
-        if (isset($_POST['attachment'])) {
+        if (\Xmf\Request::hasVar('attachment', 'POST')) {
             check_admin_referer('metaslider_save_' . $this->id);
             $this->update_slides($_POST['attachment']);
         }
@@ -160,7 +160,7 @@ class MetaSlider
      */
     public function get_slides()
     {
-        $args = array(
+        $args = [
             'force_no_custom_order' => true,
             'orderby'               => 'menu_order',
             'order'                 => 'ASC',
@@ -169,14 +169,14 @@ class MetaSlider
             'lang'                  => '', // polylang, ingore language filter
             'suppress_filters'      => 1, // wpml, ignore language filter
             'posts_per_page'        => -1,
-            'tax_query'             => array(
-                array(
+            'tax_query'             => [
+                [
                     'taxonomy' => 'ml-slider',
                     'field'    => 'slug',
                     'terms'    => $this->id
-                )
-            )
-        );
+                ]
+            ]
+        ];
 
         $args = apply_filters('metaslider_populate_slides_args', $args, $this->id, $this->settings);
 
@@ -192,7 +192,7 @@ class MetaSlider
      */
     private function populate_slides()
     {
-        $slides = array();
+        $slides = [];
 
         $query = $this->get_slides();
 
@@ -299,7 +299,7 @@ class MetaSlider
         $style = "max-width: {$this->get_setting('width')}px;";
 
         // carousels are always 100% wide
-        if ('true' === $this->get_setting('carouselMode') || ('true' === $this->get_setting('fullWidth')) && 'coin' !== $this->get_setting('type')) {
+        if (('true' === $this->get_setting('carouselMode') || 'true' === $this->get_setting('fullWidth')) && ('coin' !== $this->get_setting('type'))) {
             $style = 'width: 100%;';
         }
 
@@ -333,7 +333,7 @@ class MetaSlider
         $custom_js_before = $this->get_custom_javascript_before();
         $custom_js_after  = $this->get_custom_javascript_after();
 
-        $script = 'var ' . $this->identifier . " = function($) {";
+        $script = 'var ' . $this->identifier . ' = function($) {';
         $script .= $custom_js_before;
         $script .= "\n            $('#" . $this->identifier . "')." . $this->js_function . '({ ';
         $script .= "\n                " . $this->get_javascript_parameters();
@@ -409,7 +409,7 @@ class MetaSlider
      */
     private function get_javascript_parameters()
     {
-        $options = array();
+        $options = [];
 
         // construct an array of all parameters
         foreach ($this->get_default_parameters() as $name => $default) {
@@ -466,7 +466,7 @@ class MetaSlider
     public function enqueue_scripts()
     {
         if ('true' === $this->get_setting('printJs')) {
-            wp_enqueue_script('metaslider-' . $this->get_setting('type') . '-slider', METASLIDER_ASSETS_URL . $this->js_path, array('jquery'), METASLIDER_VERSION);
+            wp_enqueue_script('metaslider-' . $this->get_setting('type') . '-slider', METASLIDER_ASSETS_URL . $this->js_path, ['jquery'], METASLIDER_VERSION);
         }
 
         if ('true' === $this->get_setting('printCss')) {
@@ -488,7 +488,7 @@ class MetaSlider
         $old_settings = $this->get_settings();
 
         // convert submitted checkbox values from 'on' or 'off' to boolean values
-        $checkboxes = array('noConflict', 'fullWidth', 'hoverPause', 'links', 'reverse', 'random', 'printCss', 'printJs', 'smoothHeight', 'center', 'smartCrop', 'carouselMode', 'autoPlay');
+        $checkboxes = ['noConflict', 'fullWidth', 'hoverPause', 'links', 'reverse', 'random', 'printCss', 'printJs', 'smoothHeight', 'center', 'smartCrop', 'carouselMode', 'autoPlay'];
 
         foreach ($checkboxes as $checkbox) {
             if (isset($new_settings[$checkbox]) && 'on' === $new_settings[$checkbox]) {
@@ -499,7 +499,7 @@ class MetaSlider
         }
 
         // update the slider settings
-        update_post_meta($this->id, 'ml-slider_settings', array_merge((array)$old_settings, $new_settings));
+        update_post_meta($this->id, 'ml-slider_settings', array_merge($old_settings, $new_settings));
 
         $this->settings = $this->get_settings();
     }
@@ -510,10 +510,10 @@ class MetaSlider
      */
     private function update_title($title)
     {
-        $slide = array(
+        $slide = [
             'ID'         => $this->id,
             'post_title' => $title
-        );
+        ];
 
         wp_update_post($slide);
     }
@@ -527,8 +527,8 @@ class MetaSlider
     private function delete_slide($slide_id)
     {
         // Get the existing terms and only keep the ones we don't want removed
-        $new_terms     = array();
-        $current_terms = wp_get_object_terms($slide_id, 'ml-slider', array('fields' => 'ids'));
+        $new_terms     = [];
+        $current_terms = wp_get_object_terms($slide_id, 'ml-slider', ['fields' => 'ids']);
         $term          = get_term_by('name', $this->id, 'ml-slider');
 
         foreach ($current_terms as $current_term) {

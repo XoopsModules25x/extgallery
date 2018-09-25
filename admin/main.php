@@ -20,9 +20,9 @@ use XoopsModules\Extgallery;
 
 require_once __DIR__ . '/admin_header.php';
 
-include  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include __DIR__ . '/function.php';
-include __DIR__ . '/moduleUpdateFunction.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require_once __DIR__ . '/function.php';
+require_once __DIR__ . '/moduleUpdateFunction.php';
 
 $catHandler   = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
@@ -142,6 +142,8 @@ function dskspace($dir)
  */
 function imageMagickSupportType()
 {
+
+    /** @var Extgallery\Helper $helper */
     $helper = Extgallery\Helper::getInstance();
 
     $cmd = $helper->getConfig('graphic_lib_path') . 'convert -list format';
@@ -150,7 +152,7 @@ function imageMagickSupportType()
     $ret = [
         'GIF Support' => '<span style="color:#FF0000;"><b>KO</b></span>',
         'JPG Support' => '<span style="color:#FF0000;"><b>KO</b></span>',
-        'PNG Support' => '<span style="color:#FF0000;"><b>KO</b></span>'
+        'PNG Support' => '<span style="color:#FF0000;"><b>KO</b></span>',
     ];
 
     foreach ($data as $line) {
@@ -178,6 +180,7 @@ function imageMagickSupportType()
  */
 function is__writable($path)
 {
+
     //will work in despite of Windows ACLs bug
     //NOTE: use a trailing slash for folders!!!
     //see http://bugs.php.net/bug.php?id=27609
@@ -210,7 +213,7 @@ $folder = [
     XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original',
     XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large',
     XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium',
-    XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb'
+    XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb',
 ];
 
 $adminObject = \Xmf\Module\Admin::getInstance();

@@ -64,13 +64,13 @@ class Photo extends \XoopsObject
             'className'      => 'PublicCategory',
             'getMethodeName' => 'getCat',
             'keyName'        => 'cat',
-            'core'           => false
+            'core'           => false,
         ];
         $this->externalKey['uid']    = [
             'className'      => 'User',
             'getMethodeName' => 'get',
             'keyName'        => 'user',
-            'core'           => true
+            'core'           => true,
         ];
     }
 

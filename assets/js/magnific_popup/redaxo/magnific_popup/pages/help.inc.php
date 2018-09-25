@@ -7,15 +7,15 @@ $func    = rex_request('func', 'string');
 
 // include markdwon parser
 if (!class_exists('Parsedown')) {
-    require($REX['INCLUDE_PATH'] . '/addons/magnific_popup/classes/class.parsedown.inc.php');
+    require_once $REX['INCLUDE_PATH'] . '/addons/magnific_popup/classes/class.parsedown.inc.php';
 }
 
 // chapters
-$chapterpages = array(
-    ''          => array($I18N->msg('magnific_popup_help_chapter_readme'), 'pages/help/readme.inc.php'),
-    'changelog' => array($I18N->msg('magnific_popup_help_chapter_changelog'), 'pages/help/changelog.inc.php'),
-    'license'   => array($I18N->msg('magnific_popup_help_chapter_license'), 'pages/help/license.inc.php')
-);
+$chapterpages = [
+    ''          => [$I18N->msg('magnific_popup_help_chapter_readme'), 'pages/help/readme.inc.php'],
+    'changelog' => [$I18N->msg('magnific_popup_help_chapter_changelog'), 'pages/help/changelog.inc.php'],
+    'license'   => [$I18N->msg('magnific_popup_help_chapter_license'), 'pages/help/license.inc.php'],
+];
 
 // build chapter navigation
 $chapternav = '';
@@ -43,7 +43,7 @@ echo '
     <div class= "addon-template">
     ';
 
-include($addonroot . $source);
+require_once $addonroot . $source;
 
 echo '
     </div>

@@ -7,9 +7,9 @@
  * Implements hook_magnific_popup_thumbnail_schemes().
  */
 function magnific_popup_youtube_magnific_popup_thumbnail_schemes() {
-  $thumbnail_schemes = array(
+  $thumbnail_schemes = [
     'youtube' => 'magnific_popup_yt_preview_wplay'
-  );
+  ];
   return $thumbnail_schemes;
 }
 
@@ -17,14 +17,14 @@ function magnific_popup_youtube_magnific_popup_thumbnail_schemes() {
  * Implements hook_magnific_popup_iframe_patterns().
  */
 function magnific_popup_youtube_magnific_popup_iframe_patterns() {
-  $iframe_patterns = array(
-    'youtube' => array(
+  $iframe_patterns = [
+    'youtube' => [
       'index' => 'youtube.com/',
       'id' => 'v=',
       'src' => '//www.youtube.com/embed/%id%?rel=0&modestbranding=1&playerapiid=mfp-iframe&controls=2&autoplay=1'
-    )
-  );
+    ]
+  ];
   return $iframe_patterns;
 }
 
-require_once('includes/magnific_popup_youtube.image_styles.inc');
+require_once 'includes/magnific_popup_youtube.image_styles.inc';

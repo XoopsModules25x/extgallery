@@ -18,7 +18,7 @@ class MetaResponsiveSlider extends MetaSlider
      */
     protected function get_param($param)
     {
-        $params = array(
+        $params = [
             'prevText'       => 'prevText',
             'nextText'       => 'nextText',
             'delay'          => 'timeout',
@@ -27,7 +27,7 @@ class MetaResponsiveSlider extends MetaSlider
             'navigation'     => 'pager',
             'links'          => 'nav',
             'autoPlay'       => 'auto'
-        );
+        ];
 
         if (isset($params[$param])) {
             return $params[$param];

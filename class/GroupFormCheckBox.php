@@ -19,7 +19,7 @@ use XoopsModules\Extgallery;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-//require XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
+//require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 
 /**
  * Class Extgallery\GroupFormCheckBox
@@ -46,17 +46,19 @@ class GroupFormCheckBox extends \XoopsGroupFormCheckBox
         $ele_name = $this->getName();
         echo '<table class="outer"><tr><td class="odd"><table><tr>';
         $cols = 1;
-        foreach ($this->_optionTree[0]['children'] as $topitem) {
-            if ($cols > 4) {
-                echo '</tr><tr>';
-                $cols = 1;
+        if (isset($this->_optionTree[0])) {
+            foreach ($this->_optionTree[0]['children'] as $topitem) {
+                if ($cols > 4) {
+                    echo '</tr><tr>';
+                    $cols = 1;
+                }
+                $tree   = '<td valign="top">';
+                $prefix = '';
+                $this->_renderOptionTree($tree, $this->_optionTree[$topitem], $prefix);
+                echo $tree;
+                echo '</td>';
+                ++$cols;
             }
-            $tree   = '<td valign="top">';
-            $prefix = '';
-            $this->_renderOptionTree($tree, $this->_optionTree[$topitem], $prefix);
-            echo $tree;
-            echo '</td>';
-            ++$cols;
         }
         echo '</tr></table></td><td class="even" valign="top">';
         $option_ids = [];

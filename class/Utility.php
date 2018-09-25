@@ -22,7 +22,8 @@ class Utility extends \XoopsObject
     public static function getModuleOption($option)
     {
         global $xoopsModule;
-        $helper = Extgallery\Helper::getInstance();
+        /** @var \XoopsModules\Extgallery\Helper $helper */
+        $helper = \XoopsModules\Extgallery\Helper::getInstance();
         static $tbloptions = [];
         if (is_array($tbloptions) && array_key_exists($option, $tbloptions)) {
             return $tbloptions[$option];

@@ -59,7 +59,7 @@ class Image_Transform_Driver_Imagick extends Image_Transform
         if (!PEAR::loadExtension('imagick')) {
             return PEAR::raiseError('The imagick extension can not be found.', true);
         }
-        include __DIR__ . '/Image/Transform/Driver/Imagick/ImageTypes.php';
+        require_once __DIR__   . '/Image/Transform/Driver/Imagick/ImageTypes.php';
 
         //return true;
     } // End Image_IM

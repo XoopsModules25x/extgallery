@@ -118,8 +118,8 @@ class ModelReadIterator extends \XoopsModelRead
      * Retrieve a list of objects data
      *
      * @param \CriteriaElement $criteria {@link CriteriaElement} conditions to be met
-     * @param int             $limit    Max number of objects to fetch
-     * @param int             $start    Which record to start at
+     * @param int              $limit    Max number of objects to fetch
+     * @param int              $start    Which record to start at
      *
      * @return array
      */
@@ -188,11 +188,11 @@ class ModelReadIterator extends \XoopsModelRead
      *
      * {@link CriteriaCompo}
      *
-     * @param  int             $limit    Max number of objects to fetch
-     * @param  int             $start    Which record to start at
+     * @param  int              $limit    Max number of objects to fetch
+     * @param  int              $start    Which record to start at
      * @param  \CriteriaElement $criteria {@link CriteriaElement} to match
-     * @param  array           $fields   variables to fetch
-     * @param  bool            $asObject flag indicating as object, otherwise as array
+     * @param  array            $fields   variables to fetch
+     * @param  bool             $asObject flag indicating as object, otherwise as array
      * @return array           of objects    {@link XoopsObject}
      */
     public function &getByLimit(
@@ -200,8 +200,8 @@ class ModelReadIterator extends \XoopsModelRead
         $start = 0,
         \CriteriaElement $criteria = null,
         $fields = null,
-        $asObject = true
-    ) {
+        $asObject = true)
+    {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
         trigger_error(__CLASS__ . '::' . __FUNCTION__ . '() is deprecated, please use getAll instead.' . ". Called from {$trace[0]['file']}line {$trace[0]['line']}", E_USER_WARNING);
         if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {

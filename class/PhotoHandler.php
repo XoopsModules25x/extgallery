@@ -22,7 +22,6 @@ use XoopsModules\Tag\Helper;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-
 /**
  * Class PhotoHandler
  */
@@ -31,8 +30,8 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
     public $photoUploader = null;
 
     /**
-     * @param $db
-     * @param $type
+     * @param \XoopsDatabase|null $db
+     * @param                     $type
      */
     public function __construct(\XoopsDatabase $db, $type)
     {
@@ -390,6 +389,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
             return;
         }
 
+        /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
         /*  Text position param
@@ -438,7 +438,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
             'font'         => XOOPS_ROOT_PATH . '/modules/extgallery/fonts/' . $helper->getConfig('watermark_font'),
             'size'         => $helper->getConfig('watermark_fontsize'),
             'resize_first' => false,
-            'padding'      => $helper->getConfig('watermark_padding')
+            'padding'      => $helper->getConfig('watermark_padding'),
         ];
         $imageTransform->addText($watermarkParams);
     }
@@ -448,18 +448,20 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function _makeBorder(&$imageTransform)
     {
+
+        /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
         $borders   = [];
         $borders[] = [
             'borderWidth' => $helper->getConfig('inner_border_size'),
-            'borderColor' => $helper->getConfig('inner_border_color')
+            'borderColor' => $helper->getConfig('inner_border_color'),
         ];
         $borders[] = [
             'borderWidth' => $helper->getConfig('outer_border_size'),
-            'borderColor' => $helper->getConfig('outer_border_color')
+            'borderColor' => $helper->getConfig('outer_border_color'),
         ];
-//        $imageTransform->addBorders($borders);
+        //        $imageTransform->addBorders($borders);
         foreach ($borders as $border) {
             $imageTransform->addBorder($border['borderWidth'], $border['borderColor']);
         }
@@ -475,11 +477,12 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function _largePhotoTreatment($photoName)
     {
+
+        /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
         // Check if must save large photo
         if ($helper->getConfig('save_large')) {
-
             // Define Graphical library path
             if (!defined('IMAGE_TRANSFORM_IM_PATH') && 'imagick' === $helper->getConfig('graphic_lib')) {
                 define('IMAGE_TRANSFORM_IM_PATH', $helper->getConfig('graphic_lib_path'));
@@ -493,7 +496,6 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
             // Save large photo only if it's bigger than medium size
             if ($imageTransform->getImageWidth() > $helper->getConfig('medium_width')
                 || $imageTransform->getImageHeight() > $helper->getConfig('medium_heigth')) {
-
                 // Make watermark
                 if ($helper->getConfig('enable_large_watermark')) {
                     $this->_makeWatermark($imageTransform);
@@ -518,6 +520,8 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function _mediumPhotoTreatment($photoName, $filePath = null, $mediumFilePath = null)
     {
+
+        /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
         // Define Graphical library path
@@ -568,6 +572,8 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function _makeThumb($photoName)
     {
+
+        /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
         // Define Graphical library path
@@ -603,6 +609,8 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function _getImageDimension($photoName)
     {
+
+        /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
         // Define Graphical library path
@@ -634,6 +642,8 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function getAutoDescription($photoName)
     {
+
+        /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
         //DNPROSSI
@@ -666,6 +676,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function makeFileName($fileName)
     {
+
         //DNPROSSI
         //$fileName = preg_replace("/[^a-zA-Z0-9()_\.-]/", "-", $fileName);
         $fileName = preg_replace("/[^a-zA-Z0-9_\.-]/", '-', $fileName);
@@ -727,6 +738,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function postPhotoTraitement($file, $checkMd5 = false)
     {
+
         //        require_once XOOPS_ROOT_PATH.'/modules/extgallery/class/photoUploader.php';
 
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
@@ -786,16 +798,16 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $photoExtra = '';
         $photoTag   = '';
 
-        if (isset($_POST['photo_title'])) {
+        if (\Xmf\Request::hasVar('photo_title', 'POST')) {
             $photoTitle = $_POST['photo_title'];
         }
-        if (isset($_POST['photo_desc'])) {
+        if (\Xmf\Request::hasVar('photo_desc', 'POST')) {
             $photoDesc = $_POST['photo_desc'];
         }
-        if (isset($_POST['photo_extra'])) {
+        if (\Xmf\Request::hasVar('photo_extra', 'POST')) {
             $photoExtra = $_POST['photo_extra'];
         }
-        if (isset($_POST['tag'])) {
+        if (\Xmf\Request::hasVar('tag', 'POST')) {
             $photoTag = $_POST['tag'];
         }
 
@@ -809,7 +821,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $notificationHandler = xoops_getHandler('notification');
         $extraTags           = [
             'X_ITEM_CAT'     => $cat->getVar('cat_name'),
-            'X_ITEM_NBPHOTO' => 1
+            'X_ITEM_NBPHOTO' => 1,
         ];
 
         if (1 == $photoStatus) {
@@ -856,11 +868,12 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $photoTitle = '',
         $photoDesc = '',
         $photoExtra = '',
-        $photoTag = ''
-    ) {
+        $photoTag = '')
+    {
         require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
 
         $permHandler = Extgallery\PublicPermHandler::getInstance();
+        /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
         // Replace all bad file name character
@@ -876,7 +889,6 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $originalName = '';
         // Save original photo
         if ($helper->getConfig('save_large') && $helper->getConfig('save_original')) {
-
             $fileName     = explode('.', $photoName);
             $originalName = md5(uniqid(mt_rand(), true)) . '.' . $fileName[1];
             copy($this->getUploadPhotoPath() . $photoName, $this->getUploadPhotoPath() . 'original/' . $originalName);
@@ -905,7 +917,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
             'photo_havelarge' => $this->_haveLargePhoto($photoName),
             'photo_approved'  => $permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_autoapprove', $catId),
             'photo_extra'     => $photoExtra,
-            'dohtml'          => $helper->getConfig('allow_html')
+            'dohtml'          => $helper->getConfig('allow_html'),
         ];
 
         // Deleting working photo
@@ -913,7 +925,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
 
         $this->createPhoto($data);
 
-//        if (1 == $helper->getConfig('usetag') || (is_dir('../tag') || is_dir('../../tag'))) {
+        //        if (1 == $helper->getConfig('usetag') || (is_dir('../tag') || is_dir('../../tag'))) {
         if (class_exists(Helper::class) && 1 == $helper->getConfig('usetag')) {
             $newid      = $this->db->getInsertId();
             $tagHandler = \XoopsModules\Tag\Helper::getInstance()->getHandler('Tag'); // xoops_getModuleHandler('tag', 'tag');
@@ -969,7 +981,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
                 'link'  => 'public-photo.php?photoId=' . $photo->getVar('photo_id'),
                 'title' => $title,
                 'time'  => $photo->getVar('photo_date'),
-                'uid'   => $photo->getVar('uid')
+                'uid'   => $photo->getVar('uid'),
             ];
             $ret[] = $data;
         }

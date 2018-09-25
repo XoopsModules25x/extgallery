@@ -154,7 +154,7 @@ $thumbnailHeight = 200;
         <div class="control-group">
             <label for="galleryImages" class="control-label"><?php echo t('Choose Image Gallery'); ?></label>
             <div class="controls">
-                <?php echo $form->select('fsID', $sets, $fsID, array('class' => 'span3')); ?>
+                <?php echo $form->select('fsID', $sets, $fsID, ['class' => 'span3']); ?>
                 <span class="help-block"><?php echo t('Choose a Gallery'); ?></span>
             </div>
         </div>
@@ -330,7 +330,7 @@ $thumbnailHeight = 200;
             <label for="cssDialogText" class="control-label"><?php echo t('CSS Dialog Text'); ?></label>
             <div class="controls">
                 <?php Loader::element('editor_controls'); ?>
-                <?php echo $form->textarea('cssDialogText', '', array('class' => 'ccm-advanced-editor')); ?>
+                <?php echo $form->textarea('cssDialogText', '', ['class' => 'ccm-advanced-editor']); ?>
             </div>
         </div>
     </div>

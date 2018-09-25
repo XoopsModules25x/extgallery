@@ -21,48 +21,6 @@ use XoopsModules\Extgallery;
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 
-/**
- * Class Extgallery\PublicRating
- */
-class PublicRating extends \XoopsObject
-{
-    public $externalKey = [];
-
-    /**
-     * Extgallery\PublicRating constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->initVar('rating_id', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('photo_id', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('uid', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('rating_rate', XOBJ_DTYPE_INT, 0, false);
-
-        $this->externalKey['photo_id'] = [
-            'className'      => 'PublicPhoto',
-            'getMethodeName' => 'getPhoto',
-            'keyName'        => 'photo',
-            'core'           => false
-        ];
-        $this->externalKey['uid']      = [
-            'className'      => 'User',
-            'getMethodeName' => 'get',
-            'keyName'        => 'user',
-            'core'           => true
-        ];
-    }
-
-    /**
-     * @param $key
-     *
-     * @return mixed
-     */
-    public function getExternalKey($key)
-    {
-        return $this->externalKey[$key];
-    }
-}
 
 /**
  * Class Extgallery\PublicRatingHandler
@@ -70,9 +28,9 @@ class PublicRating extends \XoopsObject
 class PublicRatingHandler extends Extgallery\PersistableObjectHandler
 {
     /**
-     * @param \XoopsDatabase $db
+     * @param \XoopsDatabase|null $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'extgallery_publicrating', 'PublicRating', 'rating_id');
     }
@@ -86,7 +44,7 @@ class PublicRatingHandler extends Extgallery\PersistableObjectHandler
     public function rate($photoId, $rating)
     {
         /** @var Extgallery\PublicPhotoHandler $photoHandler */
-        $photoHandler = xoops_getModuleHandler('publicphoto', 'extgallery');
+        $photoHandler = $helper->getHandler('Publicphoto', 'extgallery');
 
         $userId = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid') : 0;
         $rate   = $this->create();

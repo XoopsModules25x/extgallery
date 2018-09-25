@@ -42,13 +42,13 @@ class PublicRating extends \XoopsObject
             'className'      => 'PublicPhoto',
             'getMethodeName' => 'getPhoto',
             'keyName'        => 'photo',
-            'core'           => false
+            'core'           => false,
         ];
         $this->externalKey['uid']      = [
             'className'      => 'User',
             'getMethodeName' => 'get',
             'keyName'        => 'user',
-            'core'           => true
+            'core'           => true,
         ];
     }
 
@@ -60,79 +60,5 @@ class PublicRating extends \XoopsObject
     public function getExternalKey($key)
     {
         return $this->externalKey[$key];
-    }
-}
-
-/**
- * Class Extgallery\PublicRatingHandler
- */
-class PublicRatingHandler extends Extgallery\PersistableObjectHandler
-{
-    /**
-     * @param \XoopsDatabase $db
-     */
-    public function __construct(\XoopsDatabase $db)
-    {
-        parent::__construct($db, 'extgallery_publicrating', 'Extgallery\PublicRating', 'rating_id');
-    }
-
-    /**
-     * @param $photoId
-     * @param $rating
-     *
-     * @return bool
-     */
-    public function rate($photoId, $rating)
-    {
-        /** @var Extgallery\PublicPhotoHandler $photoHandler */
-        $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
-
-        $userId = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid') : 0;
-        $rate   = $this->create();
-        $rate->assignVar('photo_id', $photoId);
-        $rate->assignVar('uid', $userId);
-        $rate->assignVar('rating_rate', $rating);
-
-        if ($this->hasRated($rate)) {
-            return false;
-        }
-
-        if (!$this->insert($rate, true)) {
-            return false;
-        }
-
-        return $photoHandler->updateNbRating($photoId);
-    }
-
-    /**
-     * @param $photoId
-     *
-     * @return float
-     */
-    public function getRate($photoId)
-    {
-        $criteria = new \Criteria('photo_id', $photoId);
-        $avg      = $this->getAvg($criteria, 'rating_rate');
-
-        return round($avg);
-    }
-
-    /**
-     * @param $rate
-     *
-     * @return bool
-     */
-    public function hasRated(&$rate)
-    {
-        // If the user is annonymous
-        if (0 == $rate->getVar('uid')) {
-            return false;
-        }
-
-        $criteria = new \CriteriaCompo();
-        $criteria->add(new \Criteria('photo_id', $rate->getVar('photo_id')));
-        $criteria->add(new \Criteria('uid', $rate->getVar('uid')));
-
-        return $this->getCount($criteria) > 0;
     }
 }

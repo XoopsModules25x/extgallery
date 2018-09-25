@@ -16,7 +16,7 @@ foreach ($gm->getArray() as $module) {
     $module_name = $module['name'];
 }
 
-if (isset($_REQUEST['install']) && 1 == $_REQUEST['install']) {
+if (\Xmf\Request::hasVar('install', 'REQUEST') && 1 == $_REQUEST['install']) {
     $module_name = $I18N->msg('magnific_popup_module_name_gallery');
 
     $mi = rex_sql::factory();
@@ -25,7 +25,7 @@ if (isset($_REQUEST['install']) && 1 == $_REQUEST['install']) {
     $mi->setValue('eingabe', addslashes($moduleInput));
     $mi->setValue('ausgabe', addslashes($moduleOutput));
 
-    if (isset($_REQUEST['module_id']) && $module_id == $_REQUEST['module_id']) {
+    if (\Xmf\Request::hasVar('module_id', 'REQUEST') && $module_id == $_REQUEST['module_id']) {
         // altes Module aktualisieren
         $mi->setWhere('id="' . $module_id . '"');
         $mi->update();

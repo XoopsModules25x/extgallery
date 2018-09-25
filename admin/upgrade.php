@@ -17,14 +17,14 @@
  */
 
 require_once __DIR__ . '/admin_header.php';
-if (isset($_POST['step'])) {
+if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 } else {
     $step = 'default';
 }
 
 require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include __DIR__ . '/moduleUpdateFunction.php';
+require_once __DIR__   . '/moduleUpdateFunction.php';
 
 // Change this variable if you use a cloned version of eXtGallery
 $localModuleDir = 'extgallery';
@@ -101,7 +101,7 @@ switch ($step) {
         }
 
         $g_pcltar_lib_dir = XOOPS_ROOT_PATH . '/modules/' . $localModuleDir . '/class';
-        include  dirname(__DIR__) . '/class/pcltar.lib.php';
+        require_once dirname(__DIR__) . '/class/pcltar.lib.php';
 
         //TrOn(5);
 

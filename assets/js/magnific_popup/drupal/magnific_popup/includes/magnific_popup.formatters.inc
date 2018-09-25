@@ -11,15 +11,15 @@
  */
 function magnific_popup_field_formatter_info() {
   $gallery_options = _magnific_popup_gallery_options();
-  return array(
-    'magnific_popup_file_field_formatter' => array(
-      'label' => t('Magnific Popup'),
-      'field types' => array('file', 'image'),
-      'settings'  => array(
+  return [
+    'magnific_popup_file_field_formatter' => [
+        'label' => t('Magnific Popup'),
+        'field types' => ['file', 'image'],
+        'settings'  => [
         'gallery_style' => key($gallery_options)
-      )
-    )
-  );
+        ]
+    ]
+  ];
 }
 
 /**
@@ -39,23 +39,23 @@ function magnific_popup_field_formatter_settings_form($field, $instance, $view_m
   $gallery_available = 1 !== $field['cardinality'];
   $gallery_options = _magnific_popup_gallery_options();
   
-  $element = array();
-  $element['gallery_available'] = array(
+  $element = [];
+  $element['gallery_available'] = [
     '#type' => 'markup',
     '#prefix' => '<p>',
     '#suffix' => '</p>'
-  );
+  ];
   $element['gallery_available']['#markup'] = $gallery_available ?
     t('This field configuration <strong>supports multiple items</strong> and can display itself as a gallery of items!') : 
     t('This field configuration <strong>does not support multiple items</strong> and cannot display itself as a gallery of items.');
-  $element['gallery_style'] = array(
+  $element['gallery_style'] = [
     '#type' => 'select',
     '#title' => t('Gallery Type'),
     '#options' => $gallery_options,
     '#disabled' => !$gallery_available,
     '#default_value' => $settings['gallery_style'],
     '#description' => t('Choose how this gallery displays its triggering element(s).')
-  );
+  ];
   return $element;
 }
 
@@ -70,7 +70,7 @@ function magnific_popup_field_formatter_settings_summary($field, $instance, $vie
   $display = $instance['display'][$view_mode];
   $settings = $display['settings'];
   $gallery_options = _magnific_popup_gallery_options();
-  $summary = t('Gallery Type: @gallery_type', array('@gallery_type' => $gallery_options[$settings['gallery_style']]));
+  $summary = t('Gallery Type: @gallery_type', ['@gallery_type' => $gallery_options[$settings['gallery_style']]]);
   return $summary;
 }
 
@@ -87,7 +87,7 @@ function magnific_popup_field_formatter_settings_summary($field, $instance, $vie
 function magnific_popup_field_formatter_prepare_view($entity_type, $entities, $field, $instances, $langcode, &$items, $displays) {
   // Items are some kind of entity reference, be it via image or file type.
   // Load the corresponding items into a common format for our formatter_view().
-  $static = &drupal_static(__FUNCTION__, array('loaded_items' => array(), 'thumbnail_schemes' => NULL));
+  $static = &drupal_static(__FUNCTION__, ['loaded_items' => [], 'thumbnail_schemes' => NULL]);
   $loaded_items = &$static['loaded_items'];
   $thumbnail_schemes = &$static['thumbnail_schemes'];
   if (!isset($thumbnail_schemes)) {
@@ -95,7 +95,7 @@ function magnific_popup_field_formatter_prepare_view($entity_type, $entities, $f
   }
   // Iterate through $items looking for valid gallery items. Refactor them into
   // a consistent format for magnific_popup_field_formatter_view().
-  $wrappers = array();
+  $wrappers = [];
   foreach ($entities as $entity_id => $entity) {
     foreach ($items[$entity_id] as $delta => &$item) {
       // Fail-safe check to not load items 
@@ -143,13 +143,13 @@ function magnific_popup_field_formatter_prepare_view($entity_type, $entities, $f
           // Get the alt if it exists, or fallback to the title.
           $alt = !empty($item['alt']) ? $item['alt'] : $title;
           // Build the finished gallery item.
-          $gallery_item = array(
+          $gallery_item = [
             'item' => $item,
             'title' => $title,
             'alt' => $alt,
             'thumbnail_path' => $thumbnail_path,
             'target_uri' => $wrapper->getExternalUrl()
-          );
+          ];
           $loaded_items[$item['fid']] = $gallery_item;
         }
       }
@@ -189,14 +189,14 @@ function magnific_popup_field_formatter_view($entity_type, $entity, $field, $ins
   // aren't actually displaying any Magnific Popup content on the page).
   _magnific_popup_add_api_js();
   // Create the main container.
-  $element = array();
+  $element = [];
   $settings = $display['settings'];
-  $popup_gallery = array(
+  $popup_gallery = [
     '#type' => 'container',
-    '#attributes' => array(
-      'class' => array()
-    )
-  );
+    '#attributes' => [
+      'class' => []
+    ]
+  ];
   // Determine if/what the allowed trigger item is (which will get a thumbnail).
   $trigger_item = key($items);
   if ('random_item' === $settings['gallery_style']) {
@@ -215,15 +215,15 @@ function magnific_popup_field_formatter_view($entity_type, $entity, $field, $ins
   $popup_gallery['#attributes']['class'][] = $gallery_base_class;
   // Add each item to our container.
   foreach ($items as $delta => $item) {
-    $popup_gallery['item-' . $delta] = array(
+    $popup_gallery['item-' . $delta] = [
       '#theme' => 'link',
       '#text' => '',
       '#path' => $item['target_uri'],
-      '#options' => array(
-        'attributes' => array('class' => array(), 'style' => array()),
-        'html' => TRUE
-      )
-    );
+      '#options' => [
+          'attributes' => ['class' => [], 'style' => []],
+          'html' => TRUE
+      ]
+    ];
     $popup_gallery['item-' . $delta]['#options']['attributes']['class'][] = 'mfp-item';
     // This item has a thumbnail image if:
     //  - the Gallery Type is "all items" (because all items have thumbs), or
@@ -231,17 +231,17 @@ function magnific_popup_field_formatter_view($entity_type, $entity, $field, $ins
     //  - the Gallery Type is "first item" and this $delta is the first item, or
     //  - the Gallery Type is "random item" and this $delta is the random item.
     if ('all_items' === $settings['gallery_style'] || 'no_gallery' === $settings['gallery_style'] || $delta == $trigger_item) {
-      $image = array(
-        // Try to use a "figure" theme implementation if it exists, or fall back
-        // to "image".
-        '#theme' => array('figure', 'image'),
-        '#path' => $item['thumbnail_path'],
-        '#alt' => $item['alt'],
-        '#title' => $item['title'],
-        '#attributes' => array(
-          'class' => array('mfp-thumbnail')
-        )
-      );
+      $image = [
+          // Try to use a "figure" theme implementation if it exists, or fall back
+          // to "image".
+          '#theme' => ['figure', 'image'],
+          '#path' => $item['thumbnail_path'],
+          '#alt' => $item['alt'],
+          '#title' => $item['title'],
+          '#attributes' => [
+          'class' => ['mfp-thumbnail']
+          ]
+      ];
       $popup_gallery['item-' . $delta]['#text'] = render($image);
     }
     else {
@@ -268,10 +268,10 @@ function magnific_popup_field_formatter_view($entity_type, $entity, $field, $ins
  * @return array
  */
 function _magnific_popup_gallery_options() {
-  return array(
+  return [
     'all_items' => t('Gallery: All Items Displayed'),
     'first_item' => t('Gallery: First Item Displayed'),
     'random_item' => t('Gallery: Random Item Displayed'),
     'no_gallery' => t('No Gallery: Display Each Item Separately')
-  );
+  ];
 }

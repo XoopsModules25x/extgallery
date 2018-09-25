@@ -49,7 +49,7 @@ class MetaSliderImageHelper
     private function get_crop_dimensions($image_width, $image_height)
     {
         if ('false' === $this->smart_crop) {
-            return array('width' => (int)$this->container_width, 'height' => (int)$this->container_height);
+            return ['width' => $this->container_width, 'height' => $this->container_height];
         }
 
         $container_width  = $this->container_width;
@@ -154,7 +154,7 @@ class MetaSliderImageHelper
             $new_slide_height = $container_height;
         }
 
-        return array('width' => floor($new_slide_width), 'height' => floor($new_slide_height));
+        return ['width' => floor($new_slide_width), 'height' => floor($new_slide_height)];
     }
 
     /**
@@ -170,10 +170,10 @@ class MetaSliderImageHelper
         }
 
         // if the file exists, just return it without going any further
-        $dest_file_name = $this->get_destination_file_name(array(
+        $dest_file_name = $this->get_destination_file_name([
                                                                'width'  => $this->container_width,
                                                                'height' => $this->container_height
-                                                           ));
+                                                           ]);
 
         if (file_exists($dest_file_name)) {
             return str_replace(basename($this->url), basename($dest_file_name), $this->url);
@@ -222,7 +222,7 @@ class MetaSliderImageHelper
      */
     private function get_original_image_dimensions()
     {
-        $size = array();
+        $size = [];
 
         // try and get the image size from metadata
         $meta = wp_get_attachment_metadata($this->id);
@@ -307,7 +307,7 @@ class MetaSliderImageHelper
         $backup_sizes = get_post_meta($this->id, '_wp_attachment_backup_sizes', true);
 
         if (!is_array($backup_sizes)) {
-            $backup_sizes = array();
+            $backup_sizes = [];
         }
 
         $backup_sizes["resized-{$dest_size['width']}x{$dest_size['height']}"] = $saved;

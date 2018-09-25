@@ -1,4 +1,4 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
 
 // --------------------------------------------------------------------------------
 // PhpConcept Library - Tar Module 1.3.1
@@ -63,10 +63,12 @@ if (!defined('PCL_TAR')) {
     // This library should be called by each script before the include of PhpZip
     // Library in order to limit the potential 'lib' directory path problem.
     if (!defined('PCLERROR_LIB')) {
-        include $g_pcltar_lib_dir . '/pclerror.lib.php';
+//        include $g_pcltar_lib_dir . '/pclerror.lib.php';
+        include __DIR__ . '/pclerror.lib.php';
     }
     if (!defined('PCLTRACE_LIB')) {
-        include $g_pcltar_lib_dir . '/pcltrace.lib.php';
+//        include $g_pcltar_lib_dir . '/pcltrace.lib.php';
+        include __DIR__ . '/pcltrace.lib.php';
     }
 
     // --------------------------------------------------------------------------------
@@ -1872,8 +1874,8 @@ if (!defined('PCL_TAR')) {
         $p_mode,
         $p_path,
         $p_tar_mode,
-        $p_remove_path
-    ) {
+        $p_remove_path)
+    {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtract', "archive='$p_tarname', list, mode=$p_mode, path=$p_path, tar_mode=$p_tar_mode, remove_path='$p_remove_path'");
         $v_result      = 1;
         $v_nb          = 0;
@@ -1896,21 +1898,28 @@ if (!defined('PCL_TAR')) {
         switch ($p_mode) {
             case 'complete':
                 // ----- Flag extract of all files
+
                 $v_extract_all = true;
                 $v_listing     = false;
+
                 break;
             case 'partial':
                 // ----- Flag extract of specific files
+
                 $v_extract_all = false;
                 $v_listing     = false;
+
                 break;
             case 'list':
                 // ----- Flag list of all files
+
                 $v_extract_all = false;
                 $v_listing     = true;
+
                 break;
             default:
                 // ----- Error log
+
                 PclErrorLog(-3, "Invalid extract mode ($p_mode)");
 
                 // ----- Return
@@ -2280,8 +2289,8 @@ if (!defined('PCL_TAR')) {
         &$p_list_detail,
         $p_path,
         $p_remove_path,
-        $p_tar_mode
-    ) {
+        $p_tar_mode)
+    {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtractByIndexList', "archive='$p_tarname', index_string='$p_index_string', list, path=$p_path, remove_path='$p_remove_path', tar_mode=$p_tar_mode");
         $v_result = 1;
         $v_nb     = 0;
@@ -2387,8 +2396,8 @@ if (!defined('PCL_TAR')) {
         &$p_list_detail,
         $p_path,
         $p_remove_path,
-        $p_tar_mode
-    ) {
+        $p_tar_mode)
+    {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtractByIndex', "archive_descr='$p_tar', index_current=$p_index_current, index_start='$p_index_start', index_stop='$p_index_stop', list, path=$p_path, remove_path='$p_remove_path', tar_mode=$p_tar_mode");
         $v_result = 1;
         $v_nb     = 0;

@@ -17,11 +17,11 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
+require_once __DIR__   . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-slideshow.tpl';
-include XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 /** @var Extgallery\Helper $helper */
 $helper = Extgallery\Helper::getInstance();
@@ -42,7 +42,7 @@ $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 $catObj = $catHandler->getCat($catId);
 
 if (null === $catObj) {
-    include XOOPS_ROOT_PATH . '/footer.php';
+    require_once XOOPS_ROOT_PATH . '/footer.php';
     exit;
 }
 $ajaxeffect = $helper->getConfig('use_slideshow_effects');
@@ -182,4 +182,4 @@ $xoopsTpl->assign('pic_width', $helper->getConfig('galleriffic_width'));
 $xoopsTpl->assign('galleriffic_show_descr', $helper->getConfig('galleriffic_show_descr'));
 $xoopsTpl->assign('galleriffic_download', $helper->getConfig('galleriffic_download'));
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

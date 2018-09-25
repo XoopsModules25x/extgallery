@@ -16,8 +16,10 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 require_once __DIR__ . '/admin_header.php';
-if (isset($_POST['step'])) {
+if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 } else {
     $step = 'default';
@@ -70,7 +72,7 @@ switch ($step) {
         }
 
         $g_pcltar_lib_dir = XOOPS_ROOT_PATH . '/modules/' . $localModuleDir . '/class';
-        include  dirname(__DIR__) . '/class/pcltar.lib.php';
+        require_once dirname(__DIR__) . '/class/pcltar.lib.php';
 
         // Extract extension files
         PclTarExtract(XOOPS_ROOT_PATH . '/uploads/' . $extensionFileName, XOOPS_ROOT_PATH . '/class/textsanitizer/', 'class/textsanitizer/');
@@ -83,7 +85,7 @@ switch ($step) {
         }
 
         // Activate extension
-        $conf                          = include XOOPS_ROOT_PATH . '/class/textsanitizer/config.php';
+        $conf                          = require XOOPS_ROOT_PATH . '/class/textsanitizer/config.php';
         $conf['extensions']['gallery'] = 1;
         file_put_contents(XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php', "<?php\rreturn \$config = " . var_export($conf, true) . "\r?>", LOCK_EX);
 

@@ -11,21 +11,21 @@ $REX['ADDON']['perm']['magnific_popup']        = 'magnific_popup[]';
 $REX['PERM'][] = 'magnific_popup[]';
 
 // includes
-require($REX['INCLUDE_PATH'] . '/addons/magnific_popup/settings.inc.php');
-require($REX['INCLUDE_PATH'] . '/addons/magnific_popup/classes/class.rex_magnific_popup_utils.inc.php');
+require_once $REX['INCLUDE_PATH'] . '/addons/magnific_popup/settings.inc.php';
+require_once $REX['INCLUDE_PATH'] . '/addons/magnific_popup/classes/class.rex_magnific_popup_utils.inc.php';
 
 if ($REX['REDAXO']) {
     // add lang file
     $I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/magnific_popup/lang/');
 
     // add subpages
-    $REX['ADDON']['magnific_popup']['SUBPAGES'] = array(
-        array('', $I18N->msg('magnific_popup_start')),
-        array('image_module', $I18N->msg('magnific_popup_image_module')),
-        array('gallery_module', $I18N->msg('magnific_popup_gallery_module')),
-        array('settings', $I18N->msg('magnific_popup_settings')),
-        array('help', $I18N->msg('magnific_popup_help'))
-    );
+    $REX['ADDON']['magnific_popup']['SUBPAGES'] = [
+        ['', $I18N->msg('magnific_popup_start')],
+        ['image_module', $I18N->msg('magnific_popup_image_module')],
+        ['gallery_module', $I18N->msg('magnific_popup_gallery_module')],
+        ['settings', $I18N->msg('magnific_popup_settings')],
+        ['help', $I18N->msg('magnific_popup_help')],
+    ];
 } else {
     rex_register_extension('OUTPUT_FILTER', 'rex_magnific_popup_utils::includeMagnificPopup');
 }

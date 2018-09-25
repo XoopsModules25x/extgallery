@@ -2,9 +2,9 @@
 
 define('WP_USE_THEMES', false);
 
-require(dirname(dirname(dirname(__DIR__))) . '/wp-blog-header.php');
+require_once dirname(dirname(dirname(__DIR__))) . '/wp-blog-header.php';
 
-if (isset($_GET['slider_id']) && (int)$_GET['slider_id'] > 0) {
+if (\Xmf\Request::hasVar('slider_id', 'GET') && (int)$_GET['slider_id'] > 0) {
     add_filter('show_admin_bar', '__return_false');
     remove_action('init', 'wp_admin_bar_init');
 

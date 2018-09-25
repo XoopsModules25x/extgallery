@@ -28,9 +28,9 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
 {
     /**
      * Extgallery\PublicCategoryHandler constructor.
-     * @param \XoopsDatabase $db
+     * @param \XoopsDatabase|null $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'public');
     }
@@ -80,7 +80,7 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
         $glist         = $memberHandler->getGroupList();
 
         // Applying permission mask
-        $permArray       = include XOOPS_ROOT_PATH . '/modules/extgallery/include/perm.php';
+        $permArray       = require_once XOOPS_ROOT_PATH . '/modules/extgallery/include/perm.php';
         $modulePermArray = $permArray['modulePerm'];
         $pluginPermArray = $permArray['pluginPerm'];
 

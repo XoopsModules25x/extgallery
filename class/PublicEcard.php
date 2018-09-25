@@ -20,7 +20,6 @@ use XoopsModules\Extgallery;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-
 /**
  * Class Extgallery\PublicEcard
  */
@@ -51,13 +50,13 @@ class PublicEcard extends \XoopsObject
             'className'      => 'PublicPhoto',
             'getMethodeName' => 'getPhoto',
             'keyName'        => 'photo',
-            'core'           => false
+            'core'           => false,
         ];
         $this->externalKey['uid']      = [
             'className'      => 'User',
             'getMethodeName' => 'get',
             'keyName'        => 'user',
-            'core'           => true
+            'core'           => true,
         ];
     }
 

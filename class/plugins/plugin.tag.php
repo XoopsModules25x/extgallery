@@ -8,7 +8,6 @@ use XoopsModules\Extgallery;
  * @return bool
  */
 
-
 function extgallery_tag_iteminfo(&$items)
 {
     if (empty($items) || !is_array($items)) {
@@ -36,7 +35,7 @@ function extgallery_tag_iteminfo(&$items)
                     'link'    => "public-photo.php?photoId={$item_id}#photoNav",
                     'time'    => $item_obj->getVar('photo_date'),
                     'tags'    => '',
-                    'content' => ''
+                    'content' => '',
                 ];
             }
         }
@@ -58,8 +57,7 @@ function extgallery_tag_synchronization($mid)
     $linkHandler = \XoopsModules\Tag\Helper::getInstance()->getHandler('Link'); //@var \XoopsModules\Tag\Handler $tagHandler
 
     /* clear tag-item links */
-    if (version_compare(mysqli_get_server_info($XoopsDB->conn), '4.1.0', 'ge')):
-
+    if (version_compare(mysqli_get_server_info($XoopsDB->conn), '4.1.0', 'ge')) :
         $sql = "    DELETE FROM {$linkHandler->table}"
                . '    WHERE '
                . "        tag_modid = {$mid}"
@@ -69,7 +67,8 @@ function extgallery_tag_synchronization($mid)
                . "                FROM {$itemHandler->table} "
                . "                WHERE {$itemHandler->table}.photo_approved > 0"
                . '            ) '
-               . '        )'; else:
+               . '        )';
+    else :
         $sql = "    DELETE {$linkHandler->table} FROM {$linkHandler->table}"
                . "    LEFT JOIN {$itemHandler->table} AS aa ON {$linkHandler->table}.tag_itemid = aa.{$itemHandler->keyName} "
                . '    WHERE '

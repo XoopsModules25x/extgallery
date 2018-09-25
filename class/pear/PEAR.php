@@ -466,7 +466,7 @@ class PEAR
     public function delExpect($error_code)
     {
         $deleted = false;
-        if ((is_array($error_code) && (0 != count($error_code)))) {
+        if (is_array($error_code) && (0 != count($error_code))) {
             // $error_code is a non-empty array here; we walk through it trying
             // to unset all values
             foreach ($error_code as $key => $error) {

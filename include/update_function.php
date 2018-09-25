@@ -91,7 +91,7 @@ function xoops_module_update_extgallery(\XoopsModule $xoopsModule, $oldVersion =
 
         // Fix extension Bug if it's installed
         if (file_exists(XOOPS_ROOT_PATH . '/class/textsanitizer/gallery/gallery.php')) {
-            $conf                          = include XOOPS_ROOT_PATH . '/class/textsanitizer/config.php';
+            $conf                          = require XOOPS_ROOT_PATH . '/class/textsanitizer/config.php';
             $conf['extensions']['gallery'] = 1;
             file_put_contents(XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php', "<?php\rreturn \$config = " . var_export($conf, true) . "\r?>", LOCK_EX);
         }

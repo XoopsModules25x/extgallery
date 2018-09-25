@@ -34,8 +34,8 @@
  * @link      http://pear.php.net/package/Console_GetoptPlus
  */
 
-require_once __DIR__ . '/Console/GetoptPlus/Exception.php';
-require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/PEAR.php';
+require_once __DIR__ . '/Exception.php';
+require_once dirname(__DIR__) . '/PEAR.php';
 
 /**
  * Parsing of a command line.
@@ -225,8 +225,8 @@ class Console_GetoptPlus_Getopt
         $args = [],
         $shortOptions = '',
         $longOptions = [],
-        $ambiguity = ''
-    ) {
+        $ambiguity = '')
+    {
         $getopt = new self;
 
         return $getopt->process($args, $shortOptions, $longOptions, $ambiguity, $version);
@@ -294,8 +294,8 @@ class Console_GetoptPlus_Getopt
         $args = [],
         $shortOptions = '',
         $longOptions = [],
-        $ambiguity = ''
-    ) {
+        $ambiguity = '')
+    {
         return self::doGetopt(1, $args, $shortOptions, $longOptions, $ambiguity);
     }
 
@@ -317,8 +317,8 @@ class Console_GetoptPlus_Getopt
         $args = [],
         $shortOptions = '',
         $longOptions = [],
-        $ambiguity = ''
-    ) {
+        $ambiguity = '')
+    {
         return self::doGetopt(2, $args, $shortOptions, $longOptions, $ambiguity);
     }
 
@@ -380,6 +380,7 @@ class Console_GetoptPlus_Getopt
      */
     public function parseLongOptionsDef($options)
     {
+
         // converts to an array if there is only one option
         $options = (array)$options;
 
@@ -462,6 +463,7 @@ class Console_GetoptPlus_Getopt
      */
     public function parseShortOptionsDef($options)
     {
+
         // expecting a string for a the short options definition
         is_array($options) and self::exception('string');
         // trims and extracts the options name and type
@@ -506,8 +508,8 @@ class Console_GetoptPlus_Getopt
         $shortOptions,
         $longOptions,
         $ambiguity = '',
-        $version = 2
-    ) {
+        $version = 2)
+    {
         $args = (array)$args;
         in_array($ambiguity, ['loose', 'strict', 'shortcuts']) or $ambiguity = 'loose';
 

@@ -33,7 +33,7 @@ return $config = [
         'rtsp'    => 0,
         'ul'      => 1,
         'li'      => 1,
-        'gallery' => 1
+        'gallery' => 1,
     ],
 
     'truncate_length'      => 60,
@@ -43,5 +43,5 @@ return $config = [
 
     // Filters XSS scripts on display of text
     // There is considerable trade-off between security and performance
-    'filterxss_on_display' => false
+    'filterxss_on_display' => false,
 ];

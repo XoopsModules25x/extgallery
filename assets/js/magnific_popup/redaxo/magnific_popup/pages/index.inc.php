@@ -9,13 +9,13 @@ if ('' == $subpage) {
 }
 
 // layout top
-require($REX['INCLUDE_PATH'] . '/layout/top.php');
+require_once $REX['INCLUDE_PATH'] . '/layout/top.php';
 
 // title
 rex_title($REX['ADDON']['name']['magnific_popup'] . ' <span style="font-size:14px; color:silver;">' . $REX['ADDON']['version']['magnific_popup'] . '</span>', $REX['ADDON']['magnific_popup']['SUBPAGES']);
 
 // include subpage
-include($REX['INCLUDE_PATH'] . '/addons/magnific_popup/pages/' . $subpage . '.inc.php');
+require_once $REX['INCLUDE_PATH'] . '/addons/magnific_popup/pages/' . $subpage . '.inc.php';
 ?>
 
 <style type="text/css">
@@ -65,5 +65,5 @@ include($REX['INCLUDE_PATH'] . '/addons/magnific_popup/pages/' . $subpage . '.in
 
 <?php
 // layout bottom
-require($REX['INCLUDE_PATH'] . '/layout/bottom.php');
+require_once $REX['INCLUDE_PATH'] . '/layout/bottom.php';
 ?>

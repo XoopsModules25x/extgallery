@@ -23,7 +23,7 @@ return $config = [
             'maskTitle' => '_AM_EXTGALLERY_CAN_ACCESS',
             'title'     => '_AM_EXTGALLERY_ACCESS_PERM',
             'desc'      => '_AM_EXTGALLERY_ACCESS_PERM_DESC',
-            'info'      => '_AM_EXTGALLERY_ACCESS_PERM_INFO'
+            'info'      => '_AM_EXTGALLERY_ACCESS_PERM_INFO',
         ],
         2 => [
             'maskId'    => 2,
@@ -31,7 +31,7 @@ return $config = [
             'maskTitle' => '_AM_EXTGALLERY_CAN_RATE',
             'title'     => '_AM_EXTGALLERY_RATE_PERM',
             'desc'      => '_AM_EXTGALLERY_RATE_PERM_DESC',
-            'info'      => '_AM_EXTGALLERY_RATE_PERM_INFO'
+            'info'      => '_AM_EXTGALLERY_RATE_PERM_INFO',
         ],
         3 => [
             'maskId'    => 4,
@@ -39,7 +39,7 @@ return $config = [
             'maskTitle' => '_AM_EXTGALLERY_CAN_SEND_ECARD',
             'title'     => '_AM_EXTGALLERY_PUBLIC_ECARD',
             'desc'      => '_AM_EXTGALLERY_PUBLIC_ECARD_DESC',
-            'info'      => '_AM_EXTGALLERY_PUBLIC_ECARD_INFO'
+            'info'      => '_AM_EXTGALLERY_PUBLIC_ECARD_INFO',
         ],
         4 => [
             'maskId'    => 8,
@@ -47,7 +47,7 @@ return $config = [
             'maskTitle' => '_AM_EXTGALLERY_CAN_DOWNLOAD',
             'title'     => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD',
             'desc'      => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_DESC',
-            'info'      => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_INFO'
+            'info'      => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_INFO',
         ],
         5 => [
             'maskId'    => 16,
@@ -55,7 +55,7 @@ return $config = [
             'maskTitle' => '_AM_EXTGALLERY_CAN_DOWNLOAD_ORIG',
             'title'     => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG',
             'desc'      => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_DESC',
-            'info'      => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_INFO'
+            'info'      => '_AM_EXTGALLERY_PUBLIC_DOWNLOAD_ORIG_INFO',
         ],
         6 => [
             'maskId'    => 32,
@@ -63,7 +63,7 @@ return $config = [
             'maskTitle' => '_AM_EXTGALLERY_CAN_UPLOAD',
             'title'     => '_AM_EXTGALLERY_PUBLIC_UPLOAD',
             'desc'      => '_AM_EXTGALLERY_PUBLIC_UPLOAD_DESC',
-            'info'      => '_AM_EXTGALLERY_PUBLIC_UPLOAD_INFO'
+            'info'      => '_AM_EXTGALLERY_PUBLIC_UPLOAD_INFO',
         ],
         7 => [
             'maskId'    => 64,
@@ -71,7 +71,7 @@ return $config = [
             'maskTitle' => '_AM_EXTGALLERY_AUTOAPPROVE',
             'title'     => '_AM_EXTGALLERY_PUBLIC_AUTOAPROVE',
             'desc'      => '_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_DESC',
-            'info'      => '_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_INFO'
+            'info'      => '_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_INFO',
         ],
         8 => [
             'maskId'    => 128,
@@ -79,8 +79,8 @@ return $config = [
             'maskTitle' => '_AM_EXTGALLERY_DISPLAYED',
             'title'     => '_AM_EXTGALLERY_PUBLIC_DISPLAYED',
             'desc'      => '_AM_EXTGALLERY_PUBLIC_DISPLAYED_DESC',
-            'info'      => '_AM_EXTGALLERY_PUBLIC_DISPLAYED_INFO'
-        ]
+            'info'      => '_AM_EXTGALLERY_PUBLIC_DISPLAYED_INFO',
+        ],
     ],
-    'pluginPerm' => []
+    'pluginPerm' => [],
 ];

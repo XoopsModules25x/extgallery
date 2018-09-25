@@ -5,7 +5,7 @@
  */
 class MetaSliderSystemCheck
 {
-    public $options = array();
+    public $options = [];
 
     /**
      * Constructor
@@ -33,7 +33,7 @@ class MetaSliderSystemCheck
      */
     private function dismissMessages()
     {
-        if (isset($_REQUEST['dismissMessage']) && isset($_REQUEST['_wpnonce'])) {
+        if (\Xmf\Request::hasVar('dismissMessage', 'REQUEST') && isset($_REQUEST['_wpnonce'])) {
             $nonce = $_REQUEST['_wpnonce'];
             $key   = $_REQUEST['dismissMessage'];
 

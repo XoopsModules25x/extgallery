@@ -22,7 +22,13 @@ class MytsGallery extends \MyTextSanitizerExtension
                          . '", "'
                          . _EXT_EXTGALLERY_TEXTTITLE
                          . "\");'  onmouseover='style.cursor=\"hand\"'>&nbsp;"; */
-        $code = "<button type='button' class='btn btn-default' onclick='xoopsCodeGallery(\"{$textarea_id}\",\"" . _EXT_EXTGALLERY_TEXTID .'", "'. _EXT_EXTGALLERY_TEXTTITLE. "\");' onmouseover='style.cursor=\"hand\"' title='" . _EXT_EXTGALLERY_ALTWMP . "'><span class='fa fa-file-image-o' aria-hidden='true'></span><span style='font-size:75%;'> Gallery</span></button>";
+        $code       = "<button type='button' class='btn btn-default' onclick='xoopsCodeGallery(\"{$textarea_id}\",\""
+                      . _EXT_EXTGALLERY_TEXTID
+                      . '", "'
+                      . _EXT_EXTGALLERY_TEXTTITLE
+                      . "\");' onmouseover='style.cursor=\"hand\"' title='"
+                      . _EXT_EXTGALLERY_ALTWMP
+                      . "'><span class='fa fa-file-image-o' aria-hidden='true'></span><span style='font-size:75%;'> Gallery</span></button>";
         $javascript = <<<EOH
             function xoopsCodeGallery(id, textId, photoTitle) {
                 var selection = xoopsGetSelect(id);

@@ -48,10 +48,8 @@ define('_MI_EXTGAL_L_WATERMARK_DESC', "Choose whether on not to enable the water
 define('_MI_EXTGAL_L_BORDER', 'Enable borders for large photos');
 define('_MI_EXTGAL_L_BORDER_DESC', "Choose whether on not to enable the border feature for new large photos. You must also configure border settings under the 'watermarks & borders' tab.");
 define('_MI_EXTGAL_NAME_PATTERN', 'Auto photo description pattern');
-define(
-    '_MI_EXTGAL_NAME_PATTERN_DESC',
-       "If you don't provide a description for your photo on upload the file name of the photo will be used to make an auto description.<br> For example, with a \"Tournament-06-may-2006_1.jpg\" photo name, you will end up with \"Tournament 06 may 2006\" as the description"
-);
+define('_MI_EXTGAL_NAME_PATTERN_DESC',
+       "If you don't provide a description for your photo on upload the file name of the photo will be used to make an auto description.<br> For example, with a \"Tournament-06-may-2006_1.jpg\" photo name, you will end up with \"Tournament 06 may 2006\" as the description");
 define('_MI_EXTGAL_DISPLAY_EXTRA', 'Display an extra field');
 define('_MI_EXTGAL_DISPLAY_EXTRA_DESC', 'Choose whether on not to add more information on submit form. For example, you could use this feature to add a PayPal button to each photo.');
 define('_MI_EXTGAL_ALLOW_HTML', 'Allow HTML in extra field');
@@ -78,7 +76,7 @@ define('_MI_EXTGAL_T_QUALITY_DESC', 'Quality for thumb photo from 0 (bad) to 100
 //DNPROSSI - Double define to be removed
 //define('_MI_EXTGALLERY_ALBUM',"Album");
 define('_MI_EXTGAL_EXT_UPLOAD', 'Upload type page');
-define('_MI_EXTGAL_EXT_UPLOAD_DESC', 'Select the upload type that is provided to user. Extended require Java plugin.');
+define('_MI_EXTGAL_EXT_UPLOAD_DESC', 'Select the upload type that is provided to user. Extended require_once Java plugin.');
 define('_MI_EXTGALLERY_EXTENDED', 'Extended');
 define('_MI_EXTGALLERY_STANDARD', 'Standard');
 
@@ -197,3 +195,8 @@ define('_MI_EXTGALLERY_HELP7', 'Configuration');
 define('_MI_EXTGALLERY_HELP_DISCLAIMER', 'Disclaimer');
 define('_MI_EXTGALLERY_LICENSE', 'License');
 define('_MI_EXTGALLERY_SUPPORT', 'Support');
+
+define('_MI_EXTGAL_SHOW_SAMPLE_BUTTON', 'Show Sample Button?');
+define('_MI_EXTGAL_SHOW_SAMPLE_BUTTON_DESC', 'If yes, the "Add Sample Data" button will be visible to the Admin. It is Yes as a default for first installation.');
+
+define('_MI_EXTGALLERY_ADMENU_MIGRATE', 'Migrate');

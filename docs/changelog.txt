@@ -1,11 +1,18 @@
+<h5>1.14 Beta 2  [NOT RELEASED]</h5>  Dev: Xoops 2.5.10, PHP 7.3.0 RC2
+<hr>
+- updates, cosmetics (mamba)
+- added sample data (mamba)
+- added Migrate class  (mamba)
+WORK IN PROGRESS
+
+
 <h5>1.14 Beta 1  [NOT RELEASED]</h5>  Dev: Xoops 2.5.9, PHP 7.2.3
 <hr>
 - namespaces, autoloading (mamba)
-WORK IN PROGRESS
 
-============================
-1.13 RC 1       NOT RELEASED
-============================
+
+<h5>1.13 RC 1       NOT RELEASED</h5>
+<hr>
 - updates for PHP7, XOOPS 2.5.8 (mamba)
 - code cosmetics (mamba)
 - removed @version (mamba)
@@ -31,14 +38,12 @@ WORK IN PROGRESS
 - update PEAR Image-Transform 0.9.5 (mamba)
 
 
-============================
-1.13 Beta 1     2016-03-20
-============================
+<h5>1.13 Beta 1     2016-03-20</h5>
+<hr>
 - XOOPS 2.5.8, PHP 7 (mamba)
 
-============================
-1.12 Beta 2       2014-04-23
-============================
+<h5>1.12 Beta 2       2014-04-23</h5>
+<hr>
 - added Ajax effects for slideshow block : jQuery Touch Optimized Sliders "R"Us (luciorota)
 - fixed several small issues with blocks (mamba)
 - fixed bug in public download (tomodea)
@@ -55,24 +60,21 @@ WORK IN PROGRESS
 blocks.php
 _MB_EXTGALLERY_AJAX_TOSRUS (added) (luciorota)
 
-============================
-1.12 Beta 1     2013-08-12
-============================
+<h5>1.12 Beta 1     2013-08-12</h5>
+<hr>
 - added .jpeg extension (mamba)
 - replaced Extgallery\PhotoUploader with standard XoopsMediaUploader (mamba)
 - fix for index template (Cifug)
 
-============================
-1.11            2012-12-18
-============================
+<h5>1.11            2012-12-18</h5>
+<hr>
 - Updated PEAR
 - updated Google Buzz to Google Plus
 - updated English and French translations (cesagonchu)
 - bug fixed : MD5 checksum error (Kavok fr)
 
-============================
-1.1.0           2011/--/--
-============================
+<h5>1.1.0           2011/--/--</h5>
+<hr>
 - Add list block
 - Add upload photo from in admin side
 
@@ -92,10 +94,8 @@ _AM_EXTGALLERY_UPLOAD
 _AM_EXTGALLERY_ALBUMS
 _AM_EXTGALLERY_PHOTO_TITLE
 
-============================
-1.0.9           2010/--/--
-============================
-
+<h5>1.0.9           2010/--/--</h5>
+<hr>
 - 5.3.0 Assigning the return value of new by reference is deprecated PHP 5.3 (davidenprossi)
 - Support XOOPS 2.5.x and PHP 5.3.x (davidenprossi)
 - Add Form Options - Eneabled both Description & Extra Field for html input In options HTML has to be enabled.
@@ -527,19 +527,15 @@ _AM_EXTGALLERY_SS_THUMB (removed)
 _AM_EXTGALLERY_SS_CAPTION (removed)
 _AM_EXTGALLERY_SS_CONTROLLER (removed)
 
-============================
-1.0.8           2009/21/06
-============================
-
+<h5>1.0.8           2009/21/06</h5>
+<hr>
 - Add plugin system
 - Fix bug : Block slideshow call not available image that generate lot off 404 HTTP error
 - Fix bug : Standard upload page black page after upload
 
 
-============================
-1.0.7           2009/18/02
-============================
-
+<h5>1.0.7           2009/18/02</h5>
+<hr>
 - Fix bug : SlideShow don't work if photo description contains quotes
 - Fix bug : HTML is displayed on slideshow if description contains HTML
 - Fix bug : All XOOPS tag don't work if gallery extension is installed
@@ -554,10 +550,8 @@ _AM_EXTGALLERY_SS_CONTROLLER (removed)
 - Slideshow image link in block now redirect to image and not album if Display type is set to album in module preferences
 
 
-============================
-1.0.6           2009/06/01
-============================
-
+<h5>1.0.6           2009/06/01</h5>
+<hr>
 - Fix bug : An image is displayed by default for slideshow now
 - Fix bug : An image could be bigger than specified size if border is activated
 - Fix bug : index.html file isn't adedd to all uploads directory
@@ -598,10 +592,8 @@ _MI_EXTGAL_B_TOPRSS_DESC (removed)
 _MI_EXTGAL_B_TOPESS_DESC (removed)
 
 
-============================
-1.0.5           2008/17/12
-============================
-
+<h5>1.0.5           2008/17/12</h5>
+<hr>
 - Fix bug : XOOPS version checker on index admin page don't work with XOOPS 2.3.x
 - Fix bug : cannot redeclare adminmenu() when XoopsInfo or ThAdmin is installed
 - Fix bug : Category not visible after upgrading to eXtGallery 1.0.4 or upper
@@ -726,27 +718,21 @@ _MB_EXTGALLERY_NB_PHOTO_BY_SLIDESHOW (added)
 
 extension.php (added file)
 
-============================
-1.0.4           2008/04/03
-============================
-
+<h5>1.0.4           2008/04/03</h5>
+<hr>
 - Allow HTML for desc and extra field
 - Display extra info when it's enabled
 - Display category regarding upload perm on the upload form
 - Add an hide feature for album. You could now have an user hidden album to put image for your site presentation
 
-============================
-1.0.3           2007/21/07
-============================
-
+<h5>1.0.3           2007/21/07</h5>
+<hr>
 - Fix language constant issue on admin pages
 - Display Warning message on watermarking conf page when Freetype isn't supported and disable Watermarking to don't have blank page error
 
 
-============================
-1.0.2           2007/06/07
-============================
-
+<h5>1.0.2           2007/06/07</h5>
+<hr>
 - Fix bug : eCard counter updated twice for one sent
 - Fix bug : error when using username for watermarking
 - Fix bug : language constant wasn't use on admin side (permission page)
@@ -757,10 +743,8 @@ extension.php (added file)
 - Note : Image url is priority as 'Miniature' of category. If not image url, the 'Miniature' image was display.
 
 
-============================
-1.0.1           2006/26/11
-============================
-
+<h5>1.0.1           2006/26/11</h5>
+<hr>
 - Fix bug : eCard not sent
 - Add a new Criteria order for category. Category name is used after weight
 - Fix bug : blank page when an anonymous rate a photo
@@ -770,19 +754,15 @@ extension.php (added file)
 - Add a check to filter only TTF font on the font folder and photo on the batch folder
 
 
-============================
-1.0.0           2006/05/11
-============================
-
+<h5>1.0.0           2006/05/11</h5>
+<hr>
 - Add a function to remove accentuated characters in file name to fix non diplayed photo bug
 - Fix blank page when a Anonymous user submit a photo
 - Fix a blank page when approve or delete a pending photo
 
 
-============================
-0.1.8           2006/25/10
-============================
-
+<h5>0.1.8           2006/25/10</h5>
+<hr>
 - Fix a blank page bug on public-viewecard page
 - Add a redirect on Edit/Delete photo if they aren't photo in this category
 - Change the default watermark position
@@ -793,10 +773,8 @@ extension.php (added file)
 - Modify the image captcha (send eCard) to make it more readable
 
 
-============================
-0.1.7           2006/11/10
-============================
-
+<h5>0.1.7           2006/11/10</h5>
+<hr>
 - Fix a bug that allow access to restricted album by access it directly
 - Fix a bug in synchronize method count
 - Add the feature to view all photo submitted by one user
@@ -807,10 +785,8 @@ extension.php (added file)
 - Fix a bug that allow access to unapproved photo by access it directly
 - Add test to prevent error when form are submitted with wrong argument
 
-============================
-0.1.6           2006/08/10
-============================
-
+<h5>0.1.6           2006/08/10</h5>
+<hr>
 - Fix error when delete only one pending photo on admin side
 - Fix blank page on watermark configuration page
 - Fix "Sorry you don't have permission ..." error when sumiting an eCard
@@ -825,10 +801,8 @@ extension.php (added file)
 - Fix "File size too large" error when uploading photo
 
 
-============================
-0.1.5           2006/01/10
-============================
-
+<h5>0.1.5           2006/01/10</h5>
+<hr>
 - Fix typo bug on Admin Permissions page
 - Add redirection message on admin side
 - Fix blank page error when an Anonymous try to send an eCard

@@ -31,9 +31,9 @@ class PublicPhotoHandler extends Extgallery\PhotoHandler
 {
     /**
      * Extgallery\PublicPhotoHandler constructor.
-     * @param \XoopsDatabase $db
+     * @param \XoopsDatabase|null $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'public');
     }

@@ -50,10 +50,10 @@ trait ServerStats
                 $html .= '<li>' . constant('CO_' . $moduleDirNameUpper . '_GDLIBVERSION') . '<b>' . $gdlib['GD Version'] . '</b>';
             }
         }
-        
+
         //    $safemode = ini_get('safe_mode') ? constant('CO_' . $moduleDirNameUpper . '_ON') . constant('CO_' . $moduleDirNameUpper . '_SAFEMODEPROBLEMS : constant('CO_' . $moduleDirNameUpper . '_OFF');
         //    $html .= '<li>' . constant('CO_' . $moduleDirNameUpper . '_SAFEMODESTATUS . $safemode;
-                
+
         //    $registerglobals = (!ini_get('register_globals')) ? "<span style=\"color: #008000;\">" . constant('CO_' . $moduleDirNameUpper . '_OFF') . '</span>' : "<span style=\"color: #ff0000;\">" . constant('CO_' . $moduleDirNameUpper . '_ON') . '</span>';
         //    $html .= '<li>' . constant('CO_' . $moduleDirNameUpper . '_REGISTERGLOBALS . $registerglobals;
 

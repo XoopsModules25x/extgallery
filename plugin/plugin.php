@@ -16,5 +16,5 @@
  */
 
 $extgalleryPlugin = [
-    'lolbuilder' => 0
+    'lolbuilder' => 0,
 ];

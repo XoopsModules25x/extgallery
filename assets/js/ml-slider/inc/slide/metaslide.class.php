@@ -8,7 +8,7 @@ class MetaSlide
 {
     public $slide    = 0;
     public $slider   = 0;
-    public $settings = array(); // slideshow settings
+    public $settings = []; // slideshow settings
 
     /**
      * Set the slide
@@ -83,7 +83,7 @@ class MetaSlide
      */
     public function slide_exists_in_slideshow($slider_id, $slide_id)
     {
-        return has_term("{$slider_id}", 'ml-slider', $slide_id);
+        return has_term((string)$slider_id, 'ml-slider', $slide_id);
     }
 
     /**
@@ -170,7 +170,7 @@ class MetaSlide
         $menu_order = 0;
 
         // get the slide with the highest menu_order so far
-        $args = array(
+        $args = [
             'force_no_custom_order' => true,
             'orderby'               => 'menu_order',
             'order'                 => 'DESC',
@@ -179,14 +179,14 @@ class MetaSlide
             'lang'                  => '', // polylang, ingore language filter
             'suppress_filters'      => 1, // wpml, ignore language filter
             'posts_per_page'        => 1,
-            'tax_query'             => array(
-                array(
+            'tax_query'             => [
+                [
                     'taxonomy' => 'ml-slider',
                     'field'    => 'slug',
-                    'terms'    => $this->slider->ID
-                )
-            )
-        );
+                    'terms'    => $this->slider->ID,
+                ],
+            ],
+        ];
 
         $query = new WP_Query($args);
 
@@ -201,10 +201,10 @@ class MetaSlide
         +$menu_order;
 
         // update the slide
-        wp_update_post(array(
+        wp_update_post([
                            'ID'         => $this->slide->ID,
-                           'menu_order' => $menu_order
-                       ));
+                           'menu_order' => $menu_order,
+                       ]);
     }
 
     /**

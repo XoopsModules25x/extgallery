@@ -18,7 +18,7 @@ class MetaNivoSlider extends MetaSlider
     {
         parent::__construct($id, $shortcode_settings);
 
-        add_filter('metaslider_nivo_slider_parameters', array($this, 'set_autoplay_parameter'), 10, 3);
+        add_filter('metaslider_nivo_slider_parameters', [$this, 'set_autoplay_parameter'], 10, 3);
     }
 
     /**
@@ -43,7 +43,7 @@ class MetaNivoSlider extends MetaSlider
             unset($options['autoPlay']);
         }
         // we don't want this filter hanging around if there's more than one slideshow on the page
-        remove_filter('metaslider_nivo_slider_parameters', array($this, 'set_autoplay_parameter'), 10, 3);
+        remove_filter('metaslider_nivo_slider_parameters', [$this, 'set_autoplay_parameter'], 10, 3);
 
         return $options;
     }
@@ -57,7 +57,7 @@ class MetaNivoSlider extends MetaSlider
      */
     protected function get_param($param)
     {
-        $params = array(
+        $params = [
             'effect'         => 'effect',
             'slices'         => 'slices',
             'prevText'       => 'prevText',
@@ -70,7 +70,7 @@ class MetaNivoSlider extends MetaSlider
             'navigation'     => 'controlNav',
             'links'          => 'directionNav',
             'autoPlay'       => 'autoPlay'
-        );
+        ];
 
         if (isset($params[$param])) {
             return $params[$param];
@@ -99,7 +99,7 @@ class MetaNivoSlider extends MetaSlider
     {
         $theme = $this->get_setting('theme');
 
-        if (!in_array($theme, array('dark', 'bar', 'light'))) {
+        if (!in_array($theme, ['dark', 'bar', 'light'])) {
             $theme = 'default';
         }
 

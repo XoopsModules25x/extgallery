@@ -23,21 +23,21 @@ require_once __DIR__ . '/admin_header.php';
 /** @var Extgallery\Helper $helper */
 $helper = Extgallery\Helper::getInstance();
 
-if (isset($_POST['op'])) {
+if (\Xmf\Request::hasVar('op', 'POST')) {
     $op = $_POST['op'];
 } else {
     $op = 'default';
 }
 
 switch ($op) {
-
     case 'galleryview':
+
         /** @var \XoopsModuleHandler $moduleHandler */
         /** @var \XoopsConfigHandler $configHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
-        if (isset($_POST['galleryview_panelwidth'])) {
+        if (\Xmf\Request::hasVar('galleryview_panelwidth', 'POST')) {
             if ($helper->getConfig('galleryview_panelwidth') != $_POST['galleryview_panelwidth']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -50,14 +50,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_panelwidth',
                     'conf_value'     => $_POST['galleryview_panelwidth'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_panelheight'])) {
+        if (\Xmf\Request::hasVar('galleryview_panelheight', 'POST')) {
             if ($helper->getConfig('galleryview_panelheight') != $_POST['galleryview_panelheight']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -70,14 +70,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_panelheight',
                     'conf_value'     => $_POST['galleryview_panelheight'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_framewidth'])) {
+        if (\Xmf\Request::hasVar('galleryview_framewidth', 'POST')) {
             if ($helper->getConfig('galleryview_framewidth') != $_POST['galleryview_framewidth']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -90,14 +90,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_framewidth',
                     'conf_value'     => $_POST['galleryview_framewidth'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_frameheight'])) {
+        if (\Xmf\Request::hasVar('galleryview_frameheight', 'POST')) {
             if ($helper->getConfig('galleryview_frameheight') != $_POST['galleryview_frameheight']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -110,14 +110,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_frameheight',
                     'conf_value'     => $_POST['galleryview_frameheight'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_tspeed'])) {
+        if (\Xmf\Request::hasVar('galleryview_tspeed', 'POST')) {
             if ($helper->getConfig('galleryview_tspeed') != $_POST['galleryview_tspeed']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -130,14 +130,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_tspeed',
                     'conf_value'     => $_POST['galleryview_tspeed'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_tterval'])) {
+        if (\Xmf\Request::hasVar('galleryview_tterval', 'POST')) {
             if ($helper->getConfig('galleryview_tterval') != $_POST['galleryview_tterval']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -150,14 +150,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_tterval',
                     'conf_value'     => $_POST['galleryview_tterval'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_overlayheight'])) {
+        if (\Xmf\Request::hasVar('galleryview_overlayheight', 'POST')) {
             if ($helper->getConfig('galleryview_overlayheight') != $_POST['galleryview_overlayheight']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -170,14 +170,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_overlayheight',
                     'conf_value'     => $_POST['galleryview_overlayheight'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_opacity'])) {
+        if (\Xmf\Request::hasVar('galleryview_opacity', 'POST')) {
             if ($helper->getConfig('galleryview_opacity') != $_POST['galleryview_opacity']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -190,14 +190,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_opacity',
                     'conf_value'     => $_POST['galleryview_opacity'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_overlayfs'])) {
+        if (\Xmf\Request::hasVar('galleryview_overlayfs', 'POST')) {
             if ($helper->getConfig('galleryview_overlayfs') != $_POST['galleryview_overlayfs']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -210,14 +210,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_overlayfs',
                     'conf_value'     => $_POST['galleryview_overlayfs'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_borderwidth'])) {
+        if (\Xmf\Request::hasVar('galleryview_borderwidth', 'POST')) {
             if ($helper->getConfig('galleryview_borderwidth') != $_POST['galleryview_borderwidth']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -230,14 +230,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_borderwidth',
                     'conf_value'     => $_POST['galleryview_borderwidth'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_bordercolor'])) {
+        if (\Xmf\Request::hasVar('galleryview_bordercolor', 'POST')) {
             if ($helper->getConfig('galleryview_bordercolor') != $_POST['galleryview_bordercolor']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -250,14 +250,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_bordercolor',
                     'conf_value'     => $_POST['galleryview_bordercolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_bgcolor'])) {
+        if (\Xmf\Request::hasVar('galleryview_bgcolor', 'POST')) {
             if ($helper->getConfig('galleryview_bgcolor') != $_POST['galleryview_bgcolor']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -270,14 +270,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_bgcolor',
                     'conf_value'     => $_POST['galleryview_bgcolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_overlaycolor'])) {
+        if (\Xmf\Request::hasVar('galleryview_overlaycolor', 'POST')) {
             if ($helper->getConfig('galleryview_overlaycolor') != $_POST['galleryview_overlaycolor']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -290,14 +290,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_overlaycolor',
                     'conf_value'     => $_POST['galleryview_overlaycolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_overlaytc'])) {
+        if (\Xmf\Request::hasVar('galleryview_overlaytc', 'POST')) {
             if ($helper->getConfig('galleryview_overlaytc') != $_POST['galleryview_overlaytc']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -310,14 +310,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_overlaytc',
                     'conf_value'     => $_POST['galleryview_overlaytc'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_captiontc'])) {
+        if (\Xmf\Request::hasVar('galleryview_captiontc', 'POST')) {
             if ($helper->getConfig('galleryview_captiontc') != $_POST['galleryview_captiontc']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -330,14 +330,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_captiontc',
                     'conf_value'     => $_POST['galleryview_captiontc'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_navtheme'])) {
+        if (\Xmf\Request::hasVar('galleryview_navtheme', 'POST')) {
             if ($helper->getConfig('galleryview_navtheme') != $_POST['galleryview_navtheme']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -350,14 +350,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_navtheme',
                     'conf_value'     => $_POST['galleryview_navtheme'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_position'])) {
+        if (\Xmf\Request::hasVar('galleryview_position', 'POST')) {
             if ($helper->getConfig('galleryview_position') != $_POST['galleryview_position']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -370,14 +370,14 @@ switch ($op) {
                     'conf_name'      => 'galleryview_position',
                     'conf_value'     => $_POST['galleryview_position'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleryview_easing'])) {
+        if (\Xmf\Request::hasVar('galleryview_easing', 'POST')) {
             if ($helper->getConfig('galleryview_easing') != $_POST['galleryview_easing']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -390,7 +390,7 @@ switch ($op) {
                     'conf_name'      => 'galleryview_easing',
                     'conf_value'     => $_POST['galleryview_easing'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
@@ -398,13 +398,15 @@ switch ($op) {
         }
 
         redirect_header('slideshow.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
+
         break;
 
     case 'galleria':
+
         /** @var XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
-        if (isset($_POST['galleria_height'])) {
+        if (\Xmf\Request::hasVar('galleria_height', 'POST')) {
             if ($helper->getConfig('galleria_height') != $_POST['galleria_height']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -417,14 +419,14 @@ switch ($op) {
                     'conf_name'      => 'galleria_height',
                     'conf_value'     => $_POST['galleria_height'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleria_panelwidth'])) {
+        if (\Xmf\Request::hasVar('galleria_panelwidth', 'POST')) {
             if ($helper->getConfig('galleria_panelwidth') != $_POST['galleria_panelwidth']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -437,14 +439,14 @@ switch ($op) {
                     'conf_name'      => 'galleria_panelwidth',
                     'conf_value'     => $_POST['galleria_panelwidth'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleria_bgcolor'])) {
+        if (\Xmf\Request::hasVar('galleria_bgcolor', 'POST')) {
             if ($helper->getConfig('galleria_bgcolor') != $_POST['galleria_bgcolor']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -457,14 +459,14 @@ switch ($op) {
                     'conf_name'      => 'galleria_bgcolor',
                     'conf_value'     => $_POST['galleria_bgcolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleria_bcolor'])) {
+        if (\Xmf\Request::hasVar('galleria_bcolor', 'POST')) {
             if ($helper->getConfig('galleria_bcolor') != $_POST['galleria_bcolor']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -477,14 +479,14 @@ switch ($op) {
                     'conf_name'      => 'galleria_bcolor',
                     'conf_value'     => $_POST['galleria_bcolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleria_bgimg'])) {
+        if (\Xmf\Request::hasVar('galleria_bgimg', 'POST')) {
             if ($helper->getConfig('galleria_bgimg') != $_POST['galleria_bgimg']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -497,14 +499,14 @@ switch ($op) {
                     'conf_name'      => 'galleria_bgimg',
                     'conf_value'     => $_POST['galleria_bgimg'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleria_autoplay'])) {
+        if (\Xmf\Request::hasVar('galleria_autoplay', 'POST')) {
             if ($helper->getConfig('galleria_autoplay') != $_POST['galleria_autoplay']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -517,14 +519,14 @@ switch ($op) {
                     'conf_name'      => 'galleria_autoplay',
                     'conf_value'     => $_POST['galleria_autoplay'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleria_transition'])) {
+        if (\Xmf\Request::hasVar('galleria_transition', 'POST')) {
             if ($helper->getConfig('galleria_transition') != $_POST['galleria_transition']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -537,14 +539,14 @@ switch ($op) {
                     'conf_name'      => 'galleria_transition',
                     'conf_value'     => $_POST['galleria_transition'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleria_tspeed'])) {
+        if (\Xmf\Request::hasVar('galleria_tspeed', 'POST')) {
             if ($helper->getConfig('galleria_tspeed') != $_POST['galleria_tspeed']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -557,21 +559,23 @@ switch ($op) {
                     'conf_name'      => 'galleria_tspeed',
                     'conf_value'     => $_POST['galleria_tspeed'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
         redirect_header('slideshow.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
+
         break;
 
     case 'galleriffic':
+
         /** @var XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
-        if (isset($_POST['galleriffic_height'])) {
+        if (\Xmf\Request::hasVar('galleriffic_height', 'POST')) {
             if ($helper->getConfig('galleriffic_height') != $_POST['galleriffic_height']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -584,14 +588,14 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_height',
                     'conf_value'     => $_POST['galleriffic_height'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleriffic_width'])) {
+        if (\Xmf\Request::hasVar('galleriffic_width', 'POST')) {
             if ($helper->getConfig('galleriffic_width') != $_POST['galleriffic_width']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -604,14 +608,14 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_width',
                     'conf_value'     => $_POST['galleriffic_width'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleriffic_bgcolor'])) {
+        if (\Xmf\Request::hasVar('galleriffic_bgcolor', 'POST')) {
             if ($helper->getConfig('galleriffic_bgcolor') != $_POST['galleriffic_bgcolor']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -624,14 +628,14 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_bgcolor',
                     'conf_value'     => $_POST['galleriffic_bgcolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleriffic_bordercolor'])) {
+        if (\Xmf\Request::hasVar('galleriffic_bordercolor', 'POST')) {
             if ($helper->getConfig('galleriffic_bordercolor') != $_POST['galleriffic_bordercolor']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -644,14 +648,14 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_bordercolor',
                     'conf_value'     => $_POST['galleriffic_bordercolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleriffic_fontcolor'])) {
+        if (\Xmf\Request::hasVar('galleriffic_fontcolor', 'POST')) {
             if ($helper->getConfig('galleriffic_fontcolor') != $_POST['galleriffic_fontcolor']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -664,14 +668,14 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_fontcolor',
                     'conf_value'     => $_POST['galleriffic_fontcolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleriffic_autoplay'])) {
+        if (\Xmf\Request::hasVar('galleriffic_autoplay', 'POST')) {
             if ($helper->getConfig('galleriffic_autoplay') != $_POST['galleriffic_autoplay']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -684,14 +688,14 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_autoplay',
                     'conf_value'     => $_POST['galleriffic_autoplay'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleriffic_nb_thumbs'])) {
+        if (\Xmf\Request::hasVar('galleriffic_nb_thumbs', 'POST')) {
             if ($helper->getConfig('galleriffic_nb_thumbs') != $_POST['galleriffic_nb_thumbs']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -704,14 +708,14 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_nb_thumbs',
                     'conf_value'     => $_POST['galleriffic_nb_thumbs'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleriffic_nb_colthumbs'])) {
+        if (\Xmf\Request::hasVar('galleriffic_nb_colthumbs', 'POST')) {
             if ($helper->getConfig('galleriffic_nb_colthumbs') != $_POST['galleriffic_nb_colthumbs']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -724,14 +728,14 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_nb_colthumbs',
                     'conf_value'     => $_POST['galleriffic_nb_colthumbs'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleriffic_nb_preload'])) {
+        if (\Xmf\Request::hasVar('galleriffic_nb_preload', 'POST')) {
             if ($helper->getConfig('galleriffic_nb_preload') != $_POST['galleriffic_nb_preload']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -744,14 +748,14 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_nb_preload',
                     'conf_value'     => $_POST['galleriffic_nb_preload'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleriffic_tdelay'])) {
+        if (\Xmf\Request::hasVar('galleriffic_tdelay', 'POST')) {
             if ($helper->getConfig('galleriffic_tdelay') != $_POST['galleriffic_tdelay']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -764,14 +768,14 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_tdelay',
                     'conf_value'     => $_POST['galleriffic_tdelay'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleriffic_tspeed'])) {
+        if (\Xmf\Request::hasVar('galleriffic_tspeed', 'POST')) {
             if ($helper->getConfig('galleriffic_tspeed') != $_POST['galleriffic_tspeed']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -784,14 +788,14 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_tspeed',
                     'conf_value'     => $_POST['galleriffic_tspeed'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleriffic_show_descr'])) {
+        if (\Xmf\Request::hasVar('galleriffic_show_descr', 'POST')) {
             if ($helper->getConfig('galleriffic_show_descr') != $_POST['galleriffic_show_descr']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -804,14 +808,14 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_show_descr',
                     'conf_value'     => $_POST['galleriffic_show_descr'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['galleriffic_download'])) {
+        if (\Xmf\Request::hasVar('galleriffic_download', 'POST')) {
             if ($helper->getConfig('galleriffic_download') != $_POST['galleriffic_download']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -824,16 +828,18 @@ switch ($op) {
                     'conf_name'      => 'galleriffic_download',
                     'conf_value'     => $_POST['galleriffic_download'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
         redirect_header('slideshow.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
+
         break;
 
     case 'default':
+
     default:
 
         xoops_cp_header();

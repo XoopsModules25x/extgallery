@@ -2701,7 +2701,7 @@ Galleria.prototype = {
 
             // legacy patch
             if( s === false || s == 'disabled' ) { return false; }
-            
+
             return !!Galleria.TOUCH;
 
         }( options.swipe ));

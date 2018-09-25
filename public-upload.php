@@ -17,12 +17,12 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
+require_once __DIR__   . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 //require_once __DIR__ . '/class/Utility.php';
 
-if (isset($_POST['step'])) {
+if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 } else {
     $step = 'default';
@@ -79,7 +79,7 @@ switch ($step) {
         // For xoops tag
         if ((1 == $helper->getConfig('usetag')) && is_dir('../tag')) {
             require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
-            $form->addElement(new TagFormTag('tag', 60, 255, '', 0));
+            $form->addElement(new \XoopsModules\Tag\FormTag('tag', 60, 255, '', 0));
         }
 
         $plugin = Extgallery\Helper::getInstance()->getHandler('Plugin');
@@ -90,7 +90,7 @@ switch ($step) {
 
         $form->display();
 
-        include XOOPS_ROOT_PATH . '/footer.php';
+        require_once XOOPS_ROOT_PATH . '/footer.php';
 
         break;
 

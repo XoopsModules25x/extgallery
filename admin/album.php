@@ -25,17 +25,17 @@ $helper = Extgallery\Helper::getInstance();
 
 //$GLOBALS['xoopsOption']['template_main'] = 'extgallery_admin_album.tpl';
 
-$op    = \Xmf\Request::getCmd('op', 'default');
+$op = \Xmf\Request::getCmd('op', 'default');
 
 switch ($op) {
-
     case 'overlay':
+
         /** @var XoopsModuleHandler $moduleHandler */
         /** @var \XoopsConfigHandler $configHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
-        if (isset($_POST['album_overlay_bg'])) {
+        if (\Xmf\Request::hasVar('album_overlay_bg', 'POST')) {
             if ($helper->getConfig('album_overlay_bg') != $_POST['album_overlay_bg']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -49,14 +49,14 @@ switch ($op) {
                     'conf_name'      => 'album_overlay_bg',
                     'conf_value'     => $_POST['album_overlay_bg'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['album_overlay_width'])) {
+        if (\Xmf\Request::hasVar('album_overlay_width', 'POST')) {
             if ($helper->getConfig('album_overlay_width') != $_POST['album_overlay_width']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -70,14 +70,14 @@ switch ($op) {
                     'conf_name'      => 'album_overlay_width',
                     'conf_value'     => $_POST['album_overlay_width'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['album_overlay_height'])) {
+        if (\Xmf\Request::hasVar('album_overlay_height', 'POST')) {
             if ($helper->getConfig('album_overlay_height') != $_POST['album_overlay_height']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -91,7 +91,7 @@ switch ($op) {
                     'conf_name'      => 'album_overlay_height',
                     'conf_value'     => $_POST['album_overlay_height'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
@@ -99,14 +99,16 @@ switch ($op) {
         }
 
         redirect_header('album.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
+
         break;
 
     case 'tooltip':
+
         /** @var XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
-        if (isset($_POST['album_tooltip_width'])) {
+        if (\Xmf\Request::hasVar('album_tooltip_width', 'POST')) {
             if ($helper->getConfig('album_tooltip_width') != $_POST['album_tooltip_width']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -120,9 +122,9 @@ switch ($op) {
                     'conf_name'      => 'album_tooltip_width',
                     'conf_value'     => $_POST['album_tooltip_width'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
-                if (isset($_POST['album_tooltip_width'])) {
+                if (\Xmf\Request::hasVar('album_tooltip_width', 'POST')) {
                     if ($helper->getConfig('album_tooltip_width') != $_POST['album_tooltip_width']) {
                         $criteria = new \CriteriaCompo();
                         $criteria->add($moduleIdCriteria);
@@ -136,7 +138,7 @@ switch ($op) {
                             'conf_name'      => 'album_tooltip_width',
                             'conf_value'     => $_POST['album_tooltip_width'],
                             'conf_formtype'  => 'hidden',
-                            'conf_valuetype' => 'text'
+                            'conf_valuetype' => 'text',
                         ];
                         $config->setVars($configValue);
                         $configHandler->insertConfig($config);
@@ -147,7 +149,7 @@ switch ($op) {
             }
         }
 
-        if (isset($_POST['album_tooltip_borderwidth'])) {
+        if (\Xmf\Request::hasVar('album_tooltip_borderwidth', 'POST')) {
             if ($helper->getConfig('album_tooltip_borderwidth') != $_POST['album_tooltip_borderwidth']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -161,14 +163,14 @@ switch ($op) {
                     'conf_name'      => 'album_tooltip_borderwidth',
                     'conf_value'     => $_POST['album_tooltip_borderwidth'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['album_tooltip_bordercolor'])) {
+        if (\Xmf\Request::hasVar('album_tooltip_bordercolor', 'POST')) {
             if ($helper->getConfig('album_tooltip_bordercolor') != $_POST['album_tooltip_bordercolor']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -182,7 +184,7 @@ switch ($op) {
                     'conf_name'      => 'album_tooltip_bordercolor',
                     'conf_value'     => $_POST['album_tooltip_bordercolor'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
@@ -190,14 +192,16 @@ switch ($op) {
         }
 
         redirect_header('album.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
+
         break;
 
     case 'fancybox':
+
         /** @var XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
-        if (isset($_POST['album_fancybox_color'])) {
+        if (\Xmf\Request::hasVar('album_fancybox_color', 'POST')) {
             if ($helper->getConfig('album_fancybox_color') != $_POST['album_fancybox_color']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -211,14 +215,14 @@ switch ($op) {
                     'conf_name'      => 'album_fancybox_color',
                     'conf_value'     => $_POST['album_fancybox_color'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['album_fancybox_opacity'])) {
+        if (\Xmf\Request::hasVar('album_fancybox_opacity', 'POST')) {
             if ($helper->getConfig('album_fancybox_opacity') != $_POST['album_fancybox_opacity']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -232,14 +236,14 @@ switch ($op) {
                     'conf_name'      => 'album_fancybox_opacity',
                     'conf_value'     => $_POST['album_fancybox_opacity'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['album_fancybox_tin'])) {
+        if (\Xmf\Request::hasVar('album_fancybox_tin', 'POST')) {
             if ($helper->getConfig('album_fancybox_tin') != $_POST['album_fancybox_tin']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -253,14 +257,14 @@ switch ($op) {
                     'conf_name'      => 'album_fancybox_tin',
                     'conf_value'     => $_POST['album_fancybox_tin'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['album_fancybox_tout'])) {
+        if (\Xmf\Request::hasVar('album_fancybox_tout', 'POST')) {
             if ($helper->getConfig('album_fancybox_tout') != $_POST['album_fancybox_tout']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -274,14 +278,14 @@ switch ($op) {
                     'conf_name'      => 'album_fancybox_tout',
                     'conf_value'     => $_POST['album_fancybox_tout'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['album_fancybox_title'])) {
+        if (\Xmf\Request::hasVar('album_fancybox_title', 'POST')) {
             if ($helper->getConfig('album_fancybox_title') != $_POST['album_fancybox_title']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -295,14 +299,14 @@ switch ($op) {
                     'conf_name'      => 'album_fancybox_title',
                     'conf_value'     => $_POST['album_fancybox_title'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['album_fancybox_showtype'])) {
+        if (\Xmf\Request::hasVar('album_fancybox_showtype', 'POST')) {
             if ($helper->getConfig('album_fancybox_showtype') != $_POST['album_fancybox_showtype']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -316,7 +320,7 @@ switch ($op) {
                     'conf_name'      => 'album_fancybox_showtype',
                     'conf_value'     => $_POST['album_fancybox_showtype'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
@@ -324,14 +328,16 @@ switch ($op) {
         }
 
         redirect_header('album.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
+
         break;
 
     case 'prettyphoto':
+
         /** @var XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
-        if (isset($_POST['album_prettyphoto_theme'])) {
+        if (\Xmf\Request::hasVar('album_prettyphoto_theme', 'POST')) {
             if ($helper->getConfig('album_prettyphoto_theme') != $_POST['album_prettyphoto_theme']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -344,14 +350,14 @@ switch ($op) {
                     'conf_name'      => 'album_prettyphoto_theme',
                     'conf_value'     => $_POST['album_prettyphoto_theme'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['album_prettyphoto_speed'])) {
+        if (\Xmf\Request::hasVar('album_prettyphoto_speed', 'POST')) {
             if ($helper->getConfig('album_prettyphoto_speed') != $_POST['album_prettyphoto_speed']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -364,14 +370,14 @@ switch ($op) {
                     'conf_name'      => 'album_prettyphoto_speed',
                     'conf_value'     => $_POST['album_prettyphoto_speed'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['album_prettyphoto_slidspe'])) {
+        if (\Xmf\Request::hasVar('album_prettyphoto_slidspe', 'POST')) {
             if ($helper->getConfig('album_prettyphoto_slidspe') != $_POST['album_prettyphoto_slidspe']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -384,14 +390,14 @@ switch ($op) {
                     'conf_name'      => 'album_prettyphoto_slidspe',
                     'conf_value'     => $_POST['album_prettyphoto_slidspe'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
             }
         }
 
-        if (isset($_POST['album_prettyphoto_autopla'])) {
+        if (\Xmf\Request::hasVar('album_prettyphoto_autopla', 'POST')) {
             if ($helper->getConfig('album_prettyphoto_autopla') != $_POST['album_prettyphoto_autopla']) {
                 $criteria = new \CriteriaCompo();
                 $criteria->add($moduleIdCriteria);
@@ -404,7 +410,7 @@ switch ($op) {
                     'conf_name'      => 'album_prettyphoto_autopla',
                     'conf_value'     => $_POST['album_prettyphoto_autopla'],
                     'conf_formtype'  => 'hidden',
-                    'conf_valuetype' => 'text'
+                    'conf_valuetype' => 'text',
                 ];
                 $config->setVars($configValue);
                 $configHandler->insertConfig($config);
@@ -412,10 +418,13 @@ switch ($op) {
         }
 
         redirect_header('album.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
+
         break;
 
     case 'default':
+
     default:
+
         xoops_cp_header();
 
         $xoopsTpl->assign('displayalbum', 'album' === $helper->getConfig('display_type'));

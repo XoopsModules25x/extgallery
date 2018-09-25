@@ -17,8 +17,8 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
-include XOOPS_ROOT_PATH . '/header.php';
+require_once __DIR__ . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 error_reporting(0);
@@ -93,7 +93,7 @@ if (!$xoopsTpl->is_cached('db:extgallery_public-rss.tpl')) {
 
     $param = [
         'limit' => $helper->getConfig('perpage_rss'),
-        'cat'   => $categories
+        'cat'   => $categories,
     ];
 
     $photos = $photoHandler->objectToArray($photoHandler->getLastPhoto($param));

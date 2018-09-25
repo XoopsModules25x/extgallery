@@ -133,10 +133,8 @@ define('_AM_EXTGALLERY_PUBLIC_UPLOAD_INFO', 'Allows you to restrict the upload/s
 
 define('_AM_EXTGALLERY_PUBLIC_AUTOAPROVE', 'Public auto approve permission');
 define('_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_DESC', "Select categories where public photo uploads don't need admin approval");
-define(
-    '_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_INFO',
-       "Allows you to prevent the automatic display of submitted public images until they are approved by an Admin. Select category where public user uploads don't need to be approved. Public users must be allowed to submit photos to enable this permission."
-);
+define('_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_INFO',
+       "Allows you to prevent the automatic display of submitted public images until they are approved by an Admin. Select category where public user uploads don't need to be approved. Public users must be allowed to submit photos to enable this permission.");
 
 define('_AM_EXTGALLERY_PUBLIC_DISPLAYED', 'Display album permissions');
 define('_AM_EXTGALLERY_PUBLIC_DISPLAYED_DESC', 'Select categories to be displayed');
@@ -247,10 +245,8 @@ define('_AM_EXTGALLERY_GFIC_DOWNLOAD', 'Allow download of original picture (if a
 
 // Album
 define('_AM_EXTGALLERY_USE_AJAX_EFFECTS', 'Ajax effects ');
-define(
-    '_AM_EXTGALLERY_USE_AJAX_EFFECTS_DESC',
-       'Selecting effects will change photo display when thumbs are clicked. Ajax effects or Normal can be selected.<br><br> <b>Normal</b> :  No effects<br><b>Lightbox</b> : Use Lightbox effect<br><b>Overlay</b> : use Overlay effect<br><b>Tooltip</b> : use Tooltip effect<br><b>Fancybox</b> : use Fancybox effect<br><b>PrettyPhoto</b> : use PrettyPhoto effect<br>'
-);
+define('_AM_EXTGALLERY_USE_AJAX_EFFECTS_DESC',
+       'Selecting effects will change photo display when thumbs are clicked. Ajax effects or Normal can be selected.<br><br> <b>Normal</b> :  No effects<br><b>Lightbox</b> : Use Lightbox effect<br><b>Overlay</b> : use Overlay effect<br><b>Tooltip</b> : use Tooltip effect<br><b>Fancybox</b> : use Fancybox effect<br><b>PrettyPhoto</b> : use PrettyPhoto effect<br>');
 define('_AM_EXTGALLERY_ALBUM_CONF', 'Album configuration');
 define('_AM_EXTGALLERY_OVERLAY_CONF', 'Overlay configuration');
 define('_AM_EXTGALLERY_TOOLTIP_CONF', 'Tooltip configuration');

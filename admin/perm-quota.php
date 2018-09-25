@@ -19,15 +19,15 @@
 use XoopsModules\Extgallery;
 
 require_once __DIR__ . '/admin_header.php';
-//include  dirname(__DIR__) . '/class/grouppermform.php';
+//require_once dirname(__DIR__) . '/class/grouppermform.php';
 
-if (isset($_POST['step'])) {
+if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 } else {
     $step = 'default';
 }
 
-if (isset($_GET['op'])) {
+if (\Xmf\Request::hasVar('op', 'GET')) {
     $op = $_GET['op'];
 } else {
     $op = 'default';
@@ -60,7 +60,7 @@ switch ($step) {
     case 'default':
     default:
 
-        $permArray       = include XOOPS_ROOT_PATH . '/modules/extgallery/include/perm.php';
+        $permArray       = require_once XOOPS_ROOT_PATH . '/modules/extgallery/include/perm.php';
         $modulePermArray = $permArray['modulePerm'];
         $pluginPermArray = $permArray['pluginPerm'];
 

@@ -99,23 +99,33 @@ function extgalleryPhotoShow($options)
 
     switch ($photoHandlertype) {
         case 'RandomPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getRandomPhoto($param));
+
             break;
 
         case 'LastPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getLastPhoto($param));
+
             break;
 
         case 'TopViewPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getTopViewPhoto($param));
+
             break;
 
         case 'TopRatedPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getTopRatedPhoto($param));
+
             break;
 
         case 'TopEcardPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getTopEcardPhoto($param));
+
             break;
     }
 
@@ -125,35 +135,49 @@ function extgalleryPhotoShow($options)
 
         switch ($ajaxeffect) {
             case 'lightbox':
+
                 $xoTheme->addScript('browse.php?Frameworks/jquery/plugins/jquery.lightbox.js');
                 $xoTheme->addStylesheet('browse.php?modules/system/css/lightbox.css');
+
                 break;
             case 'tooltip':
+
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.js');
                 $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.css');
+
                 break;
             case 'overlay':
+
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/overlay/overlay.jquery.tools.min.js');
                 $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/overlay/overlay.css');
+
                 break;
             case 'fancybox':
+
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/fancybox/mousewheel.js');
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/fancybox/fancybox.pack.js');
                 $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/fancybox/fancybox.css');
+
                 break;
             case 'prettyphoto':
+
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/prettyphoto/jquery.prettyPhoto.js');
                 $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/prettyphoto/prettyPhoto.css');
+
                 break;
             case 'jcarousel':
+
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/jcarousel/jquery.jcarousel.min.js');
                 $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/jcarousel/skin.css');
+
                 break;
             case 'TosRUs':
+
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/TosRUs/src/js/jquery.tosrus.js');
                 $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/TosRUs/src/css/jquery.tosrus.css');
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/TosRUs/lib/jquery.hammer.min.js');
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/TosRUs/lib/FlameViewportScale.js');
+
                 break;
         }
     }
@@ -187,7 +211,7 @@ function extgalleryPhotoShow($options)
         'prettyphotoautoplay'  => $prettyphotoautoplay,
         'jcarouselhwidth'      => $jcarouselhwidth,
         'jcarouselvwidth'      => $jcarouselvwidth,
-        'jcarouselvheight'     => $jcarouselvheight
+        'jcarouselvheight'     => $jcarouselvheight,
     ];
 
     return $ret;
@@ -195,7 +219,7 @@ function extgalleryPhotoShow($options)
 
 // converts a 2D array in a comma separated list (or separator of our choice)
 /**
- * @param $sep
+ * @param       $sep
  * @param array $array
  *
  * @return string
@@ -338,19 +362,29 @@ function extgalleryAjax($options)
 
     switch ($photoHandlertype) {
         case 'RandomPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getRandomPhoto($param));
+
             break;
         case 'LastPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getLastPhoto($param));
+
             break;
         case 'TopViewPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getTopViewPhoto($param));
+
             break;
         case 'TopRatedPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getTopRatedPhoto($param));
+
             break;
         case 'TopEcardPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getTopEcardPhoto($param));
+
             break;
     }
 
@@ -360,17 +394,23 @@ function extgalleryAjax($options)
 
         switch ($ajaxeffect) {
             case 'galleryview':
+
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/galleryview/galleryview.js');
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/galleryview/timers.js');
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/galleryview/easing.js');
                 $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/galleryview/galleryview.css');
+
                 break;
             case 'galleria':
+
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/galleria/galleria.js');
+
                 break;
             case 'microgallery':
+
                 $xoTheme->addScript('browse.php?modules/extgallery/assets/js/microgallery/jquery.microgallery.js');
                 $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/microgallery/style.css');
+
                 break;
         }
     }
@@ -408,7 +448,7 @@ function extgalleryAjax($options)
         'galleria_autoplay'   => $gria_autoplay,
         'galleria_transition' => $gria_transition,
         'galleria_tspeed'     => $gria_tspeed,
-        'micro_size'          => $micro_size
+        'micro_size'          => $micro_size,
     ];
 
     return $ret;
@@ -422,6 +462,7 @@ function extgalleryAjax($options)
  */
 function extgalleryBlockEdit($options)
 {
+
 
     /** @var Extgallery\Category $catHandler */
     $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
@@ -761,19 +802,29 @@ function extgalleryList($options)
 
     switch ($photoHandlertype) {
         case 'RandomPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getRandomPhoto($param));
+
             break;
         case 'LastPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getLastPhoto($param));
+
             break;
         case 'TopViewPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getTopViewPhoto($param));
+
             break;
         case 'TopRatedPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getTopRatedPhoto($param));
+
             break;
         case 'TopEcardPhoto':
+
             $photos = $photoHandler->objectToArray($photoHandler->getTopEcardPhoto($param));
+
             break;
     }
 
@@ -791,7 +842,7 @@ function extgalleryList($options)
         'photos' => $photos,
         'date'   => $date,
         'hits'   => $hits,
-        'rate'   => $rate
+        'rate'   => $rate,
     ];
 
     return $ret;

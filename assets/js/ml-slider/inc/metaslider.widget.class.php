@@ -20,8 +20,8 @@ class MetaSlider_Widget extends WP_Widget
     {
         parent::__construct(
             'metaslider_widget', // Base ID
-                            'Meta Slider', // Name
-                            array('description' => __('Meta Slider', 'metaslider')) // Args
+            'Meta Slider', // Name
+            ['description' => __('Meta Slider', 'metaslider')] // Args
         );
     }
 
@@ -64,7 +64,7 @@ class MetaSlider_Widget extends WP_Widget
      */
     public function update($new_instance, $old_instance)
     {
-        $instance              = array();
+        $instance              = [];
         $instance['slider_id'] = strip_tags($new_instance['slider_id']);
         $instance['title']     = strip_tags($new_instance['title']);
 
@@ -92,22 +92,22 @@ class MetaSlider_Widget extends WP_Widget
             $title = $instance['title'];
         }
 
-        $posts = get_posts(array(
+        $posts = get_posts([
                                'post_type'      => 'ml-slider',
                                'post_status'    => 'publish',
                                'orderby'        => 'date',
                                'order'          => 'ASC',
                                'posts_per_page' => -1
-                           ));
+                           ]);
 
         foreach ($posts as $post) {
             $active = $selected_slider == $post->ID ? true : false;
 
-            $sliders[] = array(
+            $sliders[] = [
                 'active' => $active,
                 'title'  => $post->post_title,
                 'id'     => $post->ID
-            );
+            ];
         } ?>
         <p>
         <?php if ($sliders) {

@@ -18,11 +18,11 @@
 use Xmf\Request;
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-userphoto.tpl';
-include XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 /** @var Extgallery\Helper $helper */
 $helper = Extgallery\Helper::getInstance();
@@ -117,7 +117,7 @@ $lang = [
     'sends'        => _MD_EXTGALLERY_SENDS,
     'submitter'    => _MD_EXTGALLERY_SUBMITTER,
     'allPhotoBy'   => _MD_EXTGALLERY_ALL_PHOTO_BY,
-    'albumName'    => $albumName
+    'albumName'    => $albumName,
 ];
 $xoopsTpl->assign('lang', $lang);
 
@@ -171,5 +171,5 @@ if ((1 == $helper->getConfig('usetag')) && is_dir('../tag')) {
     $xoopsTpl->assign('tags', false);
 }
 
-include XOOPS_ROOT_PATH . '/include/comment_view.php';
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

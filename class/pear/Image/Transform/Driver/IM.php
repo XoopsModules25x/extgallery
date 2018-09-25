@@ -69,8 +69,8 @@ class Image_Transform_Driver_IM extends Image_Transform
             $path = dirname(System::which('convert')) . DIRECTORY_SEPARATOR;
             define('IMAGE_TRANSFORM_IM_PATH', $path);
         }
-        if (System::which(IMAGE_TRANSFORM_IM_PATH . 'convert' . ((OS_WINDOWS) ? '.exe' : ''))) {
-            include __DIR__ . '/Image/Transform/Driver/Imagick/ImageTypes.php';
+        if (System::which(IMAGE_TRANSFORM_IM_PATH . 'convert' . (OS_WINDOWS ? '.exe' : ''))) {
+            require_once __DIR__   . '/Image/Transform/Driver/Imagick/ImageTypes.php';
         } else {
             $this->isError(PEAR::raiseError('Couldn\'t find "convert" binary', IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
         }
@@ -121,7 +121,7 @@ class Image_Transform_Driver_IM extends Image_Transform
         if (PEAR::isError($retval)) {
             unset($retval);
 
-            if (!System::which(IMAGE_TRANSFORM_IM_PATH . 'identify' . ((OS_WINDOWS) ? '.exe' : ''))) {
+            if (!System::which(IMAGE_TRANSFORM_IM_PATH . 'identify' . (OS_WINDOWS ? '.exe' : ''))) {
                 $this->isError(PEAR::raiseError('Couldn\'t find "identify" binary', IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
             }
             $cmd = $this->_prepare_cmd(IMAGE_TRANSFORM_IM_PATH, 'identify', '-format %w:%h:%m ' . escapeshellarg($image));

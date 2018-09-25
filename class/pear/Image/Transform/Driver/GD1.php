@@ -130,7 +130,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
         if ($autoresize) {
             $t = abs($t);
             $a = round($angle, 0);
-            switch ((int)($angle)) {
+            switch ((int)$angle) {
                 case 0:
                     $width2  = $width;
                     $height2 = $height;
@@ -148,8 +148,8 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
                     $height2 = $width;
                     break;
                 default:
-                    $width2  = (int)(abs(sin($t) * $height + cos($t) * $width));
-                    $height2 = (int)(abs(cos($t) * $height + sin($t) * $width));
+                    $width2  = (int)abs(sin($t) * $height + cos($t) * $width);
+                    $height2 = (int)abs(cos($t) * $height + sin($t) * $width);
             }
 
             $width2  -= $width2 % 2;
@@ -179,7 +179,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
         $mask = imagecolorresolve($img2, $color_mask[0], $color_mask[1], $color_mask[2]);
 
         // use simple lines copy for axes angles
-        switch ((int)($angle)) {
+        switch ((int)$angle) {
             case 0:
                 imagefill($img2, 0, 0, $mask);
                 for ($y = 0; $y < $max_y; $y++) {
@@ -223,7 +223,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
 
                     // Algebra :)
                     $x2 = round((($min_x2 - $x1) * $cosT) + (($y - $y1) * $sinT + $x1), 0);
-                    $y2 = round((($y - $y1) * $cosT - ($min_x2 - $x1) * $sinT + $y1), 0);
+                    $y2 = round(($y - $y1) * $cosT - ($min_x2 - $x1) * $sinT + $y1, 0);
 
                     for ($x = $min_x2; $x < $max_x2; $x++) {
 

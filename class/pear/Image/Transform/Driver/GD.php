@@ -447,7 +447,7 @@ class Image_Transform_Driver_GD extends Image_Transform
     public function _generate($filename, $type = '', $quality = null)
     {
         $type    = strtolower(('' == $type) ? $this->type : $type);
-        $options = (is_array($quality)) ? $quality : [];
+        $options = is_array($quality) ? $quality : [];
         switch ($type) {
             case 'jpg':
                 $type = 'jpeg';

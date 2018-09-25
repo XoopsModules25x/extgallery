@@ -690,7 +690,7 @@ class Image_Transform
                 return $type;
         }
 
-        return (isset($types[$t = strtolower($type)])) ? $types[$t] : $type;
+        return isset($types[$t = strtolower($type)]) ? $types[$t] : $type;
     }
 
     /**
@@ -837,7 +837,7 @@ class Image_Transform
      */
     public function getMimeType($type = null)
     {
-        return image_type_to_mime_type($this->_convert_image_type(($type) ?: $this->type));
+        return image_type_to_mime_type($this->_convert_image_type($type ?: $this->type));
     }
 
     /**
@@ -1288,7 +1288,7 @@ class Image_Transform
             static $colornames = [];
             require_once __DIR__ . '/Image/Transform/Driver/ColorsDefs.php';
 
-            return (isset($colornames[$color])) ? $colornames[$color] : $default;
+            return isset($colornames[$color]) ? $colornames[$color] : $default;
         }
 
         return $default;
@@ -1308,7 +1308,7 @@ class Image_Transform
     {
         $opt = array_merge($this->_options, (array)$options);
 
-        return (isset($opt[$name])) ? $opt[$name] : $default;
+        return isset($opt[$name]) ? $opt[$name] : $default;
     }
 
     /**

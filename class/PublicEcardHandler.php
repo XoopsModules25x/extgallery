@@ -29,9 +29,9 @@ class PublicEcardHandler extends Extgallery\PersistableObjectHandler
 {
     /**
      * Extgallery\PublicEcardHandler constructor.
-     * @param \XoopsDatabase $db
+     * @param \XoopsDatabase|null $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'extgallery_publicecard', Extgallery\PublicEcard::class, 'ecard_id');
     }

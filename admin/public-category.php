@@ -20,24 +20,22 @@ use XoopsModules\Extgallery;
 
 require_once __DIR__ . '/admin_header.php';
 
-if (isset($_GET['op'])) {
+if (\Xmf\Request::hasVar('op', 'GET')) {
     $op = $_GET['op'];
 } else {
     $op = 'default';
 }
 
-if (isset($_POST['step'])) {
+if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 } else {
     $step = 'default';
 }
 
 switch ($op) {
-
     case 'create':
 
         switch ($step) {
-
             case 'enreg':
 
                 /** @var Extgallery\PublicCategoryHandler $catHandler */
@@ -48,7 +46,7 @@ switch ($op) {
                     'cat_desc'   => $_POST['cat_desc'],
                     'cat_weight' => $_POST['cat_weight'],
                     'cat_date'   => time(),
-                    'cat_imgurl' => $_POST['cat_imgurl']
+                    'cat_imgurl' => $_POST['cat_imgurl'],
                 ];
                 $catHandler->createCat($data);
 
@@ -63,10 +61,9 @@ switch ($op) {
     case 'modify':
 
         switch ($step) {
-
             case 'enreg':
 
-                if (isset($_POST['submit'])) {
+                if (\Xmf\Request::hasVar('submit', 'POST')) {
                     $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
                     $catHandler->modifyCat($_POST);
 
@@ -82,9 +79,11 @@ switch ($op) {
                 break;
 
             case 'default':
+
             default:
 
                 // Check if they are selected category
+
                 if (!isset($_POST['cat_id'])) {
                     redirect_header('photo.php', 3, _AM_EXTGALLERY_NO_CATEGORY_SELECTED);
                 }
@@ -171,7 +170,6 @@ switch ($op) {
     case 'delete':
 
         switch ($step) {
-
             case 'enreg':
 
                 $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
@@ -187,6 +185,7 @@ switch ($op) {
         break;
 
     case 'default':
+
     default:
 
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
@@ -212,6 +211,7 @@ switch ($op) {
         $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/extgallery/templates/admin/extgallery_admin_public_category.tpl');
         //        xoops_cp_footer();
         require_once __DIR__ . '/admin_footer.php';
+
         break;
 
 }

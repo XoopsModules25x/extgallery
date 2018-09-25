@@ -73,8 +73,28 @@ $adminObject->addInfoBoxLine(sprintf(_AM_EXTGALLERY_UPLOAD_MAX_FILESIZE . get_cf
 $adminObject->addInfoBoxLine(sprintf(_AM_EXTGALLERY_POST_MAX_SIZE . get_cfg_var('post_max_size')));
 
 $adminObject->displayNavigation(basename(__FILE__));
+
+//------------- Test Data ----------------------------
+
+if ($helper->getConfig('displaySampleButton')) {
+    xoops_loadLanguage('admin/modulesadmin', 'system');
+    require  dirname(__DIR__) . '/testdata/index.php';
+
+    $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=load', 'add');
+
+    $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'SAVE_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=save', 'add');
+
+    //    $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA'), '__DIR__ . /../../testdata/index.php?op=exportschema', 'add');
+
+    $adminObject->displayButton('left', '');
+}
+
+//------------- End Test Data ----------------------------
+
 $adminObject->displayIndex();
+
 
 echo $utility::getServerStats();
 
-require_once __DIR__ . '/admin_footer.php';
+require __DIR__ . '/admin_footer.php';
+

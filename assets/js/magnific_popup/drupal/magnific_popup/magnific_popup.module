@@ -7,46 +7,46 @@
  * Implements hook_library().
  */
 function magnific_popup_library() {
-  $libraries = array();
+  $libraries = [];
 
   $magnific_library_path = libraries_get_path('magnific-popup', FALSE);
   $module_path = drupal_get_path('module', 'magnific_popup');
   
   if (empty($magnific_library_path)) {
     drupal_set_message(t('Please install the Magnific Popup JS library in sites/.../libraries/magnific-popup/.'), 'error');
-    return array();
+    return [];
   }
   
-  $libraries['magnific_popup'] = array(
-    'title' => 'Magnific Popup jQuery Plugin',
-    'website' => 'http://dimsemenov.com/plugins/magnific-popup/',
-    'version' => '1',
-    'js' => array(
-      "{$magnific_library_path}/dist/jquery.magnific-popup.js" => array('type' => 'file')
-    ),
-    'css' => array(
-      "{$magnific_library_path}/dist/magnific-popup.css" => array('type' => 'file')
-    ),
-    'dependencies' => array(
-      array('system', 'jquery')
-    )
-  );
+  $libraries['magnific_popup'] = [
+      'title' => 'Magnific Popup jQuery Plugin',
+      'website' => 'http://dimsemenov.com/plugins/magnific-popup/',
+      'version' => '1',
+      'js' => [
+      "{$magnific_library_path}/dist/jquery.magnific-popup.js" => ['type' => 'file']
+      ],
+      'css' => [
+      "{$magnific_library_path}/dist/magnific-popup.css" => ['type' => 'file']
+      ],
+      'dependencies' => [
+          ['system', 'jquery']
+      ]
+  ];
   
-  $libraries['magnific_popup_formatter'] = array(
-    'title' => 'Magnific Popup Module Extension',
-    'website' => '',
-    'version' => '1',
-    'js' => array(
-      "{$module_path}/js/behaviors.mfp-formatter.js" => array('type' => 'file')
-    ),
-    'css' => array(
-      "{$module_path}/css/mfp-formatter.css" => array('type' => 'file')
-    ),
-    'dependencies' => array(
-      array('system', 'jquery'),
-      array('magnific_popup', 'magnific_popup')
-    )
-  );
+  $libraries['magnific_popup_formatter'] = [
+      'title' => 'Magnific Popup Module Extension',
+      'website' => '',
+      'version' => '1',
+      'js' => [
+      "{$module_path}/js/behaviors.mfp-formatter.js" => ['type' => 'file']
+      ],
+      'css' => [
+      "{$module_path}/css/mfp-formatter.css" => ['type' => 'file']
+      ],
+      'dependencies' => [
+          ['system', 'jquery'],
+          ['magnific_popup', 'magnific_popup']
+      ]
+  ];
   
   return $libraries;
 }
@@ -58,13 +58,13 @@ function magnific_popup_library() {
  * @return array
  */
 function magnific_popup_ctools_plugin_api($owner, $api) {
-  static $api_versions = array(
-    'file_entity' => array(
+  static $api_versions = [
+    'file_entity' => [
       'file_default_displays' => 1
-    )
-  );
+    ]
+  ];
   if (isset($api_versions[$owner][$api])) {
-    return array('version' => $api_versions[$owner][$api]);
+    return ['version' => $api_versions[$owner][$api]];
   }
 }
 
@@ -97,17 +97,17 @@ function _magnific_popup_add_api_js() {
   if ($added) {
     return;
   }
-  $settings = array(
-    'magnific_popup_api' => array(
+  $settings = [
+    'magnific_popup_api' => [
       'iframe_patterns' => module_invoke_all('magnific_popup_iframe_patterns')
-    )
-  );
-  $options = array(
+    ]
+  ];
+  $options = [
     'type' => 'setting'
-  );
+  ];
   
   drupal_add_js($settings, $options);
 }
 
-require_once('includes/magnific_popup.image_styles.inc');
-require_once('includes/magnific_popup.formatters.inc');
+require_once 'includes/magnific_popup.image_styles.inc';
+require_once 'includes/magnific_popup.formatters.inc';

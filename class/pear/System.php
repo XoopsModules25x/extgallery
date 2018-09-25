@@ -235,7 +235,7 @@ class System
             }
         } else {
             foreach ($opts[1] as $file) {
-                $delete = (is_dir($file)) ? 'rmdir' : 'unlink';
+                $delete = is_dir($file) ? 'rmdir' : 'unlink';
                 if (!@$delete($file)) {
                     $ret = false;
                 }
@@ -408,7 +408,7 @@ class System
             }
         }
 
-        $prefix = (isset($opts[1][0])) ? $opts[1][0] : 'tmp';
+        $prefix = isset($opts[1][0]) ? $opts[1][0] : 'tmp';
         if (!isset($tmpdir)) {
             $tmpdir = self::tmpdir();
         }

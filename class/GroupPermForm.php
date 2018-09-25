@@ -20,7 +20,7 @@ use XoopsModules\Extgallery;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-require XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 
 /**
  * Class Extgallery\GroupPermForm

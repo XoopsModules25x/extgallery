@@ -1514,7 +1514,7 @@ Galleria.prototype = {
 
                     // remove the testElem
                     $( testElem ).remove();
-                    
+
                     // apply the new meassures
                     $container.width( num.width );
                     $container.height( num.height );
@@ -2582,14 +2582,14 @@ this.prependChild( 'info', 'myElement' );
 
         return this;
     },
-    
+
     /**
         Refreshes the gallery.
         Useful if you change image options at runtime and want to apply the changes to the active image.
 
         @returns {Galleria}
     */
-    
+
     refreshImage : function() {
         this._scaleImage();
         if ( this._options.image_pan ) {

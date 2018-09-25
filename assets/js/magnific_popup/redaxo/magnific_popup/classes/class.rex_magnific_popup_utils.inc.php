@@ -35,7 +35,7 @@ class rex_magnific_popup_utils
      * @param array $replace
      * @return mixed|string
      */
-    public static function getHtmlFromMDFile($mdFile, $search = array(), $replace = array())
+    public static function getHtmlFromMDFile($mdFile, $search = [], $replace = [])
     {
         global $REX;
 

@@ -52,7 +52,7 @@ class Category extends \XoopsObject
             'className'      => 'PublicPhoto',
             'getMethodeName' => 'getPhoto',
             'keyName'        => 'photo',
-            'core'           => false
+            'core'           => false,
         ];
     }
 

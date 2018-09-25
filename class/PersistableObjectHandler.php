@@ -43,22 +43,22 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
     /**
      * Constructor - called from child classes
      *
-     * @param \XoopsDatabase $db        {@link XoopsDatabase}
-     *                                  object
-     * @param string         $tablename Name of database table
-     * @param string         $classname Name of Class, this handler is managing
-     * @param string         $keyname   Name of the property, holding the key
+     * @param \XoopsDatabase|null $db        {@link XoopsDatabase}
+     *                                       object
+     * @param string              $tablename Name of database table
+     * @param string              $classname Name of Class, this handler is managing
+     * @param string              $keyname   Name of the property, holding the key
      *
-     * @param bool           $idenfierName
+     * @param bool                $idenfierName
      */
 
     public function __construct(\XoopsDatabase $db, $tablename, $classname, $keyname, $idenfierName = false)
     {
         parent::__construct($db);
         //        $db = \XoopsDatabaseFactory::getDatabaseConnection();
-        $this->table     = $db->prefix($tablename);
-        $this->keyName   = $keyname;
-//        $this->className = '\\XoopsModules\\Extgallery\\' .$classname;
+        $this->table   = $db->prefix($tablename);
+        $this->keyName = $keyname;
+        //        $this->className = '\\XoopsModules\\Extgallery\\' .$classname;
         $this->className = $classname;
         if (false !== $idenfierName) {
             $this->identifierName = $idenfierName;
@@ -76,7 +76,7 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
     public function create($isNew = true)
     {
         $temp = '\\XoopsModules\\Extgallery\\' . $this->className;
-        $obj = new $temp;
+        $obj  = new $temp;
 
         if (true === $isNew) {
             $obj->setNew();
@@ -266,7 +266,7 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
 
     /**
      * @param null|\CriteriaElement $criteria
-     * @param string               $sum
+     * @param string                $sum
      *
      * @return array|int|string
      */

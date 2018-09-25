@@ -18,10 +18,10 @@
 use Xmf\Request;
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-photo.tpl';
-include XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 /** @var Extgallery\Helper $helper */
 $helper = Extgallery\Helper::getInstance();
@@ -55,7 +55,7 @@ if (!$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_access', $photo['cat
 }
 
 // Don't update counter if user come from rating page
-if (null !== (Request::getString('HTTP_REFERER', '', 'SERVER')) && basename(Request::getString('HTTP_REFERER', '', 'SERVER')) != 'public-rating.php?photoId=' . $photoId) {
+if (null !== Request::getString('HTTP_REFERER', '', 'SERVER') && basename(Request::getString('HTTP_REFERER', '', 'SERVER')) != 'public-rating.php?photoId=' . $photoId) {
     $photoHandler->updateHits($photoId);
 }
 
@@ -130,7 +130,7 @@ $lang = [
     'sendEcard'    => _MD_EXTGALLERY_SEND_ECARD,
     'sends'        => _MD_EXTGALLERY_SENDS,
     'submitter'    => _MD_EXTGALLERY_SUBMITTER,
-    'allPhotoBy'   => _MD_EXTGALLERY_ALL_PHOTO_BY
+    'allPhotoBy'   => _MD_EXTGALLERY_ALL_PHOTO_BY,
 ];
 $xoopsTpl->assign('lang', $lang);
 
@@ -186,5 +186,5 @@ if ((1 == $helper->getConfig('usetag')) && is_dir('../tag')) {
     $xoopsTpl->assign('tags', false);
 }
 
-include XOOPS_ROOT_PATH . '/include/comment_view.php';
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

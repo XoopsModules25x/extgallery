@@ -18,20 +18,20 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
+require_once __DIR__   . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 //require_once __DIR__ . '/class/Utility.php';
 
 /** @var Extgallery\Helper $helper */
 $helper = Extgallery\Helper::getInstance();
 
-if (isset($_GET['op'])) {
+if (\Xmf\Request::hasVar('op', 'GET')) {
     $op = $_GET['op'];
 } else {
     $op = 'default';
 }
 
-if (isset($_POST['step'])) {
+if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 } else {
     $step = 'default';
@@ -61,7 +61,7 @@ switch ($op) {
                 $data['photo_title']  = $_POST['photo_title'];
                 $data['photo_weight'] = $_POST['photo_weight'];
 
-                if (isset($_POST['photo_extra'])) {
+                if (\Xmf\Request::hasVar('photo_extra', 'POST')) {
                     $data['photo_extra'] = $_POST['photo_extra'];
                 }
 
@@ -152,7 +152,7 @@ switch ($op) {
                 if ((1 == $helper->getConfig('usetag')) && is_dir('../tag')) {
                     $tagId = $photo->isNew() ? 0 : $photo->getVar('photo_id');
                     require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
-                    $form->addElement(new TagFormTag('tag', 60, 255, $tagId, 0));
+                    $form->addElement(new \XoopsModules\Tag\FormTag('tag', 60, 255, $tagId, 0));
                 }
 
                 $form->addElement(new \XoopsFormHidden('photo_id', $_GET['id']));
@@ -160,7 +160,7 @@ switch ($op) {
                 $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
                 $form->display();
 
-                include XOOPS_ROOT_PATH . '/footer.php';
+                require_once XOOPS_ROOT_PATH . '/footer.php';
 
                 break;
 

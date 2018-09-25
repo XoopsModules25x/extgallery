@@ -22,23 +22,23 @@ use Xmf\Request;
 use XoopsModules\Extgallery;
 
 require_once __DIR__ . '/admin_header.php';
-include  dirname(dirname(dirname(__DIR__))) . '/class/pagenav.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/class/pagenav.php';
 
-require_once  dirname(__DIR__) . '/class/pear/Image/Transform.php';
+require_once dirname(__DIR__) . '/class/pear/Image/Transform.php';
 
-if (isset($_GET['op'])) {
+if (\Xmf\Request::hasVar('op', 'GET')) {
     $op = $_GET['op'];
 } else {
     $op = 'default';
 }
 
-if (isset($_POST['step'])) {
+if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 } else {
     $step = 'default';
 }
 
-if (isset($_GET['start'])) {
+if (\Xmf\Request::hasVar('start', 'GET')) {
     $start = $_GET['start'];
 } else {
     $start = 0;
@@ -46,10 +46,11 @@ if (isset($_GET['start'])) {
 
 $moduleDirName = basename(dirname(__DIR__));
 $utility       = new Extgallery\Utility();
-$helper        = Extgallery\Helper::getInstance();
+/** @var Extgallery\Helper $helper */
+$helper = Extgallery\Helper::getInstance();
 switch ($op) {
-
     case 'add_photo':
+
         /** @var Extgallery\PublicPhotoHandler $photoHandler */
         $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
         $result       = $photoHandler->postPhotoTraitement('photo_file', false);
@@ -63,6 +64,7 @@ switch ($op) {
         } elseif (1 == $result) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_PHOTO_PENDING);
         }
+
         break;
 
     case 'batchAdd':
@@ -112,10 +114,9 @@ switch ($op) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_NO_PHOTO_IN_BATCH_DIR);
         }
 
-        $nbPhotos = \Xmf\Request::getInt('nbPhoto', 0, POST);
+        $nbPhotos = \Xmf\Request::getInt('nbPhoto', 0, 'POST');
         $i        = 0;
         foreach ($photos as $photo) {
-
             // Move the photo to the upload directory
             rename($batchRep . $photo, $photoRep . $photo);
 
@@ -153,7 +154,7 @@ switch ($op) {
             xoops_confirm([
                               'cat_id'     => $_POST['cat_id'],
                               'photo_desc' => $_POST['photo_desc'],
-                              'nbPhoto'    => $nbPhotos
+                              'nbPhoto'    => $nbPhotos,
                           ], 'photo.php?op=batchAdd', _AM_EXTGALLERY_DELETE_CAT_CONFIRM);
 
             xoops_cp_footer();
@@ -162,7 +163,7 @@ switch ($op) {
             $notificationHandler = xoops_getHandler('notification');
             $extraTags           = [
                 'X_ITEM_CAT'     => $cat->getVar('cat_name'),
-                'X_ITEM_NBPHOTO' => $i + $nbPhotos
+                'X_ITEM_NBPHOTO' => $i + $nbPhotos,
             ];
             if (1 == $photoStatus) {
                 $extraTags['X_ITEM_URL'] = XOOPS_URL . "/modules/{$moduleDirName}/public-album.php?id=" . $cat->getVar('cat_id');
@@ -198,6 +199,7 @@ switch ($op) {
         break;
 
     case 'batchApprove':
+
         /** @var Extgallery\PublicPhotoHandler $photoHandler */
         $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
@@ -206,7 +208,7 @@ switch ($op) {
             redirect_header('photo.php', 3, _AM_EXTGALLERY_NO_PHOTO_SELECTED);
         }
 
-        if (isset($_POST['approve'])) {
+        if (\Xmf\Request::hasVar('approve', 'POST')) {
             $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
             // If we have only one photo we put in in an array
@@ -229,7 +231,7 @@ switch ($op) {
                 $extraTags = [
                     'X_ITEM_CAT'     => $cat->getVar('cat_name'),
                     'X_ITEM_NBPHOTO' => $v,
-                    'X_ITEM_URL'     => XOOPS_URL . '/modules/extgallery/public-album.php?id=' . $cat->getVar('cat_id')
+                    'X_ITEM_URL'     => XOOPS_URL . '/modules/extgallery/public-album.php?id=' . $cat->getVar('cat_id'),
                 ];
                 $notificationHandler->triggerEvent('global', 0, 'new_photo', $extraTags);
                 $notificationHandler->triggerEvent('album', $cat->getVar('cat_id'), 'new_photo_album', $extraTags);
@@ -255,7 +257,7 @@ switch ($op) {
             }
 
             redirect_header('photo.php', 3, sprintf(_AM_EXTGALLERY_X_PHOTO_APPROVED, count($_POST['photoId'])));
-        } elseif (isset($_POST['delete'])) {
+        } elseif (\Xmf\Request::hasVar('delete', 'POST')) {
             foreach (array_keys($_POST['photoId']) as $photoId) {
                 $photo = $photoHandler->get($photoId);
                 $photoHandler->deletePhoto($photo);
@@ -267,6 +269,7 @@ switch ($op) {
         break;
 
     case 'rebuildthumb':
+
         /** @var Extgallery\PublicPhotoHandler $photoHandler */
         $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
         $photoHandler->rebuildThumbnail($_GET['cat_id']);
@@ -276,9 +279,11 @@ switch ($op) {
         break;
 
     case 'modify':
+
         switch ($step) {
             case 'enreg':
                 // Check if they are selected photo
+
                 if (!isset($_POST['photoId'])) {
                     redirect_header('photo.php', 3, _AM_EXTGALLERY_NO_PHOTO_SELECTED);
                 }
@@ -300,14 +305,14 @@ switch ($op) {
 
                 $message = '';
 
-                if (isset($_POST['modify'])) {
+                if (\Xmf\Request::hasVar('modify', 'POST')) {
                     $toCategories = [];
                     foreach (array_keys($_POST['photoId']) as $photoId) {
                         $data = [
                             'cat_id'       => $_POST['catId'][$photoId],
                             'photo_desc'   => $_POST['photoDesc'][$photoId],
                             'photo_title'  => $_POST['photoTitre'][$photoId],
-                            'photo_weight' => $_POST['photoPoids'][$photoId]
+                            'photo_weight' => $_POST['photoPoids'][$photoId],
                         ];
                         $photoHandler->modifyPhoto($photoId, $data);
 
@@ -389,7 +394,7 @@ switch ($op) {
                     }
 
                     $message = sprintf(_AM_EXTGALLERY_X_PHOTO_MODIFIED, count($_POST['photoId']));
-                } elseif (isset($_POST['delete'])) {
+                } elseif (\Xmf\Request::hasVar('delete', 'POST')) {
                     foreach (array_keys($_POST['photoId']) as $photoId) {
                         $photo = $photoHandler->getPhoto($photoId);
                         $photoHandler->deletePhoto($photo);
@@ -422,7 +427,9 @@ switch ($op) {
                 break;
 
             case 'default':
+
             default:
+
                 xoops_cp_header();
                 /** @var Extgallery\PublicCategoryHandler $catHandler */
                 $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
@@ -546,8 +553,10 @@ switch ($op) {
         break;*/
 
     case 'default':
+
     default:
         // require_once  dirname(__DIR__) . '/class/Utility.php';
+
         /** @var Extgallery\CategoryHandler $catHandler */
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
         /** @var Extgallery\PublicPhotoHandler $photoHandler */
@@ -572,7 +581,7 @@ switch ($op) {
         // For xoops tag
         if (class_exists(Helper::class) && 1 == $helper->getConfig('usetag')) {
             require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
-            $form->addElement(new TagFormTag('tag', 60, 255, '', 0));
+            $form->addElement(new \XoopsModules\Tag\FormTag('tag', 60, 255, '', 0));
         }
         $form->addElement(new \XoopsFormHidden('op', 'add_photo'));
         $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));

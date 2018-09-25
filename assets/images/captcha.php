@@ -17,12 +17,12 @@
  * @author       XOOPS Development Team,
  */
 
-require dirname(dirname(dirname(dirname(__DIR__)))) . '/mainfile.php';
+require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/mainfile.php';
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 require_once __DIR__ . '/../../class/php-captcha.inc.php';
 
-$aFonts         = array(XOOPS_ROOT_PATH . '/modules/extgallery/fonts/AllStarResort.ttf');
+$aFonts         = [XOOPS_ROOT_PATH . '/modules/extgallery/fonts/AllStarResort.ttf'];
 $oVisualCaptcha = new PhpCaptcha($aFonts, 200, 60);
 $oVisualCaptcha->Create();

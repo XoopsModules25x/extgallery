@@ -44,7 +44,7 @@ class NestedTree
         $this->fields = [
             'id'     => $idField,
             'parent' => $parentField,
-            'sort'   => $sortField
+            'sort'   => $sortField,
         ];
     }
 
@@ -303,7 +303,7 @@ class NestedTree
         $root['children']          = [];
 
         $arr = [
-            $root
+            $root,
         ];
 
         // populate the array and create an empty children array
@@ -342,7 +342,6 @@ class NestedTree
         // and nright of (tree size * 2 + 1)
 
         foreach ($data as $id => $row) {
-
             // skip the root node
             if (0 == $id) {
                 continue;
@@ -363,11 +362,11 @@ class NestedTree
      * in subrequests are held over to when control is returned so the nright
      * can be assigned.
      *
-     * @param array &$arr  A reference to the data array, since we need to
-     *                     be able to update the data in it
-     * @param int   $id    The ID of the current node to process
-     * @param int   $level The nlevel to assign to the current node
-     * @param int   &$n    A reference to the running tally for the n-value
+     * @param array &$arr   A reference to the data array, since we need to
+     *                      be able to update the data in it
+     * @param int    $id    The ID of the current node to process
+     * @param int    $level The nlevel to assign to the current node
+     * @param int   &$n     A reference to the running tally for the n-value
      */
     public function _generateTreeData(& $arr, $id, $level, & $n)
     {

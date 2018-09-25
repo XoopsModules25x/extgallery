@@ -17,11 +17,11 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
+require_once __DIR__   . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-upload-applet.tpl';
-include XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 $permHandler = Extgallery\PublicPermHandler::getInstance();
 if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) < 1) {
@@ -45,4 +45,4 @@ if ($helper->getConfig('save_large') || $helper->getConfig('save_original')) {
     $xoopsTpl->assign('imageHeight', $helper->getConfig('medium_heigth'));
 }
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

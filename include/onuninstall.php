@@ -8,7 +8,6 @@
  * @link            https://xoops.org XOOPS
  */
 
-
 use XoopsModules\Extgallery;
 
 /**
@@ -20,6 +19,7 @@ use XoopsModules\Extgallery;
 
 function xoops_module_pre_uninstall_extgallery(\XoopsModule $module)
 {
+
     // Do some synchronization
     return true;
 }
@@ -33,18 +33,19 @@ function xoops_module_pre_uninstall_extgallery(\XoopsModule $module)
  */
 function xoops_module_uninstall_extgallery(\XoopsModule $module)
 {
-//    return true;
 
-    $moduleDirName = basename(dirname(__DIR__));
-    $moduleDirNameUpper   = strtoupper($moduleDirName);
-     $helper      = Extgallery\Helper::getInstance();
+    //    return true;
+
+    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirNameUpper = strtoupper($moduleDirName);
+    /** @var Extgallery\Helper $helper */
+    $helper = Extgallery\Helper::getInstance();
 
     /** @var Extgallery\Utility $utility */
     $utility = new \XoopsModules\Extgallery\Utility();
 
     $success = true;
     $helper->loadLanguage('admin');
-
 
     //------------------------------------------------------------------
     // Remove uploads folder (and all subfolders) if they exist

@@ -15,12 +15,10 @@
  * @package     ExtGallery
  */
 
-
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
-
 
 $photoId = \Xmf\Request::getInt('id', 0, 'GET');
 
@@ -32,33 +30,37 @@ $photo        = $photoHandler->get($photoId);
 switch (strtolower(strrchr($photo->getVar('photo_name'), '.'))) {
     case '.png':
         $type = 'image/png';
+
         break;
     case '.gif':
         $type = 'image/gif';
+
         break;
     case '.jpg':
         $type = 'image/jpeg';
+
         break;
     default:
         $type = 'application/octet-stream';
+
         break;
 }
 
 $permHandler = Extgallery\PublicPermHandler::getInstance();
 
-// If require image don't exist
+// If require_once image don't exist
 if (0 == $photo->getVar('cat_id')) {
     header('Content-type: image/jpeg');
     readfile(XOOPS_ROOT_PATH . '/modules/extgallery/assets/images/dont-exist.jpg');
 
-// If user is allowed to view this picture
+    // If user is allowed to view this picture
 } elseif ($permHandler->isAllowed($xoopsUser, 'public_access', $photo->getVar('cat_id'))) {
     $photo = $photoHandler->objectToArray($photo);
 
     header('Content-type: ' . $type . '');
     readfile(XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo['photo_name']);
 
-// If user isn't allowed to view this picture
+    // If user isn't allowed to view this picture
 } else {
     header('Content-type: image/jpeg');
     readfile(XOOPS_ROOT_PATH . '/modules/extgallery/assets/images/not-allowed.jpg');

@@ -75,7 +75,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
     public function __construct()
     {
         if (PEAR::loadExtension('imagick')) {
-            include __DIR__ . '/Image/Transform/Driver/Imagick/ImageTypes.php';
+            require_once __DIR__   . '/Image/Transform/Driver/Imagick/ImageTypes.php';
         } else {
             $this->isError(PEAR::raiseError('Couldn\'t find the imagick extension.', IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
         }
@@ -213,7 +213,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
      */
     public function save($filename, $type = '', $quality = null)
     {
-        $options = (is_array($quality)) ? $quality : [];
+        $options = is_array($quality) ? $quality : [];
         if (is_numeric($quality)) {
             $options['quality'] = $quality;
         }
@@ -249,7 +249,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
      */
     public function display($type = '', $quality = null)
     {
-        $options = (is_array($quality)) ? $quality : [];
+        $options = is_array($quality) ? $quality : [];
         if (is_numeric($quality)) {
             $options['quality'] = $quality;
         }

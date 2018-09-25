@@ -15,10 +15,9 @@
  * @package     ExtGallery
  */
 
-
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
@@ -26,7 +25,7 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 $helper = Extgallery\Helper::getInstance();
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-album.tpl';
-include XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 if (!isset($_GET['id'])) {
     $catId = 0;
@@ -41,7 +40,7 @@ if (!isset($_GET['start'])) {
 
 // HACK BLUETEEN TO SORT PHOTO BY USERS
 //photo_date - photo_title - photo_hits - photo_rating
-if (isset($_GET['sortby'])
+if (\Xmf\Request::hasVar('sortby', 'GET')
     && ('photo_date' === $_GET['sortby']
         || 'photo_title' === $_GET['sortby']
         || 'photo_hits' === $_GET['sortby']
@@ -52,7 +51,7 @@ if (isset($_GET['sortby'])
 }
 
 //ASC ou DESC
-if (isset($_GET['orderby']) && ('DESC' === $_GET['orderby'] || 'ASC' === $_GET['orderby'])) {
+if (\Xmf\Request::hasVar('orderby', 'GET') && ('DESC' === $_GET['orderby'] || 'ASC' === $_GET['orderby'])) {
     $orderby = $_GET['orderby'];
 } else {
     $orderby = $GLOBALS['xoopsModuleConfig']['display_set_order'];
@@ -115,7 +114,7 @@ $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 $catObj = $catHandler->getCat($catId);
 
 if (null === $catObj) {
-    include XOOPS_ROOT_PATH . '/footer.php';
+    require_once XOOPS_ROOT_PATH . '/footer.php';
     exit;
 }
 
@@ -172,27 +171,32 @@ if (1 == $jquery && 'none' !== $ajaxeffect) {
         case 'lightbox':
             $xoTheme->addScript('browse.php?Frameworks/jquery/plugins/jquery.lightbox.js');
             $xoTheme->addStylesheet('browse.php?modules/system/css/lightbox.css');
+
             break;
 
         case 'tooltip':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.css');
+
             break;
 
         case 'overlay':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/overlay/overlay.jquery.tools.min.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/overlay/overlay.css');
+
             break;
 
         case 'fancybox':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/fancybox/mousewheel.js');
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/fancybox/fancybox.pack.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/fancybox/fancybox.css');
+
             break;
 
         case 'prettyphoto':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/prettyphoto/jquery.prettyPhoto.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/prettyphoto/prettyPhoto.css');
+
             break;
     }
 }
@@ -208,7 +212,7 @@ $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 $lang = [
     'hits'       => _MD_EXTGALLERY_HITS,
     'comments'   => _MD_EXTGALLERY_COMMENTS,
-    'rate_score' => _MD_EXTGALLERY_RATING_SCORE
+    'rate_score' => _MD_EXTGALLERY_RATING_SCORE,
 ];
 $xoopsTpl->assign('lang', $lang);
 
@@ -268,4 +272,4 @@ $xoopsTpl->assign('album_prettyphoto_theme', $helper->getConfig('album_prettypho
 $xoopsTpl->assign('album_prettyphoto_slidspeed', $helper->getConfig('album_prettyphoto_slidspe'));
 $xoopsTpl->assign('album_prettyphoto_autoplay', $helper->getConfig('album_prettyphoto_autopla'));
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';
