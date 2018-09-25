@@ -200,3 +200,5 @@ define('_MI_EXTGAL_SHOW_SAMPLE_BUTTON', 'Show Sample Button?');
 define('_MI_EXTGAL_SHOW_SAMPLE_BUTTON_DESC', 'If yes, the "Add Sample Data" button will be visible to the Admin. It is Yes as a default for first installation.');
 
 define('_MI_EXTGALLERY_ADMENU_MIGRATE', 'Migrate');
+define('_MI_EXTGAL_SHOW_DEV_TOOLS', 'Show Development Tools Button?');
+define('_MI_EXTGAL_SHOW_DEV_TOOLS_DESC', 'If yes, the "Migrate" Tab and other Development tools will be visible to the Admin.');

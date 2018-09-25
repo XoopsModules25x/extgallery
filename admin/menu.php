@@ -75,12 +75,13 @@ $adminmenu[] = [
     'icon'  => $pathIcon32 . '/album.png',
 ];
 
-$adminmenu[] = [
-    'title' => _MI_EXTGALLERY_ADMENU_MIGRATE,
-    'link'  => 'admin/migrate.php',
-    'icon'  => $pathIcon32 . '/database_go.png'
-];
-
+if ($helper->getConfig('displayDeveloperTools')) {
+    $adminmenu[] = [
+        'title' => _MI_EXTGALLERY_ADMENU_MIGRATE,
+        'link'  => 'admin/migrate.php',
+        'icon'  => $pathIcon32 . '/database_go.png'
+    ];
+}
 $adminmenu[] = [
     'title' => _MI_EXTGALLERY_ABOUT,
     'link'  => 'admin/about.php',

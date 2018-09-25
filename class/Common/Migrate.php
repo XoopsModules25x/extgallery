@@ -29,8 +29,8 @@ class Migrate extends \Xmf\Database\Migrate
      * Migrate constructor.
      * @param \XoopsModules\Extgallery\Common\Configurator $configurator
      */
-    public function __construct(Extgallery\Common\Configurator  $configurator)
-    {   require_once  dirname(dirname(__DIR__)) . '/include/config.php';
+    public function __construct(\XoopsModules\Extgallery\Common\Configurator  $configurator)
+    {   //require_once  dirname(dirname(__DIR__)) . '/include/config.php';
         $this->renameTables            = $configurator->renameTables;
 
         $moduleDirName = basename(dirname(dirname(__DIR__)));

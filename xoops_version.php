@@ -1365,6 +1365,18 @@ $modversion['config'][] = [
     'default'     => 1,
 ];
 
+/**
+ * Show Developer Tools?
+ */
+$modversion['config'][] = [
+    'name'        => 'displayDeveloperTools',
+    'title'       => '_MI_EXTGAL_SHOW_DEV_TOOLS',
+    'description' => '_MI_EXTGAL_SHOW_DEV_TOOLS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+
 
 // Templates
 $modversion['templates'] = [

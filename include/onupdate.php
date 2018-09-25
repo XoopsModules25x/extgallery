@@ -17,6 +17,7 @@
  */
 
 use XoopsModules\Extgallery;
+use XoopsModules\Extgallery\Common;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->IsAdmin()) {
@@ -44,12 +45,12 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_extgallery(\XoopsModule $module)
 {
-
     /** @var Extgallery\Utility $utility */
     $utility      = new Extgallery\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
+
     return $xoopsSuccess && $phpSuccess;
 }
 
@@ -81,6 +82,10 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
     $helper  = Extgallery\Helper::getInstance();
     $utility = new Extgallery\Utility();
     $configurator = new Extgallery\Common\Configurator();
+
+    $migrator = new \XoopsModules\Extgallery\Common\Migrate($configurator);
+    $migrator->synchronizeSchema();
+
 
     $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
     $catHandler->rebuild();
