@@ -209,6 +209,7 @@ switch ($op) {
         }
 
         if (\Xmf\Request::hasVar('approve', 'POST')) {
+            /** @var Extgallery\PublicCategoryHandler $catHandler */
             $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
             // If we have only one photo we put in in an array
@@ -227,6 +228,7 @@ switch ($op) {
             $notificationHandler = xoops_getHandler('notification');
 
             foreach ($categories as $k => $v) {
+                /** @var Extgallery\PublicCategory $cat */
                 $cat       = $catHandler->getCat($k);
                 $extraTags = [
                     'X_ITEM_CAT'     => $cat->getVar('cat_name'),
@@ -298,6 +300,7 @@ switch ($op) {
                 }
 
                 // If isn't an album when stop the traitment
+                /** @var Extgallery\PublicCategory $cat */
                 $cat = $catHandler->getCat($_POST['cat_id']);
                 if (1 != $cat->getVar('nright') - $cat->getVar('nleft')) {
                     redirect_header('photo.php', 3, _AM_EXTGALLERY_NOT_AN_ALBUM);
@@ -557,7 +560,7 @@ switch ($op) {
     default:
         // require_once  dirname(__DIR__) . '/class/Utility.php';
 
-        /** @var Extgallery\CategoryHandler $catHandler */
+        /** @var Extgallery\PublicCategoryHandler $catHandler */
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
         /** @var Extgallery\PublicPhotoHandler $photoHandler */
         $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');

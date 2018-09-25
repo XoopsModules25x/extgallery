@@ -125,8 +125,9 @@ switch ($step) {
         echo '</fieldset><br>';
 
         // Retriving category list for Group perm form
-        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
-        $cats       = $catHandler->getTree();
+    /** @var Extgallery\PublicCategoryHandler $catHandler */
+    $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+        $cats   = $catHandler->getTree();
 
         foreach ($modulePermArray as $perm) {
             if ($op != $perm['name']) {

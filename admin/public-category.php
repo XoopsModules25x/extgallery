@@ -64,6 +64,7 @@ switch ($op) {
             case 'enreg':
 
                 if (\Xmf\Request::hasVar('submit', 'POST')) {
+                    /** @var Extgallery\PublicCategoryHandler $catHandler */
                     $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
                     $catHandler->modifyCat($_POST);
 
@@ -87,19 +88,21 @@ switch ($op) {
                 if (!isset($_POST['cat_id'])) {
                     redirect_header('photo.php', 3, _AM_EXTGALLERY_NO_CATEGORY_SELECTED);
                 }
-
+                /** @var Extgallery\PublicCategoryHandler $catHandler */
                 $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
                 /** @var Extgallery\PublicPhotoHandler $photoHandler */
                 $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
-                $cat       = $catHandler->getCat($_POST['cat_id']);
+                /** @var Extgallery\PublicCategory $cat */
+                $cat           = $catHandler->getCat($_POST['cat_id']);
                 $photosCat = $photoHandler->getCatPhoto($cat);
 
                 xoops_cp_header();
 
                 $selectedPhoto = '../assets/images/blank.gif';
                 $photoArray    = [];
-                foreach ($photosCat as $photo) {
+            /** @var Extgallery\Photo $photo */
+            foreach ($photosCat as $photo) {
                     if ('' != $photo->getVar('photo_serveur')) {
                         $url = $photo->getVar('photo_serveur') . 'thumb_' . $photo->getVar('photo_name');
                     } else {
@@ -171,7 +174,7 @@ switch ($op) {
 
         switch ($step) {
             case 'enreg':
-
+                /** @var Extgallery\PublicCategoryHandler $catHandler */
                 $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
                 $catHandler->deleteCat($_POST['cat_id']);
@@ -187,7 +190,7 @@ switch ($op) {
     case 'default':
 
     default:
-
+    /** @var Extgallery\PublicCategoryHandler $catHandler */
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
         xoops_cp_header();
