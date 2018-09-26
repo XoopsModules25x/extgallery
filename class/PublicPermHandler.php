@@ -54,12 +54,12 @@ class PublicPermHandler
     }
 
     /**
-     * @param \XoopsUser $user
+     * @param string|\XoopsUser $user
      * @param            $perm
      *
      * @return mixed
      */
-    public function getAuthorizedPublicCat(\XoopsUser $user, $perm)
+    public function getAuthorizedPublicCat($user, $perm)
     {
         static $authorizedCat;
         $userId = $user ? $user->getVar('uid') : 0;
@@ -76,13 +76,13 @@ class PublicPermHandler
     }
 
     /**
-     * @param \XoopsUser $user
+     * @param string|\XoopsUser $user
      * @param            $perm
      * @param            $catId
      *
      * @return bool
      */
-    public function isAllowed(\XoopsUser $user, $perm, $catId)
+    public function isAllowed($user, $perm, $catId)
     {
         $autorizedCat = $this->getAuthorizedPublicCat($user, $perm);
 

@@ -10,11 +10,15 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 //require_once __DIR__ . '/class/Utility.php';
 
+$grouppermHandler = xoops_getHandler('groupperm');
+$groups       = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
+
 $myts = \MyTextSanitizer::getInstance();
 /** @var Extgallery\Helper $helper */
 $helper = Extgallery\Helper::getInstance();
 
 $helper->loadLanguage('main');
+$helper->loadLanguage('common');
 
 //------------------------------------------------------
 // Getting eXtCal object's handler

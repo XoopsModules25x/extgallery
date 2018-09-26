@@ -1,5 +1,5 @@
 <{if $jquery}>
-    <{if $use_ajax_effects == lightbox}>
+    <{if $use_ajax_effects == 'lightbox'}>
         <script type="text/javascript">
             $(function () {
                 $('#gallery a').lightBox({
@@ -12,13 +12,13 @@
             });
         </script>
     <{/if}>
-    <{if $use_ajax_effects == tooltip}>
+    <{if $use_ajax_effects == 'tooltip'}>
         <style>#screenshot img {
                 max-width: <{$album_tooltip_width}>px;
                 border: <{$album_tooltip_borderwidth}>px solid <{$album_tooltip_bordercolor}>;
             }</style>
     <{/if}>
-    <{if $use_ajax_effects == overlay}>
+    <{if $use_ajax_effects == 'overlay'}>
         <style>
             .apple_overlay {
                 background-color: <{$album_overlay_bg}>;
@@ -32,7 +32,7 @@
             }
         </style>
     <{/if}>
-    <{if $use_ajax_effects == fancybox}>
+    <{if $use_ajax_effects == 'fancybox'}>
         <script type="text/javascript">
             $(document).ready(function () {
                 <{if $album_fancybox_showtype == group }>
@@ -53,7 +53,7 @@
         </script>
     <{/if}>
 <{else}>
-    <{if $use_ajax_effects == lightbox}>
+    <{if $use_ajax_effects == 'lightbox'}>
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?Frameworks/jquery/plugins/jquery.lightbox.js}>"></script>
         <link rel="stylesheet" type="text/css" href="<{xoAppUrl browse.php?modules/system/css/lightbox.css}>">
@@ -69,7 +69,7 @@
             });
         </script>
     <{/if}>
-    <{if $use_ajax_effects == tooltip}>
+    <{if $use_ajax_effects == 'tooltip'}>
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.js}>"></script>
         <link rel="stylesheet" type="text/css"
@@ -79,7 +79,7 @@
                 border: <{$album_tooltip_borderwidth}>px solid <{$album_tooltip_bordercolor}>;
             }</style>
     <{/if}>
-    <{if $use_ajax_effects == overlay}>
+    <{if $use_ajax_effects == 'overlay'}>
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?modules/extgallery/assets/js/overlay/overlay.jquery.tools.min.js}>"></script>
         <link rel="stylesheet" type="text/css"
@@ -97,7 +97,7 @@
             }
         </style>
     <{/if}>
-    <{if $use_ajax_effects == fancybox}>
+    <{if $use_ajax_effects == 'fancybox'}>
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?modules/extgallery/assets/js/fancybox/mousewheel.js}>"></script>
         <script type="text/javascript"
@@ -123,7 +123,7 @@
             })
         </script>
     <{/if}>
-    <{if $use_ajax_effects == prettyphoto}>
+    <{if $use_ajax_effects == 'prettyphoto'}>
         <script type="text/javascript"
                 src="<{xoAppUrl browse.php?modules/extgallery/assets/js/prettyphoto/jquery.prettyPhoto.js}>"></script>
         <link rel="stylesheet" type="text/css"
@@ -191,7 +191,7 @@
             <th colspan="<{$nbColumn}>"><{$lang.albumName}></th>
         </tr>
         <tr class="even">
-            <{if $use_ajax_effects == prettyphoto}>
+            <{if $use_ajax_effects == 'prettyphoto'}>
             <ul class="gallery clearfix">
                 <{/if}>
                 <{section name=photo loop=$photos}>
@@ -216,7 +216,7 @@
                     <!-- End Admin link -->
 
                     <!-- Start Normal show -->
-                    <{if $use_ajax_effects == none}>
+                    <{if $use_ajax_effects == 'none'}>
                         <{if $photos[photo].photo_serveur && $photos[photo].photo_name}>
                             <a title="<{$photos[photo].photo_title}>"
                                href="<{xoAppUrl modules/extgallery/}>public-userphoto.php?photoId=<{$photos[photo].photo_id}>"><img
@@ -236,7 +236,7 @@
                     <!-- End Normal show -->
 
                     <!-- Start Tooltip show -->
-                    <{if $use_ajax_effects == tooltip}>
+                    <{if $use_ajax_effects == 'tooltip'}>
                         <{if $photos[photo].photo_serveur && $photos[photo].photo_name}>
                             <a class="screenshot" title="<{$photos[photo].photo_title}>"
                                href="<{xoAppUrl modules/extgallery/}>public-userphoto.php?photoId=<{$photos[photo].photo_id}>"
@@ -258,7 +258,7 @@
                     <!-- End Tooltip show -->
 
                     <!-- Start Lightbox -->
-                    <{if $use_ajax_effects == lightbox}>
+                    <{if $use_ajax_effects == 'lightbox'}>
                         <div id="gallery">
                             <{if $photos[photo].photo_serveur && $photos[photo].photo_name}>
                                 <a title="<{$photos[photo].photo_title}>"
@@ -280,7 +280,7 @@
                     <!-- End Lightbox -->
 
                     <!-- Start Overlay -->
-                    <{if $use_ajax_effects == overlay}>
+                    <{if $use_ajax_effects == 'overlay'}>
                         <div align="center" id="apple">
                             <{if $photos[photo].photo_serveur && $photos[photo].photo_name}>
                                 <img rel="#photo<{$photos[photo].photo_id}>" class="thumb"
@@ -311,7 +311,7 @@
                     <!-- End Overlay -->
 
                     <!-- Start Fansybox -->
-                    <{if $use_ajax_effects == fancybox}>
+                    <{if $use_ajax_effects == 'fancybox'}>
                         <a <{if $album_fancybox_showtype == group }>rel="example_group" <{else}>class="example"<{/if}>
                            href="<{$xoops_url}>/uploads/extgallery/public-photo/medium/<{$photos[photo].photo_name}>"
                            title="<{$photos[photo].photo_title}>"><img class="last thumb"
@@ -321,7 +321,7 @@
                     <!-- End Fansybox -->
 
                     <!-- Start prettyPhoto show -->
-                    <{if $use_ajax_effects == prettyphoto}>
+                    <{if $use_ajax_effects == 'prettyphoto'}>
                         <ul class="gallery clearfix">
                             <{if $photos[photo].photo_serveur && $photos[photo].photo_name}>
                                 <li><a title="<{$photos[photo].photo_title}>"
@@ -406,7 +406,7 @@
                 <{/if}>
             </td>
             <{/section}>
-            <{if $use_ajax_effects == prettyphoto}>
+            <{if $use_ajax_effects == 'prettyphoto'}>
                 </ul>
             <{/if}>
         </tr>
@@ -427,7 +427,7 @@
     <{include file='db:system_notification_select.tpl'}>
 </div>
 
-<{if $use_ajax_effects == overlay}>
+<{if $use_ajax_effects == 'overlay'}>
     <script type="text/javascript">
         $(function () {
             $("#apple img[rel]").overlay({effect: 'apple'});
@@ -435,7 +435,7 @@
     </script>
 <{/if}>
 
-<{if $use_ajax_effects == prettyphoto}>
+<{if $use_ajax_effects == 'prettyphoto'}>
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function () {
             $(".gallery:gt(0) a[rel^='prettyPhoto']").prettyPhoto({

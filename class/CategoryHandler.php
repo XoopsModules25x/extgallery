@@ -232,8 +232,14 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
             $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>'));
             //$query = sprintf('select * from %s where nleft < %d and nright > %d order by nlevel', $this->table, $node['nleft'], $node['nright']);
         }
-        $criteria->add($this->getCatRestrictCriteria());
-        $criteria->add($this->getCatRestrictCriteria('public_displayed'));
+        $temp = $this->getCatRestrictCriteria();
+        if (is_object($temp)) {
+            $criteria->add($temp);
+        }
+        $temp2 = $this->getCatRestrictCriteria('public_displayed');
+        if (is_object($temp)) {
+            $criteria->add($temp2);
+        }
         $criteria->setSort('nlevel');
 
         return $this->getObjects($criteria);
