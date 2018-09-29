@@ -79,7 +79,7 @@ class Migrate extends \Xmf\Database\Migrate
      */
     private function moveDoColumns()
     {
-    //for an example, see newbb 5.0
+        //for an example, see newbb 5.0
     }
 
     /**

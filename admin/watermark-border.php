@@ -484,7 +484,7 @@ switch ($op) {
 
             $xoopsTpl->assign('watermarkform', $form->render());
 
-            // Else display Warning message
+        // Else display Warning message
         } else {
             $xoopsTpl->assign('freetypewarn', _AM_EXTGALLERY_WATERMARK_FREETYPE_WARN);
         }

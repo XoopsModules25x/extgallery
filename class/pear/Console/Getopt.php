@@ -225,8 +225,8 @@ class Console_GetoptPlus_Getopt
         $args = [],
         $shortOptions = '',
         $longOptions = [],
-        $ambiguity = '')
-    {
+        $ambiguity = ''
+    ) {
         $getopt = new self;
 
         return $getopt->process($args, $shortOptions, $longOptions, $ambiguity, $version);
@@ -294,8 +294,8 @@ class Console_GetoptPlus_Getopt
         $args = [],
         $shortOptions = '',
         $longOptions = [],
-        $ambiguity = '')
-    {
+        $ambiguity = ''
+    ) {
         return self::doGetopt(1, $args, $shortOptions, $longOptions, $ambiguity);
     }
 
@@ -317,8 +317,8 @@ class Console_GetoptPlus_Getopt
         $args = [],
         $shortOptions = '',
         $longOptions = [],
-        $ambiguity = '')
-    {
+        $ambiguity = ''
+    ) {
         return self::doGetopt(2, $args, $shortOptions, $longOptions, $ambiguity);
     }
 
@@ -508,8 +508,8 @@ class Console_GetoptPlus_Getopt
         $shortOptions,
         $longOptions,
         $ambiguity = '',
-        $version = 2)
-    {
+        $version = 2
+    ) {
         $args = (array)$args;
         in_array($ambiguity, ['loose', 'strict', 'shortcuts']) or $ambiguity = 'loose';
 

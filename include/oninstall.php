@@ -118,6 +118,4 @@ function xoops_module_install_extgallery(\XoopsModule $module)
 
     // Private autoapprove
     $grouppermHandler->addRight('extgallery_private', 16, XOOPS_GROUP_ADMIN, $module_id);
-
-
 }

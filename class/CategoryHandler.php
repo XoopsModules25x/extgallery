@@ -109,8 +109,8 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         $includeSelf = false,
         $childrenOnly = false,
         $withRestrict = true,
-        $permType = 'public_access')
-    {
+        $permType = 'public_access'
+    ) {
         $cat = $this->get($id);
 
         $nleft     = $cat->getVar('nleft');
@@ -131,7 +131,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
             if ($nleft > 0 && $includeSelf) {
                 $criteria->add(new \Criteria('nleft', $nleft, '>='));
                 $criteria->add(new \Criteria('nright', $nright, '<='));
-                //$query = sprintf('select * from %s where nleft >= %d and nright <= %d order by nleft', $this->table, $nleft, $nright);
+            //$query = sprintf('select * from %s where nleft >= %d and nright <= %d order by nleft', $this->table, $nleft, $nright);
             } else {
                 if ($nleft > 0) {
                     $criteria->add(new \Criteria('nleft', $nleft, '>'));
@@ -226,7 +226,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         if ($includeSelf) {
             $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<='));
             $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>='));
-            //$query = sprintf('select * from %s where nleft <= %d and nright >= %d order by nlevel', $this->table, $node['nleft'], $node['nright']);
+        //$query = sprintf('select * from %s where nleft <= %d and nright >= %d order by nlevel', $this->table, $node['nleft'], $node['nright']);
         } else {
             $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<'));
             $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>'));
@@ -301,8 +301,8 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         $selected = 0,
         $extra = '',
         $displayWeight = false,
-        $permType = 'public_access')
-    {
+        $permType = 'public_access'
+    ) {
         $cats = $this->getDescendants(0, false, false, true, $permType);
 
         return $this->makeSelect($cats, $name, $selectMode, $addEmpty, $selected, $extra, $displayWeight);

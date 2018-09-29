@@ -102,8 +102,7 @@ class PhpCaptcha
         $aFonts, // array of TrueType fonts to use - specify full path
         $iWidth = CAPTCHA_WIDTH, // width of image
         $iHeight = CAPTCHA_HEIGHT // height of image
-    )
-    {
+    ) {
 
         // get parameters
         $this->aFonts = $aFonts;

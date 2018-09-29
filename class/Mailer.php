@@ -92,8 +92,7 @@ class Mailer
         //$this->mailer->AddReplyTo($this->fromEmail, $this->fromName);
         try {
             $this->mailer->send();
-        }
-        catch (\phpmailerException $e) {
+        } catch (\phpmailerException $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         }
     }

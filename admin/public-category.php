@@ -103,16 +103,16 @@ switch ($op) {
                 $photoArray    = [];
             /** @var Extgallery\Photo $photo */
             foreach ($photosCat as $photo) {
-                    if ('' != $photo->getVar('photo_serveur')) {
-                        $url = $photo->getVar('photo_serveur') . 'thumb_' . $photo->getVar('photo_name');
-                    } else {
-                        $url = XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name');
-                    }
-                    if ($photo->getVar('photo_id') == $cat->getVar('photo_id')) {
-                        $selectedPhoto = $url;
-                    }
-                    $photoArray[$photo->getVar('photo_id')] = $url;
+                if ('' != $photo->getVar('photo_serveur')) {
+                    $url = $photo->getVar('photo_serveur') . 'thumb_' . $photo->getVar('photo_name');
+                } else {
+                    $url = XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name');
                 }
+                if ($photo->getVar('photo_id') == $cat->getVar('photo_id')) {
+                    $selectedPhoto = $url;
+                }
+                $photoArray[$photo->getVar('photo_id')] = $url;
+            }
 
                 echo "<script type='text/JavaScript'>";
                 echo 'function ChangeThumb() {

@@ -200,8 +200,8 @@ class ModelReadIterator extends \XoopsModelRead
         $start = 0,
         \CriteriaElement $criteria = null,
         $fields = null,
-        $asObject = true)
-    {
+        $asObject = true
+    ) {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
         trigger_error(__CLASS__ . '::' . __FUNCTION__ . '() is deprecated, please use getAll instead.' . ". Called from {$trace[0]['file']}line {$trace[0]['line']}", E_USER_WARNING);
         if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {

@@ -63,8 +63,7 @@ class AudioPhpCaptcha
     public function __construct(
         $sFlitePath = CAPTCHA_FLITE_PATH, // path to flite binary
         $sAudioPath = CAPTCHA_AUDIO_PATH // the location to temporarily store the generated audio CAPTCHA
-    )
-    {
+    ) {
         $this->SetFlitePath($sFlitePath);
         $this->SetAudioPath($sAudioPath);
 

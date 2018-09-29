@@ -868,8 +868,8 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $photoTitle = '',
         $photoDesc = '',
         $photoExtra = '',
-        $photoTag = '')
-    {
+        $photoTag = ''
+    ) {
         require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
 
         $permHandler = Extgallery\PublicPermHandler::getInstance();

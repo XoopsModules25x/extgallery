@@ -97,4 +97,3 @@ $adminObject->displayIndex();
 echo $utility::getServerStats();
 
 require __DIR__ . '/admin_footer.php';
-
