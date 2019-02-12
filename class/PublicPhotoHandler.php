@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -22,7 +24,6 @@ use XoopsModules\Extgallery;
 
 //require_once __DIR__ . '/photoHandler.php';
 //require_once __DIR__ . '/publicPerm.php';
-
 
 /**
  * Class Extgallery\PublicPhotoHandler

@@ -17,7 +17,7 @@
 
 use XoopsModules\Extgallery;
 
-require_once __DIR__   . '/header.php';
+require_once __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 //require_once __DIR__ . '/class/Utility.php';
@@ -34,9 +34,8 @@ if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_up
 }
 
 $moduleDirName = basename(__DIR__);
-$utility = new Extgallery\Utility();
+$utility       = new Extgallery\Utility();
 switch ($step) {
-
     case 'enreg':
         /** @var Extgallery\PublicPhotoHandler $photoHandler */
         $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
@@ -54,7 +53,6 @@ switch ($step) {
         }
 
         break;
-
     case 'default':
     default:
 
@@ -93,5 +91,4 @@ switch ($step) {
         require_once XOOPS_ROOT_PATH . '/footer.php';
 
         break;
-
 }

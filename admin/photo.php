@@ -1,6 +1,6 @@
 <?php
 
-use XoopsModules\Tag\Helper;
+use Xmf\Request;
 /**
  * ExtGallery Admin settings
  * Manage admin pages
@@ -18,8 +18,8 @@ use XoopsModules\Tag\Helper;
  * @package     ExtGallery
  */
 
-use Xmf\Request;
 use XoopsModules\Extgallery;
+use XoopsModules\Tag\Helper;
 
 require_once __DIR__ . '/admin_header.php';
 require_once dirname(dirname(dirname(__DIR__))) . '/class/pagenav.php';
@@ -66,7 +66,6 @@ switch ($op) {
         }
 
         break;
-
     case 'batchAdd':
 
         if (null === get_cfg_var('max_execution_time')) {
@@ -101,9 +100,9 @@ switch ($op) {
         $dir      = opendir($batchRep);
         while (false !== ($f = readdir($dir))) {
             if (is_file($batchRep . $f)) {
-                if (preg_match('/.*gif/', strtolower($f)) || preg_match('/.*jpg/', strtolower($f))
-                    || preg_match('/.*jpeg/', strtolower($f))
-                    || preg_match('/.*png/', strtolower($f))) {
+                if (preg_match('/.*gif/', mb_strtolower($f)) || preg_match('/.*jpg/', mb_strtolower($f))
+                    || preg_match('/.*jpeg/', mb_strtolower($f))
+                    || preg_match('/.*png/', mb_strtolower($f))) {
                     $photos[] = $f;
                 }
             }
@@ -159,7 +158,7 @@ switch ($op) {
 
             xoops_cp_footer();
         } else {
-            /** @var XoopsNotificationHandler $notificationHandler */
+            /** @var \XoopsNotificationHandler $notificationHandler */
             $notificationHandler = xoops_getHandler('notification');
             $extraTags           = [
                 'X_ITEM_CAT'     => $cat->getVar('cat_name'),
@@ -197,7 +196,6 @@ switch ($op) {
         }
 
         break;
-
     case 'batchApprove':
 
         /** @var Extgallery\PublicPhotoHandler $photoHandler */
@@ -224,7 +222,7 @@ switch ($op) {
                 }
                 $categories[$photo->getVar('cat_id')]++;
             }
-            /** @var XoopsNotificationHandler $notificationHandler */
+            /** @var \XoopsNotificationHandler $notificationHandler */
             $notificationHandler = xoops_getHandler('notification');
 
             foreach ($categories as $k => $v) {
@@ -269,7 +267,6 @@ switch ($op) {
         }
 
         break;
-
     case 'rebuildthumb':
 
         /** @var Extgallery\PublicPhotoHandler $photoHandler */
@@ -279,7 +276,6 @@ switch ($op) {
         redirect_header('photo.php', 3, _AM_EXTGALLERY_THUMB_REBUILDED);
 
         break;
-
     case 'modify':
 
         switch ($step) {
@@ -428,7 +424,6 @@ switch ($op) {
                 redirect_header('photo.php', 3, $message);
 
                 break;
-
             case 'default':
 
             default:
@@ -515,11 +510,9 @@ switch ($op) {
                 xoops_cp_footer();
 
                 break;
-
         }
 
         break;
-
     /*case 'approve':
 
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
@@ -598,9 +591,9 @@ switch ($op) {
         $dir = opendir($rep);
         while (false !== ($f = readdir($dir))) {
             if (is_file($rep . $f)) {
-                if (preg_match('/.*gif/', strtolower($f)) || preg_match('/.*jpg/', strtolower($f))
-                    || preg_match('/.*jpeg/', strtolower($f))
-                    || preg_match('/.*png/', strtolower($f))) {
+                if (preg_match('/.*gif/', mb_strtolower($f)) || preg_match('/.*jpg/', mb_strtolower($f))
+                    || preg_match('/.*jpeg/', mb_strtolower($f))
+                    || preg_match('/.*png/', mb_strtolower($f))) {
                     ++$nbPhotos;
                 }
             }

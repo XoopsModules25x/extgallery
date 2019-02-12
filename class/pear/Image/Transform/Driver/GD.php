@@ -86,7 +86,9 @@ class Image_Transform_Driver_GD extends Image_Transform
     public function Image_Transform_Driver_GD()
     {
         $this->__construct();
-    } // End function Image
+    }
+
+    // End function Image
 
     /**
      * Check settings
@@ -118,7 +120,9 @@ class Image_Transform_Driver_GD extends Image_Transform
                 $this->isError(PEAR::raiseError('No supported image types available', IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
             }
         }
-    } // End function Image
+    }
+
+    // End function Image
 
     /**
      * Loads an image from file
@@ -149,7 +153,9 @@ class Image_Transform_Driver_GD extends Image_Transform
         }
 
         return true;
-    } // End load
+    }
+
+    // End load
 
     /**
      * Returns the GD image handle
@@ -161,7 +167,9 @@ class Image_Transform_Driver_GD extends Image_Transform
     public function getHandle()
     {
         return $this->imageHandle;
-    }//function getHandle()
+    }
+
+    //function getHandle()
 
     /**
      * Adds a border of constant width around an image
@@ -172,7 +180,7 @@ class Image_Transform_Driver_GD extends Image_Transform
      * @author Peter Bowyer
      * @access public
      */
-    public function addBorder($border_width=null, $color = '')
+    public function addBorder($border_width = null, $color = '')
     {
         $this->new_x = $this->img_x + 2 * $border_width;
         $this->new_y = $this->img_y + 2 * $border_width;
@@ -213,7 +221,7 @@ class Image_Transform_Driver_GD extends Image_Transform
      *
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      */
-    public function addText($params=null)
+    public function addText($params = null)
     {
         $this->oldImage = $this->imageHandle;
         $params         = array_merge($this->_get_default_text_params(), $params);
@@ -224,14 +232,16 @@ class Image_Transform_Driver_GD extends Image_Transform
 
         $c = imagecolorresolve($this->imageHandle, $color[0], $color[1], $color[2]);
 
-        if ('ttf' == substr($font, -3)) {
+        if ('ttf' == mb_substr($font, -3)) {
             imagettftext($this->imageHandle, $size, $angle, $x, $y, $c, $font, $text);
         } else {
             imagepstext($this->imageHandle, $size, $angle, $x, $y, $c, $font, $text);
         }
 
         return true;
-    } // End addText
+    }
+
+    // End addText
 
     /**
      * Rotates image by the given angle
@@ -287,7 +297,7 @@ class Image_Transform_Driver_GD extends Image_Transform
     /**
      * Vertical mirroring
      *
-     * @return TRUE or PEAR Error object on error
+     * @return true or PEAR Error object on error
      * @access public
      * @see    mirror()
      **/
@@ -322,6 +332,10 @@ class Image_Transform_Driver_GD extends Image_Transform
      * @param int height Cropped image height
      * @param int x X-coordinate to crop at
      * @param int y Y-coordinate to crop at
+     * @param mixed $width
+     * @param mixed $height
+     * @param mixed $x
+     * @param mixed $y
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
      */
@@ -383,7 +397,7 @@ class Image_Transform_Driver_GD extends Image_Transform
      * @return bool|PEAR_Error TRUE on success or PEAR_Error object on error
      * @access protected
      */
-    public function _resize($new_x=null, $new_y=null, $options = null)
+    public function _resize($new_x = null, $new_y = null, $options = null)
     {
         if (true === $this->resized) {
             return PEAR::raiseError('You have already resized the image without saving it.  Your previous resizing will be overwritten', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE);
@@ -446,12 +460,12 @@ class Image_Transform_Driver_GD extends Image_Transform
      */
     public function _generate($filename, $type = '', $quality = null)
     {
-        $type    = strtolower(('' == $type) ? $this->type : $type);
+        $type    = mb_strtolower(('' == $type) ? $this->type : $type);
         $options = is_array($quality) ? $quality : [];
         switch ($type) {
             case 'jpg':
                 $type = 'jpeg';
-                // no break
+            // no break
             case 'jpeg':
                 if (is_numeric($quality)) {
                     $options['quality'] = $quality;
@@ -491,7 +505,9 @@ class Image_Transform_Driver_GD extends Image_Transform
         }
 
         return true;
-    } // End save
+    }
+
+    // End save
 
     /**
      * Displays image without saving and lose changes.

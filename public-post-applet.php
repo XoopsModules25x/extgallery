@@ -17,7 +17,7 @@
 
 use XoopsModules\Extgallery;
 
-require_once __DIR__   . '/header.php';
+require_once __DIR__ . '/header.php';
 /** @var Extgallery\PublicPhotoHandler $photoHandler */
 $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 

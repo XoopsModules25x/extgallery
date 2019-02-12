@@ -33,7 +33,6 @@ $downloadServer = 'http://downloads.sourceforge.net/xoops/';
 $extensionFileName = 'extgallery-extension-hook.tar.gz';
 
 switch ($step) {
-
     case 'download':
 
         xoops_cp_header();
@@ -60,7 +59,6 @@ switch ($step) {
         xoops_cp_footer();
 
         break;
-
     case 'install':
 
         if (!file_exists(XOOPS_ROOT_PATH . '/uploads/' . $extensionFileName)) {
@@ -92,7 +90,6 @@ switch ($step) {
         redirect_header('extension.php', 3, _AM_EXTGALLERY_EXTENSION_INSTALLED);
 
         break;
-
     default:
     case 'default':
 

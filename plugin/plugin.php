@@ -14,7 +14,6 @@
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
  */
-
 $extgalleryPlugin = [
     'lolbuilder' => 0,
 ];

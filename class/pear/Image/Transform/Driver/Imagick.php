@@ -50,24 +50,23 @@ class Image_Transform_Driver_Imagick extends Image_Transform
      */
     public $oldImage;
 
-    /**
-     *
-     *
-     */
     public function __construct()
     {
         if (!PEAR::loadExtension('imagick')) {
             return PEAR::raiseError('The imagick extension can not be found.', true);
         }
-        require_once __DIR__   . '/Image/Transform/Driver/Imagick/ImageTypes.php';
+        require_once __DIR__ . '/Image/Transform/Driver/Imagick/ImageTypes.php';
 
         //return true;
-    } // End Image_IM
+    }
+
+    // End Image_IM
 
     /**
      * Load image
      *
      * @param string filename
+     * @param mixed $image
      *
      * @return mixed none or a PEAR error object on error
      * @see PEAR::isError()
@@ -87,13 +86,17 @@ class Image_Transform_Driver_Imagick extends Image_Transform
         if (PEAR::isError($result)) {
             return $result;
         }
-    } // End load
+    }
+
+    // End load
 
     /**
      * Resize Action
      *
      * @param int   new_x   new width
      * @param int   new_y   new width
+     * @param mixed $new_x
+     * @param mixed $new_y
      *
      * @return none
      * @see PEAR::isError()
@@ -108,14 +111,17 @@ class Image_Transform_Driver_Imagick extends Image_Transform
         } else {
             return PEAR::raiseError('Cannot create a new imagick imagick image for the resize.', true);
         }
-    } // End resize
+    }
+
+    // End resize
 
     /**
      * rotate
      * Note: color mask are currently not supported
      *
-     * @param float $angle
+     * @param float      $angle
      * @param       int     Rotation angle in degree
+     * @param null|mixed $options
      *
      * @return none
      * @see PEAR::isError()
@@ -130,7 +136,9 @@ class Image_Transform_Driver_Imagick extends Image_Transform
         } else {
             return PEAR::raiseError('Cannot create a new imagick imagick image for the resize.', true);
         }
-    } // End rotate
+    }
+
+    // End rotate
 
     /**
      * addText
@@ -146,8 +154,8 @@ class Image_Transform_Driver_Imagick extends Image_Transform
      *                                                  'resize_first'  Tell if the image has to be resized
      *                                                  before drawing the text
      *                                                  )
+     * @param mixed $params
      *
-     * @return void
      * @see PEAR::isError()
      */
     public function addText($params)
@@ -159,21 +167,23 @@ class Image_Transform_Driver_Imagick extends Image_Transform
             'size'         => 12,
             'color'        => 'red',
             'font'         => 'Arial.ttf',
-            'resize_first' => false // Carry out the scaling of the image before annotation?
+            'resize_first' => false, // Carry out the scaling of the image before annotation?
         ];
         $params         = array_merge($default_params, $params);
         extract($params);
 
-        $color = is_array($color) ? $this->colorarray2colorhex($color) : strtolower($color);
+        $color = is_array($color) ? $this->colorarray2colorhex($color) : mb_strtolower($color);
 
         imagick_annotate($this->imageHandle, [
             'primitive' => "text $x,$y " . $text,
             'pointsize' => $size,
             'antialias' => 0,
             'fill'      => $color,
-            'font'      => $font
+            'font'      => $font,
         ]);
-    } // End addText
+    }
+
+    // End addText
 
     /**
      * Save the image file
@@ -182,26 +192,27 @@ class Image_Transform_Driver_Imagick extends Image_Transform
      *
      * @param  string $type
      * @param  int    $quality
-     * @return void
      */
     public function save($filename, $type = '', $quality = 75)
     {
         if ('' == $type) {
-            $type = strtoupper($type);
+            $type = mb_strtoupper($type);
             imagick_write($this->imageHandle, $filename, $type);
         } else {
             imagick_write($this->imageHandle, $filename);
         }
         imagick_free($handle);
-    } // End save
+    }
+
+    // End save
 
     /**
      * Display image without saving and lose changes
      *
      * @param string type (JPG,PNG...);
      * @param int    quality 75
-     *
-     * @return void
+     * @param mixed $type
+     * @param mixed $quality
      */
     public function display($type = '', $quality = 75)
     {

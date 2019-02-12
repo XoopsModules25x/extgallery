@@ -33,7 +33,6 @@
  * @version   SVN: $Id: Exception.php 47 2008-01-10 11:03:38Z mcorne $
  * @link      http://pear.php.net/package/Console_GetoptPlus
  */
-
 require_once __DIR__ . '/PEAR/Exception.php';
 
 /**

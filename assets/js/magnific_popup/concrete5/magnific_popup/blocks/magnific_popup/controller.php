@@ -48,6 +48,7 @@ class MagnificPopupBlockController extends BlockController
     // these are used in the add and edit dialog window
     // they create a modal/popup if incorrect data or no data is inserted
     // into the text area/ text input.
+
     /**
      * @return array
      */

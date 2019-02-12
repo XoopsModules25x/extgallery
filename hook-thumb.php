@@ -27,7 +27,7 @@ $photoId = \Xmf\Request::getInt('id', 0, 'GET');
 $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 $photo        = $photoHandler->get($photoId);
 
-switch (strtolower(strrchr($photo->getVar('photo_name'), '.'))) {
+switch (mb_strtolower(mb_strrchr($photo->getVar('photo_name'), '.'))) {
     case '.png':
         $type = 'image/png';
 
@@ -53,14 +53,14 @@ if (0 == $photo->getVar('cat_id')) {
     header('Content-type: image/jpeg');
     readfile(XOOPS_ROOT_PATH . '/modules/extgallery/assets/images/dont-exist.jpg');
 
-// If user is allowed to view this picture
+    // If user is allowed to view this picture
 } elseif ($permHandler->isAllowed($xoopsUser, 'public_access', $photo->getVar('cat_id'))) {
     $photo = $photoHandler->objectToArray($photo);
 
     header('Content-type: ' . $type . '');
     readfile(XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo['photo_name']);
 
-// If user isn't allowed to view this picture
+    // If user isn't allowed to view this picture
 } else {
     header('Content-type: image/jpeg');
     readfile(XOOPS_ROOT_PATH . '/modules/extgallery/assets/images/not-allowed.jpg');

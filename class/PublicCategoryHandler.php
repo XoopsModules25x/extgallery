@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -19,7 +21,6 @@
 use XoopsModules\Extgallery;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 
 /**
  * Class Extgallery\PublicCategoryHandler
@@ -66,8 +67,8 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
         // Retriving permission mask
         /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
-        $moduleId     = $GLOBALS['xoopsModule']->getVar('mid');
-        $groups       = $GLOBALS['xoopsUser']->getGroups();
+        $moduleId         = $GLOBALS['xoopsModule']->getVar('mid');
+        $groups           = $GLOBALS['xoopsUser']->getGroups();
 
         $criteria = new \CriteriaCompo();
         $criteria->add(new \Criteria('gperm_name', 'extgallery_public_mask'));
@@ -97,6 +98,7 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
                 }
             }
         }
+
         return true;
     }
 

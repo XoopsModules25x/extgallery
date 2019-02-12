@@ -16,28 +16,26 @@
  */
 
 use XoopsModules\Extgallery;
-use XoopsModules\Extgallery\Common;
 
 /**
- *
  * Prepares system prior to attempting to install module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to install, false if not
  */
 function xoops_module_pre_install_extgallery(\XoopsModule $module)
 {
-    require_once __DIR__   . '/common.php';
+    require_once __DIR__ . '/common.php';
     /** @var Extgallery\Utility $utility */
     $utility = new \XoopsModules\Extgallery\Utility();
     //check for minimum XOOPS version
     $xoopsSuccess = $utility::checkVerXoops($module);
 
     // check for minimum PHP version
-    $phpSuccess   = $utility::checkVerPhp($module);
+    $phpSuccess = $utility::checkVerPhp($module);
 
-    if (false !== $xoopsSuccess && false !==  $phpSuccess) {
-        $moduleTables =& $module->getInfo('tables');
+    if (false !== $xoopsSuccess && false !== $phpSuccess) {
+        $moduleTables = &$module->getInfo('tables');
         foreach ($moduleTables as $table) {
             $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
         }
@@ -47,23 +45,21 @@ function xoops_module_pre_install_extgallery(\XoopsModule $module)
 }
 
 /**
- *
  * Performs tasks required during installation of the module
- * @param XoopsModule $module
+ * @param \XoopsModule $module
  * @return bool true if installation successful, false if not
  * @internal param XoopsModule $module <a href='psi_element://XoopsModule'>XoopsModule</a>
- *
  */
 function xoops_module_install_extgallery(\XoopsModule $module)
 {
-    require_once __DIR__   . '/../preloads/autoloader.php';
+    require_once __DIR__ . '/../preloads/autoloader.php';
 
     $moduleDirName = basename(dirname(__DIR__));
 
     $module_id = $module->getVar('mid');
-    /** @var XoopsGroupPermHandler $grouppermHandler */
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
-    /** @var XoopsModuleHandler $moduleHandler */
+    /** @var \XoopsModuleHandler $moduleHandler */
     $configHandler = xoops_getHandler('config');
 
     /**

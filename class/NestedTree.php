@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -368,7 +370,7 @@ class NestedTree
      * @param int    $level The nlevel to assign to the current node
      * @param int   &$n     A reference to the running tally for the n-value
      */
-    public function _generateTreeData(& $arr, $id, $level, & $n)
+    public function _generateTreeData(&$arr, $id, $level, &$n)
     {
         $arr[$id]['nlevel'] = $level;
         $arr[$id]['nleft']  = ++$n;

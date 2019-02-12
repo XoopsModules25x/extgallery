@@ -37,7 +37,7 @@ $module_id = $xoopsModule->getVar('mid');
 
 switch ($step) {
     case 'enreg':
-        /** @var XoopsGroupPermHandler $grouppermHandler */
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
         if ('public' === $_POST['type']) {
             // Delete old public mask
@@ -56,7 +56,6 @@ switch ($step) {
         redirect_header('perm-quota.php', 3, _AM_EXTGALLERY_PERM_MASK_UPDATED);
 
         break;
-
     case 'default':
     default:
 
@@ -66,9 +65,9 @@ switch ($step) {
 
         xoops_cp_header();
         ob_end_flush();
-        /** @var XoopsMemberHandler $memberHandler */
+        /** @var \XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
-        /** @var XoopsGroupPermHandler $grouppermHandler */
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
         /** @var Extgallery\PluginHandler $pluginHandler */
         $pluginHandler = Extgallery\Helper::getInstance()->getHandler('Plugin');
@@ -86,11 +85,11 @@ switch ($step) {
          */
         function getChecked($array, $v)
         {
-            if (in_array($v, $array)) {
+            if (in_array($v, $array, true)) {
                 return ' checked';
-            } else {
-                return '';
             }
+
+            return '';
         }
 
         echo '<script type="text/javascript" src="../assets/js/admin.js"></script>';
@@ -125,9 +124,9 @@ switch ($step) {
         echo '</fieldset><br>';
 
         // Retriving category list for Group perm form
-    /** @var Extgallery\PublicCategoryHandler $catHandler */
-    $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
-        $cats   = $catHandler->getTree();
+        /** @var Extgallery\PublicCategoryHandler $catHandler */
+        $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+        $cats       = $catHandler->getTree();
 
         foreach ($modulePermArray as $perm) {
             if ($op != $perm['name']) {
@@ -251,5 +250,4 @@ switch ($step) {
         xoops_cp_footer();
 
         break;
-
 }

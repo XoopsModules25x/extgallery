@@ -20,7 +20,6 @@ use XoopsModules\Extgallery;
 
 require_once __DIR__ . '/admin_header.php';
 
-require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 require_once __DIR__ . '/function.php';
 require_once __DIR__ . '/moduleUpdateFunction.php';
 
@@ -142,7 +141,6 @@ function dskspace($dir)
  */
 function imageMagickSupportType()
 {
-
     /** @var Extgallery\Helper $helper */
     $helper = Extgallery\Helper::getInstance();
 
@@ -180,13 +178,12 @@ function imageMagickSupportType()
  */
 function is__writable($path)
 {
-
     //will work in despite of Windows ACLs bug
     //NOTE: use a trailing slash for folders!!!
     //see http://bugs.php.net/bug.php?id=27609
     //see http://bugs.php.net/bug.php?id=30931
 
-    if ('/' === $path{strlen($path) - 1}) {
+    if ('/' === $path[mb_strlen($path) - 1]) {
         // recursively return a temporary file path
         return is__writable($path . uniqid(mt_rand(), true) . '.tmp');
     } elseif (is_dir($path)) {
@@ -253,7 +250,7 @@ foreach (array_keys($folder) as $i) {
     $adminObject->addConfigBoxLine($folder[$i], 'folder');
     $adminObject->addConfigBoxLine([$folder[$i], '777'], 'chmod');
 }
-/** @var XoopsTpl $xoopsTpl */
+/** @var \XoopsTpl $xoopsTpl */
 $xoopsTpl->assign('navigation', $adminObject->displayNavigation(basename(__FILE__)));
 $xoopsTpl->assign('index', $adminObject->displayIndex());
 

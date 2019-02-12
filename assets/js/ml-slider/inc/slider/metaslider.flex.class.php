@@ -13,7 +13,7 @@ class MetaFlexSlider extends MetaSlider
     /**
      * Constructor
      *
-     * @param integer $id slideshow ID
+     * @param int     $id slideshow ID
      * @param         $shortcode_settings
      */
     public function __construct($id, $shortcode_settings)
@@ -31,8 +31,8 @@ class MetaFlexSlider extends MetaSlider
     /**
      * Adjust the slider parameters so they're comparible with the carousel mode
      *
-     * @param  array   $options
-     * @param  integer $slider_id
+     * @param  array $options
+     * @param  int   $slider_id
      * @return array   $options
      */
     public function enable_carousel_mode($options, $slider_id)
@@ -58,8 +58,8 @@ class MetaFlexSlider extends MetaSlider
     /**
      * Ensure CSS transitions are disabled when easing is enabled.
      *
-     * @param  array   $options
-     * @param  integer $slider_id
+     * @param  array $options
+     * @param  int   $slider_id
      * @return array   $options
      */
     public function enable_easing($options, $slider_id)
@@ -99,9 +99,9 @@ class MetaFlexSlider extends MetaSlider
     /**
      * Return css to ensure our slides are rendered correctly in the carousel
      *
-     * @param  string  $css
-     * @param  array   $settings
-     * @param  integer $slider_id
+     * @param  string $css
+     * @param  array  $settings
+     * @param  int    $slider_id
      * @return string  $css
      */
     public function get_carousel_css($css, $settings, $slider_id)
@@ -120,7 +120,7 @@ class MetaFlexSlider extends MetaSlider
      * Enable the parameters that are accepted by the slider
      *
      * @param  string $param
-     * @return array|boolean enabled parameters (false if parameter doesn't exist)
+     * @return array|bool enabled parameters (false if parameter doesn't exist)
      */
     protected function get_param($param)
     {
@@ -137,7 +137,7 @@ class MetaFlexSlider extends MetaSlider
             'links'          => 'directionNav',
             'carouselMode'   => 'carouselMode',
             'easing'         => 'easing',
-            'autoPlay'       => 'slideshow'
+            'autoPlay'       => 'slideshow',
         ];
 
         if (isset($params[$param])) {
@@ -175,7 +175,7 @@ class MetaFlexSlider extends MetaSlider
             // backwards compatibility with older versions of Meta Slider Pro (< v2.0)
             // MS Pro < 2.0 does not include the <li>
             // MS Pro 2.0+ returns the <li>
-            if (0 === strpos($slide, '<li')) {
+            if (0 === mb_strpos($slide, '<li')) {
                 $return_value .= "\n                " . $slide;
             } else {
                 $return_value .= "\n                <li style=\"display: none;\">" . $slide . '</li>';

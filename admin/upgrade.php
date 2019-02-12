@@ -15,16 +15,15 @@
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
  */
-
 require_once __DIR__ . '/admin_header.php';
+
 if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 } else {
     $step = 'default';
 }
 
-require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-require_once __DIR__   . '/moduleUpdateFunction.php';
+require_once __DIR__ . '/moduleUpdateFunction.php';
 
 // Change this variable if you use a cloned version of eXtGallery
 $localModuleDir = 'extgallery';
@@ -37,7 +36,6 @@ $moduleFileName    = $moduleName . '-' . $lastVersionString . '.tar.gz';
 $langFileName      = $moduleName . '-lang-' . $lastVersionString . '_' . $xoopsConfig['language'] . '.tar.gz';
 
 switch ($step) {
-
     case 'download':
 
         xoops_cp_header();
@@ -88,7 +86,6 @@ switch ($step) {
         xoops_cp_footer();
 
         break;
-
     case 'install':
 
         xoops_cp_header();
@@ -139,7 +136,6 @@ switch ($step) {
         xoops_cp_footer();
 
         break;
-
     default:
     case 'default':
 

@@ -56,7 +56,9 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
     public function Image_Transform_Driver_NetPBM()
     {
         $this->__construct();
-    } // End function Image_NetPBM
+    }
+
+    // End function Image_NetPBM
 
     /**
      * Class Constructor
@@ -70,12 +72,15 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         if (!System::which(IMAGE_TRANSFORM_NETPBM_PATH . 'pnmscale' . (OS_WINDOWS ? '.exe' : ''))) {
             $this->isError(PEAR::raiseError('Couldn\'t find "pnmscale" binary', IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
         }
-    } // End function Image_NetPBM
+    }
+
+    // End function Image_NetPBM
 
     /**
      * Load image
      *
      * @param string filename
+     * @param mixed $image
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
      */
@@ -88,7 +93,9 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         }
 
         return true;
-    } // End load
+    }
+
+    // End load
 
     /**
      * Resize the image.
@@ -122,7 +129,6 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
                     $this->command[] = $this->_prepare_cmd(IMAGE_TRANSFORM_NETPBM_PATH, 'pnmscale', '-nomix -width ' . ((int)$new_x) . ' -height ' . ((int)$new_y));
                 }
                 break;
-
             case 'smooth':
             default:
                 $this->command[] = $this->_prepare_cmd(IMAGE_TRANSFORM_NETPBM_PATH, 'pnmscale', '-width ' . ((int)$new_x) . ' -height ' . ((int)$new_y));
@@ -142,7 +148,9 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         $this->_set_new_y($new_y);
 
         return true;
-    } // End resize
+    }
+
+    // End resize
 
     /**
      * Rotates the image
@@ -192,7 +200,9 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         }
 
         return true;
-    } // End rotate
+    }
+
+    // End rotate
 
     /**
      * Crop an image
@@ -222,7 +232,9 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         }
 
         return true;
-    } // End crop
+    }
+
+    // End crop
 
     /**
      * Adjust the image gamma
@@ -247,7 +259,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      * Vertical mirroring
      *
      * @see mirror()
-     * @return TRUE or PEAR Error object on error
+     * @return true or PEAR Error object on error
      **/
     public function flip()
     {
@@ -263,7 +275,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      * Horizontal mirroring
      *
      * @see flip()
-     * @return TRUE or PEAR Error object on error
+     * @return true or PEAR Error object on error
      **/
     public function mirror()
     {
@@ -305,6 +317,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      *                                  'resize_first'  // Tell if the image has to be resized
      *                                  // before drawing the text
      *                                  )
+     * @param mixed $params
      *
      * @return object
      */
@@ -323,7 +336,9 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         $color   = $this->colorarray2colorhex($color);
 
         $this->command[] = $this->_prepare_cmd(IMAGE_TRANSFORM_NETPBM_PATH, 'ppmlabel', '-angle ' . ((int)$angle) . ' -colour ' . escapeshellarg($color) . ' -size ' . ((float)$size) . ' -x ' . ((int)$x) . ' -y ' . $y + $size . ' -text ' . escapeshellarg($text));
-    } // End addText
+    }
+
+    // End addText
 
     /**
      * Image_Transform_Driver_NetPBM::_postProcess()
@@ -335,9 +350,9 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      */
     public function _postProcess($type, $quality)
     {
-        array_unshift($this->command, $this->_prepare_cmd(IMAGE_TRANSFORM_NETPBM_PATH, strtolower($this->type) . 'topnm', escapeshellarg($this->image)));
+        array_unshift($this->command, $this->_prepare_cmd(IMAGE_TRANSFORM_NETPBM_PATH, mb_strtolower($this->type) . 'topnm', escapeshellarg($this->image)));
         $arg     = '';
-        $type    = strtolower($type);
+        $type    = mb_strtolower($type);
         $program = '';
         switch ($type) {
             // ppmto* converters
@@ -346,7 +361,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
                     return PEAR::raiseError('Couldn\'t find "ppmquant" binary', IMAGE_TRANSFORM_ERROR_UNSUPPORTED);
                 }
                 $this->command[] = $this->_prepare_cmd(IMAGE_TRANSFORM_NETPBM_PATH, 'ppmquant', 256);
-                // no break
+            // no break
             case 'acad':
             case 'bmp':
             case 'eyuv':
@@ -369,20 +384,18 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
             case 'yuv':
                 $program = 'ppmto' . $type;
                 break;
-
             // Windows icon
             case 'winicon':
             case 'ico':
                 $type    = 'winicon';
                 $program = 'ppmto' . $type;
                 break;
-
             // pbmto* converters
             case 'ascii':
             case 'text':
             case 'txt':
                 $type = 'ascii';
-                // no break
+            // no break
             case 'atk':
             case 'bbubg':
             case 'epsi':
@@ -409,17 +422,15 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
             case '10x':
                 $program = 'pbmto' . $type;
                 break;
-
             // pamto* converters
             case 'jpc':
                 $type = 'jpeg2k';
-                // no break
+            // no break
             case 'html':
             case 'pfm':
             case 'tga':
                 $program = 'pamto' . $type;
                 break;
-
             // pnmto* converters
             case 'jpc':
                 $type = 'jpeg2k';
@@ -429,10 +440,10 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
                 break;
             case 'jpg':
                 $type = 'jpeg';
-                // no break
+            // no break
             case 'jpeg':
                 $arg = '--quality=' . $quality;
-                // no break
+            // no break
             case 'jbig':
             case 'fits':
             case 'palm':
@@ -447,7 +458,6 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
             case 'xwd':
                 $program = 'pnmto' . $type;
                 break;
-
         } // switch
 
         if ('' == $program) {
@@ -468,7 +478,7 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
      * @param        $filename string the name of the file to write to
      * @param string $type     (jpeg,png...);
      * @param int    $quality  75
-     * @return TRUE or PEAR Error object on error
+     * @return true or PEAR Error object on error
      */
     public function save($filename, $type = null, $quality = 75)
     {
@@ -488,14 +498,16 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
         }
 
         return (0 == $exit) ? true : PEAR::raiseError(implode('. ', $res), IMAGE_TRANSFORM_ERROR_IO);
-    } // End save
+    }
+
+    // End save
 
     /**
      * Display image without saving and lose changes
      *
      * @param string $type    (jpeg,png...);
      * @param int    $quality 75
-     * @return TRUE or PEAR Error object on error
+     * @return true or PEAR Error object on error
      */
     public function display($type = null, $quality = null)
     {
@@ -518,8 +530,6 @@ class Image_Transform_Driver_NetPBM extends Image_Transform
 
     /**
      * Destroy image handle
-     *
-     * @return void
      */
     public function free()
     {

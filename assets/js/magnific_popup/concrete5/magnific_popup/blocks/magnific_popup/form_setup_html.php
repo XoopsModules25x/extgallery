@@ -82,23 +82,23 @@ $thumbnailHeight = 200;
                 <select id="magnific_type" name="magnific_type" class="span3">
                     <option value="select1"><?php echo t('Select Popup Type') ?></option>
                     <option id="single" value="single"<?php if ('single' === $magnific_type) {
-    ?> selected<?php
-} ?> name="magnific_type"><?php echo t('Single Image Popup') ?></option>
+                        ?> selected<?php
+                    } ?> name="magnific_type"><?php echo t('Single Image Popup') ?></option>
                     <option id="popup" value="popup"<?php if ('popup' === $magnific_type) {
-        ?> selected<?php
-    } ?> name="magnific_type"><?php echo t('Gallery Popup') ?></option>
+                        ?> selected<?php
+                    } ?> name="magnific_type"><?php echo t('Gallery Popup') ?></option>
                     <option id="zoom" value="zoom"<?php if ('zoom' === $magnific_type) {
-        ?> selected<?php
-    } ?> name="magnific_type"><?php echo t('Zoom-Image') ?></option>
+                        ?> selected<?php
+                    } ?> name="magnific_type"><?php echo t('Zoom-Image') ?></option>
                     <option id="videoMap" value="vidMap"<?php if ('vidMap' === $magnific_type) {
-        ?> selected<?php
-    } ?> name="magnific_type"><?php echo t('Video or Map Popup') ?></option>
+                        ?> selected<?php
+                    } ?> name="magnific_type"><?php echo t('Video or Map Popup') ?></option>
                     <option id="cssDialog" value="cssdialog"<?php if ('cssdialog' === $magnific_type) {
-        ?> selected<?php
-    } ?> name="magnific_type"><?php echo t('Dialog With CSS Animation') ?></option>
+                        ?> selected<?php
+                    } ?> name="magnific_type"><?php echo t('Dialog With CSS Animation') ?></option>
                     <option id="modal" value="modal"<?php if ('modal' === $magnific_type) {
-        ?> selected<?php
-    } ?> name="magnific_type"><?php echo t('Modal') ?></option>
+                        ?> selected<?php
+                    } ?> name="magnific_type"><?php echo t('Modal') ?></option>
                 </select>
             </div>
         </div>
@@ -115,14 +115,14 @@ $thumbnailHeight = 200;
             <select id="singleOption" name="singleOption" class="span3">
                 <option value="select-2" name="select-2"><?php echo t('Select Single Type') ?></option>
                 <option value="vertical-fit"<?php if ('vertical-fit' === $singleOption) {
-        ?> selected<?php
-    } ?> name="singleOption"><?php echo t('Vertical Fit') ?></option>
+                    ?> selected<?php
+                } ?> name="singleOption"><?php echo t('Vertical Fit') ?></option>
                 <option value="fit-width"<?php if ('fit-width' === $singleOption) {
-        ?> selected<?php
-    } ?> name="singleOption"><?php echo t('Fit To Width') ?></option>
+                    ?> selected<?php
+                } ?> name="singleOption"><?php echo t('Fit To Width') ?></option>
                 <option value="no-margins"<?php if ('no-margins' === $singleOption) {
-        ?> selected<?php
-    } ?> name="singleOption"><?php echo t('No Margins') ?></option>
+                    ?> selected<?php
+                } ?> name="singleOption"><?php echo t('No Margins') ?></option>
             </select>
         </div>
     </div>
@@ -172,26 +172,26 @@ $thumbnailHeight = 200;
                     <select id="videoOptions" class="span3" name="videoOptions">
                         <option value="select-3"><?php echo t('Select a Type') ?></option>
                         <option value="youtube"<?php if ('youtube' === $videoOptions) {
-        ?> selected<?php
-    } ?> name="videoOptions"><?php echo t('YouTube') ?></option>
+                            ?> selected<?php
+                        } ?> name="videoOptions"><?php echo t('YouTube') ?></option>
                         <option value="youtubeThumb"<?php if ('youtubeThumb' === $videoOptions) {
-        ?> selected<?php
-    } ?> name="videoOptions"><?php echo t('YouTube With Thumbnail') ?></option>
+                            ?> selected<?php
+                        } ?> name="videoOptions"><?php echo t('YouTube With Thumbnail') ?></option>
                         <option value="vimeo"<?php if ('vimeo' === $videoOptions) {
-        ?> selected<?php
-    } ?> name="videoOptions"><?php echo t('Vimeo') ?></option>
+                            ?> selected<?php
+                        } ?> name="videoOptions"><?php echo t('Vimeo') ?></option>
                         <option value="vimeoThumb"<?php if ('vimeoThumb' === $videoOptions) {
-        ?> selected<?php
-    } ?> name="videoOptions"><?php echo t('Vimeo With Thumbnail') ?></option>
+                            ?> selected<?php
+                        } ?> name="videoOptions"><?php echo t('Vimeo With Thumbnail') ?></option>
                         <option value="gmaps"<?php if ('gmaps' === $videoOptions) {
-        ?> selected<?php
-    } ?> name="videoOptions"><?php echo t('Google Maps') ?></option>
+                            ?> selected<?php
+                        } ?> name="videoOptions"><?php echo t('Google Maps') ?></option>
                         <!-- <option value="gmapsThumb"<?php if ('gmapsThumb' === $videoOptions) {
-        ?> selected<?php
-    } ?> name="videoOptions"><?php echo t('Google Maps With Preview Image') ?></option> -->
+                            ?> selected<?php
+                        } ?> name="videoOptions"><?php echo t('Google Maps With Preview Image') ?></option> -->
                         <!-- <option value="bingmaps"<?php if ('bingmaps' === $videoOptions) {
-        ?>selected <?php
-    } ?> name="videoOptions"><?php echo t('Bing Maps') ?></option> -->
+                            ?>selected <?php
+                        } ?> name="videoOptions"><?php echo t('Bing Maps') ?></option> -->
                     </select>
                 </div>
             </div>
@@ -214,14 +214,14 @@ $thumbnailHeight = 200;
                 <div class="controls">
                     <select id="youtubeThumbnailOption" class="span3" name="youtubeThumbnailOption">
                         <option value="hqdefault"<?php if ('hqdefault' === $youtubeThumbnailOption) {
-        ?> selected<?php
-    } ?> name="youtubeThumbnailOption"><?php echo t('High Quality') ?></option>
+                            ?> selected<?php
+                        } ?> name="youtubeThumbnailOption"><?php echo t('High Quality') ?></option>
                         <option value="mqdefault"<?php if ('mqdefault' === $youtubeThumbnailOption) {
-        ?> selected<?php
-    } ?> name="youtubeThumbnailOption"><?php echo t('Medium Quality') ?></option>
+                            ?> selected<?php
+                        } ?> name="youtubeThumbnailOption"><?php echo t('Medium Quality') ?></option>
                         <option value="sddefault"<?php if ('sddefault' === $youtubeThumbnailOption) {
-        ?> selected<?php
-    } ?> name="youtubeThumbnailOption"><?php echo t('Standard Quality') ?></option>
+                            ?> selected<?php
+                        } ?> name="youtubeThumbnailOption"><?php echo t('Standard Quality') ?></option>
                     </select>
                 </div>
             </div>
@@ -233,14 +233,14 @@ $thumbnailHeight = 200;
                 <div class="controls">
                     <select id="vimeoThumbnailOption" class="span3" name="vimeoThumbnailOption">
                         <option value="large"<?php if ('large' === $vimeoThumbnailOption) {
-        ?> selected<?php
-    } ?> name="vimeoThumbnailOption"><?php echo t('Large Thumbnail') ?></option>
+                            ?> selected<?php
+                        } ?> name="vimeoThumbnailOption"><?php echo t('Large Thumbnail') ?></option>
                         <option value="medium"<?php if ('medium' === $vimeoThumbnailOption) {
-        ?> selected<?php
-    } ?> name="vimeoThumbnailOption"><?php echo t('Medium Thumbnail') ?></option>
+                            ?> selected<?php
+                        } ?> name="vimeoThumbnailOption"><?php echo t('Medium Thumbnail') ?></option>
                         <option value="small"<?php if ('small' === $vimeoThumbnailOption) {
-        ?> selected<?php
-    } ?> name="vimeoThumbnailOption"><?php echo t('Small Thumbnail') ?></option>
+                            ?> selected<?php
+                        } ?> name="vimeoThumbnailOption"><?php echo t('Small Thumbnail') ?></option>
                     </select>
                 </div>
             </div>
@@ -278,26 +278,26 @@ $thumbnailHeight = 200;
                 <select id="dialogType" class="span4" name="dialogType">
                     <option value="choose"><?php echo t('Choose a CSS Dialog Animation Type'); ?></option>
                     <option id="zoom-in" value="zoom-in"<?php if ('zoom-in' === $dialogType) {
-        ?> selected<?php
-    } ?>><?php echo t('Popup With Zoom-In Animation'); ?></option>
+                        ?> selected<?php
+                    } ?>><?php echo t('Popup With Zoom-In Animation'); ?></option>
                     <option id="newspaper" value="newspaper"<?php if ('newspaper' === $dialogType) {
-        ?> selected<?php
-    } ?>><?php echo t('Popup With Newspaper Animation'); ?></option>
+                        ?> selected<?php
+                    } ?>><?php echo t('Popup With Newspaper Animation'); ?></option>
                     <option id="newspaper" value="move-horizontal"<?php if ('move-horizontal' === $dialogType) {
-        ?> selected<?php
-    } ?>><?php echo t('Popup With Move Horizontal Animation'); ?></option>
+                        ?> selected<?php
+                    } ?>><?php echo t('Popup With Move Horizontal Animation'); ?></option>
                     <option id="move-from-top" value="move-from-top"<?php if ('move-from-top' === $dialogType) {
-        ?> selected<?php
-    } ?>><?php echo t('Popup Move In From Top'); ?></option>
+                        ?> selected<?php
+                    } ?>><?php echo t('Popup Move In From Top'); ?></option>
                     <option id="3d-unfold" value="3d-unfold"<?php if ('3d-unfold' === $dialogType) {
-        ?> selected<?php
-    } ?>><?php echo t('Popup With 3d Unfold Animation'); ?></option>
+                        ?> selected<?php
+                    } ?>><?php echo t('Popup With 3d Unfold Animation'); ?></option>
                     <option id="zoom-out" value="zoom-out"<?php if ('zoom-out' === $dialogType) {
-        ?> selected<?php
-    } ?>><?php echo t('Popup With Zoom-Out Animation'); ?></option>
+                        ?> selected<?php
+                    } ?>><?php echo t('Popup With Zoom-Out Animation'); ?></option>
                     <option id="custom-anim" value="custom-anim"<?php if ('custom-anim' === $dialogType) {
-        ?> selected<?php
-    } ?>><?php echo t('Popup With Your Custom CSS Animation'); ?></option>
+                        ?> selected<?php
+                    } ?>><?php echo t('Popup With Your Custom CSS Animation'); ?></option>
                 </select>
             </div>
         </div>

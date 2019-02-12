@@ -17,7 +17,6 @@
  * @author       XOOPS Development Team
  */
 
-use XoopsModules\Extgallery;
 use XoopsModules\Extgallery\Common;
 
 require_once __DIR__ . '/admin_header.php';
@@ -31,7 +30,6 @@ foreach (array_keys($configurator->uploadFolders) as $i) {
     $utility::createFolder($configurator->uploadFolders[$i]);
     $adminObject->addConfigBoxLine($configurator->uploadFolders[$i], 'folder');
 }
-
 
 // DNPROSSI - In PHP 5.3.0 "JPG Support" was renamed to "JPEG Support".
 // This leads to the following error: "Undefined index: JPG Support in
@@ -74,11 +72,18 @@ $adminObject->addInfoBoxLine(sprintf(_AM_EXTGALLERY_POST_MAX_SIZE . get_cfg_var(
 
 $adminObject->displayNavigation(basename(__FILE__));
 
+
+//check for latest release
+$newRelease = $utility::checkVerModule($helper);
+if (!empty($newRelease)) {
+    $adminObject->addItemButton($newRelease[0], $newRelease[1], 'download', 'style="color : Red"');
+}
+
 //------------- Test Data ----------------------------
 
 if ($helper->getConfig('displaySampleButton')) {
     xoops_loadLanguage('admin/modulesadmin', 'system');
-    require  dirname(__DIR__) . '/testdata/index.php';
+    require dirname(__DIR__) . '/testdata/index.php';
 
     $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=load', 'add');
 
@@ -92,7 +97,6 @@ if ($helper->getConfig('displaySampleButton')) {
 //------------- End Test Data ----------------------------
 
 $adminObject->displayIndex();
-
 
 echo $utility::getServerStats();
 

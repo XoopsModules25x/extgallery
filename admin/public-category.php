@@ -53,11 +53,9 @@ switch ($op) {
                 redirect_header('public-category.php', 3, _AM_EXTGALLERY_CAT_CREATED);
 
                 break;
-
         }
 
         break;
-
     case 'modify':
 
         switch ($step) {
@@ -78,7 +76,6 @@ switch ($op) {
                 }
 
                 break;
-
             case 'default':
 
             default:
@@ -94,25 +91,25 @@ switch ($op) {
                 $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
 
                 /** @var Extgallery\PublicCategory $cat */
-                $cat           = $catHandler->getCat($_POST['cat_id']);
+                $cat       = $catHandler->getCat($_POST['cat_id']);
                 $photosCat = $photoHandler->getCatPhoto($cat);
 
                 xoops_cp_header();
 
                 $selectedPhoto = '../assets/images/blank.gif';
                 $photoArray    = [];
-            /** @var Extgallery\Photo $photo */
-            foreach ($photosCat as $photo) {
-                if ('' != $photo->getVar('photo_serveur')) {
-                    $url = $photo->getVar('photo_serveur') . 'thumb_' . $photo->getVar('photo_name');
-                } else {
-                    $url = XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name');
+                /** @var Extgallery\Photo $photo */
+                foreach ($photosCat as $photo) {
+                    if ('' != $photo->getVar('photo_serveur')) {
+                        $url = $photo->getVar('photo_serveur') . 'thumb_' . $photo->getVar('photo_name');
+                    } else {
+                        $url = XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name');
+                    }
+                    if ($photo->getVar('photo_id') == $cat->getVar('photo_id')) {
+                        $selectedPhoto = $url;
+                    }
+                    $photoArray[$photo->getVar('photo_id')] = $url;
                 }
-                if ($photo->getVar('photo_id') == $cat->getVar('photo_id')) {
-                    $selectedPhoto = $url;
-                }
-                $photoArray[$photo->getVar('photo_id')] = $url;
-            }
 
                 echo "<script type='text/JavaScript'>";
                 echo 'function ChangeThumb() {
@@ -165,11 +162,9 @@ switch ($op) {
                 require_once __DIR__ . '/admin_footer.php';
 
                 break;
-
         }
 
         break;
-
     case 'delete':
 
         switch ($step) {
@@ -182,15 +177,13 @@ switch ($op) {
                 redirect_header('public-category.php', 3, _AM_EXTGALLERY_CAT_DELETED);
 
                 break;
-
         }
 
         break;
-
     case 'default':
 
     default:
-    /** @var Extgallery\PublicCategoryHandler $catHandler */
+        /** @var Extgallery\PublicCategoryHandler $catHandler */
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
         xoops_cp_header();
@@ -216,5 +209,4 @@ switch ($op) {
         require_once __DIR__ . '/admin_footer.php';
 
         break;
-
 }

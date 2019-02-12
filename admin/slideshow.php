@@ -400,10 +400,9 @@ switch ($op) {
         redirect_header('slideshow.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
 
         break;
-
     case 'galleria':
 
-        /** @var XoopsModuleHandler $moduleHandler */
+        /** @var \XoopsModuleHandler $moduleHandler */
         /** @var \XoopsConfigHandler $configHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
@@ -569,10 +568,9 @@ switch ($op) {
         redirect_header('slideshow.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
 
         break;
-
     case 'galleriffic':
 
-        /** @var XoopsModuleHandler $moduleHandler */
+        /** @var \XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -838,7 +836,6 @@ switch ($op) {
         redirect_header('slideshow.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
 
         break;
-
     case 'default':
 
     default:
@@ -934,5 +931,4 @@ switch ($op) {
         xoops_cp_footer();
 
         break;
-
 }

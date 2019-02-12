@@ -82,7 +82,6 @@ switch ($step) {
         redirect_header('public-photo.php?photoId=' . $photoId . '#photoNav', 3, _MD_EXTGALLERY_ECARD_SENT);
 
         break;
-
     case 'default':
 
     default:
@@ -136,5 +135,4 @@ switch ($step) {
         require_once XOOPS_ROOT_PATH . '/footer.php';
 
         break;
-
 }

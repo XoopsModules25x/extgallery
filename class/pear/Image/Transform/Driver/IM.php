@@ -57,7 +57,9 @@ class Image_Transform_Driver_IM extends Image_Transform
     public function Image_Transform_Driver_IM()
     {
         $this->__construct();
-    } // End Image_IM
+    }
+
+    // End Image_IM
 
     /**
      * Class constructor
@@ -70,11 +72,13 @@ class Image_Transform_Driver_IM extends Image_Transform
             define('IMAGE_TRANSFORM_IM_PATH', $path);
         }
         if (System::which(IMAGE_TRANSFORM_IM_PATH . 'convert' . (OS_WINDOWS ? '.exe' : ''))) {
-            require_once __DIR__   . '/Image/Transform/Driver/Imagick/ImageTypes.php';
+            require_once __DIR__ . '/Image/Transform/Driver/Imagick/ImageTypes.php';
         } else {
             $this->isError(PEAR::raiseError('Couldn\'t find "convert" binary', IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
         }
-    } // End Image_IM
+    }
+
+    // End Image_IM
 
     /**
      * Initialize the state of the object
@@ -90,6 +94,7 @@ class Image_Transform_Driver_IM extends Image_Transform
      * This method doesn't support remote files.
      *
      * @param string filename
+     * @param mixed $image
      *
      * @return mixed TRUE or a PEAR error object on error
      * @see PEAR::isError()
@@ -107,7 +112,9 @@ class Image_Transform_Driver_IM extends Image_Transform
         }
 
         return true;
-    } // End load
+    }
+
+    // End load
 
     /**
      * Image_Transform_Driver_IM::_get_image_details()
@@ -134,7 +141,7 @@ class Image_Transform_Driver_IM extends Image_Transform
             $data        = explode(':', $res[0]);
             $this->img_x = $data[0];
             $this->img_y = $data[1];
-            $this->type  = strtolower($data[2]);
+            $this->type  = mb_strtolower($data[2]);
             $retval      = true;
         }
 
@@ -164,7 +171,9 @@ class Image_Transform_Driver_IM extends Image_Transform
         $this->new_y = $new_y;
 
         return true;
-    } // End resize
+    }
+
+    // End resize
 
     /**
      * rotate
@@ -181,7 +190,9 @@ class Image_Transform_Driver_IM extends Image_Transform
         }
 
         return true;
-    } // End rotate
+    }
+
+    // End rotate
 
     /**
      * Crop image
@@ -193,6 +204,10 @@ class Image_Transform_Driver_IM extends Image_Transform
      * @param int height Cropped image height
      * @param int x X-coordinate to crop at
      * @param int y Y-coordinate to crop at
+     * @param mixed $width
+     * @param mixed $height
+     * @param mixed $x
+     * @param mixed $y
      *
      * @return mixed TRUE or a PEAR error object on error
      */
@@ -224,6 +239,7 @@ class Image_Transform_Driver_IM extends Image_Transform
      *                                                  'resize_first'  Tell if the image has to be resized
      *                                                  before drawing the text
      *                                                  )
+     * @param mixed $params
      *
      * @return mixed TRUE or a PEAR error object on error
      * @see PEAR::isError()
@@ -244,7 +260,9 @@ class Image_Transform_Driver_IM extends Image_Transform
 
         // Producing error: gs: not found gs: not found convert: Postscript delegate failed [No such file or directory].
         return true;
-    } // End addText
+    }
+
+    // End addText
 
     /**
      * Adjust the image gamma
@@ -279,7 +297,7 @@ class Image_Transform_Driver_IM extends Image_Transform
      * Horizontal mirroring
      *
      * @access public
-     * @return TRUE or PEAR Error object on error
+     * @return true or PEAR Error object on error
      */
     public function mirror()
     {
@@ -297,7 +315,7 @@ class Image_Transform_Driver_IM extends Image_Transform
      * Vertical mirroring
      *
      * @access public
-     * @return TRUE or PEAR Error object on error
+     * @return true or PEAR Error object on error
      */
     public function flip()
     {
@@ -324,7 +342,7 @@ class Image_Transform_Driver_IM extends Image_Transform
      */
     public function save($filename, $type = '', $quality = null)
     {
-        $type = strtoupper(('' == $type) ? $this->type : $type);
+        $type = mb_strtoupper(('' == $type) ? $this->type : $type);
         switch ($type) {
             case 'JPEG':
                 $type = 'JPG';
@@ -344,7 +362,9 @@ class Image_Transform_Driver_IM extends Image_Transform
         }
 
         return (0 == $exit) ? true : PEAR::raiseError(implode('. ', $res), IMAGE_TRANSFORM_ERROR_IO);
-    } // End save
+    }
+
+    // End save
 
     /**
      * Display image without saving and lose changes
@@ -355,12 +375,14 @@ class Image_Transform_Driver_IM extends Image_Transform
      *
      * @param string type (JPEG,PNG...);
      * @param int    quality 75
+     * @param mixed      $type
+     * @param null|mixed $quality
      *
      * @return mixed TRUE or a PEAR error object on error
      */
     public function display($type = '', $quality = null)
     {
-        $type = strtoupper(('' == $type) ? $this->type : $type);
+        $type = mb_strtoupper(('' == $type) ? $this->type : $type);
         switch ($type) {
             case 'JPEG':
                 $type = 'JPG';
@@ -386,8 +408,6 @@ class Image_Transform_Driver_IM extends Image_Transform
 
     /**
      * Destroy image handle
-     *
-     * @return void
      */
     public function free()
     {

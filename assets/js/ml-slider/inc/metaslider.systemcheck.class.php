@@ -127,14 +127,14 @@ class MetaSliderSystemCheck
             $theme_type  = 'child';
             $footer_file = file_get_contents($child_footer);
 
-            if (strpos($footer_file, 'wp_footer()')) {
+            if (mb_strpos($footer_file, 'wp_footer()')) {
                 return;
             }
         } elseif (file_exists($parent_footer . '/footer.php')) {
             $theme_type  = 'parent';
             $footer_file = file_get_contents($parent_footer . '/footer.php');
 
-            if (strpos($footer_file, 'wp_footer()')) {
+            if (mb_strpos($footer_file, 'wp_footer()')) {
                 return;
             }
         }

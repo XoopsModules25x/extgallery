@@ -43,7 +43,7 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
      * @access protected
      */
     public $_supported_image_types = [
-        'png' => 'rw'
+        'png' => 'rw',
     ];
 
     /**
@@ -94,7 +94,9 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
         }
 
         return true;
-    }//function load(..)
+    }
+
+    //function load(..)
 
     /**
      * Resize the image
@@ -138,7 +140,9 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
         $this->new_y = $new_y;
 
         return true;
-    }//function _resize(..)
+    }
+
+    //function _resize(..)
 
     /**
      * Saves the scaled image into a file.
@@ -157,7 +161,9 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
         $this->free();
 
         return true;
-    }//function save(..)
+    }
+
+    //function save(..)
 
     /**
      * Returns the surface of the image so it can be modified further
@@ -169,12 +175,13 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
     public function getHandle()
     {
         return $this->surface;
-    }//function getHandle()
+    }
+
+    //function getHandle()
 
     /**
      * Frees cairo handles
      *
-     * @return void
      *
      * @access public
      */
@@ -185,13 +192,13 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
             cairo_surface_destroy($this->surface);
         }
         $this->surface = null;
-    }//function free()
+    }
+
+    //function free()
 
     /**
      * Mirrors the image vertically
      * Uses an affine transformation matrix to flip the image.
-     *
-     * @return void
      */
     public function flip()
     {
@@ -208,15 +215,15 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
         cairo_surface_destroy($this->surface);
 
         $this->surface = $outputSurface;
-    }//function flip()
+    }
+
+    //function flip()
 
     /**
      * Mirrors the image horizontally.
      * Uses an affine transformation matrix to mirror the image.
      *
      * 123 -> 321
-     *
-     * @return void
      */
     public function mirror()
     {
@@ -233,5 +240,7 @@ class Image_Transform_Driver_Cairowrapper extends Image_Transform
         cairo_surface_destroy($this->surface);
 
         $this->surface = $outputSurface;
-    }//function mirror()
+    }
+
+    //function mirror()
 }//class Image_Transform_Driver_Cairowrapper extends Image_Transform

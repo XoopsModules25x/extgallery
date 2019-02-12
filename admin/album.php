@@ -30,7 +30,7 @@ $op = \Xmf\Request::getCmd('op', 'default');
 switch ($op) {
     case 'overlay':
 
-        /** @var XoopsModuleHandler $moduleHandler */
+        /** @var \XoopsModuleHandler $moduleHandler */
         /** @var \XoopsConfigHandler $configHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
@@ -101,10 +101,9 @@ switch ($op) {
         redirect_header('album.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
 
         break;
-
     case 'tooltip':
 
-        /** @var XoopsModuleHandler $moduleHandler */
+        /** @var \XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -194,10 +193,9 @@ switch ($op) {
         redirect_header('album.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
 
         break;
-
     case 'fancybox':
 
-        /** @var XoopsModuleHandler $moduleHandler */
+        /** @var \XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -330,10 +328,9 @@ switch ($op) {
         redirect_header('album.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
 
         break;
-
     case 'prettyphoto':
 
-        /** @var XoopsModuleHandler $moduleHandler */
+        /** @var \XoopsModuleHandler $moduleHandler */
         $configHandler    = xoops_getHandler('config');
         $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
 
@@ -420,7 +417,6 @@ switch ($op) {
         redirect_header('album.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
 
         break;
-
     case 'default':
 
     default:
@@ -495,5 +491,4 @@ switch ($op) {
         xoops_cp_footer();
 
         break;
-
 }

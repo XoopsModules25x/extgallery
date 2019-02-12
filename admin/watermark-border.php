@@ -16,7 +16,7 @@
  * @package     ExtGallery
  */
 require_once __DIR__ . '/admin_header.php';
-require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+
 xoops_load('XoopsFormLoader');
 
 if (\Xmf\Request::hasVar('op', 'GET')) {
@@ -49,7 +49,6 @@ switch ($op) {
                 redirect_header('watermark-border.php', 3, _AM_EXTGALLERY_FONT_ADDED);
 
                 break;
-
             case 'default':
 
             default:
@@ -64,7 +63,7 @@ switch ($op) {
                 $dir = opendir($rep);
                 while (false !== ($f = readdir($dir))) {
                     if (is_file($rep . $f)) {
-                        if (preg_match('/.*ttf/', strtolower($f))) {
+                        if (preg_match('/.*ttf/', mb_strtolower($f))) {
                             $fonts[] = $f;
                         }
                     }
@@ -85,17 +84,15 @@ switch ($op) {
                 xoops_cp_footer();
 
                 break;
-
         }
 
         break;
-
     case 'conf':
 
         switch ($step) {
             case 'enreg':
 
-                /** @var XoopsModuleHandler $moduleHandler */
+                /** @var \XoopsModuleHandler $moduleHandler */
                 /** @var \XoopsConfigHandler $configHandler */
                 $configHandler    = xoops_getHandler('config');
                 $moduleIdCriteria = new \Criteria('conf_modid', $xoopsModule->getVar('mid'));
@@ -338,7 +335,7 @@ switch ($op) {
                 if ('imagick' === $helper->getConfig('graphic_lib')) {
                     define('IMAGE_TRANSFORM_IM_PATH', $helper->getConfig('graphic_lib_path'));
                 }
-                $newImageTransform = new \Image_Transform;
+                $newImageTransform = new \Image_Transform();
                 //                $imageTransform = Image_Transform::factory($helper->getConfig('graphic_lib'));
                 $imageTransform = $newImageTransform->factory($helper->getConfig('graphic_lib'));
                 $imageTransform->load('../assets/images/watermark-border-orig.jpg');
@@ -405,17 +402,15 @@ switch ($op) {
                 // Remove old test image
                 deleteImageTest();
                 // Saving transformation on test image
-                $imageTransform->save('../assets/images/watermark-border-test-' . substr(md5(uniqid(mt_rand(), true)), 27) . '.jpg');
+                $imageTransform->save('../assets/images/watermark-border-test-' . mb_substr(md5(uniqid(mt_rand(), true)), 27) . '.jpg');
                 $imageTransform->free();
 
                 redirect_header('watermark-border.php', 3, _AM_EXTGALLERY_CONFIGURATION_SAVED);
 
                 break;
-
         }
 
         break;
-
     case 'default':
 
     default:
@@ -429,7 +424,7 @@ switch ($op) {
         $dir = opendir($rep);
         while (false !== ($f = readdir($dir))) {
             if (is_file($rep . $f)) {
-                if (preg_match('/.*ttf/', strtolower($f))) {
+                if (preg_match('/.*ttf/', mb_strtolower($f))) {
                     ++$nbFonts;
                     $fonts[] = $f;
                 }
@@ -484,7 +479,7 @@ switch ($op) {
 
             $xoopsTpl->assign('watermarkform', $form->render());
 
-        // Else display Warning message
+            // Else display Warning message
         } else {
             $xoopsTpl->assign('freetypewarn', _AM_EXTGALLERY_WATERMARK_FREETYPE_WARN);
         }
@@ -509,7 +504,6 @@ switch ($op) {
         xoops_cp_footer();
 
         break;
-
 }
 
 /**

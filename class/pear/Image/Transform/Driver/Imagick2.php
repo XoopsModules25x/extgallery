@@ -67,7 +67,9 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
     public function Image_Transform_Driver_Imagick2()
     {
         $this->__construct();
-    } // End Image_Transform_Driver_Imagick2
+    }
+
+    // End Image_Transform_Driver_Imagick2
 
     /**
      * @see http://www.imagemagick.org/www/formats.html
@@ -75,7 +77,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
     public function __construct()
     {
         if (PEAR::loadExtension('imagick')) {
-            require_once __DIR__   . '/Image/Transform/Driver/Imagick/ImageTypes.php';
+            require_once __DIR__ . '/Image/Transform/Driver/Imagick/ImageTypes.php';
         } else {
             $this->isError(PEAR::raiseError('Couldn\'t find the imagick extension.', IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
         }
@@ -106,7 +108,9 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
         }
 
         return true;
-    } // End load
+    }
+
+    // End load
 
     /**
      * Resize Action
@@ -128,7 +132,9 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
         $this->new_y = $new_y;
 
         return true;
-    } // End resize
+    }
+
+    // End resize
 
     /**
      * Rotates the current image
@@ -152,7 +158,9 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
         $this->new_y = imagick_getheight($this->imageHandle);
 
         return true;
-    } // End rotate
+    }
+
+    // End rotate
 
     /**
      * addText
@@ -168,6 +176,7 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
      *                                                  'resize_first'  Tell if the image has to be resized
      *                                                  before drawing the text
      *                                                  )
+     * @param mixed $params
      *
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
@@ -180,13 +189,13 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
         if (is_array($params['color'])) {
             $params['color'] = $this->colorarray2colorhex($params['color']);
         } else {
-            $params['color'] = strtolower($params['color']);
+            $params['color'] = mb_strtolower($params['color']);
         }
 
         static $cmds = [
             'setfillcolor' => 'color',
             'setfontsize'  => 'size',
-            'setfontface'  => 'font'
+            'setfontface'  => 'font',
         ];
         imagick_begindraw($this->imageHandle);
 
@@ -200,7 +209,9 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
         }
 
         return true;
-    } // End addText
+    }
+
+    // End addText
 
     /**
      * Saves the image to a file
@@ -234,7 +245,9 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
         }
 
         return true;
-    } // End save
+    }
+
+    // End save
 
     /**
      * Displays image without saving and lose changes
@@ -243,6 +256,8 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
      *
      * @param string type (JPG,PNG...);
      * @param int    quality 75
+     * @param mixed      $type
+     * @param null|mixed $quality
      *
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
@@ -293,6 +308,10 @@ class Image_Transform_Driver_Imagick2 extends Image_Transform
      * @param int height Cropped image height
      * @param int x X-coordinate to crop at
      * @param int y Y-coordinate to crop at
+     * @param mixed $width
+     * @param mixed $height
+     * @param mixed $x
+     * @param mixed $y
      *
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public

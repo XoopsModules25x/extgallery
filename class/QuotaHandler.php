@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -19,7 +21,6 @@
 use XoopsModules\Extgallery;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 
 /**
  * Class Extgallery\QuotaHandler
@@ -72,8 +73,8 @@ class QuotaHandler extends Extgallery\PersistableObjectHandler
         $ret = $this->getObjects($criteria);
         if (empty($ret)) {
             return $this->create();
-        } else {
-            return $ret[0];
         }
+
+        return $ret[0];
     }
 }

@@ -17,7 +17,7 @@
 
 use XoopsModules\Extgallery;
 
-require_once __DIR__   . '/header.php';
+require_once __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-slideshow.tpl';
@@ -27,7 +27,6 @@ require_once XOOPS_ROOT_PATH . '/header.php';
 $helper = Extgallery\Helper::getInstance();
 
 $catId = \Xmf\Request::getInt('id', 0, 'GET');
-
 
 // Check the access permission
 $permHandler = Extgallery\PublicPermHandler::getInstance();
@@ -80,16 +79,13 @@ if (1 == $jquery) {
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/galleryview/easing.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/galleryview/galleryview.css');
             break;
-
         case 'galleria':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/galleria/galleria.js');
             break;
-
         case 'microgallery':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/microgallery/jquery.microgallery.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/microgallery/style.css');
             break;
-
         case 'galleriffic':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/galleriffic/jquery.galleriffic.js');
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/galleriffic/jquery.history.js');
@@ -147,7 +143,7 @@ if (1 == $helper->getConfig('galleriffic_autoplay')) {
 $xoopsTpl->assign('galleriffic_tdelay', $helper->getConfig('galleriffic_tdelay'));
 $xoopsTpl->assign('galleriffic_tspeed', $helper->getConfig('galleriffic_tspeed'));
 
-$var_width = 0;
+$var_width       = 0;
 $var_nav_width   = 0;
 $var_nav_visible = 'hidden';
 

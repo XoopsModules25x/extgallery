@@ -40,7 +40,9 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
     public function Image_Transform_Driver_GD1()
     {
         $this->__construct();
-    } // End function Image
+    }
+
+    // End function Image
 
     /**
      * Check settings
@@ -52,7 +54,9 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
     public function __construct()
     {
         parent::__construct();
-    } // End function Image
+    }
+
+    // End function Image
 
     /**
      * Resize Action
@@ -105,7 +109,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
 
         if (!is_array($color_mask)) {
             // Not already in numberical format, so we convert it.
-            if ('#' == $color_mask{0}) {
+            if ('#' == $color_mask[0]) {
                 $color_mask = $this->colorhex2colorarray($color_mask);
             } else {
                 require_once __DIR__ . '/Image/Transform/Driver/ColorsDefs.php';
@@ -117,7 +121,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
         $cosT = cos($t);
         $sinT = sin($t);
 
-        $img =& $this->imageHandle;
+        $img = &$this->imageHandle;
 
         $width  = $max_x = $this->img_x;
         $height = $max_y = $this->img_y;
@@ -220,13 +224,11 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
             default:
                 $i = 0;
                 for ($y = $min_y2; $y < $max_y2; $y++) {
-
                     // Algebra :)
                     $x2 = round((($min_x2 - $x1) * $cosT) + (($y - $y1) * $sinT + $x1), 0);
                     $y2 = round(($y - $y1) * $cosT - ($min_x2 - $x1) * $sinT + $y1, 0);
 
                     for ($x = $min_x2; $x < $max_x2; $x++) {
-
                         // Check if we are out of original bounces, if we are
                         // use the default color mask
                         if ($x2 >= 0 && $x2 < $max_x && $y2 >= 0 && $y2 < $max_y) {

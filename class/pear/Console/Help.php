@@ -75,9 +75,9 @@ class Console_GetoptPlus_Help
      * Additional data is added to the first line.
      * The other lines are padded and aligned to the first one.
      *
-     * @param  array   $lines         the set of lines
-     * @param  string  $addon         the additional data to add to the first line
-     * @param  integer $paddingLength the padding length
+     * @param  array  $lines         the set of lines
+     * @param  string $addon         the additional data to add to the first line
+     * @param  int    $paddingLength the padding length
      * @return array   the aligned lines
      * @access public
      */
@@ -86,12 +86,12 @@ class Console_GetoptPlus_Help
         $lines = (array)$lines;
         $addon = (string)$addon;
         // defaults the left alignment to the length of the additional data + 1
-        null === $paddingLength and $paddingLength = $addon ? (strlen($addon) + 1) : 0;
+        null === $paddingLength and $paddingLength = $addon ? (mb_strlen($addon) + 1) : 0;
         // extracts the first line
         $firstLine      = (string)current($lines);
         $firstLineEmpty = '' == $firstLine;
 
-        if (!$addon or $firstLineEmpty or $paddingLength > strlen($addon)) {
+        if (!$addon or $firstLineEmpty or $paddingLength > mb_strlen($addon)) {
             // no addon or padding larger than addon
             // pads the additional data and adds it to the left of the first line
             $addon     = str_pad($addon, $paddingLength);
@@ -113,7 +113,7 @@ class Console_GetoptPlus_Help
 
     public static function get($config, $command)
     {
-        $help = new self;
+        $help = new self();
 
         return $help->set($config, $command);
     }
@@ -202,7 +202,7 @@ class Console_GetoptPlus_Help
         // or possibly a single usage line
         $config['usage'] = (array)$config['usage'];
         $lines           = [];
-        $padding         = str_repeat(' ', strlen(self::usage));
+        $padding         = str_repeat(' ', mb_strlen(self::usage));
 
         foreach ($config['usage'] as $idx => $usage) {
             $usage = $this->tidyArray($usage);
@@ -223,8 +223,8 @@ class Console_GetoptPlus_Help
      * Makes an array if passed as a string.
      * Optionally forces the values to strings if there are not.
      *
-     * @param  array   $array      the array
-     * @param  boolean $tidyString forces the values to string if true,
+     * @param  array $array        the array
+     * @param  bool  $tidyString   forces the values to string if true,
      *                             or leaves them untouched if false
      * @return array   the tidied array
      * @access public

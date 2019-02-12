@@ -4,7 +4,6 @@
  *
  * @author Philippe.Jausions @at@ 11abacus.com
  **/
-
 if (!defined('IMAGETYPE_GIF')) {
     define('IMAGETYPE_GIF', 1);
     define('IMAGETYPE_JPEG', 2);

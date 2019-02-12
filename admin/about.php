@@ -16,7 +16,6 @@
  * @since        1.12
  * @author       XOOPS Development Team
  */
-
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 

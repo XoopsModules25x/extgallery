@@ -95,7 +95,7 @@ class MetaSlide
     {
         $type = get_post_meta($slide_id, 'ml-slider_type', true);
 
-        return !strlen($type) || 'image' === $type;
+        return !mb_strlen($type) || 'image' === $type;
     }
 
     /**
@@ -109,7 +109,7 @@ class MetaSlide
         $html = '<img';
 
         foreach ($attributes as $att => $val) {
-            if (strlen($val)) {
+            if (mb_strlen($val)) {
                 $html .= ' ' . $att . '="' . $val . '"';
             }
         }
@@ -131,7 +131,7 @@ class MetaSlide
         $html = '<a';
 
         foreach ($attributes as $att => $val) {
-            if (strlen($val)) {
+            if (mb_strlen($val)) {
                 $html .= ' ' . $att . '="' . $val . '"';
             }
         }

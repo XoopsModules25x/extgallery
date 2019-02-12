@@ -102,7 +102,7 @@ $this->_supported_image_types = [
     'xcf'   => 'r',
     'xpm'   => 'rw',
     'xwd'   => 'rw',
-    'yuv'   => 'rw'
+    'yuv'   => 'rw',
 ];
 
 if (OS_WINDOWS) {

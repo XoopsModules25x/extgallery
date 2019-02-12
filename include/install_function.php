@@ -16,12 +16,11 @@
  * @param $module
  * @return bool
  */
-
 function xoops_module_pre_install_extgallery(\XoopsModule $module)
 {
     // Check if this XOOPS version is supported
     $minSupportedVersion = explode('.', '2.5.0');
-    $currentVersion      = explode('.', substr(XOOPS_VERSION, 6));
+    $currentVersion      = explode('.', mb_substr(XOOPS_VERSION, 6));
 
     if ($currentVersion[0] > $minSupportedVersion[0]) {
         return true;
@@ -41,16 +40,16 @@ function xoops_module_pre_install_extgallery(\XoopsModule $module)
 }
 
 /**
- * @param XoopsModule $module
+ * @param \XoopsModule $module
  *
  * @return bool
  */
 function xoops_module_install_extgallery(\XoopsModule $module)
 {
     $module_id = $module->getVar('mid');
-    /** @var XoopsGroupPermHandler $grouppermHandler */
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
-    /** @var XoopsModuleHandler $moduleHandler */
+    /** @var \XoopsModuleHandler $moduleHandler */
     $configHandler = xoops_getHandler('config');
 
     /**

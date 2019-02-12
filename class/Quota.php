@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -19,7 +21,6 @@
 use XoopsModules\Extgallery;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 
 /**
  * Class Extgallery\Quota

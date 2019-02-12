@@ -16,11 +16,11 @@ class MetaSliderImageHelper
     /**
      * Constructor
      *
-     * @param integer $slide_id
-     * @param integer $width  - required width of image
-     * @param integer $height - required height of image
-     * @param string  $smart_crop
-     * @param bool    $use_image_editor
+     * @param int    $slide_id
+     * @param int    $width  - required width of image
+     * @param int    $height - required height of image
+     * @param string $smart_crop
+     * @param bool   $use_image_editor
      */
     public function __construct($slide_id, $width, $height, $smart_crop, $use_image_editor = true)
     {
@@ -42,8 +42,8 @@ class MetaSliderImageHelper
      * dimensions that respect the container size ratio. This ensures image displays in a
      * sane manner in responsive sliders
      *
-     * @param  integer $image_width
-     * @param  integer $image_height
+     * @param  int $image_width
+     * @param  int $image_height
      * @return array   image dimensions
      */
     private function get_crop_dimensions($image_width, $image_height)
@@ -165,14 +165,14 @@ class MetaSliderImageHelper
     public function get_image_url()
     {
         // Get the image file path
-        if (!strlen($this->path)) {
+        if (!mb_strlen($this->path)) {
             return $this->url;
         }
 
         // if the file exists, just return it without going any further
         $dest_file_name = $this->get_destination_file_name([
                                                                'width'  => $this->container_width,
-                                                               'height' => $this->container_height
+                                                               'height' => $this->container_height,
                                                            ]);
 
         if (file_exists($dest_file_name)) {

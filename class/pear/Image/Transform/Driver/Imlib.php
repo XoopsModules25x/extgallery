@@ -90,6 +90,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
      * Load image
      *
      * @param string filename
+     * @param mixed $image
      *
      * @return mixed TRUE or a PEAR error object on error
      * @see PEAR::isError()
@@ -98,7 +99,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
     {
         $this->image       = $image;
         $this->imageHandle = imlib_load_image($this->image);
-        $result            =& $this->_get_image_details($image);
+        $result            = &$this->_get_image_details($image);
         if (PEAR::isError($result)) {
             return $result;
         }
@@ -124,8 +125,9 @@ class Image_Transform_Driver_Imlib extends Image_Transform
      *                                  'size'  Size of the fonts in pixel
      *                                  'angle' A imlib direction constant
      *                                  )
+     * @param mixed $params
      *
-     * @return TRUE or PEAR Error object on error
+     * @return true or PEAR Error object on error
      * @see PEAR::isError()
      */
     public function addText($params)
@@ -165,7 +167,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
      *
      * @param int $angle Rotation angle
      *
-     * @return TRUE or PEAR Error object on error
+     * @return true or PEAR Error object on error
      */
     public function rotate($angle)
     {
@@ -207,7 +209,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
      * @param int $in_cropY      The Y coordinate on the image to start the crop
      *
      * @access public
-     * @return TRUE or PEAR Error object on error
+     * @return true or PEAR Error object on error
      */
     public function crop($in_cropWidth, $in_cropHeight, $in_cropX, $in_cropY)
     {
@@ -234,7 +236,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
      *                          is the current used format
      * @param $quality          int     (optional) output DPI, default is 75
      *
-     * @return TRUE on success or PEAR Error object on error
+     * @return true on success or PEAR Error object on error
      */
     public function save($filename, $type = '', $quality = 75)
     {
@@ -267,7 +269,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
      * @param string $type    (optional) (JPG,PNG...);
      * @param int    $quality (optional) 75
      *
-     * @return TRUE on success or PEAR Error object on error
+     * @return true on success or PEAR Error object on error
      */
     public function display($type = '', $quality = null)
     {
@@ -296,8 +298,6 @@ class Image_Transform_Driver_Imlib extends Image_Transform
 
     /**
      * Destroy image handle
-     *
-     * @return void
      */
     public function free()
     {
@@ -318,7 +318,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
      * @param int   $new_y   New height
      * @param mixed $options Optional parameters
      *
-     * @return TRUE on success or PEAR Error object on error
+     * @return true on success or PEAR Error object on error
      * @see    PEAR::isError()
      */
     public function _resize($new_x, $new_y, $options = null)
@@ -343,7 +343,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
      * Gets the image details
      *
      * @access private
-     * @return TRUE on success or PEAR Error object on error
+     * @return true on success or PEAR Error object on error
      */
     public function _get_image_details()
     {
@@ -360,7 +360,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
     /**
      * Horizontal mirroring
      *
-     * @return TRUE on success, PEAR Error object on error
+     * @return true on success, PEAR Error object on error
      */
     public function mirror()
     {
@@ -372,7 +372,7 @@ class Image_Transform_Driver_Imlib extends Image_Transform
     /**
      * Vertical mirroring
      *
-     * @return TRUE on success, PEAR Error object on error
+     * @return true on success, PEAR Error object on error
      */
     public function flip()
     {

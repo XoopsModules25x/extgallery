@@ -17,7 +17,7 @@
 
 use XoopsModules\Extgallery;
 
-require_once __DIR__   . '/header.php';
+require_once __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 /** @var Extgallery\Helper $helper */

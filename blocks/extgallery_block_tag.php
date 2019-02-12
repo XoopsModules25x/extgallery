@@ -14,6 +14,7 @@
  * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author      Voltan (djvoltan@gmail.com)
  * @package     ExtGallery
+ * @param mixed $options
  */
 
 /**
@@ -30,6 +31,7 @@ function extgallery_tag_block_cloud_show($options)
 
         return tag_block_cloud_show($options, $module_dirname);
     }
+
     return false;
 }
 
@@ -60,6 +62,7 @@ function extgallery_tag_block_top_show($options)
 
         return tag_block_top_show($options, $module_dirname);
     }
+
     return false;
 }
 

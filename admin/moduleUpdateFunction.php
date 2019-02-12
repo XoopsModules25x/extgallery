@@ -15,7 +15,6 @@
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
  */
-
 require_once __DIR__ . '/admin_header.php';
 define('_MU_MODULE_VERSION_FILE_URL', 'http://www.zoullou.net/extgalleryVersion.xml');
 define('_MU_MODULE_DOWNLOAD_SERVER', 'http://downloads.sourceforge.net/zoullou/');
@@ -83,7 +82,7 @@ function getModuleVersion()
 {
     $version = $GLOBALS['xoopsModule']->getVar('version');
 
-    return substr($version, 0, 1) . '.' . substr($version, 1, 1) . '.' . substr($version, 2);
+    return mb_substr($version, 0, 1) . '.' . mb_substr($version, 1, 1) . '.' . mb_substr($version, 2);
 }
 
 /**
@@ -93,9 +92,9 @@ function isModuleUpToDate()
 {
     if (-1 != compareVersion(getModuleVersion(), getLastModuleVersion())) {
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 // Return -1 if v1 is lower than v2, 1 if v1 is greater than v2
@@ -133,11 +132,11 @@ function compareVersion($v1, $v2)
  */
 function isXoopsVersionSupportInstalledModuleVersion()
 {
-    if (-1 != compareVersion(substr(XOOPS_VERSION, 6), _MU_MODULE_XOOPS_VERSION_SUPPORTED)) {
+    if (-1 != compareVersion(mb_substr(XOOPS_VERSION, 6), _MU_MODULE_XOOPS_VERSION_SUPPORTED)) {
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 /**
@@ -147,11 +146,11 @@ function isXoopsVersionSupportLastModuleVersion()
 {
     $moduleInfos = moduleLastVersionInfo();
 
-    if (-1 != compareVersion(substr(XOOPS_VERSION, 6), $moduleInfos['xoopsVersionNeeded'])) {
+    if (-1 != compareVersion(mb_substr(XOOPS_VERSION, 6), $moduleInfos['xoopsVersionNeeded'])) {
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 /**

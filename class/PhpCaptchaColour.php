@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /***************************************************************/
 /* PhpCaptcha - A visual and audio CAPTCHA generation library
@@ -40,9 +42,6 @@
 Documentation is available at http://www.ejeliot.com/pages/2
 
 */
-
-
-use XoopsModules\Extgallery;
 
 // example sub class
 

@@ -17,7 +17,6 @@
  */
 
 use XoopsModules\Extgallery;
-use XoopsModules\Extgallery\Common;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->IsAdmin()) {
@@ -37,16 +36,15 @@ function tableExists($tablename)
 }
 
 /**
- *
  * Prepares system prior to attempting to install module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to install, false if not
  */
 function xoops_module_pre_update_extgallery(\XoopsModule $module)
 {
     /** @var Extgallery\Utility $utility */
-    $utility      = new Extgallery\Utility();
+    $utility = new Extgallery\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -55,14 +53,12 @@ function xoops_module_pre_update_extgallery(\XoopsModule $module)
 }
 
 /**
- *
  * Performs tasks required during update of the module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  * @param null        $previousVersion
  *
  * @return bool true if update successful, false if not
  */
-
 
 /**
  * @param \XoopsModule $module
@@ -73,19 +69,18 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
 {
     global $xoopsDB;
 
-    $moduleDirName = basename(dirname(__DIR__));
-    $moduleDirNameUpper   = strtoupper($moduleDirName);
+    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
     /** @var Extgallery\Helper $helper */
     /** @var Extgallery\Utility $utility */
     /** @var Extgallery\Common\Configurator $configurator */
-    $helper  = Extgallery\Helper::getInstance();
-    $utility = new Extgallery\Utility();
+    $helper       = Extgallery\Helper::getInstance();
+    $utility      = new Extgallery\Utility();
     $configurator = new Extgallery\Common\Configurator();
 
     $migrator = new \XoopsModules\Extgallery\Common\Migrate($configurator);
     $migrator->synchronizeSchema();
-
 
     $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
     $catHandler->rebuild();
@@ -120,10 +115,10 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
         $db->query($sql);
 
         // Set display parmission for all XOOPS base Groups
-        $sql       = 'SELECT cat_id FROM `' . $db->prefix($moduleDirName . '_publiccat') . '`;';
-        $result    = $db->query($sql);
+        $sql      = 'SELECT cat_id FROM `' . $db->prefix($moduleDirName . '_publiccat') . '`;';
+        $result   = $db->query($sql);
         $moduleId = $module->getVar('mid');
-        /** @var XoopsGroupPermHandler $grouppermHandler */
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
         while (false !== ($cat = $db->fetchArray($result))) {
             $grouppermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ADMIN, $moduleId);
@@ -145,7 +140,6 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
     }
 
     if ($previousVersion < 107) {
-
         // Fix extension Bug if it's installed
         if (file_exists(XOOPS_ROOT_PATH . '/class/textsanitizer/gallery/gallery.php')) {
             $conf                          = require XOOPS_ROOT_PATH . '/class/textsanitizer/config.php';
@@ -203,13 +197,13 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
             }
         }
 
-//        $configurator = require_once __DIR__   . '/config.php';
+        //        $configurator = require_once __DIR__   . '/config.php';
         /** @var Extgallery\Utility $utility */
         $utility = new Extgallery\Utility();
 
         //  ---  COPY blank.png FILES ---------------
         if (count($configurator->copyBlankFiles) > 0) {
-            $file =  dirname(__DIR__) . '/assets/images/blank.png';
+            $file = dirname(__DIR__) . '/assets/images/blank.png';
             foreach (array_keys($configurator->copyFiles) as $i) {
                 $dest = $configurator->copyFiles[$i] . '/blank.png';
                 $utility::copyFile($file, $dest);

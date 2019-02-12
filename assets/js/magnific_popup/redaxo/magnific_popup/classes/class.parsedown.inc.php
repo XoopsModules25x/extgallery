@@ -32,7 +32,7 @@ class Parsedown
             return self::$instances[$name];
         }
 
-        $instance = new Parsedown();
+        $instance = new self();
 
         self::$instances[$name] = $instance;
 
@@ -84,11 +84,11 @@ class Parsedown
 
         # encodes escape sequences
 
-        if (false !== strpos($text, '\\')) {
+        if (false !== mb_strpos($text, '\\')) {
             $escape_sequences = ['\\\\', '\`', '\*', '\_', '\{', '\}', '\[', '\]', '\(', '\)', '\>', '\#', '\+', '\-', '\.', '\!'];
 
             foreach ($escape_sequences as $index => $escape_sequence) {
-                if (false !== strpos($text, $escape_sequence)) {
+                if (false !== mb_strpos($text, $escape_sequence)) {
                     $code = "\x1A" . '\\' . $index . ';';
 
                     $text = str_replace($escape_sequence, $code, $text);
@@ -133,7 +133,7 @@ class Parsedown
         $elements = [];
 
         $element = [
-            'type' => ''
+            'type' => '',
         ];
 
         foreach ($lines as $line) {
@@ -155,15 +155,14 @@ class Parsedown
                     }
 
                     break;
-
                 case 'block-level markup':
 
                     if (!isset($element['closed'])) {
-                        if (false !== strpos($line, $element['start'])) { # opening tag
+                        if (false !== mb_strpos($line, $element['start'])) { # opening tag
                             $element['depth']++;
                         }
 
-                        if (false !== strpos($line, $element['end'])) { # closing tag
+                        if (false !== mb_strpos($line, $element['end'])) { # closing tag
                             $element['depth'] > 0 ? $element['depth']-- : $element['closed'] = true;
                         }
 
@@ -199,7 +198,6 @@ class Parsedown
                     }
 
                     break;
-
                 case 'li':
 
                     if (preg_match('/^([ ]{0,3})(\d+[.]|[*+-])[ ](.*)/', $line, $matches)) {
@@ -215,8 +213,8 @@ class Parsedown
                                 'indentation' => $matches[1],
                                 'last'        => true,
                                 'lines'       => [
-                                    preg_replace('/^[ ]{0,4}/', '', $matches[3])
-                                ]
+                                    preg_replace('/^[ ]{0,4}/', '', $matches[3]),
+                                ],
                             ];
                         }
 
@@ -254,7 +252,7 @@ class Parsedown
                     # code block
 
                     if (isset($line[3]) and ' ' === $line[3] and ' ' === $line[2] and ' ' === $line[1]) {
-                        $code_line = substr($line, 4);
+                        $code_line = mb_substr($line, 4);
 
                         if ('code block' === $element['type']) {
                             if (isset($element['interrupted'])) {
@@ -269,7 +267,7 @@ class Parsedown
 
                             $element = [
                                 'type' => 'code block',
-                                'text' => $code_line
+                                'text' => $code_line,
                             ];
                         }
 
@@ -277,7 +275,6 @@ class Parsedown
                     }
 
                     break;
-
                 case '#':
 
                     # atx heading (#)
@@ -294,14 +291,13 @@ class Parsedown
                         $element = [
                             'type'  => 'heading',
                             'text'  => trim($line, '# '),
-                            'level' => $level
+                            'level' => $level,
                         ];
 
                         continue 2;
                     }
 
                     break;
-
                 case '-':
                 case '=':
 
@@ -334,29 +330,29 @@ class Parsedown
             switch ($deindented_line[0]) {
                 case '<':
 
-                    $position = strpos($deindented_line, '>');
+                    $position = mb_strpos($deindented_line, '>');
 
                     if ($position > 1) { # tag
-                        $name = substr($deindented_line, 1, $position - 1);
+                        $name = mb_substr($deindented_line, 1, $position - 1);
                         $name = rtrim($name);
 
-                        if ('/' === substr($name, -1)) {
+                        if ('/' === mb_substr($name, -1)) {
                             $self_closing = true;
 
-                            $name = substr($name, 0, -1);
+                            $name = mb_substr($name, 0, -1);
                         }
 
-                        $position = strpos($name, ' ');
+                        $position = mb_strpos($name, ' ');
 
                         if ($position) {
-                            $name = substr($name, 0, $position);
+                            $name = mb_substr($name, 0, $position);
                         }
 
                         if (!ctype_alpha($name)) {
                             break;
                         }
 
-                        if (in_array($name, $this->inline_tags)) {
+                        if (in_array($name, $this->inline_tags, true)) {
                             break;
                         }
 
@@ -365,7 +361,7 @@ class Parsedown
                         if (isset($self_closing)) {
                             $element = [
                                 'type' => 'self-closing tag',
-                                'text' => $deindented_line
+                                'text' => $deindented_line,
                             ];
 
                             unset($self_closing);
@@ -378,10 +374,10 @@ class Parsedown
                             'text'  => $deindented_line,
                             'start' => '<' . $name . '>',
                             'end'   => '</' . $name . '>',
-                            'depth' => 0
+                            'depth' => 0,
                         ];
 
-                        if (strpos($deindented_line, $element['end'])) {
+                        if (mb_strpos($deindented_line, $element['end'])) {
                             $element['closed'] = true;
                         }
 
@@ -389,7 +385,6 @@ class Parsedown
                     }
 
                     break;
-
                 case '>':
 
                     # quote
@@ -400,24 +395,23 @@ class Parsedown
                         $element = [
                             'type'  => 'blockquote',
                             'lines' => [
-                                $matches[1]
-                            ]
+                                $matches[1],
+                            ],
                         ];
 
                         continue 2;
                     }
 
                     break;
-
                 case '[':
 
                     # reference
 
                     if (preg_match('/^\[(.+?)\]:[ ]*(.+?)(?:[ ]+[\'"](.+?)[\'"])?[ ]*$/', $deindented_line, $matches)) {
-                        $label = strtolower($matches[1]);
+                        $label = mb_strtolower($matches[1]);
 
                         $this->reference_map[$label] = [
-                            '»' => trim($matches[2], '<>')
+                            '»' => trim($matches[2], '<>'),
                         ];
 
                         if (isset($matches[3])) {
@@ -428,7 +422,6 @@ class Parsedown
                     }
 
                     break;
-
                 case '`':
                 case '~':
 
@@ -440,7 +433,7 @@ class Parsedown
                         $element = [
                             'type'  => 'fenced block',
                             'text'  => '',
-                            'fence' => $matches[1]
+                            'fence' => $matches[1],
                         ];
 
                         isset($matches[2]) and $element['language'] = $matches[2];
@@ -449,7 +442,6 @@ class Parsedown
                     }
 
                     break;
-
                 case '*':
                 case '+':
                 case '-':
@@ -461,7 +453,7 @@ class Parsedown
                         $elements [] = $element;
 
                         $element = [
-                            'type' => 'hr'
+                            'type' => 'hr',
                         ];
 
                         continue 2;
@@ -478,8 +470,8 @@ class Parsedown
                             'indentation' => $matches[1],
                             'last'        => true,
                             'lines'       => [
-                                preg_replace('/^[ ]{0,4}/', '', $matches[2])
-                            ]
+                                preg_replace('/^[ ]{0,4}/', '', $matches[2]),
+                            ],
                         ];
 
                         continue 2;
@@ -497,8 +489,8 @@ class Parsedown
                     'indentation' => $matches[1],
                     'last'        => true,
                     'lines'       => [
-                        preg_replace('/^[ ]{0,4}/', '', $matches[2])
-                    ]
+                        preg_replace('/^[ ]{0,4}/', '', $matches[2]),
+                    ],
                 ];
 
                 continue;
@@ -521,7 +513,7 @@ class Parsedown
 
                 $element = [
                     'type' => 'paragraph',
-                    'text' => $line
+                    'text' => $line,
                 ];
             }
         }
@@ -553,7 +545,6 @@ class Parsedown
                     }
 
                     break;
-
                 case 'blockquote':
 
                     $text = $this->parse_block_elements($element['lines']);
@@ -561,31 +552,28 @@ class Parsedown
                     $markup .= '<blockquote>' . "\n" . $text . '</blockquote>' . "\n";
 
                     break;
-
                 case 'code block':
 
                     $text = htmlspecialchars($element['text'], ENT_QUOTES | ENT_NOQUOTES, 'UTF-8');
 
-                    false !== strpos($text, "\x1A\\") and $text = strtr($text, $this->escape_sequence_map);
+                    false !== mb_strpos($text, "\x1A\\") and $text = strtr($text, $this->escape_sequence_map);
 
                     $markup .= isset($element['language']) ? '<pre><code class="language-' . $element['language'] . '">' . $text . '</code></pre>' : '<pre><code>' . $text . '</code></pre>';
 
                     $markup .= "\n";
 
                     break;
-
                 case 'fenced block':
 
                     $text = $element['text'];
 
-                    false !== strpos($text, "\x1A\\") and $text = strtr($text, $this->escape_sequence_map);
+                    false !== mb_strpos($text, "\x1A\\") and $text = strtr($text, $this->escape_sequence_map);
 
                     $markup .= rex_highlight_string($text, true) . "\n";
 
                     $markup .= "\n";
 
                     break;
-
                 case 'heading':
 
                     $text = $this->parse_span_elements($element['text']);
@@ -593,13 +581,11 @@ class Parsedown
                     $markup .= '<h' . $element['level'] . '>' . $text . '</h' . $element['level'] . '>' . "\n";
 
                     break;
-
                 case 'hr':
 
                     $markup .= '<hr >' . "\n";
 
                     break;
-
                 case 'li':
 
                     if (isset($element['ordered'])) { # first
@@ -619,13 +605,11 @@ class Parsedown
                     isset($element['last']) and $markup .= '</' . $list_type . '>' . "\n";
 
                     break;
-
                 case 'block-level markup':
 
                     $markup .= $element['text'] . "\n";
 
                     break;
-
                 default:
 
                     $markup .= $element['text'] . "\n";
@@ -656,7 +640,7 @@ class Parsedown
             $closest_marker_position = null;
 
             foreach ($markers as $index => $marker) {
-                $marker_position = strpos($text, $marker);
+                $marker_position = mb_strpos($text, $marker);
 
                 if (false === $marker_position) {
                     unset($markers[$index]);
@@ -677,11 +661,10 @@ class Parsedown
                 $markup .= $text;
 
                 break;
-            } else {
-                $markup .= substr($text, 0, $closest_marker_position);
             }
+            $markup .= mb_substr($text, 0, $closest_marker_position);
 
-            $text = substr($text, $closest_marker_position);
+            $text = mb_substr($text, $closest_marker_position);
 
             # ~
 
@@ -693,17 +676,17 @@ class Parsedown
                 case '![':
                 case '[':
 
-                    if (strpos($text, ']') and preg_match('/\[((?:[^][]|(?R))*)\]/', $text, $matches)) {
+                    if (mb_strpos($text, ']') and preg_match('/\[((?:[^][]|(?R))*)\]/', $text, $matches)) {
                         $element = [
                             '!' => '!' === $text[0],
-                            'a' => $matches[1]
+                            'a' => $matches[1],
                         ];
 
-                        $offset = strlen($matches[0]);
+                        $offset = mb_strlen($matches[0]);
 
                         $element['!'] and ++$offset;
 
-                        $remaining_text = substr($text, $offset);
+                        $remaining_text = mb_substr($text, $offset);
 
                         if ('(' === $remaining_text[0] and preg_match('/\([ ]*(.*?)(?:[ ]+[\'"](.+?)[\'"])?[ ]*\)/', $remaining_text, $matches)) {
                             $element['»'] = $matches[1];
@@ -712,17 +695,17 @@ class Parsedown
                                 $element['#'] = $matches[2];
                             }
 
-                            $offset += strlen($matches[0]);
+                            $offset += mb_strlen($matches[0]);
                         } elseif ($this->reference_map) {
                             $reference = $element['a'];
 
                             if (preg_match('/^\s*\[(.*?)\]/', $remaining_text, $matches)) {
                                 $reference = $matches[1] ?: $element['a'];
 
-                                $offset += strlen($matches[0]);
+                                $offset += mb_strlen($matches[0]);
                             }
 
-                            $reference = strtolower($reference);
+                            $reference = mb_strtolower($reference);
 
                             if (isset($this->reference_map[$reference])) {
                                 $element['»'] = $this->reference_map[$reference]['»'];
@@ -758,13 +741,12 @@ class Parsedown
                     }
 
                     break;
-
                 case '&':
 
                     if (preg_match('/^&#?\w+;/', $text, $matches)) {
                         $markup .= $matches[0];
 
-                        $offset = strlen($matches[0]);
+                        $offset = mb_strlen($matches[0]);
                     } else {
                         $markup .= '&amp;';
 
@@ -772,7 +754,6 @@ class Parsedown
                     }
 
                     break;
-
                 case '*':
                 case '_':
 
@@ -801,7 +782,7 @@ class Parsedown
                     }
 
                     if (isset($matches) and $matches) {
-                        $offset = strlen($matches[0]);
+                        $offset = mb_strlen($matches[0]);
                     } else {
                         $markup .= $closest_marker;
 
@@ -809,10 +790,9 @@ class Parsedown
                     }
 
                     break;
-
                 case '<':
 
-                    if (false !== strpos($text, '>')) {
+                    if (false !== mb_strpos($text, '>')) {
                         if ('h' === $text[1] and preg_match('/^<(https?:[\/]{2}[^\s]+?)>/i', $text, $matches)) {
                             $element_url = $matches[1];
                             $element_url = str_replace('&', '&amp;', $element_url);
@@ -820,11 +800,11 @@ class Parsedown
 
                             $markup .= '<a href="' . $element_url . '">' . $element_url . '</a>';
 
-                            $offset = strlen($matches[0]);
+                            $offset = mb_strlen($matches[0]);
                         } elseif (preg_match('/^<\/?\w.*?>/', $text, $matches)) {
                             $markup .= $matches[0];
 
-                            $offset = strlen($matches[0]);
+                            $offset = mb_strlen($matches[0]);
                         } else {
                             $markup .= '&lt;';
 
@@ -837,20 +817,19 @@ class Parsedown
                     }
 
                     break;
-
                 case '`':
 
                     if (preg_match('/^`(.+?)`/', $text, $matches)) {
                         $element_text = $matches[1];
                         $element_text = htmlspecialchars($element_text, ENT_QUOTES | ENT_NOQUOTES, 'UTF-8');
 
-                        if ($this->escape_sequence_map and false !== strpos($element_text, "\x1A")) {
+                        if ($this->escape_sequence_map and false !== mb_strpos($element_text, "\x1A")) {
                             $element_text = strtr($element_text, $this->escape_sequence_map);
                         }
 
                         $markup .= '<code>' . $element_text . '</code>';
 
-                        $offset = strlen($matches[0]);
+                        $offset = mb_strlen($matches[0]);
                     } else {
                         $markup .= '`';
 
@@ -858,7 +837,6 @@ class Parsedown
                     }
 
                     break;
-
                 case 'http':
 
                     if (preg_match('/^https?:[\/]{2}[^\s]+\b/i', $text, $matches)) {
@@ -868,7 +846,7 @@ class Parsedown
 
                         $markup .= '<a href="' . $element_url . '">' . $element_url . '</a>';
 
-                        $offset = strlen($matches[0]);
+                        $offset = mb_strlen($matches[0]);
                     } else {
                         $markup .= 'http';
 
@@ -876,7 +854,6 @@ class Parsedown
                     }
 
                     break;
-
                 case '~~':
 
                     if (preg_match('/^~~(?=\S)(.+?)(?<=\S)~~/', $text, $matches)) {
@@ -884,7 +861,7 @@ class Parsedown
 
                         $markup .= '<del>' . $matches[1] . '</del>';
 
-                        $offset = strlen($matches[0]);
+                        $offset = mb_strlen($matches[0]);
                     } else {
                         $markup .= '~~';
 
@@ -895,7 +872,7 @@ class Parsedown
             }
 
             if (isset($offset)) {
-                $text = substr($text, $offset);
+                $text = mb_substr($text, $offset);
             }
 
             $markers[$closest_marker_index] = $closest_marker;
@@ -941,28 +918,28 @@ class Parsedown
         'sup',
         'textarea',
         'tt',
-        'var'
+        'var',
     ];
 
     # ~
 
     private $strong_regex = [
         '*' => '/^[*]{2}([^*]+?)[*]{2}(?![*])/s',
-        '_' => '/^__([^_]+?)__(?!_)/s'
+        '_' => '/^__([^_]+?)__(?!_)/s',
     ];
 
     private $em_regex = [
         '*' => '/^[*]([^*]+?)[*](?![*])/s',
-        '_' => '/^_([^_]+?)[_](?![_])\b/s'
+        '_' => '/^_([^_]+?)[_](?![_])\b/s',
     ];
 
     private $strong_em_regex = [
         '*' => '/^[*]{2}(.*?)[*](.+?)[*](.*?)[*]{2}/s',
-        '_' => '/^__(.*?)_(.+?)_(.*?)__/s'
+        '_' => '/^__(.*?)_(.+?)_(.*?)__/s',
     ];
 
     private $em_strong_regex = [
         '*' => '/^[*](.*?)[*]{2}(.+?)[*]{2}(.*?)[*]/s',
-        '_' => '/^_(.*?)__(.+?)__(.*?)_/s'
+        '_' => '/^_(.*?)__(.+?)__(.*?)_/s',
     ];
 }

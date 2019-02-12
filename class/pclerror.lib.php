@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 // --------------------------------------------------------------------------------
 // PhpConcept Library (PCL) Error 1.0
@@ -35,8 +37,6 @@
 //   de loisir.
 //
 // --------------------------------------------------------------------------------
-
-use XoopsModules\Extgallery;
 
 // ----- Look for double include
 if (!defined('PCLERROR_LIB')) {

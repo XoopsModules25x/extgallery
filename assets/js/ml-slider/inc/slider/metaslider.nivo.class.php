@@ -69,7 +69,7 @@ class MetaNivoSlider extends MetaSlider
             'sph'            => 'boxRows',
             'navigation'     => 'controlNav',
             'links'          => 'directionNav',
-            'autoPlay'       => 'autoPlay'
+            'autoPlay'       => 'autoPlay',
         ];
 
         if (isset($params[$param])) {
@@ -79,9 +79,6 @@ class MetaNivoSlider extends MetaSlider
         return false;
     }
 
-    /**
-     *
-     */
     public function enqueue_scripts()
     {
         parent::enqueue_scripts();
@@ -92,14 +89,11 @@ class MetaNivoSlider extends MetaSlider
         }
     }
 
-    /**
-     *
-     */
     private function get_theme()
     {
         $theme = $this->get_setting('theme');
 
-        if (!in_array($theme, ['dark', 'bar', 'light'])) {
+        if (!in_array($theme, ['dark', 'bar', 'light'], true)) {
             $theme = 'default';
         }
 

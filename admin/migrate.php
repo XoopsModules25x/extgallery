@@ -31,7 +31,6 @@
 
 use Xmf\Request;
 use XoopsModules\Extgallery;
-use XoopsModules\Extgallery\Common;
 
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();

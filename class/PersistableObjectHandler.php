@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -51,7 +53,6 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
      *
      * @param bool                $idenfierName
      */
-
     public function __construct(\XoopsDatabase $db, $tablename, $classname, $keyname, $idenfierName = false)
     {
         parent::__construct($db);
@@ -72,15 +73,15 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
      *
      * @return \XoopsObject
      */
-
     public function create($isNew = true)
     {
         $temp = '\\XoopsModules\\Extgallery\\' . $this->className;
-        $obj  = new $temp;
+        $obj  = new $temp();
 
         if (true === $isNew) {
             $obj->setNew();
         }
+
         return $obj;
     }
 
@@ -153,12 +154,11 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
             }
 
             return $ret;
-        } else {
-            $object = new $this->className();
-            $object->assignVars($v);
-
-            return $object;
         }
+        $object = new $this->className();
+        $object->assignVars($v);
+
+        return $object;
     }
 
     /**
@@ -295,14 +295,13 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
             list($sum) = $this->db->fetchRow($result);
 
             return $sum;
-        } else {
-            $ret = [];
-            while (false !== (list($id, $sum) = $this->db->fetchRow($result))) {
-                $ret[$id] = $sum;
-            }
-
-            return $ret;
         }
+        $ret = [];
+        while (false !== (list($id, $sum) = $this->db->fetchRow($result))) {
+            $ret[$id] = $sum;
+        }
+
+        return $ret;
     }
 
     /**
@@ -336,14 +335,13 @@ class PersistableObjectHandler extends \XoopsPersistableObjectHandler //XoopsObj
             list($max) = $this->db->fetchRow($result);
 
             return $max;
-        } else {
-            $ret = [];
-            while (false !== (list($id, $max) = $this->db->fetchRow($result))) {
-                $ret[$id] = $max;
-            }
-
-            return $ret;
         }
+        $ret = [];
+        while (false !== (list($id, $max) = $this->db->fetchRow($result))) {
+            $ret[$id] = $max;
+        }
+
+        return $ret;
     }
 
     /**

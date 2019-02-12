@@ -26,7 +26,7 @@ class MetaResponsiveSlider extends MetaSlider
             'hoverPause'     => 'pause',
             'navigation'     => 'pager',
             'links'          => 'nav',
-            'autoPlay'       => 'auto'
+            'autoPlay'       => 'auto',
         ];
 
         if (isset($params[$param])) {

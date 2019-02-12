@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -15,6 +17,7 @@
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
  */
+
 use XoopsModules\Extgallery;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
@@ -38,9 +41,6 @@ class GroupFormCheckBox extends \XoopsGroupFormCheckBox
         parent::__construct($caption, $name, $groupId, $values);
     }
 
-    /**
-     *
-     */
     public function render()
     {
         $ele_name = $this->getName();

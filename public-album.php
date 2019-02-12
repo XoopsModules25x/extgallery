@@ -155,7 +155,6 @@ foreach (array_keys($photos) as $i) {
 
 $xoopsTpl->assign('photos', $photos);
 /** @var xos_opal_Theme $xoTheme */
-
 $pageNav = new \XoopsPageNav($photoHandler->getAlbumCount($catId), $helper->getConfig('nb_column') * $helper->getConfig('nb_line'), $start, 'start', 'id=' . $catId . '&orderby=' . $orderby . '&sortby=' . $sortby); //xoops - blueteen - tri de l'affichage
 $xoopsTpl->assign('pageNav', $pageNav->renderNav());
 if (isset($catObj)) {
@@ -173,26 +172,22 @@ if (1 == $jquery && 'none' !== $ajaxeffect) {
             $xoTheme->addStylesheet('browse.php?modules/system/css/lightbox.css');
 
             break;
-
         case 'tooltip':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.css');
 
             break;
-
         case 'overlay':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/overlay/overlay.jquery.tools.min.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/overlay/overlay.css');
 
             break;
-
         case 'fancybox':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/fancybox/mousewheel.js');
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/fancybox/fancybox.pack.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/fancybox/fancybox.css');
 
             break;
-
         case 'prettyphoto':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/prettyphoto/jquery.prettyPhoto.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/prettyphoto/prettyPhoto.css');

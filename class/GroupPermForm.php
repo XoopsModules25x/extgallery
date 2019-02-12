@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -41,9 +43,6 @@ class GroupPermForm extends \XoopsGroupPermForm
         parent::__construct($title, $modid, $permname, $permdesc, $url, $anonymous);
     }
 
-    /**
-     *
-     */
     public function render()
     {
         // load all child ids for javascript codes
@@ -76,7 +75,7 @@ class GroupPermForm extends \XoopsGroupPermForm
             echo $this->_permDesc . '<br><br>';
         }
         echo "<form name='" . $this->getName() . '\' id=\'' . $this->getName() . '\' action=\'' . $this->getAction() . '\' method=\'' . $this->getMethod() . '\'' . $this->getExtra() . ">\n<table width='100%' class='outer' cellspacing='1' valign='top'>\n";
-        $elements =& $this->getElements();
+        $elements = &$this->getElements();
         $hidden   = '';
         foreach (array_keys($elements) as $i) {
             if (!is_object($elements[$i])) {

@@ -5,8 +5,8 @@ $v = View::GetInstance(); ?>
     $defaultDelay = 700;
 
     $url    = $vidMapURL;
-    $str    = substr(strrchr($url, '='), 1);
-    $vimStr = substr(strrchr($url, '/'), 1);
+    $str    = mb_substr(mb_strrchr($url, '='), 1);
+    $vimStr = mb_substr(mb_strrchr($url, '/'), 1);
     ?>
 
     <a class="popup-<?php echo $videoOptions; ?>" href="<?php echo $vidMapURL; ?>"><?php echo $vidMapLinkText; ?>

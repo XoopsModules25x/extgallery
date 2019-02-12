@@ -39,7 +39,7 @@ class rex_magnific_popup_utils
     {
         global $REX;
 
-        $curLocale = strtolower($REX['LANG']);
+        $curLocale = mb_strtolower($REX['LANG']);
 
         if ('de_de' === $curLocale) {
             $file = $REX['INCLUDE_PATH'] . '/addons/magnific_popup/' . $mdFile;
@@ -53,9 +53,9 @@ class rex_magnific_popup_utils
             $md = self::makeHeadlinePretty($md);
 
             return Parsedown::instance()->parse($md);
-        } else {
-            return '[translate:' . $file . ']';
         }
+
+        return '[translate:' . $file . ']';
     }
 
     /**

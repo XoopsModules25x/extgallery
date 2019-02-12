@@ -21,7 +21,6 @@ class MetaImageSlide extends MetaSlide
      */
     public function ajax_create_slide()
     {
-
         // security check
         if (!wp_verify_nonce($_REQUEST['_wpnonce'], 'metaslider_addslide')) {
             echo "<tr><td colspan='2'>" . __('Security check failed. Refresh page and try again.', 'metaslider') . '</td></tr>';
@@ -88,7 +87,6 @@ class MetaImageSlide extends MetaSlide
      */
     protected function get_admin_slide()
     {
-
         // get some slide settings
         $imageHelper = new MetaSliderImageHelper($this->slide->ID, 150, 150, 'false', $this->use_wp_image_editor());
         $thumb       = $imageHelper->get_image_url();
@@ -177,7 +175,6 @@ class MetaImageSlide extends MetaSlide
      */
     protected function get_public_slide()
     {
-
         // get the image url (and handle cropping)
         // disable wp_image_editor if metadata does not exist for the slide
         $imageHelper = new MetaSliderImageHelper($this->slide->ID, $this->settings['width'], $this->settings['height'], isset($this->settings['smartCrop']) ? $this->settings['smartCrop'] : 'false', $this->use_wp_image_editor());
@@ -203,7 +200,7 @@ class MetaImageSlide extends MetaSlide
         ];
 
         // fix slide URLs
-        if (0 === strpos($slide['url'], 'www.')) {
+        if (0 === mb_strpos($slide['url'], 'www.')) {
             $slide['url'] = 'http://' . $slide['url'];
         }
 
@@ -256,7 +253,7 @@ class MetaImageSlide extends MetaSlide
             'target' => $slide['target'],
         ], $slide, $this->slider->ID);
 
-        if (strlen($anchor_attributes['href'])) {
+        if (mb_strlen($anchor_attributes['href'])) {
             $html = $this->build_anchor_tag($anchor_attributes, $html);
         }
 
@@ -288,16 +285,16 @@ class MetaImageSlide extends MetaSlide
             'target' => $slide['target'],
         ], $slide, $this->slider->ID);
 
-        if (strlen($anchor_attributes['href'])) {
+        if (mb_strlen($anchor_attributes['href'])) {
             $html = $this->build_anchor_tag($anchor_attributes, $html);
         }
 
         // add caption
-        if (strlen($slide['caption'])) {
+        if (mb_strlen($slide['caption'])) {
             $html .= '<div class="caption-wrap"><div class="caption">' . $slide['caption'] . '</div></div>';
         }
 
-        $thumb = isset($slide['data-thumb']) && strlen($slide['data-thumb']) ? " data-thumb=\"{$slide['data-thumb']}\"" : '';
+        $thumb = isset($slide['data-thumb']) && mb_strlen($slide['data-thumb']) ? " data-thumb=\"{$slide['data-thumb']}\"" : '';
 
         $html = '<li style="display: none;"' . $thumb . '>' . $html . '</li>';
 
@@ -325,12 +322,12 @@ class MetaImageSlide extends MetaSlide
 
         $html = $this->build_image_tag($attributes);
 
-        if (strlen($slide['caption'])) {
+        if (mb_strlen($slide['caption'])) {
             $html .= "<span>{$slide['caption']}</span>";
         }
 
         $attributes = apply_filters('metaslider_coin_slider_anchor_attributes', [
-            'href' => strlen($slide['url']) ? $slide['url'] : 'javascript:void(0)',
+            'href' => mb_strlen($slide['url']) ? $slide['url'] : 'javascript:void(0)',
         ], $slide, $this->slider->ID);
 
         $html = $this->build_anchor_tag($attributes, $html);
@@ -358,7 +355,7 @@ class MetaImageSlide extends MetaSlide
 
         $html = $this->build_image_tag($attributes);
 
-        if (strlen($slide['caption'])) {
+        if (mb_strlen($slide['caption'])) {
             $html .= '<div class="caption-wrap"><div class="caption">' . $slide['caption'] . '</div></div>';
         }
 
@@ -367,7 +364,7 @@ class MetaImageSlide extends MetaSlide
             'target' => $slide['target'],
         ], $slide, $this->slider->ID);
 
-        if (strlen($anchor_attributes['href'])) {
+        if (mb_strlen($anchor_attributes['href'])) {
             $html = $this->build_anchor_tag($anchor_attributes, $html);
         }
 
@@ -380,7 +377,6 @@ class MetaImageSlide extends MetaSlide
      */
     protected function save($fields)
     {
-
         // update the slide
         wp_update_post([
                            'ID'           => $this->slide->ID,

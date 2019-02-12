@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery\Common;
+<?php
+
+namespace XoopsModules\Extgallery\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -21,8 +23,6 @@ trait FilesManagement
      * Function responsible for checking if a directory exists, we can also write in and create an index.html file
      *
      * @param string $folder The full path of the directory to check
-     *
-     * @return void
      */
     public static function createFolder($folder)
     {
@@ -34,7 +34,8 @@ trait FilesManagement
 
                 file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
             }
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         }
     }
@@ -73,7 +74,6 @@ trait FilesManagement
     }
 
     /**
-     *
      * Remove files and (sub)directories
      *
      * @param string $src source directory to delete
@@ -85,7 +85,6 @@ trait FilesManagement
      */
     public static function deleteDirectory($src)
     {
-
         // Only continue if user is a 'global' Admin
         if (!($GLOBALS['xoopsUser'] instanceof \XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
             return false;
@@ -119,11 +118,11 @@ trait FilesManagement
             // input is not a valid directory
             $success = false;
         }
+
         return $success;
     }
 
     /**
-     *
      * Recursively remove directory
      *
      * @todo currently won't remove directories with hidden files, should it?
@@ -134,7 +133,6 @@ trait FilesManagement
      */
     public static function rrmdir($src)
     {
-
         // Only continue if user is a 'global' Admin
         if (!($GLOBALS['xoopsUser'] instanceof \XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
             return false;
@@ -175,7 +173,6 @@ trait FilesManagement
      */
     public static function rmove($src, $dest)
     {
-
         // Only continue if user is a 'global' Admin
         if (!($GLOBALS['xoopsUser'] instanceof \XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
             return false;
@@ -219,7 +216,6 @@ trait FilesManagement
      */
     public static function rcopy($src, $dest)
     {
-
         // Only continue if user is a 'global' Admin
         if (!($GLOBALS['xoopsUser'] instanceof \XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
             return false;
@@ -244,6 +240,7 @@ trait FilesManagement
                 self::rcopy($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());
             }
         }
+
         return true;
     }
 }

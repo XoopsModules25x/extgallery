@@ -60,7 +60,6 @@ class MetaSliderPlugin
      */
     public function __construct()
     {
-
         // create the admin menu/page
         add_action('admin_menu', [$this, 'register_admin_menu'], 9553);
 
@@ -167,7 +166,6 @@ class MetaSliderPlugin
      */
     public function custom_media_uploader_tabs($strings)
     {
-
         //update strings
         if (\Xmf\Request::hasVar('page', 'GET') && 'metaslider' == $_GET['page']) {
             $strings['insertMediaTitle'] = __('Image', 'metaslider');
@@ -188,6 +186,7 @@ class MetaSliderPlugin
      * Add extra tabs to the default wordpress Media Manager iframe
      *
      * @var array existing media manager tabs
+     * @param mixed $tabs
      * @return array
      */
     public function custom_media_upload_tab_name($tabs)
@@ -195,7 +194,7 @@ class MetaSliderPlugin
         $metaslider_tabs = ['post_feed', 'layer', 'youtube', 'vimeo'];
 
         // restrict our tab changes to the meta slider plugin page
-        if ((isset($_GET['page']) && 'metaslider' === $_GET['page']) || (isset($_GET['tab']) && in_array($_GET['tab'], $metaslider_tabs))) {
+        if ((isset($_GET['page']) && 'metaslider' === $_GET['page']) || (isset($_GET['tab']) && in_array($_GET['tab'], $metaslider_tabs, true))) {
             $newtabs = [];
 
             if (function_exists('is_plugin_active') && !is_plugin_active('ml-slider-pro/ml-slider-pro.php')) {
@@ -309,9 +308,6 @@ class MetaSliderPlugin
         }
     }
 
-    /**
-     *
-     */
     public function help_tab()
     {
         $screen = get_current_screen();
@@ -391,7 +387,7 @@ class MetaSliderPlugin
 
         $settings = array_merge(get_post_meta($id, 'ml-slider_settings', true), $shortcode_settings);
 
-        if (isset($settings['type']) && in_array($settings['type'], ['flex', 'coin', 'nivo', 'responsive'])) {
+        if (isset($settings['type']) && in_array($settings['type'], ['flex', 'coin', 'nivo', 'responsive'], true)) {
             $type = $settings['type'];
         }
 
@@ -431,7 +427,6 @@ class MetaSliderPlugin
      */
     public function admin_process()
     {
-
         // this function should only ever be called from the Meta Slider admin page.
         if (!is_admin()) {
             return;
@@ -470,7 +465,6 @@ class MetaSliderPlugin
      */
     private function add_slider()
     {
-
         // check nonce
         check_admin_referer('metaslider_add_slider');
 
@@ -511,7 +505,6 @@ class MetaSliderPlugin
      */
     private function delete_slider($id)
     {
-
         // check nonce
         check_admin_referer('metaslider_delete_slider');
 
@@ -610,13 +603,11 @@ class MetaSliderPlugin
     }
 
     /**
-     *
      * @param  array $aFields - array of field to render
      * @return string
      */
     public function build_settings_rows($aFields)
     {
-
         // order the fields by priority
         uasort($aFields, [$this, 'compare_elems']);
 
@@ -802,48 +793,48 @@ class MetaSliderPlugin
                     wp_nonce_field('metaslider_save_' . $this->slider->id);
                 }
 
-        $title   = '';
-        $add_url = wp_nonce_url('?page=metaslider&amp;add=true', 'metaslider_add_slider');
+                $title   = '';
+                $add_url = wp_nonce_url('?page=metaslider&amp;add=true', 'metaslider_add_slider');
 
-        if ($tabs = $this->all_meta_sliders()) {
-            if ($max_tabs && count($tabs) > $max_tabs) {
-                if (\Xmf\Request::hasVar('add', 'GET') && 'true' === $_GET['add']) {
-                    echo "<div id='message' class='updated'><p>" . __("New slideshow created. Click 'Add Slide' to get started!", 'metaslider') . '</p></div>';
-                }
-                echo "<div style='margin-top: 20px;'><label for='select-slider'>Select Slider: </label>";
-                echo "<select name='select-slider' onchange='if (this.value) window.location.href=this.value'>";
+                if ($tabs = $this->all_meta_sliders()) {
+                    if ($max_tabs && count($tabs) > $max_tabs) {
+                        if (\Xmf\Request::hasVar('add', 'GET') && 'true' === $_GET['add']) {
+                            echo "<div id='message' class='updated'><p>" . __("New slideshow created. Click 'Add Slide' to get started!", 'metaslider') . '</p></div>';
+                        }
+                        echo "<div style='margin-top: 20px;'><label for='select-slider'>Select Slider: </label>";
+                        echo "<select name='select-slider' onchange='if (this.value) window.location.href=this.value'>";
 
-                $tabs = $this->all_meta_sliders('title');
+                        $tabs = $this->all_meta_sliders('title');
 
-                foreach ($tabs as $tab) {
-                    $selected = $tab['active'] ? ' selected' : '';
+                        foreach ($tabs as $tab) {
+                            $selected = $tab['active'] ? ' selected' : '';
 
-                    if ($tab['active']) {
-                        $title = $tab['title'];
-                    }
+                            if ($tab['active']) {
+                                $title = $tab['title'];
+                            }
 
-                    echo "<option value='?page=metaslider&amp;id={$tab['id']}'{$selected}>{$tab['title']}</option>";
-                }
-                echo '</select> ' . __('or', 'metaslider') . ' ';
-                echo "<a href='{$add_url}'>" . __('Add New Slideshow', 'metaslider') . '</a></div>';
-            } else {
-                echo "<h3 class='nav-tab-wrapper'>";
-                foreach ($tabs as $tab) {
-                    if ($tab['active']) {
-                        echo "<div class='nav-tab nav-tab-active'><input type='text' name='title'  value='" . $tab['title'] . "' onfocus='this.style.width = ((this.value.length + 1) * 9) + \"px\"' ></div>";
+                            echo "<option value='?page=metaslider&amp;id={$tab['id']}'{$selected}>{$tab['title']}</option>";
+                        }
+                        echo '</select> ' . __('or', 'metaslider') . ' ';
+                        echo "<a href='{$add_url}'>" . __('Add New Slideshow', 'metaslider') . '</a></div>';
                     } else {
-                        echo "<a href='?page=metaslider&amp;id={$tab['id']}' class='nav-tab'>" . $tab['title'] . '</a>';
+                        echo "<h3 class='nav-tab-wrapper'>";
+                        foreach ($tabs as $tab) {
+                            if ($tab['active']) {
+                                echo "<div class='nav-tab nav-tab-active'><input type='text' name='title'  value='" . $tab['title'] . "' onfocus='this.style.width = ((this.value.length + 1) * 9) + \"px\"' ></div>";
+                            } else {
+                                echo "<a href='?page=metaslider&amp;id={$tab['id']}' class='nav-tab'>" . $tab['title'] . '</a>';
+                            }
+                        }
+                        echo "<a href='{$add_url}' id='create_new_tab' class='nav-tab'>+</a>";
+                        echo '</h3>';
                     }
-                }
-                echo "<a href='{$add_url}' id='create_new_tab' class='nav-tab'>+</a>";
-                echo '</h3>';
-            }
-        } else {
-            echo "<h3 class='nav-tab-wrapper'>";
-            echo "<a href='{$add_url}' id='create_new_tab' class='nav-tab'>+</a>";
-            echo "<div class='bubble'>" . __('Create your first slideshow') . '</div>';
-            echo '</h3>';
-        } ?>
+                } else {
+                    echo "<h3 class='nav-tab-wrapper'>";
+                    echo "<a href='{$add_url}' id='create_new_tab' class='nav-tab'>+</a>";
+                    echo "<div class='bubble'>" . __('Create your first slideshow') . '</div>';
+                    echo '</h3>';
+                } ?>
 
                 <?php
                 if (!$this->slider) {
@@ -994,8 +985,8 @@ class MetaSliderPlugin
                                                     ],
                                                 ];
 
-        if ($max_tabs && count($this->all_meta_sliders()) > $max_tabs) {
-            $aFields['title'] = [
+                                                if ($max_tabs && count($this->all_meta_sliders()) > $max_tabs) {
+                                                    $aFields['title'] = [
                                                         'type'     => 'title',
                                                         'priority' => 5,
                                                         'class'    => 'option flex nivo responsive coin',
@@ -1003,11 +994,11 @@ class MetaSliderPlugin
                                                         'label'    => __('Title', 'metaslider'),
                                                         'helptext' => __('Slideshow title', 'metaslider'),
                                                     ];
-        }
+                                                }
 
-        $aFields = apply_filters('metaslider_basic_settings', $aFields, $this->slider);
+                                                $aFields = apply_filters('metaslider_basic_settings', $aFields, $this->slider);
 
-        echo $this->build_settings_rows($aFields); ?>
+                                                echo $this->build_settings_rows($aFields); ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -1267,9 +1258,9 @@ class MetaSliderPlugin
                                                     ],
                                                 ];
 
-        $aFields = apply_filters('metaslider_advanced_settings', $aFields, $this->slider);
+                                                $aFields = apply_filters('metaslider_advanced_settings', $aFields, $this->slider);
 
-        echo $this->build_settings_rows($aFields); ?>
+                                                echo $this->build_settings_rows($aFields); ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -1350,7 +1341,7 @@ class MetaSliderPlugin
     {
         global $pagenow;
 
-        if (in_array($pagenow, ['post.php', 'page.php', 'post-new.php', 'post-edit.php'])) {
+        if (in_array($pagenow, ['post.php', 'page.php', 'post-new.php', 'post-edit.php'], true)) {
             $context .= '<a href="#TB_inline?&inlineId=choose-meta-slider" class="thickbox button" title="'
                         . __('Select slideshow to insert into post', 'metaslider')
                         . '"><span class="wp-media-buttons-icon" style="background: url('
@@ -1371,7 +1362,7 @@ class MetaSliderPlugin
         global $pagenow;
 
         // Only run in post/page creation and edit screens
-        if (in_array($pagenow, ['post.php', 'page.php', 'post-new.php', 'post-edit.php'])) {
+        if (in_array($pagenow, ['post.php', 'page.php', 'post-new.php', 'post-edit.php'], true)) {
             $sliders = $this->all_meta_sliders('title'); ?>
 
             <script type="text/javascript">

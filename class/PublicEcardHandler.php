@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -16,11 +18,9 @@
  * @package     ExtGallery
  */
 
-
 use XoopsModules\Extgallery;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 
 /**
  * Class Extgallery\PublicEcardHandler
@@ -54,6 +54,7 @@ class PublicEcardHandler extends Extgallery\PersistableObjectHandler
             return false;
         }
         $this->send($ecard);
+
         return true;
     }
 

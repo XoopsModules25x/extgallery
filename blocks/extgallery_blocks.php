@@ -103,25 +103,21 @@ function extgalleryPhotoShow($options)
             $photos = $photoHandler->objectToArray($photoHandler->getRandomPhoto($param));
 
             break;
-
         case 'LastPhoto':
 
             $photos = $photoHandler->objectToArray($photoHandler->getLastPhoto($param));
 
             break;
-
         case 'TopViewPhoto':
 
             $photos = $photoHandler->objectToArray($photoHandler->getTopViewPhoto($param));
 
             break;
-
         case 'TopRatedPhoto':
 
             $photos = $photoHandler->objectToArray($photoHandler->getTopRatedPhoto($param));
 
             break;
-
         case 'TopEcardPhoto':
 
             $photos = $photoHandler->objectToArray($photoHandler->getTopEcardPhoto($param));
@@ -462,8 +458,6 @@ function extgalleryAjax($options)
  */
 function extgalleryBlockEdit($options)
 {
-
-
     /** @var Extgallery\Category $catHandler */
     $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 

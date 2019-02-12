@@ -17,7 +17,7 @@
 
 use XoopsModules\Extgallery;
 
-require_once __DIR__   . '/header.php';
+require_once __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $photoId = \Xmf\Request::getInt('id', 0, 'GET');
@@ -31,7 +31,7 @@ if (!$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_download', $photo->g
     redirect_header('index.php');
 }
 
-switch (strtolower(strrchr($photo->getVar('photo_name'), '.'))) {
+switch (mb_strtolower(mb_strrchr($photo->getVar('photo_name'), '.'))) {
     case '.png':
         $type = 'image/png';
         break;

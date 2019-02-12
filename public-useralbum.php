@@ -17,17 +17,15 @@
 
 use XoopsModules\Extgallery;
 
-require_once __DIR__   . '/header.php';
+require_once __DIR__ . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-useralbum.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
-
 $userId = \Xmf\Request::getInt('id', 0, 'GET');
-$start = \Xmf\Request::getInt('start', 0, 'GET');
-
+$start  = \Xmf\Request::getInt('start', 0, 'GET');
 
 $ajaxeffect = $helper->getConfig('use_ajax_effects');
 $xoopsTpl->assign('use_ajax_effects', $ajaxeffect);
@@ -116,7 +114,7 @@ foreach (array_keys($photos) as $i) {
 
 $xoopsTpl->assign('photos', $photos);
 
-$pageNav = new \XoopsPageNav($photoHandler->getUserAlbumCount($userId), $helper->getConfig('nb_column') * $helper->getConfig('nb_line'), $start, 'start', 'id=' . $userId . '&orderby=' . $orderby . '&sortby=' . $sortby);//xoops - blueteen - tri de l'affichage
+$pageNav = new \XoopsPageNav($photoHandler->getUserAlbumCount($userId), $helper->getConfig('nb_column') * $helper->getConfig('nb_line'), $start, 'start', 'id=' . $userId . '&orderby=' . $orderby . '&sortby=' . $sortby); //xoops - blueteen - tri de l'affichage
 $xoopsTpl->assign('pageNav', $pageNav->renderNav());
 
 $albumName = '';
@@ -135,23 +133,19 @@ if (1 == $jquery && 'none' !== $ajaxeffect) {
             $xoTheme->addScript('browse.php?Frameworks/jquery/plugins/jquery.lightbox.js');
             $xoTheme->addStylesheet('browse.php?modules/system/css/lightbox.css');
             break;
-
         case 'tooltip':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/tooltip/image.tooltip.css');
             break;
-
         case 'overlay':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/overlay/overlay.jquery.tools.min.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/overlay/overlay.css');
             break;
-
         case 'fancybox':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/fancybox/mousewheel.js');
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/fancybox/fancybox.pack.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/fancybox/fancybox.css');
             break;
-
         case 'prettyphoto':
             $xoTheme->addScript('browse.php?modules/extgallery/assets/js/prettyphoto/jquery.prettyPhoto.js');
             $xoTheme->addStylesheet('browse.php?modules/extgallery/assets/js/prettyphoto/prettyPhoto.css');
@@ -176,9 +170,9 @@ $xoopsTpl->assign('nbColumn', $helper->getConfig('nb_column'));
 $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));
 $xoopsTpl->assign('disp_ph_title', $helper->getConfig('disp_ph_title'));
 
-$xoopsTpl->assign('extgalleryUID', $userId);//xoops - blueteen - tri de l'affichage
-$xoopsTpl->assign('extgalleryStart', $start);//xoops -blueteen - tri de l'affichage
-$xoopsTpl->assign('extgallerySortbyOrderby', _MD_EXTGALLERY_ORDERBY . convertorderbytrans($SortbyOrderby));//xoops - blueteen - tri de l'affichage
+$xoopsTpl->assign('extgalleryUID', $userId); //xoops - blueteen - tri de l'affichage
+$xoopsTpl->assign('extgalleryStart', $start); //xoops -blueteen - tri de l'affichage
+$xoopsTpl->assign('extgallerySortbyOrderby', _MD_EXTGALLERY_ORDERBY . convertorderbytrans($SortbyOrderby)); //xoops - blueteen - tri de l'affichage
 
 //DNPROSSI - VOLTAN - added preferences option
 //  enable_info, enable_submitter_lnk, enable_photo_hits

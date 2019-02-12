@@ -25,8 +25,6 @@
 //
 // --------------------------------------------------------------------------------
 
-use XoopsModules\Extgallery;
-
 // ----- Look for double include
 if (!defined('PCL_TAR')) {
     define('PCL_TAR', 1);
@@ -63,11 +61,11 @@ if (!defined('PCL_TAR')) {
     // This library should be called by each script before the include of PhpZip
     // Library in order to limit the potential 'lib' directory path problem.
     if (!defined('PCLERROR_LIB')) {
-//        include $g_pcltar_lib_dir . '/pclerror.lib.php';
+        //        include $g_pcltar_lib_dir . '/pclerror.lib.php';
         include __DIR__ . '/pclerror.lib.php';
     }
     if (!defined('PCLTRACE_LIB')) {
-//        include $g_pcltar_lib_dir . '/pcltrace.lib.php';
+        //        include $g_pcltar_lib_dir . '/pcltrace.lib.php';
         include __DIR__ . '/pcltrace.lib.php';
     }
 
@@ -1412,7 +1410,7 @@ if (!defined('PCL_TAR')) {
             }
 
             // ----- Check the path length
-            if (strlen($p_filename) > 99) {
+            if (mb_strlen($p_filename) > 99) {
                 // ----- Error log
                 PclErrorLog(-5, "File name is too long (max. 99) : '$p_filename'");
 
@@ -1536,26 +1534,26 @@ if (!defined('PCL_TAR')) {
         // ----- Calculate the stored filename
         $v_stored_filename = $p_filename;
         if ('' != $p_remove_dir) {
-            if ('/' !== substr($p_remove_dir, -1)) {
+            if ('/' !== mb_substr($p_remove_dir, -1)) {
                 $p_remove_dir .= '/';
             }
 
-            if (('./' === substr($p_filename, 0, 2)) || ('./' === substr($p_remove_dir, 0, 2))) {
-                if (('./' === substr($p_filename, 0, 2)) && ('./' !== substr($p_remove_dir, 0, 2))) {
+            if (('./' === mb_substr($p_filename, 0, 2)) || ('./' === mb_substr($p_remove_dir, 0, 2))) {
+                if (('./' === mb_substr($p_filename, 0, 2)) && ('./' !== mb_substr($p_remove_dir, 0, 2))) {
                     $p_remove_dir = './' . $p_remove_dir;
                 }
-                if (('./' !== substr($p_filename, 0, 2)) && ('./' === substr($p_remove_dir, 0, 2))) {
-                    $p_remove_dir = substr($p_remove_dir, 2);
+                if (('./' !== mb_substr($p_filename, 0, 2)) && ('./' === mb_substr($p_remove_dir, 0, 2))) {
+                    $p_remove_dir = mb_substr($p_remove_dir, 2);
                 }
             }
 
-            if (substr($p_filename, 0, strlen($p_remove_dir)) == $p_remove_dir) {
-                $v_stored_filename = substr($p_filename, strlen($p_remove_dir));
+            if (mb_substr($p_filename, 0, mb_strlen($p_remove_dir)) == $p_remove_dir) {
+                $v_stored_filename = mb_substr($p_filename, mb_strlen($p_remove_dir));
                 TrFctMessage(__FILE__, __LINE__, 3, "Remove path '$p_remove_dir' in file '$p_filename' = '$v_stored_filename'");
             }
         }
         if ('' != $p_add_dir) {
-            if ('/' === substr($p_add_dir, -1)) {
+            if ('/' === mb_substr($p_add_dir, -1)) {
                 $v_stored_filename = $p_add_dir . $v_stored_filename;
             } else {
                 $v_stored_filename = $p_add_dir . '/' . $v_stored_filename;
@@ -1564,7 +1562,7 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Check the path length
-        if (strlen($v_stored_filename) > 99) {
+        if (mb_strlen($v_stored_filename) > 99) {
             // ----- Error log
             PclErrorLog(-5, "Stored file name is too long (max. 99) : '$v_stored_filename'");
 
@@ -1684,7 +1682,7 @@ if (!defined('PCL_TAR')) {
             $p_stored_filename = $p_filename;
         }
         $v_reduce_filename = PclTarHandlePathReduction($p_stored_filename);
-        TrFctMessage(__FILE__, __LINE__, 2, "Filename (reduced) '$v_reduce_filename', strlen " . strlen($v_reduce_filename));
+        TrFctMessage(__FILE__, __LINE__, 2, "Filename (reduced) '$v_reduce_filename', strlen " . mb_strlen($v_reduce_filename));
 
         // ----- Get file info
         $v_info = stat($p_filename);
@@ -1750,7 +1748,7 @@ if (!defined('PCL_TAR')) {
         $v_checksum = 0;
         // ..... First part of the header
         for ($i = 0; $i < 148; ++$i) {
-            $v_checksum += ord(substr($v_binary_data_first, $i, 1));
+            $v_checksum += ord(mb_substr($v_binary_data_first, $i, 1));
         }
         // ..... Ignore the checksum value and replace it by ' ' (space)
         for ($i = 148; $i < 156; ++$i) {
@@ -1758,7 +1756,7 @@ if (!defined('PCL_TAR')) {
         }
         // ..... Last part of the header
         for ($i = 156, $j = 0; $i < 512; ++$i, ++$j) {
-            $v_checksum += ord(substr($v_binary_data_last, $j, 1));
+            $v_checksum += ord(mb_substr($v_binary_data_last, $j, 1));
         }
         TrFctMessage(__FILE__, __LINE__, 3, "Calculated checksum : $v_checksum");
 
@@ -1874,8 +1872,8 @@ if (!defined('PCL_TAR')) {
         $p_mode,
         $p_path,
         $p_tar_mode,
-        $p_remove_path
-    ) {
+        $p_remove_path)
+    {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtract', "archive='$p_tarname', list, mode=$p_mode, path=$p_path, tar_mode=$p_tar_mode, remove_path='$p_remove_path'");
         $v_result      = 1;
         $v_nb          = 0;
@@ -1889,10 +1887,10 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Look for path to remove format (should end by /)
-        if (('' != $p_remove_path) && ('/' !== substr($p_remove_path, -1))) {
+        if (('' != $p_remove_path) && ('/' !== mb_substr($p_remove_path, -1))) {
             $p_remove_path .= '/';
         }
-        $p_remove_path_size = strlen($p_remove_path);
+        $p_remove_path_size = mb_strlen($p_remove_path);
 
         // ----- Study the mode
         switch ($p_mode) {
@@ -2001,12 +1999,12 @@ if (!defined('PCL_TAR')) {
                     TrFctMessage(__FILE__, __LINE__, 2, 'Compare archived file ' . $v_header['filename'] . " from asked list file '" . $iValue . "'");
 
                     // ----- Look if it is a directory
-                    if ('/' === substr($p_file_list[$i], -1)) {
+                    if ('/' === mb_substr($p_file_list[$i], -1)) {
                         TrFctMessage(__FILE__, __LINE__, 3, 'Compare file ' . $v_header['filename'] . " with directory '$p_file_list[$i]'");
 
                         // ----- Look if the directory is in the filename path
-                        if ((strlen($v_header['filename']) > strlen($p_file_list[$i]))
-                            && (substr($v_header['filename'], 0, strlen($p_file_list[$i])) == $iValue)) {
+                        if ((mb_strlen($v_header['filename']) > mb_strlen($p_file_list[$i]))
+                            && (mb_substr($v_header['filename'], 0, mb_strlen($p_file_list[$i])) == $iValue)) {
                             // ----- The file is in the directory, so extract it
                             TrFctMessage(__FILE__, __LINE__, 2, 'File ' . $v_header['filename'] . " is in directory '$p_file_list[$i]' : extract it");
                             $v_extract_file = true;
@@ -2038,24 +2036,24 @@ if (!defined('PCL_TAR')) {
             if ($v_extract_file && (!$v_listing)) {
                 // ----- Look for path to remove
                 if (('' != $p_remove_path)
-                    && (substr($v_header['filename'], 0, $p_remove_path_size) == $p_remove_path)) {
+                    && (mb_substr($v_header['filename'], 0, $p_remove_path_size) == $p_remove_path)) {
                     TrFctMessage(__FILE__, __LINE__, 3, "Found path '$p_remove_path' to remove in file " . $v_header['filename'] . '');
                     // ----- Remove the path
-                    $v_header['filename'] = substr($v_header['filename'], $p_remove_path_size);
+                    $v_header['filename'] = mb_substr($v_header['filename'], $p_remove_path_size);
                     TrFctMessage(__FILE__, __LINE__, 3, 'Reslting file is ' . $v_header['filename'] . '');
                 }
 
                 // ----- Add the path to the file
                 if (('./' !== $p_path) && ('/' !== $p_path)) {
                     // ----- Look for the path end '/'
-                    while ('/' === substr($p_path, -1)) {
+                    while ('/' === mb_substr($p_path, -1)) {
                         TrFctMessage(__FILE__, __LINE__, 3, "Destination path [$p_path] ends by '/'");
-                        $p_path = substr($p_path, 0, -1);
+                        $p_path = mb_substr($p_path, 0, -1);
                         TrFctMessage(__FILE__, __LINE__, 3, "Modified to [$p_path]");
                     }
 
                     // ----- Add the path
-                    if ('/' === substr($v_header['filename'], 0, 1)) {
+                    if ('/' === mb_substr($v_header['filename'], 0, 1)) {
                         $v_header['filename'] = $p_path . $v_header['filename'];
                     } else {
                         $v_header['filename'] = $p_path . '/' . $v_header['filename'];
@@ -2105,7 +2103,7 @@ if (!defined('PCL_TAR')) {
                 else {
                     if ('5' == $v_header['typeflag']) {
                         $v_dir_to_check = $v_header['filename'];
-                    } elseif (false === strpos($v_header['filename'], '/')) {
+                    } elseif (false === mb_strpos($v_header['filename'], '/')) {
                         $v_dir_to_check = '';
                     } else {
                         $v_dir_to_check = dirname($v_header['filename']);
@@ -2233,7 +2231,7 @@ if (!defined('PCL_TAR')) {
                 if (($v_file_dir = dirname($v_header['filename'])) == $v_header['filename']) {
                     $v_file_dir = '';
                 }
-                if (('/' === substr($v_header['filename'], 0, 1)) && ('' == $v_file_dir)) {
+                if (('/' === mb_substr($v_header['filename'], 0, 1)) && ('' == $v_file_dir)) {
                     $v_file_dir = '/';
                 }
 
@@ -2289,8 +2287,8 @@ if (!defined('PCL_TAR')) {
         &$p_list_detail,
         $p_path,
         $p_remove_path,
-        $p_tar_mode
-    ) {
+        $p_tar_mode)
+    {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtractByIndexList', "archive='$p_tarname', index_string='$p_index_string', list, path=$p_path, remove_path='$p_remove_path', tar_mode=$p_tar_mode");
         $v_result = 1;
         $v_nb     = 0;
@@ -2299,16 +2297,16 @@ if (!defined('PCL_TAR')) {
 
         // ----- Check the path
         if (('' == $p_path)
-            || (('/' !== substr($p_path, 0, 1)) && ('../' !== substr($p_path, 0, 3))
-                && ('./' !== substr($p_path, 0, 2)))) {
+            || (('/' !== mb_substr($p_path, 0, 1)) && ('../' !== mb_substr($p_path, 0, 3))
+                && ('./' !== mb_substr($p_path, 0, 2)))) {
             $p_path = './' . $p_path;
         }
 
         // ----- Look for path to remove format (should end by /)
-        if (('' != $p_remove_path) && ('/' !== substr($p_remove_path, -1))) {
+        if (('' != $p_remove_path) && ('/' !== mb_substr($p_remove_path, -1))) {
             $p_remove_path .= '/';
         }
-        $p_remove_path_size = strlen($p_remove_path);
+        $p_remove_path_size = mb_strlen($p_remove_path);
 
         // ----- Open the tar file
         if ('tar' === $p_tar_mode) {
@@ -2396,8 +2394,8 @@ if (!defined('PCL_TAR')) {
         &$p_list_detail,
         $p_path,
         $p_remove_path,
-        $p_tar_mode
-    ) {
+        $p_tar_mode)
+    {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtractByIndex', "archive_descr='$p_tar', index_current=$p_index_current, index_start='$p_index_start', index_stop='$p_index_stop', list, path=$p_path, remove_path='$p_remove_path', tar_mode=$p_tar_mode");
         $v_result = 1;
         $v_nb     = 0;
@@ -2495,7 +2493,7 @@ if (!defined('PCL_TAR')) {
                 if (($v_file_dir = dirname($v_header['filename'])) == $v_header['filename']) {
                     $v_file_dir = '';
                 }
-                if (('/' === substr($v_header['filename'], 0, 1)) && ('' === $v_file_dir)) {
+                if (('/' === mb_substr($v_header['filename'], 0, 1)) && ('' === $v_file_dir)) {
                     $v_file_dir = '/';
                 }
 
@@ -2542,27 +2540,27 @@ if (!defined('PCL_TAR')) {
         $v_tar          = $p_tar;
         $v_extract_file = 1;
 
-        $p_remove_path_size = strlen($p_remove_path);
+        $p_remove_path_size = mb_strlen($p_remove_path);
 
         // ----- Look for path to remove
-        if (('' != $p_remove_path) && (substr($v_header['filename'], 0, $p_remove_path_size) == $p_remove_path)) {
+        if (('' != $p_remove_path) && (mb_substr($v_header['filename'], 0, $p_remove_path_size) == $p_remove_path)) {
             TrFctMessage(__FILE__, __LINE__, 3, "Found path '$p_remove_path' to remove in file " . $v_header['filename'] . '');
             // ----- Remove the path
-            $v_header['filename'] = substr($v_header['filename'], $p_remove_path_size);
+            $v_header['filename'] = mb_substr($v_header['filename'], $p_remove_path_size);
             TrFctMessage(__FILE__, __LINE__, 3, 'Resulting file is ' . $v_header['filename'] . '');
         }
 
         // ----- Add the path to the file
         if (('./' !== $p_path) && ('/' !== $p_path)) {
             // ----- Look for the path end '/'
-            while ('/' === substr($p_path, -1)) {
+            while ('/' === mb_substr($p_path, -1)) {
                 TrFctMessage(__FILE__, __LINE__, 3, "Destination path [$p_path] ends by '/'");
-                $p_path = substr($p_path, 0, -1);
+                $p_path = mb_substr($p_path, 0, -1);
                 TrFctMessage(__FILE__, __LINE__, 3, "Modified to [$p_path]");
             }
 
             // ----- Add the path
-            if ('/' === substr($v_header['filename'], 0, 1)) {
+            if ('/' === mb_substr($v_header['filename'], 0, 1)) {
                 $v_header['filename'] = $p_path . $v_header['filename'];
             } else {
                 $v_header['filename'] = $p_path . '/' . $v_header['filename'];
@@ -2611,7 +2609,7 @@ if (!defined('PCL_TAR')) {
         else {
             if ('5' == $v_header['typeflag']) {
                 $v_dir_to_check = $v_header['filename'];
-            } elseif (false === strpos($v_header['filename'], '/')) {
+            } elseif (false === mb_strpos($v_header['filename'], '/')) {
                 $v_dir_to_check = '';
             } else {
                 $v_dir_to_check = dirname($v_header['filename']);
@@ -2844,7 +2842,7 @@ if (!defined('PCL_TAR')) {
                         $v_delete_file = true;
                     } else {
                         TrFctMessage(__FILE__, __LINE__, 3, 'Look if ' . $v_header['filename'] . " is a file in $p_file_list[$i]");
-                        if ('/' === substr($v_header['filename'], strlen($p_file_list[$i]), 1)) {
+                        if ('/' === mb_substr($v_header['filename'], mb_strlen($p_file_list[$i]), 1)) {
                             TrFctMessage(__FILE__, __LINE__, 3, '' . $v_header['filename'] . " is a file in $p_file_list[$i]");
                             $v_delete_file = true;
                         }
@@ -3037,17 +3035,17 @@ if (!defined('PCL_TAR')) {
             // ----- Calculate the stored filename
             $v_stored_list[$i] = $p_file_list[$i];
             if ('' != $p_remove_dir) {
-                if ('/' !== substr($p_file_list[$i], -1)) {
+                if ('/' !== mb_substr($p_file_list[$i], -1)) {
                     $p_remove_dir .= '/';
                 }
 
-                if (substr($p_file_list[$i], 0, strlen($p_remove_dir)) == $p_remove_dir) {
-                    $v_stored_list[$i] = substr($p_file_list[$i], strlen($p_remove_dir));
+                if (mb_substr($p_file_list[$i], 0, mb_strlen($p_remove_dir)) == $p_remove_dir) {
+                    $v_stored_list[$i] = mb_substr($p_file_list[$i], mb_strlen($p_remove_dir));
                     TrFctMessage(__FILE__, __LINE__, 3, "Remove path '$p_remove_dir' in file '$p_file_list[$i]' = '$v_stored_list[$i]'");
                 }
             }
             if ('' != $p_add_dir) {
-                if ('/' === substr($p_add_dir, -1)) {
+                if ('/' === mb_substr($p_add_dir, -1)) {
                     $v_stored_list[$i] = $p_add_dir . $v_stored_list[$i];
                 } else {
                     $v_stored_list[$i] = $p_add_dir . '/' . $v_stored_list[$i];
@@ -3320,7 +3318,7 @@ if (!defined('PCL_TAR')) {
     */
 
         // ----- Look for no more block
-        if (0 == strlen($v_binary_data)) {
+        if (0 == mb_strlen($v_binary_data)) {
             $v_header['filename'] = '';
             $v_header['status']   = 'empty';
 
@@ -3331,13 +3329,13 @@ if (!defined('PCL_TAR')) {
         }
 
         // ----- Look for invalid block size
-        if (512 != strlen($v_binary_data)) {
+        if (512 != mb_strlen($v_binary_data)) {
             $v_header['filename'] = '';
             $v_header['status']   = 'invalid_header';
-            TrFctMessage(__FILE__, __LINE__, 2, 'Invalid block size : ' . strlen($v_binary_data));
+            TrFctMessage(__FILE__, __LINE__, 2, 'Invalid block size : ' . mb_strlen($v_binary_data));
 
             // ----- Error log
-            PclErrorLog(-10, 'Invalid block size : ' . strlen($v_binary_data));
+            PclErrorLog(-10, 'Invalid block size : ' . mb_strlen($v_binary_data));
 
             // ----- Return
             TrFctEnd(__FILE__, __LINE__, PclErrorCode(), PclErrorString());
@@ -3349,7 +3347,7 @@ if (!defined('PCL_TAR')) {
         $v_checksum = 0;
         // ..... First part of the header
         for ($i = 0; $i < 148; ++$i) {
-            $v_checksum += ord(substr($v_binary_data, $i, 1));
+            $v_checksum += ord(mb_substr($v_binary_data, $i, 1));
         }
         // ..... Ignore the checksum value and replace it by ' ' (space)
         for ($i = 148; $i < 156; ++$i) {
@@ -3357,7 +3355,7 @@ if (!defined('PCL_TAR')) {
         }
         // ..... Last part of the header
         for ($i = 156; $i < 512; ++$i) {
-            $v_checksum += ord(substr($v_binary_data, $i, 1));
+            $v_checksum += ord(mb_substr($v_binary_data, $i, 1));
         }
         TrFctMessage(__FILE__, __LINE__, 3, "Calculated checksum : $v_checksum");
 
@@ -3529,10 +3527,10 @@ if (!defined('PCL_TAR')) {
         TrFctStart(__FILE__, __LINE__, 'PclTarHandleExtension', "tar=$p_tarname");
 
         // ----- Look for file extension
-        if (('.tar.gz' === substr($p_tarname, -7)) || ('.tgz' === substr($p_tarname, -4))) {
+        if (('.tar.gz' === mb_substr($p_tarname, -7)) || ('.tgz' === mb_substr($p_tarname, -4))) {
             TrFctMessage(__FILE__, __LINE__, 2, 'Archive is a gzip tar');
             $v_tar_mode = 'tgz';
-        } elseif ('.tar' === substr($p_tarname, -4)) {
+        } elseif ('.tar' === mb_substr($p_tarname, -4)) {
             TrFctMessage(__FILE__, __LINE__, 2, 'Archive is a tar');
             $v_tar_mode = 'tar';
         } else {

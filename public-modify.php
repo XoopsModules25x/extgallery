@@ -15,10 +15,9 @@
  * @package     ExtGallery
  */
 
-
 use XoopsModules\Extgallery;
 
-require_once __DIR__   . '/header.php';
+require_once __DIR__ . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 //require_once __DIR__ . '/class/Utility.php';
 
@@ -43,13 +42,11 @@ if (!isset($GLOBALS['xoopsUser'])) {
     redirect_header('index.php');
 }
 $moduleDirName = basename(__DIR__);
-$utility  = new Extgallery\Utility();
+$utility       = new Extgallery\Utility();
 switch ($op) {
-
     case 'edit':
 
         switch ($step) {
-
             case 'enreg':
                 /** @var Extgallery\PublicPhotoHandler $photoHandler */
                 $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
@@ -120,7 +117,6 @@ switch ($op) {
                 }
 
                 break;
-
             case 'default':
             default:
 
@@ -163,11 +159,9 @@ switch ($op) {
                 require_once XOOPS_ROOT_PATH . '/footer.php';
 
                 break;
-
         }
 
         break;
-
     case 'delete':
         /** @var Extgallery\PublicCategoryHandler $catHandler */
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
@@ -186,7 +180,6 @@ switch ($op) {
         $catHandler->updateFieldValue('cat_nb_photo', 'cat_nb_photo - 1', $criteria);
 
         if (1 == $cat->getVar('cat_nb_photo')) {
-
             // Update album count
             $criteria = new \CriteriaCompo();
             $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<'));
@@ -201,5 +194,4 @@ switch ($op) {
         }
 
         break;
-
 }

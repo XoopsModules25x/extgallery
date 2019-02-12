@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -448,7 +450,6 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function _makeBorder(&$imageTransform)
     {
-
         /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
@@ -477,7 +478,6 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function _largePhotoTreatment($photoName)
     {
-
         /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
@@ -487,7 +487,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
             if (!defined('IMAGE_TRANSFORM_IM_PATH') && 'imagick' === $helper->getConfig('graphic_lib')) {
                 define('IMAGE_TRANSFORM_IM_PATH', $helper->getConfig('graphic_lib_path'));
             }
-            $imageFactory   = new \Image_Transform;
+            $imageFactory   = new \Image_Transform();
             $imageTransform = $imageFactory->factory($helper->getConfig('graphic_lib'));
 
             $filePath = $this->getUploadPhotoPath();
@@ -520,7 +520,6 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function _mediumPhotoTreatment($photoName, $filePath = null, $mediumFilePath = null)
     {
-
         /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
@@ -528,7 +527,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         if (!defined('IMAGE_TRANSFORM_IM_PATH') && 'imagick' === $helper->getConfig('graphic_lib')) {
             define('IMAGE_TRANSFORM_IM_PATH', $helper->getConfig('graphic_lib_path'));
         }
-        $imageFactory   = new \Image_Transform;
+        $imageFactory   = new \Image_Transform();
         $imageTransform = $imageFactory->factory($helper->getConfig('graphic_lib'));
 
         if (null === $filePath) {
@@ -572,7 +571,6 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function _makeThumb($photoName)
     {
-
         /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
@@ -580,7 +578,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         if (!defined('IMAGE_TRANSFORM_IM_PATH') && 'imagick' === $helper->getConfig('graphic_lib')) {
             define('IMAGE_TRANSFORM_IM_PATH', $helper->getConfig('graphic_lib_path'));
         }
-        $imageFactory   = new \Image_Transform;
+        $imageFactory   = new \Image_Transform();
         $imageTransform = $imageFactory->factory($helper->getConfig('graphic_lib'));
 
         $filePath  = $this->getUploadPhotoPath() . 'medium/' . $photoName;
@@ -609,7 +607,6 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function _getImageDimension($photoName)
     {
-
         /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
@@ -617,7 +614,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         if (!defined('IMAGE_TRANSFORM_IM_PATH') && 'imagick' === $helper->getConfig('graphic_lib')) {
             define('IMAGE_TRANSFORM_IM_PATH', $helper->getConfig('graphic_lib_path'));
         }
-        $imageFactory   = new \Image_Transform;
+        $imageFactory   = new \Image_Transform();
         $imageTransform = $imageFactory->factory($helper->getConfig('graphic_lib'));
 
         $ret = [];
@@ -642,7 +639,6 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function getAutoDescription($photoName)
     {
-
         /** @var Extgallery\Helper $helper */
         $helper = Extgallery\Helper::getInstance();
 
@@ -662,7 +658,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
             return preg_replace($patterns, $replacements, substr($newphotoName,0,-12));
         } else { */
         $matches = [];
-        preg_match_all($helper->getConfig('photoname_pattern'), substr($photoName, 0, -12), $matches);
+        preg_match_all($helper->getConfig('photoname_pattern'), mb_substr($photoName, 0, -12), $matches);
         preg_match_all($helper->getConfig('photoname_pattern'), $photoName, $matches);
 
         return implode(' ', $matches[1]);
@@ -676,7 +672,6 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function makeFileName($fileName)
     {
-
         //DNPROSSI
         //$fileName = preg_replace("/[^a-zA-Z0-9()_\.-]/", "-", $fileName);
         $fileName = preg_replace("/[^a-zA-Z0-9_\.-]/", '-', $fileName);
@@ -684,7 +679,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $fileName = explode('.', $fileName);
         $userId   = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid') : 0;
 
-        return $fileName[0] . '_' . $userId . '_' . substr(md5(uniqid(mt_rand(), true)), 27) . '.' . $fileName[1];
+        return $fileName[0] . '_' . $userId . '_' . mb_substr(md5(uniqid(mt_rand(), true)), 27) . '.' . $fileName[1];
     }
 
     /**
@@ -696,9 +691,9 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
     {
         if ($this->_haveLargePhoto($photoName)) {
             return $this->getFileSize('large/large_' . $photoName);
-        } else {
-            return $this->getFileSize($photoName);
         }
+
+        return $this->getFileSize($photoName);
     }
 
     /**
@@ -730,6 +725,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         4 : File rejected
         5 : File chunk receive
         */
+
     /**
      * @param      $file
      * @param bool $checkMd5
@@ -738,7 +734,6 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
      */
     public function postPhotoTraitement($file, $checkMd5 = false)
     {
-
         //        require_once XOOPS_ROOT_PATH.'/modules/extgallery/class/photoUploader.php';
 
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
@@ -772,9 +767,9 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
             // We got a chunk, so we don't add photo to database
             if ($jupart && !$jufinal) {
                 return 5;
-            } else {
-                return 4;
             }
+
+            return 4;
         }
 
         //---------------------------
@@ -844,12 +839,11 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
             $catHandler->updateFieldValue('cat_nb_photo', 'cat_nb_photo + 1', $criteria);
 
             return 0;
-        } else {
-            $extraTags['X_ITEM_URL'] = XOOPS_URL . '/modules/extgallery/admin/photo.php';
-            $notificationHandler->triggerEvent('global', 0, 'new_photo_pending', $extraTags);
-
-            return 1;
         }
+        $extraTags['X_ITEM_URL'] = XOOPS_URL . '/modules/extgallery/admin/photo.php';
+        $notificationHandler->triggerEvent('global', 0, 'new_photo_pending', $extraTags);
+
+        return 1;
     }
 
     /**
@@ -868,8 +862,8 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $photoTitle = '',
         $photoDesc = '',
         $photoExtra = '',
-        $photoTag = ''
-    ) {
+        $photoTag = '')
+    {
         require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform.php';
 
         $permHandler = Extgallery\PublicPermHandler::getInstance();
@@ -951,7 +945,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
             $criteria->add(new \Criteria('uid', $userId));
         }
         $criteria->add(new \Criteria('photo_approved', 1));
-        if (is_array($queryArray) && count($queryArray) > 0) {
+        if ($queryArray && is_array($queryArray)) {
             $subCriteria = new \CriteriaCompo();
             foreach ($queryArray as $keyWord) {
                 $keyWordCriteria = new \CriteriaCompo();
@@ -1124,7 +1118,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
     {
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
-        $criteria = new \Criteria();
+        $criteria = new \Criteria('');
         $this->addInCriteria($criteria, $param['cat']);
 
         echo $criteria->renderWhere();

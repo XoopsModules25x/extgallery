@@ -46,11 +46,11 @@ class MetaSlider
     {
         $settings = get_post_meta($this->id, 'ml-slider_settings', true);
 
-        if (is_array($settings) && isset($settings['type']) && in_array($settings['type'], ['flex', 'coin', 'nivo', 'responsive'])) {
+        if (is_array($settings) && isset($settings['type']) && in_array($settings['type'], ['flex', 'coin', 'nivo', 'responsive'], true)) {
             return $settings;
-        } else {
-            return $this->get_default_parameters();
         }
+
+        return $this->get_default_parameters();
     }
 
     /**
@@ -68,7 +68,7 @@ class MetaSlider
                 return $defaults[$name] ?: 'false';
             }
         } else {
-            if (strlen($this->settings[$name]) > 0) {
+            if (mb_strlen($this->settings[$name]) > 0) {
                 return $this->settings[$name];
             }
         }
@@ -118,7 +118,7 @@ class MetaSlider
             'thumb_width'    => 150,
             'thumb_height'   => 100,
             'fullWidth'      => false,
-            'noConflict'     => false
+            'noConflict'     => false,
         ];
 
         $params = apply_filters('metaslider_default_parameters', $params);
@@ -173,9 +173,9 @@ class MetaSlider
                 [
                     'taxonomy' => 'ml-slider',
                     'field'    => 'slug',
-                    'terms'    => $this->id
-                ]
-            ]
+                    'terms'    => $this->id,
+                ],
+            ],
         ];
 
         $args = apply_filters('metaslider_populate_slides_args', $args, $this->id, $this->settings);
@@ -357,7 +357,7 @@ class MetaSlider
 
         $html = apply_filters("metaslider_{$type}_slider_html_after", '', $this->id, $this->settings);
 
-        if (strlen($html)) {
+        if (mb_strlen($html)) {
             return "        {$html}";
         }
 
@@ -379,7 +379,7 @@ class MetaSlider
 
         $custom_js = apply_filters("metaslider_{$type}_slider_javascript_before", $javascript, $this->id);
 
-        if (strlen($custom_js)) {
+        if (mb_strlen($custom_js)) {
             return "\n            {$custom_js}";
         }
 
@@ -395,7 +395,7 @@ class MetaSlider
 
         $custom_js = apply_filters("metaslider_{$type}_slider_javascript", '', $this->id);
 
-        if (strlen($custom_js)) {
+        if (mb_strlen($custom_js)) {
             return "\n            {$custom_js}";
         }
 
@@ -453,7 +453,7 @@ class MetaSlider
         // use this to add the scoped attribute for HTML5 validation (if needed)
         $attributes = apply_filters('metaslider_style_attributes', '', $this->settings, $this->id);
 
-        if (strlen($css)) {
+        if (mb_strlen($css)) {
             return "<style type=\"text/css\"{$attributes}>{$css}\n    </style>";
         }
 
@@ -512,7 +512,7 @@ class MetaSlider
     {
         $slide = [
             'ID'         => $this->id,
-            'post_title' => $title
+            'post_title' => $title,
         ];
 
         wp_update_post($slide);

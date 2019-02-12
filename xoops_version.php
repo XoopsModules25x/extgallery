@@ -36,14 +36,14 @@ $modversion = [
     'license'             => 'GPL 2.0 or later',
     'license_url'         => 'www.gnu.org/licenses/gpl-2.0.html/',
     'help'                => 'page=help',
-    //
-    'release_info'        => 'release_info',
-    'release'             => '2016-08-28',
-    'release_file'        => XOOPS_URL . "/modules/{$moduleDirName}/docs/release_info file",
-    //
+
+    'release_info' => 'release_info',
+    'release'      => '2016-08-28',
+    'release_file' => XOOPS_URL . "/modules/{$moduleDirName}/docs/release_info file",
+
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . "/modules/{$moduleDirName}/docs/install.txt",
-    'min_php'             => '5.6',
+    'min_php'             => '5.5',
     'min_xoops'           => '2.5.9',
     'min_admin'           => '1.2',
     'min_db'              => ['mysql' => '5.5'],
@@ -141,7 +141,7 @@ $modversion['search']['file'] = 'include/search.inc.php';
 $modversion['search']['func'] = $moduleDirName . 'Search';
 
 // Config items
-$i = 1;
+$i                      = 1;
 $modversion['config'][] = [
     'name'        => 'break' . $i,
     'title'       => '_MI_EXTGAL_PREFERENCE_BREAK_GENERAL',
@@ -441,7 +441,6 @@ $modversion['config'][] = [
  * DNPROSSI - Info View
  * Shows-hides info from album thumbs or photo
  */
-
 $modversion['config'][] = [
     'name'        => 'info_view',
     'title'       => '_MI_EXTGAL_INFO_VIEW',
@@ -460,7 +459,6 @@ $modversion['config'][] = [
  * DNPROSSI - Public User Info
  * Shows-hides info from public or user album and photo
  */
-
 $modversion['config'][] = [
     'name'        => 'pubusr_info_view',
     'title'       => '_MI_EXTGAL_INFO_PUBUSR',
@@ -478,7 +476,6 @@ $modversion['config'][] = [
 /**
  * DNPROSSI - Enable Info
  */
-
 $modversion['config'][] = [
     'name'        => 'enable_info',
     'title'       => '_MI_EXTGAL_ENABLE_INFO',
@@ -500,7 +497,6 @@ $modversion['config'][] = [
 /**
  * DNPROSSI - Enable Ecards
  */
-
 $modversion['config'][] = [
     'name'        => 'enable_ecards',
     'title'       => '_MI_EXTGAL_ENABLE_ECARDS',
@@ -513,7 +509,6 @@ $modversion['config'][] = [
 /**
  * DNPROSSI - Enable Photo Hits
  */
-
 $modversion['config'][] = [
     'name'        => 'enable_photo_hits',
     'title'       => '_MI_EXTGAL_ENABLE_PHOTO_HITS',
@@ -526,7 +521,6 @@ $modversion['config'][] = [
 /**
  * DNPROSSI - Enable Submitter Link
  */
-
 $modversion['config'][] = [
     'name'        => 'enable_submitter_lnk',
     'title'       => '_MI_EXTGAL_ENABLE_SUBMITTER_LNK',
@@ -539,7 +533,6 @@ $modversion['config'][] = [
 /**
  * DNPROSSI - Enable Resolution
  */
-
 $modversion['config'][] = [
     'name'        => 'enable_resolution',
     'title'       => '_MI_EXTGAL_ENABLE_RESOLUTION',
@@ -552,7 +545,6 @@ $modversion['config'][] = [
 /**
  * DNPROSSI - Enable Submitter Link
  */
-
 $modversion['config'][] = [
     'name'        => 'enable_date',
     'title'       => '_MI_EXTGAL_ENABLE_DATE',
@@ -565,7 +557,6 @@ $modversion['config'][] = [
 /**
  * DNPROSSI - Enable Download
  */
-
 $modversion['config'][] = [
     'name'        => 'enable_download',
     'title'       => '_MI_EXTGAL_ENABLE_DOWNLOAD',
@@ -578,7 +569,6 @@ $modversion['config'][] = [
 /**
  * Voltan - Enable show comments
  */
-
 $modversion['config'][] = [
     'name'        => 'enable_show_comments',
     'title'       => '_MI_EXTGAL_ENABLE_SHOW_COMMENTS',
@@ -627,7 +617,6 @@ $modversion['config'][] = [
 /**
  * Voltan - Social networks and bookmarks
  */
-
 $modversion['config'][] = [
     'name'        => 'show_social_book',
     'title'       => '_MI_EXTGAL_SOCIAL',
@@ -1377,7 +1366,6 @@ $modversion['config'][] = [
     'default'     => 0,
 ];
 
-
 // Templates
 $modversion['templates'] = [
     ['file' => 'extgallery_public-categories.tpl', 'description' => ''],
@@ -1456,7 +1444,6 @@ $modversion['blocks'][] = [
     'template'    => 'extgallery_block_list.tpl',
 ];
 
-
 // Notifications
 $modversion['hasNotification'] = 1;
 //$modversion['notification']['lookup_file'] = 'include/notification.inc.php';
@@ -1486,7 +1473,6 @@ $modversion['notification']['category'][] = [
     'item_name'      => 'photoId',
     'allow_bookmark' => 1,
 ];
-
 
 $modversion['notification']['event'][1] = [
     'name'          => 'new_photo',

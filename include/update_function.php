@@ -66,7 +66,7 @@ function xoops_module_update_extgallery(\XoopsModule $xoopsModule, $oldVersion =
         $sql       = 'SELECT cat_id FROM `' . $db->prefix('extgallery_publiccat') . '`;';
         $result    = $db->query($sql);
         $module_id = $xoopsModule->getVar('mid');
-        /** @var XoopsGroupPermHandler $grouppermHandler */
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
         while (false !== ($cat = $db->fetchArray($result))) {
             $grouppermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ADMIN, $module_id);
@@ -88,7 +88,6 @@ function xoops_module_update_extgallery(\XoopsModule $xoopsModule, $oldVersion =
     }
 
     if ($oldVersion < 107) {
-
         // Fix extension Bug if it's installed
         if (file_exists(XOOPS_ROOT_PATH . '/class/textsanitizer/gallery/gallery.php')) {
             $conf                          = require XOOPS_ROOT_PATH . '/class/textsanitizer/config.php';
