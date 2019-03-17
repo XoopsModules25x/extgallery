@@ -149,8 +149,10 @@ if ($helper->getConfig('enable_rating')) {
 //DNPROSSI - added preferences option
 //  enable_info, enable_resolution, enable_download, enable_date
 //  enable_ecards, enable_submitter_lnk, enable_photo_hits
-if ('photo' === $helper->getConfig('info_view') || 'both' === $helper->getConfig('info_view')) {
-    if ('public' === $helper->getConfig('pubusr_info_view') || 'both' === $helper->getConfig('pubusr_info_view')) {
+//if ('photo' === $helper->getConfig('info_view') || 'both' === $helper->getConfig('info_view')) {
+if (in_array($helper->getConfig('info_view'), ['photo', 'both'])) {
+    //    if ('public' === $helper->getConfig('pubusr_info_view') || 'both' === $helper->getConfig('pubusr_info_view')) {
+    if (in_array($helper->getConfig('pubusr_info_view'), ['public', 'both'])) {
         if (0 == $helper->getConfig('enable_info')) {
             $enable_info = $helper->getConfig('enable_info');
         } else {
