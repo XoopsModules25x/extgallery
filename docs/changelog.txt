@@ -3,6 +3,7 @@
 - updates, cosmetics (mamba)
 - added sample data (mamba)
 - added Migrate class  (mamba)
+- fix strict int comparison (Yurdal/mamba)
 WORK IN PROGRESS
 
 
