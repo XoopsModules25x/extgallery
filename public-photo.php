@@ -76,7 +76,10 @@ $xoopsTpl->assign('catPath', $catPath);
 
 $photosIds = $photoHandler->getPhotoAlbumId($photoObj->getVar('cat_id'));
 
-$nbPhoto           = count($photosIds);
+$nbPhoto = 0;
+if ($photosIds && is_array($photosIds)) {
+    $nbPhoto = count($photosIds);
+}
 $currentPhotoPlace = array_search($photoId, $photosIds, true);
 
 if (1 == $nbPhoto) {

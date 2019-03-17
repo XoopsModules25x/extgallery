@@ -200,7 +200,7 @@ class PhotoHandler extends Extgallery\PersistableObjectHandler
         $result = $this->db->query($sql);
         $ret    = [];
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $ret[] = $myrow['photo_id'];
+            $ret[] = (int)$myrow['photo_id'];
         }
 
         return $ret;
