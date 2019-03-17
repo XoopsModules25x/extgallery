@@ -55,7 +55,8 @@ if (!$permHandler->isAllowed($GLOBALS['xoopsUser'], 'public_access', $photo['cat
 }
 
 // Don't update counter if user come from rating page
-if (null !== Request::getString('HTTP_REFERER', '', 'SERVER') && basename(Request::getString('HTTP_REFERER', '', 'SERVER')) != 'public-rating.php?photoId=' . $photoId) {
+//if (null !== Request::getString('HTTP_REFERER', '', 'SERVER') && basename(Request::getString('HTTP_REFERER', '', 'SERVER')) != 'public-rating.php?photoId=' . $photoId) {
+if (null !== Request::getString('HTTP_REFERER', '', 'SERVER') && basename(Request::getString('HTTP_REFERER', '', 'SERVER')) !== 'public-rating.php?photoId=' . $photoId) {
     $photoHandler->updateHits($photoId);
 }
 
