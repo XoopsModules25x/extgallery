@@ -456,7 +456,7 @@ switch ($op) {
                 echo '<th>' . _AM_EXTGALLERY_PHOTO . '</th>' . "\n";
                 echo '<th>' . _AM_EXTGALLERY_CATEGORY . '<br>' . $globalCatSelect . '</th>' . "\n";
                 echo '<th>' . _AM_EXTGALLERY_WEIGHT . '</th>' . "\n";
-                echo '<th>' . _AM_EXTGALLERY_TITLE . '<br>';
+                echo '<th style="text-align:left;">' . _AM_EXTGALLERY_TITLE . '<br>';
                 echo _AM_EXTGALLERY_DESC . '</th>' . "\n";
                 echo '</tr>' . "\n";
 
@@ -475,7 +475,7 @@ switch ($op) {
                     echo '<td><img src="' . XOOPS_URL . '/uploads/extgallery/public-photo/thumb/thumb_' . $photo->getVar('photo_name') . '"></td>' . "\n";
                     echo '<td>' . $catHandler->getLeafSelect('catId[' . $photo->getVar('photo_id') . ']', false, $_GET['cat_id']) . '</td>' . "\n";
                     echo '<td><input type="text" name="photoPoids[' . $photo->getVar('photo_id') . ']" id="photoPoids[' . $photo->getVar('photo_id') . ']" value="' . $photo->getVar('photo_weight') . '" size="3" maxlength="14"></td>' . "\n";
-                    echo '<td><input type="text" name="photoTitre[' . $photo->getVar('photo_id') . ']" id="photoTitre[' . $photo->getVar('photo_id') . ']" value="' . $photo->getVar('photo_title', 'e') . '" size="60" maxlength="150"><br>' . "\n";
+                    echo '<td  style="text-align:left;"><input type="text" name="photoTitre[' . $photo->getVar('photo_id') . ']" id="photoTitre[' . $photo->getVar('photo_id') . ']" value="' . $photo->getVar('photo_title', 'e') . '" size="60" maxlength="150"><br>' . "\n";
                     echo '<textarea name="photoDesc[' . $photo->getVar('photo_id') . ']" id="photoDesc[' . $photo->getVar('photo_id') . ']" rows="1" cols="57">' . $photo->getVar('photo_desc', 'e') . '</textarea></td>' . "\n";
                     echo '</tr>' . "\n";
                     $scriptCheckbox .= $first ? '\'photoId[' . $photo->getVar('photo_id') . '][]\'' : ', \'photoId[' . $photo->getVar('photo_id') . '][]\'';
