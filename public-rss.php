@@ -17,8 +17,8 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
-include XOOPS_ROOT_PATH . '/header.php';
+require_once __DIR__ . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 error_reporting(0);
@@ -29,7 +29,7 @@ if (function_exists('mb_http_output')) {
     mb_http_output('pass');
 }
 
-$catId = isset($_GET['id']) ? $_GET['id'] : 0;
+$catId = \Xmf\Request::getInt('id', 0, 'GET');
 /** @var Extgallery\PublicCategoryHandler $catHandler */
 $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 /** @var Extgallery\PublicPhotoHandler $photoHandler */
@@ -47,7 +47,7 @@ if (0 != $catId) {
 header('Content-Type:text/xml; charset=' . _CHARSET);
 $xoopsTpl          = new \XoopsTpl();
 $xoopsTpl->caching = 2;
-$xoopsTpl->xoops_setCacheTime($xoopsModuleConfig['timecache_rss'] * 60);
+$xoopsTpl->xoops_setCacheTime($helper->getConfig('timecache_rss') * 60);
 $myts = \MyTextSanitizer::getInstance();
 if (!$xoopsTpl->is_cached('db:extgallery_public-rss.tpl')) {
     $channel_category = $xoopsModule->getVar('dirname');
@@ -76,8 +76,8 @@ if (!$xoopsTpl->is_cached('db:extgallery_public-rss.tpl')) {
     $xoopsTpl->assign('channel_category', htmlspecialchars($channel_category, ENT_QUOTES));
     $xoopsTpl->assign('channel_generator', $xoopsModule->getVar('dirname'));
     $xoopsTpl->assign('channel_language', _LANGCODE);
-    $xoopsTpl->assign('image_url', XOOPS_URL . $xoopsModuleConfig['logo_rss']);
-    $dimention = getimagesize(XOOPS_ROOT_PATH . $xoopsModuleConfig['logo_rss']);
+    $xoopsTpl->assign('image_url', XOOPS_URL . $helper->getConfig('logo_rss'));
+    $dimention = getimagesize(XOOPS_ROOT_PATH . $helper->getConfig('logo_rss'));
 
     if (empty($dimention[0])) {
         $width  = 140;
@@ -92,8 +92,8 @@ if (!$xoopsTpl->is_cached('db:extgallery_public-rss.tpl')) {
     $xoopsTpl->assign('image_height', $height);
 
     $param = [
-        'limit' => $xoopsModuleConfig['perpage_rss'],
-        'cat'   => $categories
+        'limit' => $helper->getConfig('perpage_rss'),
+        'cat'   => $categories,
     ];
 
     $photos = $photoHandler->objectToArray($photoHandler->getLastPhoto($param));

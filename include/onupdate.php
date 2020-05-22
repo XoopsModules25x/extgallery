@@ -16,6 +16,8 @@
  * @author       XOOPS Development Team
  */
 
+use XoopsModules\Extgallery;
+
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->IsAdmin()) {
     exit('Restricted access' . PHP_EOL);
@@ -34,35 +36,29 @@ function tableExists($tablename)
 }
 
 /**
- *
  * Prepares system prior to attempting to install module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to install, false if not
  */
 function xoops_module_pre_update_extgallery(\XoopsModule $module)
 {
-    /** @var Extgallery\Helper $helper */
     /** @var Extgallery\Utility $utility */
-    $moduleDirName = basename(dirname(__DIR__));
-    $helper       = Extgallery\Helper::getInstance();
-    $utility      = new Extgallery\Utility();
+    $utility = new Extgallery\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
+
     return $xoopsSuccess && $phpSuccess;
 }
 
 /**
- *
  * Performs tasks required during update of the module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  * @param null        $previousVersion
  *
  * @return bool true if update successful, false if not
  */
-
-use XoopsModules\Extgallery;
 
 /**
  * @param \XoopsModule $module
@@ -73,15 +69,18 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
 {
     global $xoopsDB;
 
-    $moduleDirName = basename(dirname(__DIR__));
-    $capsDirName   = strtoupper($moduleDirName);
+    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
     /** @var Extgallery\Helper $helper */
     /** @var Extgallery\Utility $utility */
     /** @var Extgallery\Common\Configurator $configurator */
-    $helper  = Extgallery\Helper::getInstance();
-    $utility = new Extgallery\Utility();
+    $helper       = Extgallery\Helper::getInstance();
+    $utility      = new Extgallery\Utility();
     $configurator = new Extgallery\Common\Configurator();
+
+    $migrator = new \XoopsModules\Extgallery\Common\Migrate($configurator);
+    $migrator->synchronizeSchema();
 
     $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
     $catHandler->rebuild();
@@ -116,15 +115,15 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
         $db->query($sql);
 
         // Set display parmission for all XOOPS base Groups
-        $sql       = 'SELECT cat_id FROM `' . $db->prefix($moduleDirName . '_publiccat') . '`;';
-        $result    = $db->query($sql);
+        $sql      = 'SELECT cat_id FROM `' . $db->prefix($moduleDirName . '_publiccat') . '`;';
+        $result   = $db->query($sql);
         $moduleId = $module->getVar('mid');
-        /** @var XoopsGroupPermHandler $gpermHandler */
-        $gpermHandler = xoops_getHandler('groupperm');
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
+        $grouppermHandler = xoops_getHandler('groupperm');
         while (false !== ($cat = $db->fetchArray($result))) {
-            $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ADMIN, $moduleId);
-            $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_USERS, $moduleId);
-            $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ANONYMOUS, $moduleId);
+            $grouppermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ADMIN, $moduleId);
+            $grouppermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_USERS, $moduleId);
+            $grouppermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ANONYMOUS, $moduleId);
         }
     }
 
@@ -141,10 +140,9 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
     }
 
     if ($previousVersion < 107) {
-
         // Fix extension Bug if it's installed
         if (file_exists(XOOPS_ROOT_PATH . '/class/textsanitizer/gallery/gallery.php')) {
-            $conf                          = include XOOPS_ROOT_PATH . '/class/textsanitizer/config.php';
+            $conf                          = require XOOPS_ROOT_PATH . '/class/textsanitizer/config.php';
             $conf['extensions']['gallery'] = 1;
             file_put_contents(XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php', "<?php\rreturn \$config = " . var_export($conf, true) . "\r?>", LOCK_EX);
         }
@@ -199,13 +197,13 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
             }
         }
 
-        $configurator = include __DIR__ . '/config.php';
+        //        $configurator = require_once __DIR__   . '/config.php';
         /** @var Extgallery\Utility $utility */
         $utility = new Extgallery\Utility();
 
         //  ---  COPY blank.png FILES ---------------
         if (count($configurator->copyBlankFiles) > 0) {
-            $file = __DIR__ . '/../assets/images/blank.png';
+            $file = dirname(__DIR__) . '/assets/images/blank.png';
             foreach (array_keys($configurator->copyFiles) as $i) {
                 $dest = $configurator->copyFiles[$i] . '/blank.png';
                 $utility::copyFile($file, $dest);
@@ -220,6 +218,23 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
                 if (is_file($tempFile)) {
                     unlink($tempFile);
                 }
+            }
+        }
+
+        //  ---  CREATE UPLOAD FOLDERS ---------------
+        if (count($configurator->uploadFolders) > 0) {
+            //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
+            foreach (array_keys($configurator->uploadFolders) as $i) {
+                $utility::createFolder($configurator->uploadFolders[$i]);
+            }
+        }
+
+        //  ---  COPY blank.png FILES ---------------
+        if (count($configurator->copyBlankFiles) > 0) {
+            $file = __DIR__ . '/../assets/images/blank.png';
+            foreach (array_keys($configurator->copyBlankFiles) as $i) {
+                $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
+                $utility::copyFile($file, $dest);
             }
         }
 
@@ -238,7 +253,7 @@ function xoops_module_update_extgallery(\XoopsModule $module, $previousVersion =
         $folderHandler->delete($imagesDirectory);
     }
 
-    $gpermHandler = xoops_getHandler('groupperm');
+    $grouppermHandler = xoops_getHandler('groupperm');
 
-    return $gpermHandler->deleteByModule($module->getVar('mid'), 'item_read');
+    return $grouppermHandler->deleteByModule($module->getVar('mid'), 'item_read');
 }

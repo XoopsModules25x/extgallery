@@ -22,8 +22,7 @@
  * @version    CVS: $Id: Imagick3.php 266908 2008-10-01 21:11:07Z dufuz $
  * @link       http://pear.php.net/package/Image_Transform
  */
-
-require_once 'Image/Transform.php';
+require_once __DIR__ . '/Image/Transform.php';
 
 /**
  * imagick PECL extension implementation for Image_Transform package
@@ -72,7 +71,7 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
     public function __construct()
     {
         if (PEAR::loadExtension('imagick')) {
-            include 'Image/Transform/Driver/Imagick/ImageTypes.php';
+            require_once __DIR__ . '/Image/Transform/Driver/Imagick/ImageTypes.php';
         } else {
             $this->isError(PEAR::raiseError('Could not find the imagick extension.', IMAGE_TRANSFORM_ERROR_UNSUPPORTED));
         }
@@ -83,6 +82,7 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
      *
      * @param string $image filename
      *
+     * @throws \ImagickException
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
      */
@@ -90,9 +90,11 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
     {
         $this->free();
         $this->imagick = new Imagick();
+
         try {
             $this->imagick->readImage($image);
-        } catch (ImagickException $e) {
+        }
+        catch (ImagickException $e) {
             $this->free();
 
             return $this->raiseError('Could not load image:' . $e->getMessage(), IMAGE_TRANSFORM_ERROR_IO);
@@ -110,9 +112,9 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
     /**
      * Resizes the image
      *
-     * @param integer $new_x   New width
-     * @param integer $new_y   New height
-     * @param mixed   $options Optional parameters
+     * @param int   $new_x     New width
+     * @param int   $new_y     New height
+     * @param mixed $options   Optional parameters
      *                         <ul>
      *                         <li>'scaleMethod': "pixel" or "smooth"</li>
      *                         </ul>
@@ -125,8 +127,9 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
         try {
             $scaleMethod = $this->_getOption('scaleMethod', $options, 'smooth');
             $blur        = ('pixel' == $scaleMethod) ? 0 : 1;
-            $this->imagick->resizeImage($new_x, $new_y, imagick::FILTER_UNDEFINED, $blur);
-        } catch (ImagickException $e) {
+            $this->imagick->resizeImage($new_x, $new_y, Imagick::FILTER_UNDEFINED, $blur);
+        }
+        catch (ImagickException $e) {
             return $this->raiseError('Could not resize image.', IMAGE_TRANSFORM_ERROR_FAILED);
         }
 
@@ -134,7 +137,9 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
         $this->new_y = $new_y;
 
         return true;
-    } // End resize
+    }
+
+    // End resize
 
     /**
      * Rotates the current image
@@ -153,14 +158,16 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
         if (0 == ($angle % 360)) {
             return true;
         }
-        $color = $this->_getColor('canvasColor', $options, array(255, 255, 255));
+        $color = $this->_getColor('canvasColor', $options, [255, 255, 255]);
         if (is_array($color)) {
             $color = $this->colorarray2colorhex($color);
         }
         $pixel = new ImagickPixel($color);
+
         try {
             $this->imagick->rotateImage($pixel, $angle);
-        } catch (ImagickException $e) {
+        }
+        catch (ImagickException $e) {
             return $this->raiseError('Cannot create a new imagick image for the rotation: ' . $e->getMessage(), IMAGE_TRANSFORM_ERROR_FAILED);
         }
         $info        = $this->imagick->getImageGeometry();
@@ -168,7 +175,9 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
         $this->new_y = $info['height'];
 
         return true;
-    } // End rotate
+    }
+
+    // End rotate
 
     /**
      * Adds text to the image
@@ -194,14 +203,14 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
         if (is_array($params['color'])) {
             $params['color'] = $this->colorarray2colorhex($params['color']);
         } else {
-            $params['color'] = strtolower($params['color']);
+            $params['color'] = mb_strtolower($params['color']);
         }
 
-        static $cmds = array(
+        static $cmds = [
             'setFillColor' => 'color',
             'setFontSize'  => 'size',
-            'setFontFace'  => 'font'
-        );
+            'setFontFace'  => 'font',
+        ];
         $this->imagick->beginDraw();
 
         foreach ($cmds as $cmd => $v) {
@@ -214,19 +223,23 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
         }
 
         return true;
-    } // End addText
+    }
+
+    // End addText
 
     /**
      * Saves the image to a file
      *
-     * @param $filename string the name of the file to write to
+     * @param        $filename string the name of the file to write to
      *
+     * @param string $type
+     * @param null   $quality
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
      */
     public function save($filename, $type = '', $quality = null)
     {
-        $options = (is_array($quality)) ? $quality : array();
+        $options = is_array($quality) ? $quality : [];
         if (is_numeric($quality)) {
             $options['quality'] = $quality;
         }
@@ -236,14 +249,16 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
         if ($type && strcasecmp($type, $this->type)) {
             try {
                 $this->imagick->setImageFormat($type);
-            } catch (ImagickException $e) {
+            }
+            catch (ImagickException $e) {
                 return $this->raiseError('Could not save image to file (conversion failed).', IMAGE_TRANSFORM_ERROR_FAILED);
             }
         }
 
         try {
             $this->imagick->writeImage($filename);
-        } catch (ImagickException $e) {
+        }
+        catch (ImagickException $e) {
             return $this->raiseError('Could not save image to file: ' . $e->getMessage(), IMAGE_TRANSFORM_ERROR_IO);
         }
 
@@ -252,7 +267,9 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
         }
 
         return true;
-    } // End save
+    }
+
+    // End save
 
     /**
      * Displays image without saving and lose changes
@@ -261,13 +278,15 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
      *
      * @param string type (JPG,PNG...);
      * @param int    quality 75
+     * @param mixed      $type
+     * @param null|mixed $quality
      *
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
      */
     public function display($type = '', $quality = null)
     {
-        $options = (is_array($quality)) ? $quality : array();
+        $options = is_array($quality) ? $quality : [];
         if (is_numeric($quality)) {
             $options['quality'] = $quality;
         }
@@ -277,13 +296,16 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
         if ($type && strcasecmp($type, $this->type)) {
             try {
                 $this->imagick->setImageFormat($type);
-            } catch (ImagickException $e) {
+            }
+            catch (ImagickException $e) {
                 return $this->raiseError('Could not save image to file (conversion failed).', IMAGE_TRANSFORM_ERROR_FAILED);
             }
         }
+
         try {
             $image = $this->imagick->getImageBlob();
-        } catch (ImagickException $e) {
+        }
+        catch (ImagickException $e) {
             return $this->raiseError('Could not display image.', IMAGE_TRANSFORM_ERROR_IO);
         }
         header('Content-type: ' . $this->getMimeType($type));
@@ -312,10 +334,10 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
     /**
      * Crops the image
      *
-     * @param integer $width  Cropped image width
-     * @param integer $height Cropped image height
-     * @param integer $x      X-coordinate to crop at
-     * @param integer $y      Y-coordinate to crop at
+     * @param int $width  Cropped image width
+     * @param int $height Cropped image height
+     * @param int $x      X-coordinate to crop at
+     * @param int $y      Y-coordinate to crop at
      *
      * @return bool|PEAR_Error TRUE or a PEAR_Error object on error
      * @access public
@@ -326,9 +348,11 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
         if (!$this->intersects($width, $height, $x, $y)) {
             return PEAR::raiseError('Nothing to crop', IMAGE_TRANSFORM_ERROR_OUTOFBOUND);
         }
+
         try {
             $this->imagick->cropImage($width, $height, $x, $y);
-        } catch (ImagickException $e) {
+        }
+        catch (ImagickException $e) {
             return $this->raiseError('Could not crop image', IMAGE_TRANSFORM_ERROR_FAILED);
         }
 
@@ -368,7 +392,8 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
     {
         try {
             $this->imagick->flopImage();
-        } catch (ImagickException $e) {
+        }
+        catch (ImagickException $e) {
             return $this->raiseError('Could not mirror the image.', IMAGE_TRANSFORM_ERROR_FAILED);
         }
 
@@ -385,7 +410,8 @@ class Image_Transform_Driver_Imagick3 extends Image_Transform
     {
         try {
             $this->imagick->flipImage();
-        } catch (ImagickException $e) {
+        }
+        catch (ImagickException $e) {
             return $this->raiseError('Could not flip the image.', IMAGE_TRANSFORM_ERROR_FAILED);
         }
 

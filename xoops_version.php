@@ -17,15 +17,15 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/preloads/autoloader.php';
+require_once __DIR__ . '/preloads/autoloader.php';
 
 $moduleDirName = basename(__DIR__);
 
 // ------------------- Informations ------------------- //
 $modversion = [
     'version'             => 1.14,
-    'module_status'       => 'Beta 1',
-    'release_date'        => '2018/03/15', // YYYY/mm/dd
+    'module_status'       => 'Beta 2',
+    'release_date'        => '2018/09/22', // YYYY/mm/dd
     'name'                => _MI_EXTGALLERY_NAME,
     'description'         => _MI_EXTGAL_DESC,
     'author'              => 'Zoullou, contributors: Voltan, Mamba, Goffy',
@@ -36,11 +36,11 @@ $modversion = [
     'license'             => 'GPL 2.0 or later',
     'license_url'         => 'www.gnu.org/licenses/gpl-2.0.html/',
     'help'                => 'page=help',
-    //
-    'release_info'        => 'release_info',
-    'release'             => '2016-08-28',
-    'release_file'        => XOOPS_URL . "/modules/{$moduleDirName}/docs/release_info file",
-    //
+
+    'release_info' => 'release_info',
+    'release'      => '2016-08-28',
+    'release_file' => XOOPS_URL . "/modules/{$moduleDirName}/docs/release_info file",
+
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . "/modules/{$moduleDirName}/docs/install.txt",
     'min_php'             => '5.5',
@@ -76,7 +76,7 @@ $modversion = [
     // Comments
     'hasComments'         => 1,
     // Notification
-    'hasNotification'     => 1
+    'hasNotification'     => 1,
 ];
 
 // Menu
@@ -87,7 +87,7 @@ if (isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule']) && 'ext
         $modversion['sub'][0]['url']  = 'public-useralbum.php?id=' . $GLOBALS['xoopsUser']->uid();
 
         //        if (isset($GLOBALS['xoopsUser']) && '' !== $GLOBALS['xoopsUser']) {
-//        require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/publicPerm.php";
+        //        require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/publicPerm.php";
         $permHandler = Extgallery\PublicPermHandler::getInstance();
         if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
             $modversion['sub'][1]['name'] = _MI_EXTGALLERY_PUBLIC_UPLOAD;
@@ -110,7 +110,7 @@ $modversion['tables'] = [
     $moduleDirName . '_' . 'publicphoto',
     $moduleDirName . '_' . 'quota',
     $moduleDirName . '_' . 'publicrating',
-    $moduleDirName . '_' . 'publicecard'
+    $moduleDirName . '_' . 'publicecard',
 ];
 
 // ------------------- Help files ------------------- //
@@ -141,955 +141,1230 @@ $modversion['search']['file'] = 'include/search.inc.php';
 $modversion['search']['func'] = $moduleDirName . 'Search';
 
 // Config items
-$i                                       = 0;
-$modversion['config'][$i]['name']        = 'break' . $i;
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_GENERAL';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'line_break';
-$modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
-++$i;
-$modversion['config'][$i]['name']        = 'display_type';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_DISP_TYPE';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_DISP_TYPE_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['options']     = [
-    _MI_EXTGALLERY_SLIDESHOW => 'slideshow',
-    _MI_EXTGALLERY_ALBUM     => 'album'
+$i                      = 1;
+$modversion['config'][] = [
+    'name'        => 'break' . $i,
+    'title'       => '_MI_EXTGAL_PREFERENCE_BREAK_GENERAL',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'odd',
 ];
-$modversion['config'][$i]['default']     = 'album';
-++$i;
-$modversion['config'][$i]['name']        = 'display_set_order';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_DISP_SET_ORDER';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_DISP_SET_ORDER_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['options']     = [
-    _MI_EXTGALLERY_DESC => 'DESC',
-    _MI_EXTGALLERY_ASC  => 'ASC'
+
+$modversion['config'][] = [
+    'name'        => 'display_type',
+    'title'       => '_MI_EXTGAL_DISP_TYPE',
+    'description' => '_MI_EXTGAL_DISP_TYPE_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'options'     => [
+        _MI_EXTGALLERY_SLIDESHOW => 'slideshow',
+        _MI_EXTGALLERY_ALBUM     => 'album',
+    ],
+    'default'     => 'album',
 ];
-$modversion['config'][$i]['default']     = 'DESC';
-++$i;
-$modversion['config'][$i]['name']        = 'use_extended_upload';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_EXT_UPLOAD';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_EXT_UPLOAD_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'applet';
-$modversion['config'][$i]['options']     = [
-    _MI_EXTGALLERY_EXTENDED => 'applet',
-    _MI_EXTGALLERY_STANDARD => 'html'
+
+$modversion['config'][] = [
+    'name'        => 'display_set_order',
+    'title'       => '_MI_EXTGAL_DISP_SET_ORDER',
+    'description' => '_MI_EXTGAL_DISP_SET_ORDER_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'options'     => [
+        _MI_EXTGALLERY_DESC => 'DESC',
+        _MI_EXTGALLERY_ASC  => 'ASC',
+    ],
+    'default'     => 'DESC',
 ];
-++$i;
-$modversion['config'][$i]['name']        = 'enable_jquery';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_JQUERY';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_JQUERY_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1; // yes
-++$i;
-$modversion['config'][$i]['name']        = 'usetag';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_TAG';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_TAG_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 0; // no
-/**
- * DNPROSSI - Editor to use
- */
-++$i;
-$modversion['config'][$i]['name']        = 'form_options';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_FORM_OPTIONS';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_FORM_OPTIONS_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'dhtml';
+
+$modversion['config'][] = [
+    'name'        => 'use_extended_upload',
+    'title'       => '_MI_EXTGAL_EXT_UPLOAD',
+    'description' => '_MI_EXTGAL_EXT_UPLOAD_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'default'     => 'applet',
+    'options'     => [
+        _MI_EXTGALLERY_EXTENDED => 'applet',
+        _MI_EXTGALLERY_STANDARD => 'html',
+    ],
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_jquery',
+    'title'       => '_MI_EXTGAL_JQUERY',
+    'description' => '_MI_EXTGAL_JQUERY_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1, // yes
+];
+
+$modversion['config'][] = [
+    'name'        => 'usetag',
+    'title'       => '_MI_EXTGAL_TAG',
+    'description' => '_MI_EXTGAL_TAG_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0, // no
+    /**
+     * DNPROSSI - Editor to use
+     */
+];
 xoops_load('xoopseditorhandler');
-$editorHandler                       = XoopsEditorHandler::getInstance();
-$modversion['config'][$i]['options'] = array_flip($editorHandler->getList());
-++$i;
-$modversion['config'][$i]['name']        = 'photoname_pattern';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_NAME_PATTERN';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_NAME_PATTERN_DESC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '`([a-zA-Z0-9]+)[-_]`';
-++$i;
-$modversion['config'][$i]['name']        = 'max_photosize';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_MAX_SIZE';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_MAX_SIZE_DESC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '10485760';
-++$i;
-$modversion['config'][$i]['name']        = 'break' . $i;
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_ALBUM';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'line_break';
-$modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
-++$i;
-$modversion['config'][$i]['name']        = 'use_ajax_effects';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_DISP_TYPE';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_DISP_TYPE_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['options']     = [
-    _MI_EXTGAL_AJAX_NONE       => 'none',
-    _MI_EXTGAL_AJAX_LIGHTBOX   => 'lightbox',
-    _MI_EXTGAL_AJAX_OVERLAY    => 'overlay',
-    _MI_EXTGAL_AJAX_TOOLTIP    => 'tooltip',
-    _MI_EXTGAL_AJAX_FANCYBOX   => 'fancybox',
-    _MI_EXTGAL_AJAX_PRETTPHOTO => 'prettyphoto'
+$editorHandler = XoopsEditorHandler::getInstance();
+
+$modversion['config'][] = [
+    'name'        => 'form_options',
+    'title'       => '_MI_EXTGAL_FORM_OPTIONS',
+    'description' => '_MI_EXTGAL_FORM_OPTIONS_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'default'     => 'dhtml',
+    'options'     => array_flip($editorHandler->getList()),
 ];
-$modversion['config'][$i]['default']     = 'none';
-++$i;
-$modversion['config'][$i]['name']        = 'nb_column';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_NB_COLUMN';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_NB_COLUMN_DESC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 4;
-++$i;
-$modversion['config'][$i]['name']        = 'nb_line';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_NB_LINE';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_NB_LINE_DESC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 7;
-++$i;
-$modversion['config'][$i]['name']        = 'break' . $i;
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_SLIDESHOW';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'line_break';
-$modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
-++$i;
-$modversion['config'][$i]['name']        = 'use_slideshow_effects';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_DISP_TYPE';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_DISP_TYPE_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['options']     = [
-    _MI_EXTGAL_SLIDESHOW_GVIEW => 'galleryview',
-    _MI_EXTGAL_SLIDESHOW_GRIA  => 'galleria',
-    _MI_EXTGAL_SLIDESHOW_MICRO => 'microgallery',
-    _MI_EXTGAL_SLIDESHOW_GFIC  => 'galleriffic'
+
+$modversion['config'][] = [
+    'name'        => 'photoname_pattern',
+    'title'       => '_MI_EXTGAL_NAME_PATTERN',
+    'description' => '_MI_EXTGAL_NAME_PATTERN_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => '`([a-zA-Z0-9]+)[-_]`',
 ];
-$modversion['config'][$i]['default']     = 'galleryview';
+
+$modversion['config'][] = [
+    'name'        => 'max_photosize',
+    'title'       => '_MI_EXTGAL_MAX_SIZE',
+    'description' => '_MI_EXTGAL_MAX_SIZE_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => '10485760',
+];
 ++$i;
-$modversion['config'][$i]['name']        = 'break' . $i;
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_PHOTO';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'line_break';
-$modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
+$modversion['config'][] = [
+    'name'        => 'break' . $i,
+    'title'       => '_MI_EXTGAL_PREFERENCE_BREAK_ALBUM',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'odd',
+];
+
+$modversion['config'][] = [
+    'name'        => 'use_ajax_effects',
+    'title'       => '_MI_EXTGAL_DISP_TYPE',
+    'description' => '_MI_EXTGAL_DISP_TYPE_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'options'     => [
+        _MI_EXTGAL_AJAX_NONE       => 'none',
+        _MI_EXTGAL_AJAX_LIGHTBOX   => 'lightbox',
+        _MI_EXTGAL_AJAX_OVERLAY    => 'overlay',
+        _MI_EXTGAL_AJAX_TOOLTIP    => 'tooltip',
+        _MI_EXTGAL_AJAX_FANCYBOX   => 'fancybox',
+        _MI_EXTGAL_AJAX_PRETTPHOTO => 'prettyphoto',
+    ],
+    'default'     => 'none',
+];
+
+$modversion['config'][] = [
+    'name'        => 'nb_column',
+    'title'       => '_MI_EXTGAL_NB_COLUMN',
+    'description' => '_MI_EXTGAL_NB_COLUMN_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 4,
+];
+
+$modversion['config'][] = [
+    'name'        => 'nb_line',
+    'title'       => '_MI_EXTGAL_NB_LINE',
+    'description' => '_MI_EXTGAL_NB_LINE_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 7,
+];
 ++$i;
-$modversion['config'][$i]['name']        = 'save_large';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_SAVE_L';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_SAVE_L_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 0; // no
+$modversion['config'][] = [
+    'name'        => 'break' . $i,
+    'title'       => '_MI_EXTGAL_PREFERENCE_BREAK_SLIDESHOW',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'odd',
+];
+
+$modversion['config'][] = [
+    'name'        => 'use_slideshow_effects',
+    'title'       => '_MI_EXTGAL_DISP_TYPE',
+    'description' => '_MI_EXTGAL_DISP_TYPE_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'options'     => [
+        _MI_EXTGAL_SLIDESHOW_GVIEW => 'galleryview',
+        _MI_EXTGAL_SLIDESHOW_GRIA  => 'galleria',
+        _MI_EXTGAL_SLIDESHOW_MICRO => 'microgallery',
+        _MI_EXTGAL_SLIDESHOW_GFIC  => 'galleriffic',
+    ],
+    'default'     => 'galleryview',
+];
+
 ++$i;
-$modversion['config'][$i]['name']        = 'save_original';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_SAVE_ORIG';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_SAVE_ORIG_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 0; // no
+$modversion['config'][] = [
+    'name'        => 'break' . $i,
+    'title'       => '_MI_EXTGAL_PREFERENCE_BREAK_PHOTO',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'odd',
+];
+
+$modversion['config'][] = [
+    'name'        => 'save_large',
+    'title'       => '_MI_EXTGAL_SAVE_L',
+    'description' => '_MI_EXTGAL_SAVE_L_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0, // no
+];
+
+$modversion['config'][] = [
+    'name'        => 'save_original',
+    'title'       => '_MI_EXTGAL_SAVE_ORIG',
+    'description' => '_MI_EXTGAL_SAVE_ORIG_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0, // no
+];
+
+$modversion['config'][] = [
+    'name'        => 'medium_width',
+    'title'       => '_MI_EXTGAL_M_WIDTH',
+    'description' => '_MI_EXTGAL_M_WIDTH_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 600,
+];
+
+$modversion['config'][] = [
+    'name'        => 'medium_heigth',
+    'title'       => '_MI_EXTGAL_M_HEIGTH',
+    'description' => '_MI_EXTGAL_M_HEIGTH_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 600,
+];
+
+$modversion['config'][] = [
+    'name'        => 'medium_quality',
+    'title'       => '_MI_EXTGAL_M_QUALITY',
+    'description' => '_MI_EXTGAL_M_QUALITY_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 75,
+];
+
+$modversion['config'][] = [
+    'name'        => 'thumb_width',
+    'title'       => '_MI_EXTGAL_T_WIDTH',
+    'description' => '_MI_EXTGAL_T_WIDTH_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 100,
+];
+
+$modversion['config'][] = [
+    'name'        => 'thumb_heigth',
+    'title'       => '_MI_EXTGAL_T_HEIGTH',
+    'description' => '_MI_EXTGAL_T_HEIGTH_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 100,
+];
+
+$modversion['config'][] = [
+    'name'        => 'thumb_quality',
+    'title'       => '_MI_EXTGAL_T_QUALITY',
+    'description' => '_MI_EXTGAL_T_QUALITY_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 75,
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_medium_watermark',
+    'title'       => '_MI_EXTGAL_M_WATERMARK',
+    'description' => '_MI_EXTGAL_M_WATERMARK_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_medium_border',
+    'title'       => '_MI_EXTGAL_M_BORDER',
+    'description' => '_MI_EXTGAL_M_BORDER_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_large_watermark',
+    'title'       => '_MI_EXTGAL_L_WATERMARK',
+    'description' => '_MI_EXTGAL_L_WATERMARK_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_large_border',
+    'title'       => '_MI_EXTGAL_L_BORDER',
+    'description' => '_MI_EXTGAL_L_BORDER_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+
 ++$i;
-$modversion['config'][$i]['name']        = 'medium_width';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_M_WIDTH';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_M_WIDTH_DESC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 600;
-++$i;
-$modversion['config'][$i]['name']        = 'medium_heigth';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_M_HEIGTH';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_M_HEIGTH_DESC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 600;
-++$i;
-$modversion['config'][$i]['name']        = 'medium_quality';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_M_QUALITY';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_M_QUALITY_DESC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 75;
-++$i;
-$modversion['config'][$i]['name']        = 'thumb_width';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_T_WIDTH';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_T_WIDTH_DESC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 100;
-++$i;
-$modversion['config'][$i]['name']        = 'thumb_heigth';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_T_HEIGTH';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_T_HEIGTH_DESC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 100;
-++$i;
-$modversion['config'][$i]['name']        = 'thumb_quality';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_T_QUALITY';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_T_QUALITY_DESC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 75;
-++$i;
-$modversion['config'][$i]['name']        = 'enable_medium_watermark';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_M_WATERMARK';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_M_WATERMARK_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 0;
-++$i;
-$modversion['config'][$i]['name']        = 'enable_medium_border';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_M_BORDER';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_M_BORDER_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 0;
-++$i;
-$modversion['config'][$i]['name']        = 'enable_large_watermark';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_L_WATERMARK';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_L_WATERMARK_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 0;
-++$i;
-$modversion['config'][$i]['name']        = 'enable_large_border';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_L_BORDER';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_L_BORDER_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 0;
-++$i;
-$modversion['config'][$i]['name']        = 'break' . $i;
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_INFO';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'line_break';
-$modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
+$modversion['config'][] = [
+    'name'        => 'break' . $i,
+    'title'       => '_MI_EXTGAL_PREFERENCE_BREAK_INFO',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'odd',
+];
+
 /**
  * DNPROSSI - Info View
  * Shows-hides info from album thumbs or photo
  */
-++$i;
-$modversion['config'][$i]['name']        = 'info_view';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_INFO_VIEW';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_INFO_VIEW_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'both';
-$modversion['config'][$i]['options']     = [
-    _MI_EXTGAL_INFO_BOTH  => 'both',
-    _MI_EXTGAL_INFO_ALBUM => 'album',
-    _MI_EXTGAL_INFO_PHOTO => 'photo'
+$modversion['config'][] = [
+    'name'        => 'info_view',
+    'title'       => '_MI_EXTGAL_INFO_VIEW',
+    'description' => '_MI_EXTGAL_INFO_VIEW_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'default'     => 'both',
+    'options'     => [
+        _MI_EXTGAL_INFO_BOTH  => 'both',
+        _MI_EXTGAL_INFO_ALBUM => 'album',
+        _MI_EXTGAL_INFO_PHOTO => 'photo',
+    ],
 ];
+
 /**
  * DNPROSSI - Public User Info
  * Shows-hides info from public or user album and photo
  */
-++$i;
-$modversion['config'][$i]['name']        = 'pubusr_info_view';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_INFO_PUBUSR';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_INFO_PUBUSR_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'both';
-$modversion['config'][$i]['options']     = [
-    _MI_EXTGAL_INFO_BOTH   => 'both',
-    _MI_EXTGAL_INFO_USER   => 'user',
-    _MI_EXTGAL_INFO_PUBLIC => 'public'
+$modversion['config'][] = [
+    'name'        => 'pubusr_info_view',
+    'title'       => '_MI_EXTGAL_INFO_PUBUSR',
+    'description' => '_MI_EXTGAL_INFO_PUBUSR_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'default'     => 'both',
+    'options'     => [
+        _MI_EXTGAL_INFO_BOTH   => 'both',
+        _MI_EXTGAL_INFO_USER   => 'user',
+        _MI_EXTGAL_INFO_PUBLIC => 'public',
+    ],
 ];
+
 /**
  * DNPROSSI - Enable Info
  */
-++$i;
-$modversion['config'][$i]['name']        = 'enable_info';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_ENABLE_INFO';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_ENABLE_INFO_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
-++$i;
-$modversion['config'][$i]['name']        = 'enable_rating';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_ENABLE_RATING';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_ENABLE_RATING_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
+$modversion['config'][] = [
+    'name'        => 'enable_info',
+    'title'       => '_MI_EXTGAL_ENABLE_INFO',
+    'description' => '_MI_EXTGAL_ENABLE_INFO_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_rating',
+    'title'       => '_MI_EXTGAL_ENABLE_RATING',
+    'description' => '_MI_EXTGAL_ENABLE_RATING_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
 /**
  * DNPROSSI - Enable Ecards
  */
-++$i;
-$modversion['config'][$i]['name']        = 'enable_ecards';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_ENABLE_ECARDS';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_ENABLE_ECARDS_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
+$modversion['config'][] = [
+    'name'        => 'enable_ecards',
+    'title'       => '_MI_EXTGAL_ENABLE_ECARDS',
+    'description' => '_MI_EXTGAL_ENABLE_ECARDS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
 /**
  * DNPROSSI - Enable Photo Hits
  */
-++$i;
-$modversion['config'][$i]['name']        = 'enable_photo_hits';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_ENABLE_PHOTO_HITS';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_ENABLE_PHOTO_HITS_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
+$modversion['config'][] = [
+    'name'        => 'enable_photo_hits',
+    'title'       => '_MI_EXTGAL_ENABLE_PHOTO_HITS',
+    'description' => '_MI_EXTGAL_ENABLE_PHOTO_HITS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
 /**
  * DNPROSSI - Enable Submitter Link
  */
-++$i;
-$modversion['config'][$i]['name']        = 'enable_submitter_lnk';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_ENABLE_SUBMITTER_LNK';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_ENABLE_SUBMITTER_LNK_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
+$modversion['config'][] = [
+    'name'        => 'enable_submitter_lnk',
+    'title'       => '_MI_EXTGAL_ENABLE_SUBMITTER_LNK',
+    'description' => '_MI_EXTGAL_ENABLE_SUBMITTER_LNK_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
 /**
  * DNPROSSI - Enable Resolution
  */
-++$i;
-$modversion['config'][$i]['name']        = 'enable_resolution';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_ENABLE_RESOLUTION';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_ENABLE_RESOLUTION_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
+$modversion['config'][] = [
+    'name'        => 'enable_resolution',
+    'title'       => '_MI_EXTGAL_ENABLE_RESOLUTION',
+    'description' => '_MI_EXTGAL_ENABLE_RESOLUTION_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
 /**
  * DNPROSSI - Enable Submitter Link
  */
-++$i;
-$modversion['config'][$i]['name']        = 'enable_date';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_ENABLE_DATE';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_ENABLE_DATE_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
+$modversion['config'][] = [
+    'name'        => 'enable_date',
+    'title'       => '_MI_EXTGAL_ENABLE_DATE',
+    'description' => '_MI_EXTGAL_ENABLE_DATE_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
 /**
  * DNPROSSI - Enable Download
  */
-++$i;
-$modversion['config'][$i]['name']        = 'enable_download';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_ENABLE_DOWNLOAD';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_ENABLE_DOWNLOAD_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
+$modversion['config'][] = [
+    'name'        => 'enable_download',
+    'title'       => '_MI_EXTGAL_ENABLE_DOWNLOAD',
+    'description' => '_MI_EXTGAL_ENABLE_DOWNLOAD_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
 /**
  * Voltan - Enable show comments
  */
-++$i;
-$modversion['config'][$i]['name']        = 'enable_show_comments';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_ENABLE_SHOW_COMMENTS';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_ENABLE_SHOW_COMMENTS_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
-++$i;
-$modversion['config'][$i]['name']        = 'disp_ph_title';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_DISP_PH_TITLE';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_DISP_PH_TITLE_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
-++$i;
-$modversion['config'][$i]['name']        = 'disp_cat_img';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_DISP_CAT_IMG';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_DISP_CAT_IMG_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 0;
-++$i;
-$modversion['config'][$i]['name']        = 'display_extra_field';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_DISPLAY_EXTRA';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_DISPLAY_EXTRA_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 0;
-++$i;
-$modversion['config'][$i]['name']        = 'allow_html';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_ALLOW_HTML';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_ALLOW_HTML_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 0;
+$modversion['config'][] = [
+    'name'        => 'enable_show_comments',
+    'title'       => '_MI_EXTGAL_ENABLE_SHOW_COMMENTS',
+    'description' => '_MI_EXTGAL_ENABLE_SHOW_COMMENTS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'disp_ph_title',
+    'title'       => '_MI_EXTGAL_DISP_PH_TITLE',
+    'description' => '_MI_EXTGAL_DISP_PH_TITLE_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'disp_cat_img',
+    'title'       => '_MI_EXTGAL_DISP_CAT_IMG',
+    'description' => '_MI_EXTGAL_DISP_CAT_IMG_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+
+$modversion['config'][] = [
+    'name'        => 'display_extra_field',
+    'title'       => '_MI_EXTGAL_DISPLAY_EXTRA',
+    'description' => '_MI_EXTGAL_DISPLAY_EXTRA_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+
+$modversion['config'][] = [
+    'name'        => 'allow_html',
+    'title'       => '_MI_EXTGAL_ALLOW_HTML',
+    'description' => '_MI_EXTGAL_ALLOW_HTML_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+
 /**
  * Voltan - Social networks and bookmarks
  */
-++$i;
-$modversion['config'][$i]['name']        = 'show_social_book';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_SOCIAL';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_SOCIAL_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['options']     = [
-    _MI_EXTGAL_NONE          => 0,
-    _MI_EXTGAL_SOCIALNETWORM => 1,
-    _MI_EXTGAL_BOOKMARK      => 2,
-    _MI_EXTGAL_INFO_BOTH     => 3
+$modversion['config'][] = [
+    'name'        => 'show_social_book',
+    'title'       => '_MI_EXTGAL_SOCIAL',
+    'description' => '_MI_EXTGAL_SOCIAL_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'options'     => [
+        _MI_EXTGAL_NONE          => 0,
+        _MI_EXTGAL_SOCIALNETWORM => 1,
+        _MI_EXTGAL_BOOKMARK      => 2,
+        _MI_EXTGAL_INFO_BOTH     => 3,
+    ],
+    'default'     => 0,
 ];
-$modversion['config'][$i]['default']     = 0;
+
 ++$i;
-$modversion['config'][$i]['name']        = 'break' . $i;
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_RSS';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'line_break';
-$modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
+$modversion['config'][] = [
+    'name'        => 'break' . $i,
+    'title'       => '_MI_EXTGAL_PREFERENCE_BREAK_RSS',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'odd',
+];
+
+$modversion['config'][] = [
+    'name'        => 'show_rss',
+    'title'       => '_MI_EXTGAL_SHOW_RSS',
+    'description' => '_MI_EXTGAL_SHOW_RSS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'perpage_rss',
+    'title'       => '_MI_EXTGAL_PERPAGE_RSS',
+    'description' => '_MI_EXTGAL_PERPAGE_RSS_DSC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 10,
+];
+
+$modversion['config'][] = [
+    'name'        => 'timecache_rss',
+    'title'       => '_MI_EXTGAL_TIMECACHE_RSS',
+    'description' => '_MI_EXTGAL_TIMECACHE_RSS_DSC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 60,
+];
+
+$modversion['config'][] = [
+    'name'        => 'logo_rss',
+    'title'       => '_MI_EXTGAL_LOGO_RSS',
+    'description' => '',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => '/assets/images/logo.png',
+];
+
 ++$i;
-$modversion['config'][$i]['name']        = 'show_rss';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_SHOW_RSS';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_SHOW_RSS_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
+$modversion['config'][] = [
+    'name'        => 'break' . $i,
+    'title'       => '_MI_EXTGAL_PREFERENCE_BREAK_ADMIN',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'odd',
+];
+
+$modversion['config'][] = [
+    'name'        => 'admin_nb_photo',
+    'title'       => '_MI_EXTGAL_ADM_NBPHOTO',
+    'description' => '_MI_EXTGAL_ADM_NBPHOTO_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 10,
+];
+
 ++$i;
-$modversion['config'][$i]['name']        = 'perpage_rss';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_PERPAGE_RSS';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_PERPAGE_RSS_DSC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 10;
+$modversion['config'][] = [
+    'name'        => 'break' . $i,
+    'title'       => '_MI_EXTGAL_PREFERENCE_BREAK_GRAPHLIB',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'odd',
+];
+
+$modversion['config'][] = [
+    'name'        => 'graphic_lib',
+    'title'       => '_MI_EXTGAL_GRAPHLIB',
+    'description' => '_MI_EXTGAL_GRAPHLIB_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'default'     => 'gd',
+    'options'     => ['GD 2' => 'gd', 'Imagick' => 'imagick'],
+];
+
+$modversion['config'][] = [
+    'name'        => 'graphic_lib_path',
+    'title'       => '_MI_EXTGAL_GRAPHLIB_PATH',
+    'description' => '_MI_EXTGAL_GRAPHLIB_PATH_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => '/usr/local/bin/',
+];
+
 ++$i;
-$modversion['config'][$i]['name']        = 'timecache_rss';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_TIMECACHE_RSS';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_TIMECACHE_RSS_DSC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 60;
-++$i;
-$modversion['config'][$i]['name']        = 'logo_rss';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_LOGO_RSS';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '/assets/images/logo.png';
-++$i;
-$modversion['config'][$i]['name']        = 'break' . $i;
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_ADMIN';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'line_break';
-$modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
-++$i;
-$modversion['config'][$i]['name']        = 'admin_nb_photo';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_ADM_NBPHOTO';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_ADM_NBPHOTO_DESC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 10;
-++$i;
-$modversion['config'][$i]['name']        = 'break' . $i;
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_GRAPHLIB';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'line_break';
-$modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
-++$i;
-$modversion['config'][$i]['name']        = 'graphic_lib';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_GRAPHLIB';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_GRAPHLIB_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'gd';
-$modversion['config'][$i]['options']     = ['GD 2' => 'gd', 'Imagick' => 'imagick'];
-++$i;
-$modversion['config'][$i]['name']        = 'graphic_lib_path';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_GRAPHLIB_PATH';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_GRAPHLIB_PATH_DESC';
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '/usr/local/bin/';
-++$i;
-$modversion['config'][$i]['name']        = 'break' . $i;
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_PREFERENCE_BREAK_COMNOTI';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'line_break';
-$modversion['config'][$i]['valuetype']   = 'textbox';
-$modversion['config'][$i]['default']     = 'head';
+$modversion['config'][] = [
+    'name'        => 'break' . $i,
+    'title'       => '_MI_EXTGAL_PREFERENCE_BREAK_COMNOTI',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'odd',
+];
 
 // Hidden preferences field
-++$i;
-$modversion['config'][$i]['name']        = 'watermark_type';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_M_WATERMARK';
-$modversion['config'][$i]['description'] = '_MI_EXTGAL_M_WATERMARK_DESC';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
-++$i;
-$modversion['config'][$i]['name']        = 'watermark_font';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'AllStarResort.ttf';
-++$i;
-$modversion['config'][$i]['name']        = 'watermark_text';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = $GLOBALS['xoopsConfig']['sitename'];
-++$i;
-$modversion['config'][$i]['name']        = 'watermark_position';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'tr';
-++$i;
-$modversion['config'][$i]['name']        = 'watermark_color';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#FFFFFF';
-++$i;
-$modversion['config'][$i]['name']        = 'watermark_fontsize';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 16;
-++$i;
-$modversion['config'][$i]['name']        = 'watermark_padding';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 5;
-++$i;
-$modversion['config'][$i]['name']        = 'inner_border_color';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#FFFFFF';
-++$i;
-$modversion['config'][$i]['name']        = 'inner_border_size';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 2;
-++$i;
-$modversion['config'][$i]['name']        = 'outer_border_color';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#000000';
-++$i;
-$modversion['config'][$i]['name']        = 'outer_border_size';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 5;
+
+$modversion['config'][] = [
+    'name'        => 'watermark_type',
+    'title'       => '_MI_EXTGAL_M_WATERMARK',
+    'description' => '_MI_EXTGAL_M_WATERMARK_DESC',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'watermark_font',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'AllStarResort.ttf',
+];
+
+$modversion['config'][] = [
+    'name'        => 'watermark_text',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => $GLOBALS['xoopsConfig']['sitename'],
+];
+
+$modversion['config'][] = [
+    'name'        => 'watermark_position',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'tr',
+];
+
+$modversion['config'][] = [
+    'name'        => 'watermark_color',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#FFFFFF',
+];
+
+$modversion['config'][] = [
+    'name'        => 'watermark_fontsize',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 16,
+];
+
+$modversion['config'][] = [
+    'name'        => 'watermark_padding',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 5,
+];
+
+$modversion['config'][] = [
+    'name'        => 'inner_border_color',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#FFFFFF',
+];
+
+$modversion['config'][] = [
+    'name'        => 'inner_border_size',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 2,
+];
+
+$modversion['config'][] = [
+    'name'        => 'outer_border_color',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#000000',
+];
+
+$modversion['config'][] = [
+    'name'        => 'outer_border_size',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 5,
+];
 
 // hidden effects for slideshow
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_panelwidth';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 600;
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_panelheight';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 400;
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_framewidth';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 80;
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_frameheight';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 60;
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_overlayheight';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 62;
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_overlaycolor';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#222222';
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_borderwidth';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_bordercolor';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#cccccc';
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_navtheme';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'light';
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_position';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'bottom';
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_easing';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'swing';
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_bgcolor';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#000000';
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_tspeed';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1200;
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_tterval';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 6000;
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_overlaytc';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#ffffff';
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_captiontc';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#222222';
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_opacity';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '0.6';
-++$i;
-$modversion['config'][$i]['name']        = 'galleryview_overlayfs';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '11px';
-++$i;
-$modversion['config'][$i]['name']        = 'galleria_height';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 400;
-++$i;
-$modversion['config'][$i]['name']        = 'galleria_panelwidth';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 620;
-++$i;
-$modversion['config'][$i]['name']        = 'galleria_bgcolor';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#000000';
-++$i;
-$modversion['config'][$i]['name']        = 'galleria_bcolor';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#000000';
-++$i;
-$modversion['config'][$i]['name']        = 'galleria_bgimg';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'classic-map';
-/* added by Goffy */
-++$i;
-$modversion['config'][$i]['name']        = 'galleria_autoplay';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
-++$i;
-$modversion['config'][$i]['name']        = 'galleria_transition';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'fade';
-++$i;
-$modversion['config'][$i]['name']        = 'galleria_tspeed';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1000;
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_panelwidth',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 600,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_panelheight',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 400,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_framewidth',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 80,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_frameheight',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 60,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_overlayheight',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 62,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_overlaycolor',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#222222',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_borderwidth',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_bordercolor',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#cccccc',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_navtheme',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'light',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_position',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'bottom',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_easing',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'swing',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_bgcolor',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#000000',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_tspeed',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 1200,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_tterval',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 6000,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_overlaytc',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#ffffff',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_captiontc',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#222222',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_opacity',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '0.6',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleryview_overlayfs',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '11px',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleria_height',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 400,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleria_panelwidth',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 620,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleria_bgcolor',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#000000',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleria_bcolor',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#000000',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleria_bgimg',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'classic-map',
+    /* added by Goffy */
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleria_autoplay',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleria_transition',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'fade',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleria_tspeed',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 1000,
+];
+
 /* end added by Goffy */
 /* added by Goffy */
 // hidden effects for galleriffic
-++$i;
-$modversion['config'][$i]['name']        = 'galleriffic_height';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 600;
-++$i;
-$modversion['config'][$i]['name']        = 'galleriffic_width';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 600;
-++$i;
-$modversion['config'][$i]['name']        = 'galleriffic_bordercolor';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#cccccc';
-++$i;
-$modversion['config'][$i]['name']        = 'galleriffic_bgcolor';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#ffffff';
-++$i;
-$modversion['config'][$i]['name']        = 'galleriffic_fontcolor';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#000000';
-++$i;
-$modversion['config'][$i]['name']        = 'galleriffic_autoplay';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
-++$i;
-$modversion['config'][$i]['name']        = 'galleriffic_nb_thumbs';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 10;
-++$i;
-$modversion['config'][$i]['name']        = 'galleriffic_nb_colthumbs';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 2;
-++$i;
-$modversion['config'][$i]['name']        = 'galleriffic_nb_preload';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 10;
-++$i;
-$modversion['config'][$i]['name']        = 'galleriffic_tdelay';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 3000;
-++$i;
-$modversion['config'][$i]['name']        = 'galleriffic_tspeed';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1000;
-++$i;
-$modversion['config'][$i]['name']        = 'galleriffic_show_descr';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 0;
-++$i;
-$modversion['config'][$i]['name']        = 'galleriffic_download';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 0;
-/* end added by Goffy */
 
+$modversion['config'][] = [
+    'name'        => 'galleriffic_height',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 600,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleriffic_width',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 600,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleriffic_bordercolor',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#cccccc',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleriffic_bgcolor',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#ffffff',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleriffic_fontcolor',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#000000',
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleriffic_autoplay',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleriffic_nb_thumbs',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 10,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleriffic_nb_colthumbs',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 2,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleriffic_nb_preload',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 10,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleriffic_tdelay',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 3000,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleriffic_tspeed',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 1000,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleriffic_show_descr',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+
+$modversion['config'][] = [
+    'name'        => 'galleriffic_download',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+
+/* end added by Goffy */
 // hidden effects for album
-++$i;
-$modversion['config'][$i]['name']        = 'album_tooltip_width';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 250;
-++$i;
-$modversion['config'][$i]['name']        = 'album_tooltip_borderwidth';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
-++$i;
-$modversion['config'][$i]['name']        = 'album_tooltip_bordercolor';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#cccccc';
-++$i;
-$modversion['config'][$i]['name']        = 'album_overlay_bg';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#ffffff';
-++$i;
-$modversion['config'][$i]['name']        = 'album_overlay_width';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 600;
-++$i;
-$modversion['config'][$i]['name']        = 'album_overlay_height';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 450;
-++$i;
-$modversion['config'][$i]['name']        = 'album_fancybox_color';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '#333333';
-++$i;
-$modversion['config'][$i]['name']        = 'album_fancybox_opacity';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = '0.9';
-++$i;
-$modversion['config'][$i]['name']        = 'album_fancybox_tin';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'none';
-++$i;
-$modversion['config'][$i]['name']        = 'album_fancybox_tout';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'none';
-++$i;
-$modversion['config'][$i]['name']        = 'album_fancybox_title';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'over';
-++$i;
-$modversion['config'][$i]['name']        = 'album_fancybox_showtype';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'group';
-++$i;
-$modversion['config'][$i]['name']        = 'album_prettyphoto_speed';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'fast';
-++$i;
-$modversion['config'][$i]['name']        = 'album_prettyphoto_theme';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'light_square';
-++$i;
-$modversion['config'][$i]['name']        = 'album_prettyphoto_slidspe';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 2000;
-++$i;
-$modversion['config'][$i]['name']        = 'album_prettyphoto_autopla';
-$modversion['config'][$i]['title']       = '_MI_EXTGAL_HIDDEN_FIELD';
-$modversion['config'][$i]['description'] = '';
-$modversion['config'][$i]['formtype']    = 'hidden';
-$modversion['config'][$i]['valuetype']   = 'text';
-$modversion['config'][$i]['default']     = 'true';
+
+$modversion['config'][] = [
+    'name'        => 'album_tooltip_width',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 250,
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_tooltip_borderwidth',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_tooltip_bordercolor',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#cccccc',
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_overlay_bg',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#ffffff',
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_overlay_width',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 600,
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_overlay_height',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 450,
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_fancybox_color',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '#333333',
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_fancybox_opacity',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => '0.9',
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_fancybox_tin',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'none',
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_fancybox_tout',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'none',
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_fancybox_title',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'over',
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_fancybox_showtype',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'group',
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_prettyphoto_speed',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'fast',
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_prettyphoto_theme',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'light_square',
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_prettyphoto_slidspe',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'int',
+    'default'     => 2000,
+];
+
+$modversion['config'][] = [
+    'name'        => 'album_prettyphoto_autopla',
+    'title'       => '_MI_EXTGAL_HIDDEN_FIELD',
+    'description' => '',
+    'formtype'    => 'hidden',
+    'valuetype'   => 'text',
+    'default'     => 'true',
+];
+
+/**
+ * Make Sample button visible?
+ */
+$modversion['config'][] = [
+    'name'        => 'displaySampleButton',
+    'title'       => '_MI_EXTGAL_SHOW_SAMPLE_BUTTON',
+    'description' => '_MI_EXTGAL_SHOW_SAMPLE_BUTTON_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+/**
+ * Show Developer Tools?
+ */
+$modversion['config'][] = [
+    'name'        => 'displayDeveloperTools',
+    'title'       => '_MI_EXTGAL_SHOW_DEV_TOOLS',
+    'description' => '_MI_EXTGAL_SHOW_DEV_TOOLS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
 
 // Templates
 $modversion['templates'] = [
@@ -1104,81 +1379,100 @@ $modversion['templates'] = [
     ['file' => 'extgallery_public-slideshow.tpl', 'description' => ''],
     ['file' => 'extgallery_public-upload-applet.tpl', 'description' => ''],
     ['file' => 'extgallery_public-bookmarkme.tpl', 'description' => ''],
-    ['file' => 'extgallery_public-rss.tpl', 'description' => '']
+    ['file' => 'extgallery_public-rss.tpl', 'description' => ''],
 ];
 
 // Blocs
-$modversion['blocks'][1]['file']        = 'extgallery_blocks.php';
-$modversion['blocks'][1]['name']        = _MI_EXTGAL_B_PHOTO;
-$modversion['blocks'][1]['description'] = '';
-$modversion['blocks'][1]['show_func']   = 'extgalleryPhotoShow';
-$modversion['blocks'][1]['options']     = '4|0|0|RandomPhoto|true|none|#ffffff|600|450|250|1|#cccccc|#333333|0.9|none|none|over|group|slow|dark_rounded|2000|true|500|120|300|3|0';
-$modversion['blocks'][1]['edit_func']   = 'extgalleryBlockEdit';
-$modversion['blocks'][1]['template']    = 'extgallery_block.tpl';
 
-$modversion['blocks'][2]['file']        = 'extgallery_blocks.php';
-$modversion['blocks'][2]['name']        = _MI_EXTGAL_B_SUB;
-$modversion['blocks'][2]['description'] = '';
-$modversion['blocks'][2]['show_func']   = 'extgalleryTopSubmitterShow';
-$modversion['blocks'][2]['options']     = '5|0';
-$modversion['blocks'][2]['edit_func']   = 'extgalleryTopSubmitterEdit';
-$modversion['blocks'][2]['template']    = 'extgallery_block_top_submitter.tpl';
+$modversion['blocks'][] = [
+    'file'        => 'extgallery_blocks.php',
+    'name'        => _MI_EXTGAL_B_PHOTO,
+    'description' => '',
+    'show_func'   => 'extgalleryPhotoShow',
+    'options'     => '4|0|0|RandomPhoto|true|none|#ffffff|600|450|250|1|#cccccc|#333333|0.9|none|none|over|group|slow|dark_rounded|2000|true|500|120|300|3|0',
+    'edit_func'   => 'extgalleryBlockEdit',
+    'template'    => 'extgallery_block.tpl',
+];
 
-$modversion['blocks'][3]['file']        = 'extgallery_blocks.php';
-$modversion['blocks'][3]['name']        = _MI_EXTGAL_B_AJAX;
-$modversion['blocks'][3]['description'] = '';
-$modversion['blocks'][3]['show_func']   = 'extgalleryAjax';
-$modversion['blocks'][3]['options']     = '8|RandomPhoto|true|galleryview|600|400|60|40|000|1200|6000|62|222|fff|222|1px solid #ccc|0.6|11px|light|bottom|swing|620|400|#000000|#000000|classic-map|true|fade|1000|small|0';
-$modversion['blocks'][3]['edit_func']   = 'extgalleryAjaxEdit';
-$modversion['blocks'][3]['template']    = 'extgallery_block_ajax.tpl';
+$modversion['blocks'][] = [
+    'file'        => 'extgallery_blocks.php',
+    'name'        => _MI_EXTGAL_B_SUB,
+    'description' => '',
+    'show_func'   => 'extgalleryTopSubmitterShow',
+    'options'     => '5|0',
+    'edit_func'   => 'extgalleryTopSubmitterEdit',
+    'template'    => 'extgallery_block_top_submitter.tpl',
+];
 
-$modversion['blocks'][4]['file']        = 'extgallery_block_tag.php';
-$modversion['blocks'][4]['name']        = _MI_EXTGAL_B_TOP_TAG;
-$modversion['blocks'][4]['description'] = 'Show top tags';
-$modversion['blocks'][4]['show_func']   = 'extgallery_tag_block_top_show';
-$modversion['blocks'][4]['edit_func']   = 'extgallery_tag_block_top_edit';
-$modversion['blocks'][4]['options']     = '50|30|c';
-$modversion['blocks'][4]['template']    = 'extgallery_tag_block_top.tpl';
+$modversion['blocks'][] = [
+    'file'        => 'extgallery_blocks.php',
+    'name'        => _MI_EXTGAL_B_AJAX,
+    'description' => '',
+    'show_func'   => 'extgalleryAjax',
+    'options'     => '8|RandomPhoto|true|galleryview|600|400|60|40|000|1200|6000|62|222|fff|222|1px solid #ccc|0.6|11px|light|bottom|swing|620|400|#000000|#000000|classic-map|true|fade|1000|small|0',
+    'edit_func'   => 'extgalleryAjaxEdit',
+    'template'    => 'extgallery_block_ajax.tpl',
+];
 
-$modversion['blocks'][5]['file']        = 'extgallery_block_tag.php';
-$modversion['blocks'][5]['name']        = _MI_EXTGAL_B_TAG_CLOUD;
-$modversion['blocks'][5]['description'] = 'Show tag cloud';
-$modversion['blocks'][5]['show_func']   = 'extgallery_tag_block_cloud_show';
-$modversion['blocks'][5]['edit_func']   = 'extgallery_tag_block_cloud_edit';
-$modversion['blocks'][5]['options']     = '100|0|150|80';
-$modversion['blocks'][5]['template']    = 'extgallery_tag_block_cloud.tpl';
+$modversion['blocks'][] = [
+    'file'        => 'extgallery_block_tag.php',
+    'name'        => _MI_EXTGAL_B_TOP_TAG,
+    'description' => 'Show top tags',
+    'show_func'   => 'extgallery_tag_block_top_show',
+    'edit_func'   => 'extgallery_tag_block_top_edit',
+    'options'     => '50|30|c',
+    'template'    => 'extgallery_tag_block_top.tpl',
+];
 
-$modversion['blocks'][6]['file']        = 'extgallery_blocks.php';
-$modversion['blocks'][6]['name']        = _MI_EXTGAL_B_LIST;
-$modversion['blocks'][6]['description'] = 'List of photos';
-$modversion['blocks'][6]['show_func']   = 'extgalleryList';
-$modversion['blocks'][6]['edit_func']   = 'extgalleryListEdit';
-$modversion['blocks'][6]['options']     = '10|1|1|1|RandomPhoto|0';
-$modversion['blocks'][6]['template']    = 'extgallery_block_list.tpl';
+$modversion['blocks'][] = [
+    'file'        => 'extgallery_block_tag.php',
+    'name'        => _MI_EXTGAL_B_TAG_CLOUD,
+    'description' => 'Show tag cloud',
+    'show_func'   => 'extgallery_tag_block_cloud_show',
+    'edit_func'   => 'extgallery_tag_block_cloud_edit',
+    'options'     => '100|0|150|80',
+    'template'    => 'extgallery_tag_block_cloud.tpl',
+];
+
+$modversion['blocks'][] = [
+    'file'        => 'extgallery_blocks.php',
+    'name'        => _MI_EXTGAL_B_LIST,
+    'description' => 'List of photos',
+    'show_func'   => 'extgalleryList',
+    'edit_func'   => 'extgalleryListEdit',
+    'options'     => '10|1|1|1|RandomPhoto|0',
+    'template'    => 'extgallery_block_list.tpl',
+];
 
 // Notifications
 $modversion['hasNotification'] = 1;
 //$modversion['notification']['lookup_file'] = 'include/notification.inc.php';
 //$modversion['notification']['lookup_func'] = 'extgalleryNotifyIteminfo';
 
-$modversion['notification']['category'][1]['name']           = 'global';
-$modversion['notification']['category'][1]['title']          = _MI_EXTGAL_GLOBAL_NOTIFY;
-$modversion['notification']['category'][1]['description']    = _MI_EXTGAL_GLOBAL_NOTIFYDSC;
-$modversion['notification']['category'][1]['subscribe_from'] = '*';
-$modversion['notification']['category'][1]['item_name']      = '';
+$modversion['notification']['category'][] = [
+    'name'           => 'global',
+    'title'          => _MI_EXTGAL_GLOBAL_NOTIFY,
+    'description'    => _MI_EXTGAL_GLOBAL_NOTIFYDSC,
+    'subscribe_from' => '*',
+    'item_name'      => '',
+];
 
-$modversion['notification']['category'][2]['name']           = 'album';
-$modversion['notification']['category'][2]['title']          = _MI_EXTGAL_ALBUM_NOTIFY;
-$modversion['notification']['category'][2]['description']    = _MI_EXTGAL_ALBUM_NOTIFYDSC;
-$modversion['notification']['category'][2]['subscribe_from'] = 'public-album.php';
-$modversion['notification']['category'][2]['item_name']      = 'id';
+$modversion['notification']['category'][] = [
+    'name'           => 'album',
+    'title'          => _MI_EXTGAL_ALBUM_NOTIFY,
+    'description'    => _MI_EXTGAL_ALBUM_NOTIFYDSC,
+    'subscribe_from' => 'public-album.php',
+    'item_name'      => 'id',
+];
 
-$modversion['notification']['category'][3]['name']           = 'event';
-$modversion['notification']['category'][3]['title']          = _MI_EXTGAL_PHOTO_NOTIFY;
-$modversion['notification']['category'][3]['description']    = _MI_EXTGAL_PHOTO_NOTIFYDSC;
-$modversion['notification']['category'][3]['subscribe_from'] = 'public-photo.php';
-$modversion['notification']['category'][3]['item_name']      = 'photoId';
-$modversion['notification']['category'][3]['allow_bookmark'] = 1;
+$modversion['notification']['category'][] = [
+    'name'           => 'event',
+    'title'          => _MI_EXTGAL_PHOTO_NOTIFY,
+    'description'    => _MI_EXTGAL_PHOTO_NOTIFYDSC,
+    'subscribe_from' => 'public-photo.php',
+    'item_name'      => 'photoId',
+    'allow_bookmark' => 1,
+];
 
 $modversion['notification']['event'][1] = [
     'name'          => 'new_photo',
@@ -1187,7 +1481,7 @@ $modversion['notification']['event'][1] = [
     'caption'       => _MI_EXTGAL_NEW_PHOTO_NOTIFYCAP,
     'description'   => _MI_EXTGAL_NEW_PHOTO_NOTIFYDSC,
     'mail_template' => 'global_new_photo',
-    'mail_subject'  => _MI_EXTGAL_NEW_PHOTO_NOTIFYSBJ
+    'mail_subject'  => _MI_EXTGAL_NEW_PHOTO_NOTIFYSBJ,
 ];
 
 $modversion['notification']['event'][2] = [
@@ -1198,7 +1492,7 @@ $modversion['notification']['event'][2] = [
     'description'   => _MI_EXTGAL_NEW_PHOTO_PENDING_NOTIFYDSC,
     'mail_template' => 'global_new_photo_pending',
     'mail_subject'  => _MI_EXTGAL_NEW_PHOTO_PENDING_NOTIFYSBJ,
-    'admin_only'    => 1
+    'admin_only'    => 1,
 ];
 
 $modversion['notification']['event'][3] = [
@@ -1208,5 +1502,5 @@ $modversion['notification']['event'][3] = [
     'caption'       => _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYCAP,
     'description'   => _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYDSC,
     'mail_template' => 'album_new_photo',
-    'mail_subject'  => _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYSBJ
+    'mail_subject'  => _MI_EXTGAL_NEW_PHOTO_ALBUM_NOTIFYSBJ,
 ];

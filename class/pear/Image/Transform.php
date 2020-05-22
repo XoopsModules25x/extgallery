@@ -29,7 +29,7 @@
 /**
  * Include for error handling
  */
-//require_once 'PEAR.php';
+//require_once __DIR__ . '/PEAR.php';
 require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/PEAR.php';
 
 /**
@@ -135,13 +135,13 @@ class Image_Transform
      * @var array General options
      * @access protected
      */
-    public $_options = array(
+    public $_options = [
         'quality'     => 75,
         'scaleMethod' => 'smooth',
-        'canvasColor' => array(255, 255, 255),
-        'pencilColor' => array(0, 0, 0),
-        'textColor'   => array(0, 0, 0)
-    );
+        'canvasColor' => [255, 255, 255],
+        'pencilColor' => [0, 0, 0],
+        'textColor'   => [0, 0, 0],
+    ];
 
     /**
      * Flag for whether settings should be discarded on saving/display of image
@@ -155,7 +155,7 @@ class Image_Transform
      * @var array
      * @access protected
      */
-    public $_supported_image_types = array();
+    public $_supported_image_types = [];
 
     /**
      * Initialization error tracking
@@ -171,12 +171,12 @@ class Image_Transform
      * @var array
      * @access protected
      */
-    public $_programs = array();
+    public $_programs = [];
 
     /**
      * Default parameters used in the addText methods.
      */
-    public $default_text_params = array(
+    public $default_text_params = [
         'text'         => 'Default text',
         'x'            => 10,
         'y'            => 20,
@@ -184,8 +184,8 @@ class Image_Transform
         'font'         => 'Arial.ttf',
         'size'         => 12,
         'angle'        => 0,
-        'resize_first' => false
-    );
+        'resize_first' => false,
+    ];
 
     /**
      * Creates a new Image_Transform object
@@ -202,11 +202,11 @@ class Image_Transform
     public function &factory($driver = '')
     {
         if ('' == $driver) {
-            $extensions = array(
+            $extensions = [
                 'imagick' => 'Imagick3',
                 'gd'      => 'GD',
-                'imlib'   => 'Imlib'
-            );
+                'imlib'   => 'Imlib',
+            ];
             if (version_compare(PHP_VERSION, '5.0.0', '<')) {
                 //Imagick2 driver for php < 5
                 $extensions['imagick'] = 'Imagick2';
@@ -222,7 +222,7 @@ class Image_Transform
                 return PEAR::raiseError('No image library specified and none can be found.' . ' You must specify driver in factory() call.', IMAGE_TRANSFORM_ERROR_ARGUMENT);
             }
         } else {
-            switch (strtolower($driver)) {
+            switch (mb_strtolower($driver)) {
                 case 'gd':
                     $driver = 'GD';
                     break;
@@ -256,8 +256,8 @@ class Image_Transform
         $obj = new $classname();
 
         // Check startup error
-        if ($error =& $obj->isError()) {
-            $obj =& $error;
+        if ($error = &$obj->isError()) {
+            $obj = &$error;
         }
 
         return $obj;
@@ -273,8 +273,8 @@ class Image_Transform
      */
     public function &isError($error = null)
     {
-        if (!is_null($error)) {
-            $this->_error =& $error;
+        if (null !== $error) {
+            $this->_error = &$error;
         }
 
         return $this->_error;
@@ -300,7 +300,9 @@ class Image_Transform
 
         // Now do the library specific resizing.
         return $this->_resize($new_x, $new_y, $options);
-    } // End resize
+    }
+
+    // End resize
 
     /**
      * Scales the image to the specified width
@@ -320,17 +322,25 @@ class Image_Transform
         $new_y = round(($new_x / $this->img_x) * $this->img_y, 0);
 
         return $this->_resize(max(1, $new_x), max(1, $new_y));
-    } // End scaleByX
+    }
+
+    // End scaleByX
 
     /**
      * Alias for resize()
      *
      * @see resize()
+     * @param int  $new_x
+     * @param int  $new_y
+     * @param null $options
+     * @return mixed
      */
     public function scaleByXY($new_x = 0, $new_y = 0, $options = null)
     {
         return $this->resize($new_x, $new_y, $options);
-    } // End scaleByXY
+    }
+
+    // End scaleByXY
 
     /**
      * Scales the image to the specified height.
@@ -350,7 +360,9 @@ class Image_Transform
         $new_x = round(($new_y / $this->img_y) * $this->img_x, 0);
 
         return $this->_resize(max(1, $new_x), max(1, $new_y));
-    } // End scaleByY
+    }
+
+    // End scaleByY
 
     /**
      * Scales an image by a percentage, factor or a given length
@@ -365,14 +377,16 @@ class Image_Transform
      */
     public function scale($size)
     {
-        if ((strlen($size) > 1) && ('%' == substr($size, -1))) {
-            return $this->scaleByPercentage(substr($size, 0, -1));
+        if ((mb_strlen($size) > 1) && ('%' == mb_substr($size, -1))) {
+            return $this->scaleByPercentage(mb_substr($size, 0, -1));
         } elseif ($size < 1) {
             return $this->scaleByFactor($size);
-        } else {
-            return $this->scaleByLength($size);
         }
-    } // End scale
+
+        return $this->scaleByLength($size);
+    }
+
+    // End scale
 
     /**
      * Scales an image to a percentage of its original size.  For example, if
@@ -387,7 +401,9 @@ class Image_Transform
     public function scaleByPercentage($size)
     {
         return $this->scaleByFactor($size / 100);
-    } // End scaleByPercentage
+    }
+
+    // End scaleByPercentage
 
     /**
      * Scales an image to a factor of its original size.  For example, if
@@ -408,7 +424,9 @@ class Image_Transform
         $new_y = round($size * $this->img_y, 0);
 
         return $this->_resize(max(1, $new_x), max(1, $new_y));
-    } // End scaleByFactor
+    }
+
+    // End scaleByFactor
 
     /**
      * Scales an image so that the longest side has the specified dimension.
@@ -434,7 +452,9 @@ class Image_Transform
         }
 
         return $this->_resize(max(1, $new_x), max(1, $new_y));
-    } // End scaleMaxLength
+    }
+
+    // End scaleMaxLength
 
     /**
      * Alias for scaleMaxLength
@@ -457,8 +477,8 @@ class Image_Transform
      * it will be scaled down to fit inside of it.
      * If the image is smaller, nothing is done.
      *
-     * @param integer $width  Width of the box in pixels
-     * @param integer $height Height of the box in pixels
+     * @param int $width  Width of the box in pixels
+     * @param int $height Height of the box in pixels
      *
      * @return bool|PEAR_Error TRUE or PEAR_Error object on error
      * @access public
@@ -466,7 +486,7 @@ class Image_Transform
     public function fit($width, $height)
     {
         if ($width <= 0 || $height <= 0) {
-            return PEAR::raiseError("Invalid arguments.", IMAGE_TRANSFORM_ERROR_ARGUMENT);
+            return PEAR::raiseError('Invalid arguments.', IMAGE_TRANSFORM_ERROR_ARGUMENT);
         }
         $x = $this->img_x / $width;
         $y = $this->img_y / $height;
@@ -474,9 +494,9 @@ class Image_Transform
             return true;
         } elseif ($x > $y) {
             return $this->scaleByX($width);
-        } else {
-            return $this->scaleByY($height);
         }
+
+        return $this->scaleByY($height);
     }
 
     /**
@@ -485,7 +505,7 @@ class Image_Transform
      *
      * @param unknown_type $width
      * @param unknown_type $height
-     * @param unknown_type $posn
+     * @param string       $posn
      *
      * @return unknown
      */
@@ -501,7 +521,7 @@ class Image_Transform
      * it will be scaled down to fit inside of it.
      * If the image is smaller, nothing is done.
      *
-     * @param integer $width Maximum width in pixels
+     * @param int $width Maximum width in pixels
      *
      * @return bool|PEAR_Error TRUE or PEAR_Error object on error
      * @access public
@@ -518,7 +538,7 @@ class Image_Transform
      * it will be scaled down to fit inside of it.
      * If the image is smaller, nothing is done.
      *
-     * @param integer $height Maximum height in pixels
+     * @param int $height Maximum height in pixels
      *
      * @return bool|PEAR_Error TRUE or PEAR_Error object on error
      * @access public
@@ -534,7 +554,6 @@ class Image_Transform
      * @param string $name  Name of option
      * @param mixed  $value Value of option
      *
-     * @return void
      * @access public
      * @see    setOptions()
      */
@@ -552,7 +571,6 @@ class Image_Transform
      *
      * @param array $options Array of options
      *
-     * @return void
      * @access public
      */
     public function setOptions($options)
@@ -578,7 +596,7 @@ class Image_Transform
         //  9 = JPC,  10 = JP2, 11 = JPX, 12 = JB2, 13 = SWC, 14 = IFF,
         // 15 = WBMP, 16 = XBM
         if (!is_array($data)) {
-            return PEAR::raiseError("Cannot fetch image or images details.", true);
+            return PEAR::raiseError('Cannot fetch image or images details.', true);
         }
 
         switch ($data[2]) {
@@ -629,7 +647,7 @@ class Image_Transform
                 $type = 'xbm';
                 break;
             default:
-                return PEAR::raiseError("Cannot recognize image format", IMAGE_TRANSFORM_ERROR_UNSUPPORTED);
+                return PEAR::raiseError('Cannot recognize image format', IMAGE_TRANSFORM_ERROR_UNSUPPORTED);
         }
         $this->img_x = $this->new_x = $data[0];
         $this->img_y = $this->new_y = $data[1];
@@ -649,7 +667,7 @@ class Image_Transform
      **/
     public function _convert_image_type($type)
     {
-        switch (strtolower($type)) {
+        switch (mb_strtolower($type)) {
             case 'gif':
                 return IMAGETYPE_GIF;
             case 'jpeg':
@@ -686,7 +704,7 @@ class Image_Transform
                 return $type;
         }
 
-        return (isset($types[$t = strtolower($type)])) ? $types[$t] : $type;
+        return isset($types[$t = mb_strtolower($type)]) ? $types[$t] : $type;
     }
 
     /**
@@ -702,17 +720,17 @@ class Image_Transform
      */
     public function _parse_size($new_size, $old_size)
     {
-        if ('%' == substr($new_size, -1)) {
-            $new_size = substr($new_size, 0, -1);
+        if ('%' == mb_substr($new_size, -1)) {
+            $new_size = mb_substr($new_size, 0, -1);
             $new_size = $new_size / 100;
         }
         if ($new_size > 1) {
             return (int)$new_size;
         } elseif (0 == $new_size) {
             return (int)$old_size;
-        } else {
-            return (int)round($new_size * $old_size, 0);
         }
+
+        return (int)round($new_size * $old_size, 0);
     }
 
     /**
@@ -746,7 +764,6 @@ class Image_Transform
      *
      * @param int $size dimension to set
      *
-     * @return void
      * @access protected
      * @since  29/05/02 13:36:31
      */
@@ -760,7 +777,6 @@ class Image_Transform
      *
      * @param int $size dimension to set
      *
-     * @return void
      * @access protected
      * @since  29/05/02 13:36:31
      */
@@ -774,7 +790,6 @@ class Image_Transform
      *
      * @param int $size dimension to set
      *
-     * @return void
      * @access protected
      * @since  29/05/02 13:36:31
      */
@@ -788,7 +803,6 @@ class Image_Transform
      *
      * @param int $size dimension to set
      *
-     * @return void
      * @since  29/05/02 13:36:31
      * @access protected
      */
@@ -801,14 +815,16 @@ class Image_Transform
      * Returns the image handle so that one can further try
      * to manipulate the image
      *
-     * @return resource
+     * @return object
      *
      * @access public
      */
     public function getHandle()
     {
         return PEAR::raiseError('getHandle() method not supported by driver', IMAGE_TRANSFORM_ERROR_UNSUPPORTED);
-    }//function getHandle()
+    }
+
+    //function getHandle()
 
     /**
      * Returns the type of the image being manipulated
@@ -833,7 +849,7 @@ class Image_Transform
      */
     public function getMimeType($type = null)
     {
-        return image_type_to_mime_type($this->_convert_image_type(($type) ? $type : $this->type));
+        return image_type_to_mime_type($this->_convert_image_type($type ?: $this->type));
     }
 
     /**
@@ -904,13 +920,13 @@ class Image_Transform
      */
     public function getImageSize()
     {
-        return array(
+        return [
             $this->img_x,
             $this->img_y,
             $this->_convert_image_type($this->type),
             'height="' . $this->img_y . '" width="' . $this->img_x . '"',
-            'mime' => $this->getMimeType()
-        );
+            'mime' => $this->getMimeType(),
+        ];
     }
 
     /**
@@ -1017,12 +1033,12 @@ class Image_Transform
      * @param string $type Image type (GIF, PNG, JPEG...)
      * @param string $mode 'r' for read, 'w' for write, 'rw' for both
      *
-     * @return TRUE if type (and mode) is supported FALSE otherwise
+     * @return true if type (and mode) is supported FALSE otherwise
      * @access public
      */
     public function supportsType($type, $mode = 'rw')
     {
-        return (false === strpos(@$this->_supported_image_types[strtolower($type)], $mode)) ? false : true;
+        return (false === mb_strpos(@$this->_supported_image_types[mb_strtolower($type)], $mode)) ? false : true;
     }
 
     /**
@@ -1070,11 +1086,11 @@ class Image_Transform
      */
     public function colorhex2colorarray($colorhex)
     {
-        $r = hexdec(substr($colorhex, 1, 2));
-        $g = hexdec(substr($colorhex, 3, 2));
-        $b = hexdec(substr($colorhex, 5, 2));
+        $r = hexdec(mb_substr($colorhex, 1, 2));
+        $g = hexdec(mb_substr($colorhex, 3, 2));
+        $b = hexdec(mb_substr($colorhex, 5, 2));
 
-        return array($r, $g, $b, 'type' => 'RGB');
+        return [$r, $g, $b, 'type' => 'RGB'];
     }
 
     public function _send_display_headers($type)
@@ -1105,7 +1121,7 @@ class Image_Transform
         }
         $color = sprintf('#%02X%02X%02X', @$color[0], @$color[1], @$color[2]);
 
-        return (7 != strlen($color)) ? false : $color;
+        return (7 != mb_strlen($color)) ? false : $color;
     }
 
     /**
@@ -1118,7 +1134,7 @@ class Image_Transform
      */
     public function getTempDir()
     {
-        require_once 'System.php';
+        require_once __DIR__ . '/System.php';
 
         return System::tmpdir();
     }
@@ -1133,8 +1149,8 @@ class Image_Transform
      */
     public function getTempFile($dirname = null)
     {
-        if (is_null($dirname)) {
-            require_once 'System.php';
+        if (null === $dirname) {
+            require_once __DIR__ . '/System.php';
             $dirname = System::tmpdir();
         }
 
@@ -1149,7 +1165,7 @@ class Image_Transform
     /**
      * Methods to add to the driver classes in the future
      *
-     * @return void
+     * @return object
      */
     public function addText()
     {
@@ -1229,10 +1245,10 @@ class Image_Transform
     /**
      * Vertical mirroring
      *
-     * @return TRUE or PEAR Error object on error
+     * @return object or PEAR Error object on error
      * @access public
      * @see    mirror()
-     **/
+     */
     public function flip()
     {
         return PEAR::raiseError('flip() method not supported by driver', IMAGE_TRANSFORM_ERROR_UNSUPPORTED);
@@ -1270,7 +1286,7 @@ class Image_Transform
      * @return array an RGB color array
      * @access protected
      */
-    public function _getColor($colorOf, $options = array(), $default = array(0, 0, 0))
+    public function _getColor($colorOf, $options = [], $default = [0, 0, 0])
     {
         $opt = array_merge($this->_options, (array)$options);
         if (isset($opt[$colorOf])) {
@@ -1278,13 +1294,13 @@ class Image_Transform
             if (is_array($color)) {
                 return $color;
             }
-            if ('#' == $color{0}) {
+            if ('#' == $color[0]) {
                 return $this->colorhex2colorarray($color);
             }
-            static $colornames = array();
-            require_once 'Image/Transform/Driver/ColorsDefs.php';
+            static $colornames = [];
+            require_once __DIR__ . '/Image/Transform/Driver/ColorsDefs.php';
 
-            return (isset($colornames[$color])) ? $colornames[$color] : $default;
+            return isset($colornames[$color]) ? $colornames[$color] : $default;
         }
 
         return $default;
@@ -1300,11 +1316,11 @@ class Image_Transform
      * @return mixed the option
      * @access protected
      */
-    public function _getOption($name, $options = array(), $default = null)
+    public function _getOption($name, $options = [], $default = null)
     {
         $opt = array_merge($this->_options, (array)$options);
 
-        return (isset($opt[$name])) ? $opt[$name] : $default;
+        return isset($opt[$name]) ? $opt[$name] : $default;
     }
 
     /**
@@ -1334,9 +1350,9 @@ class Image_Transform
             $bottom = $y;
         }
 
-        return (bool)($left < $this->new_x
-                      && $right >= 0
-                      && $top < $this->new_y
-                      && $bottom >= 0);
+        return ($left < $this->new_x
+                && $right >= 0
+                && $top < $this->new_y
+                && $bottom >= 0);
     }
 }

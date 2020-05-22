@@ -15,26 +15,23 @@
  * @package     ExtGallery
  */
 
-
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 
+/** @var Extgallery\Helper $helper */
+$helper                                  = Extgallery\Helper::getInstance();
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-categories.tpl';
-include XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
-if (!isset($_GET['id'])) {
-    $catId = 0;
-} else {
-    $catId = (int)$_GET['id'];
-}
+$catId = \Xmf\Request::getInt('id', 0, 'GET');
 
 $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 /** @var Extgallery\Category $catObj */
 $catObj = $catHandler->getCat($catId);
 
 if (null === $catObj) {
-    include XOOPS_ROOT_PATH . '/footer.php';
+    require_once XOOPS_ROOT_PATH . '/footer.php';
     exit;
 }
 
@@ -63,13 +60,13 @@ $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 $lang = [
     'categoriesAlbums' => _MD_EXTGALLERY_CATEGORIESALBUMS,
     'nbAlbums'         => _MD_EXTGALLERY_NBALBUMS,
-    'nbPhotos'         => _MD_EXTGALLERY_NBPHOTOS
+    'nbPhotos'         => _MD_EXTGALLERY_NBPHOTOS,
 ];
 $xoopsTpl->assign('lang', $lang);
 
 $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));
-$xoopsTpl->assign('disp_cat_img', $xoopsModuleConfig['disp_cat_img']);
-$xoopsTpl->assign('display_type', $xoopsModuleConfig['display_type']);
-$xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
+$xoopsTpl->assign('disp_cat_img', $helper->getConfig('disp_cat_img'));
+$xoopsTpl->assign('display_type', $helper->getConfig('display_type'));
+$xoopsTpl->assign('show_rss', $helper->getConfig('show_rss'));
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

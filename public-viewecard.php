@@ -17,14 +17,14 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-viewecard.tpl';
-include XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 $myts = \MyTextSanitizer::getInstance();
 
-if (isset($_GET['id'])) {
+if (\Xmf\Request::hasVar('id', 'GET')) {
     $ecardId = $myts->addSlashes($_GET['id']);
 } else {
     $ecardId = 0;
@@ -58,8 +58,8 @@ $xoTheme->addMeta('link', $rel, $attributes);
 $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 
 $lang = [
-    'clickFormMore' => _MD_EXTGALLERY_CLICK_FOR_MORE
+    'clickFormMore' => _MD_EXTGALLERY_CLICK_FOR_MORE,
 ];
 $xoopsTpl->assign('lang', $lang);
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

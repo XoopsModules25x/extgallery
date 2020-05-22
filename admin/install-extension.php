@@ -16,8 +16,10 @@
  * @package     ExtGallery
  */
 
+use XoopsModules\Extgallery;
+
 require_once __DIR__ . '/admin_header.php';
-if (isset($_POST['step'])) {
+if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 } else {
     $step = 'default';
@@ -31,7 +33,6 @@ $downloadServer = 'http://downloads.sourceforge.net/xoops/';
 $extensionFileName = 'extgallery-extension-hook.tar.gz';
 
 switch ($step) {
-
     case 'download':
 
         xoops_cp_header();
@@ -58,7 +59,6 @@ switch ($step) {
         xoops_cp_footer();
 
         break;
-
     case 'install':
 
         if (!file_exists(XOOPS_ROOT_PATH . '/uploads/' . $extensionFileName)) {
@@ -70,7 +70,7 @@ switch ($step) {
         }
 
         $g_pcltar_lib_dir = XOOPS_ROOT_PATH . '/modules/' . $localModuleDir . '/class';
-        include __DIR__ . '/../class/pcltar.lib.php';
+        require_once dirname(__DIR__) . '/class/pcltar.lib.php';
 
         // Extract extension files
         PclTarExtract(XOOPS_ROOT_PATH . '/uploads/' . $extensionFileName, XOOPS_ROOT_PATH . '/class/textsanitizer/', 'class/textsanitizer/');
@@ -83,14 +83,13 @@ switch ($step) {
         }
 
         // Activate extension
-        $conf                          = include XOOPS_ROOT_PATH . '/class/textsanitizer/config.php';
+        $conf                          = require XOOPS_ROOT_PATH . '/class/textsanitizer/config.php';
         $conf['extensions']['gallery'] = 1;
         file_put_contents(XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php', "<?php\rreturn \$config = " . var_export($conf, true) . "\r?>", LOCK_EX);
 
         redirect_header('extension.php', 3, _AM_EXTGALLERY_EXTENSION_INSTALLED);
 
         break;
-
     default:
     case 'default':
 

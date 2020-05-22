@@ -9,7 +9,7 @@
  * Contributing author: Tyler Smith (@mbmufffin)
  */
 
- 
+
 /* Browser Resets */
 .flex-container a:active,
 .flexslider a:active,
@@ -17,18 +17,18 @@
 .flexslider a:focus  {outline: none;}
 .slides,
 .flex-control-nav,
-.flex-direction-nav {margin: 0; padding: 0; list-style: none;} 
+.flex-direction-nav {margin: 0; padding: 0; list-style: none;}
 
 /* FlexSlider Necessary Styles
-*********************************/ 
+*********************************/
 .flexslider {margin: 0; padding: 0;}
 .flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
 .flexslider .slides img {width: 100%; display: block;}
 .flex-pauseplay span {text-transform: capitalize;}
 
 /* Clearfix for the .slides element */
-.slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;} 
-html[xmlns] .slides {display: block;} 
+.slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+html[xmlns] .slides {display: block;}
 * html .slides {height: 1%;}
 
 /* No JavaScript Fallback */
@@ -89,18 +89,18 @@ html[xmlns] .slides {display: block;}
 }
 
 .flex-control-nav {
-	bottom: -30px;
-	line-height: 11px;
+    bottom: -30px;
+    line-height: 11px;
 }
 
 
 /** move margin from list items to anchors */
 .flex-control-nav li {
-	margin: 0;
+    margin: 0;
 }
 .flex-control-nav li a {
-	margin: 0 6px;
-	padding: 0;
+    margin: 0 6px;
+    padding: 0;
 }
 
 .flexslider .slides li {
@@ -123,11 +123,11 @@ html[xmlns] .slides {display: block;}
 }
 
 .flex-control-nav {
-	margin: auto;
+    margin: auto;
 }
 
 .metaslider .flexslider.filmstrip {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 .metaslider .flexslider.filmstrip .slides li {
     cursor: pointer;

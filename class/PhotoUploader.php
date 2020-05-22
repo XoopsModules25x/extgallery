@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -64,8 +66,8 @@ class PhotoUploader
      */
     public function fetchPhoto($file)
     {
-        $jupart  = isset($_POST['jupart']) ? (int)$_POST['jupart'] : 0;
-        $jufinal = isset($_POST['jufinal']) ? (int)$_POST['jufinal'] : 1;
+        $jupart  = \Xmf\Request::getInt('jupart', 0, 'POST');
+        $jufinal = \Xmf\Request::getInt('jufinal', 1, 'POST');
         $md5sums = isset($_POST['md5sum'][0]) ? $_POST['md5sum'][0] : null;
 
         if ('' == $this->uploadDir) {
@@ -215,7 +217,7 @@ class PhotoUploader
         $imageExtensions = ['gif', 'jpg', 'jpeg', 'png'];
 
         // Check IE XSS before returning success
-        $ext       = strtolower(substr(strrchr($this->savedDestination, '.'), 1));
+        $ext       = mb_strtolower(mb_substr(mb_strrchr($this->savedDestination, '.'), 1));
         $photoInfo = getimagesize($tmpDestination);
         if (false === $photoInfo || $imageExtensions[(int)$photoInfo[2]] != $ext) {
             $this->abort('Suspicious image upload refused');
@@ -313,7 +315,7 @@ class PhotoUploader
     {
         //  $allowedMimeTypes = array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_JPG, IMAGETYPE_PNG);
         $allowedMimeTypes = ['image/gif', 'image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png'];
-        if (!in_array($photoInfo['mime'], $allowedMimeTypes)) {
+        if (!in_array($photoInfo['mime'], $allowedMimeTypes, true)) {
             return false;
         }
 

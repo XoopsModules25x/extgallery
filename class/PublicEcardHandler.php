@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -16,11 +18,9 @@
  * @package     ExtGallery
  */
 
-
 use XoopsModules\Extgallery;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 
 /**
  * Class Extgallery\PublicEcardHandler
@@ -29,9 +29,9 @@ class PublicEcardHandler extends Extgallery\PersistableObjectHandler
 {
     /**
      * Extgallery\PublicEcardHandler constructor.
-     * @param \XoopsDatabase $db
+     * @param \XoopsDatabase|null $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'extgallery_publicecard', Extgallery\PublicEcard::class, 'ecard_id');
     }
@@ -54,6 +54,7 @@ class PublicEcardHandler extends Extgallery\PersistableObjectHandler
             return false;
         }
         $this->send($ecard);
+
         return true;
     }
 
@@ -88,7 +89,7 @@ class PublicEcardHandler extends Extgallery\PersistableObjectHandler
     public function getEcard($ecardId)
     {
         $criteria = new \Criteria('ecard_cardid', $ecardId);
-        $ecard    =& $this->getObjects($criteria);
+        $ecard    = $this->getObjects($criteria);
         if (1 != count($ecard)) {
             return false;
         }

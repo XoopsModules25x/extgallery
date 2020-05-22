@@ -10,9 +10,9 @@ $loading  = $json->encode(t('Loading image %s...', '#%curr%'));
 $errortxt = $json->encode(t('The image %s could not be loaded.', '#%curr%</a>'));
 
 ?>
-<?php if (false !== $images): ?>
+<?php if (false !== $images) : ?>
     <ul id="<?php echo $magnific_type . '-' . $bID ?>" class="<?php echo $magnific_type . '-gallery' . ' ' . $cssFrameworkClass; ?>">
-        <?php foreach ($images as $image): ?>
+        <?php foreach ($images as $image) : ?>
             <?php $thumbnail = $ih->getThumbnail($image, (int)$controller->thumbnailWidth, (int)$controller->thumbnailHeight); ?>
             <?php $fileName = $image->getFileName(); ?>
             <?php $fileDescription = $image->getDescription(); ?>

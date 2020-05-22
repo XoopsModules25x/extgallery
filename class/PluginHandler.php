@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -16,7 +18,6 @@
  * @package     ExtGallery
  */
 
-
 use XoopsModules\Extgallery;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
@@ -28,9 +29,9 @@ class PluginHandler
 {
     /**
      * Extgallery\PluginHandler constructor.
-     * @param $db
+     * @param \XoopsDatabase|null $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
     }
 
@@ -40,14 +41,14 @@ class PluginHandler
      */
     public function triggerEvent($event, &$param)
     {
-        include XOOPS_ROOT_PATH . '/modules/extgallery/plugin/plugin.php';
+        require_once XOOPS_ROOT_PATH . '/modules/extgallery/plugin/plugin.php';
 
         foreach ($extgalleryPlugin as $plugin => $status) {
             if (!$status) {
                 continue;
             }
 
-//            require_once XOOPS_ROOT_PATH . "/modules/extgallery/plugin/$plugin/$plugin.php";
+            //            require_once XOOPS_ROOT_PATH . "/modules/extgallery/plugin/$plugin/$plugin.php";
 
             $class = 'Extgallery' . ucfirst($plugin);
 
@@ -58,7 +59,7 @@ class PluginHandler
 
     public function includeLangFile()
     {
-        include XOOPS_ROOT_PATH . '/modules/extgallery/plugin/plugin.php';
+        require_once XOOPS_ROOT_PATH . '/modules/extgallery/plugin/plugin.php';
 
         foreach ($extgalleryPlugin as $plugin => $status) {
             if (!$status) {

@@ -17,14 +17,17 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
+
+/** @var Extgallery\Helper $helper */
+$helper        = Extgallery\Helper::getInstance();
 $moduleDirName = basename(__DIR__);
 
 $GLOBALS['xoopsOption']['template_main'] = $moduleDirName . '_index.tpl';
-include XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 /** @var Extgallery\PublicCategoryHandler $catHandler */
-$catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
+$catHandler = $helper->getHandler('PublicCategory');
 
 $cats = $catHandler->objectToArray($catHandler->getChildren(0), ['photo_id']);
 $xoopsTpl->assign('cats', $cats);
@@ -41,24 +44,23 @@ $xoTheme->addStylesheet('modules/extgallery/assets/css/style.css');
 $lang = [
     'categoriesAlbums' => _MD_EXTGALLERY_CATEGORIESALBUMS,
     'nbAlbums'         => _MD_EXTGALLERY_NBALBUMS,
-    'nbPhotos'         => _MD_EXTGALLERY_NBPHOTOS
+    'nbPhotos'         => _MD_EXTGALLERY_NBPHOTOS,
 ];
 $xoopsTpl->assign('lang', $lang);
-
 $xoopsTpl->assign('extgalleryName', $xoopsModule->getVar('name'));
-$xoopsTpl->assign('disp_cat_img', $xoopsModuleConfig['disp_cat_img']);
-$xoopsTpl->assign('display_type', $xoopsModuleConfig['display_type']);
-$xoopsTpl->assign('show_rss', $xoopsModuleConfig['show_rss']);
+$xoopsTpl->assign('disp_cat_img', $helper->getConfig('disp_cat_img'));
+$xoopsTpl->assign('display_type', $helper->getConfig('display_type'));
+$xoopsTpl->assign('show_rss', $helper->getConfig('show_rss'));
 
 // pk ------------------- add upload and view-my-album links to main page
 if (null !== $GLOBALS['xoopsUser'] && is_object($GLOBALS['xoopsUser'])) {
     if (isset($GLOBALS['xoopsModule']) && $GLOBALS['xoopsModule']->getVar('dirname') == $moduleDirName) {
-        if (null != $GLOBALS['xoopsUser']) {
+        if (null !== $GLOBALS['xoopsUser']) {
             $albumlinkname = _MD_EXTGALLERY_USERALBUM;
             $albumurl      = 'public-useralbum.php?id=' . $GLOBALS['xoopsUser']->uid();
         }
 
-//        require_once XOOPS_ROOT_PATH . "/modules/{$moduleDirName}/class/publicPerm.php";
+        //        require_once XOOPS_ROOT_PATH . "/modules/{$moduleDirName}/class/publicPerm.php";
 
         $permHandler = Extgallery\PublicPermHandler::getInstance();
         if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) > 0) {
@@ -82,4 +84,4 @@ if (isset($uploadurl)) {
 
 // end pk mod ------------------------------
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

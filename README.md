@@ -12,7 +12,7 @@
 
 extGallery module for [XOOPS CMS](https://xoops.org) for a Photo Gallery
 
-[![Tutorial Available](https://xoops.org/images/tutorial-available-blue.svg)](https://www.gitbook.com/book/xoops/xoops-extgallery-module/) Tutorial: see [here](https://www.gitbook.com/book/xoops/xoops-extgallery-module/). 
+[![Tutorial Available](https://xoops.org/images/tutorial-available-blue.svg)](https://xoops.gitbook.io/xoops-extgallery-module/) Tutorial: see [here](https://xoops.gitbook.io/xoops-extgallery-module/).
 To contribute to the Tutorial, [fork it on GitHub](https://github.com/XoopsDocs/extgallery-tutorial)
 
 [![Translations on Transifex](https://xoops.org/images/translations-transifex-blue.svg)](https://www.transifex.com/xoops) 

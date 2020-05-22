@@ -16,7 +16,7 @@
 // |          Alan Knowles <alan@akbkhome.com>                            |
 // +----------------------------------------------------------------------+
 
-//require_once 'Image/Transform/Driver/GD.php';
+//require_once __DIR__ . '/Image/Transform/Driver/GD.php';
 require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/pear/Image/Transform/Driver/GD.php';
 
 /**
@@ -40,7 +40,9 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
     public function Image_Transform_Driver_GD1()
     {
         $this->__construct();
-    } // End function Image
+    }
+
+    // End function Image
 
     /**
      * Check settings
@@ -52,7 +54,9 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
     public function __construct()
     {
         parent::__construct();
-    } // End function Image
+    }
+
+    // End function Image
 
     /**
      * Resize Action
@@ -73,8 +77,8 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
         if (true === $this->resized) {
             return PEAR::raiseError('You have already resized the image without saving it.  Your previous resizing will be overwritten', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE);
         }
-        $new_img = ImageCreate($new_x, $new_y);
-        ImageCopyResized($new_img, $this->imageHandle, 0, 0, 0, 0, $new_x, $new_y, $this->img_x, $this->img_y);
+        $new_img = imagecreate($new_x, $new_y);
+        imagecopyresized($new_img, $this->imageHandle, 0, 0, 0, 0, $new_x, $new_y, $this->img_x, $this->img_y);
         $this->old_image   = $this->imageHandle;
         $this->imageHandle = $new_img;
         $this->resized     = true;
@@ -87,9 +91,9 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
 
     public function rotate($angle, $options = null)
     {
-        if (null == $options) {
+        if (null === $options) {
             $autoresize = true;
-            $color_mask = array(255, 255, 0);
+            $color_mask = [255, 255, 0];
         } else {
             extract($options);
         }
@@ -105,10 +109,10 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
 
         if (!is_array($color_mask)) {
             // Not already in numberical format, so we convert it.
-            if ('#' == $color_mask{0}) {
+            if ('#' == $color_mask[0]) {
                 $color_mask = $this->colorhex2colorarray($color_mask);
             } else {
-                require_once 'Image/Transform/Driver/ColorsDefs.php';
+                require_once __DIR__ . '/Image/Transform/Driver/ColorsDefs.php';
                 $color_mask = isset($colornames[$color_mask]) ? $colornames[$color_mask] : false;
             }
         }
@@ -117,7 +121,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
         $cosT = cos($t);
         $sinT = sin($t);
 
-        $img =& $this->imageHandle;
+        $img = &$this->imageHandle;
 
         $width  = $max_x = $this->img_x;
         $height = $max_y = $this->img_y;
@@ -130,7 +134,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
         if ($autoresize) {
             $t = abs($t);
             $a = round($angle, 0);
-            switch ((int)($angle)) {
+            switch ((int)$angle) {
                 case 0:
                     $width2  = $width;
                     $height2 = $height;
@@ -148,8 +152,8 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
                     $height2 = $width;
                     break;
                 default:
-                    $width2  = (int)(abs(sin($t) * $height + cos($t) * $width));
-                    $height2 = (int)(abs(cos($t) * $height + sin($t) * $width));
+                    $width2  = (int)abs(sin($t) * $height + cos($t) * $width);
+                    $height2 = (int)abs(cos($t) * $height + sin($t) * $width);
             }
 
             $width2  -= $width2 % 2;
@@ -165,7 +169,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
             $max_y2   = $height2;
         }
 
-        $img2 = @imagecreateTrueColor($width2, $height2);
+        $img2 = @imagecreatetruecolor($width2, $height2);
 
         if (!is_resource($img2)) {
             return PEAR::raiseError('Cannot create buffer for the rotataion.', null, PEAR_ERROR_TRIGGER, E_USER_NOTICE);
@@ -179,7 +183,7 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
         $mask = imagecolorresolve($img2, $color_mask[0], $color_mask[1], $color_mask[2]);
 
         // use simple lines copy for axes angles
-        switch ((int)($angle)) {
+        switch ((int)$angle) {
             case 0:
                 imagefill($img2, 0, 0, $mask);
                 for ($y = 0; $y < $max_y; $y++) {
@@ -220,13 +224,11 @@ class Image_Transform_Driver_GD1 extends Image_Transform_Driver_GD
             default:
                 $i = 0;
                 for ($y = $min_y2; $y < $max_y2; $y++) {
-
                     // Algebra :)
                     $x2 = round((($min_x2 - $x1) * $cosT) + (($y - $y1) * $sinT + $x1), 0);
-                    $y2 = round((($y - $y1) * $cosT - ($min_x2 - $x1) * $sinT + $y1), 0);
+                    $y2 = round(($y - $y1) * $cosT - ($min_x2 - $x1) * $sinT + $y1, 0);
 
                     for ($x = $min_x2; $x < $max_x2; $x++) {
-
                         // Check if we are out of original bounces, if we are
                         // use the default color mask
                         if ($x2 >= 0 && $x2 < $max_x && $y2 >= 0 && $y2 < $max_y) {

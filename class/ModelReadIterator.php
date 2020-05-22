@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * Extended object handlers
@@ -18,8 +20,6 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-use XoopsModules\Extgallery;
-
 /**
  * Object render handler class.
  *
@@ -27,14 +27,14 @@ use XoopsModules\Extgallery;
  * @copyright   XOOPS Project (https://xoops.org)
  *
  * {@link XoopsObjectAbstract}
- *
  */
 class ModelReadIterator extends \XoopsModelRead
 {
     /**
      * get all objects matching a condition
      *
-     * @param  \CriteriaCompo $criteria  {@link CriteriaElement} to match
+     * @param \CriteriaElement $criteria  {@link CriteriaElement}
+     *                                    to match
      * @param  array           $fields    variables to fetch
      * @param  bool            $asObject  flag indicating as object, otherwise as array
      * @param  bool            $id_as_key use the ID as key for the array
@@ -42,8 +42,8 @@ class ModelReadIterator extends \XoopsModelRead
      */
     public function &getAll(\CriteriaElement $criteria = null, $fields = null, $asObject = true, $id_as_key = true)
     {
-        if (is_array($fields) && count($fields) > 0) {
-            if (!in_array($this->handler->keyName, $fields)) {
+        if ($fields && is_array($fields)) {
+            if (!in_array($this->handler->keyName, $fields, true)) {
                 $fields[] = $this->handler->keyName;
             }
             $select = '`' . implode('`, `', $fields) . '`';
@@ -108,7 +108,7 @@ class ModelReadIterator extends \XoopsModelRead
      */
     public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
-        $objects =& $this->getAll($criteria, null, $as_object, $id_as_key);
+        $objects = &$this->getAll($criteria, null, $as_object, $id_as_key);
 
         return $objects;
     }
@@ -117,8 +117,8 @@ class ModelReadIterator extends \XoopsModelRead
      * Retrieve a list of objects data
      *
      * @param \CriteriaElement $criteria {@link CriteriaElement} conditions to be met
-     * @param int             $limit    Max number of objects to fetch
-     * @param int             $start    Which record to start at
+     * @param int              $limit    Max number of objects to fetch
+     * @param int              $start    Which record to start at
      *
      * @return array
      */
@@ -187,11 +187,11 @@ class ModelReadIterator extends \XoopsModelRead
      *
      * {@link CriteriaCompo}
      *
-     * @param  int             $limit    Max number of objects to fetch
-     * @param  int             $start    Which record to start at
+     * @param  int              $limit    Max number of objects to fetch
+     * @param  int              $start    Which record to start at
      * @param  \CriteriaElement $criteria {@link CriteriaElement} to match
-     * @param  array           $fields   variables to fetch
-     * @param  bool            $asObject flag indicating as object, otherwise as array
+     * @param  array            $fields   variables to fetch
+     * @param  bool             $asObject flag indicating as object, otherwise as array
      * @return array           of objects    {@link XoopsObject}
      */
     public function &getByLimit(
@@ -199,8 +199,8 @@ class ModelReadIterator extends \XoopsModelRead
         $start = 0,
         \CriteriaElement $criteria = null,
         $fields = null,
-        $asObject = true
-    ) {
+        $asObject = true)
+    {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
         trigger_error(__CLASS__ . '::' . __FUNCTION__ . '() is deprecated, please use getAll instead.' . ". Called from {$trace[0]['file']}line {$trace[0]['line']}", E_USER_WARNING);
         if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
@@ -235,7 +235,7 @@ class ModelReadIterator extends \XoopsModelRead
             $obj->assignVars($myrow);
             if (!$id_as_key) {
                 if ($as_object) {
-                    $ret[] =& $obj;
+                    $ret[] = &$obj;
                 } else {
                     $row  = [];
                     $vars = $obj->getVars();
@@ -246,7 +246,7 @@ class ModelReadIterator extends \XoopsModelRead
                 }
             } else {
                 if ($as_object) {
-                    $ret[$myrow[$this->handler->keyName]] =& $obj;
+                    $ret[$myrow[$this->handler->keyName]] = &$obj;
                 } else {
                     $row  = [];
                     $vars = $obj->getVars();

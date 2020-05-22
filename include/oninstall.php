@@ -16,29 +16,26 @@
  */
 
 use XoopsModules\Extgallery;
-use XoopsModules\Extgallery\Common;
 
 /**
- *
  * Prepares system prior to attempting to install module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to install, false if not
  */
 function xoops_module_pre_install_extgallery(\XoopsModule $module)
 {
-    //    include __DIR__ . '/../preloads/autoloader.php';
-    include __DIR__ . '/common.php';
+    require_once __DIR__ . '/common.php';
     /** @var Extgallery\Utility $utility */
-    $utility = new Extgallery\Utility();
+    $utility = new \XoopsModules\Extgallery\Utility();
     //check for minimum XOOPS version
     $xoopsSuccess = $utility::checkVerXoops($module);
 
     // check for minimum PHP version
-    $phpSuccess   = $utility::checkVerPhp($module);
+    $phpSuccess = $utility::checkVerPhp($module);
 
-    if (false !== $xoopsSuccess && false !==  $phpSuccess) {
-        $moduleTables =& $module->getInfo('tables');
+    if (false !== $xoopsSuccess && false !== $phpSuccess) {
+        $moduleTables = &$module->getInfo('tables');
         foreach ($moduleTables as $table) {
             $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
         }
@@ -48,19 +45,21 @@ function xoops_module_pre_install_extgallery(\XoopsModule $module)
 }
 
 /**
- *
  * Performs tasks required during installation of the module
- * @param XoopsModule $module
+ * @param \XoopsModule $module
  * @return bool true if installation successful, false if not
  * @internal param XoopsModule $module <a href='psi_element://XoopsModule'>XoopsModule</a>
- *
  */
 function xoops_module_install_extgallery(\XoopsModule $module)
 {
+    require_once __DIR__ . '/../preloads/autoloader.php';
+
+    $moduleDirName = basename(dirname(__DIR__));
+
     $module_id = $module->getVar('mid');
-    /** @var XoopsGroupPermHandler $gpermHandler */
-    $gpermHandler = xoops_getHandler('groupperm');
-    /** @var XoopsModuleHandler $moduleHandler */
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
+    $grouppermHandler = xoops_getHandler('groupperm');
+    /** @var \XoopsModuleHandler $moduleHandler */
     $configHandler = xoops_getHandler('config');
 
     /**
@@ -68,32 +67,32 @@ function xoops_module_install_extgallery(\XoopsModule $module)
      */
 
     // Access right
-    $gpermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_USERS, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_ANONYMOUS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_ANONYMOUS, $module_id);
 
     // Public rate
-    $gpermHandler->addRight('extgallery_public_mask', 2, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 2, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 2, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 2, XOOPS_GROUP_USERS, $module_id);
 
     // Public eCard
-    $gpermHandler->addRight('extgallery_public_mask', 4, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 4, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 4, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 4, XOOPS_GROUP_USERS, $module_id);
 
     // Public download
-    $gpermHandler->addRight('extgallery_public_mask', 8, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 8, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 8, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 8, XOOPS_GROUP_USERS, $module_id);
 
     // Public upload
-    $gpermHandler->addRight('extgallery_public_mask', 16, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 16, XOOPS_GROUP_ADMIN, $module_id);
 
     // Public autoapprove
-    $gpermHandler->addRight('extgallery_public_mask', 32, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 32, XOOPS_GROUP_ADMIN, $module_id);
 
     // Public display
-    $gpermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_USERS, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_ANONYMOUS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_ANONYMOUS, $module_id);
 
     /**
      * Default User's category permission
@@ -102,144 +101,17 @@ function xoops_module_install_extgallery(\XoopsModule $module)
     // Private gallery
 
     // Private rate
-    $gpermHandler->addRight('extgallery_private', 2, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_private', 2, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_private', 2, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_private', 2, XOOPS_GROUP_USERS, $module_id);
 
     // Private eCard
-    $gpermHandler->addRight('extgallery_private', 4, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_private', 4, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_private', 4, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_private', 4, XOOPS_GROUP_USERS, $module_id);
 
     // Private download
-    $gpermHandler->addRight('extgallery_private', 8, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_private', 8, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_private', 8, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_private', 8, XOOPS_GROUP_USERS, $module_id);
 
     // Private autoapprove
-    $gpermHandler->addRight('extgallery_private', 16, XOOPS_GROUP_ADMIN, $module_id);
-
-    /*
-
-      // Create eXtGallery main upload directory
-      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery';
-      if (!is_dir($dir)) {
-          mkdir($dir, 0777);
-      }
-      chmod($dir, 0777);
-      // Create directory for photo in public album
-      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo';
-      if (!is_dir($dir)) {
-          mkdir($dir, 0777);
-      }
-      chmod($dir, 0777);
-      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original';
-      if (!is_dir($dir)) {
-          mkdir($dir, 0777);
-      }
-      chmod($dir, 0777);
-      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large';
-      if (!is_dir($dir)) {
-          mkdir($dir, 0777);
-      }
-      chmod($dir, 0777);
-      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium';
-      if (!is_dir($dir)) {
-          mkdir($dir, 0777);
-      }
-      chmod($dir, 0777);
-      $dir = XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb';
-      if (!is_dir($dir)) {
-          mkdir($dir, 0777);
-      }
-      chmod($dir, 0777);
-
-
-
-      // Create directory for photo in user's album
-      //mkdir(XOOPS_ROOT_PATH."/uploads/extgallery/user-photo");
-
-      // Copy index.html files on uploads folders
-      $indexFile = XOOPS_ROOT_PATH . '/modules/extgallery/include/index.html';
-      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/index.html');
-      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/index.html');
-      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original/index.html');
-      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large/index.html');
-      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium/index.html');
-      copy($indexFile, XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb/index.html');
-
-  */
-
-    require_once __DIR__ . '/../../../include/cp_header.php';
-
-    $moduleDirName = basename(dirname(__DIR__));
-
-    /** @var Extgallery\Helper $helper */
-    /** @var Extgallery\Utility $utility */
-    /** @var Extgallery\Common\Configurator $configurator */
-    $helper = Extgallery\Helper::getInstance();
-    $utility      = new Extgallery\Utility();
-    $configurator = new Common\Configurator();
-
-    // Load language files
-    $helper->loadLanguage('admin');
-    $helper->loadLanguage('modinfo');
-
-
-
-    $moduleId     = $module->getVar('mid');
-    $moduleId2    = $helper->getModule()->mid();
-    //$moduleName = $module->getVar('name');
-    $gpermHandler = xoops_getHandler('groupperm');
-
-    /** @var Extgallery\Utility $utility */
-    $utility = new Extgallery\Utility();
-
-    //    require_once __DIR__ . '/config.php';
-
-    if (count($configurator->uploadFolders) > 0) {
-        //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-        foreach (array_keys($configurator->uploadFolders) as $i) {
-            $utility::createFolder($configurator->uploadFolders[$i]);
-        }
-    }
-    if (count($configurator->copyBlankFiles) > 0) {
-        $file = __DIR__ . '/../assets/images/blank.png';
-        foreach (array_keys($configurator->copyBlankFiles) as $i) {
-            $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
-            $utility::copyFile($file, $dest);
-        }
-    }
-
-    //  ---  CREATE FOLDERS ---------------
-    if (count($configurator->uploadFolders) > 0) {
-        //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-        foreach (array_keys($configurator->uploadFolders) as $i) {
-            $utility::createFolder($configurator->uploadFolders[$i]);
-        }
-    }
-
-    //  ---  COPY blank.png FILES ---------------
-    if (count($configurator->copyBlankFiles) > 0) {
-        $file = __DIR__ . '/../assets/images/blank.png';
-        foreach (array_keys($configurator->copyBlankFiles) as $i) {
-            $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
-            $utility::copyFile($file, $dest);
-        }
-    }
-
-    /*
-    //  ---  COPY test folder files ---------------
-if (count($configurator->copyTestFolders) > 0) {
-    //        $file = __DIR__ . '/../testdata/images/';
-    foreach (array_keys($configurator->copyTestFolders) as $i) {
-        $src  = $configurator->copyTestFolders[$i][0];
-        $dest = $configurator->copyTestFolders[$i][1];
-        $utility::xcopy($src, $dest);
-    }
-}
-*/
-
-    //delete .html entries from the tpl table
-    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
-    $GLOBALS['xoopsDB']->queryF($sql);
-
-    return true;
+    $grouppermHandler->addRight('extgallery_private', 16, XOOPS_GROUP_ADMIN, $module_id);
 }

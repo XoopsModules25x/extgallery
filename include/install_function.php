@@ -16,12 +16,11 @@
  * @param $module
  * @return bool
  */
-
 function xoops_module_pre_install_extgallery(\XoopsModule $module)
 {
     // Check if this XOOPS version is supported
     $minSupportedVersion = explode('.', '2.5.0');
-    $currentVersion      = explode('.', substr(XOOPS_VERSION, 6));
+    $currentVersion      = explode('.', mb_substr(XOOPS_VERSION, 6));
 
     if ($currentVersion[0] > $minSupportedVersion[0]) {
         return true;
@@ -41,16 +40,16 @@ function xoops_module_pre_install_extgallery(\XoopsModule $module)
 }
 
 /**
- * @param XoopsModule $module
+ * @param \XoopsModule $module
  *
  * @return bool
  */
 function xoops_module_install_extgallery(\XoopsModule $module)
 {
     $module_id = $module->getVar('mid');
-    /** @var XoopsGroupPermHandler $gpermHandler */
-    $gpermHandler = xoops_getHandler('groupperm');
-    /** @var XoopsModuleHandler $moduleHandler */
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
+    $grouppermHandler = xoops_getHandler('groupperm');
+    /** @var \XoopsModuleHandler $moduleHandler */
     $configHandler = xoops_getHandler('config');
 
     /**
@@ -58,32 +57,32 @@ function xoops_module_install_extgallery(\XoopsModule $module)
      */
 
     // Access right
-    $gpermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_USERS, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_ANONYMOUS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 1, XOOPS_GROUP_ANONYMOUS, $module_id);
 
     // Public rate
-    $gpermHandler->addRight('extgallery_public_mask', 2, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 2, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 2, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 2, XOOPS_GROUP_USERS, $module_id);
 
     // Public eCard
-    $gpermHandler->addRight('extgallery_public_mask', 4, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 4, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 4, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 4, XOOPS_GROUP_USERS, $module_id);
 
     // Public download
-    $gpermHandler->addRight('extgallery_public_mask', 8, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 8, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 8, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 8, XOOPS_GROUP_USERS, $module_id);
 
     // Public upload
-    $gpermHandler->addRight('extgallery_public_mask', 16, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 16, XOOPS_GROUP_ADMIN, $module_id);
 
     // Public autoapprove
-    $gpermHandler->addRight('extgallery_public_mask', 32, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 32, XOOPS_GROUP_ADMIN, $module_id);
 
     // Public display
-    $gpermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_USERS, $module_id);
-    $gpermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_ANONYMOUS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_public_mask', 128, XOOPS_GROUP_ANONYMOUS, $module_id);
 
     /**
      * Default User's category permission
@@ -92,19 +91,19 @@ function xoops_module_install_extgallery(\XoopsModule $module)
     // Private gallery
 
     // Private rate
-    $gpermHandler->addRight('extgallery_private', 2, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_private', 2, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_private', 2, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_private', 2, XOOPS_GROUP_USERS, $module_id);
 
     // Private eCard
-    $gpermHandler->addRight('extgallery_private', 4, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_private', 4, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_private', 4, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_private', 4, XOOPS_GROUP_USERS, $module_id);
 
     // Private download
-    $gpermHandler->addRight('extgallery_private', 8, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('extgallery_private', 8, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('extgallery_private', 8, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_private', 8, XOOPS_GROUP_USERS, $module_id);
 
     // Private autoapprove
-    $gpermHandler->addRight('extgallery_private', 16, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('extgallery_private', 16, XOOPS_GROUP_ADMIN, $module_id);
 
     // Create eXtGallery main upload directory
     $dir = XOOPS_ROOT_PATH . '/uploads/extgallery';

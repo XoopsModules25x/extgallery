@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -44,7 +46,7 @@ class NestedTree
         $this->fields = [
             'id'     => $idField,
             'parent' => $parentField,
-            'sort'   => $sortField
+            'sort'   => $sortField,
         ];
     }
 
@@ -155,9 +157,9 @@ class NestedTree
         }
 
         if ($includeSelf) {
-            $query = sprintf('SELECT * FROM %s WHERE nleft <= %d AND nright >= %d ORDER BY nlevel', $this->table, $node['nleft'], $node['nright']);
+            $query = sprintf('SELECT * FROM `%s` WHERE nleft <= %d AND nright >= %d ORDER BY nlevel', $this->table, $node['nleft'], $node['nright']);
         } else {
-            $query = sprintf('SELECT * FROM %s WHERE nleft < %d AND nright > %d ORDER BY nlevel', $this->table, $node['nleft'], $node['nright']);
+            $query = sprintf('SELECT * FROM `%s` WHERE nleft < %d AND nright > %d ORDER BY nlevel', $this->table, $node['nleft'], $node['nright']);
         }
 
         $result = $this->db->query($query);
@@ -187,7 +189,7 @@ class NestedTree
         }
 
         $query = sprintf('SELECT count(*) AS is_descendant
-                                      FROM %s
+                                      FROM `%s`
                                       WHERE `%s` = %d
                                       AND nleft > %d
                                       AND nright < %d', $this->table, $this->fields['id'], $descendant_id, $node->nleft, $node->nright);
@@ -211,7 +213,7 @@ class NestedTree
      */
     public function isChildOf($child_id, $parent_id)
     {
-        $query = sprintf('SELECT count(*) AS is_child FROM %s WHERE `%s` = %d AND %s = %d', $this->table, $this->fields['id'], $child_id, $this->fields['parent'], $parent_id);
+        $query = sprintf('SELECT count(*) AS is_child FROM `%s` WHERE `%s` = %d AND %s = %d', $this->table, $this->fields['id'], $child_id, $this->fields['parent'], $parent_id);
 
         $result = $this->db->query($query);
 
@@ -231,7 +233,7 @@ class NestedTree
     public function numDescendants($id)
     {
         if (0 == $id) {
-            $query  = sprintf('SELECT count(*) AS num_descendants FROM %s', $this->table);
+            $query  = sprintf('SELECT count(*) AS num_descendants FROM `%s`', $this->table);
             $result = $this->db->query($query);
             if ($row = $this->db->fetchArray($result)) {
                 return $row['num_descendants'];
@@ -254,7 +256,7 @@ class NestedTree
      */
     public function numChildren($id)
     {
-        $query  = sprintf('SELECT count(*) AS num_children FROM %s WHERE `%s` = %d', $this->table, $this->fields['parent'], $id);
+        $query  = sprintf('SELECT count(*) AS num_children FROM `%s` WHERE `%s` = %d', $this->table, $this->fields['parent'], $id);
         $result = $this->db->query($query);
         if ($row = $this->db->fetchArray($result)) {
             return $row['num_children'];
@@ -270,7 +272,7 @@ class NestedTree
      */
     public function numLeef($id)
     {
-        $query = sprintf('SELECT count(*) AS num_leef FROM %s WHERE nright - nleft = 1', $this->table);
+        $query = sprintf('SELECT count(*) AS num_leef FROM `%s` WHERE nright - nleft = 1', $this->table);
         if (0 != $id) {
             $node  = $this->getNode($id);
             $query .= sprintf(' AND nleft > %d AND nright < %d', $node['nleft'], $node['nright']);
@@ -293,7 +295,7 @@ class NestedTree
         $idField     = $this->fields['id'];
         $parentField = $this->fields['parent'];
 
-        $query = sprintf('SELECT * FROM %s ORDER BY %s', $this->table, $this->fields['sort']);
+        $query = sprintf('SELECT * FROM `%s` ORDER BY %s', $this->table, $this->fields['sort']);
 
         $result = $this->db->query($query);
 
@@ -303,7 +305,7 @@ class NestedTree
         $root['children']          = [];
 
         $arr = [
-            $root
+            $root,
         ];
 
         // populate the array and create an empty children array
@@ -342,7 +344,6 @@ class NestedTree
         // and nright of (tree size * 2 + 1)
 
         foreach ($data as $id => $row) {
-
             // skip the root node
             if (0 == $id) {
                 continue;
@@ -363,13 +364,13 @@ class NestedTree
      * in subrequests are held over to when control is returned so the nright
      * can be assigned.
      *
-     * @param array &$arr  A reference to the data array, since we need to
-     *                     be able to update the data in it
-     * @param int   $id    The ID of the current node to process
-     * @param int   $level The nlevel to assign to the current node
-     * @param int   &$n    A reference to the running tally for the n-value
+     * @param array &$arr   A reference to the data array, since we need to
+     *                      be able to update the data in it
+     * @param int    $id    The ID of the current node to process
+     * @param int    $level The nlevel to assign to the current node
+     * @param int   &$n     A reference to the running tally for the n-value
      */
-    public function _generateTreeData(& $arr, $id, $level, & $n)
+    public function _generateTreeData(&$arr, $id, $level, &$n)
     {
         $arr[$id]['nlevel'] = $level;
         $arr[$id]['nleft']  = ++$n;

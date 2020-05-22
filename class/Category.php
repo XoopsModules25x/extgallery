@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -52,7 +54,7 @@ class Category extends \XoopsObject
             'className'      => 'PublicPhoto',
             'getMethodeName' => 'getPhoto',
             'keyName'        => 'photo',
-            'core'           => false
+            'core'           => false,
         ];
     }
 

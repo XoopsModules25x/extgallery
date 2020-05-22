@@ -17,9 +17,9 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/../../mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
-$com_itemid = isset($_GET['com_itemid']) ? (int)$_GET['com_itemid'] : 0;
+$com_itemid = \Xmf\Request::getInt('com_itemid', 0, 'GET');
 if ($com_itemid > 0) {
     /** @var Extgallery\PublicPhotoHandler $photoHandler */
     $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');

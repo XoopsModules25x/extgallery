@@ -16,11 +16,11 @@ class MetaSliderImageHelper
     /**
      * Constructor
      *
-     * @param integer $slide_id
-     * @param integer $width  - required width of image
-     * @param integer $height - required height of image
-     * @param string  $smart_crop
-     * @param bool    $use_image_editor
+     * @param int    $slide_id
+     * @param int    $width  - required width of image
+     * @param int    $height - required height of image
+     * @param string $smart_crop
+     * @param bool   $use_image_editor
      */
     public function __construct($slide_id, $width, $height, $smart_crop, $use_image_editor = true)
     {
@@ -42,14 +42,14 @@ class MetaSliderImageHelper
      * dimensions that respect the container size ratio. This ensures image displays in a
      * sane manner in responsive sliders
      *
-     * @param  integer $image_width
-     * @param  integer $image_height
+     * @param  int $image_width
+     * @param  int $image_height
      * @return array   image dimensions
      */
     private function get_crop_dimensions($image_width, $image_height)
     {
         if ('false' === $this->smart_crop) {
-            return array('width' => (int)$this->container_width, 'height' => (int)$this->container_height);
+            return ['width' => $this->container_width, 'height' => $this->container_height];
         }
 
         $container_width  = $this->container_width;
@@ -154,7 +154,7 @@ class MetaSliderImageHelper
             $new_slide_height = $container_height;
         }
 
-        return array('width' => floor($new_slide_width), 'height' => floor($new_slide_height));
+        return ['width' => floor($new_slide_width), 'height' => floor($new_slide_height)];
     }
 
     /**
@@ -165,15 +165,15 @@ class MetaSliderImageHelper
     public function get_image_url()
     {
         // Get the image file path
-        if (!strlen($this->path)) {
+        if (!mb_strlen($this->path)) {
             return $this->url;
         }
 
         // if the file exists, just return it without going any further
-        $dest_file_name = $this->get_destination_file_name(array(
+        $dest_file_name = $this->get_destination_file_name([
                                                                'width'  => $this->container_width,
-                                                               'height' => $this->container_height
-                                                           ));
+                                                               'height' => $this->container_height,
+                                                           ]);
 
         if (file_exists($dest_file_name)) {
             return str_replace(basename($this->url), basename($dest_file_name), $this->url);
@@ -183,7 +183,7 @@ class MetaSliderImageHelper
         $orig_size = $this->get_original_image_dimensions();
 
         // bail out if we can't find the image dimensions
-        if (false == $orig_size) {
+        if (false === $orig_size) {
             return $this->url;
         }
 
@@ -222,7 +222,7 @@ class MetaSliderImageHelper
      */
     private function get_original_image_dimensions()
     {
-        $size = array();
+        $size = [];
 
         // try and get the image size from metadata
         $meta = wp_get_attachment_metadata($this->id);
@@ -307,7 +307,7 @@ class MetaSliderImageHelper
         $backup_sizes = get_post_meta($this->id, '_wp_attachment_backup_sizes', true);
 
         if (!is_array($backup_sizes)) {
-            $backup_sizes = array();
+            $backup_sizes = [];
         }
 
         $backup_sizes["resized-{$dest_size['width']}x{$dest_size['height']}"] = $saved;

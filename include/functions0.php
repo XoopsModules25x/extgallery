@@ -16,7 +16,6 @@
  * @param $option
  * @return bool
  */
-
 function gal_getmoduleoption($option)
 {
     global $xoopsModuleConfig, $xoopsModule;
@@ -33,11 +32,11 @@ function gal_getmoduleoption($option)
             $retval = $xoopsModuleConfig[$option];
         }
     } else {
-        /** @var XoopsModuleHandler $moduleHandler */
+        /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         $module        = $moduleHandler->getByDirname('extgallery');
 
-        /** @var XoopsModuleHandler $moduleHandler */
+        /** @var \XoopsModuleHandler $moduleHandler */
         $configHandler = xoops_getHandler('config');
         if ($module) {
             $moduleConfig = $configHandler->getConfigsByCat(0, $module->getVar('mid'));
@@ -65,7 +64,7 @@ function gal_getmoduleoption($option)
  */
 function gal_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $height, $supplemental)
 {
-    $editor_option            = strtolower(gal_getmoduleoption('form_options'));
+    $editor_option            = mb_strtolower(gal_getmoduleoption('form_options'));
     $editor                   = false;
     $editor_configs           = [];
     $editor_configs['name']   = $name;

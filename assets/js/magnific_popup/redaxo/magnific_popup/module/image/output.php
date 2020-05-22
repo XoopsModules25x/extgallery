@@ -41,7 +41,7 @@ if ('' != $imageFile) {
     $resizedFile = $REX['INCLUDE_PATH'] . '/generated/files/image_manager__' . $imageType . '_' . $imageFile;
     $imageSize   = @getimagesize($resizedFile);
 
-    if (false != $imageSize) {
+    if (false !== $imageSize) {
         $imageDimensions = ' width="' . $imageSize[0] . '" height="' . $imageSize[1] . '"';
     } else {
         $imageDimensions = '';

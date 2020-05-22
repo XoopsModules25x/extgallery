@@ -4,7 +4,7 @@
  *
  * @author Philippe.Jausions @at@ 11abacus.com
  **/
-$this->_supported_image_types = array(
+$this->_supported_image_types = [
     'art'   => 'r',
     'avi'   => 'r',
     'avs'   => 'rw',
@@ -102,8 +102,8 @@ $this->_supported_image_types = array(
     'xcf'   => 'r',
     'xpm'   => 'rw',
     'xwd'   => 'rw',
-    'yuv'   => 'rw'
-);
+    'yuv'   => 'rw',
+];
 
 if (OS_WINDOWS) {
     $this->_supported_image_types['emf'] = 'r';

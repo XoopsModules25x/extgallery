@@ -133,10 +133,8 @@ define('_AM_EXTGALLERY_PUBLIC_UPLOAD_INFO', 'Allows you to restrict the upload/s
 
 define('_AM_EXTGALLERY_PUBLIC_AUTOAPROVE', 'Public auto approve permission');
 define('_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_DESC', "Select categories where public photo uploads don't need admin approval");
-define(
-    '_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_INFO',
-       "Allows you to prevent the automatic display of submitted public images until they are approved by an Admin. Select category where public user uploads don't need to be approved. Public users must be allowed to submit photos to enable this permission."
-);
+define('_AM_EXTGALLERY_PUBLIC_AUTOAPROVE_INFO',
+       "Allows you to prevent the automatic display of submitted public images until they are approved by an Admin. Select category where public user uploads don't need to be approved. Public users must be allowed to submit photos to enable this permission.");
 
 define('_AM_EXTGALLERY_PUBLIC_DISPLAYED', 'Display album permissions');
 define('_AM_EXTGALLERY_PUBLIC_DISPLAYED_DESC', 'Select categories to be displayed');
@@ -247,10 +245,8 @@ define('_AM_EXTGALLERY_GFIC_DOWNLOAD', 'Allow download of original picture (if a
 
 // Album
 define('_AM_EXTGALLERY_USE_AJAX_EFFECTS', 'Ajax effects ');
-define(
-    '_AM_EXTGALLERY_USE_AJAX_EFFECTS_DESC',
-       'Selecting effects will change photo display when thumbs are clicked. Ajax effects or Normal can be selected.<br><br> <b>Normal</b> :  No effects<br><b>Lightbox</b> : Use Lightbox effect<br><b>Overlay</b> : use Overlay effect<br><b>Tooltip</b> : use Tooltip effect<br><b>Fancybox</b> : use Fancybox effect<br><b>PrettyPhoto</b> : use PrettyPhoto effect<br>'
-);
+define('_AM_EXTGALLERY_USE_AJAX_EFFECTS_DESC',
+       'Selecting effects will change photo display when thumbs are clicked. Ajax effects or Normal can be selected.<br><br> <b>Normal</b> :  No effects<br><b>Lightbox</b> : Use Lightbox effect<br><b>Overlay</b> : use Overlay effect<br><b>Tooltip</b> : use Tooltip effect<br><b>Fancybox</b> : use Fancybox effect<br><b>PrettyPhoto</b> : use PrettyPhoto effect<br>');
 define('_AM_EXTGALLERY_ALBUM_CONF', 'Album configuration');
 define('_AM_EXTGALLERY_OVERLAY_CONF', 'Overlay configuration');
 define('_AM_EXTGALLERY_TOOLTIP_CONF', 'Tooltip configuration');
@@ -310,7 +306,8 @@ define('_AM_EXTGALLERY_EXTENSION_INFO', 'Extension information');
 define('_AM_EXTGALLERY_EXTENSION_NOT_INSTALLED', 'Extension not installed');
 define('_AM_EXTGALLERY_INSTALL_EXTENSION', 'Install extension');
 define('_AM_EXTGALLERY_EXTENSION_OK', 'Extension available');
-define('_AM_EXTGALLERY_EXTENSION_NOTICE', 'This extension allow you to display photo on all the site just by adding a <b>gallery</b> tag to your text. A button ( <button type="button" class="btn btn-default");" onmouseover="style.cursor=\"hand\' title=""><span class="fa fa-file-image-o" aria-hidden="true"></span><span style="font-size:75%;"> Gallery</span></button> ) is displayed on XOOPS editor.');
+define('_AM_EXTGALLERY_EXTENSION_NOTICE',
+       'This extension allow you to display photo on all the site just by adding a <b>gallery</b> tag to your text. A button ( <button type="button" class="btn btn-default");" onmouseover="style.cursor=\"hand\' title=""><span class="fa fa-file-image-o" aria-hidden="true"></span><span style="font-size:75%;"> Gallery</span></button> ) is displayed on XOOPS editor.');
 define('_AM_EXTGALLERY_EXT_FILE_DONT_EXIST', "Extension file don't exist on repository :<br><b>Server : </b>%s<br><b>File : </b>%s");
 define('_AM_EXTGALLERY_EXT_FILE_DONT_EXIST_SHORT', "Extension file don't exist");
 define('_AM_EXTGALLERY_EXTENSION_INSTALLED', 'Extension installed');
@@ -339,7 +336,7 @@ define('_AM_EXTGALLERY_ABOUT_DESCRIPTION', 'Description: ');
 
 // text in admin footer
 define('_AM_EXTGALLERY_ADMIN_FOOTER', "<div class='right smallsmall italic pad5'>XOOPS Tag is maintained by the <a class='tooltip' rel='external' href='https://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
-define('_EXTGALLERY_ADMIN_', ' '); //
+define('_EXTGALLERY_ADMIN_', ' ');
 
 // Add File size define (cesagonchu)
 define('_AM_EXTGALLERY_UPLOAD_MAX_FILESIZE', 'Maximum file size to upload: ');

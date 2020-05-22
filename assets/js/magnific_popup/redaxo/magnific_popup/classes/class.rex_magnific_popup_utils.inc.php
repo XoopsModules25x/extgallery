@@ -35,11 +35,11 @@ class rex_magnific_popup_utils
      * @param array $replace
      * @return mixed|string
      */
-    public static function getHtmlFromMDFile($mdFile, $search = array(), $replace = array())
+    public static function getHtmlFromMDFile($mdFile, $search = [], $replace = [])
     {
         global $REX;
 
-        $curLocale = strtolower($REX['LANG']);
+        $curLocale = mb_strtolower($REX['LANG']);
 
         if ('de_de' === $curLocale) {
             $file = $REX['INCLUDE_PATH'] . '/addons/magnific_popup/' . $mdFile;
@@ -53,9 +53,9 @@ class rex_magnific_popup_utils
             $md = self::makeHeadlinePretty($md);
 
             return Parsedown::instance()->parse($md);
-        } else {
-            return '[translate:' . $file . ']';
         }
+
+        return '[translate:' . $file . ']';
     }
 
     /**

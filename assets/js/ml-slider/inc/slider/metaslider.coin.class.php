@@ -18,7 +18,7 @@ class MetaCoinSlider extends MetaSlider
      */
     protected function get_param($param)
     {
-        $params = array(
+        $params = [
             'effect'     => 'animation',
             'width'      => 'width',
             'height'     => 'height',
@@ -32,8 +32,8 @@ class MetaCoinSlider extends MetaSlider
             'navigation' => 'showNavigationButtons',
             'links'      => 'showNavigationPrevNext',
             'prevText'   => 'prevText',
-            'nextText'   => 'nextText'
-        );
+            'nextText'   => 'nextText',
+        ];
 
         if (isset($params[$param])) {
             return $params[$param];

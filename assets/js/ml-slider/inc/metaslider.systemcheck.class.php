@@ -5,7 +5,7 @@
  */
 class MetaSliderSystemCheck
 {
-    public $options = array();
+    public $options = [];
 
     /**
      * Constructor
@@ -33,7 +33,7 @@ class MetaSliderSystemCheck
      */
     private function dismissMessages()
     {
-        if (isset($_REQUEST['dismissMessage']) && isset($_REQUEST['_wpnonce'])) {
+        if (\Xmf\Request::hasVar('dismissMessage', 'REQUEST') && isset($_REQUEST['_wpnonce'])) {
             $nonce = $_REQUEST['_wpnonce'];
             $key   = $_REQUEST['dismissMessage'];
 
@@ -127,14 +127,14 @@ class MetaSliderSystemCheck
             $theme_type  = 'child';
             $footer_file = file_get_contents($child_footer);
 
-            if (strpos($footer_file, 'wp_footer()')) {
+            if (mb_strpos($footer_file, 'wp_footer()')) {
                 return;
             }
         } elseif (file_exists($parent_footer . '/footer.php')) {
             $theme_type  = 'parent';
             $footer_file = file_get_contents($parent_footer . '/footer.php');
 
-            if (strpos($footer_file, 'wp_footer()')) {
+            if (mb_strpos($footer_file, 'wp_footer()')) {
                 return;
             }
         }

@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -20,35 +22,6 @@ use XoopsModules\Extgallery;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-
-/**
- * Class Extgallery\Quota
- */
-class Quota extends \XoopsObject
-{
-    public $externalKey = [];
-
-    /**
-     * Extgallery\Quota constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->initVar('quota_id', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('groupid', XOBJ_DTYPE_INT, 0, false);
-        $this->initVar('quota_name', XOBJ_DTYPE_TXTBOX, 0, false);
-        $this->initVar('quota_value', XOBJ_DTYPE_INT, 0, false);
-    }
-
-    /**
-     * @return array
-     */
-    public function getExternalKey()
-    {
-        return $this->externalKey;
-    }
-}
-
 /**
  * Class Extgallery\QuotaHandler
  */
@@ -56,9 +29,9 @@ class QuotaHandler extends Extgallery\PersistableObjectHandler
 {
     /**
      * Extgallery\QuotaHandler constructor.
-     * @param \XoopsDatabase $db
+     * @param \XoopsDatabase|null $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'extgallery_quota', 'Extgallery\Quota', 'quota_id');
     }
@@ -97,11 +70,11 @@ class QuotaHandler extends Extgallery\PersistableObjectHandler
         $criteria = new \CriteriaCompo();
         $criteria->add(new \Criteria('groupid', $groupid));
         $criteria->add(new \Criteria('quota_name', $quotaName));
-        $ret =& $this->getObjects($criteria);
+        $ret = $this->getObjects($criteria);
         if (empty($ret)) {
             return $this->create();
-        } else {
-            return $ret[0];
         }
+
+        return $ret[0];
     }
 }

@@ -5,24 +5,33 @@ $image = Loader::helper('image');
 */
 switch ($magnific_type) {
     case 'single':
+
         $this->inc('includes/singlepopup.php');
-        break;
 
+        break;
     case 'popup':
+
         $this->inc('includes/gallerypopup.php');
-        break;
 
+        break;
     case 'zoom':
-        $this->inc('includes/zoompopup.php');
-        break;
 
+        $this->inc('includes/zoompopup.php');
+
+        break;
     case 'vidMap':
+
         $this->inc('includes/videomapspopup.php');
+
         break;
     case 'cssdialog':
+
         $this->inc('includes/cssDialogpopup.php');
+
         break;
     case 'modal':
+
         $this->inc('includes/modalpopup.php');
+
         break;
 }

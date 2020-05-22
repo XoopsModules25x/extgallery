@@ -41,19 +41,20 @@ class MagnificPopupBlockController extends BlockController
         $html = Loader::helper('html');
         $bv   = new BlockView();
         $bv->setBlockObject($this->getBlockObject());
-        $this->addFooterItem($html->javascript($bv->getBlockURL() . '/magnific/magnific-combined-1.0.0.min.js', array('minify' => true)));
+        $this->addFooterItem($html->javascript($bv->getBlockURL() . '/magnific/magnific-combined-1.0.0.min.js', ['minify' => true]));
     }
 
     // JavaScript form validation strings
     // these are used in the add and edit dialog window
     // they create a modal/popup if incorrect data or no data is inserted
     // into the text area/ text input.
+
     /**
      * @return array
      */
     public function getJavaScriptStrings()
     {
-        return array(
+        return [
             'selection-required'           => t('Please Select a Magnific Type.'),
             'image-required'               => t('Please Select an Image.'),
             'single-option-required'       => t('Please Select a Single Image Option.'),
@@ -63,8 +64,8 @@ class MagnificPopupBlockController extends BlockController
             'video-map-selection-required' => t('Please Make a Video or Map Selection'),
             'dialog-type-required'         => t('Please Choose a Dialog Type'),
             'dialog-text-required'         => t('Please Enter the Dialog Text'),
-            'dialog-link-text-required'    => t('Pleaes Enter the Dialog Link Text')
-        );
+            'dialog-link-text-required'    => t('Pleaes Enter the Dialog Link Text'),
+        ];
     }
 
     // getting a picture for the file picker
@@ -100,7 +101,7 @@ class MagnificPopupBlockController extends BlockController
         $fsList = new FileSetList();
         $sets   = $fsList->get();
 
-        $options = array();
+        $options = [];
 
         foreach ($sets as $fs) {
             $options[$fs->fsID] = $fs->fsName;

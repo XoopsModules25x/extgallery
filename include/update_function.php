@@ -66,12 +66,12 @@ function xoops_module_update_extgallery(\XoopsModule $xoopsModule, $oldVersion =
         $sql       = 'SELECT cat_id FROM `' . $db->prefix('extgallery_publiccat') . '`;';
         $result    = $db->query($sql);
         $module_id = $xoopsModule->getVar('mid');
-        /** @var XoopsGroupPermHandler $gpermHandler */
-        $gpermHandler = xoops_getHandler('groupperm');
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
+        $grouppermHandler = xoops_getHandler('groupperm');
         while (false !== ($cat = $db->fetchArray($result))) {
-            $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ADMIN, $module_id);
-            $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_USERS, $module_id);
-            $gpermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ANONYMOUS, $module_id);
+            $grouppermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ADMIN, $module_id);
+            $grouppermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_USERS, $module_id);
+            $grouppermHandler->addRight('public_displayed', $cat['cat_id'], XOOPS_GROUP_ANONYMOUS, $module_id);
         }
     }
 
@@ -88,10 +88,9 @@ function xoops_module_update_extgallery(\XoopsModule $xoopsModule, $oldVersion =
     }
 
     if ($oldVersion < 107) {
-
         // Fix extension Bug if it's installed
         if (file_exists(XOOPS_ROOT_PATH . '/class/textsanitizer/gallery/gallery.php')) {
-            $conf                          = include XOOPS_ROOT_PATH . '/class/textsanitizer/config.php';
+            $conf                          = require XOOPS_ROOT_PATH . '/class/textsanitizer/config.php';
             $conf['extensions']['gallery'] = 1;
             file_put_contents(XOOPS_ROOT_PATH . '/class/textsanitizer/config.custom.php', "<?php\rreturn \$config = " . var_export($conf, true) . "\r?>", LOCK_EX);
         }

@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -29,8 +31,8 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
     public $_photoHandler;
 
     /**
-     * @param $db
-     * @param $type
+     * @param \XoopsDatabase|null $db
+     * @param                     $type
      */
     public function __construct(\XoopsDatabase $db, $type)
     {
@@ -78,6 +80,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         if (isset($data['cat_pid']) || isset($data['nlevel']) || isset($data['nright']) || isset($data['nleft'])) {
             $this->rebuild();
         }
+
         return '';
     }
 
@@ -109,8 +112,8 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         $includeSelf = false,
         $childrenOnly = false,
         $withRestrict = true,
-        $permType = 'public_access'
-    ) {
+        $permType = 'public_access')
+    {
         $cat = $this->get($id);
 
         $nleft     = $cat->getVar('nleft');
@@ -131,7 +134,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
             if ($nleft > 0 && $includeSelf) {
                 $criteria->add(new \Criteria('nleft', $nleft, '>='));
                 $criteria->add(new \Criteria('nright', $nright, '<='));
-            //$query = sprintf('select * from %s where nleft >= %d and nright <= %d order by nleft', $this->table, $nleft, $nright);
+                //$query = sprintf('select * from %s where nleft >= %d and nright <= %d order by nleft', $this->table, $nleft, $nright);
             } else {
                 if ($nleft > 0) {
                     $criteria->add(new \Criteria('nleft', $nleft, '>'));
@@ -144,11 +147,11 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         }
         if ($withRestrict) {
             $temp = $this->getCatRestrictCriteria($permType);
-            if (null !== $temp) {
+            if (false !== $temp) {
                 $criteria->add($temp);
             }
             $temp = $this->getCatRestrictCriteria('public_displayed');
-            if (null !== $temp) {
+            if (false !== $temp) {
                 $criteria->add($temp);
             }
         }
@@ -159,15 +162,17 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
 
     /**
      * @param int $id
-     *
-     * @return null
      */
     public function getCat($id = 0)
     {
         $criteria = new \CriteriaCompo();
-        $criteria->add($this->getCatRestrictCriteria('public_displayed'));
+        $temp     = $this->getCatRestrictCriteria('public_displayed');
+        if (false !== $temp) {
+            $criteria->add($temp);
+        }
+
         $criteria->add(new \Criteria('cat_id', $id));
-        $ret =& $this->getObjects($criteria);
+        $ret = $this->getObjects($criteria);
 
         if (count($ret) > 0) {
             return $ret[0];
@@ -221,14 +226,20 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         if ($includeSelf) {
             $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<='));
             $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>='));
-        //$query = sprintf('select * from %s where nleft <= %d and nright >= %d order by nlevel', $this->table, $node['nleft'], $node['nright']);
+            //$query = sprintf('select * from %s where nleft <= %d and nright >= %d order by nlevel', $this->table, $node['nleft'], $node['nright']);
         } else {
             $criteria->add(new \Criteria('nleft', $cat->getVar('nleft'), '<'));
             $criteria->add(new \Criteria('nright', $cat->getVar('nright'), '>'));
             //$query = sprintf('select * from %s where nleft < %d and nright > %d order by nlevel', $this->table, $node['nleft'], $node['nright']);
         }
-        $criteria->add($this->getCatRestrictCriteria());
-        $criteria->add($this->getCatRestrictCriteria('public_displayed'));
+        $temp = $this->getCatRestrictCriteria();
+        if (is_object($temp)) {
+            $criteria->add($temp);
+        }
+        $temp2 = $this->getCatRestrictCriteria('public_displayed');
+        if (is_object($temp)) {
+            $criteria->add($temp2);
+        }
         $criteria->setSort('nlevel');
 
         return $this->getObjects($criteria);
@@ -290,8 +301,8 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         $selected = 0,
         $extra = '',
         $displayWeight = false,
-        $permType = 'public_access'
-    ) {
+        $permType = 'public_access')
+    {
         $cats = $this->getDescendants(0, false, false, true, $permType);
 
         return $this->makeSelect($cats, $name, $selectMode, $addEmpty, $selected, $extra, $displayWeight);
@@ -347,7 +358,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
             if ('node' === $selectMode && (1 != $cat->getVar('nright') - $cat->getVar('nleft'))) {
                 // If the brownser is IE the parent cat isn't displayed
                 //                if (preg_match('`MSIE`', $_SERVER['HTTP_USER_AGENT'])) {
-                if (false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
+                if (false !== mb_strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
                     continue;
                 }
                 $disableOption = ' disabled="disabled"';
@@ -386,7 +397,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         $cats           = $this->getDescendants();
         $ret            = '<select name="options[]" multiple="multiple">';
         $selectedOption = '';
-        if ($allCat = in_array(0, $selected)) {
+        if ($allCat = in_array(0, $selected, true)) {
             $selectedOption = ' selected';
         }
         $ret .= '<option value="0"' . $selectedOption . '>' . _MB_EXTGALLERY_ALL_CATEGORIES . '</option>';
@@ -398,7 +409,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
             $selectedOption = '';
             $disableOption  = '';
 
-            if (!$allCat && in_array($cat->getVar('cat_id'), $selected)) {
+            if (!$allCat && in_array($cat->getVar('cat_id'), $selected, true)) {
                 $selectedOption = ' selected';
             }
 
@@ -423,7 +434,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         //$query = sprintf('select * from %s order by %s', $this->table, $this->fields['sort']);
 
         //$result = $this->db->query($query);
-        $categories =& $this->getObjects($criteria, false, false);
+        $categories = $this->getObjects($criteria, false, false);
 
         // create a root node to hold child data about first level items
         $root             = [];
@@ -431,7 +442,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         $root['children'] = [];
 
         $arr = [
-            $root
+            $root,
         ];
 
         // populate the array and create an empty children array
@@ -478,7 +489,6 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
         $this->db->queryF($query);
 
         foreach ($data as $id => $row) {
-
             // skip the root node
             if (0 == $id) {
                 continue;
@@ -525,11 +535,11 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
      * in subrequests are held over to when control is returned so the nright
      * can be assigned.
      *
-     * @param array &$arr  A reference to the data array, since we need to
-     *                     be able to update the data in it
-     * @param int   $id    The ID of the current node to process
-     * @param int   $level The nlevel to assign to the current node
-     * @param int   &$n    A reference to the running tally for the n-value
+     * @param array &$arr   A reference to the data array, since we need to
+     *                      be able to update the data in it
+     * @param int    $id    The ID of the current node to process
+     * @param int    $level The nlevel to assign to the current node
+     * @param int   &$n     A reference to the running tally for the n-value
      */
     public function _generateTreeData(&$arr, $id, $level, &$n)
     {
@@ -570,6 +580,7 @@ class CategoryHandler extends Extgallery\PersistableObjectHandler
 
             return $criteria;
         }
+
         return false;
     }
 

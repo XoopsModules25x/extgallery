@@ -1,0 +1,206 @@
+extgallery_publiccat:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: cat_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: cat_pid
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: nleft
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: nright
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: nlevel
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: cat_name
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: cat_desc
+            attributes: ' text '
+        -
+            name: cat_date
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: cat_isalbum
+            attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: cat_weight
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: cat_nb_album
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: cat_nb_photo
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: cat_imgurl
+            attributes: ' varchar(150)  NOT NULL  DEFAULT '''' '
+        -
+            name: photo_id
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: cat_id
+            unique: true
+extgallery_publicphoto:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: photo_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: photo_title
+            attributes: ' varchar(150)  NOT NULL  DEFAULT '''' '
+        -
+            name: photo_desc
+            attributes: ' text '
+        -
+            name: photo_serveur
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: photo_name
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: photo_orig_name
+            attributes: ' varchar(40)  NOT NULL  DEFAULT '''' '
+        -
+            name: photo_size
+            attributes: ' float  NOT NULL  DEFAULT ''0'' '
+        -
+            name: photo_res_x
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: photo_res_y
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: photo_hits
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: photo_comment
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: photo_rating
+            attributes: ' tinyint(4)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: photo_nbrating
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: photo_download
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: photo_ecard
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: photo_date
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: photo_havelarge
+            attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: photo_approved
+            attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: photo_extra
+            attributes: ' text '
+        -
+            name: photo_weight
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: cat_id
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: uid
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: dohtml
+            attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: photo_id
+            unique: true
+extgallery_quota:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: quota_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: groupid
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: quota_name
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: quota_value
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: quota_id
+            unique: true
+extgallery_publicrating:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: rating_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: photo_id
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: uid
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: rating_rate
+            attributes: ' tinyint(4)  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: rating_id
+            unique: true
+extgallery_publicecard:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: ecard_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: ecard_cardid
+            attributes: ' varchar(32)  NOT NULL  DEFAULT '''' '
+        -
+            name: ecard_fromname
+            attributes: ' varchar(60)  NOT NULL  DEFAULT '''' '
+        -
+            name: ecard_fromemail
+            attributes: ' varchar(60)  NOT NULL  DEFAULT '''' '
+        -
+            name: ecard_toname
+            attributes: ' varchar(60)  NOT NULL  DEFAULT '''' '
+        -
+            name: ecard_toemail
+            attributes: ' varchar(60)  NOT NULL  DEFAULT '''' '
+        -
+            name: ecard_greetings
+            attributes: ' varchar(50)  NOT NULL  DEFAULT '''' '
+        -
+            name: ecard_desc
+            attributes: ' text '
+        -
+            name: ecard_date
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: ecard_ip
+            attributes: ' varchar(15)  NOT NULL  DEFAULT '''' '
+        -
+            name: uid
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: photo_id
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: ecard_id
+            unique: true

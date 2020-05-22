@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -15,11 +17,8 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
-
-use XoopsModules\Extgallery;
-
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
@@ -30,10 +29,9 @@ class Helper extends \Xmf\Module\Helper
     public $debug;
 
     /**
-     * 
      * @param bool $debug
      */
-    protected function __construct($debug = false)
+    public function __construct($debug = false)
     {
         $this->debug   = $debug;
         $moduleDirName = basename(dirname(__DIR__));
@@ -43,7 +41,7 @@ class Helper extends \Xmf\Module\Helper
     /**
      * @param bool $debug
      *
-     * @return \Xmf\Module\Helper
+     * @return \XoopsModules\Extgallery\Helper
      */
     public static function getInstance($debug = false)
     {
@@ -74,8 +72,9 @@ class Helper extends \Xmf\Module\Helper
     {
         $ret   = false;
         $db    = \XoopsDatabaseFactory::getDatabaseConnection();
-        $class = '\\XoopsModules\\' . ucfirst(strtolower(basename(dirname(__DIR__)))) . '\\' . $name . 'Handler';
+        $class = '\\XoopsModules\\' . ucfirst(mb_strtolower(basename(dirname(__DIR__)))) . '\\' . $name . 'Handler';
         $ret   = new $class($db);
+
         return $ret;
     }
 }

@@ -16,14 +16,13 @@
  * @since
  * @author       XOOPS Development Team
  */
-
-
 function getConfig()
 {
     $moduleDirName      = basename(dirname(__DIR__));
-    $moduleDirNameUpper = strtoupper($moduleDirName);
+    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
     return (object)[
-        'name'           => strtoupper($moduleDirName) . ' Module Configurator',
+        'name'           => mb_strtoupper($moduleDirName) . ' Module Configurator',
         'paths'          => [
             'dirname'    => $moduleDirName,
             'admin'      => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/admin',
@@ -33,45 +32,43 @@ function getConfig()
             'uploadUrl'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
         ],
         'uploadFolders'  => [
-            constant($moduleDirNameUpper . '_UPLOAD_PATH'),
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/public-photo',
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/public-photo/original',
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/public-photo/large',
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/public-photo/medium',
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/public-photo/thumb',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/public-photo',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/public-photo/original',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/public-photo/large',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/public-photo/medium',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/public-photo/thumb',
             //XOOPS_UPLOAD_PATH . '/flags'
         ],
         'copyBlankFiles' => [
-            constant($moduleDirNameUpper . '_UPLOAD_PATH'),
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/public-photo',
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/public-photo/original',
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/public-photo/large',
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/public-photo/medium',
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/public-photo/thumb',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/public-photo',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/public-photo/original',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/public-photo/large',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/public-photo/medium',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/public-photo/thumb',
             //XOOPS_UPLOAD_PATH . '/flags'
         ],
 
         'copyTestFolders' => [
-            //        constant($moduleDirNameUpper . '_UPLOAD_PATH'),
-            //[
-            //    constant($moduleDirNameUpper . '_PATH') . '/testdata/images',
-            //    constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/images',
-            //]
+            [
+                XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/uploads',
+                XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+            ],
         ],
 
         'templateFolders' => [
             '/templates/',
             '/templates/blocks/',
-            '/templates/admin/'
-
+            '/templates/admin/',
         ],
         'oldFiles'        => [
             '/class/request.php',
             '/class/registry.php',
             '/class/utilities.php',
             '/class/util.php',
-            '/include/constants.php',
-            '/include/functions.php',
+            // '/include/constants.php',
+            // '/include/functions.php',
             '/ajaxrating.txt',
         ],
         'oldFolders'      => [
@@ -81,7 +78,13 @@ function getConfig()
             '/tcpdf',
             '/images',
         ],
-        'modCopyright'    => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
-                     <img src='" . constant($moduleDirNameUpper . '_AUTHOR_LOGOIMG') . '\' alt=\'XOOPS Project\' /></a>',
+        'renameTables'    => [//         'XX_archive'     => 'ZZZZ_archive',
+        ],
+
+        //        'modCopyright' => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
+        //                     <img src='" . constant($moduleDirNameUpper . '_AUTHOR_LOGOIMG') . '\' alt=\'XOOPS Project\' /></a>',
+
+        'modCopyright' => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
+                     <img src='" . XOOPS_URL . '/modules/' . $moduleDirName . '_AUTHOR_LOGOIMG' . '\' alt=\'XOOPS Project\' /></a>',
     ];
 }

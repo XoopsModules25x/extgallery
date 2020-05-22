@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -20,7 +22,6 @@ use XoopsModules\Extgallery;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-
 /**
  * Class Extgallery\PublicCategoryHandler
  */
@@ -28,9 +29,9 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
 {
     /**
      * Extgallery\PublicCategoryHandler constructor.
-     * @param \XoopsDatabase $db
+     * @param \XoopsDatabase|null $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'public');
     }
@@ -58,21 +59,21 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
         $criteria->setOrder('DESC');
         $criteria->setLimit(1);
 
-        $cat =& $this->getObjects($criteria);
+        $cat = $this->getObjects($criteria);
         $cat = $cat[0];
 
         $moduleId = $GLOBALS['xoopsModule']->getVar('mid');
 
         // Retriving permission mask
-        /** @var \XoopsGroupPermHandler $gpermHandler */
-        $gpermHandler = xoops_getHandler('groupperm');
-        $moduleId     = $GLOBALS['xoopsModule']->getVar('mid');
-        $groups       = $GLOBALS['xoopsUser']->getGroups();
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
+        $grouppermHandler = xoops_getHandler('groupperm');
+        $moduleId         = $GLOBALS['xoopsModule']->getVar('mid');
+        $groups           = $GLOBALS['xoopsUser']->getGroups();
 
         $criteria = new \CriteriaCompo();
         $criteria->add(new \Criteria('gperm_name', 'extgallery_public_mask'));
         $criteria->add(new \Criteria('gperm_modid', $moduleId));
-        $permMask = $gpermHandler->getObjects($criteria);
+        $permMask = $grouppermHandler->getObjects($criteria);
 
         // Retriving group list
         /** @var \XoopsMemberHandler $memberHandler */
@@ -80,23 +81,24 @@ class PublicCategoryHandler extends Extgallery\CategoryHandler
         $glist         = $memberHandler->getGroupList();
 
         // Applying permission mask
-        $permArray       = include XOOPS_ROOT_PATH . '/modules/extgallery/include/perm.php';
+        $permArray       = require_once XOOPS_ROOT_PATH . '/modules/extgallery/include/perm.php';
         $modulePermArray = $permArray['modulePerm'];
         $pluginPermArray = $permArray['pluginPerm'];
 
         foreach ($permMask as $perm) {
             foreach ($modulePermArray as $permMask) {
                 if ($perm->getVar('gperm_itemid') == $permMask['maskId']) {
-                    $gpermHandler->addRight($permMask['name'], $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
+                    $grouppermHandler->addRight($permMask['name'], $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
                 }
             }
 
             foreach ($pluginPermArray as $permMask) {
                 if ($perm->getVar('gperm_itemid') == $permMask['maskId']) {
-                    $gpermHandler->addRight($permMask['name'], $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
+                    $grouppermHandler->addRight($permMask['name'], $cat->getVar('cat_id'), $perm->getVar('gperm_groupid'), $moduleId);
                 }
             }
         }
+
         return true;
     }
 

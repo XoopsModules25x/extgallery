@@ -19,15 +19,15 @@
 use XoopsModules\Extgallery;
 
 require_once __DIR__ . '/admin_header.php';
-//include __DIR__ . '/../class/grouppermform.php';
+//require_once dirname(__DIR__) . '/class/grouppermform.php';
 
-if (isset($_POST['step'])) {
+if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 } else {
     $step = 'default';
 }
 
-if (isset($_GET['op'])) {
+if (\Xmf\Request::hasVar('op', 'GET')) {
     $op = $_GET['op'];
 } else {
     $op = 'default';
@@ -37,18 +37,18 @@ $module_id = $xoopsModule->getVar('mid');
 
 switch ($step) {
     case 'enreg':
-        /** @var XoopsGroupPermHandler $gpermHandler */
-        $gpermHandler = xoops_getHandler('groupperm');
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
+        $grouppermHandler = xoops_getHandler('groupperm');
         if ('public' === $_POST['type']) {
             // Delete old public mask
             $criteria = new \CriteriaCompo();
             $criteria->add(new \Criteria('gperm_name', 'extgallery_public_mask'));
             $criteria->add(new \Criteria('gperm_modid', $module_id));
-            $gpermHandler->deleteAll($criteria);
+            $grouppermHandler->deleteAll($criteria);
 
             foreach ($_POST['perms']['extgallery_public_mask']['group'] as $groupId => $perms) {
                 foreach (array_keys($perms) as $perm) {
-                    $gpermHandler->addRight('extgallery_public_mask', $perm, $groupId, $module_id);
+                    $grouppermHandler->addRight('extgallery_public_mask', $perm, $groupId, $module_id);
                 }
             }
         }
@@ -56,20 +56,19 @@ switch ($step) {
         redirect_header('perm-quota.php', 3, _AM_EXTGALLERY_PERM_MASK_UPDATED);
 
         break;
-
     case 'default':
     default:
 
-        $permArray       = include XOOPS_ROOT_PATH . '/modules/extgallery/include/perm.php';
+        $permArray       = require_once XOOPS_ROOT_PATH . '/modules/extgallery/include/perm.php';
         $modulePermArray = $permArray['modulePerm'];
         $pluginPermArray = $permArray['pluginPerm'];
 
         xoops_cp_header();
         ob_end_flush();
-        /** @var XoopsMemberHandler $memberHandler */
+        /** @var \XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
-        /** @var XoopsGroupPermHandler $gpermHandler */
-        $gpermHandler = xoops_getHandler('groupperm');
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
+        $grouppermHandler = xoops_getHandler('groupperm');
         /** @var Extgallery\PluginHandler $pluginHandler */
         $pluginHandler = Extgallery\Helper::getInstance()->getHandler('Plugin');
 
@@ -86,11 +85,11 @@ switch ($step) {
          */
         function getChecked($array, $v)
         {
-            if (in_array($v, $array)) {
+            if (in_array($v, $array, true)) {
                 return ' checked';
-            } else {
-                return '';
             }
+
+            return '';
         }
 
         echo '<script type="text/javascript" src="../assets/js/admin.js"></script>';
@@ -125,6 +124,7 @@ switch ($step) {
         echo '</fieldset><br>';
 
         // Retriving category list for Group perm form
+        /** @var Extgallery\PublicCategoryHandler $catHandler */
         $catHandler = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
         $cats       = $catHandler->getTree();
 
@@ -229,12 +229,12 @@ switch ($step) {
             echo '<td class="' . $style . '">' . $v . '</td>';
 
             foreach ($modulePermArray as $perm) {
-                $permAccessGroup = $gpermHandler->getGroupIds('extgallery_public_mask', $perm['maskId'], $module_id);
+                $permAccessGroup = $grouppermHandler->getGroupIds('extgallery_public_mask', $perm['maskId'], $module_id);
                 echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extgallery_public_mask][group][' . $k . '][' . $perm['maskId'] . ']" type="checkbox"' . getChecked($permAccessGroup, $k) . '></td>';
             }
 
             foreach ($pluginPermArray as $perm) {
-                $permAccessGroup = $gpermHandler->getGroupIds('extgallery_public_mask', $perm['maskId'], $module_id);
+                $permAccessGroup = $grouppermHandler->getGroupIds('extgallery_public_mask', $perm['maskId'], $module_id);
                 echo '<td class="' . $style . '" style="text-align:center;"><input name="perms[extgallery_public_mask][group][' . $k . '][' . $perm['maskId'] . ']" type="checkbox"' . getChecked($permAccessGroup, $k) . '></td>';
             }
 
@@ -250,5 +250,4 @@ switch ($step) {
         xoops_cp_footer();
 
         break;
-
 }

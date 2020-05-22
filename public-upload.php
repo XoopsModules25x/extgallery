@@ -17,12 +17,12 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 //require_once __DIR__ . '/class/Utility.php';
 
-if (isset($_POST['step'])) {
+if (\Xmf\Request::hasVar('step', 'POST')) {
     $step = $_POST['step'];
 } else {
     $step = 'default';
@@ -34,9 +34,8 @@ if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_up
 }
 
 $moduleDirName = basename(__DIR__);
-$utility = new Extgallery\Utility();
+$utility       = new Extgallery\Utility();
 switch ($step) {
-
     case 'enreg':
         /** @var Extgallery\PublicPhotoHandler $photoHandler */
         $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
@@ -54,7 +53,6 @@ switch ($step) {
         }
 
         break;
-
     case 'default':
     default:
 
@@ -71,15 +69,15 @@ switch ($step) {
         $editor = $utility::getWysiwygForm(_MD_EXTGALLERY_DESC, 'photo_desc', '', 15, 60, '100%', '350px', 'hometext_hidden');
         $form->addElement($editor, false);
 
-        $form->addElement(new \XoopsFormFile(_MD_EXTGALLERY_PHOTO, 'photo_file', $xoopsModuleConfig['max_photosize']), false);
-        if ($xoopsModuleConfig['display_extra_field']) {
+        $form->addElement(new \XoopsFormFile(_MD_EXTGALLERY_PHOTO, 'photo_file', $helper->getConfig('max_photosize')), false);
+        if ($helper->getConfig('display_extra_field')) {
             $form->addElement(new \XoopsFormTextArea(_MD_EXTGALLERY_EXTRA_INFO, 'photo_extra'));
         }
 
         // For xoops tag
-        if ((1 == $xoopsModuleConfig['usetag']) && is_dir('../tag')) {
+        if ((1 == $helper->getConfig('usetag')) && is_dir('../tag')) {
             require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
-            $form->addElement(new TagFormTag('tag', 60, 255, '', 0));
+            $form->addElement(new \XoopsModules\Tag\FormTag('tag', 60, 255, '', 0));
         }
 
         $plugin = Extgallery\Helper::getInstance()->getHandler('Plugin');
@@ -90,8 +88,7 @@ switch ($step) {
 
         $form->display();
 
-        include XOOPS_ROOT_PATH . '/footer.php';
+        require_once XOOPS_ROOT_PATH . '/footer.php';
 
         break;
-
 }

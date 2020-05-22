@@ -20,9 +20,8 @@ use XoopsModules\Extgallery;
 
 require_once __DIR__ . '/admin_header.php';
 
-include __DIR__ . '/../../../include/cp_header.php';
-include __DIR__ . '/function.php';
-include __DIR__ . '/moduleUpdateFunction.php';
+require_once __DIR__ . '/function.php';
+require_once __DIR__ . '/moduleUpdateFunction.php';
 
 $catHandler   = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 $photoHandler = Extgallery\Helper::getInstance()->getHandler('PublicPhoto');
@@ -142,15 +141,16 @@ function dskspace($dir)
  */
 function imageMagickSupportType()
 {
-    global $xoopsModuleConfig;
+    /** @var Extgallery\Helper $helper */
+    $helper = Extgallery\Helper::getInstance();
 
-    $cmd = $xoopsModuleConfig['graphic_lib_path'] . 'convert -list format';
+    $cmd = $helper->getConfig('graphic_lib_path') . 'convert -list format';
     exec($cmd, $data);
 
     $ret = [
         'GIF Support' => '<span style="color:#FF0000;"><b>KO</b></span>',
         'JPG Support' => '<span style="color:#FF0000;"><b>KO</b></span>',
-        'PNG Support' => '<span style="color:#FF0000;"><b>KO</b></span>'
+        'PNG Support' => '<span style="color:#FF0000;"><b>KO</b></span>',
     ];
 
     foreach ($data as $line) {
@@ -183,7 +183,7 @@ function is__writable($path)
     //see http://bugs.php.net/bug.php?id=27609
     //see http://bugs.php.net/bug.php?id=30931
 
-    if ('/' === $path{strlen($path) - 1}) {
+    if ('/' === $path[mb_strlen($path) - 1]) {
         // recursively return a temporary file path
         return is__writable($path . uniqid(mt_rand(), true) . '.tmp');
     } elseif (is_dir($path)) {
@@ -210,13 +210,13 @@ $folder = [
     XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original',
     XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/large',
     XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/medium',
-    XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb'
+    XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/thumb',
 ];
 
 $adminObject = \Xmf\Module\Admin::getInstance();
 
 $adminObject->addInfoBox(_AM_EXTGALLERY_SERVER_CONF);
-if ('gd' === $xoopsModuleConfig['graphic_lib']) {
+if ('gd' === $helper->getConfig('graphic_lib')) {
     $gd = gd_info();
     // GD graphic lib
     $test1 = ('' == $gd['GD Version']) ? '<span style="color:#FF0000;"><b>KO</b></span>' : $gd['GD Version'];
@@ -231,9 +231,9 @@ if ('gd' === $xoopsModuleConfig['graphic_lib']) {
     $adminObject->addInfoBoxLine(sprintf(_AM_EXTGALLERY_PNG_SUPPORT . ' ' . $test4), '');
 }
 
-if ('imagick' === $xoopsModuleConfig['graphic_lib']) {
+if ('imagick' === $helper->getConfig('graphic_lib')) {
     // ImageMagick graphic lib
-    $cmd = $xoopsModuleConfig['graphic_lib_path'] . 'convert -version';
+    $cmd = $helper->getConfig('graphic_lib_path') . 'convert -version';
     exec($cmd, $data, $error);
     $test      = !isset($data[0]) ? '<span style="color:#FF0000;"><b>KO</b></span>' : $data[0];
     $imSupport = imageMagickSupportType();
@@ -250,7 +250,7 @@ foreach (array_keys($folder) as $i) {
     $adminObject->addConfigBoxLine($folder[$i], 'folder');
     $adminObject->addConfigBoxLine([$folder[$i], '777'], 'chmod');
 }
-/** @var XoopsTpl $xoopsTpl */
+/** @var \XoopsTpl $xoopsTpl */
 $xoopsTpl->assign('navigation', $adminObject->displayNavigation(basename(__FILE__)));
 $xoopsTpl->assign('index', $adminObject->displayIndex());
 

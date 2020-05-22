@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /**
  * ExtGallery Class Manager
@@ -15,7 +17,6 @@
  * @author      Zoullou (http://www.zoullou.net)
  * @package     ExtGallery
  */
-
 
 use XoopsModules\Extgallery;
 
@@ -48,18 +49,18 @@ class PublicPermHandler
     {
         if (is_a($user, 'XoopsUser')) {
             return $user->getGroups();
-        } else {
-            return XOOPS_GROUP_ANONYMOUS;
         }
+
+        return XOOPS_GROUP_ANONYMOUS;
     }
 
     /**
-     * @param \XoopsUser $user
-     * @param            $perm
+     * @param string|\XoopsUser $user
+     * @param                   $perm
      *
      * @return mixed
      */
-    public function getAuthorizedPublicCat(\XoopsUser $user, $perm)
+    public function getAuthorizedPublicCat($user, $perm)
     {
         static $authorizedCat;
         $userId = $user ? $user->getVar('uid') : 0;
@@ -76,16 +77,16 @@ class PublicPermHandler
     }
 
     /**
-     * @param \XoopsUser $user
-     * @param            $perm
-     * @param            $catId
+     * @param string|\XoopsUser $user
+     * @param                   $perm
+     * @param                   $catId
      *
      * @return bool
      */
-    public function isAllowed(\XoopsUser $user, $perm, $catId)
+    public function isAllowed($user, $perm, $catId)
     {
         $autorizedCat = $this->getAuthorizedPublicCat($user, $perm);
 
-        return in_array($catId, $autorizedCat);
+        return in_array($catId, $autorizedCat, true);
     }
 }

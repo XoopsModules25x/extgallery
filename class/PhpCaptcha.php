@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Extgallery;
+<?php
+
+namespace XoopsModules\Extgallery;
 
 /***************************************************************/
 /* PhpCaptcha - A visual and audio CAPTCHA generation library
@@ -35,14 +37,12 @@
 /***************************************************************/
 
 /************************ Documentation ************************/
+
 /*
 
 Documentation is available at http://www.ejeliot.com/pages/2
 
 */
-
-
-use XoopsModules\Extgallery;
 
 /************************ Default Options **********************/
 
@@ -102,7 +102,8 @@ class PhpCaptcha
         $aFonts, // array of TrueType fonts to use - specify full path
         $iWidth = CAPTCHA_WIDTH, // width of image
         $iHeight = CAPTCHA_HEIGHT // height of image
-    ) {
+    )
+    {
         // get parameters
         $this->aFonts = $aFonts;
         $this->SetNumChars(CAPTCHA_NUM_CHARS);
@@ -200,7 +201,7 @@ class PhpCaptcha
                 // loop through items
                 foreach ($aCharSet as $sCurrentItem) {
                     // a range should have 3 characters, otherwise is normal character
-                    if (3 == strlen($sCurrentItem)) {
+                    if (3 == mb_strlen($sCurrentItem)) {
                         // split on range character
                         $aRange = explode('-', $sCurrentItem);
 
@@ -266,7 +267,7 @@ class PhpCaptcha
     public function SetFileType($sFileType)
     {
         // check for valid file type
-        if (in_array($sFileType, ['gif', 'png', 'jpeg'])) {
+        if (in_array($sFileType, ['gif', 'png', 'jpeg'], true)) {
             $this->sFileType = $sFileType;
         } else {
             $this->sFileType = 'jpeg';
@@ -326,7 +327,7 @@ class PhpCaptcha
 
         // save code in session variable
         if ($this->bCaseInsensitive) {
-            $_SESSION[CAPTCHA_SESSION_ID] = strtoupper($this->sCode);
+            $_SESSION[CAPTCHA_SESSION_ID] = mb_strtoupper($this->sCode);
         } else {
             $_SESSION[CAPTCHA_SESSION_ID] = $this->sCode;
         }
@@ -336,7 +337,7 @@ class PhpCaptcha
     {
         $iShadowColour = '';
         // loop through and write out selected number of characters
-        for ($i = 0, $iMax = strlen($this->sCode); $i < $iMax; ++$i) {
+        for ($i = 0, $iMax = mb_strlen($this->sCode); $i < $iMax; ++$i) {
             // select random font
             $sCurrentFont = $this->aFonts[array_rand($this->aFonts)];
 
@@ -399,12 +400,17 @@ class PhpCaptcha
 
         switch ($this->sFileType) {
             case 'gif':
+
                 '' != $sFilename ? imagegif($this->oImage, $sFilename) : imagegif($this->oImage);
+
                 break;
             case 'png':
+
                 '' != $sFilename ? imagepng($this->oImage, $sFilename) : imagepng($this->oImage);
+
                 break;
             default:
+
                 '' != $sFilename ? imagejpeg($this->oImage, $sFilename) : imagejpeg($this->oImage);
         }
     }
@@ -481,7 +487,7 @@ class PhpCaptcha
     public static function Validate($sUserCode, $bCaseInsensitive = true)
     {
         if ($bCaseInsensitive) {
-            $sUserCode = strtoupper($sUserCode);
+            $sUserCode = mb_strtoupper($sUserCode);
         }
 
         if (!empty($_SESSION[CAPTCHA_SESSION_ID]) && $sUserCode == $_SESSION[CAPTCHA_SESSION_ID]) {
@@ -492,127 +498,5 @@ class PhpCaptcha
         }
 
         return false;
-    }
-}
-
-// this class will only work correctly if a visual CAPTCHA has been created first using PhpCaptcha
-
-/**
- * Class AudioPhpCaptcha
- */
-class AudioPhpCaptcha
-{
-    public $sFlitePath;
-    public $sAudioPath;
-    public $sCode;
-
-    /**
-     * AudioPhpCaptcha constructor.
-     * @param string $sFlitePath
-     * @param string $sAudioPath
-     */
-    public function __construct(
-        $sFlitePath = CAPTCHA_FLITE_PATH, // path to flite binary
-        $sAudioPath = CAPTCHA_AUDIO_PATH // the location to temporarily store the generated audio CAPTCHA
-    ) {
-        $this->SetFlitePath($sFlitePath);
-        $this->SetAudioPath($sAudioPath);
-
-        // retrieve code if already set by previous instance of visual PhpCaptcha
-        if (isset($_SESSION[CAPTCHA_SESSION_ID])) {
-            $this->sCode = $_SESSION[CAPTCHA_SESSION_ID];
-        }
-    }
-
-    /**
-     * @param $sFlitePath
-     */
-    public function SetFlitePath($sFlitePath)
-    {
-        $this->sFlitePath = $sFlitePath;
-    }
-
-    /**
-     * @param $sAudioPath
-     */
-    public function SetAudioPath($sAudioPath)
-    {
-        $this->sAudioPath = $sAudioPath;
-    }
-
-    /**
-     * @param $sText
-     *
-     * @return string
-     */
-    public function Mask($sText)
-    {
-        $iLength = strlen($sText);
-
-        // loop through characters in code and format
-        $sFormattedText = '';
-        foreach ($sText as $i => $iValue) {
-            // comma separate all but first and last characters
-            if ($i > 0 && $i < $iLength - 1) {
-                $sFormattedText .= ', ';
-            } elseif ($i == $iLength - 1) { // precede last character with "and"
-                $sFormattedText .= ' and ';
-            }
-            $sFormattedText .= $sText[$i];
-        }
-
-        $aPhrases = [
-            'The %1$s characters are as follows: %2$s',
-            '%2$s, are the %1$s letters',
-            'Here are the %1$s characters: %2$s',
-            '%1$s characters are: %2$s',
-            '%1$s letters: %2$s'
-        ];
-
-        $iPhrase = array_rand($aPhrases);
-
-        return sprintf($aPhrases[$iPhrase], $iLength, $sFormattedText);
-    }
-
-    public function Create()
-    {
-        $sText = $this->Mask($this->sCode);
-        $sFile = md5($this->sCode . time());
-
-        // create file with flite
-        shell_exec("$this->sFlitePath -t \"$sText\" -o $this->sAudioPath$sFile.wav");
-
-        // set headers
-        header('Content-type: audio/x-wav');
-        header("Content-Disposition: attachment;filename=$sFile.wav");
-
-        // output to browser
-        echo file_get_contents("$this->sAudioPath$sFile.wav");
-
-        // delete temporary file
-        @unlink("$this->sAudioPath$sFile.wav");
-    }
-}
-
-// example sub class
-
-/**
- * Class PhpCaptchaColour
- */
-class PhpCaptchaColour extends PhpCaptcha
-{
-    /**
-     * PhpCaptchaColour constructor.
-     * @param     $aFonts
-     * @param int $iWidth
-     * @param int $iHeight
-     */
-    public function __construct($aFonts, $iWidth = CAPTCHA_WIDTH, $iHeight = CAPTCHA_HEIGHT)
-    {
-        // call parent constructor
-        parent::__construct($aFonts, $iWidth, $iHeight);
-
-        // set options
-        $this->UseColour(true);
     }
 }

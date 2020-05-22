@@ -17,11 +17,11 @@
 
 use XoopsModules\Extgallery;
 
-include __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/extgallery/class/publicPerm.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'extgallery_public-upload-applet.tpl';
-include XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 $permHandler = Extgallery\PublicPermHandler::getInstance();
 if (count($permHandler->getAuthorizedPublicCat($GLOBALS['xoopsUser'], 'public_upload')) < 1) {
@@ -33,16 +33,16 @@ $_SESSION['juvar.tmpsize'] = 0;
 $catHandler                = Extgallery\Helper::getInstance()->getHandler('PublicCategory');
 
 $xoopsTpl->assign('categorySelect', $catHandler->getLeafSelect('cat_id', false, 0, '', 'public_upload'));
-$xoopsTpl->assign('imageQuality', $xoopsModuleConfig['medium_quality'] / 100);
+$xoopsTpl->assign('imageQuality', $helper->getConfig('medium_quality') / 100);
 $xoopsTpl->assign('appletLang', _MD_EXTGALLERY_APPLET_LANG);
-$xoopsTpl->assign('maxphotosize', $xoopsModuleConfig['max_photosize']);
+$xoopsTpl->assign('maxphotosize', $helper->getConfig('max_photosize'));
 
-if ($xoopsModuleConfig['save_large'] || $xoopsModuleConfig['save_original']) {
+if ($helper->getConfig('save_large') || $helper->getConfig('save_original')) {
     $xoopsTpl->assign('imageWidth', -1);
     $xoopsTpl->assign('imageHeight', -1);
 } else {
-    $xoopsTpl->assign('imageWidth', $xoopsModuleConfig['medium_width']);
-    $xoopsTpl->assign('imageHeight', $xoopsModuleConfig['medium_heigth']);
+    $xoopsTpl->assign('imageWidth', $helper->getConfig('medium_width'));
+    $xoopsTpl->assign('imageHeight', $helper->getConfig('medium_heigth'));
 }
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

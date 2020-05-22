@@ -18,10 +18,9 @@ class MetaSlider_Widget extends WP_Widget
      */
     public function __construct()
     {
-        parent::__construct(
-            'metaslider_widget', // Base ID
+        parent::__construct('metaslider_widget', // Base ID
                             'Meta Slider', // Name
-                            array('description' => __('Meta Slider', 'metaslider')) // Args
+                            ['description' => __('Meta Slider', 'metaslider')] // Args
         );
     }
 
@@ -64,7 +63,7 @@ class MetaSlider_Widget extends WP_Widget
      */
     public function update($new_instance, $old_instance)
     {
-        $instance              = array();
+        $instance              = [];
         $instance['slider_id'] = strip_tags($new_instance['slider_id']);
         $instance['title']     = strip_tags($new_instance['title']);
 
@@ -92,26 +91,26 @@ class MetaSlider_Widget extends WP_Widget
             $title = $instance['title'];
         }
 
-        $posts = get_posts(array(
+        $posts = get_posts([
                                'post_type'      => 'ml-slider',
                                'post_status'    => 'publish',
                                'orderby'        => 'date',
                                'order'          => 'ASC',
-                               'posts_per_page' => -1
-                           ));
+                               'posts_per_page' => -1,
+                           ]);
 
         foreach ($posts as $post) {
             $active = $selected_slider == $post->ID ? true : false;
 
-            $sliders[] = array(
+            $sliders[] = [
                 'active' => $active,
                 'title'  => $post->post_title,
-                'id'     => $post->ID
-            );
+                'id'     => $post->ID,
+            ];
         } ?>
         <p>
         <?php if ($sliders) {
-            ?>
+        ?>
         <p>
             <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>">
@@ -125,9 +124,9 @@ class MetaSlider_Widget extends WP_Widget
             } ?>
         </select>
         <?php
-        } else {
-            _e('No slideshows found', 'metaslider');
-        } ?>
+    } else {
+        _e('No slideshows found', 'metaslider');
+    } ?>
         </p>
         <?php
     }

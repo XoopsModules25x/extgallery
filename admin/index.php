@@ -17,7 +17,6 @@
  * @author       XOOPS Development Team
  */
 
-use XoopsModules\Extgallery;
 use XoopsModules\Extgallery\Common;
 
 require_once __DIR__ . '/admin_header.php';
@@ -32,7 +31,6 @@ foreach (array_keys($configurator->uploadFolders) as $i) {
     $adminObject->addConfigBoxLine($configurator->uploadFolders[$i], 'folder');
 }
 
-
 // DNPROSSI - In PHP 5.3.0 "JPG Support" was renamed to "JPEG Support".
 // This leads to the following error: "Undefined index: JPG Support in
 // Fixed with version compare
@@ -43,7 +41,7 @@ if (PHP_VERSION_ID < 50300) {
 }
 
 $adminObject->addInfoBox(_AM_EXTGALLERY_SERVER_CONF);
-if ('gd' === $xoopsModuleConfig['graphic_lib']) {
+if ('gd' === $helper->getConfig('graphic_lib')) {
     $gd = gd_info();
     // GD graphic lib
     $test1 = ('' == $gd['GD Version']) ? '<span style="color:#FF0000;"><b>KO</b></span>' : $gd['GD Version'];
@@ -57,9 +55,9 @@ if ('gd' === $xoopsModuleConfig['graphic_lib']) {
     $adminObject->addInfoBoxLine(sprintf(_AM_EXTGALLERY_PNG_SUPPORT . ' ' . $test4));
 }
 
-if ('imagick' === $xoopsModuleConfig['graphic_lib']) {
+if ('imagick' === $helper->getConfig('graphic_lib')) {
     // ImageMagick graphic lib
-    $cmd = $xoopsModuleConfig['graphic_lib_path'] . 'convert -version';
+    $cmd = $helper->getConfig('graphic_lib_path') . 'convert -version';
     exec($cmd, $data, $error);
     $test      = !isset($data[0]) ? '<span style="color:#FF0000;"><b>KO</b></span>' : $data[0];
     $imSupport = imageMagickSupportType();
@@ -73,8 +71,33 @@ $adminObject->addInfoBoxLine(sprintf(_AM_EXTGALLERY_UPLOAD_MAX_FILESIZE . get_cf
 $adminObject->addInfoBoxLine(sprintf(_AM_EXTGALLERY_POST_MAX_SIZE . get_cfg_var('post_max_size')));
 
 $adminObject->displayNavigation(basename(__FILE__));
+
+
+//check for latest release
+$newRelease = $utility::checkVerModule($helper);
+if (!empty($newRelease)) {
+    $adminObject->addItemButton($newRelease[0], $newRelease[1], 'download', 'style="color : Red"');
+}
+
+//------------- Test Data ----------------------------
+
+if ($helper->getConfig('displaySampleButton')) {
+    xoops_loadLanguage('admin/modulesadmin', 'system');
+    require dirname(__DIR__) . '/testdata/index.php';
+
+    $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=load', 'add');
+
+    $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'SAVE_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=save', 'add');
+
+    //    $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA'), '__DIR__ . /../../testdata/index.php?op=exportschema', 'add');
+
+    $adminObject->displayButton('left', '');
+}
+
+//------------- End Test Data ----------------------------
+
 $adminObject->displayIndex();
 
 echo $utility::getServerStats();
 
-require_once __DIR__ . '/admin_footer.php';
+require __DIR__ . '/admin_footer.php';

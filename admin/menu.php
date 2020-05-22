@@ -18,63 +18,72 @@
 
 use XoopsModules\Extgallery;
 
-// require_once __DIR__ . '/../class/Helper.php';
-//require_once __DIR__ . '/../include/common.php';
+//require_once  dirname(__DIR__) . '/include/common.php';
+/** @var Extgallery\Helper $helper */
 $helper = Extgallery\Helper::getInstance();
 
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
-$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+if (is_object($helper->getModule())) {
+    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+}
 
 $adminmenu[] = [
     'title' => _MI_EXTGALLERY_INDEX,
     'link'  => 'admin/index.php',
-    'icon'  => $pathIcon32 . '/home.png'
+    'icon'  => $pathIcon32 . '/home.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_EXTGALLERY_PUBLIC_CAT,
     'link'  => 'admin/public-category.php',
-    'icon'  => $pathIcon32 . '/category.png'
+    'icon'  => $pathIcon32 . '/category.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_EXTGALLERY_PHOTO,
     'link'  => 'admin/photo.php',
-    'icon'  => $pathIcon32 . '/photo.png'
+    'icon'  => $pathIcon32 . '/photo.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_EXTGALLERY_PERMISSIONS,
     'link'  => 'admin/perm-quota.php',
-    'icon'  => $pathIcon32 . '/permissions.png'
+    'icon'  => $pathIcon32 . '/permissions.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_EXTGALLERY_WATERMARK_BORDER,
     'link'  => 'admin/watermark-border.php',
-    'icon'  => $pathIcon32 . '/watermark.png'
+    'icon'  => $pathIcon32 . '/watermark.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_EXTGALLERY_SLIDESHOW,
     'link'  => 'admin/slideshow.php',
-    'icon'  => $pathIcon32 . '/slideshow.png'
+    'icon'  => $pathIcon32 . '/slideshow.png',
 ];
-
-$adminmenu[] = [
-    'title' => _MI_EXTGALLERY_EXTENSION,
-    'link'  => 'admin/extension.php',
-    'icon'  => $pathModIcon32 . '/extension.png'
-];
-
+if (is_object($helper->getModule())) {
+    $adminmenu[] = [
+        'title' => _MI_EXTGALLERY_EXTENSION,
+        'link'  => 'admin/extension.php',
+        'icon'  => $pathModIcon32 . '/extension.png',
+    ];
+}
 $adminmenu[] = [
     'title' => _MI_EXTGALLERY_ALBUM,
     'link'  => 'admin/album.php',
-    'icon'  => $pathIcon32 . '/album.png'
+    'icon'  => $pathIcon32 . '/album.png',
 ];
 
+if ($helper->getConfig('displayDeveloperTools')) {
+    $adminmenu[] = [
+        'title' => _MI_EXTGALLERY_ADMENU_MIGRATE,
+        'link'  => 'admin/migrate.php',
+        'icon'  => $pathIcon32 . '/database_go.png',
+    ];
+}
 $adminmenu[] = [
     'title' => _MI_EXTGALLERY_ABOUT,
     'link'  => 'admin/about.php',
-    'icon'  => $pathIcon32 . '/about.png'
+    'icon'  => $pathIcon32 . '/about.png',
 ];
